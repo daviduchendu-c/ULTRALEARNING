@@ -18,9 +18,11 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
 3. **Background / history** (only if it helps understanding): a short table of how the idea evolved.
 4. **Glossary**: every new term, defined in plain language, one line each.
 5. **Concept deep dives**: one subsection per concept in the outline. For each one give:
+   -decide what is expident for this topic 
    - intuition first (an analogy or everyday example),
-   - the precise definition,
-   - a worked example, with numbers or a small code snippet where the topic is technical,
+   - break down into first principles
+   - the definition,
+   - a worked example, with numbers or a small code snippet where necessary and the topic is technical,
    - common mistakes and how to spot them,
    - one "what this looks like in the real market" sentence (which job, product or tool uses it).
    Use ASCII diagrams or Mermaid where a picture explains a structure, and name a reference image to search for when a visual helps.
