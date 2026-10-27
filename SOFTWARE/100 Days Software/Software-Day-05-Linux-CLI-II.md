@@ -3,20 +3,56 @@
 *100 Days of Software Engineering, Module: Foundations*
 
 **Time:** about 4 hours
-**You will build:** `logscan.sh`, a tested shell script that summarizes a log file, lists the most common errors, and returns exit codes that a CI pipeline can read. It goes in a GitHub repo.
-**You should know:** Day 4 (moving around, managing files, `less`, `man`, reading `ls -l`) and Day 3 (PATH, environment variables, VS Code connected to WSL). Work in your **Ubuntu** tab.
+**Level:** intermediate. For learners who finished Day 4 and can move around Ubuntu, manage files and read `ls -l`.
+
+**By the end of this day, you will have:**
+
+- Searched files with `grep` and `find`, and chained commands with pipes and redirection
+- Read and changed file permissions with `chmod`, and stopped processes with signals
+- `logscan.sh`, a tested shell script that summarizes a log file, lists the most common errors, and returns exit codes that a CI pipeline can read, in a GitHub repo
+
+**What you need:**
+
+- The Ubuntu terminal on WSL from Day 3 (work in your Ubuntu tab)
+- VS Code connected to WSL
+- Bash, which comes with Ubuntu
+- ShellCheck (installed in the project with `sudo apt install shellcheck`)
+- A GitHub account
+
+**Prerequisites:**
+
+- Day 4: Linux CLI I (moving around, managing files, `less`, `man`, reading `ls -l`)
+- Day 3: Developer Environment (PATH, environment variables, VS Code connected to WSL)
+- Day 2: How Computers Execute Programs (every running program is a process)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [grep](#grep)
+- [find](#find)
+- [Streams and redirection](#streams-and-redirection)
+- [Pipes](#pipes)
+- [File permissions](#file-permissions)
+- [chmod](#chmod)
+- [Processes and job control](#processes-and-job-control)
+- [Signals](#signals)
+- [Shell scripts](#shell-scripts)
+- [Quoting](#quoting)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: logscan, a log summary script](#project-logscan-a-log-summary-script)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 Yesterday you ran single commands. Today you combine them, and that is where the command line becomes useful. "Which of our 40 config files mention the old database host?" is one `grep`. "Which files over 100 MB did we create this week?" is one `find`. "What were the five most common errors in last night's log?" is one line of small commands joined with pipes. Save that line in a script, and an hour of clicking becomes a command anyone on the team can run, and a CI server can run on every commit.
 
-Along the way you learn **permissions** (who can read, change and run a file) and **processes and signals** (how to see what is running and stop it cleanly).
-
----
-
-## 2. Search with grep and find
+Along the way you learn permissions (who can read, change and run a file) and processes and signals (how to see what is running and stop it cleanly). On the job, these are the skills you use when a deploy fails at night and all you have is a terminal and a log file.
 
 First, make some practice data. This uses Day 4 commands and `printf`, which prints formatted text:
 
@@ -26,11 +62,13 @@ printf 'INFO app started\nERROR db timeout\nINFO user login\nWARN slow query\nER
 cat app.log
 ```
 
-### 2.1 `grep`
+---
 
-**Intuition.** Ctrl+F for every file at once, from the terminal, with a much stronger pattern language.
+### grep
 
-**Definition.** `grep PATTERN FILE...` prints every line that matches the pattern. The pattern is a **regular expression** (regex). These flags come up constantly:
+Think of Ctrl+F for every file at once, run from the terminal, with a much stronger pattern language.
+
+`grep PATTERN FILE...` reads each file line by line and prints every line that matches the pattern. The pattern is a regular expression (regex), a small language for describing text shapes. These flags come up constantly:
 
 | Flag | Meaning |
 |---|---|
@@ -43,7 +81,7 @@ cat app.log
 | `-l` | print only the names of matching files |
 | `-E` | extended regex, which allows alternation such as `"ERROR\|WARN"` |
 
-Regex basics: `^` is the start of a line, `$` is the end, `.` matches any one character, `*` means "zero or more of the previous thing," and `[0-9]` matches any digit.
+In regex, `^` is the start of a line, `$` is the end, `.` matches any one character, `*` means "zero or more of the previous thing," and `[0-9]` matches any digit.
 
 ```bash
 grep ERROR app.log              # 3 lines
@@ -57,13 +95,13 @@ grep -rn "PATH" ~/.bashrc ~/.profile   # where is PATH set?
 
 `grep` also reports through its exit status: 0 if something matched, 1 if nothing matched, and 2 if there was an error, such as a missing file. Scripts depend on that status, and so will your project.
 
-**Mistakes.** Unquoted patterns with spaces: `grep db timeout app.log` searches for `db` in two files named `timeout` and `app.log`. Write `grep "db timeout" app.log`. Matching too much: `grep -c ERROR` also counts `INFO no ERRORS today`. Anchor the pattern (`^ERROR`) or use `-w`. `grep -r` can be slow on large trees. Ripgrep (`rg`) is faster, but `grep` is on every Linux machine.
+The classic mistake is an unquoted pattern with spaces. `grep db timeout app.log` searches for `db` in two files named `timeout` and `app.log`, and you see "No such file" for the first. Write `grep "db timeout" app.log`. A second mistake is matching too much: `grep -c ERROR` also counts `INFO no ERRORS today`, so a count that looks too high is the clue. Anchor the pattern (`^ERROR`) or use `-w`. Also, `grep -r` can be slow on large trees. Ripgrep (`rg`) is faster, but `grep` is on every Linux machine. Engineers reach for `grep` first when they triage an incident, usually against a log that is too big to open in an editor.
 
-### 2.2 `find`
+### find
 
-**Intuition.** `grep` looks inside files. `find` looks for the files themselves, by name, type, size, age or owner. It works like a librarian who searches the catalogue rather than reading every book.
+`grep` looks inside files. `find` looks for the files themselves, by name, type, size, age or owner. It works like a librarian who searches the catalogue rather than reading every book.
 
-**Definition.** `find START_DIR TESTS... ACTION` walks the tree from a starting directory and applies the tests to each entry. Common tests are `-name "pattern"` (case-sensitive; use `-iname` to ignore case), `-type f` for files, `-type d` for directories, `-size +10M` (larger than 10 MiB), `-mtime -1` (modified in the last 24 hours) and `-maxdepth N`. The default action is to print the path. `-exec CMD {} +` runs a command on the results, and `-delete` removes them.
+`find START_DIR TESTS... ACTION` walks the tree from a starting directory and applies the tests to each entry. Common tests are `-name "pattern"` (case-sensitive; use `-iname` to ignore case), `-type f` for files, `-type d` for directories, `-size +10M` (larger than 10 MiB), `-mtime -1` (modified in the last 24 hours) and `-maxdepth N`. The default action is to print the path. `-exec CMD {} +` runs a command on the results, and `-delete` removes them.
 
 ```bash
 find ~ -name "*.log"                         # every .log under your home
@@ -76,14 +114,13 @@ find ~/dev -name "*.log" -exec grep -l ERROR {} +   # which log files contain ER
 
 In the last line, `{}` stands for each path that `find` locates, and `+` passes many paths to one `grep` call.
 
-**Mistakes.** Forgetting to quote the pattern. `find . -name *.log` lets the shell expand `*.log` first, using files in the current directory, so `find` searches for the wrong thing or fails. Always write `-name "*.log"`. With `-delete`, mistakes are permanent. Run the command without `-delete` first, read the list, then add `-delete` at the end. Searching from `/` as a normal user floods the screen with "Permission denied." `2>/dev/null` hides those errors.
----
+The most common mistake is leaving the pattern unquoted. `find . -name *.log` lets the shell expand `*.log` first, using files in the current directory, so `find` searches for the wrong thing or fails, and the result changes depending on where you run it. Always write `-name "*.log"`. With `-delete`, mistakes are permanent. Run the command without `-delete` first, read the list, then add `-delete` at the end. Searching from `/` as a normal user floods the screen with "Permission denied," and `2>/dev/null` hides those errors. Teams use `find` for cleanup jobs, such as removing build artifacts older than a week from a CI machine.
 
-## 3. Streams and pipes
+### Streams and redirection
 
-**Intuition.** Every program has three hoses. One takes input (stdin). Two send output: stdout for results, and stderr for complaints. By default all three connect to your terminal. Redirection plugs a hose into a file, and a pipe plugs one program's output into the next program's input.
+Every program has three hoses. One takes input (stdin). Two send output: stdout for results, and stderr for complaints. By default all three connect to your terminal. Redirection plugs a hose into a file.
 
-**Definition.** Stdin is stream 0, stdout is stream 1, and stderr is stream 2. Redirection changes where they point.
+Stdin is stream 0, stdout is stream 1, and stderr is stream 2. Redirection changes where they point.
 
 | Syntax | Meaning |
 |---|---|
@@ -103,6 +140,12 @@ echo "second" >> notes.txt           # append
 wc -l < app.log                      # 6 (wc reads stdin, so no filename is printed)
 grep ERROR app.log > errors.txt 2>&1 # results and any errors, in one file
 ```
+
+The trap is that `>` truncates the file before the command runs. So `sort app.log > app.log` leaves you with an empty file, because the shell empties it and then `sort` reads nothing. If a file you just "sorted" is suddenly zero bytes, this is why. Write to a new file and `mv` it back. Order also matters with `2>&1`. `cmd > file 2>&1` captures both streams, but `cmd 2>&1 > file` sends stderr to the terminal, because `2>&1` runs while stdout still points at the terminal. In real teams, the split between stdout and stderr is what lets a deploy script print results to a file while errors still reach the engineer watching.
+
+### Pipes
+
+A pipe is a length of tubing between two programs. Water goes in one end, and the next program drinks from the other end, with no bucket in between.
 
 A pipe, written `cmd1 | cmd2`, sends the stdout of `cmd1` to the stdin of `cmd2`. Both run at the same time as separate processes, and the data streams through without a temporary file. Common filters are `sort` (`-n` for numbers, `-r` for reverse), `uniq` (merges adjacent duplicate lines, and `-c` counts them), `wc -l`, `head -n N`, `tail -n N`, `cut -d: -f1` (picks fields split by a delimiter), `tr` and `tee file` (saves a copy while passing data on).
 
@@ -129,15 +172,13 @@ grep ERROR app.log | sort | uniq -c | sort -rn | head -n 3
       1 ERROR disk full
 ```
 
-**Mistakes.** `uniq` merges only duplicates that sit next to each other, so `uniq -c` without a `sort` first gives wrong counts. `>` truncates the file before the command runs. So `sort app.log > app.log` leaves you with an empty file, because the shell empties it and then `sort` reads nothing. Write to a new file and `mv` it back. Order matters with `2>&1`. `cmd > file 2>&1` captures both streams. `cmd 2>&1 > file` sends stderr to the terminal, because `2>&1` runs while stdout still points at the terminal. A pipeline's exit status is the status of its last command, so an early failure is invisible unless you set `set -o pipefail` in scripts (section 6). Once a pipeline passes four or five stages, move it into a script with comments.
+`uniq` merges only duplicates that sit next to each other, so `uniq -c` without a `sort` first gives wrong counts. The tell is a count of `1` for a line you know appears many times. A second hazard is that a pipeline's exit status is the status of its last command, so an early failure is invisible unless you set `set -o pipefail` in scripts (see Shell scripts below). Once a pipeline passes four or five stages, move it into a script with comments. This "count, sort, rank" shape is the standard first move when an on-call engineer asks what is failing most.
 
----
+### File permissions
 
-## 4. Permissions and chmod
+Picture an office where every room has three locks: one for the owner, one for the owner's team, and one for every visitor. Each lock decides separately whether you can look inside, change things, or walk through.
 
-**Intuition.** An office where every room has three locks: one for the owner, one for the owner's team, and one for every visitor. Each lock decides separately whether you can look inside, change things, or walk through.
-
-**Definition.** Every file has an **owner** and a **group**, plus three permission sets: owner (`u`), group (`g`) and others (`o`). Each set holds read (`r`), write (`w`) and execute (`x`). The first ten characters of `ls -l` show them:
+Every file has an owner and a group, plus three permission sets: owner (`u`), group (`g`) and others (`o`). Each set holds read (`r`), write (`w`) and execute (`x`). The first ten characters of `ls -l` show them:
 
 ```
  -  rwx  r-x  r--     ada  devs   logscan.sh
@@ -160,11 +201,11 @@ touch new.txt && ls -l new.txt   # -rw-r--r-- if umask is 0022
 
 New files start from `666` (read and write for everyone) minus the umask, so a umask of `0022` gives `644`. New directories start from `777`, which gives `755`.
 
-**Mistakes.** Deleting a file depends on write permission on the directory, not on the file. A read-only file can still be deleted from a directory you can write to. These classic bits are coarse, with one owner and one group. Finer control uses ACLs (`man setfacl`). SSH refuses to use a private key that others can read, which is why most cloud engineers have run `chmod 600` on a key at least once.
+People often assume a read-only file cannot be deleted. Deleting a file depends on write permission on the directory, not on the file, so a read-only file can still be deleted from a directory you can write to. If a file vanishes despite mode `444`, check the directory. These classic bits are coarse, with one owner and one group. Finer control uses ACLs (`man setfacl`). On cloud teams, the permission rule people meet first is that SSH refuses to use a private key that others can read, which is why most cloud engineers have run `chmod 600` on a key at least once.
 
-### 4.1 `chmod`
+### chmod
 
-**Definition.** `chmod MODE FILE` changes the permission bits. You can use symbolic mode (`who`, then `+`, `-` or `=`, then what) or octal mode, where each digit adds up r=4, w=2, x=1.
+`chmod MODE FILE` changes the permission bits. You can use symbolic mode (`who`, then `+`, `-` or `=`, then what) or octal mode, where each digit adds up r=4, w=2, x=1. Only the owner, or root, can change a file's mode.
 
 | Octal | Bits | Typical use |
 |---|---|---|
@@ -172,8 +213,6 @@ New files start from `666` (read and write for everyone) minus the umask, so a u
 | `644` | `rw-r--r--` | ordinary files |
 | `700` | `rwx------` | private directories |
 | `600` | `rw-------` | secrets and SSH keys |
-
-Only the owner, or root, can change a file's mode.
 
 ```bash
 printf '#!/usr/bin/env bash\necho "Hello from a script"\n' > hello.sh
@@ -189,15 +228,13 @@ mkdir private && chmod 700 private
 
 Work out `754` yourself: 7 is `rwx`, 5 is `r-x`, and 4 is `r--`, so the result is `rwxr-xr--`.
 
-**Mistakes.** `chmod -R 777` "to fix a permission error" lets every user change or replace your files, including web-facing files. Find out which user needs which access instead. `chmod -R 644` on a directory tree removes `x` from the directories too, so nobody can enter them. Uploading a script through the GitHub website does not keep the executable bit, so the README must tell users to run `chmod +x`. Git records that bit for you from Day 6 on.
+The mistake that does real damage is `chmod -R 777` "to fix a permission error." It lets every user change or replace your files, including web-facing files. Find out which user needs which access instead. A quieter version is `chmod -R 644` on a directory tree, which removes `x` from the directories too, so nobody can enter them and every `cd` fails with "Permission denied." Another surprise: uploading a script through the GitHub website does not keep the executable bit, so the README must tell users to run `chmod +x`. Git records that bit for you from Day 6 on. In teams, a Dockerfile or deploy script that fails with "Permission denied" is almost always a missing `x`.
 
----
+### Processes and job control
 
-## 5. Processes, job control and signals
+Day 2 showed that every running program is a process. Now you get the control room: a list of everything running, and buttons to pause, resume and move work to the background.
 
-**Intuition.** Day 2 showed that every running program is a process. Now you get the control room: a list of everything running, and buttons to pause, resume and move work to the background.
-
-**Definition.** `ps aux` lists processes with their user, PID, CPU and memory use. `ps -ef` adds the **PPID**, the parent that started each one. `top` shows a live view (`q` quits), and `pgrep -a NAME` finds processes by name. **Job control** manages the commands your shell started. `&` runs a command in the background, `jobs` lists them, `fg` and `bg` move them between foreground and background, and Ctrl+Z pauses the foreground job. `$$` holds your shell's PID.
+`ps aux` lists processes with their user, PID, CPU and memory use. `ps -ef` adds the PPID, the parent that started each one. `top` shows a live view (`q` quits), and `pgrep -a NAME` finds processes by name. Job control manages the commands your shell started. `&` runs a command in the background, `jobs` lists them, `fg` and `bg` move them between foreground and background, and Ctrl+Z pauses the foreground job. `$$` holds your shell's PID.
 
 ```bash
 echo $$                  # your shell's PID, for example 412
@@ -215,23 +252,23 @@ bg %1                    # it continues in the background
 
 Use the PIDs your machine prints, not the ones shown above.
 
-**Mistakes.** Closing the terminal usually ends its background jobs (SIGHUP, below). Long-running services belong under a supervisor such as systemd. A paused job still holds its memory, files and ports, which is why a port can stay "already in use."
+Closing the terminal usually ends its background jobs (SIGHUP, covered next), so a job you "left running" is gone when you come back. Long-running services belong under a supervisor such as systemd. A paused job still holds its memory, files and ports, which is why a port can stay "already in use" after you press Ctrl+Z. Check `jobs` when that happens. On servers, `ps` and `pgrep` are how you find the process that is holding a port or eating memory.
 
-### 5.1 Signals
+### Signals
 
-**Intuition.** Signals are taps on a process's shoulder. Most are polite requests, such as "please wrap up," and the process can respond in its own way. SIGKILL is different. It pulls the power cord.
+Signals are taps on a process's shoulder. Most are polite requests, such as "please wrap up," and the process can respond in its own way. SIGKILL is different. It pulls the power cord.
 
-**Definition.** A signal is a numbered message that the kernel, another process (through `kill`), or your keyboard sends to a process. The common ones on Linux are below. The numbers match x86 and ARM. Use the names in scripts.
+A signal is a numbered message that the kernel, another process (through `kill`), or your keyboard sends to a process. The common ones on Linux are below. The numbers match x86 and ARM. Use the names in scripts.
 
 | Signal | Number | Sent by | Default effect | Can be caught? |
 |---|---|---|---|---|
 | SIGHUP | 1 | terminal closed | terminate | yes |
 | SIGINT | 2 | Ctrl+C | terminate | yes |
 | SIGQUIT | 3 | Ctrl+\\ | terminate with core dump | yes |
-| SIGKILL | 9 | `kill -9` | terminate immediately | **no** |
+| SIGKILL | 9 | `kill -9` | terminate immediately | no |
 | SIGTERM | 15 | `kill` (default) | terminate | yes |
 | SIGCONT | 18 | `fg`, `bg`, `kill -CONT` | resume | yes |
-| SIGSTOP | 19 | `kill -STOP` | pause | **no** |
+| SIGSTOP | 19 | `kill -STOP` | pause | no |
 | SIGTSTP | 20 | Ctrl+Z | pause | yes |
 
 "Caught" means the program can run its own handler, for example to save work and close files before it exits. SIGKILL and SIGSTOP cannot be caught, blocked or ignored. When a process dies from a signal, the shell reports exit status 128 plus the signal number. That gives 130 after Ctrl+C, 137 after SIGKILL and 143 after SIGTERM.
@@ -257,15 +294,13 @@ kill -l              # list every signal name and number
 
 The short delay happens because bash finishes the current `sleep 1` before it runs the trap.
 
-**Mistakes.** Reaching for `kill -9` first. SIGKILL gives the program no chance to flush data or close database connections, so it can leave half-written files behind. Send SIGTERM, wait a few seconds, and use SIGKILL only if the process is still running. Check a PID with `ps -p PID` before you kill it. `docker stop` sends SIGTERM, then SIGKILL after 10 seconds by default, and Kubernetes waits 30 seconds by default. Services must handle SIGTERM to shut down without dropping requests. Exit code 137 in a container log usually means SIGKILL, often from running out of memory.
+The habit to avoid is reaching for `kill -9` first. SIGKILL gives the program no chance to flush data or close database connections, so it can leave half-written files behind, and you notice later as corrupt data or stale lock files. Send SIGTERM, wait a few seconds, and use SIGKILL only if the process is still running. Check a PID with `ps -p PID` before you kill it. This matters in production. `docker stop` sends SIGTERM, then SIGKILL after 10 seconds by default, and Kubernetes waits 30 seconds by default, so services must handle SIGTERM to shut down without dropping requests. Exit code 137 in a container log usually means SIGKILL, often from running out of memory.
 
----
+### Shell scripts
 
-## 6. Shell scripting foundations
+A script is a recipe card for the shell. Anything you would type can be written down once and run again, the same way, on any Linux machine.
 
-**Intuition.** A script is a recipe card for the shell. Anything you would type can be written down once and run again, the same way, on any Linux machine.
-
-**Definition.** A shell script is a text file of commands. The **shebang** line `#!/usr/bin/env bash` tells the kernel to run the file with bash, and `env` finds bash through PATH. Make the file executable with `chmod +x`, then run it as `./script.sh`. The current directory is not on PATH, so the `./` is required.
+A shell script is a text file of commands. The shebang line `#!/usr/bin/env bash` tells the kernel to run the file with bash, and `env` finds bash through PATH. Make the file executable with `chmod +x`, then run it as `./script.sh`. The current directory is not on PATH, so the `./` is required.
 
 ```bash
 #!/usr/bin/env bash
@@ -304,7 +339,13 @@ exit 0                           # 0 = success; any other number = failure
 
 Common tests are `-f` (file exists), `-d` (directory exists), `-r` (readable), `-s` (exists and is not empty), `-z "$x"` (string is empty), `"$a" = "$b"` (strings are equal) and `"$n" -gt 5` (number is greater than 5). `&&` runs the next command only if this one succeeded. `||` runs it only if this one failed. `$?` holds the last exit status.
 
-**Why quoting matters.**
+Spaces around `=` are the first trap: `name = "Ada"` runs a command called `name` and fails with "command not found." A script saved with Windows (CRLF) line endings fails with `/usr/bin/env: 'bash\r': No such file or directory`. Check with `cat -A script.sh` (CRLF lines end in `^M$`), then fix it with `sed -i 's/\r$//' script.sh`, or switch the file to LF in VS Code's status bar. `set -e` does not trigger inside `if` conditions or on the left side of `&&`, so use it as a safety net and nothing more. Run ShellCheck (`sudo apt install shellcheck`, then `shellcheck script.sh`) to catch unquoted variables (SC2086) and the empty-variable `rm` danger (SC2115). Once a script passes roughly 100 lines or needs real data structures, rewrite it in Python (Day 9: Python Runtime and Syntax). Teams keep deploy, backup and CI glue in small shell scripts like this, and run ShellCheck on every pull request.
+
+### Quoting
+
+Quotes in the shell work like the wrapping around a parcel. Without it, the shell splits your contents at every space before the command ever sees them.
+
+When you write `$file`, the shell replaces it with the variable's value and then splits the result into words at spaces. Double quotes stop the splitting and keep the value as one argument. Single quotes stop expansion entirely.
 
 ```bash
 file="my notes.txt"
@@ -315,30 +356,30 @@ rm "$file"    # quoted: deletes the one file you meant
 
 A worse case: if `$BUILD_DIR` is empty or unset (a typo is enough), `rm -rf "$BUILD_DIR"/*` becomes `rm -rf /*`. Steam's Linux client shipped a bug of this shape in 2015, and it deleted users' files. The defense is `rm -rf "${BUILD_DIR:?}"/*`, which aborts with an error if the variable is empty, combined with `set -u`.
 
-**Mistakes.** Spaces around `=`: `name = "Ada"` runs a command called `name`. Unquoted variables are the most common shell bug. A script saved with Windows (CRLF) line endings fails with `/usr/bin/env: 'bash\r': No such file or directory`. Check with `cat -A script.sh` (CRLF lines end in `^M$`), then fix it with `sed -i 's/\r$//' script.sh`, or switch the file to LF in VS Code's status bar. `set -e` does not trigger inside `if` conditions or on the left side of `&&`, so use it as a safety net and nothing more. Run **ShellCheck** (`sudo apt install shellcheck`, then `shellcheck script.sh`) to catch unquoted variables (SC2086) and the empty-variable `rm` danger (SC2115). Once a script passes roughly 100 lines or needs real data structures, rewrite it in Python (from Day 9 onward).
+Unquoted variables are the most common shell bug, and they stay hidden until a filename contains a space or a variable is empty. ShellCheck flags them, so run it before you trust a script. In code review, "quote your variables" is the comment shell authors get most often.
 
 ---
 
-## 7. Hands-on exercises (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
-Work in `~/dev/day05` with the `app.log` from section 2.
+Work in `~/dev/day05` with the `app.log` from the start of this guide.
 
 1. **grep (10 minutes).** Count the ERROR lines. Print the non-INFO lines with line numbers. Find every line that mentions `db`, regardless of case. Then run `grep -q NOPE app.log; echo $?`. *Check:* you get 3, four numbered lines, two lines, and `1`.
 2. **find (10 minutes).** List every `.sh` and `.log` file under `~/dev`. Find directories named `.venv` from Day 3. Find files in `~` modified in the last 60 minutes with `-mmin -60`. *Check:* `app.log` appears in the last result.
 3. **Redirection (10 minutes).** Run `ls /etc /nope`, sending the listing to `ok.txt` and the error to `bad.txt`. Then reproduce the trap. Copy `app.log` to `trap.log`, run `sort trap.log > trap.log`, and check with `wc -l trap.log`. *Check:* `bad.txt` holds one line, and `trap.log` is now empty. Explain why in one sentence.
-4. **Pipes (10 minutes).** Build the login-shell pipeline from section 3 one stage at a time, and look at the output after each `|`. Then find the three most frequent words in a man page: `man ls | tr -s ' ' '\n' | sort | uniq -c | sort -rn | head -n 3`. *Check:* you can say what each stage contributed.
-5. **Permissions (10 minutes).** Create `hello.sh` from section 4.1 and get it from "Permission denied" to running. Create a directory with mode `600` (no `x`) that contains one file, then try `ls` and `cd` on it. *Check:* you can explain why `cd` fails even though you own the directory, then fix it with `chmod 700`.
+4. **Pipes (10 minutes).** Build the login-shell pipeline from the Pipes section one stage at a time, and look at the output after each `|`. Then find the three most frequent words in a man page: `man ls | tr -s ' ' '\n' | sort | uniq -c | sort -rn | head -n 3`. *Check:* you can say what each stage contributed.
+5. **Permissions (10 minutes).** Create `hello.sh` from the chmod section and get it from "Permission denied" to running. Create a directory with mode `600` (no `x`) that contains one file, then try `ls` and `cd` on it. *Check:* you can explain why `cd` fails even though you own the directory, then fix it with `chmod 700`.
 6. **Processes and signals (10 minutes).** Start `polite.sh` in the background, find it with `pgrep -a polite`, and send SIGTERM. Start it again and send SIGKILL. Then run `sleep 100`, press Ctrl+C, and run `echo $?`. *Check:* the trap message appears only for SIGTERM, and `$?` prints `130`.
 
 ---
 
-## 8. Project: `logscan`, a log summary script
+## Project: logscan, a log summary script
 
 **Goal.** Write a shell script that summarizes a log file. It counts entries by level, lists the most common error messages, and returns an exit code that tells automation whether the log crossed an error threshold. Then test it and lint it.
 
 **Repo name:** `100-days-software-day-05-logscan`
 
-**Repository layout:**
+### Repository layout
 
 ```
 100-days-software-day-05-logscan/
@@ -358,14 +399,18 @@ Work in `~/dev/day05` with the `app.log` from section 2.
 └── .gitattributes             # keeps .sh files with LF line endings
 ```
 
-**Log format.** Each line holds a date, a time, the level padded to five characters, then the message.
+### Log format
+
+Each line holds a date, a time, the level padded to five characters, then the message.
 
 ```
 2026-10-20 09:00:03 ERROR [db] connection timeout
 2026-10-20 09:00:04 INFO  [api] request served
 ```
 
-**Starter code.** Create every file inside Ubuntu (`mkdir -p ~/dev/100-days-software-day-05-logscan && cd "$_" && code .`; `$_` is the last argument of the previous command). Files created this way get LF line endings.
+### Starter code
+
+Create every file inside Ubuntu (`mkdir -p ~/dev/100-days-software-day-05-logscan && cd "$_" && code .`; `$_` is the last argument of the previous command). Files created this way get LF line endings.
 
 `make-sample-log.sh`:
 
@@ -487,7 +532,7 @@ The new parts work as follows.
 - `getopts ":n:t:h"` parses the options. A letter followed by `:` takes a value, which arrives in `$OPTARG`. The leading `:` lets the script print its own error messages. `shift $((OPTIND - 1))` leaves the log file in `$1`.
 - The regex `^[^ ]+ [^ ]+ ERROR ` anchors on the level column, so a message that merely contains the word "ERROR" is not counted.
 - `cut -d' ' -f4-` keeps the message, so identical messages group together.
-- The `EXIT` trap deletes the temporary file however the script ends. The `INT TERM` trap turns Ctrl+C or `kill` into a clean exit, which then fires the `EXIT` trap (section 5.1 in use).
+- The `EXIT` trap deletes the temporary file however the script ends. The `INT TERM` trap turns Ctrl+C or `kill` into a clean exit, which then fires the `EXIT` trap (the Signals section in use).
 
 `tests/fixtures/small.log` (2 errors, 1 warning, 2 info lines):
 
@@ -538,7 +583,7 @@ echo "$pass passed, $fail failed"
 [ "$fail" -eq 0 ]
 ```
 
-The last line makes the test script exit 0 only when every check passes, so a CI server (Day 91) can run it as-is.
+The last line makes the test script exit 0 only when every check passes, so a CI server (Day 91: CI/CD) can run it as-is.
 
 `.gitattributes`:
 
@@ -546,37 +591,63 @@ The last line makes the test script exit 0 only when every check passes, so a CI
 *.sh text eol=lf
 ```
 
-This tells Git to store and check out `.sh` files with LF endings, even on Windows. Day 6 covers it properly.
+This tells Git to store and check out `.sh` files with LF endings, even on Windows. Day 6: Git Mental Model covers it properly.
 
-**Step-by-step tasks:**
+### Step 1: create the folder and files
 
-1. Create the folder and all the files above. Run `chmod +x logscan.sh make-sample-log.sh tests/test-logscan.sh`.
-2. Run `./logscan.sh tests/fixtures/small.log`. *Expect:* `INFO: 2`, `WARN: 1`, `ERROR: 2`, and `2 [db] connection timeout` in the top list.
-3. Generate data: `mkdir -p samples results && ./make-sample-log.sh 500 > samples/sample.log`. Check it with `wc -l` (500).
-4. Save a report: `./logscan.sh -n 3 samples/sample.log > results/report.txt`. Confirm that the INFO, WARN and ERROR counts add up to the total.
-5. Try the threshold: `./logscan.sh -t 10 samples/sample.log; echo "exit: $?"`. Expect the FAIL message and `exit: 3`. Then run it with `> /dev/null` and notice the FAIL line still appears, because it goes to stderr.
-6. Run the tests and save the output: `./tests/test-logscan.sh | tee results/tests.txt`. *Expect:* `6 passed, 0 failed`.
-7. Lint: `sudo apt install shellcheck`, then `shellcheck logscan.sh make-sample-log.sh tests/test-logscan.sh > results/shellcheck.txt`. Fix anything it reports, rerun, and commit the final file, which should be empty.
-8. Break it on purpose. Remove the `|| true` from `count_level`. Run the script on a log with no WARN lines. Make one with `grep -v WARN tests/fixtures/small.log > /tmp/nowarn.log`. The script stops silently, because `set -e` sees grep's exit code 1. Restore the line and describe what happened in the README.
-9. Write the README, then upload everything to a new GitHub repo with **Add file > Upload files** (use `explorer.exe .` to find the folder). The upload does not keep the executable bit, which is why the README tells users to run `chmod +x`.
+Create the folder and all the files above. Run `chmod +x logscan.sh make-sample-log.sh tests/test-logscan.sh`.
 
-**Stretch goals (pick one):**
+### Step 2: run it on the small fixture
+
+Run `./logscan.sh tests/fixtures/small.log`. *Expect:* `INFO: 2`, `WARN: 1`, `ERROR: 2`, and `2 [db] connection timeout` in the top list.
+
+### Step 3: generate sample data
+
+Run `mkdir -p samples results && ./make-sample-log.sh 500 > samples/sample.log`. Check it with `wc -l` (500).
+
+### Step 4: save a report
+
+Run `./logscan.sh -n 3 samples/sample.log > results/report.txt`. Confirm that the INFO, WARN and ERROR counts add up to the total.
+
+### Step 5: try the threshold
+
+Run `./logscan.sh -t 10 samples/sample.log; echo "exit: $?"`. Expect the FAIL message and `exit: 3`. Then run it with `> /dev/null` and notice the FAIL line still appears, because it goes to stderr.
+
+### Step 6: run the tests
+
+Run `./tests/test-logscan.sh | tee results/tests.txt`. *Expect:* `6 passed, 0 failed`.
+
+### Step 7: lint
+
+Run `sudo apt install shellcheck`, then `shellcheck logscan.sh make-sample-log.sh tests/test-logscan.sh > results/shellcheck.txt`. Fix anything it reports, rerun, and commit the final file, which should be empty.
+
+### Step 8: break it on purpose
+
+Remove the `|| true` from `count_level`. Run the script on a log with no WARN lines. Make one with `grep -v WARN tests/fixtures/small.log > /tmp/nowarn.log`. The script stops silently, because `set -e` sees grep's exit code 1. Restore the line and describe what happened in the README.
+
+### Step 9: write the README and upload
+
+Write the README, then upload everything to a new GitHub repo with Add file > Upload files (use `explorer.exe .` to find the folder). The upload does not keep the executable bit, which is why the README tells users to run `chmod +x`.
+
+### Stretch goals
+
+Pick one.
 
 - Add a `-l LEVEL` option, so `./logscan.sh -l WARN file` lists the top warnings instead of the top errors.
 - Make `logscan.sh` accept several log files and print one summary per file.
 - Point it at a real log such as `/var/log/dpkg.log`, and adapt the pattern to that format in a copy of the script.
 
-**README checklist:**
+### README checklist
 
 - [ ] What `logscan` does, in two sentences
 - [ ] Install: `chmod +x *.sh tests/*.sh`
 - [ ] Usage with both options, and an example report pasted as a code block
 - [ ] A table of exit codes (0, 1, 2, 3) and what each means
 - [ ] How to run the tests and ShellCheck
-- [ ] What you learned when you broke `set -e` on purpose (step 8). Note that the exit code is 1, the same code the script uses for a file problem.
+- [ ] What you learned when you broke `set -e` on purpose (Step 8). Note that the exit code is 1, the same code the script uses for a file problem.
 - [ ] One limitation of the script (for example, it assumes this exact log format, or it reads the file several times, which is slow on very large logs)
 
-**Done when:**
+### Done when
 
 - `./tests/test-logscan.sh` prints `6 passed, 0 failed`, and its output is committed in `results/tests.txt`.
 - `results/shellcheck.txt` is committed and contains no unresolved warnings.
@@ -586,7 +657,7 @@ This tells Git to store and check out `.sh` files with LF endings, even on Windo
 
 ---
 
-## 9. Check your understanding
+## Check your understanding
 
 1. You run `sort data.txt > data.txt` and the file is now empty. Explain exactly when the data was lost.
 2. `grep ERROR app.log | uniq -c` reports `1` for an error that appears three times. What is wrong with the pipeline?
@@ -608,7 +679,7 @@ This tells Git to store and check out `.sh` files with LF endings, even on Windo
 
 ---
 
-## 10. Sources to read and watch
+## Sources to read and watch
 
 **Read:**
 - [Wikipedia: Grep](https://en.wikipedia.org/wiki/Grep)
@@ -635,6 +706,6 @@ This tells Git to store and check out `.sh` files with LF endings, even on Windo
 
 ---
 
-## 11. Tomorrow
+## Tomorrow
 
-Day 6, **Git Mental Model**, starts the Git and Collaboration module. Until now you have uploaded files to GitHub through the website, and you have seen the gaps. Empty folders vanish, the executable bit is lost, and nothing records how a file changed. Git fixes all three. You will learn what a repository, a commit and the staging area are, and you will drive Git from Ubuntu using the terminal skills from Days 4 and 5. Your first real commits can go into today's `logscan` repo, and the `.gitattributes` file you added will finally do its job.
+Day 6, Git Mental Model, starts the Git and Collaboration module, right after this last day of Foundations. Until now you have uploaded files to GitHub through the website, and you have seen the gaps. Empty folders vanish, the executable bit is lost, and nothing records how a file changed. Git fixes all three. You will learn what a repository, a commit and the staging area are, and you will drive Git from Ubuntu using the terminal skills from Day 4: Linux CLI I and today. Your first real commits can go into today's `logscan` repo, and the `.gitattributes` file you added will finally do its job.

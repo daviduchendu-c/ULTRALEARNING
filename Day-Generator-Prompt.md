@@ -13,19 +13,20 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
 {NOTION_OUTLINE}
 
 ## Output structure (use these headings, in this order)
-1. **Title and metadata**: "Day N: Title", module name, estimated time, what you will build, prerequisites.
+1. **Title, metadata and table of contents**:
+   - "Day N: Title", module name, then one line each for **Time** (for example "about 3 hours") and **Level** (beginner, intermediate or advanced, with one line on who it is for).
+   - **By the end of this day, you will have:** a bulleted list of the concrete outputs the reader walks away with.
+   - **What you need:** a bulleted list of the equipment, installs and accounts needed before starting, each with the version where relevant.
+   - **Prerequisites:** a bulleted list of the skills and earlier days the reader must already have.
+   - **In this guide you are going to cover the following:** a plain bulleted list (no numbers) that links to every `##` section and every concept `###` heading, using GitHub anchors (for example `[Introduction](#introduction)`). Then a `---` line.
+   - Headings carry no numbers anywhere. Open the body with `## Introduction`, not "The big idea". Do not add group headings above concept sections unless the group holds its own diagram or intro that the concepts need.
 2. **The big idea**: one paragraph that explains why this topic matters on the job.
 3. **Background / history** (only if it helps understanding): a short table of how the idea evolved.
 4. **Glossary**: every new term, defined in plain language, one line each.
 5. **Concept deep dives**: one subsection per concept in the outline. For each one give:
-   -decide what is expident for this topic 
-   - intuition first (an analogy or everyday example),
-   - break down into first principles
-   - the definition,
-   - a worked example, with numbers or a small code snippet where necessary and the topic is technical,
-   - common mistakes and how to spot them,
-   - one "what this looks like in the real market" sentence (which job, product or tool uses it).
-   Use ASCII diagrams or Mermaid where a picture explains a structure, and name a reference image to search for when a visual helps.
+   - Each concept is a `###` heading with a short step-by-step flow. Do not label the parts (no "Intuition", "Definition", "Example", "Trap" or "On the job" tags in bold). Write them as ordinary paragraphs that follow this order: start with an everyday analogy, break the idea into first principles, give the definition, work an example with numbers or a small code snippet when the topic is technical, name one common mistake and how to spot it, and end with one sentence on where the concept shows up in the real market (which job, product or tool uses it).
+   - Decide first what is essential for this topic and cover that fully.
+   - Use ASCII diagrams or Mermaid where a picture explains a structure, and name a reference image to search for when a visual helps.
 6. **Hands-on exercises** (about 60 minutes): concrete, checkable steps.
 7. **Project (GitHub, project-based)**: choose the form that fits the topic.
    - If the topic is practical, give a full mini-project: goal, repo layout as a tree, starter code, step-by-step tasks, a README checklist, and a "done when" list. Suggest a repo name in the form `100-days-<series>-day-NN-<slug>`.

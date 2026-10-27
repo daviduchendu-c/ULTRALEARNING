@@ -3,12 +3,50 @@
 *100 Days of Software Engineering, Module: Foundations*
 
 **Time:** about 4 hours, including installs and one restart
-**You will build:** a Windows 11 developer setup with VS Code, Git, Python and WSL 2 (Ubuntu), plus a GitHub repo that proves it: an environment check script for each side, a setup log, and a bug you found with the debugger.
-**You should know:** Day 2 (processes, storage and memory). You need administrator rights and about 5 GB of free disk space.
+**Level:** beginner. For anyone on a Windows 11 machine who has used a terminal a little and wants a working developer setup.
+
+**By the end of this day, you will have:**
+
+- A Windows 11 developer setup with VS Code, Git, Python and WSL 2 (Ubuntu)
+- An environment check script for each side (PowerShell and WSL), with saved output
+- A setup log (`SETUP.md`) that records what you installed and every problem you fixed
+- A bug in a small Python program that you found with the debugger
+- A GitHub repo that proves all of the above
+
+**What you need:**
+
+- A Windows 11 computer with administrator rights and about 5 GB of free disk space
+- Virtualization enabled in your firmware (BIOS or UEFI), which WSL 2 requires
+- VS Code, Git and Python 3.14 (installed with `winget` in the install section; if 3.14 has been superseded, use the newest stable release)
+- WSL 2 with Ubuntu (installed in the install section)
+- A GitHub account
+
+**Prerequisites:**
+
+- Day 2: How Computers Execute Programs (processes, storage and memory)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [Install the tools](#install-the-tools)
+- [The terminal](#the-terminal)
+- [The filesystem](#the-filesystem)
+- [PATH: how the shell finds programs](#path-how-the-shell-finds-programs)
+- [Environment variables](#environment-variables)
+- [Package managers and virtual environments](#package-managers-and-virtual-environments)
+- [VS Code](#vs-code)
+- [Debugging](#debugging)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: prove your environment works](#project-prove-your-environment-works)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 On your first day at a job, someone will ask you to "get the project running locally." That means an editor, a terminal, the right language versions, the right packages, and settings stored in environment variables. Engineers who can do this in an hour, and fix it when it breaks, become productive quickly. Engineers who cannot lose days to errors like `'python' is not recognized` or `command not found`.
 
@@ -16,11 +54,11 @@ Those errors come from a small set of ideas: where files live, how the terminal 
 
 ---
 
-## 2. Install the tools
+## Install the tools
 
 Work in an administrator PowerShell window for the WSL step. Run the other commands in a normal window.
 
-**Editor, Git and Python** (run in PowerShell):
+Install the editor, Git and Python from PowerShell:
 
 ```powershell
 winget install --id Microsoft.VisualStudioCode -e
@@ -30,7 +68,7 @@ winget install --id Python.Python.3.14 -e
 
 `-e` means "match the ID exactly." Run `winget search python` to see current versions. If 3.14 has been superseded when you read this, install the newest stable release.
 
-**WSL 2 and Ubuntu** (run in Windows Terminal as administrator):
+Install WSL 2 and Ubuntu from Windows Terminal, run as administrator:
 
 ```powershell
 wsl --install
@@ -53,19 +91,17 @@ sudo apt update && sudo apt upgrade -y
 
 `&&` runs the second command only if the first succeeds. Day 5 covers it in detail.
 
-**Mistakes.** If `wsl --install` fails with a message about virtualization (error code 0x80370102 is common), virtualization is off in your firmware. Restart into the BIOS or UEFI settings, enable Intel VT-x or AMD-V (SVM), and try again. WSL 2 uses RAM while it runs. `wsl --shutdown` stops it if your laptop feels slow.
+If `wsl --install` fails with a message about virtualization (error code 0x80370102 is common), virtualization is off in your firmware. Restart into the BIOS or UEFI settings, enable Intel VT-x or AMD-V (SVM), and try again. WSL 2 uses RAM while it runs, and `wsl --shutdown` stops it if your laptop feels slow.
 
 ---
 
-## 3. The terminal and the filesystem
+### The terminal
 
-### 3.1 The terminal
+The terminal is a text conversation with your computer. Clicking is like pointing at a menu. Typing a command is like giving the chef exact instructions, which you can write down and repeat.
 
-**Intuition.** The terminal is a text conversation with your computer. You say "run this, with these details," and it answers in text. Clicking is like pointing at a menu. Typing a command is like giving the chef exact instructions, which you can write down and repeat.
+A conversation needs a window, someone listening, and a sentence shape, and each has its own name. The **terminal emulator** is the window (Windows Terminal, which ships with Windows 11). The **shell** is the program inside the window that reads and runs your commands. On Windows you have **Windows PowerShell 5.1** (built in), **PowerShell 7** (a separate free install, command `pwsh`), and the older **Command Prompt** (`cmd`). In WSL you use **bash**. A command line has the shape `command argument --flag`, so `git --version` runs the program `git` with the flag `--version`.
 
-**Definition.** Three parts are easy to confuse. The **terminal emulator** is the window (Windows Terminal, which ships with Windows 11). The **shell** is the program inside the window that reads and runs your commands. On Windows you have **Windows PowerShell 5.1** (built in), **PowerShell 7** (a separate free install, command `pwsh`), and the older **Command Prompt** (`cmd`). In WSL you use **bash**. A command line has a shape: `command argument --flag`. So `git --version` runs the program `git` with the flag `--version`.
-
-**Worked example.** Try these in PowerShell:
+Try these in PowerShell:
 
 ```powershell
 Get-Location              # where am I? (alias: pwd)
@@ -75,15 +111,17 @@ Set-Location ..           # move up one level
 $PSVersionTable.PSVersion # which PowerShell is this?
 ```
 
-Three habits save time from day one: **Tab** completes names, **Up arrow** recalls earlier commands, and **Ctrl+C** stops a running command.
+Three habits save time from day one: Tab completes names, the Up arrow recalls earlier commands, and Ctrl+C stops a running command.
 
-**Mistakes.** PowerShell defines aliases named `ls`, `cat` and `rm` so Linux users feel at home, but they are not the Linux tools. `ls -la` fails in PowerShell because `Get-ChildItem` has no such flags. When a tutorial shows a `$` prompt, it means bash, so run that command in your Ubuntu tab, not in PowerShell. Closing a terminal also stops the processes it started, so a server you launched there stops too.
+PowerShell defines aliases named `ls`, `cat` and `rm` so Linux users feel at home, but they are not the Linux tools. `ls -la` fails in PowerShell because `Get-ChildItem` has no such flags. When a tutorial shows a `$` prompt, it means bash, so run that command in your Ubuntu tab, not in PowerShell. Closing a terminal also stops the processes it started, so a server you launched there stops too.
 
-### 3.2 The filesystem
+Every deployment guide, README and bug report you read on a team is written as terminal commands, so reading them fluently is part of the job.
 
-**Intuition.** The filesystem is a family tree of folders. Every file has one full address, like a postal address that runs from country down to street.
+### The filesystem
 
-**Definition.** Windows has one tree per drive. Each tree starts at a drive letter such as `C:\` and separates parts with backslashes. Linux has one tree that starts at `/` (called root). Other drives appear as folders inside it, and parts are separated by forward slashes. Two differences matter. Windows names are not case-sensitive, so `Notes.txt` and `notes.txt` are the same file. Linux names are case-sensitive, so they are two files. Names that start with a dot, such as `.gitignore`, are hidden by default on Linux.
+The filesystem is a family tree of folders. Every file has one full address, like a postal address that runs from country down to street.
+
+Every operating system needs one rule for turning a name into a place on disk, and Windows and Linux made different rules. Windows has one tree per drive. Each tree starts at a drive letter such as `C:\` and separates parts with backslashes. Linux has one tree that starts at `/` (called root). Other drives appear as folders inside it, and parts are separated by forward slashes. Two differences matter. Windows names are not case-sensitive, so `Notes.txt` and `notes.txt` are the same file. Linux names are case-sensitive, so they are two files. Names that start with a dot, such as `.gitignore`, are hidden by default on Linux.
 
 WSL connects the two trees:
 
@@ -93,7 +131,7 @@ WSL connects the two trees:
 | Windows | Your Linux files are at `\\wsl$\Ubuntu` (or `\\wsl.localhost\Ubuntu`), and appear under **Linux** in File Explorer |
 | Ubuntu (WSL) | `explorer.exe .` opens the current Linux folder in File Explorer |
 
-**Worked example.** You are in `C:\Users\ada\projects`, and you want `C:\Users\ada\projects\habit\README.md`.
+Say you are in `C:\Users\ada\projects`, and you want `C:\Users\ada\projects\habit\README.md`.
 
 - Absolute path: `C:\Users\ada\projects\habit\README.md`
 - Relative path: `habit\README.md`
@@ -101,17 +139,15 @@ WSL connects the two trees:
 
 In WSL, the same file is `/home/ada/projects/habit/README.md`, or `habit/README.md` relative to `~/projects`. The `~` symbol means your home directory.
 
-**Mistakes.** Spaces break paths unless you quote them: `cd "My Projects"`. Working on files under `/mnt/c` from Linux tools is much slower, so Microsoft's WSL documentation recommends keeping Linux projects in `~`. A third trap is code that works on Windows but fails on Linux because the file is `Config.json` and the code opens `config.json`. Most servers, containers and CI runners are Linux, so code must survive a case-sensitive, forward-slash world before it ships.
+Spaces break paths unless you quote them: `cd "My Projects"`. Working on files under `/mnt/c` from Linux tools is much slower, so Microsoft's WSL documentation recommends keeping Linux projects in `~`. A third trap is code that works on Windows but fails on Linux because the file is `Config.json` and the code opens `config.json`. Most servers, containers and CI runners are Linux, so code must survive a case-sensitive, forward-slash world before it ships.
 
----
+### PATH: how the shell finds programs
 
-## 4. PATH: how the shell finds programs
+When you call a friend, your phone does not search the whole world. It checks your contacts in order. PATH is the shell's contact list for programs.
 
-**Intuition.** When you call a friend, your phone does not search the whole world. It checks your contacts in order. PATH is the shell's contact list for programs.
+`PATH` is an environment variable that holds a list of folders. When you type a command name without a folder, the shell checks each folder in PATH, in order, and runs the first match. On Windows the list is separated by semicolons, and the shell also tries endings such as `.exe` and `.cmd`. On Linux the list is separated by colons. The current folder is not on PATH, which is why you run your own scripts as `./script.sh` on Day 5. If no folder has the program, you get `'x' is not recognized...` in PowerShell or `x: command not found` in bash.
 
-**Definition.** `PATH` is an environment variable that holds a list of folders. When you type a command name without a folder, the shell checks each folder in PATH, in order, and runs the first match. On Windows the list is separated by semicolons, and the shell also tries endings such as `.exe` and `.cmd`. On Linux the list is separated by colons. The current folder is not on PATH, which is why you run your own scripts as `./script.sh` on Day 5. If no folder has the program, you get `'x' is not recognized...` in PowerShell or `x: command not found` in bash.
-
-**Worked example.** In PowerShell:
+In PowerShell:
 
 ```powershell
 $env:Path -split ';'      # list each folder on PATH, one per line
@@ -136,17 +172,15 @@ C:\Users\ada\AppData\Local\Programs\Python\Python314\python.exe
 
 Typing `python` runs the first one. On many Windows 11 machines, that first entry is an **App Execution Alias** that opens the Microsoft Store instead of running Python. Turn off the `python.exe` and `python3.exe` aliases in **Settings > Apps > Advanced app settings > App execution aliases**, or use the Python launcher `py`, which the python.org installer adds.
 
-**Mistakes.** PATH changes reach only new processes. After you install something, close and reopen the terminal and VS Code. This one fact fixes many "installed but not found" problems. Do not edit PATH with the old `setx` command. It silently truncates values longer than 1024 characters, and it can wipe your PATH. Use **Start > Edit environment variables for your account** instead. Order matters too. With two Python versions on PATH, the earlier folder wins. Tools such as pyenv, nvm and Docker images work by controlling PATH, and "the CI server picked the wrong version" is usually a PATH problem.
+PATH changes reach only new processes. After you install something, close and reopen the terminal and VS Code. That one fact fixes many "installed but not found" problems. Do not edit PATH with the old `setx` command. It silently truncates values longer than 1024 characters, and it can wipe your PATH. Use **Start > Edit environment variables for your account** instead. Order matters too. With two Python versions on PATH, the earlier folder wins. Tools such as pyenv, nvm and Docker images work by controlling PATH, and "the CI server picked the wrong version" is usually a PATH problem.
 
----
+### Environment variables
 
-## 5. Environment variables
+Environment variables are sticky notes attached to every process: "your home folder is here," "the language is English," "the database address is this." A process reads its notes and hands copies to any child process it starts.
 
-**Intuition.** Environment variables are sticky notes attached to every process: "your home folder is here," "the language is English," "the database address is this." A process reads its notes and hands copies to any child process it starts.
+An environment variable is a name and text value that the OS keeps for each process. When a process starts another, the child gets a **copy** of the parent's variables. Changing the copy never changes the parent. So a variable set in one terminal tab does not appear in another. Programs read variables to get configuration without hard-coding it. Common examples are `PATH`, `HOME` (Linux) or `USERPROFILE` (Windows), `TEMP` and `LANG`.
 
-**Definition.** An environment variable is a name and text value that the OS keeps for each process. When a process starts another, the child gets a **copy** of the parent's variables. Changing the copy never changes the parent. So a variable set in one terminal tab does not appear in another. Programs read variables to get configuration without hard-coding it. Common examples are `PATH`, `HOME` (Linux) or `USERPROFILE` (Windows), `TEMP` and `LANG`.
-
-**Worked example.** This program reads a variable:
+This program reads a variable:
 
 ```python
 import os
@@ -173,15 +207,13 @@ env                              # list every variable
 
 To make a variable permanent, use the "Edit environment variables for your account" window on Windows. In bash, add the `export` line to `~/.bashrc` and run `source ~/.bashrc`.
 
-**Mistakes.** In bash, `APP_GREETING = "Hi"` fails. There must be no spaces around `=`. The bigger mistake is putting secrets (API keys, passwords) in code, or committing a `.env` file to GitHub. Bots scan public repos for leaked keys within minutes. Keep secrets in environment variables or in a `.env` file listed in `.gitignore`. Environment variables are not encrypted, and any process running as you can read them. Production systems use a secrets manager. The Twelve-Factor App method recommends storing configuration in the environment, and platforms such as Vercel, Heroku and AWS all offer an environment variables page for it.
+In bash, `APP_GREETING = "Hi"` fails, because there must be no spaces around `=`. The bigger mistake is putting secrets (API keys, passwords) in code, or committing a `.env` file to GitHub. Bots scan public repos for leaked keys within minutes. Keep secrets in environment variables or in a `.env` file listed in `.gitignore`. Environment variables are not encrypted, and any process running as you can read them, so production systems use a secrets manager. The Twelve-Factor App method recommends storing configuration in the environment, and platforms such as Vercel, Heroku and AWS all offer an environment variables page for it.
 
----
+### Package managers and virtual environments
 
-## 6. Package managers and virtual environments
+A package manager is an app store for developers, which you drive from the terminal. It knows where to download software, which version you have, and what else that software needs.
 
-**Intuition.** A package manager is an app store for developers, which you drive from the terminal. It knows where to download software, which version you have, and what else that software needs.
-
-**Definition.** A package manager installs, upgrades and removes **packages**, and resolves their **dependencies** (other packages a package needs). You will use four of them at different levels.
+A package manager installs, upgrades and removes **packages**, and resolves their **dependencies** (other packages a package needs). You will use four of them at different levels.
 
 | Level | Tool | Example | Notes |
 |---|---|---|---|
@@ -190,7 +222,7 @@ To make a variable permanent, use the "Edit environment variables for your accou
 | Python libraries | **pip** inside a **venv** | `pip install requests` | Per project, recorded in `requirements.txt` |
 | JavaScript libraries | **npm** (comes with Node.js, Day 70) | `npm install express` | Per project, recorded in `package.json` |
 
-**Worked example.** Create a Python environment that belongs to one project:
+Create a Python environment that belongs to one project:
 
 ```powershell
 mkdir $HOME\dev\day03; cd $HOME\dev\day03
@@ -205,15 +237,13 @@ Plain `pip freeze > requirements.txt` in Windows PowerShell 5.1 writes UTF-16 te
 
 If activation fails with "running scripts is disabled on this system," run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once and try again. In Ubuntu, the same steps are `python3 -m venv .venv` and `source .venv/bin/activate`. If Ubuntu says venv is unavailable, run `sudo apt install python3-venv` first.
 
-**Mistakes.** Installing Python packages globally mixes versions between projects until something breaks. Recent Ubuntu releases block `pip install` outside a virtual environment and show an `externally-managed-environment` error. That error protects you, so use a venv instead of forcing the install. Package managers also run code from strangers. Misspelled package names (typosquatting) have carried malware on PyPI and npm, so check a name before you install it. Every codebase has a dependency file (`requirements.txt`, `pyproject.toml`, `package.json`), and GitHub's Dependabot uses those files to flag vulnerable versions.
+Installing Python packages globally mixes versions between projects until something breaks. Recent Ubuntu releases block `pip install` outside a virtual environment and show an `externally-managed-environment` error. That error protects you, so use a venv instead of forcing the install. Package managers also run code from strangers. Misspelled package names (typosquatting) have carried malware on PyPI and npm, so check a name before you install it. Every codebase has a dependency file (`requirements.txt`, `pyproject.toml`, `package.json`), and GitHub's Dependabot uses those files to flag vulnerable versions.
 
----
+### VS Code
 
-## 7. The editor and the debugger
+A workshop with every tool within reach is faster than a bare table. An editor is that workshop for code: it opens your files, runs your programs, and adds tools as you need them.
 
-### 7.1 VS Code
-
-**Definition.** Visual Studio Code is a free editor from Microsoft. Its source is MIT-licensed (the "Code - OSS" project). The downloadable build adds a Microsoft license and telemetry. VSCodium is a community build without them. Open a **folder** as a workspace. Opening a single file turns off project-wide search and debug configuration. Extensions add languages and tools. Install **Python** (which brings the Python debugger) and **WSL** (both by Microsoft) now.
+Visual Studio Code is a free editor from Microsoft. Its source is MIT-licensed (the "Code - OSS" project). The downloadable build adds a Microsoft license and telemetry, and VSCodium is a community build without them. You open a **folder** as a workspace. Opening a single file turns off project-wide search and debug configuration. Extensions add languages and tools. Install **Python** (which brings the Python debugger) and **WSL** (both by Microsoft) now.
 
 | Action | Shortcut |
 |---|---|
@@ -225,7 +255,7 @@ If activation fails with "running scripts is disabled on this system," run `Set-
 | Rename symbol everywhere | F2 |
 | Format document | Shift+Alt+F |
 
-**Worked example.** Connect VS Code to Linux. In your Ubuntu terminal:
+To connect VS Code to Linux, run this in your Ubuntu terminal:
 
 ```bash
 mkdir -p ~/dev/day03-linux
@@ -235,15 +265,15 @@ code .
 
 The first time, VS Code installs a small server inside Ubuntu, then opens a window labeled **WSL: Ubuntu** in the bottom-left corner. The editor UI runs on Windows. The terminal, the files and the Python interpreter run in Linux. This works because WSL adds your Windows PATH to Linux's PATH by default, so `code` is found.
 
-**Mistakes.** The classic beginner bug is forgetting to save. A dot on an editor tab means unsaved changes. Turn on **File > Auto Save** to remove the problem. Installing dozens of extensions slows the editor and causes conflicts, so keep the list short.
+The classic beginner bug is forgetting to save. A dot on an editor tab means unsaved changes, and **File > Auto Save** removes the problem. Installing dozens of extensions slows the editor and causes conflicts, so keep the list short. Teams often commit a shared list of recommended extensions and settings in the repo so that everyone starts from the same editor.
 
-### 7.2 Debugging
+### Debugging
 
-**Intuition.** Guessing at a bug is like finding a gas leak by sniffing each room. A debugger is a meter you can hold up to any pipe while the gas flows.
+Guessing at a bug is like finding a gas leak by sniffing each room. A debugger is a meter you can hold up to any pipe while the gas flows.
 
-**Definition.** A **debugger** runs your program under control. You set a **breakpoint** on a line. When execution reaches it, the process pauses (the CPU stops running that thread), and you can inspect variables and the **call stack** from Day 2. Then you step. **Step over** runs the current line. **Step into** enters a function call. **Step out** finishes the current function. In VS Code, **F9** toggles a breakpoint, **F5** starts or continues, **F10** steps over, **F11** steps into, **Shift+F11** steps out, and **Shift+F5** stops. Two other tools are useful too. Python's `breakpoint()` drops into the `pdb` debugger in the terminal. A **traceback** names the error, and you read it from the last line up.
+A **debugger** runs your program under control. You set a **breakpoint** on a line. When execution reaches it, the process pauses (the CPU stops running that thread), and you can inspect variables and the **call stack** from Day 2. Then you step. **Step over** runs the current line. **Step into** enters a function call. **Step out** finishes the current function. In VS Code, F9 toggles a breakpoint, F5 starts or continues, F10 steps over, F11 steps into, Shift+F11 steps out, and Shift+F5 stops. Two other tools are useful too. Python's `breakpoint()` drops into the `pdb` debugger in the terminal. A **traceback** names the error, and you read it from the last line up.
 
-**Worked example.** The `average.py` file in section 9 has a bug. It prints `56.666666666666664` for `[80, 90, 100]`, but the answer should be 90.0. Put a breakpoint on line 7, `total += numbers[i]`, and press F5. Watch `i` in the **Variables** pane. It takes the values 0 and 1, never 2. The loop skips the last number, so `total` ends at 170, and 170 / 3 = 56.67. The fix is `range(len(numbers))`, or better, `sum(numbers) / len(numbers)`.
+The `average.py` file in the project has a bug. It prints `56.666666666666664` for `[80, 90, 100]`, but the answer should be 90.0. Put a breakpoint on line 7, `total += numbers[i]`, and press F5. Watch `i` in the **Variables** pane. It takes the values 0 and 1, never 2. The loop skips the last number, so `total` ends at 170, and 170 / 3 = 56.67. The fix is `range(len(numbers))`, or better, `sum(numbers) / len(numbers)`.
 
 The same hunt in the terminal with `pdb`, run from the project folder:
 
@@ -256,13 +286,13 @@ $ python3 -m pdb average.py
 (Pdb) q            # quit
 ```
 
-**Mistakes.** Changing code at random until the error disappears hides the bug instead of fixing it. Form a guess, then use the debugger to confirm or reject it. Debuggers also change timing. A race between threads or network calls can vanish when you pause, and logs with timestamps are the better tool there. Remove leftover `breakpoint()` calls before you commit, because they freeze a server that waits for input. Support and backend engineers spend much of their week reproducing bugs from tickets, and "walk me through how you would debug this" is a standard interview question.
+Changing code at random until the error disappears hides the bug instead of fixing it. Form a guess, then use the debugger to confirm or reject it. Debuggers also change timing. A race between threads or network calls can vanish when you pause, and logs with timestamps are the better tool there. Remove leftover `breakpoint()` calls before you commit, because they freeze a server that waits for input. Support and backend engineers spend much of their week reproducing bugs from tickets, and "walk me through how you would debug this" is a standard interview question.
 
 ---
 
-## 8. Hands-on exercises (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
-Install commands are in section 2. Complete those first.
+Install commands are in the install section. Complete those first.
 
 1. **Check the install (5 minutes).** In a new PowerShell window, run `git --version`, `py --version` and `code --version`. Run `wsl -l -v`. *Check:* all three print versions and `wsl -l -v` shows VERSION 2.
 2. **Terminal (5 minutes).** Open a PowerShell tab and an Ubuntu tab. In each, print where you are (`Get-Location` and `pwd`). *Check:* one shows `C:\Users\...`, the other `/home/...`.
@@ -274,13 +304,13 @@ Install commands are in section 2. Complete those first.
 
 ---
 
-## 9. Project: prove your environment works
+## Project: prove your environment works
 
-**Goal.** A repo that shows a reviewer, in two minutes, that your machine is set up correctly and that you can find a bug with a debugger.
+The goal is a repo that shows a reviewer, in two minutes, that your machine is set up correctly and that you can find a bug with a debugger.
 
-**Repo name:** `100-days-software-day-03-developer-environment`
+Name the repo `100-days-software-day-03-developer-environment`.
 
-**Repository layout:**
+### Repository layout
 
 ```
 100-days-software-day-03-developer-environment/
@@ -300,7 +330,7 @@ Install commands are in section 2. Complete those first.
 └── .gitignore
 ```
 
-**Starter code.**
+### Starter code
 
 `check-env.ps1`:
 
@@ -400,18 +430,39 @@ __pycache__/
 .env
 ```
 
-**Step-by-step tasks:**
+### Step 1: create the folder
 
-1. Create `C:\Users\<you>\dev\100-days-software-day-03-developer-environment` and open it in VS Code with **File > Open Folder**.
-2. Add `check-env.ps1` and run it with `.\check-env.ps1`. If PowerShell refuses to run scripts, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once. Then save the output: `mkdir results`, then `.\check-env.ps1 | Out-File -Encoding utf8 results\check-env-windows.txt`.
-3. In Ubuntu, create `check-env.sh` in `~/dev`, run `chmod +x check-env.sh` (Day 5 explains permissions), then run `./check-env.sh > check-env-wsl.txt` (Day 5 explains the `>`). Run `explorer.exe .`, copy `check-env.sh` into the repo folder, and copy `check-env-wsl.txt` into its `results\` folder.
-4. Add `average.py` and `launch.json`. Run the file once normally and note the wrong output. Set a breakpoint on line 7, press F5 with the "Debug average.py" configuration, step through the loop, and take `debugger-paused.png` with the **Variables** and **Call Stack** panes visible.
-5. Fix the bug. Run again and confirm that `Debugging! Average score: 90.0` appears in the debug terminal. That greeting proves the `env` setting in `launch.json` reached the process.
-6. Create a venv, install `requests`, and save `requirements.txt` as shown in section 6.
-7. Write `SETUP.md`: every install command you ran, the version each tool reported, and every error you hit with how you fixed it. You will reuse it on your next laptop.
-8. Create the GitHub repo and upload the files with **Add file > Upload files**. Do not upload `.venv`.
+Create `C:\Users\<you>\dev\100-days-software-day-03-developer-environment` and open it in VS Code with **File > Open Folder**.
 
-**README checklist:**
+### Step 2: check the Windows side
+
+Add `check-env.ps1` and run it with `.\check-env.ps1`. If PowerShell refuses to run scripts, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once. Then save the output: `mkdir results`, then `.\check-env.ps1 | Out-File -Encoding utf8 results\check-env-windows.txt`.
+
+### Step 3: check the WSL side
+
+In Ubuntu, create `check-env.sh` in `~/dev`, run `chmod +x check-env.sh` (Day 5 explains permissions), then run `./check-env.sh > check-env-wsl.txt` (Day 5 explains the `>`). Run `explorer.exe .`, copy `check-env.sh` into the repo folder, and copy `check-env-wsl.txt` into its `results\` folder.
+
+### Step 4: debug the bug
+
+Add `average.py` and `launch.json`. Run the file once normally and note the wrong output. Set a breakpoint on line 7, press F5 with the "Debug average.py" configuration, step through the loop, and take `debugger-paused.png` with the **Variables** and **Call Stack** panes visible.
+
+### Step 5: fix the bug
+
+Fix the bug. Run again and confirm that `Debugging! Average score: 90.0` appears in the debug terminal. That greeting proves the `env` setting in `launch.json` reached the process.
+
+### Step 6: record the dependencies
+
+Create a venv, install `requests`, and save `requirements.txt` as shown in the package managers section.
+
+### Step 7: write the setup log
+
+Write `SETUP.md`: every install command you ran, the version each tool reported, and every error you hit with how you fixed it. You will reuse it on your next laptop.
+
+### Step 8: publish
+
+Create the GitHub repo and upload the files with **Add file > Upload files**. Do not upload `.venv`.
+
+### README checklist
 
 - [ ] What the repo proves, in two sentences
 - [ ] A table of tools and versions (VS Code, Git, Python, WSL, Ubuntu)
@@ -419,7 +470,7 @@ __pycache__/
 - [ ] The bug in `average.py`: the symptom, how the debugger revealed it, and the fix
 - [ ] One PATH or environment-variable problem you hit and solved (or a note that you hit none)
 
-**Done when:**
+### Done when
 
 - Both `results/` files are committed and show every tool found.
 - `wsl -l -v` output in `SETUP.md` shows Ubuntu on VERSION 2.
@@ -429,7 +480,7 @@ __pycache__/
 
 ---
 
-## 10. Check your understanding
+## Check your understanding
 
 1. You install Node.js, then type `node --version` in a PowerShell window that was already open, and get "not recognized." What happened?
 2. You set `$env:API_KEY` in one terminal tab, then run your app from a VS Code terminal opened earlier. The app cannot see the key. Why?
@@ -451,9 +502,10 @@ __pycache__/
 
 ---
 
-## 11. Sources to read and watch
+## Sources to read and watch
 
 **Read:**
+
 - [Microsoft Learn: How to install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
 - [Microsoft Learn: Set up a WSL development environment](https://learn.microsoft.com/en-us/windows/wsl/setup/environment)
 - [Microsoft Learn: Working across Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
@@ -469,21 +521,24 @@ __pycache__/
 - [The Twelve-Factor App: III. Config](https://12factor.net/config)
 
 **Tutorials:**
+
 - [VS Code: Getting Started with Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial), which walks through running and debugging a Python file.
 - GeeksforGeeks: search "Environment Variables in Linux/Unix" and "How to Install WSL2 on Windows".
 - [MIT Missing Semester: Debugging and Profiling](https://missing.csail.mit.edu/2020/debugging-profiling/) (the debugging half).
 
 **Watch:**
+
 - The official Visual Studio Code YouTube channel: search "Getting started with VS Code" and "Python debugging in VS Code".
 - MIT Missing Semester Lecture 1, "Course Overview + The Shell", on YouTube.
 
 **Practice:**
+
 - [MIT Missing Semester: Course overview + the shell](https://missing.csail.mit.edu/2020/course-shell/). Do the exercises at the bottom in your new Ubuntu terminal.
 
 **Note on links:** open each one once. If a page has moved, search its title.
 
 ---
 
-## 12. Tomorrow
+## Tomorrow
 
-Day 4, **Linux CLI I**, moves into the Ubuntu terminal you set up today. You will move around and manage files with `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv` and `rm`. You will read files with `cat` and `less`, look up any command with `man`, and tour the Linux filesystem from `/` down to your home folder. The filesystem tree, PATH and WSL's two worlds from today are the map. Tomorrow you learn to walk it quickly and safely.
+Day 4: Linux CLI I moves into the Ubuntu terminal you set up today. You will move around and manage files with `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv` and `rm`. You will read files with `cat` and `less`, look up any command with `man`, and tour the Linux filesystem from `/` down to your home folder. The filesystem tree, PATH and WSL's two worlds from today are the map. Tomorrow you learn to walk it quickly and safely.

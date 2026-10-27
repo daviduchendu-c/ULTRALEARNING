@@ -3,18 +3,63 @@
 *100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours (plus shopping time if you buy tools)
-**You will build:** a costed bench toolkit plan, a measurement log with real or simulated readings, datasheet notes for a real motor driver, and a debugging template you will use for the rest of the series.
-**You should know:** Days 1 to 3. You do not need to own any tools yet. Every exercise has a no-hardware option.
+**Level:** beginner. You do not need to own any tools or have used them before. Every exercise has a no-hardware option.
+
+**By the end of this day, you will have:**
+
+- A costed bench toolkit plan that marks each tool as owned, planned or skipped
+- A measurement log with at least ten real or simulated readings, each with an expected value, a measured value and a percentage error
+- Datasheet notes, with page numbers, for a real motor driver (the TB6612FNG)
+- A debugging template, and one worked debugging case, that you will reuse for the rest of the series
+
+**What you need:**
+
+- A web browser, for the [Falstad circuit simulator](https://www.falstad.com/circuit/) and [Wokwi](https://wokwi.com/). Both run online and need no install.
+- sigrok PulseView, free, for reading logic analyzer captures. Check the current release at sigrok.org. It runs on Windows, macOS and Linux.
+- A PDF reader, for the TB6612FNG datasheet
+- Optional: a starter multimeter, three resistors, a fresh and a used AA battery, ten jumper wires and a breadboard. The exercises tell you what to do if you have none of these.
+- Optional: any other tool from the buying guide. Nothing today requires a purchase.
+- Git and a GitHub account, for the project repository
+
+**Prerequisites:**
+
+- Day 1: What Is Robotics?
+- Day 2: Anatomy of a Robot (the motor driver and the hardware layers)
+- Day 3: Robotics Engineering Workflow (test plans with a "Result" column, and the engineering notebook)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [Safety at the bench](#safety-at-the-bench)
+- [Multimeter](#multimeter)
+- [Bench power supply](#bench-power-supply)
+- [Oscilloscope](#oscilloscope)
+- [Logic analyzer](#logic-analyzer)
+- [Calipers](#calipers)
+- [Breadboards](#breadboards)
+- [Soldering tools](#soldering-tools)
+- [Datasheets](#datasheets)
+- [Systematic debugging](#systematic-debugging)
+- [What to buy](#what-to-buy)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: a bench toolkit and measurement log](#project-a-bench-toolkit-and-measurement-log)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 A robot that "doesn't work" tells you nothing. A motor driver that reads 7.8 V on its supply pin and 0 V on its standby pin tells you exactly what to fix. Measurement turns guessing into engineering.
 
 On Day 3 you wrote test plans with a "Result" column. Today you learn the instruments that fill it in, how to use them without hurting yourself or your parts, and how to read the datasheet that says what the number should be. Test engineers, technicians and firmware engineers are judged on how quickly they find a fault on a bench.
 
-## 2. Safety first
+---
+
+## Safety at the bench
 
 Most of what you build in this series runs on low voltage (under 30 V DC), which is not a shock hazard for dry skin. The real dangers are heat, fire and eyes.
 
@@ -28,11 +73,11 @@ Most of what you build in this series runs on low voltage (under 30 V DC), which
 | Mains electricity | Wall sockets, power supply internals | Do not open or probe anything plugged into the wall in this series. Mains work needs training. |
 | Short circuits | A dropped probe or a loose wire across a battery | Set current limits, insulate exposed wires, and remove rings and watches. |
 
-## 3. Electrical tools
+---
 
-### 3.1 Multimeter
+### Multimeter
 
-**Intuition.** The multimeter is your thermometer. You would not treat a fever without a reading, and you should not debug a circuit without a voltage reading.
+A multimeter is a thermometer for circuits. You would not treat a fever without taking a reading, and you should not debug a circuit without a voltage reading.
 
 A digital multimeter measures:
 
@@ -50,36 +95,38 @@ A digital multimeter measures:
    └──battery───┘               └───────────────────────┘
 ```
 
-**Worked example.** An LED with a 2.0 V forward voltage and a 330 Ω resistor runs from 5 V. The expected current is (5.0 − 2.0) / 330 = 9.1 mA. Put the meter in series on the mA range and read about 9 mA. If you read 0 mA, check each joint with continuity. If you read about 15 mA, measure the resistor: it may be 200 Ω. (Day 6 covers Ohm's law properly. For now, compare measured with expected.)
+A multimeter is a measurement with a limit built in: it shows an average. A 5 V PWM signal at 25 percent duty reads about 1.25 V, which hides the switching. You need a scope for that.
 
-**Common mistakes.**
-- Leaving the red lead in the current (A) jack and then measuring a battery's voltage. In current mode the meter is nearly a short circuit. You blow the meter's fuse, or with a LiPo you create a dangerous short. Move the lead back to V/Ω after every current measurement.
-- Measuring resistance on a powered circuit. The reading is wrong, and you can damage the meter.
-- Trusting a cheap meter's printed "CAT III 1000 V" label. Many cheap meters do not meet the ratings they print. They are fine for robots, not for mains.
+Take an LED with a 2.0 V forward voltage and a 330 Ω resistor, running from 5 V. The expected current is (5.0 − 2.0) / 330 = 9.1 mA. Put the meter in series on the mA range and read about 9 mA. If you read 0 mA, check each joint with continuity. If you read about 15 mA, measure the resistor, because it may be 200 Ω. (Day 6 covers Ohm's law properly. For now, compare measured with expected.)
 
-**Limitation.** A multimeter shows an average. A 5 V PWM signal at 25 percent duty reads about 1.25 V, which hides the switching. You need a scope for that.
+The classic mistake is leaving the red lead in the current (A) jack and then measuring a battery's voltage. In current mode the meter is nearly a short circuit, so you blow the meter's fuse, or with a LiPo you create a dangerous short. Move the lead back to V/Ω after every current measurement. Two others are measuring resistance on a powered circuit, which gives a wrong reading and can damage the meter, and trusting a cheap meter's printed "CAT III 1000 V" label. Many cheap meters do not meet the ratings they print. They are fine for robots and not for mains.
 
-### 3.2 Bench power supply
+Test engineers and field technicians at robotics companies use a multimeter every day to confirm that power reaches the part it should.
 
-**Intuition.** A battery gives whatever current the circuit demands, even if that melts a wire. A bench supply is a battery with a safety valve. You set the maximum current, and it will not give more.
+---
 
-You set two knobs: voltage and current limit. If the circuit draws less than the limit, the supply holds the voltage (**CV mode**). If the circuit tries to draw more, the supply drops the voltage to hold the current at the limit (**CC mode**), and an indicator lights.
+### Bench power supply
 
-**Worked example: a safe gearmotor test.**
+A battery gives whatever current the circuit demands, even if that melts a wire. A bench supply is a battery with a safety valve: you set the maximum current, and it will not give more.
+
+You set two knobs, voltage and current limit. If the circuit draws less than the limit, the supply holds the voltage (**CV mode**, constant voltage). If the circuit tries to draw more, the supply drops the voltage to hold the current at the limit (**CC mode**, constant current), and an indicator lights.
+
+Here is a safe gearmotor test.
 
 1. With nothing connected, set 7.4 V (the battery's nominal voltage) and a 0.5 A limit.
 2. Connect the motor. It spins freely and draws 0.15 A. The supply stays in CV mode.
 3. Grip the wheel to stall it. The supply jumps to CC mode at 0.5 A, and the voltage drops to, say, 2.1 V.
 4. The motor's winding resistance is about 2.1 / 0.5 = 4.2 Ω. At the full 7.4 V, the stall current would be about 7.4 / 4.2 ≈ 1.8 A. That number goes straight into the motor driver choice from Day 2.
 
-**Common mistakes.**
-- Turning the supply on with the current limit at maximum. The first short circuit destroys the part you are testing.
-- Charging lithium batteries from a bench supply. Use a charger with balancing and cutoff.
-- Forgetting that motors push energy back when they slow down. Large motors can push the supply's output above its set voltage.
+The most common mistake is turning the supply on with the current limit at maximum, so the first short circuit destroys the part you are testing. Do not charge lithium batteries from a bench supply either. Use a charger with balancing and cutoff. Also remember that motors push energy back when they slow down, and large motors can push the supply's output above its set voltage.
 
-### 3.3 Oscilloscope
+Robotics labs use bench supplies to power a prototype board for the first time with a current limit, so a wiring error trips the limit and does not burn a part.
 
-**Intuition.** A multimeter is a photo of a moving car: one blurred number. A scope is the video, showing the car move.
+---
+
+### Oscilloscope
+
+If a multimeter is a photo of a moving car, a scope is the video. The photo gives you one blurred number, and the video shows the car move.
 
 A scope plots voltage (vertical, volts per division) against time (horizontal, seconds per division). The specs that matter are:
 
@@ -88,62 +135,60 @@ A scope plots voltage (vertical, volts per division) against time (horizontal, s
 - **Channels:** two is the minimum, four is comfortable.
 - **Trigger:** tells the scope when to start drawing, such as "when channel 1 rises through 2.5 V," so a repeating signal stays still on screen.
 
-**Worked example.** Your firmware outputs 1 kHz PWM at 25 percent duty on a 3.3 V pin.
+Say your firmware outputs 1 kHz PWM at 25 percent duty on a 3.3 V pin.
 
 - Period: 1 / 1,000 Hz = 1 ms. High time: 0.25 × 1 ms = 0.25 ms.
 - Set the time base to 200 µs per division. A typical screen has 10 horizontal divisions, so you see 2 ms: two full periods.
 - Set 1 V per division and trigger on the rising edge at about 1.6 V.
 - You should see a square wave: 0.25 ms high at 3.3 V, 0.75 ms low. If the edges show big spikes, or the low level wobbles when the motor runs, you have found noise that a multimeter would never show.
 
-**Common mistakes.**
-- A probe set to 10× while the scope is set to 1× (or the reverse), so every reading is off by a factor of ten.
-- Mains safety: the scope's ground clip connects to the earth pin of the wall socket through the power cord. On a battery-powered robot this is not a hazard. On anything plugged into the wall, clip the ground only to ground, or the clip creates a short through the scope.
-- Long ground leads on fast signals, which add ringing that is not in the circuit.
+One common mistake is a probe set to 10× while the scope is set to 1× (or the reverse), so every reading is off by a factor of ten. Another is long ground leads on fast signals, which add ringing that is not in the circuit. There is also a mains hazard: the scope's ground clip connects to the earth pin of the wall socket through the power cord. On a battery-powered robot this is not a problem. On anything plugged into the wall, clip the ground only to ground, or the clip creates a short through the scope.
 
-**Limitation.** A 2- or 4-channel scope sees only a few signals. Debugging an 8-wire bus needs a logic analyzer.
+A 2- or 4-channel scope sees only a few signals, so debugging an 8-wire bus needs a logic analyzer. Motor-control and power-electronics engineers use scopes to check PWM edges, switching noise and supply dips.
 
-### 3.4 Logic analyzer
+---
 
-**Intuition.** A scope is a detailed video of one or two people. A logic analyzer is a grid of security cameras: less detail (only high or low), but many signals at once, with subtitles (decoded protocol data).
+### Logic analyzer
 
-A logic analyzer samples digital lines (usually 8 or 16) and records each one as 0 or 1. Software decodes the protocols: I2C addresses and bytes, UART characters, SPI transfers. **Sample rate rule:** sample at least 4 times faster than the fastest signal, and 10 times is safer.
+A scope is a detailed video of one or two people. A logic analyzer is a wall of security cameras. It shows less detail (only high or low), but it covers many signals at once and adds subtitles (decoded protocol data).
 
-**Worked example.** Your IMU on I2C at 400 kHz returns nothing.
+A logic analyzer samples digital lines (usually 8 or 16) and records each one as 0 or 1. Software decodes the protocols: I2C addresses and bytes, UART characters, SPI transfers. Sample at least 4 times faster than the fastest signal, and 10 times is safer.
+
+Suppose your IMU on I2C at 400 kHz returns nothing.
 
 - A cheap 24 MHz analyzer gives 24,000,000 / 400,000 = 60 samples per clock period. That is plenty.
 - Connect GND, SDA and SCL, capture, and add the I2C decoder in PulseView.
-- The decode shows the MCU sending address 0x68 and getting a NACK (no acknowledgment). The sensor is not answering. Now ask: is it powered? Is its address pin pulling it to 0x69 instead? The analyzer turned "nothing works" into one specific question.
+- The decode shows the MCU sending address 0x68 and getting a NACK (no acknowledgment). The sensor is not answering. Now ask whether it is powered, and whether its address pin is pulling it to 0x69 instead. The analyzer turned "nothing works" into one specific question.
 
 For UART at 115,200 baud, one bit lasts 1 / 115,200 ≈ 8.68 µs, so 24 MHz sampling gives about 208 samples per bit.
 
-**Common mistakes.**
-- Forgetting to connect the analyzer's ground to the circuit ground. The capture is garbage.
-- Exceeding the input voltage. Many cheap analyzers accept 0 to 5 V only. Never connect one to motor voltage.
-- Decoding at the wrong baud rate or with the wrong channel assignment, then blaming the device.
+A frequent mistake is forgetting to connect the analyzer's ground to the circuit ground, which makes the capture garbage. Another is exceeding the input voltage: many cheap analyzers accept 0 to 5 V only, so never connect one to motor voltage. People also decode at the wrong baud rate or with the wrong channel assignment, then blame the device.
 
-**Limitation.** A logic analyzer cannot show voltage levels or noise. A line at 2.1 V on a 3.3 V system may read as valid to the analyzer and invalid to your chip. Use a scope for that.
+A logic analyzer cannot show voltage levels or noise. A line at 2.1 V on a 3.3 V system may read as valid to the analyzer and invalid to your chip, so use a scope for that. Firmware and embedded engineers reach for a logic analyzer first when a sensor bus goes silent.
 
-## 4. Physical tools
+---
 
-### 4.1 Calipers
+### Calipers
 
-**Intuition.** A ruler tells you "about 3 mm." A caliper tells you "3.02 mm," which is the difference between a wheel that fits the motor shaft and one that wobbles.
+A ruler tells you "about 3 mm." A caliper tells you "3.02 mm," which is the difference between a wheel that fits the motor shaft and one that wobbles.
 
 Digital calipers measure outside dimensions (jaws), inside dimensions (the small top jaws), depth (the rod at the end) and steps. Typical resolution is 0.01 mm, with accuracy around ±0.02 to ±0.03 mm on decent units.
 
-**Worked example.** You need the center distance between two mounting holes on a motor bracket, each 3.2 mm in diameter.
+Say you need the center distance between two mounting holes on a motor bracket, each 3.2 mm in diameter.
 
 - Measure outside edge to outside edge of the two holes: 28.4 mm.
 - Center distance = 28.4 − 3.2 = 25.2 mm. You subtract one diameter, since half a diameter comes off each side.
 - Check by measuring inside edge to inside edge. It should read 25.2 − 3.2 = 22.0 mm.
 
-**Common mistakes.** Not zeroing the jaws before measuring. Squeezing too hard on soft plastic. Measuring a 3D-printed part once instead of three times at different spots.
+The usual mistakes are not zeroing the jaws before measuring, squeezing too hard on soft plastic, and measuring a 3D-printed part once instead of three times at different spots. Cheap calipers also drift and their batteries die, so check them against a known part, such as a drill bit shank.
 
-**Limitation.** Cheap calipers drift, and their batteries die. Check them against a known part, such as a drill bit shank.
+Mechanical and prototyping engineers use calipers to check that printed and machined parts match the drawing before assembly.
 
-### 4.2 Breadboards
+---
 
-**Intuition.** A breadboard is LEGO for circuits. Push parts in, test, pull them out, rearrange.
+### Breadboards
+
+A breadboard is LEGO for circuits. You push parts in, test, pull them out and rearrange.
 
 Inside a solderless breadboard are metal spring clips. Each short row of five holes is connected. The long rails along the edges carry power and ground.
 
@@ -156,19 +201,21 @@ Inside a solderless breadboard are metal spring clips. Each short row of five ho
      2    ●─●─●─●─●     ●─●─●─●─●       the centre gap separates them
 ```
 
-**Worked example.** Map a new breadboard with continuity mode. Touch one probe to the top of the + rail and the other to the bottom. If there is no beep, the rail is split in the middle, and you need a jumper. This one check saves hours.
+Map a new breadboard with continuity mode. Touch one probe to the top of the + rail and the other to the bottom. If there is no beep, the rail is split in the middle, and you need a jumper. This one check saves hours.
 
-**Common mistakes.** Running motor current through a breadboard (the clips are meant for well under 1 A). Loose, cheap boards that cause intermittent faults. Long tangled jumpers that are impossible to check.
+The common mistakes are running motor current through a breadboard (the clips are meant for well under 1 A), using loose, cheap boards that cause intermittent faults, and building long tangled jumpers that are impossible to check. Breadboards also add stray capacitance and poor contacts, so they are bad for fast signals and high current. Move a working circuit to soldered perfboard or a PCB (Module 6).
 
-**Limitation.** Breadboards add stray capacitance and poor contacts. They are bad for fast signals and high current. Move a working circuit to soldered perfboard or a PCB (Module 6).
+Hardware teams prototype on breadboards for the first proof of a circuit and then move to a PCB for anything that has to survive vibration.
 
-### 4.3 Soldering tools
+---
 
-**Intuition.** Solder is not glue. It is a metal that melts below the temperature of copper and wets both surfaces, which makes an electrical and mechanical bond.
+### Soldering tools
+
+Solder is not glue. It is a metal that melts below the temperature of copper and wets both surfaces, which makes an electrical and mechanical bond.
 
 The kit: a temperature-controlled iron, rosin-core solder (leaded 63/37 or 60/40, or lead-free SAC305), flux, a brass wool tip cleaner, solder wick, flush cutters, wire strippers, heat-shrink tubing and a holder.
 
-**Worked example: a through-hole joint.**
+A through-hole joint goes like this.
 
 1. Clean the tip and tin it with a little solder.
 2. Touch the tip to both the pad and the lead for 1 to 2 seconds.
@@ -177,13 +224,15 @@ The kit: a temperature-controlled iron, rosin-core solder (leaded 63/37 or 60/40
 
 Typical tip temperatures are 320 to 350 °C for leaded solder and 350 to 380 °C for lead-free.
 
-**Common mistakes.** A cold joint (dull, lumpy, balled up) from too little heat. Bridging two pads. Heating a pad so long that it lifts off the board. Forgetting to slide heat-shrink onto a wire before soldering the second end.
+A cold joint (dull, lumpy, balled up) comes from too little heat. Other mistakes are bridging two pads, heating a pad so long that it lifts off the board, and forgetting to slide heat-shrink onto a wire before soldering the second end. Bad joints often pass a quick test and then fail when the robot vibrates, so tug-test every wire joint and inspect pads with a magnifier.
 
-**Limitation.** Bad joints often pass a quick test and then fail when the robot vibrates. Tug-test every wire joint and inspect pads with a magnifier.
+Every robotics team that builds its own harnesses and boards solders, and a reliable joint is a basic hiring signal for a hardware technician.
 
-## 5. Reading datasheets
+---
 
-**Intuition.** A datasheet is the part's manual and its contract. If the datasheet does not promise it, do not rely on it.
+### Datasheets
+
+A datasheet is the part's manual and its contract. If the datasheet does not promise it, do not rely on it.
 
 A typical datasheet has these parts, in roughly this order:
 
@@ -194,20 +243,24 @@ A typical datasheet has these parts, in roughly this order:
 5. **Electrical characteristics:** typical, minimum and maximum values under stated conditions.
 6. **Timing diagrams, application circuit and package drawing.**
 
-**Worked example: the TB6612FNG motor driver from Day 2.** Open Toshiba's datasheet (search "TB6612FNG datasheet" on toshiba.semicon-storage.com) and find:
+"Typical" values are not guarantees, so design with the minimum or maximum value that hurts most.
+
+Take the TB6612FNG motor driver from Day 2. Open Toshiba's datasheet (search "TB6612FNG datasheet" on toshiba.semicon-storage.com) and find:
 
 - Motor supply absolute maximum: 15 V. A 3S LiPo at 12.6 V full charge is close to that, so check the recommended operating range before trusting it.
-- Output current: 1.2 A average and 3.2 A peak per channel. The stall estimate from Section 3.2 (about 1.8 A) exceeds the 1.2 A average. You either limit stall time in firmware or choose a bigger driver.
+- Output current: 1.2 A average and 3.2 A peak per channel. The stall estimate from the bench power supply test (about 1.8 A) exceeds the 1.2 A average. You either limit stall time in firmware or choose a bigger driver.
 - Logic supply: 2.7 to 5.5 V, so it works with both 3.3 V and 5 V MCUs.
 - A **STBY** (standby) pin that must be driven high before the outputs work. Beginners miss this often.
 
-**Common mistakes.** Reading only page 1. Designing to absolute maximums. Trusting a breakout seller's summary instead of the manufacturer's datasheet. Ignoring the test conditions printed above each table, such as "at 25 °C."
+People read only page 1, design to absolute maximums, trust a breakout seller's summary instead of the manufacturer's datasheet, or ignore the test conditions printed above each table, such as "at 25 °C." Each of these shows up later as a part that runs hot or dies.
 
-**Limitation.** "Typical" values are not guarantees. Design with the minimum or maximum value that hurts most.
+Hardware and firmware engineers pick parts by their datasheet numbers, and a design review will often ask which page a rating came from.
 
-## 6. Systematic debugging
+---
 
-**Intuition.** A doctor does not guess. The doctor checks vital signs, forms a hypothesis, orders one test, and narrows it down. Debugging works the same way.
+### Systematic debugging
+
+A doctor does not guess. The doctor checks vital signs, forms a hypothesis, orders one test and narrows it down. Debugging a robot works the same way.
 
 The loop:
 
@@ -218,9 +271,9 @@ The loop:
  6. Record in notebook  ←  5. Compare result  ←  4. Test one change
 ```
 
-Rules: check power first, then ground, then clocks and resets, then signals, then code. Split the system in half and test the middle. Change one thing at a time. Write everything down in the notebook from Day 3.
+The rules: check power first, then ground, then clocks and resets, then signals, then code. Split the system in half and test the middle. Change one thing at a time. Write everything down in the notebook from Day 3.
 
-**Worked example: "the left motor does nothing."**
+Take the fault "the left motor does nothing."
 
 | Step | Measurement | Result | Conclusion |
 |---|---|---|---|
@@ -233,11 +286,13 @@ Rules: check power first, then ground, then clocks and resets, then signals, the
 
 Six measurements, no guessing, and the wiring diagram is updated in the same commit.
 
-**Common mistakes.** Rewriting code when the fault is a loose wire. Changing three things at once. Not writing down what you already ruled out, then checking it again.
+The usual mistakes are rewriting code when the fault is a loose wire, changing three things at once, and not writing down what you already ruled out, then checking it again. Intermittent faults, such as loose connectors or brownouts under load, may not appear while you measure. Log data over time, and wiggle connectors on purpose while you watch the readings.
 
-**Limitation.** Intermittent faults, such as loose connectors or brownouts under load, may not appear while you measure. Log data over time, and wiggle connectors on purpose while you watch the readings.
+Test and support engineers are paid for how fast they isolate a fault, and a written record of what was ruled out is what lets a second person take over.
 
-## 7. What to buy
+---
+
+## What to buy
 
 Prices are approximate USD ranges from 2025 to 2026 retail listings. They vary by country and seller and change often, so check before you buy.
 
@@ -254,14 +309,16 @@ Prices are approximate USD ranges from 2025 to 2026 retail listings. They vary b
 
 A USB-C PD trigger board or a fused battery pack can stand in for a bench supply at first, but neither has an adjustable current limit. If a scope is not in your budget yet, wait. A multimeter and a cheap logic analyzer carry you through Module 3.
 
-## 8. Hands-on exercises (about 60 minutes)
+---
+
+## Hands-on exercises (about 60 minutes)
 
 **With a multimeter (any starter meter):**
 
 1. Measure a fresh AA battery and a used one. Record both. A fresh alkaline cell reads about 1.5 to 1.6 V with no load.
 2. Read the color bands on three resistors, then measure them. Calculate the percentage difference from the marked value.
 3. Use continuity mode to test ten jumper wires. Set aside any that fail.
-4. Map your breadboard's power rails, as in Section 4.2.
+4. Map your breadboard's power rails, as described in the breadboards section.
 
 **Without hardware:**
 
@@ -270,19 +327,23 @@ A USB-C PD trigger board or a fused battery pack can stand in for a bench supply
 
 **Everyone:**
 
-1. Download the TB6612FNG datasheet and find the four values from Section 5. Note the page number of each.
-2. Write a debugging table like Section 6 for this fault: "The robot works on the bench supply but resets on the battery."
+1. Download the TB6612FNG datasheet and find the four values from the datasheets section. Note the page number of each.
+2. Write a debugging table like the one in the systematic debugging section for this fault: "The robot works on the bench supply but resets on the battery."
 
-## 9. Project: bench toolkit and measurement log
+---
 
-**Why this project fits:** the topic is practical, and buying tools is optional. The project produces evidence of two real skills: making a costed equipment decision, and logging measurements in a way another engineer can trust.
+## Project: a bench toolkit and measurement log
 
-**Repo name:** `100-days-robotics-day-04-measurement-tools`
+The topic is practical, and buying tools is optional. The project produces evidence of two real skills: making a costed equipment decision, and logging measurements in a way another engineer can trust.
+
+### Repository layout
+
+Repo name: `100-days-robotics-day-04-measurement-tools`
 
 ```
 100-days-robotics-day-04-measurement-tools/
 ├── README.md
-├── safety.md                    # your bench rules, adapted from Section 2
+├── safety.md                    # your bench rules, adapted from the safety section
 ├── toolkit.csv                  # tools: owned / planned, price, why
 ├── measurements/
 │   ├── 2026-10-24-multimeter.md # readings with expected vs measured
@@ -294,7 +355,15 @@ A USB-C PD trigger board or a fused battery pack can stand in for a bench supply
     └── case-01-reset-on-battery.md
 ```
 
-**Starter `toolkit.csv`:**
+### Step 1: write the safety rules
+
+Write `safety.md` as rules you will actually follow, including where you charge batteries.
+
+### Step 2: fill in the toolkit
+
+Fill `toolkit.csv` with every tool from today, marking each one owned, planned or skipped, and total the starter kit. A reasonable starter bench (meter, iron with adapter and consumables, glasses, calipers, breadboard kit, logic analyzer) comes to roughly $120 to $250.
+
+Starter `toolkit.csv`:
 
 ```csv
 tool,example,tier,status,price_low_usd,price_high_usd,why_i_need_it
@@ -305,30 +374,35 @@ calipers,150 mm digital,starter,planned,15,35,motor shafts and mounting holes
 breadboard,830-point + jumpers,starter,owned,10,20,prototyping
 ```
 
-**Steps.**
+### Step 3: record the measurements
 
-1. Write `safety.md` as rules you will actually follow, including where you charge batteries.
-2. Fill `toolkit.csv` with every tool from today, marking each one owned, planned or skipped, and total the starter kit. A reasonable starter bench (meter, iron with adapter and consumables, glasses, calipers, breadboard kit, logic analyzer) comes to roughly $120 to $250.
-3. Record at least ten measurements, each with the expected value, the measured value, the percentage error and the instrument used.
-4. Write the datasheet notes with page numbers.
-5. Complete the debugging case from the exercises, following the six-step loop, and end with a recorded conclusion.
+Record at least ten measurements, each with the expected value, the measured value, the percentage error and the instrument used.
 
-**README checklist.**
+### Step 4: write the datasheet notes
+
+Write the datasheet notes with page numbers.
+
+### Step 5: complete the debugging case
+
+Complete the debugging case from the exercises, following the six-step loop, and end with a recorded conclusion.
+
+### README checklist
 
 - [ ] Total starter kit cost, with low and high estimates
 - [ ] Which tools you are buying first, and why
 - [ ] Link to the measurement log and at least one photo or screenshot
 - [ ] One paragraph on the safety rule that matters most to you
 
-**Done when.**
+### Done when
 
 - Every measurement has units, an expected value and an instrument.
 - The datasheet notes would let someone choose a battery voltage for the TB6612FNG without opening the datasheet.
 - The debugging case follows the six-step loop and ends with a recorded conclusion.
+- All files above are committed, including photos or simulator screenshots of real readings.
 
-**Evidence to commit:** all files above, including photos or simulator screenshots of real readings.
+---
 
-## 10. Check your understanding
+## Check your understanding
 
 1. Your multimeter reads 1.65 V on a 3.3 V PWM pin. What is the likely duty cycle, and why would a scope be more convincing?
 2. You set a bench supply to 12 V with a 3 A limit to test a small sensor board. What is wrong with that, and what should the limit be?
@@ -338,7 +412,7 @@ breadboard,830-point + jumpers,starter,owned,10,20,prototyping
 6. A motor works on the bench supply, but the robot resets on the battery. Which measurement would you take first, and with which tool?
 7. Why is a breadboard a poor place for your motor power wiring?
 
-**Answers.**
+**Answers (check after you try):**
 
 1. About 50 percent (1.65 / 3.3). The meter shows only the average, so a steady 1.65 V would read the same. The scope shows the actual switching.
 2. The limit is far too high. A fault would let up to 3 A flow and burn something. Set it slightly above the expected draw, for example 100 to 200 mA for a small board.
@@ -348,7 +422,9 @@ breadboard,830-point + jumpers,starter,owned,10,20,prototyping
 6. The logic supply voltage during motor start, captured on a scope or with a meter's min/max mode. It is probably dipping below the MCU's minimum when the motors draw current.
 7. Breadboard clips are rated well under 1 A, the contacts are loose, and heat or a poor contact causes intermittent faults.
 
-## 11. Sources
+---
+
+## Sources to read and watch
 
 **Read:**
 - [Wikipedia: Multimeter](https://en.wikipedia.org/wiki/Multimeter)
@@ -377,8 +453,10 @@ breadboard,830-point + jumpers,starter,owned,10,20,prototyping
 **Practice:**
 - [Falstad circuit simulator](https://www.falstad.com/circuit/) and [Wokwi](https://wokwi.com/) for measurements without hardware
 
-**Note on links:** open each one once. If a page has moved, search its title. Prices are approximate and change often, so check before you buy.
+**Note on links:** open each one once. If a page has moved, search its title on the site named in the entry. Prices are approximate and change often, so check before you buy.
 
-## 12. Tomorrow
+---
 
-Day 5, **First Robot System Design**, brings Module 1 together. You will design a complete robot on paper: the requirements from Day 3, the hardware and software layers from Day 2, and the tools and datasheet habits from today. You will size the motors, battery and regulators with real calculations, and produce a BOM with honest prices. The stall test and datasheet check you learned today are how you will verify those choices once you build.
+## Tomorrow
+
+Day 5, **First Robot System Design**, brings Module 1 together. You will design a complete robot on paper, using the requirements from Day 3, the hardware and software layers from Day 2, and the tools and datasheet habits from today. You will size the motors, battery and regulators with real calculations, and produce a BOM with honest prices. The stall test and datasheet check you learned today are how you will verify those choices once you build.

@@ -3,23 +3,70 @@
 *100 Days of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 3 to 4 hours
-**You will build:** two small programs. The first opens up your Day 1 learned bot and prints the numbers it learned. The second trains a model with gradient descent that you write by hand, then checks it against scikit-learn and measures how well it generalizes.
-**You should know:** Day 1 (training vs inference, models and parameters), basic Python, and how to activate a virtual environment.
-**You will install:** Python 3.11 or newer, plus the pinned `numpy`, `pandas`, `scipy` and `scikit-learn` in section 7.
+**Level:** beginner to intermediate. For learners who finished Day 1 and can run Python scripts. No calculus is needed.
+
+**By the end of this day, you will have:**
+
+- A printout of the numbers your Day 1 learned bot actually learned, and an explanation of why its strongest complaint word is "and"
+- A gradient descent loop written by hand that finds the same parameters as scikit-learn
+- A measurement of overfitting: training error against test error as a model gets more flexible
+- A working picture of the learning loop and of the four ways a model gets a learning signal
+
+**What you need:**
+
+- Python 3.11 or newer
+- A virtual environment (as on Day 1)
+- `numpy==2.2.6`, `pandas==2.2.3`, `scikit-learn==1.6.1` and `scipy==1.15.2` (pinned in the project section)
+- Your Day 1 `data/messages.csv`
+- Paper or a whiteboard tool for the loop diagram
+
+**Prerequisites:**
+
+- Day 1: What Is Artificial Intelligence? (training vs inference, models and parameters)
+- Basic Python
+- How to activate a virtual environment
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [A short history](#a-short-history)
+- [The learning loop in one picture](#the-learning-loop-in-one-picture)
+- [Data](#data)
+- [Features](#features)
+- [Labels](#labels)
+- [Models](#models)
+- [Parameters and hyperparameters](#parameters-and-hyperparameters)
+- [Training](#training)
+- [Loss](#loss)
+- [Optimization](#optimization)
+- [Generalization](#generalization)
+- [Inference](#inference)
+- [Four ways to get a learning signal](#four-ways-to-get-a-learning-signal)
+- [Supervised learning](#supervised-learning)
+- [Unsupervised learning](#unsupervised-learning)
+- [Self-supervised learning](#self-supervised-learning)
+- [Reinforcement learning](#reinforcement-learning)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: open the black box and write the loop yourself](#project-open-the-black-box-and-write-the-loop-yourself)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 Every learning system in this series, from a spam filter to a large language model, runs one loop. Take **data**, turn it into **features**, let a **model** with adjustable **parameters** make a guess, measure the error with a **loss**, nudge the parameters to shrink the loss (**optimization**), and repeat. When training stops, the model runs on new inputs (**inference**), and you hope it does as well there as it did in training (**generalization**).
 
-Most bugs in ML systems sit in one of these pieces: wrong data, a feature that leaks the answer, a loss that measures the wrong thing, an optimizer that never converged, or a model that memorized instead of learning. If you can name the piece, you can start debugging.
+Most bugs in ML systems sit in one of these pieces: wrong data, a feature that leaks the answer, a loss that measures the wrong thing, an optimizer that never converged, or a model that memorized instead of learning. If you can name the piece, you can start debugging. On the job, that naming skill is what separates someone who can fix a failing model from someone who retries it with different settings.
 
 Tom Mitchell's textbook *Machine Learning* (1997) gives the classic definition. A program learns from experience E on task T, measured by performance P, if its performance on T improves with E. Today you make E, T and P concrete.
 
 ---
 
-## 2. A short history
+## A short history
 
 | Year | What happened | Why it matters today |
 |---|---|---|
@@ -33,9 +80,9 @@ Tom Mitchell's textbook *Machine Learning* (1997) gives the classic definition. 
 
 ---
 
-## 3. The learning loop in one picture
+## The learning loop in one picture
 
-Copy this into your notebook. Each box maps to a concept in section 4.
+Copy this into your notebook. Each box maps to a concept section below.
 
 ```
                  ┌────────────────────────────────────────────┐
@@ -57,31 +104,37 @@ Copy this into your notebook. Each box maps to a concept in section 4.
                  └────────────────────────────────────────────┘
 ```
 
-The labels enter only at the loss. The model never sees them directly. Inference runs the **same** feature steps as training. If the two differ, the model gets inputs it was never trained on. That is training/serving skew, a common production bug.
+The labels enter only at the loss. The model never sees them directly. Inference runs the **same** feature steps as training. If the two differ, the model gets inputs it was never trained on. That mismatch is called training/serving skew, and it is a common production bug.
 
 **Reference image to find:** search "machine learning training loop diagram" and compare a few versions with this one.
 
 ---
 
-## 4. The pieces of the loop
+### Data
 
-### 4.1 Data
+A student who studies only past exam papers can only be as good as those papers. A model is the same: whatever it knows came from the examples it was shown.
 
-**Intuition.** A student who studies only past exam papers can only be as good as those papers.
+Each example (also called a sample or a row) is one unit, such as one email or one apartment. Collect enough of them and the pattern starts to show. Collect them from the wrong place and the pattern you see is not the one you will meet later. So the useful test of a dataset is not only how many rows it has but how well they cover the situations the model will face.
 
-**Definition.** Data is the set of recorded examples the system learns from. Each example (also called a sample or a row) is one unit, such as one email. The data must be relevant, large enough to show the pattern, and **representative** of the inputs the model will see later.
+Put formally, data is the set of recorded examples the system learns from. It must be relevant, large enough to show the pattern, and **representative** of the inputs the model will see later.
 
-**Example.** Your Day 1 `messages.csv` has 30 rows, 10 per label. Every message is in English, and every complaint is about a delivery or a product. A model trained on it has never seen a complaint about a rude employee.
+Your Day 1 `messages.csv` has 30 rows, 10 per label. Every message is in English, and every complaint is about a delivery or a product. A model trained on it has never seen a complaint about a rude employee, so it has no way to recognize one.
 
-**Trap.** Collecting from one source (one city, one season) and deploying everywhere. Counting rows instead of asking what situations they cover. Duplicate rows, which make the model look better than it is. Module 3 covers data work.
+The usual mistakes are collecting from one source (one city, one season) and deploying everywhere, counting rows instead of asking what situations they cover, and leaving in duplicate rows, which make the model look better than it is. Spot them by asking where each row came from and by checking for repeats before you train. Module 3 covers data work.
 
-### 4.2 Features
+In the market, teams often spend more time collecting, cleaning and checking data than choosing a model.
 
-**Intuition.** A doctor looks at temperature, blood pressure, age and symptoms. Those measurements are the features.
+---
 
-**Definition.** A [feature](https://en.wikipedia.org/wiki/Feature_(machine_learning)) is one numeric property of an example that the model can use. All the features together form the **feature matrix**, `X`, with one row per example and one column per feature.
+### Features
 
-**Example.** On Day 1, `CountVectorizer` turned "Hi there!" into a row with a 1 in the "hi" column, a 1 in the "there" column, and 0 everywhere else. Thirty messages with 106 distinct words make a 30 by 106 matrix. The project prints that shape.
+A doctor looks at temperature, blood pressure, age and symptoms. Those measurements are what the doctor reasons from, and the model needs the same kind of thing: a list of measurable facts about each case.
+
+A model can only do arithmetic, so every fact must become a number. All the numbers for one example form a row, and all the rows together form a table with one column per fact.
+
+A [feature](https://en.wikipedia.org/wiki/Feature_(machine_learning)) is one numeric property of an example that the model can use. All the features together form the **feature matrix**, `X`, with one row per example and one column per feature.
+
+On Day 1, `CountVectorizer` turned "Hi there!" into a row with a 1 in the "hi" column, a 1 in the "there" column, and 0 everywhere else. Thirty messages with 106 distinct words make a 30 by 106 matrix. The project prints that shape.
 
 ```
             hi  there  how  do  reset  password  ...
@@ -89,58 +142,88 @@ Hi there!    1     1    0    0     0         0
 How do I...  0     0    1    1     1         1
 ```
 
-**Trap.** A feature that contains the answer, such as a "refund_issued" column when you predict complaints. That is **data leakage**. It gives great test scores and useless predictions in production. Mixed scales also cause trouble: square meters next to cents can make some algorithms misbehave until you rescale. Day 21 covers feature engineering.
+A feature that contains the answer, such as a "refund_issued" column when you predict complaints, is **data leakage**. It gives great test scores and useless predictions in production. Spot it by asking of every column whether you would know its value at the moment you need the prediction. Mixed scales also cause trouble: square meters next to cents can make some algorithms misbehave until you rescale. Day 21 covers feature engineering.
 
-### 4.3 Labels
+In industry, much of the practical skill in classical ML is deciding which columns to build and which to leave out.
 
-**Intuition.** A flashcard has a question on the front and the answer on the back. The label is the back.
+---
 
-**Definition.** A label (also called the target, written `y`) is the correct output for an example. It can be a category ("complaint") or a number (1,050 per month).
+### Labels
 
-**Example.** In `messages.csv`, the `label` column is `y`. In the rent data you build in the project, `rent` is `y` and `size_m2` is the only feature.
+A flashcard has a question on the front and the answer on the back. The label is the back of the card: the correct answer the model is trying to reproduce.
 
-**Trap.** People write labels, so labels contain errors. Is "Can you stop calling me?" a question or a complaint? Day 1 labeled it a complaint, and someone else might not. If labelers disagree on 10% of rows, no model can be reliably more than about 90% "correct" by those labels. Check a sample of labels by hand before you blame the model.
+Without a correct answer, there is nothing to measure a guess against. A label can be a category ("complaint") or a number (1,050 per month), and a person or a process has to supply it for every training example.
 
-### 4.4 Models
+A label (also called the target, written `y`) is the correct output for an example.
 
-**Intuition.** A model is a machine with dials. The shape of the machine is fixed, and the dial settings are learned.
+In `messages.csv`, the `label` column is `y`. In the rent data you build in the project, `rent` is `y` and `size_m2` is the only feature.
 
-**Definition.** A model is a family of functions `f(x; θ)` that maps features `x` to a prediction. `θ` (theta) stands for the parameters. Choosing the model type (a straight line, a decision tree, a neural network) chooses the family. Training picks one member of that family.
+People write labels, so labels contain errors. Is "Can you stop calling me?" a question or a complaint? Day 1 labeled it a complaint, and someone else might not. If labelers disagree on 10% of rows, no model can be reliably more than about 90% "correct" by those labels. Check a sample of labels by hand before you blame the model.
 
-**Example.** For rent, `rent = w * size + b`. The family is all straight lines. The dials are `w` (rent per square meter) and `b` (base rent). `w = 12, b = 300` is one line. `w = 8, b = 500` is another.
+Labeling is a line item in real project budgets, often done by annotation teams or by domain experts such as doctors for medical images.
 
-**Trap.** A family that cannot express the pattern. A straight line cannot fit a curve, however long you train it. That is **underfitting**. The opposite mistake, a family so flexible that it fits the noise, is **overfitting** (section 4.9).
+---
 
-### 4.5 Parameters and hyperparameters
+### Models
 
-**Intuition.** Parameters are the dial positions. Training turns them. Nobody sets them by hand.
+A model is a machine with dials. The shape of the machine is fixed, and the dial settings are learned.
 
-**Definition.** Parameters are the numbers inside the model that training adjusts to reduce the loss. **Hyperparameters** are settings you choose before training, such as the learning rate, the number of steps or a tree's depth. Training does not change them.
+Choosing the type of model decides which settings are even possible. A straight line can only tilt and shift. A decision tree can only split and branch. A neural network can bend in far more ways.
 
-**Example.** The linear rent model has 2 parameters. The Day 1 Naive Bayes model stored one number per (label, word) pair, plus one per label: 3 × 106 + 3 = 321 numbers. GPT-style language models have billions.
+Formally, a model is a family of functions `f(x; θ)` that maps features `x` to a prediction. `θ` (theta) stands for the parameters. Choosing the model type (a straight line, a decision tree, a neural network) chooses the family. Training picks one member of that family.
 
-**Trap.** Treating more parameters as automatically better. A model with far more parameters than training examples can memorize every example and still fail on new ones. Parameter count also sets cost. A 7-billion-parameter model stored as 16-bit floats (2 bytes each) needs about 14 GB for its weights alone.
+For rent, `rent = w * size + b`. The family is all straight lines. The dials are `w` (rent per square meter) and `b` (base rent). `w = 12, b = 300` is one line. `w = 8, b = 500` is another.
 
-### 4.6 Training
+The mistake is choosing a family that cannot express the pattern. A straight line cannot fit a curve, however long you train it. That is **underfitting**, and you can spot it when the error is high on both the training data and the test data. The opposite mistake, a family so flexible that it fits the noise, is overfitting (see the generalization section).
 
-**Intuition.** Learning to throw darts: throw, see where it landed, adjust your arm, throw again.
+In practice, picking the model family is one of the first decisions on any project, and a simple family is often the first thing a team tries.
 
-**Definition.** Training repeats three steps: predict on the training data, measure the loss, and update the parameters to reduce it. One full pass over the training data is an **epoch**.
+---
 
-**Example.** In scikit-learn, `model.fit(X_train, y_train)` runs a loop like the one in section 3. In the project you write that loop yourself, in about ten lines.
+### Parameters and hyperparameters
 
-**Trap.** Measuring on the same data you trained on. The score is high and meaningless, because the model has seen every answer. Always hold out data the model never trains on.
+Parameters are the dial positions. Training turns them, and nobody sets them by hand. Hyperparameters are the settings on the outside of the machine, such as how fast you turn the dials. You pick those before the run.
 
-### 4.7 Loss
+Everything the model "knows" lives in its parameters. Everything about how the search for them is run lives in the hyperparameters.
 
-**Intuition.** A golf score: one number, and lower is better.
+Parameters are the numbers inside the model that training adjusts to reduce the loss. **Hyperparameters** are settings you choose before training, such as the learning rate, the number of steps or a tree's depth. Training does not change them.
 
-**Definition.** A loss function compares predictions with the true labels and returns one number for the total error. Two common ones:
+The linear rent model has 2 parameters. The Day 1 Naive Bayes model stored one number per (label, word) pair, plus one per label: 3 × 106 + 3 = 321 numbers. GPT-style language models have billions.
+
+More parameters are not automatically better. A model with far more parameters than training examples can memorize every example and still fail on new ones. Parameter count also sets cost: a 7-billion-parameter model stored as 16-bit floats (2 bytes each) needs about 14 GB for its weights alone. You can spot memorization when training error is far lower than test error.
+
+When a vendor quotes a parameter count, translate it into memory and cost per request. That is how engineers size hardware and choose between models.
+
+---
+
+### Training
+
+Learning to throw darts goes like this: throw, see where it landed, adjust your arm, throw again.
+
+A model learns the same way. It guesses, the guess is compared with the right answer, and the parameters shift slightly so the next guess is better. Nothing more mysterious than that happens, only many times over.
+
+Training repeats three steps: predict on the training data, measure the loss, and update the parameters to reduce it. One full pass over the training data is an **epoch**.
+
+In scikit-learn, `model.fit(X_train, y_train)` runs a loop like the one in the learning loop picture. In the project you write that loop yourself, in about ten lines.
+
+The mistake is measuring on the same data you trained on. The score is high and meaningless, because the model has seen every answer. You spot it when someone reports one number and never mentions a held-out set. Always hold out data the model never trains on.
+
+On a team, training is the slow, expensive, occasional step, and it usually runs in pipelines that someone watches and reruns on a schedule.
+
+---
+
+### Loss
+
+A golf score is one number, and lower is better. A loss does the same job for a model: it squeezes all the mistakes into a single number the optimizer can chase.
+
+The model needs one number to improve against, because "a bit wrong on this row and very wrong on that one" gives it no clear direction. The loss function decides how each kind of mistake is counted.
+
+A loss function compares predictions with the true labels and returns one number for the total error. Two common ones:
 
 - **Mean squared error (MSE)** for numbers: the average of `(prediction - truth)²`.
 - **Cross-entropy (log loss)** for categories: large when the model is confidently wrong, small when it is confidently right.
 
-**Example.** Three apartments:
+Take three apartments:
 
 | True rent | Predicted rent | Error | Squared error |
 |---|---|---|---|
@@ -150,19 +233,25 @@ How do I...  0     0    1    1     1         1
 
 MSE = (10,000 + 10,000 + 0) / 3 ≈ 6,667. The mean absolute error (MAE) for the same rows is (100 + 100 + 0) / 3 ≈ 66.7. Squaring punishes big misses. One miss of 300 contributes 90,000, nine times the contribution of a miss of 100.
 
-**Trap.** A loss that does not match the business goal. A fraud model can reach 99.9% accuracy by answering "not fraud" every time if only 0.1% of transactions are fraud. The loss looks good and the model catches nothing. Day 6 shows the same trap with a baseline. Day 42 covers loss functions in depth.
+A loss that does not match the business goal gives a misleading result. A fraud model can reach 99.9% accuracy by answering "not fraud" every time if only 0.1% of transactions are fraud. The score looks good and the model catches nothing. You spot it by asking what the model would score if it always gave the most common answer. Day 6 shows the same trap with a baseline. Day 42 covers loss functions in depth.
 
-### 4.8 Optimization
+Teams choose their loss and their reported metric to match what the business cares about, such as cost of a missed fraud case against cost of a false alarm.
 
-**Intuition.** You are on a foggy hill at night and want the valley floor. You cannot see the valley, but you can feel the slope under your feet. Step downhill, feel again, repeat.
+---
 
-**Definition.** Optimization searches for parameter values that make the loss small. **Gradient descent** computes the **gradient** (the slope of the loss with respect to each parameter) and steps the opposite way. The **learning rate** sets how big each step is.
+### Optimization
+
+You are on a foggy hill at night and want the valley floor. You cannot see the valley, but you can feel the slope under your feet. Step downhill, feel again, repeat.
+
+The loss is the height of the ground, and the parameters are your position. You cannot see the whole landscape, but the local slope tells you which way is down. Many small downhill steps get you to a low point.
+
+Optimization searches for parameter values that make the loss small. **Gradient descent** computes the **gradient** (the slope of the loss with respect to each parameter) and steps the opposite way. The **learning rate** sets how big each step is.
 
 ```
 new_parameter = old_parameter - learning_rate * gradient
 ```
 
-**Example.** Model: `rent = w * size`. One training row: size 50, rent 600. The right answer is `w = 12`. The loss is `L(w) = (50w - 600)²`, with gradient `dL/dw = 100 * (50w - 600)`. Start at `w = 0` with learning rate 0.0001.
+Model: `rent = w * size`. One training row: size 50, rent 600. The right answer is `w = 12`. The loss is `L(w) = (50w - 600)²`, with gradient `dL/dw = 100 * (50w - 600)`. Start at `w = 0` with learning rate 0.0001.
 
 | Step | w | Prediction 50w | Gradient | New w |
 |---|---|---|---|---|
@@ -172,7 +261,7 @@ new_parameter = old_parameter - learning_rate * gradient
 
 Each step halves the distance to 12, so after about 20 steps `w` is within 0.00002 of 12. You do not need calculus to follow this. Days 11 and 12 explain where the gradient formula comes from.
 
-**Trap.** A learning rate that is too large. At 0.0004, starting from `w = 0`, `w` jumps to 24, then back to 0, forever. Anything larger flies off toward infinity. A learning rate that is too small wastes hours of compute. When a training loss rises or turns into `nan`, suspect the learning rate first.
+A learning rate that is too large overshoots. At 0.0004, starting from `w = 0`, `w` jumps to 24, then back to 0, forever. Anything larger flies off toward infinity. A learning rate that is too small wastes hours of compute. When a training loss rises or turns into `nan`, suspect the learning rate first.
 
 ```
 loss
@@ -185,15 +274,19 @@ loss
  └──────────────────────────────────── steps
 ```
 
-Real training scripts use refinements of this one update rule, such as SGD, Adam and AdamW. Day 44 covers them.
+Real training scripts use refinements of this one update rule, such as SGD, Adam and AdamW. Day 44 covers them. Every large model you hear about is trained with a descendant of this update rule.
 
-### 4.9 Generalization
+---
 
-**Intuition.** One student memorizes last year's answers. Another understands the method. On last year's paper they tie. On this year's paper, only one passes.
+### Generalization
 
-**Definition.** Generalization is how well a model performs on data from the same source that it was not trained on. You estimate it with a held-out **test set**. The gap between training and test error shows whether the model memorized. **Overfitting** means the model fits the training data well and new data badly, because it has memorized noise. **Underfitting** means the model is too simple to capture the pattern, so it does badly everywhere.
+One student memorizes last year's answers. Another understands the method. On last year's paper they tie. On this year's paper, only one passes.
 
-**Example.** In the project you fit three models of increasing flexibility to only 15 rent examples:
+A model faces the same split. Doing well on examples it has seen proves little, since it may have memorized them. What counts is performance on new data from the same source, so you hold some data back and test on it.
+
+Generalization is how well a model performs on data from the same source that it was not trained on. You estimate it with a held-out **test set**. The gap between training and test error shows whether the model memorized. **Overfitting** means the model fits the training data well and new data badly, because it has memorized noise. **Underfitting** means the model is too simple to capture the pattern, so it does badly everywhere.
+
+In the project you fit three models of increasing flexibility to only 15 rent examples:
 
 | Model flexibility (polynomial degree) | Train MSE | Test MSE |
 |---|---|---|
@@ -203,23 +296,31 @@ Real training scripts use refinements of this one update rule, such as SGD, Adam
 
 As flexibility rises, training error falls and test error explodes. The degree-10 curve passes close to all 15 training points and swings wildly between and beyond them. That is overfitting in one table.
 
-**Trap.** Reporting the training score as the result. Tuning settings against the test set until the test set leaks into your choices (Day 3 adds a separate validation set). Assuming the future looks like the test set. If the world changes, even a well-generalized model degrades.
+The common mistakes are reporting the training score as the result, tuning settings against the test set until the test set leaks into your choices (Day 3 adds a separate validation set), and assuming the future looks like the test set. If the world changes, even a well-generalized model degrades. You spot the first two when test results look too good and then collapse in production.
 
-### 4.10 Inference
-
-**Intuition.** Training is studying. Inference is sitting the exam, over and over, for every user.
-
-**Definition.** Inference runs the trained model, with its parameters frozen, on new inputs to produce predictions.
-
-**Example.** After training, the rent for a 65 m² apartment is one multiplication and one addition: 292.0 + 12.03 × 65 ≈ 1,074. For a large language model, each generated word takes billions of multiplications.
-
-**Trap.** Forgetting the preprocessing from training, such as rescaling with the training mean and standard deviation. Feeding inputs outside the training range. The rent model has never seen a 400 m² apartment, so its prediction there is a guess dressed up as a number. Inference cost per request decides whether an AI feature pays for itself. Day 92 covers serving.
+In the market, this gap between test results and live results is the reason teams monitor deployed models after launch.
 
 ---
 
-## 5. Four ways to get a learning signal
+### Inference
 
-The loop in section 3 needs something to compare predictions against. The source of that signal defines the type of learning.
+Training is studying. Inference is sitting the exam, over and over, for every user.
+
+Once training ends, the parameters are frozen. Using the model means feeding it a new input and running the same arithmetic it always runs. No learning happens at that point.
+
+Inference runs the trained model, with its parameters frozen, on new inputs to produce predictions.
+
+After training, the rent for a 65 m² apartment is one multiplication and one addition: 292.0 + 12.03 × 65 ≈ 1,074. For a large language model, each generated word takes billions of multiplications.
+
+The mistakes are forgetting the preprocessing from training, such as rescaling with the training mean and standard deviation, and feeding inputs outside the training range. The rent model has never seen a 400 m² apartment, so its prediction there is a guess dressed up as a number. You spot both when predictions in production look odd for inputs that differ from the training data.
+
+Inference cost per request decides whether an AI feature pays for itself, which is why serving gets its own day (Day 92).
+
+---
+
+## Four ways to get a learning signal
+
+The loop in the learning loop section needs something to compare predictions against. The source of that signal defines the type of learning.
 
 ```
 Where does the learning signal come from?
@@ -229,23 +330,27 @@ Where does the learning signal come from?
 └── Rewards from acting in a world .... reinforcement learning
 ```
 
-### 5.1 Supervised learning
+---
 
-**Intuition.** A teacher marks every practice answer right or wrong.
+### Supervised learning
 
-**Definition.** The training data contains inputs and correct labels, and the model learns the mapping between them. A category label makes it **classification**. A number makes it **regression**. [Wikipedia](https://en.wikipedia.org/wiki/Supervised_learning)
+A teacher marks every practice answer right or wrong, and you learn from the marks.
 
-**Example.** Day 1's message classifier (classification) and today's rent model (regression).
+The training data contains inputs and the correct label for each. The model learns the mapping between them. If the label is a category, the task is **classification**. If it is a number, the task is **regression**. [Wikipedia](https://en.wikipedia.org/wiki/Supervised_learning)
 
-**Limitation.** Labels are slow and costly. A medical image may need a specialist's time. Most deployed business ML, such as credit scoring, churn prediction and demand forecasting, is supervised.
+Supervised learning means learning a function from labeled input-output pairs. Day 1's message classifier is classification, and today's rent model is regression.
 
-### 5.2 Unsupervised learning
+The limit is that labels are slow and costly. A medical image may need a specialist's time. Most deployed business ML, such as credit scoring, churn prediction and demand forecasting, is supervised.
 
-**Intuition.** You dump a box of mixed buttons on a table and sort them into piles by color and size. Nobody names the piles for you.
+---
 
-**Definition.** The data has no labels. The algorithm finds structure, such as groups (**clustering**) or a smaller set of features that keeps most of the information (**dimensionality reduction**). [Wikipedia](https://en.wikipedia.org/wiki/Unsupervised_learning)
+### Unsupervised learning
 
-**Example.**
+You dump a box of mixed buttons on a table and sort them into piles by color and size. Nobody names the piles for you.
+
+With no labels, the algorithm can only look at how the examples relate to each other. It can find groups of similar items (**clustering**) or a smaller set of features that keeps most of the information (**dimensionality reduction**). [Wikipedia](https://en.wikipedia.org/wiki/Unsupervised_learning)
+
+Unsupervised learning finds structure in unlabeled data.
 
 ```python
 from sklearn.cluster import KMeans
@@ -257,15 +362,17 @@ print(groups)  # [1 1 1 0 0 0]
 
 The algorithm found two groups. The numbers 0 and 1 are arbitrary names for them. Swap the names and the grouping stays the same. (On some Windows 11 machines this prints a harmless warning about counting CPU cores. You can ignore it.)
 
-**Limitation.** There is no single right answer to check against, so a useful grouping is hard to tell from a meaningless one. You asked for 2 groups, and the algorithm would happily find 5. Customer segmentation and grouping similar support tickets are common unsupervised jobs (Day 32).
+There is no single right answer to check against, so a useful grouping is hard to tell from a meaningless one. You asked for 2 groups, and the algorithm would happily find 5. Spot the problem by asking whether the groups mean anything to someone who knows the domain. Customer segmentation and grouping similar support tickets are common unsupervised jobs (Day 32).
 
-### 5.3 Self-supervised learning
+---
 
-**Intuition.** Cover a word in a sentence with your thumb and guess it. The text tells you whether you were right, so nobody had to write labels.
+### Self-supervised learning
 
-**Definition.** The labels are created automatically from the raw data, usually by hiding part of an input and asking the model to predict it. The training is technically supervised, but no person writes labels, so it scales to enormous datasets. [Wikipedia](https://en.wikipedia.org/wiki/Self-supervised_learning)
+Cover a word in a sentence with your thumb and guess it. The text tells you whether you were right, so nobody had to write labels.
 
-**Example.** Turning one sentence into five training examples for next-word prediction:
+The labels are created automatically from the raw data, usually by hiding part of an input and asking the model to predict it. The training is technically supervised, but no person writes labels, so it scales to enormous datasets. [Wikipedia](https://en.wikipedia.org/wiki/Self-supervised_learning)
+
+Self-supervised learning is learning from labels generated out of the data itself. Here is one sentence turned into five training examples for next-word prediction:
 
 ```python
 words = "the cat sat on the mat".split()
@@ -284,15 +391,17 @@ for context, target in pairs:
 
 Run this over billions of sentences and you have the pretraining task of a GPT-style language model (Day 73).
 
-**Limitation.** The model learns every pattern in the raw data, including errors and biases. The pretext task (guess the next word) is not the job you want done, so pretrained models are usually fine-tuned afterwards (Day 74). Most large language models, and many image and speech models, start with self-supervised pretraining.
+The model learns every pattern in the raw data, including errors and biases. The pretext task (guess the next word) is not the job you want done, so pretrained models are usually fine-tuned afterwards (Day 74), and you spot the gap when a pretrained model gets the style right but the task wrong. Most large language models, and many image and speech models, start with self-supervised pretraining.
 
-### 5.4 Reinforcement learning
+---
 
-**Intuition.** Training a dog with treats. Nobody shows the dog the right sequence of moves. It tries things and gets rewarded when the outcome is good.
+### Reinforcement learning
 
-**Definition.** An **agent** takes **actions** in an **environment**, receives **rewards**, and learns a **policy** (a way of choosing actions) that maximizes total reward over time. Unlike supervised learning, the agent is never told the right action, only how good the result was. Its own choices also decide which data it sees next. [Wikipedia](https://en.wikipedia.org/wiki/Reinforcement_learning)
+Training a dog with treats. Nobody shows the dog the right sequence of moves. It tries things and gets rewarded when the outcome is good.
 
-**Example.** Machine A pays out 30% of the time, machine B 60%. The agent does not know this.
+An **agent** takes **actions** in an **environment**, receives **rewards**, and learns a **policy** (a way of choosing actions) that maximizes total reward over time. Unlike supervised learning, the agent is never told the right action, only how good the result was. Its own choices also decide which data it sees next. [Wikipedia](https://en.wikipedia.org/wiki/Reinforcement_learning)
+
+Reinforcement learning is learning a policy from rewards received while acting. Here is a small case. Machine A pays out 30% of the time, machine B 60%. The agent does not know this.
 
 ```python
 import numpy as np
@@ -320,11 +429,11 @@ estimates: [0.24, 0.59]
 
 The agent pulls machine B 95% of the time (475 of 500). The code also shows the trade-off between **exploration** (trying the other machine in case it is better) and **exploitation** (using what you already know). Without the 10% exploration, an early unlucky streak could lock the agent onto the worse machine forever.
 
-**Limitation.** RL needs many trials. In the real world, trials can be slow, expensive or dangerous (a robot falling over), so robotics RL usually trains in simulation first (Day 98). RL also shows up in game AI, ad bidding and the preference-tuning stage of chat models (RLHF, Day 75).
+RL needs many trials. In the real world, trials can be slow, expensive or dangerous (a robot falling over), so robotics RL usually trains in simulation first (Day 98). You spot a problem when the agent keeps repeating one action and never tests the others. RL also shows up in game AI, ad bidding and the preference-tuning stage of chat models (RLHF, Day 75).
 
 ---
 
-## 6. Hands-on exercises (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
 **Exercise 1: name the pieces (about 20 minutes).** For each system, write one line each for: data, features, label (or "none"), model output, and learning type.
 
@@ -337,7 +446,7 @@ The agent pulls machine B 95% of the time (475 of 500). The code also shows the 
 
 **Answer key:** 1 self-supervised (the next word in your own typing is the label). 2 supervised classification (labels from users clicking "spam"). 3 unsupervised clustering. 4 reinforcement learning (reward is time saved or area covered). 5 supervised (classification of default, often reported as a probability). 6 self-supervised (the label "same photo" comes from how the crops were made).
 
-**Exercise 2: gradient descent by hand (about 20 minutes).** Use the one-row example from section 4.8 (size 50, rent 600, start `w = 0`).
+**Exercise 2: gradient descent by hand (about 20 minutes).** Use the one-row example from the optimization section (size 50, rent 600, start `w = 0`).
 
 1. With learning rate 0.0001, compute steps 4 and 5 on paper. Confirm `w` goes to 11.25 and then about 11.63.
 2. With learning rate 0.0002, compute step 1. What happens? (Answer: `w` jumps straight to 12 in one step. For this one-row problem, 0.0002 is exactly the "perfect" step size. Real problems never line up this neatly.)
@@ -355,7 +464,9 @@ You should get MSE 10,050 and MAE 55. Write one sentence on which single row dom
 
 ---
 
-## 7. Project: open the black box and write the loop yourself
+## Project: open the black box and write the loop yourself
+
+This is the GitHub project for Day 2. You open up the model you built on Day 1, then write the training loop yourself so no part of it stays hidden.
 
 **Goal:** see the learned parameters of your Day 1 bot, write gradient descent from scratch, confirm it matches scikit-learn, and measure overfitting.
 
@@ -549,7 +660,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Why rescale.** Sizes run from 20 to 120. Without rescaling, the gradient for `w` is about 70 times larger than the gradient for `b`. Any learning rate small enough to keep `w` stable then makes `b` crawl. Rescaling puts both on the same footing. The two "undo" lines convert the answer back to real units.
+Sizes run from 20 to 120. Without rescaling, the gradient for `w` is about 70 times larger than the gradient for `b`. Any learning rate small enough to keep `w` stable then makes `b` crawl. Rescaling puts both on the same footing. The two "undo" lines convert the answer back to real units.
 
 Run `python make_data.py`, then `python gradient_descent.py`. Expected output:
 
@@ -570,7 +681,7 @@ scikit-learn:    rent = 292.0 + 12.03 * size_m2
 predicted rent for 65 m2: 1074
 ```
 
-The output shows three things. The loss falls fast and then flattens, so the optimizer has converged. Your 10 lines found the same parameters as scikit-learn. The learned rule (292 + 12.03 × size) is close to the true rule (300 + 12 × size) but not equal, because the noise in 80 training rows pulls the estimate a little. The training loss of about 5,867 never reaches 0, because the noise (standard deviation 80, so variance about 6,400) cannot be predicted by any model.
+The loss falls fast and then flattens, so the optimizer has converged. Your 10 lines found the same parameters as scikit-learn. The learned rule (292 + 12.03 × size) is close to the true rule (300 + 12 × size) but not equal, because the noise in 80 training rows pulls the estimate a little. The training loss of about 5,867 never reaches 0, because the noise (standard deviation 80, so variance about 6,400) cannot be predicted by any model.
 
 ### Step 5: measure generalization (`generalization.py`)
 
@@ -636,7 +747,7 @@ Paste all three outputs, then answer in full sentences:
 
 ---
 
-## 8. Check your understanding
+## Check your understanding
 
 1. A model scores 99% on its training data and 61% on held-out data. What is the most likely problem, and what are two things you could try?
 2. Why does the learning signal in self-supervised learning cost almost nothing, while supervised labels are expensive?
@@ -658,7 +769,7 @@ Paste all three outputs, then answer in full sentences:
 
 ---
 
-## 9. Sources to read and watch
+## Sources to read and watch
 
 **Read (reference):**
 - [Wikipedia: Supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)
@@ -686,6 +797,6 @@ Paste all three outputs, then answer in full sentences:
 
 ---
 
-## 10. Tomorrow
+## Tomorrow
 
 Day 3, **The AI/ML Lifecycle**, zooms out from the training loop to the project around it. Today you saw that `model.fit()` is about ten lines of logic. Tomorrow you see the stages before and after those lines: defining the problem, collecting and cleaning data, building a baseline, validating, testing, deploying and monitoring. You also see what goes wrong when a stage is skipped, starting with the leak from question 4 above. Keep today's repo. Its "and" problem is a data-collection failure, and you will name the stage it belongs to.

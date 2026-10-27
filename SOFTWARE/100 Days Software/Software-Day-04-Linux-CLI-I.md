@@ -3,24 +3,64 @@
 *100 Days of Software Engineering, Module: Foundations*
 
 **Time:** about 3 to 4 hours
-**You will build:** an organized project folder created entirely from the command line, plus a field guide to the Linux filesystem based on your own exploration, in a GitHub repo.
-**You should know:** Day 3 (Windows Terminal, WSL 2 with Ubuntu, PATH, absolute and relative paths). Everything today happens in your **Ubuntu** tab, not PowerShell.
+**Level:** beginner. You should be comfortable opening a terminal, and you will work in Ubuntu on WSL 2.
+
+**By the end of this day, you will have:**
+
+- A map of the Linux filesystem and the ability to find config files, logs and live system information in it
+- Practice moving, creating, copying, renaming, deleting and reading files using only the command line
+- The habit of looking up a command in `man` and `--help` before searching the web
+- A GitHub repo with an organized project folder built entirely from the command line, plus a field guide to the Linux filesystem based on your own exploration
+
+**What you need:**
+
+- Windows Terminal with an Ubuntu tab (WSL 2 and Ubuntu, both installed on Day 3)
+- A code editor that opens from the terminal with `code .` (VS Code, set up on Day 3), or `nano`, which ships with Ubuntu
+- A GitHub account
+- Optional: the `tldr` package (`sudo apt install tldr`) and an `ssh` client for the practice site at the end
+
+**Prerequisites:**
+
+- Day 3: Developer Environment (Windows Terminal, WSL 2 with Ubuntu, PATH, absolute and relative paths). Everything today happens in your Ubuntu tab, not PowerShell.
+- Day 2: How Computers Execute Programs (processes and process IDs, which appear in `/proc`)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [The filesystem hierarchy](#the-filesystem-hierarchy)
+- [pwd](#pwd)
+- [ls](#ls)
+- [cd](#cd)
+- [mkdir and touch](#mkdir-and-touch)
+- [cp and mv](#cp-and-mv)
+- [rm and rmdir](#rm-and-rmdir)
+- [cat and less](#cat-and-less)
+- [man pages and help](#man-pages-and-help)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: a project folder and filesystem field guide, built from the CLI](#project-a-project-folder-and-filesystem-field-guide-built-from-the-cli)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 Most computers you will deploy code to have no screen, no mouse and no File Explorer. They are Linux servers, containers and build machines that you reach through a terminal. On those machines, a handful of commands is how you look around, find a config file, read a log, copy a release into place and clean up after yourself. An engineer who can move calmly through a Linux filesystem during an outage at 2 a.m. is worth a lot.
 
-Today you learn to move, create, copy, move, delete and read files. You learn how to get help on any command without a search engine, and you learn the layout of the Linux tree so you always know where to look.
+Today you learn to move, create, copy, rename, delete and read files. You also learn to get help on any command without a search engine, and the layout of the Linux tree, so you always know where to look.
+
+[Wikipedia: Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) describes the layout you will explore first. Read its introduction today.
 
 ---
 
-## 2. The filesystem hierarchy
+### The filesystem hierarchy
 
-**Intuition.** A hospital puts the same departments on the same floors in every branch, so a doctor who transfers from another city can find the pharmacy without asking. The Filesystem Hierarchy Standard (FHS) does this for Linux. Config files go in one place, logs in another and programs in a third.
+A hospital puts the same departments on the same floors in every branch, so a doctor who transfers from another city can find the pharmacy without asking. The Filesystem Hierarchy Standard (FHS) does this for Linux. Config files go in one place, logs in another and programs in a third.
 
-**Definition.** Linux has one tree that starts at `/`. Everything appears somewhere inside it, including other drives and hardware devices.
+Linux has one tree that starts at `/`. Everything appears somewhere inside it, including other drives and hardware devices. There is no `C:` or `D:`. A second disk is attached at a folder inside the same tree. The FHS is the convention that says which top-level folder holds which kind of thing.
 
 ```
 /
@@ -49,7 +89,7 @@ Today you learn to move, create, copy, move, delete and read files. You learn ho
     └── log            log files
 ```
 
-**Worked example.** Explore four of these directories:
+Explore four of these directories:
 
 ```bash
 ls /                      # list the top level
@@ -58,21 +98,19 @@ ls /proc                  # numbered folders: one per running process (PIDs, Day
 cat /proc/meminfo         # memory facts, generated live by the kernel
 ```
 
-The numbers in `/proc` are PIDs. `/proc` does not exist on disk. The kernel generates its contents each time you read them. That is the Unix idea that "everything is a file."
+The numbers in `/proc` are PIDs. `/proc` does not exist on disk. The kernel generates its contents each time you read them, which is the Unix idea that "everything is a file."
 
-**Mistakes.** Saving work in `/tmp` and losing it after a restart. Editing files in `/etc` without a backup (copy the file first; `cp` is below). Assuming every distro is identical. Ubuntu merges `/bin` into `/usr/bin` with a symlink, but other systems keep them separate. The FHS is a convention that distros follow loosely.
+A common mistake is saving work in `/tmp` and losing it after a restart. Another is editing a file in `/etc` without a backup, so copy it first (`cp` is covered below). You can also go wrong by assuming every distro is identical. Ubuntu merges `/bin` into `/usr/bin` with a symlink, but other systems keep them separate, because the FHS is a convention that distros follow loosely.
 
 When a production web server misbehaves, the first places an on-call engineer checks are its config under `/etc` (for example `/etc/nginx/`) and its logs under `/var/log`.
 
 ---
 
-## 3. Where am I, and what is here?
+### pwd
 
-### 3.1 `pwd`
+A mall map has a dot labelled "You are here." `pwd` is that dot for your shell.
 
-**Intuition.** The "You are here" dot on a mall map.
-
-**Definition.** `pwd` (print working directory) prints the absolute path of the shell's current directory. Relative paths are resolved from there. Your prompt usually shows it too, with `~` standing for your home.
+Every shell session has a current directory, and every relative path is resolved from it. `pwd` (print working directory) prints the absolute path of that directory. Your prompt usually shows it too, with `~` standing for your home.
 
 ```
 ada@laptop:~$ pwd
@@ -84,13 +122,15 @@ ada@laptop:/var/log$ pwd
 
 If you reach a folder through a symlink, `pwd -P` prints the real location. `cd /bin` followed by `pwd -P` shows `/usr/bin` on Ubuntu.
 
-**Mistakes.** Running a command with a relative path from the wrong directory, such as `rm notes.txt` when you thought you were in `~/old`. Make `pwd` a reflex before anything destructive. Scripts fail the same way, because they run from wherever you launched them, not from where the script file lives. This is why CI configs set the working directory explicitly.
+The usual mistake is running a command with a relative path from the wrong directory, such as `rm notes.txt` when you thought you were in `~/old`. Make `pwd` a reflex before anything destructive. Scripts fail the same way, because they run from wherever you launched them, not from where the script file lives. This is why CI configs set the working directory explicitly.
 
-### 3.2 `ls`
+---
 
-**Intuition.** Opening a drawer and looking inside. The flags decide whether you glance or empty it onto the table.
+### ls
 
-**Definition.** `ls` lists the contents of a directory. With no argument, it lists the working directory.
+Opening a drawer and looking inside is `ls`. The flags decide whether you glance or empty the drawer onto the table.
+
+`ls` lists the contents of a directory. With no argument, it lists the working directory. Each piece of information it can show about a file, such as size, owner, date or hidden status, is switched on by a flag.
 
 | Flag | Meaning |
 |---|---|
@@ -102,8 +142,6 @@ If you reach a folder through a symlink, `pwd -P` prints the real location. `cd 
 | `-R` | recurse into subdirectories |
 | `-d` | list a directory itself, not its contents |
 
-**Worked example.**
-
 ```
 ada@laptop:~$ ls -lah
 total 32K
@@ -114,15 +152,17 @@ drwxr-xr-x 3 ada  ada  4.0K Oct 24 09:10 dev
 -rw-r--r-- 1 ada  ada   220 Oct 24 09:12 notes.txt
 ```
 
-Read one line from left to right. The first character is the type: `-` for a regular file, `d` for a directory, `l` for a symlink. Then come the permissions (`rw-r--r--`, covered on Day 5), the link count, the owner and group (`ada ada`), the size in bytes (`220`), the last-modified time, and the name. Run `ls -l /` and find the `bin -> usr/bin` symlink from section 2.
+Read one line from left to right. The first character is the type: `-` for a regular file, `d` for a directory, `l` for a symlink. Then come the permissions (`rw-r--r--`, covered on Day 5: Linux CLI II), the link count, the owner and group (`ada ada`), the size in bytes (`220`), the last-modified time, and the name. Run `ls -l /` and find the `bin -> usr/bin` symlink from the filesystem hierarchy tree.
 
-**Mistakes.** Deciding a file is missing because it is hidden. Add `-a`. A huge directory floods the screen. Pipe the output to a pager (Day 5) or narrow it with a glob such as `ls *.log`. Do not write scripts that parse `ls` output to get filenames. Names with spaces or newlines break them. Use `find` (Day 5) instead. On the job, `ls -lt /var/log` (newest logs first) is a standard first step in an incident.
+People often decide a file is missing when it is only hidden. Add `-a`. The opposite problem is a huge directory flooding the screen, which a pager (Day 5: Linux CLI II) or a glob such as `ls *.log` fixes. Do not write scripts that parse `ls` output to get filenames, because names with spaces or newlines break them. Use `find` (Day 5: Linux CLI II) instead. On the job, `ls -lt /var/log` (newest logs first) is a standard first step in an incident.
 
-### 3.3 `cd`
+---
 
-**Intuition.** Walking from room to room. You can give directions from where you stand, or give a full street address.
+### cd
 
-**Definition.** `cd` (change directory) changes the shell's working directory.
+Walking from room to room is `cd`. You can give directions from where you stand, or give a full street address.
+
+`cd` (change directory) changes the shell's working directory. The path you give is either absolute (it starts at `/`) or relative to where you are now.
 
 | Command | Goes to |
 |---|---|
@@ -133,26 +173,24 @@ Read one line from left to right. The first character is the type: `-` for a reg
 | `cd ~` or just `cd` | your home directory |
 | `cd -` | the previous directory (and prints it) |
 
-`cd` is a **shell builtin**. Run `type cd` and bash says so. It has to be. A separate program would run as a child process (Day 2), and it could change only its own directory. The shell's directory would stay put. That is the same reason a variable set in a child process never reaches its parent (Day 3).
+`cd` is a shell builtin. Run `type cd` and bash says so. It has to be one. A separate program would run as a child process (Day 2: How Computers Execute Programs), and it could change only its own directory, so the shell's directory would stay put. That is the same reason a variable set in a child process never reaches its parent (Day 3: Developer Environment).
 
-**Worked example.** You are in `/home/ada/dev/day04/src` and want `/home/ada/dev/day03`.
+You are in `/home/ada/dev/day04/src` and want `/home/ada/dev/day03`.
 
 - Absolute: `cd /home/ada/dev/day03`, or `cd ~/dev/day03`
 - Relative: `cd ../../day03` (up to `day04`, up to `dev`, down into `day03`)
 
 Type `cd ~/de` and press Tab. Bash completes `~/dev/`. Press Tab twice when several matches exist, to list them.
 
-**Mistakes.** Spaces split arguments, so `cd My Projects` fails with "too many arguments." Use `cd "My Projects"` or `cd My\ Projects`, or let Tab add the backslash. Case matters: `cd Dev` is not `cd dev`. In WSL, `cd /mnt/c/Users/<you>` works, but Linux tools run slowly there (Day 3).
+Spaces split arguments, so `cd My Projects` fails with "too many arguments." Use `cd "My Projects"` or `cd My\ Projects`, or let Tab add the backslash. Case matters, so `cd Dev` is not `cd dev`. In WSL, `cd /mnt/c/Users/<you>` works, but Linux tools run slowly there (Day 3: Developer Environment). Engineers use `cd -` constantly to bounce between a code folder and a log folder.
 
 ---
 
-## 4. Create and copy
+### mkdir and touch
 
-### 4.1 `mkdir` and `touch`
+`mkdir` builds a new drawer. `touch` slips an empty sheet of paper into a drawer, or re-stamps the date on a sheet that is already there.
 
-**Intuition.** `mkdir` builds a new drawer. `touch` slips an empty sheet of paper into a drawer, or re-stamps the date on a sheet that is already there.
-
-**Definition.** `mkdir name` creates a directory. `-p` creates any missing parents, and does not complain if the directory exists. `touch name` creates an empty file if none exists. If the file exists, `touch` updates its modification time and leaves the contents alone.
+A directory and a file are both entries in the filesystem, and each has its own creation command. `mkdir name` creates a directory. `-p` creates any missing parents and does not complain if the directory exists. `touch name` creates an empty file if none exists. If the file exists, `touch` updates its modification time and leaves the contents alone.
 
 ```bash
 mkdir -p ~/dev/day04/habit-tracker/src
@@ -165,13 +203,15 @@ ls -aR habit-tracker
 
 Bash expands `{tests,docs}` into two paths before `mkdir` runs. A `.gitkeep` is an empty placeholder. Git does not store empty directories, so teams add one to keep a folder in the repo.
 
-**Mistakes.** `mkdir my project` creates two directories, `my` and `project`. Quote names with spaces. Without `-p`, `mkdir a/b/c` fails if `a/b` does not exist. `touch` never opens an editor and never empties a file. To edit, use `code file` or `nano file`. A space inside the braces stops the expansion, so `{tests, docs}` fails.
+`mkdir my project` creates two directories, `my` and `project`, so quote names with spaces. Without `-p`, `mkdir a/b/c` fails if `a/b` does not exist. `touch` never opens an editor and never empties a file. To edit, use `code file` or `nano file`. A space inside the braces stops the expansion, so `{tests, docs}` fails. Project templates and setup scripts on real teams are often just a run of `mkdir -p` and `touch` lines.
 
-### 4.2 `cp` and `mv`
+---
 
-**Intuition.** `cp` is a photocopier, and the original stays where it is. `mv` picks the page up and puts it somewhere else. It can also write a new label on the page without moving it.
+### cp and mv
 
-**Definition.** `cp SOURCE DEST` copies. `cp -r` copies a directory and everything inside it. `mv SOURCE DEST` moves or renames. The two operations are the same thing, because a name is just a directory entry. Useful flags for both: `-i` asks before overwriting, `-v` prints what happened, and `-n` never overwrites. `cp -a` copies recursively and keeps timestamps and permissions.
+`cp` is a photocopier, and the original stays where it is. `mv` picks the page up and puts it somewhere else. It can also write a new label on the page without moving it.
+
+The two operations are close relatives, because a name is just a directory entry. `cp SOURCE DEST` copies. `cp -r` copies a directory and everything inside it. `mv SOURCE DEST` moves or renames. Useful flags for both: `-i` asks before overwriting, `-v` prints what happened, and `-n` never overwrites. `cp -a` copies recursively and keeps timestamps and permissions.
 
 ```bash
 cp notes.txt notes-backup.txt          # copy, new name
@@ -182,17 +222,17 @@ mv "meeting notes.txt" meeting-notes.txt   # rename
 mv *.jpg images/                       # move every .jpg (the shell expands the glob)
 ```
 
-Two results surprise people. First, `cp -r photos backup` creates `backup` as a copy of `photos` if `backup` does not exist. If `backup` already exists, the same command creates `backup/photos` instead. Running the same command twice gives two results. Second, inside one filesystem, `mv` only rewrites a directory entry, so moving a 10 GB file takes no time. Moving from `~` to `/mnt/c` crosses filesystems. Then `mv` must copy every byte and delete the original.
+Two results surprise people. First, `cp -r photos backup` creates `backup` as a copy of `photos` if `backup` does not exist. If `backup` already exists, the same command creates `backup/photos` instead, so running it twice gives two different results. Second, inside one filesystem, `mv` only rewrites a directory entry, so moving a 10 GB file takes no time. Moving from `~` to `/mnt/c` crosses filesystems, and then `mv` must copy every byte and delete the original.
 
-**Mistakes.** Both `cp` and `mv` overwrite an existing destination silently. `mv draft.txt final.txt` destroys the old `final.txt` without a warning. Add `-i` when you are unsure. Forgetting `-r` gives `cp: -r not specified; omitting directory`. A typo in the destination directory renames your file to that typo instead of moving it. Deployment often relies on this. A release is copied into a fresh directory and then renamed into place, so users never see a half-copied release.
+Both `cp` and `mv` overwrite an existing destination silently. `mv draft.txt final.txt` destroys the old `final.txt` without a warning, so add `-i` when you are unsure. Forgetting `-r` gives `cp: -r not specified; omitting directory`. A typo in the destination directory renames your file to that typo instead of moving it. Deployment often relies on this behavior: a release is copied into a fresh directory and then renamed into place, so users never see a half-copied release.
 
 ---
 
-## 5. Delete carefully
+### rm and rmdir
 
-**Intuition.** A paper shredder with no bin underneath. The Linux command line has no Recycle Bin.
+A paper shredder with no bin underneath is `rm`. The Linux command line has no Recycle Bin.
 
-**Definition.** `rm file` removes files. `rm -r dir` removes a directory and everything in it. `rm -i` asks about each file. `rm -f` forces removal and suppresses prompts and errors. `rmdir dir` removes only an empty directory, so it is a safe choice when you expect the folder to be empty.
+Deleting a file removes its directory entry, and nothing in the shell keeps a copy. `rm file` removes files. `rm -r dir` removes a directory and everything in it. `rm -i` asks about each file. `rm -f` forces removal and suppresses prompts and errors. `rmdir dir` removes only an empty directory, which makes it a safe choice when you expect the folder to be empty.
 
 A safe routine:
 
@@ -205,15 +245,15 @@ rmdir old-empty-folder   # fails safely if anything is still inside
 
 A file named `-notes` looks like a flag. Use `rm -- -notes` (the `--` means "no more options") or `rm ./-notes`.
 
-**Mistakes.** One extra space is a disaster. `rm * .txt` (with a space after `*`) deletes every file in the folder, then complains that `.txt` does not exist. `rm -rf` on the wrong path cannot be undone. GNU `rm` refuses `rm -rf /` by default, but `rm -rf /*` is not protected. Some people add `alias rm='rm -i'` to `~/.bashrc`. It helps, but it trains you to rely on a prompt that will not exist on a server. Version control (Day 6) and backups protect you. Production incidents often trace back to a cleanup command run in the wrong directory, which is why teams review cleanup scripts before they run them.
+One extra space is a disaster. `rm * .txt` (with a space after `*`) deletes every file in the folder, then complains that `.txt` does not exist. `rm -rf` on the wrong path cannot be undone. GNU `rm` refuses `rm -rf /` by default, but `rm -rf /*` is not protected. Some people add `alias rm='rm -i'` to `~/.bashrc`. It helps, but it trains you to rely on a prompt that will not exist on a server. Version control (Day 6) and backups protect you. Production incidents often trace back to a cleanup command run in the wrong directory, which is why teams review cleanup scripts before they run them.
 
 ---
 
-## 6. Read files
+### cat and less
 
-**Intuition.** `cat` dumps the whole letter onto the table at once. `less` hands it to you one page at a time, with search.
+`cat` dumps the whole letter onto the table at once. `less` hands it to you one page at a time, with search.
 
-**Definition.** `cat` (concatenate) prints one or more files, one after another. `cat -n` numbers the lines. `cat -A` shows invisible characters: line ends appear as `$`, tabs as `^I`, and Windows carriage returns as `^M`. `less` is a **pager**. It opens a file for scrolling and searching without loading the whole thing on screen, so it works on files far larger than your terminal.
+`cat` (concatenate) prints one or more files, one after another. `cat -n` numbers the lines. `cat -A` shows invisible characters: line ends appear as `$`, tabs as `^I`, and Windows carriage returns as `^M`. `less` is a pager. It opens a file for scrolling and searching without putting the whole thing on screen, so it works on files far larger than your terminal.
 
 | Key | Action |
 |---|---|
@@ -236,15 +276,15 @@ less -N /var/log/apt/history.log   # what apt installed, with line numbers
 
 In `/var/log/dpkg.log`, press `G` to jump to the newest entries, then type `?install` and Enter to search backward.
 
-**Mistakes.** `cat` on a big log floods the terminal, so use `less`. `cat` on a binary file such as `/usr/bin/ls` prints garbage and can scramble the terminal. Type `reset` and press Enter to recover. Being stuck in `less` is the most common beginner panic. Press `q`. On the job, SREs read logs with `less` and its search, and `less +F` (follow mode) watches a log as it grows during an incident.
+`cat` on a big log floods the terminal, so use `less`. `cat` on a binary file such as `/usr/bin/ls` prints garbage and can scramble the terminal. Type `reset` and press Enter to recover. Being stuck in `less` is the most common beginner panic, and the way out is `q`. On the job, SREs read logs with `less` and its search, and `less +F` (follow mode) watches a log as it grows during an incident.
 
 ---
 
-## 7. Get help without leaving the terminal
+### man pages and help
 
-**Intuition.** A reference book bolted to every Linux machine, written for the exact versions of the tools installed there.
+Picture a reference book bolted to every Linux machine, written for the exact versions of the tools installed there. That is the manual.
 
-**Definition.** `man command` opens the manual page for a command in `less`. Pages are grouped into numbered sections: 1 for user commands, 5 for file formats, 7 for overviews, and 8 for administration commands. When a name exists in several sections, say which one you want. `man passwd` shows the command, and `man 5 passwd` shows the format of `/etc/passwd`. `man -k word` searches page descriptions. Most commands also accept `--help`, which prints a short summary. Builtins such as `cd` have no separate man page in many setups. Use `help cd` for those.
+`man command` opens the manual page for a command in `less`. Pages are grouped into numbered sections: 1 for user commands, 5 for file formats, 7 for overviews, and 8 for administration commands. When a name exists in several sections, say which one you want. `man passwd` shows the command, and `man 5 passwd` shows the format of `/etc/passwd`. `man -k word` searches page descriptions. Most commands also accept `--help`, which prints a short summary. Builtins such as `cd` have no separate man page in many setups, so use `help cd` for those.
 
 ```
 cp [OPTION]... [-T] SOURCE DEST
@@ -261,11 +301,11 @@ help cd                 # builtin help
 type ls                 # alias, builtin, or file?
 ```
 
-**Mistakes.** Reading a man page top to bottom like a novel. Skim NAME, SYNOPSIS and the flag you need, then search with `/`. Man pages are reference material and often lack examples. Pair them with `tldr`, a community project of example-first summaries (`sudo apt install tldr`). If `man` says the system was minimized, run `sudo unminimize` to restore the documentation. A web tutorial may describe a different version from the one installed. The local man page describes yours. On locked-down production servers there is often no browser and no internet, so `man` and `--help` may be the only documentation you have.
+People read a man page top to bottom like a novel. Skim NAME, SYNOPSIS and the flag you need, then search with `/`. Man pages are reference material and often lack examples, so pair them with `tldr`, a community project of example-first summaries (`sudo apt install tldr`). If `man` says the system was minimized, run `sudo unminimize` to restore the documentation. A web tutorial may describe a different version from the one installed, while the local man page describes yours. On locked-down production servers there is often no browser and no internet, so `man` and `--help` may be the only documentation you have.
 
 ---
 
-## 8. Hands-on exercises (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
 Do these in your Ubuntu tab. Write each answer, and the command that found it, in a notes file. You will reuse them in the project.
 
@@ -277,13 +317,15 @@ Do these in your Ubuntu tab. Write each answer, and the command that found it, i
 
 ---
 
-## 9. Project: a project folder and filesystem field guide, built from the CLI
+## Project: a project folder and filesystem field guide, built from the CLI
 
-**Goal.** Show that you can create, organize and inspect files using only the command line, and that you understand the Linux layout well enough to explain it to someone else.
+This is the GitHub project for Day 4. You will show that you can create, organize and inspect files using only the command line, and that you understand the Linux layout well enough to explain it to someone else.
 
 **Repo name:** `100-days-software-day-04-linux-cli-i`
 
-**Repository layout (finished state):**
+### Repository layout
+
+Finished state:
 
 ```
 100-days-software-day-04-linux-cli-i/
@@ -306,7 +348,9 @@ Do these in your Ubuntu tab. Write each answer, and the command that found it, i
         └── .gitkeep
 ```
 
-**Starter: create a messy inbox.** Paste this into your Ubuntu terminal:
+### Starter: create a messy inbox
+
+Paste this into your Ubuntu terminal:
 
 ```bash
 mkdir -p ~/dev/100-days-software-day-04-linux-cli-i/inbox
@@ -316,28 +360,58 @@ touch holiday.jpg beach.jpg screenshot.png song.mp3 podcast.mp3
 touch "meeting notes.txt" .old-config
 ```
 
-**Step-by-step tasks:**
+### Step 1: look at the inbox
 
-1. Run `ls` and then `ls -la` in `inbox`. Note the file that appears only with `-a`.
-2. From the repo folder, create `organized/{documents,images,music,archive}` with one `mkdir -p` command.
-3. Rename `meeting notes.txt` to `meeting-notes.txt`.
-4. Move documents (`.docx`, `.xlsx`, `.txt`) into `organized/documents`, images (`.jpg`, `.png`) into `organized/images`, and audio into `organized/music`, using globs. Preview each glob with `ls` first.
-5. Treat `report-final.docx` as an old version. Move it to `organized/archive`. Copy `report-final-v2.docx` to `organized/archive/report-final-v2-backup.docx`.
-6. Delete `.old-config` with `rm -i`, then remove the empty `inbox` with `rmdir`. If `rmdir` refuses, run `ls -a inbox` and find what you missed.
-7. Create the `habit-tracker` skeleton with `mkdir -p` and `touch`. Add `.gitkeep` files to its empty folders, and to the empty `organized/` subfolders too. GitHub drops empty folders.
-8. Open the folder with `code .` and write `commands.md`. List every command from steps 1 to 7, in order, with one line saying what each did. Run `history` to recover any you forgot.
-9. Write `fhs-field-guide.md`. For ten directories from section 2, record what lives there, one real file you found inside (with the command you used), and whether you could read it as a normal user.
-10. Write `cheatsheet.md` in your own words. For each command from today, list its three most useful flags and one mistake to avoid.
-11. Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add file > Upload files** by dragging the folders in. From Day 6 you will push with `git` instead.
+Run `ls` and then `ls -la` in `inbox`. Note the file that appears only with `-a`.
 
-**README checklist:**
+### Step 2: create the destination folders
+
+From the repo folder, create `organized/{documents,images,music,archive}` with one `mkdir -p` command.
+
+### Step 3: fix the filename with a space
+
+Rename `meeting notes.txt` to `meeting-notes.txt`.
+
+### Step 4: sort with globs
+
+Move documents (`.docx`, `.xlsx`, `.txt`) into `organized/documents`, images (`.jpg`, `.png`) into `organized/images`, and audio into `organized/music`, using globs. Preview each glob with `ls` first.
+
+### Step 5: archive the old version
+
+Treat `report-final.docx` as an old version. Move it to `organized/archive`. Copy `report-final-v2.docx` to `organized/archive/report-final-v2-backup.docx`.
+
+### Step 6: clean up
+
+Delete `.old-config` with `rm -i`, then remove the empty `inbox` with `rmdir`. If `rmdir` refuses, run `ls -a inbox` and find what you missed.
+
+### Step 7: build the habit-tracker skeleton
+
+Create the `habit-tracker` skeleton with `mkdir -p` and `touch`. Add `.gitkeep` files to its empty folders, and to the empty `organized/` subfolders too. GitHub drops empty folders.
+
+### Step 8: record your commands
+
+Open the folder with `code .` and write `commands.md`. List every command from Steps 1 to 7, in order, with one line saying what each did. Run `history` to recover any you forgot.
+
+### Step 9: write the field guide
+
+Write `fhs-field-guide.md`. For ten directories from the filesystem hierarchy tree, record what lives there, one real file you found inside (with the command you used), and whether you could read it as a normal user.
+
+### Step 10: write your cheatsheet
+
+Write `cheatsheet.md` in your own words. For each command from today, list its three most useful flags and one mistake to avoid.
+
+### Step 11: publish
+
+Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add file > Upload files** by dragging the folders in. From Day 6 you will push with `git` instead.
+
+### README checklist
 
 - [ ] What this repo shows, in two sentences
 - [ ] The before (`ls -la inbox`) and after (`ls -R organized`) listings, pasted as code blocks
 - [ ] Links to `commands.md`, `fhs-field-guide.md` and `cheatsheet.md`
 - [ ] One mistake you made today and how you recovered (for example, a `cp -r` surprise or a failed `rmdir`)
 
-**Done when:**
+### Done when
 
 - No files remain uncategorized, and the `inbox` folder is gone.
 - `commands.md` lists every command needed to reproduce the result from the starter block, in order.
@@ -347,7 +421,7 @@ touch "meeting notes.txt" .old-config
 
 ---
 
-## 10. Check your understanding
+## Check your understanding
 
 1. Why can't `cd` be an ordinary program in `/usr/bin` the way `ls` is?
 2. You are in `/home/ada/dev/app/src`. Write the shortest relative path to `/home/ada/notes.txt`, and say when you would prefer the absolute path.
@@ -369,7 +443,7 @@ touch "meeting notes.txt" .old-config
 
 ---
 
-## 11. Sources to read and watch
+## Sources to read and watch
 
 **Read:**
 - [Wikipedia: Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
@@ -398,6 +472,6 @@ touch "meeting notes.txt" .old-config
 
 ---
 
-## 12. Tomorrow
+## Tomorrow
 
 Day 5, **Linux CLI II**, turns today's single commands into tools that work together. You will search inside files with `grep`, search the tree with `find`, chain commands with pipes, send output into files with redirection, control access with permissions and `chmod`, manage processes with signals, and write your first real shell script. Today's `ls -l` permission strings, the PIDs in `/proc` and the logs in `/var/log` are exactly what you will work with tomorrow.

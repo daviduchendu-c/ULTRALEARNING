@@ -3,21 +3,67 @@
 *100 Days of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 4 hours (installing PyTorch can take a while on a slow connection)
-**You will build:** a reusable starter repo with a pinned environment, an environment check script that reports your library versions and compute device, a short tour of the core libraries, a Jupyter notebook, and a reproducibility test that shows your results can be repeated exactly.
-**You should know:** Days 1 to 4, how to open a terminal, and how to create and activate a virtual environment (Days 1, 2 and 4 covered it).
-**You will install:** Python 3.12 (3.11 or newer works), NumPy, pandas, Matplotlib, scikit-learn, PyTorch and JupyterLab, all at pinned versions. Optionally, Hugging Face `transformers`. Everything today is free.
+**Level:** beginner to intermediate. For anyone who can use a terminal and has done Days 1 to 4.
+
+**By the end of this day, you will have:**
+
+- A reusable starter repo with a pinned environment, a `.gitignore` and a recorded lock file
+- An environment check script that reports your library versions and compute device
+- A short tour of NumPy, pandas, Matplotlib and scikit-learn, as a script and as a Jupyter notebook
+- A reproducibility test that shows your results can be repeated exactly
+
+**What you need:**
+
+- Python 3.12 (3.11 or newer works)
+- NumPy, pandas, Matplotlib, scikit-learn, PyTorch and JupyterLab, all at pinned versions (installed in the project section)
+- Optionally, Hugging Face `transformers`
+- A terminal and a text editor or VS Code
+- No paid accounts. Everything today is free.
+
+**Prerequisites:**
+
+- Day 1: What Is Artificial Intelligence?
+- Day 2: How Machines Learn
+- Day 3: The AI/ML Lifecycle
+- Day 4: AI Problem Formulation
+- How to open a terminal, and how to create and activate a virtual environment (Days 1, 2 and 4 covered it)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
 
-An ML result is only as trustworthy as the environment that produced it. If your README says "test accuracy 0.97" and a colleague gets 0.94 on their laptop, nobody knows which number is real. Treat the environment as part of the code. The Python version, every library version, the hardware (CPU or GPU) and the random seeds get written down and checked in.
-
-Today you set up the toolkit for the rest of the series and make your results repeatable. Anyone who clones your repo should be able to run one install command and one run command, and get the numbers you reported.
+- [Introduction](#introduction)
+- [A short history of the Python AI stack](#a-short-history-of-the-python-ai-stack)
+- [How the layers fit together](#how-the-layers-fit-together)
+- [NumPy](#numpy)
+- [pandas](#pandas)
+- [Matplotlib](#matplotlib)
+- [scikit-learn](#scikit-learn)
+- [PyTorch](#pytorch)
+- [Hugging Face](#hugging-face)
+- [Virtual environments and pinned requirements](#virtual-environments-and-pinned-requirements)
+- [Jupyter notebooks](#jupyter-notebooks)
+- [CPU, GPU and CUDA](#cpu-gpu-and-cuda)
+- [Reproducibility and random seeds](#reproducibility-and-random-seeds)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: an AI environment starter repo](#project-an-ai-environment-starter-repo)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
 
 ---
 
-## 2. A short history of the Python AI stack
+## Introduction
+
+An ML result is only as trustworthy as the environment that produced it. If your README says "test accuracy 0.97" and a colleague gets 0.94 on their laptop, nobody knows which number is real. The environment is part of the code: the Python version, every library version, the hardware (CPU or GPU) and the random seeds all get written down and checked in.
+
+Today you set up the toolkit for the rest of the series and make your results repeatable. Anyone who clones your repo should be able to run one install command and one run command and get the numbers you reported.
+
+On the job, a repo that will not run on a teammate's machine costs hours, and a result nobody can reproduce gets thrown out in review. Hiring managers read a pinned `requirements.txt` as a sign that you have shipped before.
+
+---
+
+## A short history of the Python AI stack
 
 | Year | Tool | Why it matters today |
 |---|---|---|
@@ -32,9 +78,11 @@ Today you set up the toolkit for the rest of the series and make your results re
 
 ---
 
-## 3. The stack and the tools
+### How the layers fit together
 
-Python is the dominant language for AI work. Python itself is slow, but the heavy math runs in compiled C, C++ and CUDA code inside the libraries, and Python glues them together.
+Think of a building. Each floor stands on the one below it, and a crack in the foundation shows up as a crooked wall three floors up.
+
+Python is the dominant language for AI work. Python itself is slow, but the heavy math runs in compiled C, C++ and CUDA code inside the libraries, and Python glues them together. That gives a stack of layers:
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -56,6 +104,8 @@ Python is the dominant language for AI work. Python itself is slow, but the heav
 
 Read it bottom up. Each layer uses the ones below it, so when something breaks, the cause is usually the lowest layer that is wrong. A wrong Python version breaks everything above it.
 
+In short, the stack is the set of libraries, each with one job, that you combine to go from raw data to a trained model:
+
 | Job | Tool |
 |---|---|
 | Load a CSV, clean columns, group and count | pandas |
@@ -66,7 +116,19 @@ Read it bottom up. Each layer uses the ones below it, so when something breaks, 
 | Use a pretrained language or vision model | Hugging Face `transformers` |
 | Explore data interactively and show results | Jupyter |
 
-**NumPy** provides the `ndarray`, a fixed-type grid of numbers, and fast operations on whole arrays (vectorization) without Python loops.
+Suppose `import torch` fails on a fresh machine. Start at the bottom: check the Python version, then whether the environment is active, then whether the package is installed there. Jumping straight to PyTorch settings wastes time when the real fault is an inactive environment.
+
+A frequent mistake is debugging at the layer where the error message appears. A pandas error can come from a NumPy version that pandas was not built for. Compare the versions that `pip list` shows before you read the pandas docs. Every AI job post lists some of these libraries, and the people who debug fastest are the ones who know which layer to suspect.
+
+---
+
+### NumPy
+
+A spreadsheet applies a formula to one cell at a time unless you drag it down a whole column. NumPy is the drag-down: one instruction, and the whole column changes.
+
+A plain Python loop checks the type of every number as it goes. NumPy stores numbers of one type in one block of memory and hands the whole block to compiled code, so the work happens without Python in the loop.
+
+NumPy provides the `ndarray`, a fixed-type grid of numbers, and fast operations on whole arrays (vectorization) without Python loops.
 
 ```python
 import numpy as np
@@ -77,9 +139,19 @@ a = np.array([[1.0, 2.0], [3.0, 4.0]])
 print(a.shape, a.mean(), a.sum(axis=0))   # (2, 2) 2.5 [4. 6.]
 ```
 
-`axis=0` collapses the rows, so the sum runs down each column. Print `shape` first when something goes wrong. The most common NumPy error is a shape mismatch, such as a `(100,)` array where a function expects `(100, 1)`. That is why Day 2's `gradient_descent.py` used `x_train.reshape(-1, 1)`. Day 17 covers NumPy in depth.
+`axis=0` collapses the rows, so the sum runs down each column. The most common NumPy error is a shape mismatch, such as a `(100,)` array where a function expects `(100, 1)`. That is why `gradient_descent.py` in Day 2: How Machines Learn used `x_train.reshape(-1, 1)`. When something goes wrong, print `shape` first. NumPy gets a full day later (Day 17).
 
-**pandas** provides the `DataFrame`, a table with named, typed columns, plus tools to load, filter, join, group and summarize data.
+Every pandas column, every scikit-learn input and every PyTorch tensor behaves like a NumPy array, so NumPy fluency shows up in nearly every data and ML interview.
+
+---
+
+### pandas
+
+Picture a spreadsheet you can drive with code: named columns, a type for each column, and one-line filters, joins and totals instead of clicking.
+
+Real data arrives as tables with messy columns. pandas keeps each column as a typed NumPy array and adds labels, so you can say "sum the sales per city" and not write the loop.
+
+pandas provides the `DataFrame`, a table with named, typed columns, plus tools to load, filter, join, group and summarize data.
 
 ```python
 import pandas as pd
@@ -90,13 +162,54 @@ print(df.groupby("city")["sales"].sum())
 # Lagos    320
 ```
 
-Two traps. Chained assignment such as `df[df.sales > 100]["city"] = "X"` may change a temporary copy. Use `df.loc[df.sales > 100, "city"] = "X"` instead. Also check `df.dtypes` after reading a CSV, because numbers stored as text will not add up. Day 18 covers pandas in depth.
+Chained assignment such as `df[df.sales > 100]["city"] = "X"` may change a temporary copy, and the original table stays the same. Use `df.loc[df.sales > 100, "city"] = "X"` instead. Also run `df.dtypes` after reading a CSV: numbers stored as text will not add up, and the symptom is a sum that looks like joined strings. Day 18 covers pandas in depth.
 
-**Matplotlib** draws static plots: lines, scatter plots, histograms and images. Give every plot axis labels and units. On a server with no display, save with `fig.savefig` instead of calling `plt.show()`, which is why today's code uses the `Agg` backend.
+Cleaning and summarizing tables is a large share of day-to-day data and ML work, and pandas is the tool most teams use for it.
 
-**scikit-learn** implements classical ML, preprocessing and evaluation behind one interface: `fit(X, y)` to train, `predict(X)` to infer, `transform(X)` for preprocessing, and `Pipeline` to chain them. Swapping a logistic regression for a random forest changes one word. The common mistake is fitting a scaler on all the data before splitting, which is the leak from Day 3. Put preprocessing inside a `Pipeline` so it is fit on training rows only.
+---
 
-**PyTorch** provides tensors (arrays that can live on a CPU or a GPU), automatic differentiation (it computes the gradients you wrote by hand on Day 2), and the building blocks of neural networks.
+### Matplotlib
+
+A plot is a picture you draw on graph paper: you choose the axes, put dots or lines where the numbers say, and label everything so a stranger can read it.
+
+Matplotlib builds a figure object, places axes on it, draws marks from your arrays, and writes the result to a screen or a file.
+
+Matplotlib draws static plots: lines, scatter plots, histograms and images.
+
+You will see it in `tour.py` below: a scatter of petal length against petal width, one color per species, saved to `iris_petals.png`.
+
+Give every plot axis labels and units, or the picture cannot be read without you standing next to it. On a server with no display, `plt.show()` has nothing to draw on, so save with `fig.savefig` instead. That is why today's code uses the `Agg` backend, which renders to files.
+
+Loss curves, confusion matrices and result charts in reports and pull requests are almost always Matplotlib or a library built on it.
+
+---
+
+### scikit-learn
+
+Think of a set of kitchen appliances that all share one plug. Swap the blender for the mixer and nothing else in the kitchen changes.
+
+scikit-learn gives every model the same small set of methods, so models are interchangeable. Preprocessing steps follow the same pattern, which lets you chain them.
+
+scikit-learn implements classical ML, preprocessing and evaluation behind one interface: `fit(X, y)` to train, `predict(X)` to infer, `transform(X)` for preprocessing, and `Pipeline` to chain them. Swapping a logistic regression for a random forest changes one word:
+
+```python
+model = LogisticRegression(max_iter=1000).fit(X_train, y_train)   # change this class name...
+model = RandomForestClassifier().fit(X_train, y_train)            # ...and the rest of the code stays
+```
+
+The common mistake is fitting a scaler on all the data before splitting, which is the leak from Day 3: The AI/ML Lifecycle. The tell is a validation score that looks too good and falls apart on new data. Put preprocessing inside a `Pipeline` so it is fit on training rows only.
+
+For tabular business data, such as churn, fraud and forecasting, scikit-learn models are still a first choice in industry.
+
+---
+
+### PyTorch
+
+NumPy is a calculator that handles whole grids at once. PyTorch is the same calculator with two upgrades: it can run on a GPU, and it remembers every step so it can work backwards and tell you how each number contributed to the error.
+
+Training a neural network means adjusting weights to reduce a loss. That needs fast grids of numbers (tensors) and the gradients of the loss with respect to every weight. PyTorch records the operations as you run them and computes the gradients automatically.
+
+PyTorch provides tensors (arrays that can live on a CPU or a GPU), automatic differentiation (it computes the gradients you wrote by hand in Day 2: How Machines Learn), and the building blocks of neural networks.
 
 ```python
 import torch
@@ -107,17 +220,37 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 x = x.to(device)    # move the tensor to the GPU if there is one
 ```
 
-Copy the install command from the selector at [pytorch.org/get-started/locally](https://pytorch.org/get-started/locally/) rather than typing your own, because builds differ by hardware. The GPU install is covered in section 6 and the project. A common error is `RuntimeError: Expected all tensors to be on the same device`. Move the model and the data to the same device. Module 5 teaches PyTorch properly.
+Copy the install command from the selector at [pytorch.org/get-started/locally](https://pytorch.org/get-started/locally/) rather than typing your own, because builds differ by hardware. The GPU install is covered in the CPU, GPU and CUDA section and in the project.
 
-**Hugging Face** runs the **Hub**, which holds hundreds of thousands of public models and datasets, and maintains libraries: `transformers` (pretrained models for text, vision and audio), `datasets` (loading and processing data), and `tokenizers` (fast text splitting). Most Hub models run on PyTorch. Public models are free to download, but check each model's license before you use it in a product. Pin the model name, and ideally its revision, so a different model does not download later. Expect the first run to download hundreds of megabytes into a cache folder (`~/.cache/huggingface` by default).
+A common error is `RuntimeError: Expected all tensors to be on the same device`. It means the model sits on one device and the data on another. Move both to the same one. Module 5 teaches PyTorch properly.
+
+Most deep learning research code and a large share of production model code is written in PyTorch, so it appears in most ML engineering job posts.
 
 ---
 
-## 4. Virtual environments and pinned requirements
+### Hugging Face
 
-**Intuition.** Each project gets its own toolbox. If one project needs an old wrench, that does not force every other project to use it.
+A public library lends you books you did not write. Hugging Face lends you models other people trained.
 
-**Definition.** A **virtual environment** is a folder (here `.venv`) with its own Python interpreter and installed packages. Activating it makes `python` and `pip` point to that folder. **pip** is Python's installer, and it downloads **packages** from PyPI (the Python Package Index). A **requirements.txt** file lists what a project needs. **Pinning** writes an exact version (`pandas==2.2.3`) instead of a range (`pandas>=2.0`). A **dependency** is a package that another package needs, such as NumPy and SciPy for scikit-learn. [Python docs](https://docs.python.org/3/library/venv.html)
+Training a language or vision model from scratch needs huge data and compute. If someone has already trained one and published the weights, you can download them and run them with a few lines.
+
+Hugging Face runs the **Hub**, which holds hundreds of thousands of public models and datasets, and maintains libraries: `transformers` (pretrained models for text, vision and audio), `datasets` (loading and processing data), and `tokenizers` (fast text splitting). Most Hub models run on PyTorch.
+
+You will run one in Step 7 of the project: a small sentiment classifier that downloads about 270 MB the first time and caches it. By default the cache folder is `~/.cache/huggingface`.
+
+Public models are free to download, but check each model's license before you use it in a product. Pin the model name, and ideally its revision, so a different model does not download later. If your results change without any code change, an unpinned model name is a likely cause.
+
+Teams use Hub models as starting points for classifiers, embeddings and chat features, then fine-tune or call them rather than train from scratch.
+
+---
+
+### Virtual environments and pinned requirements
+
+Each project gets its own toolbox. If one project needs an old wrench, that does not force every other project to use it.
+
+Python installs packages into a folder, and one folder can hold only one version of each package. Two projects that need different versions of the same package cannot share a folder. A separate folder per project solves it.
+
+A **virtual environment** is a folder (here `.venv`) with its own Python interpreter and installed packages. Activating it makes `python` and `pip` point to that folder. **pip** is Python's installer, and it downloads **packages** from PyPI (the Python Package Index). A **requirements.txt** file lists what a project needs. **Pinning** writes an exact version (`pandas==2.2.3`) instead of a range (`pandas>=2.0`). A **dependency** is a package that another package needs, such as NumPy and SciPy for scikit-learn. [Python docs](https://docs.python.org/3/library/venv.html)
 
 ```bash
 python -m venv .venv                 # create
@@ -129,68 +262,67 @@ python -m pip freeze > requirements-lock.txt   # record every installed package,
 
 `pip freeze` lists dependencies you never asked for, such as `scipy`, `joblib` and `threadpoolctl`. Keep `requirements.txt` short and readable. Commit the frozen lock file next to it for exact rebuilds.
 
-**Common mistakes.** Installing into the system Python with no environment, then wondering why another project broke. Forgetting to activate, so `pip install` goes somewhere else. Check with `python -c "import sys; print(sys.prefix)"`, which should end in `.venv`. Committing `.venv` to Git. It is large and specific to one machine, so add it to `.gitignore`. On Windows PowerShell, activation can fail with an execution policy error. Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or use the Command Prompt activation from Day 1.
+The usual mistakes are installing into the system Python with no environment, then wondering why another project broke, and forgetting to activate, so `pip install` goes somewhere else. Check with `python -c "import sys; print(sys.prefix)"`, which should end in `.venv`. Committing `.venv` to Git is another one. It is large and specific to one machine, so add it to `.gitignore`. On Windows PowerShell, activation can fail with an execution policy error. Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or use the Command Prompt activation from Day 1: What Is Artificial Intelligence?
 
-**Alternatives you will see at work:** `uv` (a fast, free installer from Astral), Poetry, and conda. Conda is popular for scientific packages. Anaconda's default channel has commercial licensing terms for larger organizations, while Miniforge with conda-forge is free. This series uses `venv` and `pip`, which come with Python.
-
----
-
-## 5. Jupyter notebooks
-
-**Intuition.** A lab notebook where every experiment, its result and your notes sit on the same page.
-
-**Definition.** A notebook is a file of cells. **Code cells** run in a **kernel**, a live Python process that keeps variables in memory between cells, and their output (text, tables, plots) is saved under the cell. **Markdown cells** hold notes. JupyterLab is the browser-based editor, and VS Code also opens `.ipynb` files.
-
-**Example.** Start `jupyter lab` from your activated environment. In a cell, run `import pandas as pd`, then in the next cell run `pd.__version__`. The version printed comes from the environment you launched Jupyter from.
-
-**Common mistakes.** Running cells out of order. If you define `x` in cell 5, then delete cell 5, `x` still exists in the kernel, and the notebook fails for anyone who runs it top to bottom. Before you commit, use **Kernel → Restart Kernel and Run All Cells**. Another trap is a kernel that uses a different Python from your environment, so imports fail. Check with `import sys; sys.executable`.
-
-**Limitation.** Notebooks are good for exploration and poor for production code. They are hard to test, hard to review in Git diffs and easy to run out of order. The habit in this series: explore in notebooks, then move the code you keep into `.py` files.
+You will see other tools at work: `uv` (a fast, free installer from Astral), Poetry, and conda. Conda is popular for scientific packages. Anaconda's default channel has commercial licensing terms for larger organizations, while Miniforge with conda-forge is free. This series uses `venv` and `pip`, which come with Python. Whatever the tool, employers expect a project to come with a pinned, rebuildable environment.
 
 ---
 
-## 6. Hardware: CPU, GPU and CUDA
+### Jupyter notebooks
 
-**Intuition.** A CPU is a few expert chefs who can each cook anything. A GPU is a thousand line cooks who can each only chop, but all chop at once. Deep learning is mostly chopping: multiplying large grids of numbers.
+A lab notebook keeps every experiment, its result and your notes on the same page.
 
-**Definition.** A CPU has a small number of complex cores, built for varied, sequential work. A GPU has thousands of simpler cores, built to run the same operation on many numbers in parallel. [Wikipedia](https://en.wikipedia.org/wiki/Graphics_processing_unit) Neural network training and inference are dominated by matrix multiplications, which parallelize well. A **device** is where a PyTorch tensor lives and computes: `cpu`, `cuda` (NVIDIA GPU) or `mps` (Apple silicon GPU).
+A notebook runs your code in a live process, and it saves what the code printed or plotted next to the code. You can change one cell and rerun it without redoing the slow steps before it.
+
+A notebook is a file of cells. **Code cells** run in a **kernel**, a live Python process that keeps variables in memory between cells, and their output (text, tables, plots) is saved under the cell. **Markdown cells** hold notes. JupyterLab is the browser-based editor, and VS Code also opens `.ipynb` files.
+
+Start `jupyter lab` from your activated environment. In a cell, run `import pandas as pd`, then in the next cell run `pd.__version__`. The version printed comes from the environment you launched Jupyter from.
+
+The classic mistake is running cells out of order. If you define `x` in cell 5, then delete cell 5, `x` still exists in the kernel, and the notebook fails for anyone who runs it top to bottom. Before you commit, use Kernel → Restart Kernel and Run All Cells. A second mistake is a kernel that uses a different Python from your environment, so imports fail. Check with `import sys; sys.executable`.
+
+Notebooks are good for exploration and poor for production code. They are hard to test, hard to review in Git diffs and easy to run out of order. The habit in this series is to explore in notebooks and then move the code you keep into `.py` files. Data science and ML teams use notebooks daily for exploration and reports, and ship `.py` modules.
+
+---
+
+### CPU, GPU and CUDA
+
+A CPU is a few expert chefs who can each cook anything. A GPU is a thousand line cooks who can each only chop, but all chop at once. Deep learning is mostly chopping: multiplying large grids of numbers.
+
+Neural network training and inference are dominated by matrix multiplications. Each output number in a matrix product can be computed independently of the others, so thousands of simple cores working at once beat a few complex ones.
+
+A CPU has a small number of complex cores, built for varied, sequential work. A GPU has thousands of simpler cores, built to run the same operation on many numbers in parallel. [Wikipedia](https://en.wikipedia.org/wiki/Graphics_processing_unit) A **device** is where a PyTorch tensor lives and computes: `cpu`, `cuda` (NVIDIA GPU) or `mps` (Apple silicon GPU).
 
 **CUDA** is NVIDIA's parallel computing platform: a driver, a toolkit and libraries (cuBLAS for matrix math, cuDNN for neural network operations). A PyTorch CUDA build bundles the CUDA libraries it needs, so you only need a recent NVIDIA driver. CUDA works only on NVIDIA GPUs. AMD's equivalent is ROCm. Apple's is Metal, which PyTorch uses through the `mps` device.
 
-**Example.** Multiplying two 4,096 by 4,096 matrices takes about 137 billion floating-point operations, or about 68.7 billion multiply-adds with each one counted as two operations. A modern GPU does this many times faster than a laptop CPU. The scikit-learn models in this module run on the CPU, so a GPU gives them no benefit.
+Multiplying two 4,096 by 4,096 matrices takes about 137 billion floating-point operations, or about 68.7 billion multiply-adds with each one counted as two operations. A modern GPU does this many times faster than a laptop CPU. The scikit-learn models in this module run on the CPU, so a GPU gives them no benefit.
 
 `torch.cuda.is_available()` returns `True` only when three things line up: an NVIDIA GPU, a working driver, and a CUDA build of PyTorch. `torch.version.cuda` prints the CUDA version the build uses, or `None` for a CPU build. `nvidia-smi` shows the GPU, the driver version and current memory use.
 
-**Common mistakes.**
-- Buying or renting a GPU before you need one. The early days of this series run on a laptop CPU. From Module 5 on, Google Colab's free tier and Kaggle Notebooks give limited free GPU time. Cloud GPUs are paid by the hour.
-- Installing the full CUDA Toolkit separately and assuming PyTorch will use it. pip builds bring their own libraries.
-- A driver older than the CUDA version the PyTorch build needs. `is_available()` then returns `False`.
+The first mistake is buying or renting a GPU before you need one. The early days of this series run on a laptop CPU. From Module 5 on, Google Colab's free tier and Kaggle Notebooks give limited free GPU time. Cloud GPUs are paid by the hour. The second is installing the full CUDA Toolkit separately and assuming PyTorch will use it. pip builds bring their own libraries. The third is a driver older than the CUDA version the PyTorch build needs. You spot it when `is_available()` returns `False` on a machine that has an NVIDIA GPU.
 
 On a job post, "CUDA" usually means comfort with GPU setup and debugging. Writing CUDA kernels by hand is a specialist skill.
 
 ---
 
-## 7. Reproducibility and random seeds
+### Reproducibility and random seeds
 
-**Intuition.** A recipe is only useful if someone else can follow it and get the same cake. A shuffled deck is repeatable if you write down exactly how you shuffled.
+A recipe is only useful if someone else can follow it and get the same cake. A shuffled deck is repeatable if you write down exactly how you shuffled.
 
-**Definition.** A result is reproducible when the same code, data and environment give the same numbers. That needs pinned library versions, a recorded Python version, fixed random seeds, a fixed data version, and a written record of how to run everything.
+Computers make "random" numbers with a deterministic algorithm that starts from a number. Start from the same number and you get the same sequence. ML uses randomness in train/test splits, weight initialization, shuffling, random forests and dropout, and each library keeps its own generator: Python's `random`, NumPy, PyTorch, and the `random_state` argument in scikit-learn.
 
-A **random seed** is the starting number for a pseudo-random number generator. Computers make "random" numbers with a deterministic algorithm, so the same seed gives the same sequence. [Wikipedia](https://en.wikipedia.org/wiki/Random_seed) ML uses randomness in train/test splits, weight initialization, shuffling, random forests and dropout. Each library has its own generator: Python's `random`, NumPy, PyTorch, and the `random_state` argument in scikit-learn.
+A result is **reproducible** when the same code, data and environment give the same numbers. That needs pinned library versions, a recorded Python version, fixed random seeds, a fixed data version, and a written record of how to run everything. A **random seed** is the starting number for a pseudo-random number generator. [Wikipedia](https://en.wikipedia.org/wiki/Random_seed)
 
 In the project, two runs with seed 42 give identical accuracy and an identical PyTorch number. Runs with no seed differ each time. `random_state=42` in scikit-learn and `torch.manual_seed(42)` are separate settings, so you need both.
 
-**Common mistakes.**
-- Seeding only one library.
-- Choosing the seed that gives the best score ("seed hacking"). If your result changes a lot between seeds, report the mean and spread over several seeds. On Day 1, one seed gave 0.22 and another gave 0.89.
-- Results that depend on unrecorded state: notebook cells run out of order, a file edited by hand, or a dataset downloaded as "latest."
-- Expecting bit-for-bit identical numbers across machines. Different CPUs, operating systems, math libraries and GPU kernels can change floating-point results slightly. Some GPU operations are nondeterministic by default. PyTorch's reproducibility notes explain `torch.use_deterministic_algorithms(True)`, at some speed cost. Aim for identical results on one machine and close results across machines.
+Seeding only one library is the most common slip, and you spot it when two runs of the same script disagree. A second one is choosing the seed that gives the best score ("seed hacking"). If your result changes a lot between seeds, report the mean and spread over several seeds. On Day 1: What Is Artificial Intelligence?, one seed gave 0.22 and another gave 0.89. A third is results that depend on unrecorded state: notebook cells run out of order, a file edited by hand, or a dataset downloaded as "latest."
+
+A fourth is expecting bit-for-bit identical numbers across machines. Different CPUs, operating systems, math libraries and GPU kernels can change floating-point results slightly. Some GPU operations are nondeterministic by default. PyTorch's reproducibility notes explain `torch.use_deterministic_algorithms(True)`, at some speed cost. Aim for identical results on one machine and close results across machines.
 
 In regulated work such as finance or health, you may need to reproduce a model's results months later. Day 89 covers reproducible pipelines.
 
 ---
 
-## 8. Hands-on exercises (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
 **Exercise 1: break and fix an environment (about 20 minutes).**
 
@@ -201,7 +333,7 @@ In regulated work such as finance or health, you may need to reproduce a model's
 
 **Exercise 2: notebook hygiene (about 20 minutes).**
 
-1. Start `jupyter lab` from an activated environment that has JupyterLab installed (you will have one after step 2 of the project).
+1. Start `jupyter lab` from an activated environment that has JupyterLab installed (you will have one after Step 2 of the project).
 2. In cell 1, write `x = 10`. In cell 2, write `print(x * 2)`. Run both.
 3. Delete cell 1. Run cell 2 again. It still prints 20. Explain why.
 4. Choose Kernel → Restart Kernel and Run All Cells. Read the error. This is why you restart and run all before committing a notebook.
@@ -232,9 +364,11 @@ Record the speedup on your machine. It varies a lot by machine. One Windows lapt
 
 ---
 
-## 9. Project: an AI environment starter repo
+## Project: an AI environment starter repo
 
-**Goal:** a repo you can copy at the start of every later project: pinned requirements, a `.gitignore`, an environment check, a library tour, a notebook and a reproducibility test.
+This is the GitHub project for Day 5. You will copy this repo at the start of every later project.
+
+**Goal:** a repo with pinned requirements, a `.gitignore`, an environment check, a library tour, a notebook and a reproducibility test.
 
 Suggested repo name: `100-days-ai-engineering-day-05-ai-environment`.
 
@@ -267,7 +401,7 @@ mkdir notebooks
 python -m venv .venv
 ```
 
-Activate it (as on Day 1) and upgrade pip: `python -m pip install --upgrade pip`.
+Activate it (as on Day 1: What Is Artificial Intelligence?) and upgrade pip: `python -m pip install --upgrade pip`.
 
 ### Step 2: pinned requirements
 
@@ -435,11 +569,11 @@ Matplotlib  saved iris_petals.png
 scikit-learn  test accuracy: 0.93
 ```
 
-Open `iris_petals.png`. One species sits far from the other two, and the other two overlap a little. The overlap explains the 0.93. The mistakes happen there.
+Open `iris_petals.png`. One species sits far from the other two, and the other two overlap a little. The overlap explains the 0.93, because the mistakes happen there.
 
 ### Step 5: the same tour as a notebook
 
-Run `jupyter lab`, create `notebooks/01_tour.ipynb`, and rebuild `tour.py` as cells: one Markdown cell explaining each library, then its code cell. Delete the `matplotlib.use("Agg")` line and add `plt.show()` after the plot so it appears inline. Finish with **Restart Kernel and Run All Cells**, check that every cell ran without errors, and save. The notebook runs from the `notebooks/` folder, so the saved image goes there unless you change the path.
+Run `jupyter lab`, create `notebooks/01_tour.ipynb`, and rebuild `tour.py` as cells: one Markdown cell explaining each library, then its code cell. Delete the `matplotlib.use("Agg")` line and add `plt.show()` after the plot so it appears inline. Finish with Restart Kernel and Run All Cells, check that every cell ran without errors, and save. The notebook runs from the `notebooks/` folder, so the saved image goes there unless you change the path.
 
 ### Step 6: the reproducibility test (`reproducibility.py`)
 
@@ -527,7 +661,7 @@ A score of 1.000 is rounded. The model is very confident on clear sentences like
 
 ### Step 8: prove the environment with an old result
 
-If you did the optional Day 4 check, copy `three_framings.py` into this repo, run it, and confirm it prints the same numbers as on Day 4. If it does, your new environment reproduces an old result. Note that in the README.
+If you did the optional Day 4 check, copy `three_framings.py` into this repo, run it, and confirm it prints the same numbers as on Day 4: AI Problem Formulation. If it does, your new environment reproduces an old result. Note that in the README.
 
 ### Step 9: write the README
 
@@ -553,7 +687,7 @@ Include:
 
 ---
 
-## 10. Check your understanding
+## Check your understanding
 
 1. Your colleague's code fails with `ModuleNotFoundError: No module named 'sklearn'`, but they swear they installed it. Give the two most likely causes.
 2. Why pin `scikit-learn==1.6.1` instead of writing `scikit-learn>=1.6`?
@@ -571,11 +705,11 @@ Include:
 4. A CPU-only PyTorch build is installed (`torch.version.cuda` is `None`). The NVIDIA driver is missing or too old (`nvidia-smi` fails or shows an old version). The active environment is not the one where the CUDA build was installed.
 5. Neural network training is dominated by large matrix multiplications that GPUs run in parallel, and PyTorch has GPU implementations of them. scikit-learn's random forest runs on the CPU. Tree building involves many branching decisions, which GPUs are not designed for.
 6. Probably not. Different CPUs, operating systems, math library builds and GPU kernels can change floating-point results slightly. Exact repeatability is expected on the same setup, and small differences across setups are normal. Large differences mean a real mismatch, such as different versions or data.
-7. The maximum of 20 noisy results is biased upward, the same as picking the best validation score on Day 3. Report the mean and the spread (standard deviation or range) across seeds.
+7. The maximum of 20 noisy results is biased upward, the same as picking the best validation score in Day 3: The AI/ML Lifecycle. Report the mean and the spread (standard deviation or range) across seeds.
 
 ---
 
-## 11. Sources to read and watch
+## Sources to read and watch
 
 **Read (reference):**
 - [Python docs: venv, creation of virtual environments](https://docs.python.org/3/library/venv.html) and the tutorial page [Virtual Environments and Packages](https://docs.python.org/3/tutorial/venv.html)
@@ -603,8 +737,10 @@ Include:
 **Practice:**
 - [Google Colab](https://colab.research.google.com): open a new notebook, run `import torch; torch.cuda.is_available()`, then switch the runtime type to a GPU (Runtime → Change runtime type) and run it again. Free GPU time is limited and not guaranteed.
 
+**Note on links:** open each one once. If a page has moved, search its title; the content is what matters.
+
 ---
 
-## 12. Tomorrow
+## Tomorrow
 
-Day 6, **First End-to-End AI Experiment**, puts the module together in one project. Using the environment you built today, you will take a real medical dataset through every stage of the Day 3 lifecycle: load it, inspect it, preprocess it, split it, beat a baseline, measure it with metrics chosen by the Day 4 formulation, save predictions, and read the model's mistakes one by one. Copy today's `requirements.txt`, `.gitignore` and `env_check.py` into the new repo. That is what a starter repo is for.
+Day 6, **First End-to-End AI Experiment**, puts the module together in one project. Using the environment you built today, you will take a real medical dataset through every stage of the lifecycle from Day 3 (The AI/ML Lifecycle). You will load it, inspect it, preprocess it, split it, beat a baseline, measure it with metrics chosen by the formulation work in Day 4 (AI Problem Formulation), save predictions, and read the model's mistakes one by one. Copy today's `requirements.txt`, `.gitignore` and `env_check.py` into the new repo. That is what a starter repo is for.

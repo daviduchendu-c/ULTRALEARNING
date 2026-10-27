@@ -3,18 +3,63 @@
 *100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours
-**You will build:** a one-page requirements and test plan for a robot of your choice, with the margin math, a traceability table and a first engineering notebook entry.
-**You should know:** Days 1 and 2 (the sense, decide, act loop and the layers of a mobile robot). Basic use of a terminal helps but is not required.
+**Level:** beginner. It is for anyone who has seen the parts of a robot and now wants to know the order in which to decide things. A basic terminal helps but is not required.
+
+**By the end of this day, you will have:**
+
+- A one-page requirements and test plan for a robot of your choice, with margin math
+- A traceability table that links each requirement to a design block and a test
+- A first engineering notebook entry, a starter bill of materials and a small Git repository that holds them
+
+**What you need:**
+
+- A text editor and a terminal
+- Git installed (check with `git --version`) and a free GitHub account
+- Paper and a pen for hand-drawn diagrams
+- Optional: KiCad, FreeCAD and Gazebo for later days. None is needed today. Check the current release of each before installing.
+- Optional, for later: ROS 2 Jazzy Jalisco on Ubuntu 24.04. You do not need it today.
+- No hardware
+
+**Prerequisites:**
+
+- Day 1: What Is Robotics? (the sense, compute, decide and act loop)
+- Day 2: Anatomy of a Robot (the layers and blocks of a mobile robot)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [The workflow in order](#the-workflow-in-order)
+- [Problem, requirements and specifications](#problem-requirements-and-specifications)
+- [Architecture](#architecture)
+- [Parallel design stages and interface agreements](#parallel-design-stages-and-interface-agreements)
+- [Simulation](#simulation)
+- [Prototypes and integration](#prototypes-and-integration)
+- [Testing and iteration](#testing-and-iteration)
+- [Drawings: block, wiring and schematic](#drawings-block-wiring-and-schematic)
+- [Engineering notebook](#engineering-notebook)
+- [Bill of materials](#bill-of-materials)
+- [Version control](#version-control)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: a one-page requirements and test plan](#project-a-one-page-requirements-and-test-plan)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 Beginners start a robot by buying parts. Engineers start by writing down the problem. The difference shows up three weeks later, when the beginner's motors are too weak, the battery is too small, and nobody remembers why the sensor is mounted upside down.
 
 A workflow is the order in which you make decisions, so that early choices constrain later ones on purpose. Teams hiring robotics engineers want to see that you can turn a vague request into numbers, test against those numbers, and leave a record someone else can follow. Today you learn that order and the documents that carry it.
 
-## 2. The workflow in order
+---
+
+## The workflow in order
+
+Think of building a house. Nobody orders tiles before the plans exist, and nobody signs off the house without walking through it. A robot project has the same two ends: a plan at the start and an inspection at the end, with work in between.
 
 The chain for today is:
 
@@ -38,23 +83,21 @@ The V-model makes the loops explicit. Each stage on the left has a test on the r
                           \__ build + simulate __/
 ```
 
-Two rules make this work:
+Two rules make this work. You decide in order and revise in any order: you write requirements before picking motors, and if testing shows the motors are too weak, you go back, change the spec or the part, and record why. And every stage produces a document, so the next stage, or the next person, can trust the decision.
 
-1. **Decide in order, revise in any order.** You write requirements before picking motors. If testing shows the motors are too weak, you go back, change the spec or the part, and record why.
-2. **Every stage produces a document.** The document lets the next stage, or the next person, trust the decision.
+A common mistake is treating the chain as one pass and then being surprised when a late test sends you back to the start. To spot it, look at your plan for any stage with no test attached. Each stage on the left of the V needs a matching test on the right.
 
-Regulated fields make these rules formal. Automotive robots follow ISO 26262, and medical device software follows IEC 62304. Startups run lighter versions, but interviewers still ask, "How did you verify that?"
+Regulated fields make these rules formal. Automotive systems follow ISO 26262, and medical device software follows IEC 62304. Startups run lighter versions, but interviewers still ask, "How did you verify that?"
 
-## 3. Problem, requirements and specifications
+---
 
-**Intuition.** A customer says, "I want a robot that brings coffee." That is a wish. A requirement is "The robot shall carry a 500 g mug." A specification is "Payload 0.5 kg, tilt under 5 degrees, maximum acceleration 0.5 m/s²." Each step makes the wish harder to misread.
+### Problem, requirements and specifications
 
-- **Problem statement:** who has the problem, what it is, and why it matters, in one or two sentences with no solution in them.
-- **Requirement:** a "The system shall..." statement. Good requirements are specific, measurable, achievable, relevant and testable. Usually they use "shall."
-- **Specification (spec):** the numbers, units, tolerances and test conditions behind a requirement.
-- **Constraint:** a limit you did not choose, such as budget, size or deadline.
+A customer says, "I want a robot that brings coffee." That is a wish. Each step after it makes the wish harder to misread, the way a tailor moves from "a nice suit" to "jacket, 102 cm chest, charcoal wool."
 
-**Worked example: the desk courier.** You will carry this robot through Day 5. In a small office, people walk across the room to pass light items (keys, a phone, a pen box) between two desks about 5 m apart.
+The vocabulary of those steps is short. A problem statement says who has the problem, what it is and why it matters, in one or two sentences with no solution in them. A requirement is a "The system shall..." statement, and a good one is specific, measurable, achievable, relevant and testable. A specification (spec) holds the numbers, units, tolerances and test conditions behind a requirement. A constraint is a limit you did not choose, such as budget, size or deadline. So the coffee wish becomes the requirement "The robot shall carry a 500 g mug," and then the spec "Payload 0.5 kg, tilt under 5 degrees, maximum acceleration 0.5 m/s²."
+
+Here is the worked example you will carry through Day 5, the desk courier. In a small office, people walk across the room to pass light items (keys, a phone, a pen box) between two desks about 5 m apart.
 
 | ID | Requirement | Specification | How to verify |
 |---|---|---|---|
@@ -67,22 +110,31 @@ Regulated fields make these rules formal. Automotive robots follow ISO 26262, an
 
 Check that the numbers are sensible. 5 m in 30 s is only 0.17 m/s on average, but the robot must accelerate, turn and stop, so 0.25 m/s leaves margin. For R3, stopping distance at speed v with deceleration a is v² / (2a). At 0.25 m/s and 0.5 m/s², that is 0.0625 m, about 6 cm. Add 100 ms of reaction time (0.25 × 0.1 = 2.5 cm) and you need about 9 cm. Detecting at 30 cm gives more than three times that.
 
-**Common mistakes.**
-- Writing a solution as a requirement: "The robot shall use a Raspberry Pi." That belongs in the architecture, unless the customer truly demands it.
-- Untestable words such as "fast," "robust" or "user-friendly." Replace each with a number and a test.
-- No margin. If the spec equals exactly what the requirement needs, any real-world loss makes you fail.
+Three mistakes show up again and again. The first is writing a solution as a requirement, such as "The robot shall use a Raspberry Pi," which belongs in the architecture unless the customer truly demands it. The second is untestable words such as "fast," "robust" or "user-friendly"; replace each with a number and a test. The third is no margin: if the spec equals exactly what the requirement needs, any real-world loss makes you fail. Requirements are also guesses about the future, and users change their minds once they see a prototype, so keep the document under version control and expect to revise it.
 
-**Limitation.** Requirements are guesses about the future. Users change their minds once they see a prototype. Keep the document under version control and expect to revise it.
+Systems engineering and integration roles spend much of their time on requirements and verification planning.
 
-## 4. Architecture and the four parallel stages
+---
 
-**Intuition.** The architecture is the floor plan before the furniture. It says "there is a kitchen here, and it connects to the dining room." It does not say which fridge to buy.
+### Architecture
 
-The architecture names the major blocks (compute, sensing, actuation, power, communication, mechanics and software layers), the interfaces between them, and the reason for each split. Day 2 gave you the typical blocks of a mobile robot. Each block should trace back to a requirement.
+The architecture is the floor plan before the furniture. It says "there is a kitchen here, and it connects to the dining room." It does not say which fridge to buy.
 
-**Worked example.** For the desk courier, R3 (avoid obstacles) creates a forward distance-sensing block. R5 (phone control) creates a Wi-Fi block. R1 and R2 together create a drive block with enough torque for 2 kg at 0.25 m/s. If you cannot point to a requirement for a block, either a requirement is missing or the block is not needed.
+It names the major blocks (compute, sensing, actuation, power, communication, mechanics and software layers), the interfaces between them, and the reason for each split. Day 2: Anatomy of a Robot gave you the typical blocks of a mobile robot. The rule that keeps an architecture honest is that each block traces back to a requirement.
 
-After the architecture is fixed, four stages run partly in parallel. Each has its own tools and outputs:
+For the desk courier, R3 (avoid obstacles) creates a forward distance-sensing block. R5 (phone control) creates a Wi-Fi block. R1 and R2 together create a drive block with enough torque for 2 kg at 0.25 m/s. If you cannot point to a requirement for a block, either a requirement is missing or the block is not needed.
+
+A common mistake is designing the frame before the electronics are known, then finding that the battery does not fit. To spot it, ask whether the architecture has a volume budget. Agree on one early, using rough boxes in CAD for the battery, boards and motors.
+
+In a robotics company, the architecture decides what every other team can build, so it is usually owned by the most senior engineers.
+
+---
+
+### Parallel design stages and interface agreements
+
+Four trades build one house: the framer, the electrician, the plumber and the interior designer. They work at the same time, but they must agree on where the walls are before anyone drills a hole.
+
+After the architecture is fixed, four robot stages run partly in parallel, each with its own tools and outputs:
 
 | Stage | Main output | Common tools (approximate cost) |
 |---|---|---|
@@ -91,9 +143,9 @@ After the architecture is fixed, four stages run partly in parallel. Each has it
 | Firmware | Code for the MCU | Arduino IDE 2 (free); PlatformIO in VS Code (free core); Pico SDK; ESP-IDF |
 | Software | Code for the SBC, usually ROS 2 | ROS 2 Jazzy on Ubuntu 24.04 (free); Python; C++; VS Code |
 
-**Intuition.** Four trades build one house: the framer, the electrician, the plumber and the interior designer. They work at the same time, but they must agree on where the walls are before anyone drills a hole.
+Tool licenses and plans change, so check each vendor's current terms.
 
-The agreement is written down. Before firmware and software are split, both sides agree on the interface:
+The agreement between the trades is written down. An interface agreement is a short document that fixes what crosses the boundary between two blocks, so each side can be built and tested alone. Before firmware and software are split, both sides agree on this:
 
 ```
 MCU ⇄ SBC link: USB serial, 115200 baud
@@ -102,25 +154,49 @@ MCU → SBC:  "E <left_ticks> <right_ticks> <battery_mV>\n", sent at 50 Hz
 Timeout: if no "V" line arrives for 500 ms, MCU stops both motors.
 ```
 
-Firmware and software can then be written and tested separately. When something fails later, you check each side against the agreement.
+The timeout line matters as much as the message formats. If the SBC crashes while the last command was "drive forward," the MCU would otherwise keep driving. With the agreement in place, firmware and software can be written and tested separately, and when something fails later, you check each side against it.
 
-**Common mistakes.** Designing the frame before the electronics are known, then finding that the battery does not fit. Agree on a volume budget early, using rough boxes in CAD for the battery, boards and motors.
+A common mistake is changing an interface late. Parallel work saves time only while interfaces stay stable, and a late change breaks both sides at once. To spot the risk, look for message formats that exist only in someone's head.
 
-**Limitation.** Parallel work saves time only while the interfaces stay stable. Changing an interface late breaks both sides at once.
+In the market, teams that split a robot between an embedded group and a ROS group live or die by these written contracts.
 
-## 5. Simulation, prototypes and testing
+---
 
-**Simulation.** A simulator models the robot's body, sensors and environment, so software can be tested before the hardware exists. Gazebo (free, open source, the usual pairing with ROS 2; the Harmonic release pairs with ROS 2 Jazzy) and Webots (free, open source under Apache 2.0) are the main robot simulators. Wokwi runs microcontroller circuits in a browser, with a free tier and paid plans. NVIDIA Isaac Sim is free to use but needs a strong NVIDIA GPU.
+### Simulation
 
-For the desk courier, you could simulate a differential-drive robot in Gazebo with a forward distance sensor, drive it at 0.25 m/s toward a wall, and check that it stops more than 6 cm away. The sim-to-real gap is the catch: simulated wheels do not slip on carpet, simulated sensors are cleaner than real ones, and simulated motors never overheat. Use simulation to find logic bugs, then confirm on hardware.
+A flight simulator lets a pilot crash a hundred times for free. A robot simulator does the same for software: it models the robot's body, sensors and environment, so code can be tested before the hardware exists.
 
-**Prototype.** A prototype is a quick build made to reduce the biggest risk first. A motor taped to a board with a weight answers "Can this motor move 2 kg?"
+Gazebo (free, open source, the usual pairing with ROS 2; the Harmonic release pairs with ROS 2 Jazzy) and Webots (free, open source under Apache 2.0) are the main robot simulators. Wokwi runs microcontroller circuits in a browser, with a free tier and paid plans. NVIDIA Isaac Sim is free to use but needs a strong NVIDIA GPU. Simulator versions move quickly, so check the current release of each.
 
-**Integration.** Connect subsystems one at a time. Power first, then the MCU, then one motor, then two, then sensors, then the SBC. Never all at once. "Big bang" integration, where everything is connected together, makes it impossible to tell which part caused the failure.
+For the desk courier, you could simulate a differential-drive robot in Gazebo with a forward distance sensor, drive it at 0.25 m/s toward a wall, and check that it stops more than 6 cm away. That tests the logic of R3 without a single wire.
 
-**Testing levels.** Unit tests check one function. Bench tests check one board on the desk. Integration tests check subsystems together. HIL (hardware-in-the-loop) tests run a real controller against a simulated world. Field tests run in the real environment.
+The catch is the sim-to-real gap. Simulated wheels do not slip on carpet, simulated sensors are cleaner than real ones, and simulated motors never overheat. A common mistake is trusting a clean simulation result as proof, and you can spot it when a report has simulation numbers and no hardware numbers beside them. Use simulation to find logic bugs, then confirm on hardware.
 
-**Iteration.** Each test result feeds back into the spec, the design or the part choice. A test log records conditions and outcomes:
+In industry, simulation is how teams run thousands of regression tests overnight, for example in warehouse fleet software.
+
+---
+
+### Prototypes and integration
+
+A chef tests one sauce in a small pan before cooking for forty guests. A prototype is that small pan: a quick build made to reduce the biggest risk first. A motor taped to a board with a weight answers "Can this motor move 2 kg?" far sooner than a finished chassis would.
+
+Integration is joining the parts into one system, and it works only in small steps. Connect subsystems one at a time: power first, then the MCU, then one motor, then two, then sensors, then the SBC. When each step passes before the next begins, a new failure points at the part you just added.
+
+Take a courier that will not move. Added all at once, the cause could be power, firmware, wiring, the motor driver, the serial link or the software. Added one at a time, with a passing check after each, only the last addition is suspect.
+
+The mistake is "big bang" integration, where everything is connected together at once. You spot it by the question "which part broke?" having no answer. It is also the reason a robot can pass every unit test and still fail when assembled.
+
+Hardware startups tend to prototype the riskiest part first, because a failed motor test in week one costs far less than a failed product in month six.
+
+---
+
+### Testing and iteration
+
+A teacher gives quizzes during the term, not just a final exam. Robot testing works the same way, with checks at several sizes.
+
+Unit tests check one function. Bench tests check one board on the desk. Integration tests check subsystems together. HIL (hardware-in-the-loop) tests run a real controller against a simulated world. Field tests run in the real environment. Iteration is what follows a test: each result feeds back into the spec, the design or the part choice.
+
+A test log records conditions and outcomes:
 
 | Test | Spec | Setup | Result | Pass? | Action |
 |---|---|---|---|---|---|
@@ -128,23 +204,25 @@ For the desk courier, you could simulate a differential-drive robot in Gazebo wi
 
 A failed test is useful data, as long as it is written down with its conditions.
 
-**Common mistakes.**
-- Testing only the happy path. Test low battery, lost Wi-Fi and a blocked wheel too.
-- Changing two things between tests, so you cannot tell which change helped.
+Two mistakes spoil test results. One is testing only the happy path, so the robot is never tried with a low battery, lost Wi-Fi or a blocked wheel. The other is changing two things between tests, so you cannot tell which change helped. You spot the second when a result improves and you cannot say why. Change one variable per test.
 
-## 6. Drawings: block, wiring and schematic
+Interviewers for robotics roles often ask for a time a test failed and what you changed, because a team lives on its test log.
 
-**Intuition.** A city has three maps: a subway map (which stations connect), a street map (where the roads physically run) and an engineering plan (exact pipes and valve sizes). Those are the block diagram, the wiring diagram and the schematic.
+---
 
-All three show the same connection: an MCU driving one motor through a driver.
+### Drawings: block, wiring and schematic
 
-**Block diagram** (what talks to what):
+A city has three maps: a subway map (which stations connect), a street map (where the roads physically run) and an engineering plan (exact pipes and valve sizes). Those are the block diagram, the wiring diagram and the schematic.
+
+All three show the same connection, an MCU driving one motor through a driver, at a different level of detail.
+
+The block diagram shows what talks to what:
 
 ```
 [ MCU ] ──PWM, DIR──▶ [ Motor driver ] ──power──▶ [ Motor ]
 ```
 
-**Wiring diagram** (physical wires, connectors and colors):
+The wiring diagram shows physical wires, connectors and colors:
 
 ```
 MCU header J1               Driver board J2
@@ -156,15 +234,17 @@ MCU header J1               Driver board J2
                                  AO2 ── black (22 AWG) ──▶ Motor −
 ```
 
-**Schematic** (electrical symbols and values): drawn in KiCad, with the MCU symbol, the driver IC symbol, decoupling capacitors next to the driver's power pins, and net labels such as `PWM_A` and `VMOTOR`. A schematic shows the parts and values that the other two diagrams hide.
+The schematic uses electrical symbols and values. Drawn in KiCad, it would have the MCU symbol, the driver IC symbol, decoupling capacitors next to the driver's power pins, and net labels such as `PWM_A` and `VMOTOR`. It shows the parts and values that the other two diagrams hide.
 
-**Common mistakes.** Block diagrams cluttered with pin numbers are hard to read. Wiring diagrams without wire colors or connector names are useless when you are debugging with a multimeter (Day 4).
+Two habits ruin drawings. A block diagram cluttered with pin numbers is hard to read, and a wiring diagram without wire colors or connector names is useless when you are debugging with a multimeter (Day 4: Measurement and Engineering Tools). A third problem is drift: diagrams fall out of step with reality as you change things on the bench. Update the drawing in the same commit as the change.
 
-**Limitation.** Diagrams drift from reality as you change things on the bench. Update the drawing in the same commit as the change.
+In the market, a clear wiring diagram is what lets a technician who did not build the robot repair it.
 
-## 7. Records: notebook, BOM and version control
+---
 
-**Engineering notebook.** A dated, append-only record of decisions, experiments and results. Your notebook is a letter to yourself in three months, when you have forgotten everything. A Markdown file per day works well.
+### Engineering notebook
+
+A ship's logbook records what happened and when, so the next officer can pick up the voyage. An engineering notebook is a dated, append-only record of decisions, experiments and results. It is a letter to yourself in three months, when you have forgotten everything. A Markdown file per day works well.
 
 ```markdown
 ## 2026-10-24: Motor sizing for the desk courier
@@ -179,7 +259,15 @@ Next: bench test one motor with a 1 kg load on day X.
 
 Write entries as you go, including what failed. Keep them short and in plain text, so search and `git log` work on them.
 
-**Bill of materials (BOM).** The list of every part, with a reference, quantity, description, manufacturer, manufacturer part number (MPN), supplier, unit cost and extended cost (quantity × unit cost). CSV works well: GitHub renders it as a table, and any spreadsheet opens it.
+The usual mistake is writing the notebook afterward from memory, which loses the dead ends and the reasons. You can spot it when every entry reads as a success. The "Decision" line is the one future you will thank you for.
+
+Engineers in medical, aerospace and automotive work keep records like this to show a regulator why a design choice was made.
+
+---
+
+### Bill of materials
+
+A recipe lists every ingredient with a quantity, or the cook arrives at the shop with half the shopping done. A bill of materials (BOM) is that list for a robot: every part, with a reference, quantity, description, manufacturer, manufacturer part number (MPN), supplier, unit cost and extended cost (quantity × unit cost). CSV works well, because GitHub renders it as a table and any spreadsheet opens it.
 
 ```csv
 ref,qty,description,manufacturer,mpn,supplier,unit_usd,ext_usd,notes
@@ -189,9 +277,19 @@ M1-M2,2,Gearmotor with encoder,TBD,TBD,TBD,15.00,30.00,verify torque in Day 5
 HW1,1,M3 screw and standoff kit,generic,,any,8.00,8.00,easy to forget
 ```
 
-The prices are placeholders for the format. Day 5 replaces them with checked ranges. Most BOMs forget wires, connectors, screws, heat-shrink, shipping and spares. A common rule of thumb adds 10 to 20 percent for these and for parts you break.
+The prices are placeholders for the format. Day 5: First Robot System Design replaces them with checked ranges. The four rows above total $52.00, against the $250 limit in R6.
 
-**Version control.** Git tracks changes to files, and GitHub hosts the repository online. Every commit says what changed and why, and you can always go back. A robotics repository mixes text (code, Markdown, CSV) with binaries (CAD, images). Git shows line-by-line differences for text, but for binaries it only stores whole versions. Large binaries can go in Git LFS (Large File Storage), and CAD should also be exported to a neutral format such as STEP.
+Most BOMs forget wires, connectors, screws, heat-shrink, shipping and spares. A common rule of thumb adds 10 to 20 percent for these and for parts you break. If your BOM total sits right at the budget, you have already failed R6 on paper. A CSV BOM kept in Git beats a spreadsheet emailed around, because every change is recorded with who, when and why.
+
+Purchasing and manufacturing teams run entirely from BOMs, so a clean one is a skill that carries into any hardware job.
+
+---
+
+### Version control
+
+Think of the history in a word processor, but one that records every change with a reason and lets you jump to any date. Git tracks changes to files, and GitHub hosts the repository online. Every commit says what changed and why, and you can always go back.
+
+A robotics repository mixes text (code, Markdown, CSV) with binaries (CAD, images). Git shows line-by-line differences for text, but for binaries it only stores whole versions. Large binaries can go in Git LFS (Large File Storage), and CAD should also be exported to a neutral format such as STEP.
 
 ```bash
 git init
@@ -214,26 +312,46 @@ __pycache__/
 
 The first three are folders created by `colcon`, the ROS 2 build tool. `.pio/` is PlatformIO's build folder.
 
-**Common mistakes.**
-- Commit messages such as "update" or "fix." Say what changed and why.
-- Committing build output, which bloats the repo and causes conflicts.
-- Never tagging, so you cannot say which code version ran on the robot during a test.
-- Committing Wi-Fi keys or passwords in firmware. Keep them in a file listed in `.gitignore`.
+Four mistakes recur. Commit messages such as "update" or "fix" say nothing, so say what changed and why. Committing build output bloats the repo and causes conflicts. Never tagging means you cannot say which code version ran on the robot during a test. And committing Wi-Fi keys or passwords in firmware leaks them, so keep them in a file listed in `.gitignore`. You can spot the third by asking, for any test result, "which commit was on the robot?" If you cannot answer, you have no tags.
 
-**Limitation.** Git cannot merge two people's edits to the same binary CAD file. Teams assign ownership of each CAD file, or use a CAD tool with built-in versioning such as Onshape.
+One limit to know: Git cannot merge two people's edits to the same binary CAD file. Teams assign ownership of each CAD file, or use a CAD tool with built-in versioning such as Onshape.
 
-## 8. Hands-on exercises (about 60 minutes)
+In a portfolio, a repository with readable commit messages and tags shows a reviewer how you work.
 
-1. **Requirements rewrite (15 min).** Rewrite each vague statement as a testable "shall" plus a spec: "The robot should be fast." "The battery should last a long time." "It should be quiet." "It should be safe around people."
-2. **Stopping distance (10 min).** For speeds of 0.1, 0.25 and 0.5 m/s, with 0.5 m/s² deceleration and 100 ms reaction time, compute the stopping distance. Check: at 0.5 m/s you get 0.25 m + 0.05 m = 0.30 m, exactly the R3 detection distance. What does that tell you about raising the speed?
-3. **Three drawings (20 min).** For a Raspberry Pi Pico reading one HC-SR04 ultrasonic sensor (VCC, TRIG, ECHO, GND), draw a block diagram, a wiring diagram with colors, and a rough hand-drawn schematic. The HC-SR04's echo pin outputs 5 V when powered from 5 V, and the Pico is a 3.3 V device. Write in your notebook how you would handle that: a voltage divider, or a 3.3 V-compatible sensor variant. You will size the divider in Module 2.
-4. **Git practice (15 min).** Complete the first levels of Learn Git Branching, or create a local repo, make three commits and one tag, and run `git log --oneline`.
+---
 
-## 9. Practical check: a one-page requirements plan
+## Hands-on exercises (about 60 minutes)
 
-**Why this is a written check and not a repo:** today's skill is process. A single page that shows the process working is enough evidence. You will apply the same method to your full design on Day 5.
+**Exercise 1: Requirements rewrite (about 15 minutes).** Rewrite each vague statement as a testable "shall" plus a spec: "The robot should be fast." "The battery should last a long time." "It should be quiet." "It should be safe around people."
 
-**Task.** On one page (a Markdown file, a document or paper), cover the following for the desk courier or a robot of your own:
+**Exercise 2: Stopping distance (about 10 minutes).** For speeds of 0.1, 0.25 and 0.5 m/s, with 0.5 m/s² deceleration and 100 ms reaction time, compute the stopping distance. Check: at 0.5 m/s you get 0.25 m + 0.05 m = 0.30 m, exactly the R3 detection distance. What does that tell you about raising the speed?
+
+**Exercise 3: Three drawings (about 20 minutes).** For a Raspberry Pi Pico reading one HC-SR04 ultrasonic sensor (VCC, TRIG, ECHO, GND), draw a block diagram, a wiring diagram with colors, and a rough hand-drawn schematic. The HC-SR04's echo pin outputs 5 V when powered from 5 V, and the Pico is a 3.3 V device. Write in your notebook how you would handle that: a voltage divider, or a 3.3 V-compatible sensor variant. You will size the divider in Module 2.
+
+**Exercise 4: Git practice (about 15 minutes).** Complete the first levels of Learn Git Branching, or create a local repo, make three commits and one tag, and run `git log --oneline`.
+
+---
+
+## Project: a one-page requirements and test plan
+
+Today's skill is process, so the project is a written plan and not a working robot. A single page that shows the process working is enough evidence. You will apply the same method to your full design on Day 5: First Robot System Design.
+
+**Goal:** a one-page plan for the desk courier or a robot of your own, kept in a small Git repository.
+
+### Repository layout
+
+```
+100-days-robotics-day-03-workflow/
+├── README.md             # the one-page plan: problem, requirements, traceability, diagrams
+├── bom.csv               # at least five rows; mark unknowns "TBD"
+├── notebook/
+│   └── 2026-10-24.md     # one dated notebook entry (use today's date)
+└── .gitignore            # build/, install/, log/, .pio/, __pycache__/, *.bak
+```
+
+### Step 1: write the plan
+
+On one page in `README.md`, cover the following:
 
 1. A two-sentence problem statement with no solution in it.
 2. At least six requirements, each with a number, a unit and a verification method. Show the margin math for at least two.
@@ -244,22 +362,44 @@ The first three are folders created by `colcon`, the ROS 2 build tool. `.pio/` i
    | R3 detect ≥ 0.30 m | Forward ToF sensor | T3.1 box-in-path | not run |
 
 4. A block diagram in Mermaid or on paper, and a wiring diagram for one subsystem.
-5. A BOM with at least five rows. Placeholders are allowed if they are marked "TBD."
-6. One dated notebook entry.
 
-**Done when.** Every requirement has a number, a unit and a test. A stranger could read the page and know what the robot must do and how you will prove it. If you commit it, the page is the file and the commit message says what it contains.
+### Step 2: add the BOM and the notebook entry
 
-## 10. Check your understanding
+Create `bom.csv` in the format from the bill of materials section, with at least five rows. Placeholders are allowed if they are marked "TBD." Then write one dated notebook entry in `notebook/` using the Goal, Hypothesis, Did, Result, Decision, Next layout.
+
+### Step 3: commit and tag
+
+```bash
+git init
+git add README.md bom.csv notebook .gitignore
+git commit -m "Add desk courier requirements, BOM and first notebook entry"
+git tag v0.1-requirements
+git log --oneline
+```
+
+The commit message should say what the commit contains.
+
+### Done when
+
+- Every requirement has a number, a unit and a test.
+- A stranger could read the page and know what the robot must do and how you will prove it.
+- The traceability table has no empty cells.
+- The BOM has at least five rows, and the notebook has one dated entry.
+- The repository has one commit with a descriptive message and a tag.
+
+---
+
+## Check your understanding
 
 1. Why is "The robot shall use an ESP32" usually a poor requirement?
 2. Your robot passes every unit test but fails when assembled. Which workflow stage was weak, and what would you change?
 3. Give one bug a simulator would catch and one it would likely miss.
-4. Why write the MCU ⇄ SBC interface agreement before writing either side's code?
+4. Why write the interface agreement between the MCU and the SBC before writing either side's code?
 5. A teammate updates the wiring on the robot but not the diagram. What goes wrong a month later?
 6. You test a speed change and a new battery at the same time, and speed improves. What can you conclude, and what should you have done?
 7. Why is a CSV BOM in Git better than a spreadsheet emailed around?
 
-**Answers.**
+**Answers (check after you try):**
 
 1. It names a solution, not a need. Unless the customer demands that chip, the real need (for example "phone control over Wi-Fi") should be the requirement, leaving the design free to choose.
 2. Integration. Bring subsystems together one at a time, with integration tests at each step, instead of all at once.
@@ -269,7 +409,9 @@ The first three are folders created by `colcon`, the ROS 2 build tool. `.pio/` i
 6. Nothing, about which change caused it. Change one variable per test.
 7. Every change is recorded with who, when and why. Older versions can be restored, and the diff shows exactly which rows changed.
 
-## 11. Sources
+---
+
+## Sources to read and watch
 
 **Read:**
 - [Wikipedia: Systems engineering](https://en.wikipedia.org/wiki/Systems_engineering)
@@ -300,6 +442,8 @@ The first three are folders created by `colcon`, the ROS 2 build tool. `.pio/` i
 
 **Note on links:** open each one once. If a page has moved, search its title.
 
-## 12. Tomorrow
+---
+
+## Tomorrow
 
 Day 4, **Measurement and Engineering Tools**, moves from the desk to the bench. Today you wrote specifications and test plans. Tomorrow you learn the instruments that produce the numbers in those plans: multimeters, bench power supplies, oscilloscopes, logic analyzers, calipers, breadboards and soldering tools. You will also learn to read a datasheet and debug in a fixed order. Your test log from today gets its first real column of measurements.

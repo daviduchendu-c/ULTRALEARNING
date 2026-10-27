@@ -3,25 +3,64 @@
 *100 Days of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 4 to 5 hours
-**You will build:** a complete, reproducible experiment on a real medical dataset (569 breast tumor samples). You will load, inspect, preprocess, split, beat a baseline, measure with the right metrics, save predictions, read every mistake, and write it up as an experiment report. This is the first repo in the series that you could show an employer as-is.
-**You should know:** Days 1 to 5. In particular: train vs test (Day 2), the lifecycle and baselines (Day 3), classification and why accuracy can mislead (Day 4), and your pinned environment (Day 5).
-**You will install:** Python 3.11 or newer with `numpy`, `pandas`, `scipy`, `scikit-learn` and `matplotlib` at the versions from Day 5.
+**Level:** beginner to intermediate. For learners who have finished Days 1 to 5 and can run Python scripts from a terminal.
+
+**By the end of this day, you will have:**
+
+- A complete, reproducible experiment on a real medical dataset (569 breast tumor samples): load, inspect, preprocess, split, beat a baseline, measure with the right metrics, save predictions and read every mistake
+- A written experiment report (`REPORT.md`) in which every number traces back to a script
+- A repo that anyone can clone and run with three commands. It is the first repo in the series that you could show an employer as it stands.
+
+**What you need:**
+
+- Python 3.11 or newer
+- `numpy`, `pandas`, `scipy`, `scikit-learn` and `matplotlib` at the versions from Day 5 (pinned in the project section)
+- A terminal and a text editor
+
+**Prerequisites:**
+
+- Day 2: How Machines Learn (train vs test)
+- Day 3: The AI/ML Lifecycle (the lifecycle stages and baselines)
+- Day 4: AI Problem Formulation (classification, and why accuracy can mislead)
+- Day 5: AI Development Environment (your pinned environment)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [The dataset and the stage map](#the-dataset-and-the-stage-map)
+- [The experiment in one picture](#the-experiment-in-one-picture)
+- [Loading](#loading)
+- [Inspection](#inspection)
+- [Preprocessing](#preprocessing)
+- [Train/test split](#traintest-split)
+- [Baseline model](#baseline-model)
+- [Metrics](#metrics)
+- [Predictions](#predictions)
+- [Error inspection](#error-inspection)
+- [Documentation](#documentation)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: a reproducible end-to-end experiment](#project-a-reproducible-end-to-end-experiment)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 For five days you have studied the pieces separately. Today you connect them into one experiment, the unit of work an ML engineer delivers dozens of times a year. An experiment is a chain of decisions, each one written down: where the data came from, what it looks like, how it was split, what the baseline scored, which metric matters and why, what the model got wrong, and what you would try next.
 
-Anyone should be able to clone your repo, run three commands, get your exact numbers, and understand from your report whether to trust them. The report is the part that turns a tutorial copy into a portfolio project.
+Anyone should be able to clone your repo, run three commands, get your exact numbers, and understand from your report whether to trust them. The report is what turns a tutorial copy into a portfolio project.
 
 ---
 
-## 2. The dataset and the stage map
+## The dataset and the stage map
 
 The [Breast Cancer Wisconsin (Diagnostic)](https://scikit-learn.org/stable/datasets/toy_dataset.html) dataset was created at the University of Wisconsin in the early 1990s by Dr. William H. Wolberg, W. Nick Street and Olvi L. Mangasarian. Each row describes cell nuclei seen in a digitized image of a fine needle aspirate (a small tissue sample taken with a needle) from a breast mass. Ten properties of the nuclei (radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, fractal dimension) are each summarized three ways: the mean, the standard error, and the "worst" (the mean of the three largest values). That gives 30 numeric features. The label is the diagnosis: **malignant** (cancerous) or **benign**.
 
-It ships with scikit-learn, so you need no download, and it is small enough to inspect by eye. It is a teaching dataset. **Nothing you build today is a medical tool**, and the report in section 6 says why.
+It ships with scikit-learn, so you need no download, and it is small enough to inspect by eye. It is a teaching dataset. Nothing you build today is a medical tool, and the limitations part of the report template in the project section says why.
 
 | Stage (Day 3) | Today's version |
 |---|---|
@@ -36,7 +75,7 @@ It ships with scikit-learn, so you need no download, and it is small enough to i
 
 ---
 
-## 3. The experiment, in one picture
+## The experiment in one picture
 
 ```
 load ──► inspect ──► split (stratified, seed 42) ──┬──► baseline (DummyClassifier) ──┐
@@ -48,57 +87,75 @@ load ──► inspect ──► split (stratified, seed 42) ──┬──► 
 
 Every arrow is a file or function in the repo. If a number appears in `REPORT.md`, you can trace it back to the script that produced it.
 
+The project has code for each stage. The sections below explain what each stage is for and where people go wrong.
+
 ---
 
-## 4. The nine steps, and the ideas behind them
+### Loading
 
-The project in section 5 has code for each step. This section explains what each step is for and where people go wrong.
+Before cooking, you take every ingredient out and put it on the counter where you can see it. Loading is the same move for data.
 
-### 4.1 Loading
+Loading means reading the data into a structure your code can work with, in one place, the same way every time. `load_breast_cancer(as_frame=True)` returns a pandas table. The project wraps this in one function, `load_dataframe()`, that every script calls, and it turns the 0/1 target into text.
 
-**Intuition.** Before cooking, take every ingredient out and put it on the counter where you can see it.
+In this dataset 0 means malignant and 1 means benign, the opposite of what most people guess. If you assume 1 is malignant, every precision and recall you report is for the wrong class, and nothing in the output warns you. Converting the numbers to words on load stops the mistake from spreading to every later script.
 
-**What it is.** Reading the data into a structure your code can work with, in one place, the same way every time. `load_breast_cancer(as_frame=True)` returns a pandas table. The project wraps this in one function, `load_dataframe()`, that every script calls, and it turns the 0/1 target into text.
+Every real project has one loading function like this, usually the first piece of code a new teammate reads, because it is where encodings like this one get documented.
 
-**Trap.** In this dataset **0 means malignant and 1 means benign**, the opposite of what most people guess. If you assume 1 is malignant, every precision and recall you report is for the wrong class. Converting the numbers to words on load stops this mistake from spreading.
+---
 
-### 4.2 Inspection
+### Inspection
 
-**Intuition.** Look at a patient before you treat them.
+A doctor looks at a patient before treating them. You look at the data before modeling it.
 
-**What it is.** Checking shape, types, missing values, duplicates, class balance and feature ranges before any modeling. You will find 569 rows, 31 columns (30 features plus the diagnosis), no missing values, no duplicates, and a 63% / 37% split between benign and malignant. That balance means "always predict benign" already scores about 63% accuracy.
+Inspection means checking shape, types, missing values, duplicates, class balance and feature ranges before any modeling. Here you will find 569 rows, 31 columns (30 features plus the diagnosis), no missing values, no duplicates, and a 63% / 37% split between benign and malignant. That balance means "always predict benign" already scores about 63% accuracy.
 
-**Trap.** Skipping inspection because the dataset looks clean. Even clean data hides surprises such as the 0/1 encoding above. Also check the feature scales: `mean area` goes up to 2,501, while `mean smoothness` stays below 0.17.
+The usual mistake is skipping inspection because the dataset looks clean. Even clean data hides surprises such as the 0/1 encoding above. Check the feature scales too: `mean area` goes up to 2,501, while `mean smoothness` stays below 0.17. If you did not look, the first sign of trouble would be a model that behaves oddly with no obvious reason.
 
-### 4.3 Preprocessing
+Data scientists and ML engineers both start every project this way, and a short inspection summary is a standard first deliverable.
 
-**Intuition.** Converting everyone's height to the same unit before comparing them.
+---
 
-**What it is.** Transforming features so the model can use them well. Here the transform is standardization: each feature gets mean 0 and standard deviation 1, so a feature measured in thousands (area) does not dominate one measured in hundredths (smoothness). `StandardScaler` learns each feature's mean and standard deviation from the training rows, then applies `(value - mean) / std`. Putting it inside `make_pipeline(StandardScaler(), LogisticRegression())` makes sure the test rows are scaled with training statistics, never their own.
+### Preprocessing
 
-**Trap.** Scaling the whole dataset before splitting, which is the small leak from Days 2 and 3. Scaling the target in classification, which you should not do because labels are categories. Assuming every model needs scaling. Tree models (Day 29) do not care about feature scale, but logistic regression's optimizer converges much better with it.
+Before comparing people's heights, you convert everyone to the same unit. Preprocessing does that for features.
 
-### 4.4 Train/test split
+Preprocessing transforms features so the model can use them well. Here the transform is standardization: each feature gets mean 0 and standard deviation 1, so a feature measured in thousands (area) does not dominate one measured in hundredths (smoothness). `StandardScaler` learns each feature's mean and standard deviation from the training rows, then applies `(value - mean) / std`. Putting it inside `make_pipeline(StandardScaler(), LogisticRegression())` makes sure the test rows are scaled with training statistics, never their own.
 
-**Intuition.** Lock the final exam in a drawer before you start studying.
+Three mistakes show up here. The first is scaling the whole dataset before splitting, which is the small leak from Days 2 and 3. You can spot it when the scaler is fit on `X` before `train_test_split` is called. The second is scaling the target in classification, which makes no sense because labels are categories. The third is assuming every model needs scaling. Tree models (Day 29) do not care about feature scale, but logistic regression's optimizer converges much better with it.
 
-**What it is.** Holding out a share of rows (here 25%, which is 143 rows) that the model never sees during training. `stratify=y` keeps the 63/37 balance in both parts. `random_state=42` makes the split identical on every run. The result is 426 training rows and 143 test rows. The test set has 53 malignant and 90 benign tumors.
+In production, the fitted scaler is saved with the model, so a new input is transformed exactly the way the training data was.
 
-**Trap.** Splitting after preprocessing. Re-splitting with new seeds until the test score looks good. Forgetting that 143 rows is small. Each test row is worth 0.7 percentage points of accuracy, so a gap of one or two points between models can be pure luck. When rows have time order, or several rows belong to one patient, split by time or by group instead (Module 4).
+---
 
-### 4.5 Baseline model
+### Train/test split
 
-**Intuition.** A thermometer that always says 20 °C is right in some rooms. You need to know how often before you praise a real thermometer.
+You lock the final exam in a drawer before you start studying, so the exam cannot leak into your preparation.
 
-**What it is.** The simplest predictor. Here it is `DummyClassifier(strategy="most_frequent")`, which predicts "benign" for every tumor. It scores 0.629 accuracy and 0.0 recall on malignant. It never finds a single cancer. Any accuracy below about 63% is worse than doing nothing, and a model with high accuracy but low recall is close to useless for this task.
+A split holds out a share of rows (here 25%, which is 143 rows) that the model never sees during training. `stratify=y` keeps the 63/37 balance in both parts. `random_state=42` makes the split identical on every run. The result is 426 training rows and 143 test rows. The test set has 53 malignant and 90 benign tumors.
 
-**Trap.** Skipping it. Without the baseline, "96% accuracy" sounds amazing. With it, you know the model adds about 34 points over doing nothing, and you know accuracy alone is the wrong headline.
+There are three ways to go wrong. Splitting after preprocessing leaks information. Re-splitting with new seeds until the test score looks good turns the test set into training data. And 143 rows is small: each test row is worth 0.7 percentage points of accuracy, so a gap of one or two points between models can be pure luck. When rows have time order, or several rows belong to one patient, split by time or by group instead (Module 4).
 
-### 4.6 Metrics
+Reviewers at any ML company ask first how the split was made, because a bad split makes every later number meaningless.
 
-**Intuition.** A smoke alarm that never rings has no false alarms and is still useless. You have to count both kinds of mistake.
+---
 
-**What it is.** The **positive class** is the class you are trying to detect, here **malignant**. Precision and recall are computed for it. A **confusion matrix** counts four outcomes:
+### Baseline model
+
+A thermometer that always says 20 °C is right in some rooms. You need to know how often before you praise a real thermometer.
+
+A baseline is the simplest predictor that could do the job. Here it is `DummyClassifier(strategy="most_frequent")`, which predicts "benign" for every tumor. It scores 0.629 accuracy and 0.0 recall on malignant, so it never finds a single cancer. Any accuracy below about 63% is worse than doing nothing, and a model with high accuracy but low recall is close to useless for this task.
+
+The mistake is skipping it. Without the baseline, "96% accuracy" sounds amazing. With it, you know the model adds about 34 points over doing nothing, and you know accuracy alone is the wrong headline.
+
+Hiring managers look for the baseline in a portfolio project, because it shows you know what a result is measured against.
+
+---
+
+### Metrics
+
+A smoke alarm that never rings has no false alarms and is still useless. You have to count both kinds of mistake.
+
+The **positive class** is the class you are trying to detect, here **malignant**. Precision and recall are computed for it. A **confusion matrix** counts four outcomes:
 
 - **True positive (TP):** malignant, predicted malignant.
 - **False negative (FN):** malignant, predicted benign. A missed cancer.
@@ -124,37 +181,51 @@ actually benign             FP = 1              TN = 89
 - Recall = 49 / (49 + 4) = 0.925. It finds 92.5% of cancers and misses 4 of 53.
 - Accuracy = (49 + 89) / 143 = 0.965.
 
-**Trap.** Leading with accuracy on an imbalanced problem. Computing precision and recall for the wrong class. scikit-learn's default is `pos_label=1`. With text labels that raises an error. With 0/1 labels it would silently score "benign" here, so always set `pos_label` explicitly. Treating the two error types as equal. In screening, a missed cancer (FN) is usually far worse than a false alarm (FP), which is why a flagged case gets an extra test rather than a diagnosis.
+Leading with accuracy on an imbalanced problem is the first mistake. The second is computing precision and recall for the wrong class. scikit-learn's default is `pos_label=1`. With text labels that raises an error. With 0/1 labels it would silently score "benign" here, so always set `pos_label` explicitly. The third is treating the two error types as equal. In screening, a missed cancer (FN) is usually far worse than a false alarm (FP), which is why a flagged case gets an extra test rather than a diagnosis.
 
-The model also outputs a **predicted probability** for each row, and a **decision threshold** (0.5 by default) turns that probability into a label. Section 6 changes that threshold on purpose.
+The model also outputs a **predicted probability** for each row, and a **decision threshold** (0.5 by default) turns that probability into a label. The stretch step on thresholds in the project changes that threshold on purpose.
 
-### 4.7 Predictions
-
-**Intuition.** Keep the marked exam papers as well as the final grade.
-
-**What it is.** Saving, for every test row, the true label, the predicted label and the predicted probability. The file is the raw material for error analysis and for anyone who wants to check your metrics. With the probabilities saved, you can test other thresholds without retraining.
-
-**Trap.** Saving only labels and losing the probabilities. Losing the row ID, so you cannot join predictions back to the original features. Production systems log every prediction with an ID and the model version, which is what makes monitoring (Day 93) possible.
-
-### 4.8 Error inspection
-
-**Intuition.** A coach reviews the tape of the goals the team let in, as well as the final score.
-
-**What it is.** Reading the misclassified rows one by one, comparing their features with the class averages, and checking how confident the model was. Today's model makes 5 errors: 4 malignant tumors predicted benign and 1 benign tumor predicted malignant. The missed cancers are smaller than a typical malignant tumor. Their mean radius (13.8 to 15.1) sits between the benign average (12.1) and the malignant average (17.5). Three of the five errors had probabilities between 0.3 and 0.7, so the model was unsure. The fourth missed cancer (row 73) got a malignant probability of only 0.056. The model was confidently wrong, and that is the row a clinician would worry about most.
-
-**Trap.** Stopping at the metric. Looking only at errors and never at correct predictions for comparison. Drawing big conclusions from 5 rows. Error analysis gives you hypotheses to test, not proof. ML teams use error analysis to choose the next step, such as more data of a certain kind, a new feature, or a different threshold. Day 37 is devoted to it.
-
-### 4.9 Documentation
-
-**Intuition.** A lab experiment that is not written down did not happen, as far as anyone else is concerned.
-
-**What it is.** A README for how to run the code, and an experiment report (`REPORT.md`) for what you found: question, data, method, results, errors, limitations and next steps. For models other people may use, a **model card** adds intended use and out-of-scope uses. Mitchell et al. introduced model cards in 2019, and the Hugging Face Hub now hosts them as standard.
-
-**Trap.** Writing the report from memory instead of from the saved results. Hiding limitations. Claiming more than the data supports. "Detects cancer with 96.5% accuracy" is a claim about a medical device. "Logistic regression reached 0.925 recall on a 143-row held-out set" is a claim about an experiment.
+In the market, the metric choice follows the cost of each error: recall for screening and safety checks, precision for systems that take automatic action against a person, such as blocking an account.
 
 ---
 
-## 5. Hands-on exercises (about 60 minutes)
+### Predictions
+
+You keep the marked exam papers as well as the final grade, because the papers show where the points were lost.
+
+Saving predictions means writing, for every test row, the true label, the predicted label and the predicted probability. The file is the raw material for error analysis and for anyone who wants to check your metrics. With the probabilities saved, you can test other thresholds without retraining.
+
+The common mistakes are saving only labels and losing the probabilities, and losing the row ID, so you cannot join predictions back to the original features. You notice the second one the first time you try to look at a wrong prediction and cannot find which row it was.
+
+Production systems log every prediction with an ID and the model version, which is what makes monitoring (Day 93) possible.
+
+---
+
+### Error inspection
+
+A coach reviews the tape of the goals the team let in, as well as the final score.
+
+Error inspection means reading the misclassified rows one by one, comparing their features with the class averages, and checking how confident the model was. Today's model makes 5 errors: 4 malignant tumors predicted benign and 1 benign tumor predicted malignant. The missed cancers are smaller than a typical malignant tumor. Their mean radius (13.8 to 15.1) sits between the benign average (12.1) and the malignant average (17.5). Three of the five errors had probabilities between 0.3 and 0.7, so the model was unsure. The fourth missed cancer (row 73) got a malignant probability of only 0.056. The model was confidently wrong, and that is the row a clinician would worry about most.
+
+The mistake is stopping at the metric. A related one is looking only at errors and never at correct predictions for comparison. A third is drawing big conclusions from 5 rows. Error analysis gives you hypotheses to test, not proof.
+
+ML teams use error analysis to choose the next step, such as more data of a certain kind, a new feature, or a different threshold. Day 37 is devoted to it.
+
+---
+
+### Documentation
+
+A lab experiment that is not written down did not happen, as far as anyone else is concerned.
+
+Documentation here is two files. A README says how to run the code. An experiment report (`REPORT.md`) says what you found: question, data, method, results, errors, limitations and next steps. For models other people may use, a **model card** adds intended use and out-of-scope uses. Mitchell et al. introduced model cards in 2019, and the Hugging Face Hub now hosts them as standard.
+
+Writing the report from memory instead of from the saved results is one failure. Hiding limitations is another, and claiming more than the data supports is a third. "Detects cancer with 96.5% accuracy" is a claim about a medical device. "Logistic regression reached 0.925 recall on a 143-row held-out set" is a claim about an experiment. Check each sentence against the second kind.
+
+Teams that ship models are often asked for a model card or an equivalent write-up before launch, so this habit carries straight into the job.
+
+---
+
+## Hands-on exercises (about 60 minutes)
 
 Do these before the project. They use the same dataset.
 
@@ -174,7 +245,7 @@ Read `target_names` and work out which number means malignant. Then print the da
 
 ---
 
-## 6. Project: a reproducible end-to-end experiment
+## Project: a reproducible end-to-end experiment
 
 **Goal:** a repo that anyone can clone and run with three commands to reproduce your numbers, with an experiment report that explains them.
 
@@ -185,15 +256,15 @@ Suggested repo name: `100-days-ai-engineering-day-06-first-experiment`.
 ```
 day-06-first-experiment/
 ├── README.md                # how to set up and run
-├── REPORT.md                # the experiment report (step 7)
+├── REPORT.md                # the experiment report (written in step 7)
 ├── .gitignore               # from Day 5
 ├── requirements.txt
 ├── env_check.py             # optional, copied from Day 5
 ├── src/
 │   ├── data.py              # loading and splitting, shared by every script
-│   ├── inspect_data.py      # step 2: inspection
-│   ├── train.py             # steps 3 to 7: preprocess, baseline, model, metrics, predictions
-│   ├── inspect_errors.py    # step 8: error inspection
+│   ├── inspect_data.py      # inspection
+│   ├── train.py             # preprocess, baseline, model, metrics, predictions
+│   ├── inspect_errors.py    # error inspection
 │   └── thresholds.py        # stretch: other decision thresholds
 └── results/                 # created by train.py, committed so readers can see your numbers
     ├── metrics.json
@@ -220,7 +291,7 @@ scikit-learn==1.6.1
 matplotlib==3.10.0
 ```
 
-Install with `python -m pip install -r requirements.txt`. **Run every script from the repo root** (the folder that contains `src/`), for example `python src/train.py`, so that the `results/` folder is created in the right place.
+Install with `python -m pip install -r requirements.txt`. Run every script from the repo root (the folder that contains `src/`), for example `python src/train.py`, so that the `results/` folder is created in the right place.
 
 ### Step 2: loading and splitting (`src/data.py`)
 
@@ -405,7 +476,7 @@ A few lines deserve a comment:
 
 - `zero_division=0` in the precision call: the baseline never predicts malignant, so its precision is 0 / 0. Without this argument, scikit-learn warns and uses 0 anyway. With it, the choice is explicit.
 - `model.classes_` lists the classes in the order `predict_proba` uses (alphabetical here: benign, malignant). Looking up the column by name is safer than assuming it is column 1.
-- `labels=["malignant", "benign"]` puts the positive class first in the confusion matrix, so the top-left cell is TP, matching section 4.6.
+- `labels=["malignant", "benign"]` puts the positive class first in the confusion matrix, so the top-left cell is TP, matching the metrics section.
 - Logistic regression is a classification model despite its name. It learns one weight per feature and outputs a probability between 0 and 1. Day 26 explains how.
 
 Run `python src/train.py`. Expected output:
@@ -487,7 +558,7 @@ test rows with p_malignant between 0.3 and 0.7: 4
 errors inside that band: 3
 ```
 
-Read the table row by row. All four missed cancers are smaller than the average malignant tumor: radius 13.8 to 15.1 against an average of 17.5, and worst area 750 to 990 against 1,422. Their concave-points values sit between the two class averages, so they look more like benign tumors. That is a hypothesis for the report: **the model struggles with small malignant tumors**. Only 4 test rows fall in the "unsure" band of 0.3 to 0.7, and 3 of them are errors. So the model's uncertainty carries information. Row 73 is the most serious case: a cancer scored at 5.6% probability.
+Read the table row by row. All four missed cancers are smaller than the average malignant tumor: radius 13.8 to 15.1 against an average of 17.5, and worst area 750 to 990 against 1,422. Their concave-points values sit between the two class averages, so they look more like benign tumors. That gives you a hypothesis for the report: the model struggles with small malignant tumors. Only 4 test rows fall in the "unsure" band of 0.3 to 0.7, and 3 of them are errors, so the model's uncertainty carries information. Row 73 is the most serious case: a cancer scored at 5.6% probability.
 
 ### Step 6 (stretch): change the decision threshold (`src/thresholds.py`)
 
@@ -521,7 +592,7 @@ threshold  caught  missed  false alarms
 
 Lowering the threshold to 0.3 catches 2 more cancers with no extra false alarms on this test set. Going to 0.1 catches one more but adds 5 false alarms.
 
-**Caveat:** this threshold was picked by looking at the test set, which is the Day 3 mistake. To choose a threshold properly, pick it on a validation set (or with cross-validation on the training rows), then report its test result once. Put this caveat in your report.
+This threshold was picked by looking at the test set, which is the Day 3 mistake. To choose a threshold properly, pick it on a validation set (or with cross-validation on the training rows), then report its test result once. Put this caveat in your report.
 
 ### Step 7: write `REPORT.md`
 
@@ -595,10 +666,10 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 
 ---
 
-## 7. Check your understanding
+## Check your understanding
 
 1. Your model has 0.965 accuracy. A classmate's has 0.972 on the same 143-row test set. Is theirs better? What would you need to decide?
-2. Why does the scaler live inside the pipeline instead of being applied to `X` before `split`?
+2. Why does the scaler live inside the pipeline instead of being applied to `X` before the split?
 3. You forgot that 0 means malignant and computed recall for class 1. What number would you have reported, and why is it misleading?
 4. Row 73 was malignant with `p_malignant = 0.056`. Why is a confidently wrong prediction more worrying than an unsure one?
 5. Lowering the threshold to 0.3 looked free on the test set. Why can you not just adopt 0.3 and report the improved recall?
@@ -617,7 +688,7 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 
 ---
 
-## 8. Sources to read and watch
+## Sources to read and watch
 
 **Read (reference):**
 - [scikit-learn: load_breast_cancer](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html), and the dataset description in the [toy datasets page](https://scikit-learn.org/stable/datasets/toy_dataset.html)
@@ -639,10 +710,12 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 - StatQuest: "Logistic Regression" (the first video in the series), for intuition before Day 26.
 
 **Practice:**
-- [Kaggle: Titanic, Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic): repeat today's nine steps on a dataset that needs real cleaning (missing ages, text columns). Submit one prediction file and compare your score with your baseline.
+- [Kaggle: Titanic, Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic): repeat today's stages on a dataset that needs real cleaning (missing ages, text columns). Submit one prediction file and compare your score with your baseline.
 
 ---
 
-## 9. Tomorrow
+## Tomorrow
 
-Day 7 begins Module 2, **Mathematics for AI**, with **Mathematical Foundations**: functions, variables, equations, exponents, logarithms, summation notation, function composition and graphs. Every piece of math you used this week without proof lives there. The MSE on Day 2 is a summation. The gradient descent update is a function applied over and over. Logistic regression, which produced today's `p_malignant`, is a composition of two functions: a weighted sum, then a squashing function built from an exponent. Tomorrow you start making those ideas precise, so that by Day 12 you can derive the gradient you coded by hand on Day 2 instead of copying it.
+Next is Day 6, Part II: **How AI Works and How to Use It**, which steps back from the experiment you just built and explains how AI systems work and how to use them well.
+
+After that, Day 7 begins Module 2, **Mathematics for AI**, with **Mathematical Foundations**: functions, variables, equations, exponents, logarithms, summation notation, function composition and graphs. Every piece of math you used this week without proof lives there. The MSE on Day 2 is a summation. The gradient descent update is a function applied over and over. Logistic regression, which produced today's `p_malignant`, is a composition of two functions: a weighted sum, then a squashing function built from an exponent. Day 7 starts making those ideas precise, so that by Day 12 you can derive the gradient you coded by hand on Day 2 instead of copying it.

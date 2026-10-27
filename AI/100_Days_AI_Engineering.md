@@ -113,6 +113,12 @@ Take a small dataset through:
 -   error inspection
 -   documentation
 
+### Day 6, Part II: How AI Works and How to Use It
+
+Explain how modern AI works at a practical level (tokens, the context window, sampling settings, instruction tuning, hallucination, tool use, retrieval, evaluation), using OpenAI as a case study. Move from average user to power user to practitioner.
+
+**Tutorial:** [Day 6, Part II: How AI Works and How to Use It](100%20Days%20AI/Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
+
 ------------------------------------------------------------------------
 
 # Module 2: Mathematics for AI

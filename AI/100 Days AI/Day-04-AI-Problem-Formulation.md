@@ -3,21 +3,63 @@
 *100 Days of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 2 to 3 hours
-**You will build:** a written formulation for each of 20 real problems (input, output, formulation, metric, baseline), and the formulation line for your two Day 3 briefs. There is also an optional script that frames one medical dataset three ways and shows that each framing gives a different verdict.
-**You should know:** Day 2 (features, labels, supervised and unsupervised learning, reinforcement learning) and Day 3 (problem definition, baselines, metrics).
-**You will install:** nothing for the written work. The optional script in section 6 needs Python 3.11 or newer, `numpy==2.2.6`, `pandas==2.2.3`, `scikit-learn==1.6.1` and `scipy==1.15.2`.
+**Level:** beginner. For learners who have finished Days 2 and 3 and want to choose the right type of model for a problem.
+
+**By the end of this day, you will have:**
+
+- A written formulation (input, output, formulation, metric, baseline) for each of 20 real problems
+- A formulation line for each of your two Day 3 briefs
+- A small project that frames one medical dataset three ways (regression, classification, ranking) and shows that each framing gives a different verdict
+
+**What you need:**
+
+- Pen and paper, or a text editor, for the written work
+- For the project script only: Python 3.11 or newer, `numpy==2.2.6`, `pandas==2.2.3`, `scikit-learn==1.6.1` and `scipy==1.15.2` (installed in the project section)
+- Your two problem briefs from Day 3
+
+**Prerequisites:**
+
+- Day 2: How Machines Learn (features, labels, supervised and unsupervised learning, reinforcement learning)
+- Day 3: The AI/ML Lifecycle (problem definition, baselines, metrics)
 
 ---
 
-## 1. The big idea
+## In this guide you are going to cover the following
+
+- [Introduction](#introduction)
+- [Where each formulation came from](#where-each-formulation-came-from)
+- [The formulation finder](#the-formulation-finder)
+- [Classification](#classification)
+- [Regression](#regression)
+- [Ranking](#ranking)
+- [Clustering](#clustering)
+- [Generation](#generation)
+- [Detection](#detection)
+- [Segmentation](#segmentation)
+- [Forecasting](#forecasting)
+- [Recommendation](#recommendation)
+- [Anomaly detection](#anomaly-detection)
+- [Control and decision-making](#control-and-decision-making)
+- [One problem, many formulations](#one-problem-many-formulations)
+- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Project: one dataset, three framings](#project-one-dataset-three-framings)
+- [Check your understanding](#check-your-understanding)
+- [Sources to read and watch](#sources-to-read-and-watch)
+- [Tomorrow](#tomorrow)
+
+---
+
+## Introduction
 
 Before you pick a model, you pick a **formulation**: the shape of the question the model answers. "Will this customer leave?" is classification. "How much will they spend?" is regression. "Which 50 customers should the retention team call first?" is ranking. These are three different models, trained on different labels, judged by different metrics, and they lead to different business actions, even when the data is the same.
 
-Choosing the wrong shape is one of the costliest mistakes in ML, because everything downstream (labels, loss, metric, evaluation, deployment) is built on it. On Day 3 you wrote problem briefs. Today you learn the menu of formulations, so the "Prediction" line in those briefs is correct.
+Choosing the wrong shape is one of the costliest mistakes in ML, because everything downstream (labels, loss, metric, evaluation, deployment) is built on it. On Day 3 you wrote problem briefs. Today you learn the menu of formulations, so the prediction line in those briefs is correct.
+
+On the job, the formulation is the first thing a senior engineer checks in a project proposal. A team that agrees on the formulation in week one avoids rebuilding the pipeline in week six.
 
 ---
 
-## 2. Background: where each formulation came from
+## Where each formulation came from
 
 | Formulation | Early roots | Modern form |
 |---|---|---|
@@ -33,9 +75,9 @@ Each formulation is an old, well-studied question with its own metrics and tools
 
 ---
 
-## 3. The formulation finder
+## The formulation finder
 
-Use this flowchart on every new problem. It covers most cases. Section 4 covers the ones where it is ambiguous.
+Run every new problem through this flowchart. It covers most cases. The concept sections that follow handle the ones where it is ambiguous.
 
 ```
 What does the output look like?
@@ -57,125 +99,187 @@ What does the output look like?
 
 ---
 
-## 4. The 11 formulations
+### Classification
 
-Each entry gives the intuition, the definition, one worked example with its metric and baseline, and the trap people fall into most often.
+Think of sorting mail into labeled trays. Every letter goes into exactly one tray, and the only question is which one.
 
-### 4.1 Classification
+A model that does this has to produce a score for each tray. It usually outputs a probability per class, such as 0.92 for "spam" and 0.08 for "not spam." Then a rule turns the probabilities into a decision, and the usual rule is a threshold, 0.5 by default.
 
-**Intuition.** Sorting mail into labeled trays.
+Classification maps an input to one category from a fixed set. **Binary** means two classes, **multi-class** means exactly one of many, and **multi-label** means several tags at once. [Wikipedia: Statistical classification](https://en.wikipedia.org/wiki/Statistical_classification)
 
-**Definition.** Map an input to one category from a fixed set. The model usually outputs a probability per class, and a threshold (0.5 by default) turns that into a label. **Binary** means two classes, **multi-class** means exactly one of many, and **multi-label** means several tags at once. [Wikipedia](https://en.wikipedia.org/wiki/Statistical_classification)
+Take email. The input is an email and the output is spam or not spam. The metric is precision and recall on spam, because spam is rare (class imbalance). The baseline is "never spam," which would score high accuracy and catch nothing.
 
-**Worked example.** Input: an email. Output: spam or not spam. Metric: precision and recall on spam, because spam is rare (class imbalance). Baseline: "never spam."
+The usual mistake is using accuracy on imbalanced data. If 1 email in 100 is spam, "never spam" is 99% accurate and useless. You spot it when a model with impressive accuracy has a recall near zero on the class you care about. The 0.5 threshold is also a business choice: a cancer screen should flag at a lower probability than a marketing-email filter. Multi-class and multi-label are different, too, since a news article can be both "sport" and "business."
 
-**Trap.** Using accuracy on imbalanced data. The 0.5 threshold is also a business choice. A cancer screen should flag at a lower probability than a marketing-email filter. Multi-class and multi-label are different: a news article can be both "sport" and "business."
-
-### 4.2 Regression
-
-**Intuition.** Guessing a parcel's weight by lifting it.
-
-**Definition.** Map an input to a continuous number. The training loss is usually MSE or MAE (Day 2). [Wikipedia](https://en.wikipedia.org/wiki/Regression_analysis)
-
-**Worked example.** Input: house size, location and age. Output: sale price. Metric: mean absolute error in currency, because a manager can read "we are off by 12,000 on average." Baseline: the median price in the same area.
-
-**Trap.** Predicting a number when the decision needs a category (does the house sell above asking, or not?). Prices also have a long tail, so a few mansions dominate MSE. Predicting the log of the price often works better.
-
-### 4.3 Ranking
-
-**Intuition.** A librarian who puts the three most useful books on the desk first, not every book in the building.
-
-**Definition.** Given a query (or some context) and a set of candidates, order the candidates so the most relevant come first. The order matters, not the exact score. [Wikipedia](https://en.wikipedia.org/wiki/Learning_to_rank)
-
-**Worked example.** Input: a search query and 1,000 matching documents. Output: an ordered list. Metric: precision@10, or NDCG (normalized discounted cumulative gain), which rewards putting the best items at the very top. Baseline: sort by keyword match count.
-
-**Trap.** Training a classifier and calling it ranking without checking the top of the list, which is where the value is. Measuring the whole list when users only see the top 5.
-
-### 4.4 Clustering
-
-**Intuition.** Sorting a pile of photos into groups without anyone telling you the groups.
-
-**Definition.** Partition unlabeled examples into groups so that members of a group are similar. It is unsupervised (Day 2). [Wikipedia](https://en.wikipedia.org/wiki/Cluster_analysis)
-
-**Worked example.** Input: each customer's purchase history. Output: 5 segments, which a marketer then names ("weekend bargain hunters," "monthly bulk buyers"). There is no ground truth, so you use internal measures such as the silhouette score, plus a check on whether the segments help the business.
-
-**Trap.** Treating clusters as natural categories. The algorithm returns exactly as many groups as you ask for. And if you have labels, classification is usually the better choice.
-
-### 4.5 Generation
-
-**Intuition.** A musician who has heard thousands of songs writes a new one in the same style.
-
-**Definition.** Produce new content conditioned on an input: a prompt, an image or a class. The output space is huge (any paragraph, any image), so there is rarely one correct answer.
-
-**Worked example.** Input: a customer email. Output: a draft reply. No single number works here. Teams use human ratings, rubric-based scoring by another model, and task checks (did the reply include the order number?). Baseline: a reply template.
-
-**Trap.** Using generation for a task that is classification or extraction. If you need "which department handles this email," a classifier is cheaper, faster and easier to test than an LLM writing an answer. Generated text can also be fluent and wrong (hallucination).
-
-### 4.6 Detection
-
-**Intuition.** "Where's Waldo." You have to say Waldo is there and point to him.
-
-**Definition.** Find every instance of the target objects in an input and give each one a location (in images, a bounding box) and a class. [Wikipedia](https://en.wikipedia.org/wiki/Object_detection)
-
-**Worked example.** Input: a shelf photo. Output: a labeled box around each product. Metric: mean average precision (mAP), which checks both the class and how well each box overlaps the true box (intersection over union, IoU). Baseline: a pretrained general detector.
-
-**Trap.** Using image classification ("this photo contains a person") when you need detection ("three people, here, here and here"). Every box has to be drawn by hand, which is expensive.
-
-### 4.7 Segmentation
-
-**Intuition.** A coloring book where every region gets exactly one color.
-
-**Definition.** Assign a class to every pixel of an image (semantic segmentation). Instance segmentation also separates individual objects. [Wikipedia](https://en.wikipedia.org/wiki/Image_segmentation)
-
-**Worked example.** Input: a medical scan. Output: a mask marking every tumor pixel. Metric: Dice coefficient or IoU between the predicted and true masks. Baseline: a threshold on pixel brightness.
-
-**Trap.** Choosing segmentation when a bounding box would do. Masks cost far more to label. Pixel-average metrics also undervalue thin structures such as roads or blood vessels.
-
-### 4.8 Forecasting
-
-**Intuition.** Predicting tomorrow's weather from the past weeks of weather.
-
-**Definition.** Regression on a time series. You predict future values from past values and from known future inputs (holidays, planned promotions). Time order matters.
-
-**Worked example.** Input: daily sales for the past two years. Output: sales for each of the next 14 days. Metric: MAE or MAPE (mean absolute percentage error). Baseline: the same weekday last week (a seasonal naive forecast), which is surprisingly hard to beat.
-
-**Trap.** A random train/test split. If you train on Wednesday and test on Tuesday of the same week, the model has seen the future. Split by time: train on the past, test on the most recent period. The future can also break the pattern (a pandemic, a new competitor).
-
-### 4.9 Recommendation
-
-**Intuition.** A friend who knows your taste suggests a film.
-
-**Definition.** Personalized ranking. For one user, rank the items they have not interacted with by how likely they are to engage. It is often built from user-item interaction data (collaborative filtering) and item features.
-
-**Worked example.** Input: a user's watch history. Output: the top 10 shows to display. Offline metric: recall@10 or NDCG on held-out interactions. Online metric: click or watch rate in an A/B test. Baseline: "most popular this week."
-
-**Trap.** The cold start problem: new users and new items have no history. Feedback loops: the system only learns about what it already showed, so it narrows over time. Optimizing clicks can favor clickbait over satisfaction.
-
-### 4.10 Anomaly detection
-
-**Intuition.** A security guard who knows what a normal night sounds like and notices the one strange noise.
-
-**Definition.** Flag inputs that differ from normal patterns. Use it when anomalies are so rare, or so varied, that you cannot collect enough labeled examples to train a classifier. [Wikipedia](https://en.wikipedia.org/wiki/Anomaly_detection)
-
-**Worked example.** Input: per-minute readings from a factory motor (temperature, vibration). Output: an anomaly score. Above a threshold, the system raises an alert. Metric: precision of the alerts and the share of known failures caught. Baseline: a fixed limit ("vibration above 3 mm/s").
-
-**Trap.** "Unusual" is not the same as "bad." A holiday sale looks anomalous to a fraud model. If you have plenty of labeled fraud cases, plain classification usually works better.
-
-### 4.11 Control and decision-making
-
-**Intuition.** Driving a car. Each steering choice changes what you see next, and the goal is arriving safely, not any single turn.
-
-**Definition.** Choose a sequence of actions in an environment to maximize long-term reward. This is usually reinforcement learning (Day 2), planning or classical control. Unlike the other formulations, the model's outputs change its own future inputs.
-
-**Worked example.** Input: the state of a building's heating system and the weather forecast. Output: heating settings every 15 minutes. Metric: energy cost over a month while keeping the temperature in range. Baseline: a fixed thermostat schedule.
-
-**Trap.** Using RL where a one-shot prediction would do. Choosing which ad to show is often classification plus a simple rule. RL needs a simulator or many safe trials, and learning directly on a live system can be dangerous. DeepMind has reported using RL to cut cooling energy in Google data centers.
+Spam filtering, fraud scoring, ticket routing and medical triage are all classification jobs you will find in production.
 
 ---
 
-## 5. One problem, many formulations
+### Regression
 
-The formulation is a **choice**, not a fact about the data. Take customer churn:
+Guessing a parcel's weight by lifting it is regression. The answer is a quantity on a scale, and being close counts for something.
+
+The model learns a function from inputs to a number, and training pushes the gap between the predicted number and the true one down. That gap is the loss, usually MSE or MAE (Day 2).
+
+Regression maps an input to a continuous number. [Wikipedia: Regression analysis](https://en.wikipedia.org/wiki/Regression_analysis)
+
+For house prices, the input is size, location and age, and the output is the sale price. The metric is mean absolute error in currency, because a manager can read "we are off by 12,000 on average." The baseline is the median price in the same area.
+
+A frequent mistake is predicting a number when the decision needs a category, such as whether the house sells above asking. You spot it when nobody downstream uses the exact number, only whether it crosses a line. Prices also have a long tail, so a few mansions dominate MSE, and predicting the log of the price often works better.
+
+Pricing, delivery-time estimates and insurance claim sizes are regression problems in most companies that sell something.
+
+---
+
+### Ranking
+
+A librarian who puts the three most useful books on the desk first, instead of handing you every book in the building, is ranking.
+
+The model does not need a perfect score for each item. It needs the right order. If item A is more relevant than item B, A must come first, and how far apart the scores are does not matter.
+
+Given a query (or some context) and a set of candidates, ranking orders the candidates so the most relevant come first. [Wikipedia: Learning to rank](https://en.wikipedia.org/wiki/Learning_to_rank)
+
+For a search, the input is a query plus 1,000 matching documents, and the output is an ordered list. The metric is precision@10, or NDCG (normalized discounted cumulative gain), which rewards putting the best items at the very top. The baseline is sorting by keyword match count.
+
+A typical mistake is training a classifier and calling it ranking without checking the top of the list, which is where the value is. Another is measuring the whole list when users only see the top 5. You spot it when overall accuracy looks fine and users still complain that results are bad.
+
+Search engines, job boards, feeds and the retrieval step in LLM applications all depend on ranking.
+
+---
+
+### Clustering
+
+Sorting a pile of photos into groups when nobody tells you what the groups are is clustering.
+
+With no labels, the only thing the algorithm can use is similarity. It puts examples that look alike in the same group and examples that look different in separate groups. That makes it unsupervised (Day 2).
+
+Clustering partitions unlabeled examples into groups so that members of a group are similar. [Wikipedia: Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
+
+Say the input is each customer's purchase history and the output is 5 segments, which a marketer then names ("weekend bargain hunters," "monthly bulk buyers"). There is no ground truth, so you use internal measures such as the silhouette score, plus a check on whether the segments help the business.
+
+The usual mistake is treating clusters as natural categories. The algorithm returns exactly as many groups as you ask for, so ask for 5 and you get 5 even if the data has 2. You spot it when the groups change a lot after a small change in settings or sample. If you have labels, classification is usually the better choice.
+
+Customer segmentation, grouping support tickets and organizing documents by embeddings are the common market uses.
+
+---
+
+### Generation
+
+A musician who has heard thousands of songs and writes a new one in the same style is generating.
+
+A generative model learns what typical outputs look like, then produces a new one from an input such as a prompt, an image or a class. The output space is huge (any paragraph, any image), so there is rarely one correct answer to compare against.
+
+Generation produces new content conditioned on an input.
+
+Take a customer email as the input and a draft reply as the output. No single number works here. Teams use human ratings, rubric-based scoring by another model, and task checks (did the reply include the order number?). The baseline is a reply template.
+
+The common mistake is using generation for a task that is classification or extraction. If you need "which department handles this email," a classifier is cheaper, faster and easier to test than an LLM writing an answer. You spot it when the expected output is always one of a short fixed list. Generated text can also be fluent and wrong (hallucination).
+
+Drafting replies, summarizing documents, writing code and creating images are the products built on generation today.
+
+---
+
+### Detection
+
+In "Where's Waldo," finding Waldo is not enough. You have to say Waldo is there and point to him. Detection is that.
+
+The model must answer two questions for every target object: what is it, and where is it? The location, for images, is a bounding box, a rectangle drawn around the object.
+
+Detection finds every instance of the target objects in an input and gives each one a location and a class. [Wikipedia: Object detection](https://en.wikipedia.org/wiki/Object_detection)
+
+For a shelf photo, the output is a labeled box around each product. The metric is mean average precision (mAP), which checks both the class and how well each box overlaps the true box (intersection over union, IoU). The baseline is a pretrained general detector.
+
+The typical mistake is using image classification ("this photo contains a person") when you need detection ("three people, here, here and here"). You spot it when the product needs counts or positions and your model only returns one label per photo. Every box in the training set has to be drawn by hand, which is expensive.
+
+Retail shelf audits, driver-assistance systems and warehouse robots rely on detection.
+
+---
+
+### Segmentation
+
+A coloring book where every region gets exactly one color is segmentation. No pixel is left blank.
+
+The model assigns a class to every pixel of an image. That is finer than a bounding box, because the output follows the true outline of each object.
+
+Semantic segmentation assigns a class to every pixel. Instance segmentation also separates individual objects of the same class. [Wikipedia: Image segmentation](https://en.wikipedia.org/wiki/Image_segmentation)
+
+For a medical scan, the output is a mask marking every tumor pixel. The metric is the Dice coefficient or IoU between the predicted and true masks. The baseline is a threshold on pixel brightness.
+
+The usual mistake is choosing segmentation when a bounding box would do, since masks cost far more to label. Pixel-average metrics also undervalue thin structures such as roads or blood vessels. You spot the second problem when a model scores high overall but visibly misses the thin parts.
+
+Medical imaging, satellite mapping and photo editing tools use segmentation.
+
+---
+
+### Forecasting
+
+Predicting tomorrow's weather from the past weeks of weather is forecasting.
+
+It is regression on a time series, with one extra rule: time order matters. You predict future values from past values and from inputs you already know about the future, such as holidays or planned promotions.
+
+Forecasting is regression on data ordered in time, where the target is a future value.
+
+Take daily sales for the past two years as the input and sales for each of the next 14 days as the output. The metric is MAE or MAPE (mean absolute percentage error). The baseline is the same weekday last week (a seasonal naive forecast), which is surprisingly hard to beat.
+
+The classic mistake is a random train/test split. If you train on Wednesday and test on Tuesday of the same week, the model has seen the future. You spot it when test scores are excellent and live performance is poor. Split by time: train on the past, test on the most recent period. The future can also break the pattern (a pandemic, a new competitor).
+
+Retailers, energy companies and logistics teams forecast demand, load and traffic every day.
+
+---
+
+### Recommendation
+
+A friend who knows your taste suggests a film. You trust them because they know you, not because the film is popular.
+
+This is ranking made personal. For one user, the system ranks the items they have not interacted with by how likely they are to engage. It is often built from user-item interaction data (collaborative filtering) and item features.
+
+Recommendation is personalized ranking of items for a single user.
+
+For a streaming service, the input is a user's watch history and the output is the top 10 shows to display. The offline metric is recall@10 or NDCG on held-out interactions. The online metric is click or watch rate in an A/B test. The baseline is "most popular this week."
+
+The well-known mistakes are the cold start problem (new users and new items have no history) and feedback loops (the system only learns about what it already showed, so it narrows over time). Optimizing clicks can favor clickbait over satisfaction. You spot a feedback loop when variety on the home page shrinks month after month.
+
+Streaming, e-commerce, social feeds and news apps run on recommendation.
+
+---
+
+### Anomaly detection
+
+A security guard who knows what a normal night sounds like notices the one strange noise. That is anomaly detection.
+
+The model learns what normal looks like and scores how far a new input is from it. You use it when anomalies are so rare, or so varied, that you cannot collect enough labeled examples to train a classifier.
+
+Anomaly detection flags inputs that differ from normal patterns. [Wikipedia: Anomaly detection](https://en.wikipedia.org/wiki/Anomaly_detection)
+
+For a factory motor, the input is per-minute readings (temperature, vibration) and the output is an anomaly score. Above a threshold, the system raises an alert. The metric is the precision of the alerts and the share of known failures caught. The baseline is a fixed limit ("vibration above 3 mm/s").
+
+The common mistake is assuming "unusual" means "bad." A holiday sale looks anomalous to a fraud model. You spot it when alerts keep firing on harmless events. If you have plenty of labeled fraud cases, plain classification usually works better.
+
+Predictive maintenance, network security and payment monitoring use anomaly detection.
+
+---
+
+### Control and decision-making
+
+Driving a car is control. Each steering choice changes what you see next, and the goal is arriving safely, not any single turn.
+
+Here the model's outputs change its own future inputs. So the model has to be judged on the whole sequence of choices, not on each one alone. That is the setting of reinforcement learning (Day 2), planning and classical control.
+
+Control and decision-making chooses a sequence of actions in an environment to maximize long-term reward.
+
+Consider the state of a building's heating system and the weather forecast as the input, and heating settings every 15 minutes as the output. The metric is energy cost over a month while keeping the temperature in range. The baseline is a fixed thermostat schedule.
+
+The typical mistake is using RL where a one-shot prediction would do. Choosing which ad to show is often classification plus a simple rule. RL needs a simulator or many safe trials, and learning directly on a live system can be dangerous. You spot it when the team cannot say how the model will be tested before it touches the real system. DeepMind has reported using RL to cut cooling energy in Google data centers.
+
+Robotics, building energy management, pricing and logistics scheduling are the usual markets for control.
+
+---
+
+### One problem, many formulations
+
+Two doctors can look at the same patient and ask different questions: "Is this person ill?" or "Who in this waiting room should I see first?" The patient is the same, and the work that follows is not.
+
+The formulation is a **choice**, not a fact about the data. What fixes it is the decision the business has to make. Take customer churn:
 
 | Question the business asks | Formulation | Label | Metric | Action |
 |---|---|---|---|---|
@@ -186,11 +290,13 @@ The formulation is a **choice**, not a fact about the data. Take customer churn:
 
 The data can be identical. The right row depends on the decision in your Day 3 brief. A team with a fixed call capacity of 200 needs ranking. A classifier tuned to a 0.5 threshold might flag 900 people, and nobody can call 900 people.
 
-**Honest limitation:** real systems often combine formulations. A self-driving stack uses detection, segmentation, forecasting (where will that pedestrian be in 2 seconds?) and control at once. An LLM chatbot uses ranking (retrieval) and generation. Formulate each component separately.
+Real systems often combine formulations. A self-driving stack uses detection, segmentation, forecasting (where will that pedestrian be in 2 seconds?) and control at once. An LLM chatbot uses ranking (retrieval) and generation. Formulate each component separately, and watch for the mistake of forcing the whole product into one label. You spot it when one metric is supposed to judge parts of the system that do different jobs.
+
+In project meetings, the question "what decision does this output feed?" is how experienced engineers turn a vague request into one of these rows.
 
 ---
 
-## 6. Practical check (about 60 minutes)
+## Hands-on exercises (about 60 minutes)
 
 **Exercise 1: 20 real problems (about 60 minutes).** For each problem, write one line in this form:
 
@@ -244,11 +350,57 @@ Do not look at the answer key until you have written all 20. Some problems have 
 | 19 | Multi-class classification (10 classes, one per digit) | per-digit and whole-code accuracy | none simple; a pretrained OCR tool | the classic MNIST dataset is exactly this |
 | 20 | Ranking | NDCG@10 or precision@10 | keyword search (BM25) | |
 
-Score yourself. If you got fewer than 15 formulations right, reread section 3 and redo the ones you missed. If you mixed up multi-class and multi-label (problems 12 and 14), reread section 4.1.
+Score yourself. If you got fewer than 15 formulations right, reread the formulation finder section and redo the ones you missed. If you mixed up multi-class and multi-label (problems 12 and 14), reread the classification section.
 
 Then write the formulation line for each of your two Day 3 briefs. Keep the 20 lines and the two briefs together. You will check them again on later days.
 
-**Exercise 2 (optional): one dataset, three framings (about 30 minutes).** The diabetes dataset in scikit-learn has 442 patients with 10 measurements each (age, sex, body mass index, blood pressure and six blood serum values, already scaled). The target is a number that measures how far the disease progressed one year later. Save this as `three_framings.py` in any folder:
+---
+
+## Project: one dataset, three framings
+
+This is the GitHub project for Day 4. It is optional, but it turns the one-problem-many-formulations idea into numbers you can see. You will frame one dataset as regression, classification and ranking, and score each framing with its own metric.
+
+**Goal:** a Python script that trains on the scikit-learn diabetes dataset (442 patients with 10 measurements each: age, sex, body mass index, blood pressure and six blood serum values, already scaled). The target is a number that measures how far the disease progressed one year later.
+
+### Repository layout
+
+```
+day-04-problem-formulation/
+├── README.md              # your 20 formulation lines, your two Day 3 formulation lines, and your answers to the questions below
+├── three_framings.py      # one dataset scored as regression, classification and ranking
+└── requirements.txt       # pinned library versions
+```
+
+### Step 1: create the folder and environment
+
+```bash
+mkdir day-04-problem-formulation
+cd day-04-problem-formulation
+python -m venv .venv
+```
+
+Activate it:
+
+- macOS or Linux: `source .venv/bin/activate`
+- Windows (PowerShell): `.venv\Scripts\Activate.ps1`
+- Windows (Command Prompt): `.venv\Scripts\activate.bat`
+
+### Step 2: requirements
+
+Create `requirements.txt`:
+
+```text
+numpy==2.2.6
+pandas==2.2.3
+scikit-learn==1.6.1
+scipy==1.15.2
+```
+
+Install with `pip install -r requirements.txt`.
+
+### Step 3: the script
+
+Save this as `three_framings.py`:
 
 ```python
 """Frame the same dataset as regression, classification and ranking, and score each one."""
@@ -293,6 +445,12 @@ print(f"  random order would give about {truly_severe.mean():.2f}")
 
 The ranking framing reuses the regression model's predictions to order patients. A model trained for one formulation can serve another, but you have to measure it with the second formulation's metric.
 
+### Step 4: predict before you run
+
+Before you run it, answer two questions in your README. Which framing fits a clinic that can call exactly 20 patients a week? If you change `top_k` to 50, does precision@k go up or down? Then check your answers by running the script.
+
+### Step 5: run and read
+
 Run `python three_framings.py`. Expected output:
 
 ```text
@@ -314,18 +472,18 @@ Read the three results as three answers to "is the model good?"
 - As classification, it puts 74% of patients on the correct side of the median. That sounds fine.
 - As ranking, 8 of its top 20 picks are truly severe cases, more than twice the share that random calls would find. For a clinic with 20 calls a week, that is a useful tool.
 
-The data and the model stay the same. The verdict depends on the clinic's decision. Before you rerun it, answer two questions in writing. Which framing fits a clinic that can call exactly 20 patients a week? If you change `top_k` to 50, does precision@k go up or down? Then check your answers by running it.
+The data and the model stay the same. The verdict depends on the clinic's decision.
 
-**Done when**
+### Done when
 
-- Your 20 lines match the answer key, or you have written a defense for each place you differ.
+- Your 20 lines from Exercise 1 match the answer key, or you have written a defense for each place you differ.
 - Your two Day 3 briefs each have a formulation line.
 - You can name the formulation, metric and baseline for a new product feature in under a minute.
-- If you ran Exercise 2, you can say which framing matches the clinic's decision and why.
+- `python three_framings.py` runs and prints the expected output above, and your README says which framing matches the clinic's decision and why.
 
 ---
 
-## 7. Check your understanding
+## Check your understanding
 
 1. A team frames "which products will a user buy?" as multi-class classification over 50,000 products. What problem will they hit, and what formulation fits better?
 2. Why is a random train/test split wrong for forecasting but usually fine for classifying photos?
@@ -347,7 +505,7 @@ The data and the model stay the same. The verdict depends on the clinic's decisi
 
 ---
 
-## 8. Sources to read and watch
+## Sources to read and watch
 
 **Read (reference):**
 - [Wikipedia: Statistical classification](https://en.wikipedia.org/wiki/Statistical_classification)
@@ -376,6 +534,6 @@ The data and the model stay the same. The verdict depends on the clinic's decisi
 
 ---
 
-## 9. Tomorrow
+## Tomorrow
 
 Day 5, **AI Development Environment**, sets up the toolkit for the rest of the series. Tomorrow you learn what `pip install -r requirements.txt` actually does, why pinned versions matter, and how NumPy, pandas, Matplotlib, scikit-learn, PyTorch, Jupyter and Hugging Face fit together. You will also learn what a GPU and CUDA are, and why random seeds decide whether someone else can reproduce the numbers in your README.
