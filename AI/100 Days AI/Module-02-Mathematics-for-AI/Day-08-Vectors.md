@@ -40,7 +40,7 @@
 - [Unit vectors](#unit-vectors)
 - [Dot products](#dot-products)
 - [Geometric interpretation](#geometric-interpretation)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a vector toolkit with tests](#project-a-vector-toolkit-with-tests)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -229,7 +229,7 @@ Assuming that geometric intuition from two or three dimensions carries over unch
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Do the first four on paper, then check each one in Python.
 
@@ -450,3 +450,5 @@ def test_projection_matches_known_answer():
 ## Tomorrow
 
 Tomorrow you stack vectors into matrices. A matrix is a grid of numbers, and a dataset with one row per example and one column per feature is exactly that. You will learn how matrices add, multiply and transpose, how their shapes must line up, and how a single matrix multiplication computes the outputs of a neural network layer for a whole batch at once. The dot product you implemented today is the building block of every entry in that product.
+
+**Next:** [Day 9: Matrices](Day-09-Matrices.md)

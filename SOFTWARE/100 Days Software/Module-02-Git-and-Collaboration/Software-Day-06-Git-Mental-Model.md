@@ -38,7 +38,7 @@
 - [Diff](#diff)
 - [Restore](#restore)
 - [.gitignore](#gitignore)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a Git-tracked greeting tool with a readable history](#project-a-git-tracked-greeting-tool-with-a-readable-history)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -271,11 +271,11 @@ The main limitation is that `.gitignore` only affects untracked files. If you co
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work in `git-practice`. Run each command and read the output before going on.
 
-Check the setup first (about 5 minutes):
+Check the setup first:
 
 ```bash
 git --version
@@ -285,7 +285,7 @@ git config --global user.email "you@example.com"
 
 On Windows you may see `LF will be replaced by CRLF the next time Git touches it`. This warning is about line endings and does not mean your content is wrong.
 
-Exercise 1 builds a two-commit history (about 10 minutes).
+Exercise 1 builds a two-commit history.
 
 1. Run `mkdir git-practice && cd git-practice && git init -b main`.
 2. Create `notes.txt` with one line, stage it, and commit with the message "Add first note".
@@ -295,7 +295,7 @@ Exercise 1 builds a two-commit history (about 10 minutes).
 
 Done when `git log --oneline` shows exactly two commits and `git status --short` shows only `?? draft.md`.
 
-Exercise 2 practices staging (about 10 minutes).
+Exercise 2 practices staging.
 
 1. Add a third line to `notes.txt` and a line to `draft.md`.
 2. Run `git add notes.txt`, then `git status --short`. Confirm `M ` for `notes.txt` and `??` for `draft.md`.
@@ -304,7 +304,7 @@ Exercise 2 practices staging (about 10 minutes).
 
 Done when you can say in one sentence why `draft.md` was not in the commit.
 
-Exercise 3 covers `.gitignore` (about 10 minutes).
+Exercise 3 covers `.gitignore`.
 
 1. Create `secret.env` containing `API_KEY=not-a-real-key` and `build.log` containing any text.
 2. Run `git status --short`. Both appear as untracked.
@@ -314,7 +314,7 @@ Exercise 3 covers `.gitignore` (about 10 minutes).
 
 Done when `git ls-files` lists `.gitignore` and `notes.txt`, and neither ignored file.
 
-Exercise 4 covers restore (about 15 minutes).
+Exercise 4 covers restore.
 
 1. Append `BAD LINE` to `notes.txt` and save.
 2. Run `git restore notes.txt`, then open the file to confirm the line is gone.
@@ -324,7 +324,7 @@ Exercise 4 covers restore (about 15 minutes).
 
 Done when you can explain in your own words the difference between `git restore` and `git restore --staged`.
 
-Exercise 5 reads history (about 10 minutes).
+Exercise 5 reads history.
 
 1. Run `git log --stat` and find the commit with the largest change.
 2. Run `git show --stat HEAD` and `git diff HEAD~1 HEAD --stat`. The file lists should match.
@@ -445,3 +445,5 @@ This project is light on code because the lesson is about the history. A reviewe
 ## Tomorrow
 
 Day 7 works with the history you read today. You will create branches, merge them, resolve a merge conflict, rebase for a cleaner history, and recover work after a mistake. Keep the `git-practice` folder, because Day 7 begins from it.
+
+**Next:** [Day 7: Branches and Merging](Software-Day-07-Branches-and-Merging.md)

@@ -37,7 +37,7 @@
 - [Rebase concept](#rebase-concept)
 - [Clean history](#clean-history)
 - [Recovery](#recovery)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a todo CLI with a branch conflict and a recovery drill](#project-a-todo-cli-with-a-branch-conflict-and-a-recovery-drill)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -267,11 +267,11 @@ Recovery has a hard limit. The reflog is local, and it expires. A clone on anoth
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work in the `git-practice` repo from Day 6. If you do not have it, create a new one with `mkdir git-practice && cd git-practice && git init -b main`, add a `notes.txt` file, and commit it.
 
-Exercise 1 creates a branch and fast-forwards it (about 10 minutes).
+Exercise 1 creates a branch and fast-forwards it.
 
 1. Run `git switch -c feature/intro` and add a line to `notes.txt`. Commit it with the message "Add intro line".
 2. Run `git switch main`, then `git merge feature/intro`. Read the output and confirm it says `Fast-forward`.
@@ -279,7 +279,7 @@ Exercise 1 creates a branch and fast-forwards it (about 10 minutes).
 
 Done when the output says `Fast-forward` and `main` points at the same commit as `feature/intro`.
 
-Exercise 2 creates a merge commit with `--no-ff` (about 10 minutes).
+Exercise 2 creates a merge commit with `--no-ff`.
 
 1. Run `git switch -c feature/todo` and add a new file `todo.txt` with one task. Commit it.
 2. Run `git switch main`, add a line to `notes.txt`, and commit it so that `main` has a new commit.
@@ -288,7 +288,7 @@ Exercise 2 creates a merge commit with `--no-ff` (about 10 minutes).
 
 Done when the graph shows a branch and a merge commit labeled "Merge feature/todo".
 
-Exercise 3 produces and resolves a conflict (about 15 minutes).
+Exercise 3 produces and resolves a conflict.
 
 1. Run `git switch -c feature/caps`, change the first line of `notes.txt` to uppercase, and commit.
 2. Run `git switch main`, change the same first line to a different wording, and commit.
@@ -299,7 +299,7 @@ Exercise 3 produces and resolves a conflict (about 15 minutes).
 
 Done when `grep -c "<<<<" notes.txt` prints `0` and `git status` reports a clean working tree.
 
-Exercise 4 uses rebase (about 10 minutes).
+Exercise 4 uses rebase.
 
 1. Run `git switch -c feature/rebase-me` and make two small commits, each with a different new file.
 2. Run `git switch main` and make one commit on `main`.
@@ -309,7 +309,7 @@ Exercise 4 uses rebase (about 10 minutes).
 
 Done when the `--ff-only` merge succeeds, which proves the history is linear.
 
-Exercise 5 practices recovery (about 15 minutes).
+Exercise 5 practices recovery.
 
 1. Run `git switch -c feature/scratch`, create `scratch.txt`, and commit it with "Add scratch". Then run `git switch main` and `git branch -D feature/scratch`.
 2. Run `git reflog -n 10` and find the "Add scratch" commit, which is the last commit the deleted branch pointed at.
@@ -472,3 +472,5 @@ This project is light on code and heavy on history, because the skill being test
 ## Tomorrow
 
 Day 8 moves your repo onto GitHub. You will connect a local repo to a remote, clone a repo, push and pull, open issues and pull requests, review code, and publish a release with a version tag. The branches and merges from today become the pull requests you will open tomorrow.
+
+**Next:** [Day 8: GitHub Workflow](Software-Day-08-GitHub-Workflow.md)

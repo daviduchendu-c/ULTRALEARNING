@@ -45,7 +45,7 @@
 - [Jupyter notebooks](#jupyter-notebooks)
 - [CPU, GPU and CUDA](#cpu-gpu-and-cuda)
 - [Reproducibility and random seeds](#reproducibility-and-random-seeds)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: an AI environment starter repo](#project-an-ai-environment-starter-repo)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -322,23 +322,23 @@ In regulated work such as finance or health, you may need to reproduce a model's
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: break and fix an environment (about 20 minutes).**
+**Exercise 1: break and fix an environment.**
 
 1. In a scratch folder, create a venv, activate it, and run `pip install pandas==2.2.3`.
 2. Run `python -c "import sklearn"`. Read the error (`ModuleNotFoundError`). Explain in one sentence why it happened.
 3. Deactivate the environment (`deactivate`) and run `python -c "import sys; print(sys.prefix)"`. Activate it again and rerun. Write down both paths and what changed.
 4. Run `pip freeze`. Count the packages listed, although you installed only one. Name two of them and guess why pandas needs them.
 
-**Exercise 2: notebook hygiene (about 20 minutes).**
+**Exercise 2: notebook hygiene.**
 
 1. Start `jupyter lab` from an activated environment that has JupyterLab installed (you will have one after Step 2 of the project).
 2. In cell 1, write `x = 10`. In cell 2, write `print(x * 2)`. Run both.
 3. Delete cell 1. Run cell 2 again. It still prints 20. Explain why.
 4. Choose Kernel → Restart Kernel and Run All Cells. Read the error. This is why you restart and run all before committing a notebook.
 
-**Exercise 3: where does my compute go? (about 20 minutes).** Run this and time it:
+**Exercise 3: where does my compute go?.** Run this and time it:
 
 ```python
 import time
@@ -744,3 +744,5 @@ Include:
 ## Tomorrow
 
 Day 6, **First End-to-End AI Experiment**, puts the module together in one project. Using the environment you built today, you will take a real medical dataset through every stage of the lifecycle from Day 3 (The AI/ML Lifecycle). You will load it, inspect it, preprocess it, split it, beat a baseline, measure it with metrics chosen by the formulation work in Day 4 (AI Problem Formulation), save predictions, and read the model's mistakes one by one. Copy today's `requirements.txt`, `.gitignore` and `env_check.py` into the new repo. That is what a starter repo is for.
+
+**Next:** [Day 6: First End-to-End AI Experiment](Day-06-First-End-to-End-AI-Experiment.md)

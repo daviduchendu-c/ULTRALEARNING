@@ -46,7 +46,7 @@
 - [Rails and grounding](#rails-and-grounding)
 - [Decoupling](#decoupling)
 - [Protection and brownouts](#protection-and-brownouts)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a power budget and protected supply for a small robot](#project-a-power-budget-and-protected-supply-for-a-small-robot)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -207,7 +207,7 @@ Every serious mobile robot has a BMS, a fused battery input and a power-good ind
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work with the battery only after you have read all the safety notes in this section. Keep the pack in a fireproof bag while you test, never leave it charging unattended, and never short the battery terminals or connect it to anything without the fuse in place.
 
@@ -400,3 +400,5 @@ This project is light on fabrication, but the electrical risk is real. The batte
 ## Tomorrow
 
 Today you sized the supply, protected it and measured how it behaves under load. The next step is the part of the robot that draws most of that power: the motors. Day 13 covers how a DC motor behaves electrically, why its back-EMF limits its speed, how an H-bridge reverses it, and how PWM controls its average voltage. The stall currents you budgeted today are the numbers the motor driver and its flyback diode must survive, so keep the budget file open while you work.
+
+**Next:** [Day 13: Motor Electronics](Robotics-Day-13-Motor-Electronics.md)

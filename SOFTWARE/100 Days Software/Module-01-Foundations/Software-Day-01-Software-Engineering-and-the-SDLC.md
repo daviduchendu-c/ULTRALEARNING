@@ -40,7 +40,7 @@
 - [Engineering tradeoffs](#engineering-tradeoffs)
 - [Technical debt](#technical-debt)
 - [Product thinking before code](#product-thinking-before-code)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a command-line checker for user stories](#project-a-command-line-checker-for-user-stories)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -226,9 +226,9 @@ A common mistake is building before defining success. To spot it, ask the team t
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Map an app you use (about 25 minutes).**
+**Exercise 1: Map an app you use.**
 
 1. Pick a simple app you use daily, such as a notes app or a banking app. Do not look at its code.
 2. Write five things it must do, each starting with "A user can." Check: five items, each starting with those words.
@@ -237,14 +237,14 @@ A common mistake is building before defining success. To spot it, ask the team t
 5. Write how users get updates: an app store, a web page, or both. Check: your answer names a channel.
 6. If the company publishes an engineering blog, compare your guesses with it. Check: you have one thing right and one thing wrong.
 
-**Exercise 2: Write three user stories with criteria (about 20 minutes).**
+**Exercise 2: Write three user stories with criteria.**
 
 1. Choose an app idea. A habit tracker, a bookmark manager or a recipe-to-shopping-list tool all work.
 2. Write three stories in the form "As a ___, I want ___, so that ___." Check: all three parts appear in each.
 3. Under each story, write two acceptance criteria. Check: each one can be answered yes or no.
 4. Ask whether two people would always agree on pass or fail for each criterion. Rewrite any that fail this test. Check: you rewrote at least one, or can say why none needed it.
 
-**Exercise 3: Record one piece of debt (about 15 minutes).**
+**Exercise 3: Record one piece of debt.**
 
 1. Imagine a prototype of your app that skips one feature to ship faster, such as password reset or data export.
 2. Write three sentences: the shortcut, the reason, and the fix. Check: all three exist.
@@ -613,3 +613,5 @@ Optional: run `git switch -c break-test`, add `assert False` to one test, push t
 ## Tomorrow
 
 Day 2, **How Computers Execute Programs**, explains what happens between the code you write and the result on screen: the CPU, memory, compilation and interpretation. Bring your `storycheck` repository. You will trace what Python does when `parse` reads one line of `stories.txt`, and compare that with the app idea you wrote about today.
+
+**Next:** [Day 2: How Computers Execute Programs](Software-Day-02-How-Computers-Execute-Programs.md)

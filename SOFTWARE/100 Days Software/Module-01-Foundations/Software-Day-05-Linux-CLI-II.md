@@ -40,7 +40,7 @@
 - [Signals](#signals)
 - [Shell scripts](#shell-scripts)
 - [Quoting](#quoting)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: logscan, a log summary script](#project-logscan-a-log-summary-script)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -360,16 +360,16 @@ Unquoted variables are the most common shell bug, and they stay hidden until a f
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work in `~/dev/day05` with the `app.log` from the start of this guide.
 
-1. **grep (10 minutes).** Count the ERROR lines. Print the non-INFO lines with line numbers. Find every line that mentions `db`, regardless of case. Then run `grep -q NOPE app.log; echo $?`. *Check:* you get 3, four numbered lines, two lines, and `1`.
-2. **find (10 minutes).** List every `.sh` and `.log` file under `~/dev`. Find directories named `.venv` from Day 3. Find files in `~` modified in the last 60 minutes with `-mmin -60`. *Check:* `app.log` appears in the last result.
-3. **Redirection (10 minutes).** Run `ls /etc /nope`, sending the listing to `ok.txt` and the error to `bad.txt`. Then reproduce the trap. Copy `app.log` to `trap.log`, run `sort trap.log > trap.log`, and check with `wc -l trap.log`. *Check:* `bad.txt` holds one line, and `trap.log` is now empty. Explain why in one sentence.
-4. **Pipes (10 minutes).** Build the login-shell pipeline from the Pipes section one stage at a time, and look at the output after each `|`. Then find the three most frequent words in a man page: `man ls | tr -s ' ' '\n' | sort | uniq -c | sort -rn | head -n 3`. *Check:* you can say what each stage contributed.
-5. **Permissions (10 minutes).** Create `hello.sh` from the chmod section and get it from "Permission denied" to running. Create a directory with mode `600` (no `x`) that contains one file, then try `ls` and `cd` on it. *Check:* you can explain why `cd` fails even though you own the directory, then fix it with `chmod 700`.
-6. **Processes and signals (10 minutes).** Start `polite.sh` in the background, find it with `pgrep -a polite`, and send SIGTERM. Start it again and send SIGKILL. Then run `sleep 100`, press Ctrl+C, and run `echo $?`. *Check:* the trap message appears only for SIGTERM, and `$?` prints `130`.
+1. **grep.** Count the ERROR lines. Print the non-INFO lines with line numbers. Find every line that mentions `db`, regardless of case. Then run `grep -q NOPE app.log; echo $?`. *Check:* you get 3, four numbered lines, two lines, and `1`.
+2. **find.** List every `.sh` and `.log` file under `~/dev`. Find directories named `.venv` from Day 3. Find files in `~` modified in the last 60 minutes with `-mmin -60`. *Check:* `app.log` appears in the last result.
+3. **Redirection.** Run `ls /etc /nope`, sending the listing to `ok.txt` and the error to `bad.txt`. Then reproduce the trap. Copy `app.log` to `trap.log`, run `sort trap.log > trap.log`, and check with `wc -l trap.log`. *Check:* `bad.txt` holds one line, and `trap.log` is now empty. Explain why in one sentence.
+4. **Pipes.** Build the login-shell pipeline from the Pipes section one stage at a time, and look at the output after each `|`. Then find the three most frequent words in a man page: `man ls | tr -s ' ' '\n' | sort | uniq -c | sort -rn | head -n 3`. *Check:* you can say what each stage contributed.
+5. **Permissions.** Create `hello.sh` from the chmod section and get it from "Permission denied" to running. Create a directory with mode `600` (no `x`) that contains one file, then try `ls` and `cd` on it. *Check:* you can explain why `cd` fails even though you own the directory, then fix it with `chmod 700`.
+6. **Processes and signals.** Start `polite.sh` in the background, find it with `pgrep -a polite`, and send SIGTERM. Start it again and send SIGKILL. Then run `sleep 100`, press Ctrl+C, and run `echo $?`. *Check:* the trap message appears only for SIGTERM, and `$?` prints `130`.
 
 ---
 
@@ -709,3 +709,5 @@ Pick one.
 ## Tomorrow
 
 Day 6, Git Mental Model, starts the Git and Collaboration module, right after this last day of Foundations. Until now you have uploaded files to GitHub through the website, and you have seen the gaps. Empty folders vanish, the executable bit is lost, and nothing records how a file changed. Git fixes all three. You will learn what a repository, a commit and the staging area are, and you will drive Git from Ubuntu using the terminal skills from Day 4: Linux CLI I and today. Your first real commits can go into today's `logscan` repo, and the `.gitattributes` file you added will finally do its job.
+
+**Next:** [Day 6: Git Mental Model](../Module-02-Git-and-Collaboration/Software-Day-06-Git-Mental-Model.md)

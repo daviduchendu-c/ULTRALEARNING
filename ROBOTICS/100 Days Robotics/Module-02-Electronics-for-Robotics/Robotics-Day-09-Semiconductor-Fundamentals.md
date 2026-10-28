@@ -34,7 +34,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [The PN junction](#the-pn-junction)
 - [Diodes](#diodes)
@@ -43,7 +43,7 @@
 - [Transistor switching](#transistor-switching)
 - [Pull-up and pull-down resistors](#pull-up-and-pull-down-resistors)
 - [Logic-level switching](#logic-level-switching)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a transistor switch calculator](#project-a-transistor-switch-calculator)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -59,7 +59,7 @@ Robot builders reach for transistors when a pin is too weak, when a circuit has 
 
 ---
 
-## Background and history
+## Short history
 
 The semiconductor story moved from a laboratory curiosity to the basis of every chip in about 80 years.
 
@@ -205,7 +205,7 @@ Logic-level problems are a common reason for a robot that runs on the bench with
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Record every reading in a table. Set the DMM to diode test mode for the first two exercises.
 
@@ -384,3 +384,5 @@ def divider_ratio(v_high: float, v_target: float) -> float:
 ## Tomorrow
 
 Tomorrow you move from analog levels to numbers. Today a transistor switched one signal between on and off, and the logic-level section assumed a high and a low. Digital electronics gives those levels meaning. You will convert between decimal, binary and hexadecimal, read truth tables for gates such as AND, OR and XOR, and use bitwise operators to read several pins as one byte, which is how robot firmware reads switches and sensors.
+
+**Next:** [Day 10: Digital Electronics](Robotics-Day-10-Digital-Electronics.md)

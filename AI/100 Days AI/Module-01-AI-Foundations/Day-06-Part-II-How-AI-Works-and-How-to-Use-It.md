@@ -47,7 +47,7 @@
 - [The average user: ask and accept](#the-average-user-ask-and-accept)
 - [The power user: structure prompts and compare outputs](#the-power-user-structure-prompts-and-compare-outputs)
 - [The practitioner: measure, decide, and know when not to use AI](#the-practitioner-measure-decide-and-know-when-not-to-use-ai)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: compare prompts and temperatures on a 10-case evaluation set](#project-compare-prompts-and-temperatures-on-a-10-case-evaluation-set)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -181,15 +181,15 @@ Not using AI is often right: when a rule or lookup is exact and cheaper, when an
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Estimate tokens (about 10 minutes).** Pick three texts you wrote, of about 50, 300 and 600 words. Estimate each with the three-quarters rule. Check: a three-row table where each estimate equals the word count divided by 0.75, rounded to the nearest ten.
+**Exercise 1: Estimate tokens.** Pick three texts you wrote, of about 50, 300 and 600 words. Estimate each with the three-quarters rule. Check: a three-row table where each estimate equals the word count divided by 0.75, rounded to the nearest ten.
 
-**Exercise 2: Temperature by hand (about 15 minutes).** In the Playground, set the system message to "Reply with a name only" and the user message to "Suggest a name for a coffee shop on a quiet street." Run three times at temperature 0, then three times at 1.0. Check: a six-row table of replies with their temperatures, and one sentence on whether the temperature 0 runs matched and the 1.0 runs varied.
+**Exercise 2: Temperature by hand.** In the Playground, set the system message to "Reply with a name only" and the user message to "Suggest a name for a coffee shop on a quiet street." Run three times at temperature 0, then three times at 1.0. Check: a six-row table of replies with their temperatures, and one sentence on whether the temperature 0 runs matched and the 1.0 runs varied.
 
-**Exercise 3: A system message changes behavior (about 15 minutes).** Send "I want to cancel my subscription. What do I do?" under two system messages. First: "You are a terse assistant. Answer in one sentence." Second: "You are a support agent for Northwind Software, a fictional company. Ask one clarifying question before giving steps." Check: the first reply is one sentence and the second ends with a question mark. If either fails, adjust the system message and record the change.
+**Exercise 3: A system message changes behavior.** Send "I want to cancel my subscription. What do I do?" under two system messages. First: "You are a terse assistant. Answer in one sentence." Second: "You are a support agent for Northwind Software, a fictional company. Ask one clarifying question before giving steps." Check: the first reply is one sentence and the second ends with a question mark. If either fails, adjust the system message and record the change.
 
-**Exercise 4: Compare two prompts (about 20 minutes).** Paste a 200-word meeting note. Prompt A: "Summarize this." Prompt B: a role, three bullet points, a 60-word limit and "use only the note". Score each output: main decision stated, 60 words or fewer, no invented fact. Check: a table of both scores and one sentence on which you would ship.
+**Exercise 4: Compare two prompts.** Paste a 200-word meeting note. Prompt A: "Summarize this." Prompt B: a role, three bullet points, a 60-word limit and "use only the note". Score each output: main decision stated, 60 words or fewer, no invented fact. Check: a table of both scores and one sentence on which you would ship.
 
 ---
 
@@ -463,3 +463,5 @@ Write `README.md` with the summary table at the top. Tick each item only when it
 ## Tomorrow
 
 Tomorrow continues the module. Keep `data/eval_set.csv` and `results/results.csv` in the repo, since measuring against a fixed set carries forward.
+
+**Next:** [Day 7: Mathematical Foundations](../Module-02-Mathematics-for-AI/Day-07-Mathematical-Foundations.md)

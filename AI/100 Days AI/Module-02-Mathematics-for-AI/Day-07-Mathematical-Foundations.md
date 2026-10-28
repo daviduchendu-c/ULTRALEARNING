@@ -40,7 +40,7 @@
 - [Summation notation](#summation-notation)
 - [Function composition](#function-composition)
 - [Graphs](#graphs)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a notation checker and a plotting lab](#project-a-notation-checker-and-a-plotting-lab)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -218,7 +218,7 @@ Reading a graph without checking the scales is a common mistake. A curve that lo
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work these on paper first, then check them in Python.
 
@@ -367,3 +367,5 @@ if __name__ == "__main__":
 ## Tomorrow
 
 Tomorrow moves from single numbers to vectors, which are ordered lists of numbers that describe a point, a direction or a feature set. Everything you wrote today, the functions, exponents and sums, reappears as operations on vectors. You will implement addition, scaling, magnitude and the dot product with NumPy, and you will see why the dot product measures how closely two feature vectors point in the same direction.
+
+**Next:** [Day 8: Vectors](Day-08-Vectors.md)

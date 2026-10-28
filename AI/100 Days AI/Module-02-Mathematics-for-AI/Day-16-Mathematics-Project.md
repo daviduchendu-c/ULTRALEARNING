@@ -33,13 +33,13 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Vectors and matrices from scratch](#vectors-and-matrices-from-scratch)
 - [Linear regression](#linear-regression)
 - [Loss calculation](#loss-calculation)
 - [Gradient descent from scratch](#gradient-descent-from-scratch)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: mathlab, linear regression from scratch](#project-mathlab-linear-regression-from-scratch)
 - [Check your understanding](#check-your-understanding)
 - [Sources](#sources)
@@ -57,7 +57,7 @@ The big idea is that linear regression is the smallest complete learning system.
 
 ---
 
-## Background and history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -185,21 +185,21 @@ The honest limitation is that full-batch gradient descent reads every row at eac
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Create a folder called `day16-warmup` and write your code in `warmup.py`. Do each step on paper first.
 
-1. **Dot product (5 minutes).** Compute `[2, -1, 4] · [3, 5, 0]` by hand. Write a loop-based `dot(a, b)` and confirm it matches `np.dot`. The answer is 1.
+1. **Dot product.** Compute `[2, -1, 4] · [3, 5, 0]` by hand. Write a loop-based `dot(a, b)` and confirm it matches `np.dot`. The answer is 1.
 
-2. **Matrix product (10 minutes).** Multiply `A = [[1, 2], [0, 1], [3, 4]]` by `B = [[2, 0, 1], [1, 1, 0]]` on paper, then check with `A @ B`. Predict the shape of `B @ A` before computing it.
+2. **Matrix product.** Multiply `A = [[1, 2], [0, 1], [3, 4]]` by `B = [[2, 0, 1], [1, 1, 0]]` on paper, then check with `A @ B`. Predict the shape of `B @ A` before computing it.
 
-3. **MSE (10 minutes).** Targets `[5, 7, 9]` and predictions `[4, 7, 11]`. Compute the MSE by hand and confirm with NumPy. Write one sentence on which example contributes most.
+3. **MSE.** Targets `[5, 7, 9]` and predictions `[4, 7, 11]`. Compute the MSE by hand and confirm with NumPy. Write one sentence on which example contributes most.
 
-4. **One gradient step (10 minutes).** Use `X = [[1, 1], [1, 2]]`, `y = [2, 3]`, `w = [0, 0]` and a learning rate of 0.1. Compute the gradient and the new weights by hand, then check them in code.
+4. **One gradient step.** Use `X = [[1, 1], [1, 2]]`, `y = [2, 3]`, `w = [0, 0]` and a learning rate of 0.1. Compute the gradient and the new weights by hand, then check them in code.
 
-5. **Finite difference (10 minutes).** For the same data, compute the loss at `w = [0, 0]` and the numerical gradient by nudging each weight by `h = 1e-6`. Confirm it matches `[-5, -8]` to about six decimal places.
+5. **Finite difference.** For the same data, compute the loss at `w = [0, 0]` and the numerical gradient by nudging each weight by `h = 1e-6`. Confirm it matches `[-5, -8]` to about six decimal places.
 
-6. **Predict a line (10 minutes).** Use the three houses from the lesson with `w = [30, 3]` and confirm the MSE is 900. Then set `w = [0, 3]`. The new MSE is 0, because the houses lie exactly on `y = 3x`. Write one sentence on whether the intercept or the slope mattered more.
+6. **Predict a line.** Use the three houses from the lesson with `w = [30, 3]` and confirm the MSE is 900. Then set `w = [0, 3]`. The new MSE is 0, because the houses lie exactly on `y = 3x`. Write one sentence on whether the intercept or the slope mattered more.
 
 **Evidence to commit:** `warmup.py` and `notes.md` with your hand calculations and sentences.
 

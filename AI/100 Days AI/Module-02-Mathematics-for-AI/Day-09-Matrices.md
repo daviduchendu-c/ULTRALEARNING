@@ -40,7 +40,7 @@
 - [Identity](#identity)
 - [Inverse concept](#inverse-concept)
 - [Systems of equations](#systems-of-equations)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a matrix toolkit and a dense layer](#project-a-matrix-toolkit-and-a-dense-layer)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -255,7 +255,7 @@ A common mistake is treating an overdetermined system as if it had an exact answ
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Do the first four by hand, then check each one in Python.
 
@@ -481,3 +481,5 @@ def test_solve_known_system():
 ## Tomorrow
 
 Tomorrow you ask what a matrix does to space. Every matrix you met today is a linear transformation: it moves vectors, stretches them, flips them or squashes them. You will learn what a basis is, how the rank of a matrix tells you how many independent directions a dataset really uses, and why orthogonal directions are so valuable. Those ideas lead to eigenvalues, the singular value decomposition and dimensionality reduction, which are the tools that compress large feature sets and reveal their structure.
+
+**Next:** [Day 10: Linear Algebra for ML](Day-10-Linear-Algebra-for-ML.md)

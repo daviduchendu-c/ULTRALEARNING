@@ -32,14 +32,14 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Information](#information)
 - [Entropy](#entropy)
 - [Cross-entropy](#cross-entropy)
 - [KL divergence concept](#kl-divergence-concept)
 - [Why cross-entropy appears in classification and language models](#why-cross-entropy-appears-in-classification-and-language-models)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: an information theory lab](#project-an-information-theory-lab)
 - [Check your understanding](#check-your-understanding)
 - [Sources](#sources)
@@ -57,7 +57,7 @@ The big idea is that a loss is a measure of surprise. A good model is rarely sur
 
 ---
 
-## Background and history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -237,21 +237,21 @@ The honest limitation is that low cross-entropy does not mean a useful model. A 
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Create a folder called `day15-practice` and write your code in `practice.py`. Use the Python prompt for arithmetic checks, and write down each result.
 
-1. **Surprisal (10 minutes).** Compute the information in bits of a fair coin landing heads, one specific card from 52, and a roll of 6 on a fair die. Check each with `math.log2`.
+1. **Surprisal.** Compute the information in bits of a fair coin landing heads, one specific card from 52, and a roll of 6 on a fair die. Check each with `math.log2`.
 
-2. **Entropy (10 minutes).** Write `entropy(p)` in bits. Compute it for `[1/3, 1/3, 1/3]`, `[0.7, 0.2, 0.1]` and `[0.98, 0.01, 0.01]`. The first should equal `log2(3)`, about 1.585 bits. Write one sentence on which distribution is most predictable.
+2. **Entropy.** Write `entropy(p)` in bits. Compute it for `[1/3, 1/3, 1/3]`, `[0.7, 0.2, 0.1]` and `[0.98, 0.01, 0.01]`. The first should equal `log2(3)`, about 1.585 bits. Write one sentence on which distribution is most predictable.
 
-3. **Wrong model (10 minutes).** For `p = [0.5, 0.25, 0.125, 0.125]`, compute the cross-entropy against `q = [0.25, 0.25, 0.25, 0.25]` and against `q = [0.1, 0.1, 0.4, 0.4]`. The second should be larger.
+3. **Wrong model.** For `p = [0.5, 0.25, 0.125, 0.125]`, compute the cross-entropy against `q = [0.25, 0.25, 0.25, 0.25]` and against `q = [0.1, 0.1, 0.4, 0.4]`. The second should be larger.
 
-4. **Check the identity (10 minutes).** For the same pair, confirm that `cross_entropy = entropy + KL` to within `1e-9`. Swap the arguments of KL and note whether the value changes.
+4. **Check the identity.** For the same pair, confirm that `cross_entropy = entropy + KL` to within `1e-9`. Swap the arguments of KL and note whether the value changes.
 
-5. **Logits and loss (10 minutes).** With true class 0, compute the cross-entropy in nats for logits `[2.0, 1.0, 0.1]`, `[10.0, 1.0, 0.1]` and `[-5.0, 1.0, 0.1]`. Explain in one sentence why the loss changes as it does.
+5. **Logits and loss.** With true class 0, compute the cross-entropy in nats for logits `[2.0, 1.0, 0.1]`, `[10.0, 1.0, 0.1]` and `[-5.0, 1.0, 0.1]`. Explain in one sentence why the loss changes as it does.
 
-6. **Gradients (10 minutes).** Compare the cross-entropy and squared error gradients twice: with logits `[-4, 4, 0]` and true class 1 (the model is correct), and with logits `[4, -4, 0]` and true class 1 (the model is confidently wrong). Write one sentence on which gradient is large in the wrong case.
+6. **Gradients.** Compare the cross-entropy and squared error gradients twice: with logits `[-4, 4, 0]` and true class 1 (the model is correct), and with logits `[4, -4, 0]` and true class 1 (the model is confidently wrong). Write one sentence on which gradient is large in the wrong case.
 
 **Evidence to commit:** `practice.py` and `notes.md` with your numbers and sentences.
 
@@ -473,3 +473,5 @@ def test_one_hot_cross_entropy_is_negative_log_probability():
 ## Tomorrow
 
 Tomorrow is Day 16, the Mathematics Project. You will build vectors, matrices, a linear regression model, the mean squared error loss and a gradient descent loop from scratch, using NumPy arrays but no machine learning framework. Every piece comes from Days 8 to 15: the vector and matrix operations, the derivative of the loss, the optimization loop and the loss measures you have just studied.
+
+**Next:** [Day 16: Mathematics Project](Day-16-Mathematics-Project.md)

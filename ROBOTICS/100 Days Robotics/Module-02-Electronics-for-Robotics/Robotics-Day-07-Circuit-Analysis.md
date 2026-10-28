@@ -31,7 +31,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Series circuits](#series-circuits)
 - [Parallel circuits](#parallel-circuits)
@@ -40,7 +40,7 @@
 - [Current division](#current-division)
 - [Kirchhoff's current law](#kirchhoffs-current-law)
 - [Kirchhoff's voltage law](#kirchhoffs-voltage-law)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a resistor network calculator with a SPICE check](#project-a-resistor-network-calculator-with-a-spice-check)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -58,7 +58,7 @@ On the job, a sensor reads 2.9 V on one board and 2.2 V on another, and the engi
 
 ---
 
-## Background and history
+## Short history
 
 Network analysis grew out of the telegraph and telephone industries, where engineers needed to predict signals over long lines.
 
@@ -200,7 +200,7 @@ KVL underlies the checks used by design and test engineers: when the measured lo
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Predict every value on paper before you measure it. Record predicted and measured values side by side.
 
@@ -353,3 +353,5 @@ def kcl_residual(currents_in: list[float], currents_out: list[float]) -> float:
 ## Tomorrow
 
 Tomorrow you meet the parts that fill these circuits. Today every component was a plain resistor. Tomorrow you cover potentiometers, capacitors, inductors, diodes, LEDs, switches, relays, connectors and fuses. Capacitors and inductors change over time, so the steady-state rules from today will need a time dimension. You will see how a capacitor's charge curve explains a button that bounces, and why a motor coil needs a flyback diode.
+
+**Next:** [Day 8: Components](Robotics-Day-08-Components.md)

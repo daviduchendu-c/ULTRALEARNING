@@ -41,7 +41,7 @@
 - [Engineering notebook](#engineering-notebook)
 - [Bill of materials](#bill-of-materials)
 - [Version control](#version-control)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a one-page requirements and test plan](#project-a-one-page-requirements-and-test-plan)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -320,15 +320,15 @@ In a portfolio, a repository with readable commit messages and tags shows a revi
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Requirements rewrite (about 15 minutes).** Rewrite each vague statement as a testable "shall" plus a spec: "The robot should be fast." "The battery should last a long time." "It should be quiet." "It should be safe around people."
+**Exercise 1: Requirements rewrite.** Rewrite each vague statement as a testable "shall" plus a spec: "The robot should be fast." "The battery should last a long time." "It should be quiet." "It should be safe around people."
 
-**Exercise 2: Stopping distance (about 10 minutes).** For speeds of 0.1, 0.25 and 0.5 m/s, with 0.5 m/s² deceleration and 100 ms reaction time, compute the stopping distance. Check: at 0.5 m/s you get 0.25 m + 0.05 m = 0.30 m, exactly the R3 detection distance. What does that tell you about raising the speed?
+**Exercise 2: Stopping distance.** For speeds of 0.1, 0.25 and 0.5 m/s, with 0.5 m/s² deceleration and 100 ms reaction time, compute the stopping distance. Check: at 0.5 m/s you get 0.25 m + 0.05 m = 0.30 m, exactly the R3 detection distance. What does that tell you about raising the speed?
 
-**Exercise 3: Three drawings (about 20 minutes).** For a Raspberry Pi Pico reading one HC-SR04 ultrasonic sensor (VCC, TRIG, ECHO, GND), draw a block diagram, a wiring diagram with colors, and a rough hand-drawn schematic. The HC-SR04's echo pin outputs 5 V when powered from 5 V, and the Pico is a 3.3 V device. Write in your notebook how you would handle that: a voltage divider, or a 3.3 V-compatible sensor variant. You will size the divider in Module 2.
+**Exercise 3: Three drawings.** For a Raspberry Pi Pico reading one HC-SR04 ultrasonic sensor (VCC, TRIG, ECHO, GND), draw a block diagram, a wiring diagram with colors, and a rough hand-drawn schematic. The HC-SR04's echo pin outputs 5 V when powered from 5 V, and the Pico is a 3.3 V device. Write in your notebook how you would handle that: a voltage divider, or a 3.3 V-compatible sensor variant. You will size the divider in Module 2.
 
-**Exercise 4: Git practice (about 15 minutes).** Complete the first levels of Learn Git Branching, or create a local repo, make three commits and one tag, and run `git log --oneline`.
+**Exercise 4: Git practice.** Complete the first levels of Learn Git Branching, or create a local repo, make three commits and one tag, and run `git log --oneline`.
 
 ---
 
@@ -447,3 +447,5 @@ The commit message should say what the commit contains.
 ## Tomorrow
 
 Day 4, **Measurement and Engineering Tools**, moves from the desk to the bench. Today you wrote specifications and test plans. Tomorrow you learn the instruments that produce the numbers in those plans: multimeters, bench power supplies, oscilloscopes, logic analyzers, calipers, breadboards and soldering tools. You will also learn to read a datasheet and debug in a fixed order. Your test log from today gets its first real column of measurements.
+
+**Next:** [Day 4: Measurement and Engineering Tools](Robotics-Day-04-Measurement-and-Engineering-Tools.md)

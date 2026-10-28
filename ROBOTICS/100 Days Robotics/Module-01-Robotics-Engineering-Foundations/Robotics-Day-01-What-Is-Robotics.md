@@ -39,7 +39,7 @@
 - [Actuators](#actuators)
 - [Compute](#compute)
 - [Types of robots](#types-of-robots)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a simulated differential-drive robot on your laptop](#project-a-simulated-differential-drive-robot-on-your-laptop)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -201,9 +201,9 @@ Pick one robot and ask which of the four loop jobs is hardest. For a mobile robo
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Decompose five robots (about 40 minutes).**
+**Exercise 1: Decompose five robots.**
 
 1. Pick five robots from videos, products or real life. Include at least one mobile robot and one arm.
 2. Create `notes/robot-types.md` with this table header and one row per robot:
@@ -215,7 +215,7 @@ Pick one robot and ask which of the four loop jobs is hardest. For a mobile robo
 4. In the algorithms column, write what the robot decides, such as "follows a line" or "avoids obstacles." Do not write "AI" unless you can say what it learns.
 5. Check each row against a product page or manufacturer video. Mark unconfirmed cells with a question mark.
 
-**Exercise 2: Open or closed loop (about 20 minutes).**
+**Exercise 2: Open or closed loop.**
 
 1. List five everyday machines: a kettle, a washing machine, a car's cruise control, a microwave and a dishwasher.
 2. For each, write `open loop` or `closed loop`, and name the sensor that makes it closed loop, if any.
@@ -518,3 +518,5 @@ Create `README.md`. Paste the two printed lines at the top, then answer these qu
 ## Tomorrow
 
 Day 2, **Anatomy of a Robot**, opens the box. You will map each block from today's loop to real hardware: microcontrollers such as the Arduino Uno, single-board computers such as the Raspberry Pi, motor drivers, batteries and frames. Bring your five-robot table, because tomorrow you will compare each robot's parts with parts you can buy.
+
+**Next:** [Day 2: Anatomy of a Robot](Robotics-Day-02-Anatomy-of-a-Robot.md)

@@ -33,7 +33,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Electric charge](#electric-charge)
 - [Voltage](#voltage)
@@ -43,7 +43,7 @@
 - [DC and AC](#dc-and-ac)
 - [Conductors and insulators](#conductors-and-insulators)
 - [Ground and reference](#ground-and-reference)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a power and energy calculator with a bench log](#project-a-power-and-energy-calculator-with-a-bench-log)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -61,7 +61,7 @@ Today is about vocabulary and measurement. You will build one circuit, measure i
 
 ---
 
-## Background and history
+## Short history
 
 The units were named later than the ideas, and the ideas arrived in a useful order.
 
@@ -221,7 +221,7 @@ Printed circuit board designers route a solid ground plane for the same reason: 
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 These exercises need a DMM, a breadboard, a 9 V battery, resistors and one red LED. Write every reading in a table, because the table is the bench log for the project.
 
@@ -357,3 +357,5 @@ def battery_runtime_h(capacity_mah: float, voltage_v: float, load_w: float) -> f
 ## Tomorrow
 
 Tomorrow you combine resistors. Today you analyzed one resistor on one source. Circuit analysis covers resistors in series and parallel, how they divide voltage and current, and Kirchhoff's laws for any loop or junction. You will predict every voltage and current before you wire the circuit, and the bench log from today is the test of those predictions.
+
+**Next:** [Day 7: Circuit Analysis](Robotics-Day-07-Circuit-Analysis.md)

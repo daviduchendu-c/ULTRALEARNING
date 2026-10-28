@@ -38,7 +38,7 @@
 - [Package managers and virtual environments](#package-managers-and-virtual-environments)
 - [VS Code](#vs-code)
 - [Debugging](#debugging)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: prove your environment works](#project-prove-your-environment-works)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -290,17 +290,17 @@ Changing code at random until the error disappears hides the bug instead of fixi
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Install commands are in the install section. Complete those first.
 
-1. **Check the install (5 minutes).** In a new PowerShell window, run `git --version`, `py --version` and `code --version`. Run `wsl -l -v`. *Check:* all three print versions and `wsl -l -v` shows VERSION 2.
-2. **Terminal (5 minutes).** Open a PowerShell tab and an Ubuntu tab. In each, print where you are (`Get-Location` and `pwd`). *Check:* one shows `C:\Users\...`, the other `/home/...`.
-3. **Filesystem (10 minutes).** In Ubuntu, run `cd /mnt/c/Users` and `ls`, then `cd ~` and `explorer.exe .`. *Check:* File Explorer opens on your Linux home, and you can say why `/mnt/c` and `~` are different trees.
-4. **PATH (10 minutes).** Run `where.exe python` and `where.exe py` in PowerShell, then `which python3` and `which code` in Ubuntu. *Check:* you can say which file runs for each name, and whether the App Execution Alias appears first.
-5. **Environment variables (5 minutes).** In PowerShell, run `$env:APP_GREETING = "Hi"`. Open a second tab and run `$env:APP_GREETING`. *Check:* the second tab is empty, and you can explain why, using Day 2's idea of separate processes.
-6. **Packages (5 minutes).** In a venv, install `requests` and run `pip freeze`. *Check:* `requests` and its dependency `urllib3` are listed.
-7. **Bytecode (5 minutes).** Save the `dis` example from Day 2 as `bytecode.py` and run `py bytecode.py`. *Check:* you see `LOAD_FAST`-style instructions.
+1. **Check the install.** In a new PowerShell window, run `git --version`, `py --version` and `code --version`. Run `wsl -l -v`. *Check:* all three print versions and `wsl -l -v` shows VERSION 2.
+2. **Terminal.** Open a PowerShell tab and an Ubuntu tab. In each, print where you are (`Get-Location` and `pwd`). *Check:* one shows `C:\Users\...`, the other `/home/...`.
+3. **Filesystem.** In Ubuntu, run `cd /mnt/c/Users` and `ls`, then `cd ~` and `explorer.exe .`. *Check:* File Explorer opens on your Linux home, and you can say why `/mnt/c` and `~` are different trees.
+4. **PATH.** Run `where.exe python` and `where.exe py` in PowerShell, then `which python3` and `which code` in Ubuntu. *Check:* you can say which file runs for each name, and whether the App Execution Alias appears first.
+5. **Environment variables.** In PowerShell, run `$env:APP_GREETING = "Hi"`. Open a second tab and run `$env:APP_GREETING`. *Check:* the second tab is empty, and you can explain why, using Day 2's idea of separate processes.
+6. **Packages.** In a venv, install `requests` and run `pip freeze`. *Check:* `requests` and its dependency `urllib3` are listed.
+7. **Bytecode.** Save the `dis` example from Day 2 as `bytecode.py` and run `py bytecode.py`. *Check:* you see `LOAD_FAST`-style instructions.
 
 ---
 
@@ -542,3 +542,5 @@ Create the GitHub repo and upload the files with **Add file > Upload files**. Do
 ## Tomorrow
 
 Day 4: Linux CLI I moves into the Ubuntu terminal you set up today. You will move around and manage files with `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv` and `rm`. You will read files with `cat` and `less`, look up any command with `man`, and tour the Linux filesystem from `/` down to your home folder. The filesystem tree, PATH and WSL's two worlds from today are the map. Tomorrow you learn to walk it quickly and safely.
+
+**Next:** [Day 4: Linux CLI I](Software-Day-04-Linux-CLI-I.md)

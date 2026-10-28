@@ -39,7 +39,7 @@
 - [Processes](#processes)
 - [Stack and heap](#stack-and-heap)
 - [Binary and data representation](#binary-and-data-representation)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: trace one feature through the machine](#project-trace-one-feature-through-the-machine)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -309,40 +309,40 @@ Payment APIs such as Stripe send amounts as integers in the smallest currency un
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Write your answers in a notes file. You will use them in the project.
 
-**Exercise 1: Processes (about 10 minutes).**
+**Exercise 1: Processes.**
 
 1. Open Notepad twice and open Task Manager. Check: both windows are open.
 2. On the Details tab, write down both PIDs. Check: you have two different PIDs written down.
 3. On the Performance tab, write down your CPU model, core count, clock speed, total RAM and disk type. Check: all five are in your notes.
 4. Close one Notepad and confirm the other PID is still there. Check: one `Notepad.exe` row remains.
 
-**Exercise 2: Bytes on disk (about 5 minutes).**
+**Exercise 2: Bytes on disk.**
 
 1. Create a text file containing `hi` on your desktop.
 2. In Properties, note "Size" and "Size on disk." Check: you can explain why they differ.
 
-**Exercise 3: Stack frames (about 15 minutes).**
+**Exercise 3: Stack frames.**
 
 1. Step through the `factorial(3)` code in Python Tutor.
 2. Draw the stack at its deepest point. Check: your drawing has four `factorial` frames.
 3. Run `factorial(5000)` and copy the error message. Check: it names `RecursionError`.
 
-**Exercise 4: Compilation (about 10 minutes).**
+**Exercise 4: Compilation.**
 
 1. In Compiler Explorer, compile the C `square` function with `-O0`, then with `-O2`.
 2. Count the instructions in each. Check: `-O2` has fewer, and you can explain in one sentence why (the optimizer removed steps that do not change the result).
 
-**Exercise 5: Binary by hand (about 15 minutes).**
+**Exercise 5: Binary by hand.**
 
 1. Without a calculator, convert 6, 19, 100 and 255 to binary.
 2. Convert `10110` and `11111111` to decimal, convert `0x2A` to decimal, and write -1 as 8-bit two's complement.
 3. Check each answer in the browser console with `(19).toString(2)`, `parseInt("10110", 2)` and `0x2A`. Check: all eight match.
 
-**Exercise 6: Floating point and text (about 5 minutes).**
+**Exercise 6: Floating point and text.**
 
 1. In the console, run `0.1 + 0.2`, `0.1 + 0.2 === 0.3` and `new TextEncoder().encode("Café 😀")`.
 2. Check: you can explain why the byte count is larger than the character count.
@@ -387,7 +387,7 @@ Create `trace.md`. On one page, write the following:
 6. Storage: when does the data reach disk, and what does a crash one second earlier lose?
 7. Failure: three failure modes from this lesson that could hit this feature.
 
-This should take about 30 minutes. Commit it:
+Commit it:
 
 ```bash
 git add trace.md
@@ -462,3 +462,5 @@ git commit -m "Add feature trace"
 ## Tomorrow
 
 Day 3, Developer Environment, turns your laptop into a working engineer's machine. You will install VS Code, Git and Python on Windows 11, set up WSL 2 so you have a real Linux system for Day 4: Linux CLI I and Day 5: Linux CLI II, and learn how the terminal finds programs through PATH and environment variables. Today's ideas come back in each part. The terminal starts processes, PATH decides which program file gets loaded into memory, and the debugger pauses the CPU on a line so you can inspect the stack frames you drew today.
+
+**Next:** [Day 3: Developer Environment](Software-Day-03-Developer-Environment.md)

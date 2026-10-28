@@ -41,7 +41,7 @@
 - [Models, parameters and algorithms](#models-parameters-and-algorithms)
 - [AI engineering vs ML engineering vs data science vs research](#ai-engineering-vs-ml-engineering-vs-data-science-vs-research)
 - [The AI field map (today's output)](#the-ai-field-map-todays-output)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a rule-based bot and a learned bot that solve the same problem](#project-a-rule-based-bot-and-a-learned-bot-that-solve-the-same-problem)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -499,9 +499,9 @@ Solid arrows from the top are **is-a-subset-of** relationships (methods). Dotted
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Build your AI field map (about 30 minutes).**
+**Exercise 1: Build your AI field map.**
 
 1. Open a blank page, paper or whiteboard tool. Write the title "AI field map."
 2. Without looking, draw the nested method boxes from the methods part of the field map: AI, symbolic AI, ML, classical ML, DL, LLMs.
@@ -511,7 +511,7 @@ Solid arrows from the top are **is-a-subset-of** relationships (methods). Dotted
 6. List five real products you use each week. Use these if you need ideas: a phone camera that finds faces, a maps app that suggests a route, a music app's recommendations, autocorrect, a voice assistant, a spam filter, a photo app that searches by "dog" or "beach."
 7. Place each product on your map, and next to it write one line in this form: `Product: category, because <one reason>`. The category must be one of: symbolic, classical ML, deep learning, generative. If you are not sure, write `unsure, check later`. That is an honest answer, and you will revisit it on Day 2.
 
-**Exercise 2: Problem sorting (about 30 minutes).**
+**Exercise 2: Problem sorting.**
 
 Write the answer to each problem below in this form: `Problem number: rules, learning, or mix, because <one sentence>`. Do not look up anything. Use your best guess and the definitions from the symbolic vs statistical AI section.
 
@@ -530,7 +530,7 @@ Write the answer to each problem below in this form: `Problem number: rules, lea
 
 If you disagreed with three or more of these, reread the symbolic vs statistical AI section before the project.
 
-**Exercise 3: Predictive or generative? (about 5 minutes).** For problems 2, 3, 4, 8 and 9 above, write `predictive` or `generative`. Answers: 2 predictive, 3 predictive, 4 generative (the answer is new text), 8 predictive, 9 predictive.
+**Exercise 3: Predictive or generative?.** For problems 2, 3, 4, 8 and 9 above, write `predictive` or `generative`. Answers: 2 predictive, 3 predictive, 4 generative (the answer is new text), 8 predictive, 9 predictive.
 
 ---
 
@@ -848,3 +848,5 @@ In `README.md`, answer these questions in full sentences. Paste the accuracy tab
 ## Tomorrow
 
 Day 2, **How Machines Learn**, introduces data, features, labels, loss and training in detail. Bring your field map, your answer key results from Exercise 2, and your `compare.py` output. You will revisit the learned bot and ask what exactly it learned: which words pushed a message toward each label.
+
+**Next:** [Day 2: How Machines Learn](Day-02-How-Machines-Learn.md)

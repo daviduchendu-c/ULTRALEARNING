@@ -32,7 +32,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background / history](#background--history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Limits concept](#limits-concept)
 - [Slopes](#slopes)
@@ -41,7 +41,7 @@
 - [Chain rule](#chain-rule)
 - [Gradients](#gradients)
 - [Connecting derivatives to learning](#connecting-derivatives-to-learning)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a numerical gradient checker](#project-a-numerical-gradient-checker)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -59,7 +59,7 @@ On the job, derivatives appear when you write a custom loss function, when you t
 
 ---
 
-## Background / history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -250,7 +250,7 @@ Reading the gradient's sign as the amount to change the parameter is a common mi
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work the first four on paper, then check each one numerically.
 
@@ -454,3 +454,5 @@ def test_one_step_lowers_loss():
 ## Tomorrow
 
 Tomorrow you turn the single gradient step into an optimization loop. You will study objective functions, minima and maxima, the difference between local and global minima, and why a convex function is easy to optimize. Then you will implement gradient descent by hand, study how the learning rate decides whether training converges, and meet stochastic gradient descent, which estimates the gradient from a small batch of data. The gradient you computed today is the input to every step.
+
+**Next:** [Day 12: Calculus II: Optimization](Day-12-Calculus-II-Optimization.md)

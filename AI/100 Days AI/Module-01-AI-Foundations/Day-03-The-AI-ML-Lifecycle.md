@@ -45,7 +45,7 @@
 - [Data leakage](#data-leakage)
 - [Training, validation and test sets](#training-validation-and-test-sets)
 - [The work around training](#the-work-around-training)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: your briefs and a leakage check](#project-your-briefs-and-a-leakage-check)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -359,9 +359,9 @@ Job listings for AI engineers mention data pipelines, evaluation and deployment 
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: name the stage that failed (about 25 minutes).** For each story, write `Story number: stage, because <one sentence>`.
+**Exercise 1: name the stage that failed.** For each story, write `Story number: stage, because <one sentence>`.
 
 1. A churn model scores 0.99 accuracy. One of its features is "account closed date."
 2. A face-unlock model works well in the office and badly for users with darker skin, who were barely in the training photos.
@@ -373,7 +373,7 @@ Job listings for AI engineers mention data pipelines, evaluation and deployment 
 
 **Answer key:** 1 features (leakage: the feature is only known after churn). 2 data collection (unrepresentative data), caught too late because evaluation did not check subgroups. 3 monitoring (concept or data drift), followed by iteration. 4 baseline (there was none). 5 testing (the test set was used as a validation set). 6 deployment (training/serving skew). 7 monitoring (only uptime was watched, not predictions).
 
-**Exercise 2: write a project brief (about 35 minutes).** Write the brief for the delivery case first, using the stage sections above as your source. Then write one for a case of your own, such as (a) a gym that wants to predict which members will cancel next month, or (b) a city that wants to predict which streetlights will fail this week. Use this structure:
+**Exercise 2: write a project brief.** Write the brief for the delivery case first, using the stage sections above as your source. Then write one for a case of your own, such as (a) a gym that wants to predict which members will cancel next month, or (b) a city that wants to predict which streetlights will fail this week. Use this structure:
 
 ```markdown
 # Project brief: <name>
@@ -578,3 +578,5 @@ In `README.md`, write full sentences for each of these:
 ## Tomorrow
 
 Day 4, **AI Problem Formulation**, zooms in on the problem definition stage. Today you saw that a vague request ("use AI for late deliveries") has to become a precise prediction before anything else can happen. Tomorrow you learn the menu of shapes that prediction can take: classification, regression, ranking, clustering, generation, detection, segmentation, forecasting, recommendation, anomaly detection and control. You will map 20 real problems to the right shape, and see that the same dataset scored three different ways gives three very different answers to "is the model good?" Bring your two project briefs. You will check whether you chose the right formulation for each.
+
+**Next:** [Day 4: AI Problem Formulation](Day-04-AI-Problem-Formulation.md)

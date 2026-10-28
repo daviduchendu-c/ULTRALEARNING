@@ -43,7 +43,7 @@
 - [Software architecture](#software-architecture)
 - [Bill of materials and budget](#bill-of-materials-and-budget)
 - [Risks and design review](#risks-and-design-review)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: your first robot system design](#project-your-first-robot-system-design)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -404,13 +404,13 @@ The common mistake is running the review as a formality and ticking boxes withou
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-1. **Carpet rerun (15 min).** Repeat the torque calculation from the Actuators section with a rolling resistance coefficient of 0.08. Check: rolling force 1.57 N, total 4.28 N, 2.14 N per wheel, torque 0.070 N·m, and 0.14 N·m with the safety factor of 2. That is 47 percent of the 0.30 N·m stall spec. It is under stall, but above the one-third guideline. Decide what you would change: a larger motor, a higher-torque gearbox, or a thinner margin you accept and record.
-2. **Runtime with a LiDAR (10 min).** Add a 2.5 W LiDAR to the power budget. Recalculate the 2S2P runtime.
-3. **Stopping at top speed (10 min).** If you raise top speed to 0.5 m/s, what detection distance do you need with 0.10 m of margin? Use the Day 3 method.
-4. **Matrix sensitivity (10 min).** Change the R7 weight from 4 to 2 in the Compute decision matrix. Which option wins? Write one sentence on what that means for your choice.
-5. **Datasheet check (15 min).** Find a real listing or datasheet for one gearmotor you would buy. Record rated voltage, no-load rpm, stall torque and stall current. Does it meet the spec from the Actuators section?
+1. **Carpet rerun.** Repeat the torque calculation from the Actuators section with a rolling resistance coefficient of 0.08. Check: rolling force 1.57 N, total 4.28 N, 2.14 N per wheel, torque 0.070 N·m, and 0.14 N·m with the safety factor of 2. That is 47 percent of the 0.30 N·m stall spec. It is under stall, but above the one-third guideline. Decide what you would change: a larger motor, a higher-torque gearbox, or a thinner margin you accept and record.
+2. **Runtime with a LiDAR.** Add a 2.5 W LiDAR to the power budget. Recalculate the 2S2P runtime.
+3. **Stopping at top speed.** If you raise top speed to 0.5 m/s, what detection distance do you need with 0.10 m of margin? Use the Day 3 method.
+4. **Matrix sensitivity.** Change the R7 weight from 4 to 2 in the Compute decision matrix. Which option wins? Write one sentence on what that means for your choice.
+5. **Datasheet check.** Find a real listing or datasheet for one gearmotor you would buy. Record rated voltage, no-load rpm, stall torque and stall current. Does it meet the spec from the Actuators section?
 
 ---
 
@@ -551,3 +551,5 @@ Evidence to commit: all Markdown documents, `bom.csv`, `power-budget.csv`, the M
 ## Tomorrow
 
 Day 6, **Electricity Fundamentals**, is the first day of Module 2: Electronics for Robotics, and it follows the last day of Module 1. Today you used watts, volts, amps and watt-hours without explaining them. Tomorrow covers charge, voltage, current, resistance, power and energy, DC and AC, conductors, and what "ground" means, built around `V = IR` and `P = VI`. Every line of today's power budget is a `P = VI` calculation, and the battery divider is `V = IR` in action. Keep the Day 5 repo open. By the end of Module 2, you will be able to check every electrical number in it yourself.
+
+**Next:** [Day 6: Electricity Fundamentals](../Module-02-Electronics-for-Robotics/Robotics-Day-06-Electricity-Fundamentals.md)

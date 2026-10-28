@@ -46,7 +46,7 @@ Each index file lists every day with its study topics, its output or exercise, a
 2. The big idea: why the topic matters on the job
 3. Glossary of new terms
 4. Concept deep dives, with analogies, worked examples, common mistakes, and real-world use
-5. Hands-on exercises (about 60 minutes)
+5. Hands-on exercises
 6. A project with a repo layout, starter steps, and a "done when" list
 7. Check-your-understanding questions with answers
 8. Sources: official docs, tutorials, videos, and one practice resource

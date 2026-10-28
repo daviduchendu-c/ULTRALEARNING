@@ -39,7 +39,7 @@
 - [Buses: how the parts talk](#buses-how-the-parts-talk)
 - [Compute: MCUs, SBCs, CPUs and GPUs](#compute-mcus-sbcs-cpus-and-gpus)
 - [Firmware and high-level software](#firmware-and-high-level-software)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: draw the architecture of a small wheeled robot](#project-draw-the-architecture-of-a-small-wheeled-robot)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -310,17 +310,17 @@ Job postings for embedded robotics roles often ask for STM32 or ESP32 firmware n
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: Parts hunt (about 15 minutes).** Open the ROBOTIS TurtleBot3 Burger specifications page (search "TurtleBot3 specifications" on emanual.robotis.com). List its SBC, MCU board, motors, LiDAR, battery and frame material. Put each one into a layer of the map of a mobile robot.
+**Exercise 1: Parts hunt.** Open the ROBOTIS TurtleBot3 Burger specifications page (search "TurtleBot3 specifications" on emanual.robotis.com). List its SBC, MCU board, motors, LiDAR, battery and frame material. Put each one into a layer of the map of a mobile robot.
 
-**Exercise 2: Compute sizing (about 10 minutes).** For each task, choose an MCU, an SBC or an SBC with GPU, and write one sentence on why: blink an LED at exactly 1 Hz; detect people in a camera image at 10 frames per second; build a 2D map of a room; balance a two-wheeled robot. Check: the LED and the balancing robot need an MCU, the camera task needs an SBC with GPU, and the mapping task runs on an SBC.
+**Exercise 2: Compute sizing.** For each task, choose an MCU, an SBC or an SBC with GPU, and write one sentence on why: blink an LED at exactly 1 Hz; detect people in a camera image at 10 frames per second; build a 2D map of a room; balance a two-wheeled robot. Check: the LED and the balancing robot need an MCU, the camera task needs an SBC with GPU, and the mapping task runs on an SBC.
 
-**Exercise 3: Encoder math (about 10 minutes).** A motor encoder gives 7 counts per motor revolution (counting one edge). The gearbox is 30:1 and the wheel is 80 mm in diameter. Compute the distance per count. Check: 7 × 30 = 210 counts per wheel revolution, and π × 0.08 / 210 ≈ 1.2 mm.
+**Exercise 3: Encoder math.** A motor encoder gives 7 counts per motor revolution (counting one edge). The gearbox is 30:1 and the wheel is 80 mm in diameter. Compute the distance per count. Check: 7 × 30 = 210 counts per wheel revolution, and π × 0.08 / 210 ≈ 1.2 mm.
 
-**Exercise 4: Power math (about 10 minutes).** Your robot draws an average of 6 W. Your pack is 3S LiPo, 2,200 mAh (11.1 V nominal). Compute the watt-hours and the theoretical runtime. Cut the runtime by 20 percent for losses, and say why the real runtime is still lower. Check: 11.1 × 2.2 ≈ 24.4 Wh, which is about 4.1 hours, or about 3.3 hours after the 20 percent cut.
+**Exercise 4: Power math.** Your robot draws an average of 6 W. Your pack is 3S LiPo, 2,200 mAh (11.1 V nominal). Compute the watt-hours and the theoretical runtime. Cut the runtime by 20 percent for losses, and say why the real runtime is still lower. Check: 11.1 × 2.2 ≈ 24.4 Wh, which is about 4.1 hours, or about 3.3 hours after the 20 percent cut.
 
-**Exercise 5: Bus assignment (about 15 minutes).** You have an IMU (I2C), a GPS (UART), a small display (SPI) and a link to the SBC (USB serial). Draw the wires from each to an ESP32 or Pico. Mark which devices share a bus and which need their own pins.
+**Exercise 5: Bus assignment.** You have an IMU (I2C), a GPS (UART), a small display (SPI) and a link to the SBC (USB serial). Draw the wires from each to an ESP32 or Pico. Mark which devices share a bus and which need their own pins.
 
 ---
 
@@ -451,3 +451,5 @@ Write what happens if the USB link drops, the battery runs low, or the front sen
 ## Tomorrow
 
 Day 3, **Robotics Engineering Workflow**, covers process. Today you learned what a robot is made of. Tomorrow you learn the order in which engineers make those decisions: problem, requirements, specifications, architecture, then mechanics, electronics, firmware and software, followed by simulation, prototyping, testing and documentation. Keep today's architecture note open. You will write the requirements it should have started from, and check which of your part choices survive them.
+
+**Next:** [Day 3: Robotics Engineering Workflow](Robotics-Day-03-Robotics-Engineering-Workflow.md)

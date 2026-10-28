@@ -31,7 +31,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Mean](#mean)
 - [Median](#median)
@@ -43,7 +43,7 @@
 - [Bias](#bias)
 - [Confidence concepts](#confidence-concepts)
 - [Statistical distributions](#statistical-distributions)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: statistics from scratch](#project-statistics-from-scratch)
 - [Check your understanding](#check-your-understanding)
 - [Sources](#sources)
@@ -61,7 +61,7 @@ The big idea is that every statistic is a summary, and every summary throws info
 
 ---
 
-## Background and history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -301,21 +301,21 @@ In the market, distribution checks come before any model is trained. Fraud amoun
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Create a folder called `day14-practice` and write your code in `practice.py`. Use any CSV file with a numeric column, or the study-hours data from this lesson.
 
-1. **Summarize one column (10 minutes).** Print the mean, median, sample standard deviation (`ddof=1`), minimum and maximum. Write one sentence on whether the mean and median agree.
+1. **Summarize one column.** Print the mean, median, sample standard deviation (`ddof=1`), minimum and maximum. Write one sentence on whether the mean and median agree.
 
-2. **Stress the summaries (10 minutes).** Multiply the largest value by 100 and recompute the mean and median. Record how much each moved and explain why in one sentence.
+2. **Stress the summaries.** Multiply the largest value by 100 and recompute the mean and median. Record how much each moved and explain why in one sentence.
 
-3. **Units and correlation (10 minutes).** For two numeric columns, compute the covariance and correlation. Multiply one column by 1000 and compute both again. Record which number changed and which did not, and explain why.
+3. **Units and correlation.** For two numeric columns, compute the covariance and correlation. Multiply one column by 1000 and compute both again. Record which number changed and which did not, and explain why.
 
-4. **Biased sampling (10 minutes).** From a normal population with mean 100 and standard deviation 15, draw a random sample of 500 and a biased sample of 500 from values above 95. Print both means and the population mean. Then repeat the biased version with 5,000 values and note whether the bias shrinks.
+4. **Biased sampling.** From a normal population with mean 100 and standard deviation 15, draw a random sample of 500 and a biased sample of 500 from values above 95. Print both means and the population mean. Then repeat the biased version with 5,000 values and note whether the bias shrinks.
 
-5. **Coverage check (10 minutes).** Change the coverage simulation to `n = 100`, run 10,000 trials and record the coverage. Then use the t multiplier 1.984 in place of 1.96 and record the new coverage. Explain the change in one sentence.
+5. **Coverage check.** Change the coverage simulation to `n = 100`, run 10,000 trials and record the coverage. Then use the t multiplier 1.984 in place of 1.96 and record the new coverage. Explain the change in one sentence.
 
-6. **Describe your dataset (10 minutes).** Write a paragraph on your column: its shape, the summary you would report to a manager, one caveat about the sample, and one statistic you would not report and why.
+6. **Describe your dataset.** Write a paragraph on your column: its shape, the summary you would report to a manager, one caveat about the sample, and one statistic you would not report and why.
 
 **Evidence to commit:** `practice.py` and `notes.md` with the results of each step and your sentences.
 
@@ -548,3 +548,5 @@ def test_correlation_bounds():
 ## Tomorrow
 
 Tomorrow is Day 15, Information Theory. Today you summarized data and checked whether a summary can be trusted. Information theory asks how much an observation tells you, and how many bits a random outcome needs. You will meet entropy, cross-entropy and KL divergence, which explain why classifiers are trained with cross-entropy loss. The variance and probability ideas from this day and Day 13 are the foundation for that work.
+
+**Next:** [Day 15: Information Theory](Day-15-Information-Theory.md)

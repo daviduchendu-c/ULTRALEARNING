@@ -21,13 +21,13 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
    - **In this guide you are going to cover the following:** a plain bulleted list (no numbers) that links to every `##` section and every concept `###` heading, using GitHub anchors (for example `[Introduction](#introduction)`). Then a `---` line.
    - Headings carry no numbers anywhere. Open the body with `## Introduction`, not "The big idea". Do not add group headings above concept sections unless the group holds its own diagram or intro that the concepts need.
 2. **The big idea**: one paragraph that explains why this topic matters on the job.
-3. **Background / history** (only if it helps understanding): a short table of how the idea evolved.
+3. **Short history** (only if it helps understanding): a short table of how the idea evolved.
 4. **Glossary**: every new term, defined in plain language, one line each.
 5. **Concept deep dives**: one subsection per concept in the outline. For each one give:
    - Each concept is a `###` heading with a short step-by-step flow. Do not label the parts (no "Intuition", "Definition", "Example", "Trap" or "On the job" tags in bold). Write them as ordinary paragraphs that follow this order: start with an everyday analogy, break the idea into first principles, give the definition, work an example with numbers or a small code snippet when the topic is technical, name one common mistake and how to spot it, and end with one sentence on where the concept shows up in the real market (which job, product or tool uses it).
    - Decide first what is essential for this topic and cover that fully.
    - Use ASCII diagrams or Mermaid where a picture explains a structure, and name a reference image to search for when a visual helps.
-6. **Hands-on exercises** (about 60 minutes): concrete, checkable steps.
+6. **Hands-on exercises**: concrete, checkable steps.
 7. **Project (GitHub, project-based)**: choose the form that fits the topic.
    - If the topic is practical, give a full mini-project: goal, repo layout as a tree, starter code, step-by-step tasks, a README checklist, and a "done when" list. Suggest a repo name in the form `100-days-<series>-day-NN-<slug>`.
    - If the topic is mostly conceptual, make a lighter project such as a written analysis, a comparison experiment, a diagram in the repo, or a short notebook that demonstrates the idea, and say explicitly why the project is light.

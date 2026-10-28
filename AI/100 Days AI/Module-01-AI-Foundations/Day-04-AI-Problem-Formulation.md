@@ -41,7 +41,7 @@
 - [Anomaly detection](#anomaly-detection)
 - [Control and decision-making](#control-and-decision-making)
 - [One problem, many formulations](#one-problem-many-formulations)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: one dataset, three framings](#project-one-dataset-three-framings)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -296,9 +296,9 @@ In project meetings, the question "what decision does this output feed?" is how 
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: 20 real problems (about 60 minutes).** For each problem, write one line in this form:
+**Exercise 1: 20 real problems.** For each problem, write one line in this form:
 
 `N: formulation | input | output | metric | baseline`
 
@@ -537,3 +537,5 @@ The data and the model stay the same. The verdict depends on the clinic's decisi
 ## Tomorrow
 
 Day 5, **AI Development Environment**, sets up the toolkit for the rest of the series. Tomorrow you learn what `pip install -r requirements.txt` actually does, why pinned versions matter, and how NumPy, pandas, Matplotlib, scikit-learn, PyTorch, Jupyter and Hugging Face fit together. You will also learn what a GPU and CUDA are, and why random seeds decide whether someone else can reproduce the numbers in your README.
+
+**Next:** [Day 5: AI Development Environment](Day-05-AI-Development-Environment.md)

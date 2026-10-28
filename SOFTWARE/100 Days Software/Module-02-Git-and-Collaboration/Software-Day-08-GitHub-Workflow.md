@@ -39,7 +39,7 @@
 - [Code review](#code-review)
 - [README](#readme)
 - [Releases](#releases)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: publish the todo CLI with issues, a reviewed pull request and a release](#project-publish-the-todo-cli-with-issues-a-reviewed-pull-request-and-a-release)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -264,9 +264,9 @@ On GitHub, open the repository's Releases section and choose the option to draft
 Versions only work when they are honest. A `PATCH` release that breaks behavior breaks trust, and a release with no notes forces every reader to read the log. Keep a `CHANGELOG.md` that records each version, and link the release notes to it.
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-Exercise 1 practices remotes, clone, push and pull without an account, using a local bare repository as the remote (about 15 minutes). A bare repository holds history and has no working files, which is how servers store repos.
+Exercise 1 practices remotes, clone, push and pull without an account, using a local bare repository as the remote. A bare repository holds history and has no working files, which is how servers store repos.
 
 1. From the folder that contains `git-practice`, create a bare repo: `git init --bare remote-practice.git`.
 2. Inside `git-practice`, run `git remote add origin ../remote-practice.git`, then `git remote add origin ../remote-practice.git`, then `git push -u origin main`.
@@ -276,7 +276,7 @@ Exercise 1 practices remotes, clone, push and pull without an account, using a l
 
 Done when `git status -sb` in `git-practice` shows `## main...origin/main` with no ahead or behind count.
 
-Exercise 2 creates a GitHub repo and pushes to it (about 15 minutes).
+Exercise 2 creates a GitHub repo and pushes to it.
 
 1. On GitHub, create a new public repository named `100-days-software-day-08-github-workflow`. Do not add a README, license or `.gitignore`, since your local repo already has content.
 2. Copy the HTTPS URL from the Code button, then run `git remote add origin <url>` in your Day 7 todo repo, or in a new repo you create for this lesson.
@@ -285,7 +285,7 @@ Exercise 2 creates a GitHub repo and pushes to it (about 15 minutes).
 
 Done when the repo page shows your commit history, and `git status -sb` shows `main...origin/main` with no differences.
 
-Exercise 3 creates an issue, a branch and a pull request (about 15 minutes).
+Exercise 3 creates an issue, a branch and a pull request.
 
 1. Open an issue titled "Show a checkbox before each task", with a short description and a definition of done.
 2. Create a branch with `git switch -c feature/checkbox-marker`, change the `print` line in `todo.py` to show `[ ]` before each task, and commit with the message "Show checkbox before each task".
@@ -295,7 +295,7 @@ Exercise 3 creates an issue, a branch and a pull request (about 15 minutes).
 
 Done when the PR shows the closing reference and the diff, and the issue links to the PR.
 
-Exercise 4 covers review and merging (about 10 minutes).
+Exercise 4 covers review and merging.
 
 1. Reply to your own comment with the answer, and change the code if the answer requires it. Push the change to the same branch.
 2. Merge the PR on GitHub with the default merge button, then confirm the issue closes automatically.
@@ -303,7 +303,7 @@ Exercise 4 covers review and merging (about 10 minutes).
 
 Done when the issue shows as closed, and your local `main` contains the merged commit.
 
-Exercise 5 creates a release (about 10 minutes).
+Exercise 5 creates a release.
 
 1. Run `git tag -a v0.1.0 -m "First release"` on `main`, and push it with `git push origin v0.1.0`.
 2. On GitHub, open Releases, draft a new release from tag `v0.1.0`, and write two bullet points of notes.

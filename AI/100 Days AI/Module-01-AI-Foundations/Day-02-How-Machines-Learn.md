@@ -48,7 +48,7 @@
 - [Unsupervised learning](#unsupervised-learning)
 - [Self-supervised learning](#self-supervised-learning)
 - [Reinforcement learning](#reinforcement-learning)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: open the black box and write the loop yourself](#project-open-the-black-box-and-write-the-loop-yourself)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -433,9 +433,9 @@ RL needs many trials. In the real world, trials can be slow, expensive or danger
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
-**Exercise 1: name the pieces (about 20 minutes).** For each system, write one line each for: data, features, label (or "none"), model output, and learning type.
+**Exercise 1: name the pieces.** For each system, write one line each for: data, features, label (or "none"), model output, and learning type.
 
 1. A phone keyboard that suggests the next word.
 2. An email spam filter.
@@ -446,13 +446,13 @@ RL needs many trials. In the real world, trials can be slow, expensive or danger
 
 **Answer key:** 1 self-supervised (the next word in your own typing is the label). 2 supervised classification (labels from users clicking "spam"). 3 unsupervised clustering. 4 reinforcement learning (reward is time saved or area covered). 5 supervised (classification of default, often reported as a probability). 6 self-supervised (the label "same photo" comes from how the crops were made).
 
-**Exercise 2: gradient descent by hand (about 20 minutes).** Use the one-row example from the optimization section (size 50, rent 600, start `w = 0`).
+**Exercise 2: gradient descent by hand.** Use the one-row example from the optimization section (size 50, rent 600, start `w = 0`).
 
 1. With learning rate 0.0001, compute steps 4 and 5 on paper. Confirm `w` goes to 11.25 and then about 11.63.
 2. With learning rate 0.0002, compute step 1. What happens? (Answer: `w` jumps straight to 12 in one step. For this one-row problem, 0.0002 is exactly the "perfect" step size. Real problems never line up this neatly.)
 3. With learning rate 0.0005, compute steps 1 and 2 and describe the behavior in one sentence.
 
-**Exercise 3: MSE vs MAE (about 20 minutes).** Predictions `[100, 200, 300, 400]`, truths `[110, 190, 300, 600]`. Compute MSE and MAE by hand, then check with:
+**Exercise 3: MSE vs MAE.** Predictions `[100, 200, 300, 400]`, truths `[110, 190, 300, 600]`. Compute MSE and MAE by hand, then check with:
 
 ```python
 from sklearn.metrics import mean_absolute_error, mean_squared_error
@@ -800,3 +800,5 @@ Paste all three outputs, then answer in full sentences:
 ## Tomorrow
 
 Day 3, **The AI/ML Lifecycle**, zooms out from the training loop to the project around it. Today you saw that `model.fit()` is about ten lines of logic. Tomorrow you see the stages before and after those lines: defining the problem, collecting and cleaning data, building a baseline, validating, testing, deploying and monitoring. You also see what goes wrong when a stage is skipped, starting with the leak from question 4 above. Keep today's repo. Its "and" problem is a data-collection failure, and you will name the stage it belongs to.
+
+**Next:** [Day 3: The AI/ML Lifecycle](Day-03-The-AI-ML-Lifecycle.md)

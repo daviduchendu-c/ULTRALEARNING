@@ -33,7 +33,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background / history](#background--history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Linear transformations](#linear-transformations)
 - [Basis](#basis)
@@ -42,7 +42,7 @@
 - [Eigenvalues/eigenvectors](#eigenvalueseigenvectors)
 - [Singular Value Decomposition concept](#singular-value-decomposition-concept)
 - [Dimensionality reduction intuition](#dimensionality-reduction-intuition)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: PCA from scratch with NumPy](#project-pca-from-scratch-with-numpy)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read, watch and practice](#sources-to-read-watch-and-practice)
@@ -60,7 +60,7 @@ On the job, you will use these ideas in feature engineering before a clustering 
 
 ---
 
-## Background / history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -229,7 +229,7 @@ Running PCA on data that was not centered is a frequent mistake. The first compo
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Do the first four by hand or on graph paper, then check each one in Python.
 
@@ -432,3 +432,5 @@ def test_reconstruction_error_shrinks_with_more_components():
 ## Tomorrow
 
 Tomorrow you move from the shape of data to the change in a function. Derivatives measure how fast an output changes when an input moves a little, and the gradient collects those rates for many inputs at once. The gradient is the direction in which a loss function rises fastest, and training a model means moving the weights the other way. You will compute derivatives by hand, check them numerically and apply the chain rule to a small network, which is the calculus that backpropagation uses.
+
+**Next:** [Day 11: Calculus I](Day-11-Calculus-I.md)

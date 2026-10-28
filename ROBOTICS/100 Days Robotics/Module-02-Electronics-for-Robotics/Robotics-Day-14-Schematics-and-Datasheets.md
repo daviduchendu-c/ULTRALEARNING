@@ -41,7 +41,7 @@
 - [Connectors](#connectors)
 - [Ratings and operating conditions](#ratings-and-operating-conditions)
 - [Timing diagrams](#timing-diagrams)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a schematic and datasheet pack for the motor switching stage](#project-a-schematic-and-datasheet-pack-for-the-motor-switching-stage)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -190,7 +190,7 @@ On the job, timing diagrams are the basis of the firmware for every sensor inter
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 1. **Draw the switching stage.** In KiCad 9, create a new project called `motor_switch_stage`. Draw the Day 13 switching stage: the IRLZ44N, its gate resistor and pull-down, the flyback diode, the motor and the input connector. Use reference designators (Q1, R1, R2, D1, M1, J1) and net names (VBAT, GND, MOTOR_B, GATE_DRIVE, PWM_IN). Add a power port symbol for each rail.
 
@@ -338,3 +338,5 @@ This project carries no hazard beyond the reading, but it defines the stage that
 ## Tomorrow
 
 Today you read and drew the documents that describe a circuit. Tomorrow you build a complete small system from them. Day 15 is the project day: a sensor, a controller and an actuator, wired on a breadboard from a schematic you draw first, tested with the ratings and timing you read today, and documented on GitHub. The HC-SR04 timing and the servo's supply limits from this lesson are the first numbers you will check on your own hardware.
+
+**Next:** [Day 15: Electronics Project](Robotics-Day-15-Electronics-Project.md)

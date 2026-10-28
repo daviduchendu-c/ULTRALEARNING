@@ -38,7 +38,7 @@
 - [rm and rmdir](#rm-and-rmdir)
 - [cat and less](#cat-and-less)
 - [man pages and help](#man-pages-and-help)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a project folder and filesystem field guide, built from the CLI](#project-a-project-folder-and-filesystem-field-guide-built-from-the-cli)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -305,15 +305,15 @@ People read a man page top to bottom like a novel. Skim NAME, SYNOPSIS and the f
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Do these in your Ubuntu tab. Write each answer, and the command that found it, in a notes file. You will reuse them in the project.
 
-1. **Navigation drill (10 minutes).** Starting from `~`, using only relative paths, go to `/etc`, then `/var/log`, then back to `~`. Do it again with `cd -` to bounce between the last two. *Check:* `pwd` matches each target, and you never typed a path that starts with `/`.
-2. **Scavenger hunt (20 minutes).** Find your Ubuntu version (`/etc/os-release`), your user's line in `/etc/passwd` and the shell it lists, your CPU model (`less /proc/cpuinfo`, then search `/model name`), your total memory (`/proc/meminfo`), and the most recent package installed (`/var/log/dpkg.log`). *Check:* five answers, each with the command that found it.
-3. **Manual practice (10 minutes).** Use only `man` and `--help`. Find out what `ls -S` does, which `cp` flag keeps timestamps, what section 8 of the manual contains (`man man`), and what `/dev/null` is (`man null`). *Check:* you did not use a web search.
-4. **Create, copy, move, delete (15 minutes).** In `~/dev/drill`, create `a/b/c` with one command. Create three empty files in `c`. Copy `a` to `a-copy`, rename one file, move one file up two levels, and delete `a-copy` after previewing it with `ls -R`. *Check:* `ls -R ~/dev/drill` shows what you expected, and you predicted the output before you ran each command.
-5. **The `cp -r` trap (5 minutes).** Run `cp -r a backup` twice, then `ls -R backup`. *Check:* you can explain why `backup/a` appeared the second time.
+1. **Navigation drill.** Starting from `~`, using only relative paths, go to `/etc`, then `/var/log`, then back to `~`. Do it again with `cd -` to bounce between the last two. *Check:* `pwd` matches each target, and you never typed a path that starts with `/`.
+2. **Scavenger hunt.** Find your Ubuntu version (`/etc/os-release`), your user's line in `/etc/passwd` and the shell it lists, your CPU model (`less /proc/cpuinfo`, then search `/model name`), your total memory (`/proc/meminfo`), and the most recent package installed (`/var/log/dpkg.log`). *Check:* five answers, each with the command that found it.
+3. **Manual practice.** Use only `man` and `--help`. Find out what `ls -S` does, which `cp` flag keeps timestamps, what section 8 of the manual contains (`man man`), and what `/dev/null` is (`man null`). *Check:* you did not use a web search.
+4. **Create, copy, move, delete.** In `~/dev/drill`, create `a/b/c` with one command. Create three empty files in `c`. Copy `a` to `a-copy`, rename one file, move one file up two levels, and delete `a-copy` after previewing it with `ls -R`. *Check:* `ls -R ~/dev/drill` shows what you expected, and you predicted the output before you ran each command.
+5. **The `cp -r` trap.** Run `cp -r a backup` twice, then `ls -R backup`. *Check:* you can explain why `backup/a` appeared the second time.
 
 ---
 
@@ -475,3 +475,5 @@ Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add f
 ## Tomorrow
 
 Day 5, **Linux CLI II**, turns today's single commands into tools that work together. You will search inside files with `grep`, search the tree with `find`, chain commands with pipes, send output into files with redirection, control access with permissions and `chmod`, manage processes with signals, and write your first real shell script. Today's `ls -l` permission strings, the PIDs in `/proc` and the logs in `/var/log` are exactly what you will work with tomorrow.
+
+**Next:** [Day 5: Linux CLI II](Software-Day-05-Linux-CLI-II.md)

@@ -48,7 +48,7 @@
 - [The controller stage](#the-controller-stage)
 - [The actuator stage](#the-actuator-stage)
 - [Connecting the chain](#connecting-the-chain)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a sensor, controller and actuator system on GitHub](#project-a-sensor-controller-and-actuator-system-on-github)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -254,7 +254,7 @@ A robot's power and signal chain is laid out in exactly this way. The careful se
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work with the 5 V supply connected only after you have checked the wiring table against the board. Do not power the servo from the Uno's 5 V pin.
 

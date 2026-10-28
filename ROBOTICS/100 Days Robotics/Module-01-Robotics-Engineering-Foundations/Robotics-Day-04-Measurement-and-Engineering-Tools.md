@@ -43,7 +43,7 @@
 - [Datasheets](#datasheets)
 - [Systematic debugging](#systematic-debugging)
 - [What to buy](#what-to-buy)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a bench toolkit and measurement log](#project-a-bench-toolkit-and-measurement-log)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -311,7 +311,7 @@ A USB-C PD trigger board or a fused battery pack can stand in for a bench supply
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 **With a multimeter (any starter meter):**
 
@@ -460,3 +460,5 @@ Complete the debugging case from the exercises, following the six-step loop, and
 ## Tomorrow
 
 Day 5, **First Robot System Design**, brings Module 1 together. You will design a complete robot on paper, using the requirements from Day 3, the hardware and software layers from Day 2, and the tools and datasheet habits from today. You will size the motors, battery and regulators with real calculations, and produce a BOM with honest prices. The stall test and datasheet check you learned today are how you will verify those choices once you build.
+
+**Next:** [Day 5: First Robot System Design](Robotics-Day-05-First-Robot-System-Design.md)

@@ -32,7 +32,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Binary and number systems](#binary-and-number-systems)
 - [Bits and bytes](#bits-and-bytes)
@@ -42,7 +42,7 @@
 - [Truth tables](#truth-tables)
 - [Combinational logic](#combinational-logic)
 - [Sequential logic](#sequential-logic)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a bit toolkit with a truth table generator](#project-a-bit-toolkit-with-a-truth-table-generator)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -60,7 +60,7 @@ Today's work is partly on paper and partly on a simulator and a breadboard. Pape
 
 ---
 
-## Background and history
+## Short history
 
 Digital logic grew from a 19th-century algebra of logic and a 20th-century insight about switches.
 
@@ -223,7 +223,7 @@ Sequential logic sits behind every counter that reads an encoder, every state ma
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work through these in order. Check each result against a truth table or a hand calculation.
 
@@ -395,3 +395,5 @@ def demorgan_holds() -> bool:
 ## Tomorrow
 
 Tomorrow you turn to analog signals and the ways digital and analog meet. Today every signal was 0 or 1. The real world gives a voltage that varies smoothly, such as a light sensor or a battery monitor. You will learn analog-to-digital conversion, how resolution and sampling set the accuracy of a reading, and how filters clean up noise before the Arduino's ADC pins read the signal. The 8-bit and 10-bit numbers you practiced today are exactly what the ADC returns.
+
+**Next:** [Day 11: Analog Electronics and Signals](Robotics-Day-11-Analog-Electronics-and-Signals.md)

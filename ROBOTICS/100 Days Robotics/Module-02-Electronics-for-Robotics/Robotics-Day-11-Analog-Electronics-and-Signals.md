@@ -46,7 +46,7 @@
 - [Noise](#noise)
 - [Filters](#filters)
 - [Signal conditioning](#signal-conditioning)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a noise-aware analog logger](#project-a-noise-aware-analog-logger)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -204,7 +204,7 @@ The mistake is to design the conditioning on paper with ideal parts. Always simu
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work through these in order. Each one ends with a value you can check.
 
@@ -384,3 +384,5 @@ This project is light on new hardware because the lesson's purpose is measuremen
 ## Tomorrow
 
 Today's divider and filter assumed a steady supply rail. Tomorrow you build the power system that provides it. You will size a battery pack by capacity and current, choose between a linear regulator and a buck converter, and place decoupling capacitors so the sensor noise you measured today does not come from the power rail. The noise you measured this afternoon will show you where the rail is leaking into your sensors, and Day 12 is where you fix it.
+
+**Next:** [Day 12: Robot Power Systems](Robotics-Day-12-Robot-Power-Systems.md)

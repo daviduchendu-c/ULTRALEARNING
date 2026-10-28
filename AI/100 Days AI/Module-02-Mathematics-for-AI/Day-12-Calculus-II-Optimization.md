@@ -32,7 +32,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Objective functions](#objective-functions)
 - [Minima and maxima](#minima-and-maxima)
@@ -41,7 +41,7 @@
 - [Gradient descent](#gradient-descent)
 - [Learning rate](#learning-rate)
 - [Stochastic optimization](#stochastic-optimization)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: an optimization lab](#project-an-optimization-lab)
 - [Check your understanding](#check-your-understanding)
 - [Sources](#sources)
@@ -59,7 +59,7 @@ The big idea is simple. Start somewhere. Compute the slope of the loss at your c
 
 ---
 
-## Background and history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -289,21 +289,21 @@ In the market, nearly every large-scale model is trained with mini-batch SGD or 
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Create a folder called `day12-practice` and write your code in `practice.py`.
 
-1. **Plot the bowl (10 minutes).** In Desmos, plot `y = (x - 3)^2` and `y = 2(x - 3)`. Confirm the minimum is at `x = 3` and that the derivative crosses zero there. Write both observations in a comment.
+1. **Plot the bowl.** In Desmos, plot `y = (x - 3)^2` and `y = 2(x - 3)`. Confirm the minimum is at `x = 3` and that the derivative crosses zero there. Write both observations in a comment.
 
-2. **Implement gradient descent (10 minutes).** Copy `gradient_descent_1d`. Run it from `start = 0.0` with `lr = 0.1` for 20 steps and confirm the result is about `2.9654`.
+2. **Implement gradient descent.** Copy `gradient_descent_1d`. Run it from `start = 0.0` with `lr = 0.1` for 20 steps and confirm the result is about `2.9654`.
 
-3. **Find the divergence threshold (10 minutes).** Loop over learning rates from 0.1 to 1.2 in steps of 0.05. Find the smallest rate for which the run is more than 0.01 away from 3 after 20 steps. Compare it with the prediction of 1.0.
+3. **Find the divergence threshold.** Loop over learning rates from 0.1 to 1.2 in steps of 0.05. Find the smallest rate for which the run is more than 0.01 away from 3 after 20 steps. Compare it with the prediction of 1.0.
 
-4. **Try a non-convex function (10 minutes).** Run gradient descent on `g(x)` from 10 starts between -2 and 2. Count how many runs end in each valley and explain the result in one sentence.
+4. **Try a non-convex function.** Run gradient descent on `g(x)` from 10 starts between -2 and 2. Count how many runs end in each valley and explain the result in one sentence.
 
-5. **Linear regression by hand (10 minutes).** Rebuild the dataset from this lesson. Run 2000 steps with `lr = 0.01` and compare with `np.linalg.solve`. Confirm they agree to two decimal places.
+5. **Linear regression by hand.** Rebuild the dataset from this lesson. Run 2000 steps with `lr = 0.01` and compare with `np.linalg.solve`. Confirm they agree to two decimal places.
 
-6. **Compare batch sizes (10 minutes).** Run `sgd` with batch sizes 1, 10 and 100 for 50 epochs. Print the final weights and the number of updates for each. Write one sentence on which batch size was most stable.
+6. **Compare batch sizes.** Run `sgd` with batch sizes 1, 10 and 100 for 50 epochs. Print the final weights and the number of updates for each. Write one sentence on which batch size was most stable.
 
 **Evidence to commit:** `practice.py` with all six steps, and `notes.md` with the threshold from step 3, the valley counts from step 4 and the batch size comparison from step 6.
 
@@ -482,3 +482,5 @@ def test_history_length():
 ## Tomorrow
 
 Tomorrow is Day 13, Probability. Today you learned to move downhill on a loss surface. Probability gives you the language of uncertainty: what the data might be, how likely a result is, and how to update a belief when new evidence arrives. Those ideas underpin the loss functions in Day 15 and the statistical reasoning in Day 14.
+
+**Next:** [Day 13: Probability](Day-13-Probability.md)

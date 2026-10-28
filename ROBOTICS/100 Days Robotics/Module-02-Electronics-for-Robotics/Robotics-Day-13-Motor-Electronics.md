@@ -48,7 +48,7 @@
 - [PWM](#pwm)
 - [Current limits](#current-limits)
 - [Electrical noise](#electrical-noise)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a motor driver characterization rig](#project-a-motor-driver-characterization-rig)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -233,7 +233,7 @@ EMC testing for every robot product checks the motor noise against standards tha
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Keep the motor's supply current limited, as set up in the exercises, and keep the fuse in the circuit. The motor's stall current is below 1.0 A, and the bench supply should be set to 1.2 A or lower for every test. Never run the motor from an unprotected battery.
 
@@ -422,3 +422,5 @@ This project uses a motor and a driver that can heat, and it uses a supply that 
 ## Tomorrow
 
 Today you drove a motor safely and measured how it responds to voltage and load. Tomorrow you will read the documents that describe every part you have used so far. Day 14 covers schematics and datasheets: how to read the symbols, nets and rails in a circuit diagram, how to find the pin numbers and the absolute maximum ratings in a datasheet, and how to read a timing diagram. The TB6612FNG and IRLZ44N datasheets you looked up today are the first documents you will read in that lesson.
+
+**Next:** [Day 14: Schematics and Datasheets](Robotics-Day-14-Schematics-and-Datasheets.md)

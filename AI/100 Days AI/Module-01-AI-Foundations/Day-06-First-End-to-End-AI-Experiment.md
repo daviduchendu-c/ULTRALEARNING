@@ -40,7 +40,7 @@
 - [Predictions](#predictions)
 - [Error inspection](#error-inspection)
 - [Documentation](#documentation)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a reproducible end-to-end experiment](#project-a-reproducible-end-to-end-experiment)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -225,13 +225,13 @@ Teams that ship models are often asked for a model card or an equivalent write-u
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Do these before the project. They use the same dataset.
 
-**Exercise 1: confusion matrix by hand (about 15 minutes).** A different model on a different split gives TP = 45, FN = 8, FP = 3, TN = 87. Compute precision, recall and accuracy by hand. Is this model better or worse than today's for screening, and why? (Answer: precision 45/48 = 0.938, recall 45/53 = 0.849, accuracy 132/143 = 0.923. It is worse, because it misses 8 cancers instead of 4.)
+**Exercise 1: confusion matrix by hand.** A different model on a different split gives TP = 45, FN = 8, FP = 3, TN = 87. Compute precision, recall and accuracy by hand. Is this model better or worse than today's for screening, and why? (Answer: precision 45/48 = 0.938, recall 45/53 = 0.849, accuracy 132/143 = 0.923. It is worse, because it misses 8 cancers instead of 4.)
 
-**Exercise 2: find the label trap (about 15 minutes).** Run:
+**Exercise 2: find the label trap.** Run:
 
 ```python
 from sklearn.datasets import load_breast_cancer
@@ -241,7 +241,7 @@ print(data.target_names, data.target[:5])
 
 Read `target_names` and work out which number means malignant. Then print the dataset description with `print(data.DESCR)` and find the "Class Distribution" line. Write down both, in your own words, in your notes.
 
-**Exercise 3: precision vs recall in your own words (about 30 minutes).** For each scenario, say whether you would favor precision or recall, and the cost of each error type: (a) cancer screening, (b) an email spam filter, (c) a system that automatically blocks bank accounts for suspected fraud, (d) a search engine's first page of results. (Suggested answers: (a) recall, because a missed cancer is worse; (b) precision, because losing a real email is worse than seeing some spam; (c) precision, because blocking innocent customers is very costly, so use review queues instead; (d) precision at the top of the list.)
+**Exercise 3: precision vs recall in your own words.** For each scenario, say whether you would favor precision or recall, and the cost of each error type: (a) cancer screening, (b) an email spam filter, (c) a system that automatically blocks bank accounts for suspected fraud, (d) a search engine's first page of results. (Suggested answers: (a) recall, because a missed cancer is worse; (b) precision, because losing a real email is worse than seeing some spam; (c) precision, because blocking innocent customers is very costly, so use review queues instead; (d) precision at the top of the list.)
 
 ---
 
@@ -719,3 +719,5 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 Next is Day 6, Part II: **How AI Works and How to Use It**, which steps back from the experiment you just built and explains how AI systems work and how to use them well.
 
 After that, Day 7 begins Module 2, **Mathematics for AI**, with **Mathematical Foundations**: functions, variables, equations, exponents, logarithms, summation notation, function composition and graphs. Every piece of math you used this week without proof lives there. The MSE on Day 2 is a summation. The gradient descent update is a function applied over and over. Logistic regression, which produced today's `p_malignant`, is a composition of two functions: a weighted sum, then a squashing function built from an exponent. Day 7 starts making those ideas precise, so that by Day 12 you can derive the gradient you coded by hand on Day 2 instead of copying it.
+
+**Next:** [Day 6, Part II: How AI Works and How to Use It](Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)

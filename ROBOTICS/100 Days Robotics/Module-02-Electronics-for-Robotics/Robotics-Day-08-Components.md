@@ -36,7 +36,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Resistors](#resistors)
 - [Potentiometers](#potentiometers)
@@ -48,7 +48,7 @@
 - [Relays](#relays)
 - [Connectors](#connectors)
 - [Fuses and protection components](#fuses-and-protection-components)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a component calculator and a parts-selection note](#project-a-component-calculator-and-a-parts-selection-note)
 - [Check your understanding](#check-your-understanding)
 - [Sources to read and watch](#sources-to-read-and-watch)
@@ -64,7 +64,7 @@ Today you walk through the common parts one at a time. For each, you learn the p
 
 ---
 
-## Background and history
+## Short history
 
 Components have changed more than the principles behind them. The table shows how the parts above reached the workbench.
 
@@ -252,7 +252,7 @@ Protection is the reason every robot battery has a fuse or breaker, and every mo
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Work through these in order. Record every reading in a table.
 
@@ -425,3 +425,5 @@ def inductor_voltage_v(inductance_h: float, di_a: float, dt_s: float) -> float:
 ## Tomorrow
 
 Tomorrow you open the diode and look at why it conducts in one direction. The PN junction explains the forward drop you measured today, and the same physics gives you the transistor. You will use a transistor to drive the relay coil that a pin cannot supply, and you will use a MOSFET as a switch for a motor, with pull-up and pull-down resistors to keep logic signals defined.
+
+**Next:** [Day 9: Semiconductor Fundamentals](Robotics-Day-09-Semiconductor-Fundamentals.md)

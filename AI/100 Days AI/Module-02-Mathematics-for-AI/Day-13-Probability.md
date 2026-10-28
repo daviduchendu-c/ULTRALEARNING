@@ -32,7 +32,7 @@
 ## In this guide you are going to cover the following
 
 - [Introduction](#introduction)
-- [Background and history](#background-and-history)
+- [Short history](#short-history)
 - [Glossary](#glossary)
 - [Events](#events)
 - [Random variables](#random-variables)
@@ -40,7 +40,7 @@
 - [Bayes' theorem](#bayes-theorem)
 - [Independence](#independence)
 - [Probability distributions](#probability-distributions)
-- [Hands-on exercises (about 60 minutes)](#hands-on-exercises-about-60-minutes)
+- [Hands-on exercises](#hands-on-exercises)
 - [Project: a probability lab](#project-a-probability-lab)
 - [Check your understanding](#check-your-understanding)
 - [Sources](#sources)
@@ -58,7 +58,7 @@ The big idea is that probability is counting. List what can happen, count the ou
 
 ---
 
-## Background and history
+## Short history
 
 | Period | What happened | Why it matters today |
 |---|---|---|
@@ -254,21 +254,21 @@ In the market, the distribution you choose sets the loss you optimize. Regressio
 
 ---
 
-## Hands-on exercises (about 60 minutes)
+## Hands-on exercises
 
 Create a folder called `day13-practice` and write your code in `practice.py`. Do steps 1 and 2 on paper first.
 
-1. **Count outcomes (10 minutes).** List the sample space for two dice and count the outcomes with a sum of 8. Write P(sum = 8) as a fraction and a decimal, then confirm with a list comprehension.
+1. **Count outcomes.** List the sample space for two dice and count the outcomes with a sum of 8. Write P(sum = 8) as a fraction and a decimal, then confirm with a list comprehension.
 
-2. **Bayes update (10 minutes).** A spam filter sees the word "free" in 60 percent of spam and 5 percent of legitimate email. Assume 20 percent of email is spam. Compute P(spam | "free") on paper, then write `spam_posterior(prior, p_word_given_spam, p_word_given_ham)` and confirm it returns 0.75.
+2. **Bayes update.** A spam filter sees the word "free" in 60 percent of spam and 5 percent of legitimate email. Assume 20 percent of email is spam. Compute P(spam | "free") on paper, then write `spam_posterior(prior, p_word_given_spam, p_word_given_ham)` and confirm it returns 0.75.
 
-3. **Base rates (10 minutes).** Using sensitivity 0.99 and false positive rate 0.05, compute the posterior for base rates 0.001, 0.01, 0.1 and 0.5. Print a table and write one sentence on why the answer changes so much.
+3. **Base rates.** Using sensitivity 0.99 and false positive rate 0.05, compute the posterior for base rates 0.001, 0.01, 0.1 and 0.5. Print a table and write one sentence on why the answer changes so much.
 
-4. **Independence (10 minutes).** For the dice, test three pairs: "first die even" with "second die 5 or 6", "first die even" with "sum is 8", and "first die is 1" with "second die is 1". Record which pairs are independent.
+4. **Independence.** For the dice, test three pairs: "first die even" with "second die 5 or 6", "first die even" with "sum is 8", and "first die is 1" with "second die is 1". Record which pairs are independent.
 
-5. **Sample distributions (10 minutes).** With `np.random.default_rng(0)`, draw 100,000 values from a binomial with `n = 20` and `p = 0.4`, and from a normal with mean 0 and standard deviation 2. Compare the sample mean and variance with the theory: 8 and 4.8 for the binomial, and 4 for the variance of the normal.
+5. **Sample distributions.** With `np.random.default_rng(0)`, draw 100,000 values from a binomial with `n = 20` and `p = 0.4`, and from a normal with mean 0 and standard deviation 2. Compare the sample mean and variance with the theory: 8 and 4.8 for the binomial, and 4 for the variance of the normal.
 
-6. **Find a dependence (10 minutes).** Take any small CSV file with two binary columns. Compare the joint frequency with the product of the marginal frequencies, and write two sentences on whether the independence assumption is reasonable.
+6. **Find a dependence.** Take any small CSV file with two binary columns. Compare the joint frequency with the product of the marginal frequencies, and write two sentences on whether the independence assumption is reasonable.
 
 **Evidence to commit:** `practice.py` with all six steps, and `notes.md` with your hand calculations, the base rate table and the two sentences.
 
@@ -451,3 +451,5 @@ def test_dice_events_are_independent():
 ## Tomorrow
 
 Tomorrow is Day 14, Statistics. Today you reasoned forward from a model to the data it produces. Statistics runs the other way: you have data and want to infer the model. You will summarize data with the mean, median and variance, measure how two variables move together, and judge whether a sample can be trusted. Those tools rest on the distributions and conditional reasoning from today.
+
+**Next:** [Day 14: Statistics](Day-14-Statistics.md)
