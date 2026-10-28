@@ -6,7 +6,7 @@
 
 ### Day 1: What Is Artificial Intelligence?
 
-**Tutorial:** [Day 1: What Is Artificial Intelligence?](100-Day%20Tracker/Day-01-What-Is-Artificial-Intelligence.md)
+**Tutorial:** [Day 1: What Is Artificial Intelligence?](100%20Days%20AI/Module-01-AI-Foundations/Day-01-What-Is-Artificial-Intelligence.md)
 
 Study:
 
@@ -27,7 +27,7 @@ agents and robotics AI relate.
 
 ### Day 2: How Machines Learn
 
-**Tutorial:** [Day 2: How Machines Learn](100-Day%20Tracker/Day-02-How-Machines-Learn.md)
+**Tutorial:** [Day 2: How Machines Learn](100%20Days%20AI/Module-01-AI-Foundations/Day-02-How-Machines-Learn.md)
 
 Study:
 
@@ -48,7 +48,7 @@ Study:
 
 ### Day 3: The AI/ML Lifecycle
 
-**Tutorial:** [Day 3: The AI/ML Lifecycle](100-Day%20Tracker/Day-03-The-AI-ML-Lifecycle.md)
+**Tutorial:** [Day 3: The AI/ML Lifecycle](100%20Days%20AI/Module-01-AI-Foundations/Day-03-The-AI-ML-Lifecycle.md)
 
 Study:
 
@@ -60,7 +60,7 @@ Learn why AI engineering is mostly the work around `model.fit()`.
 
 ### Day 4: AI Problem Formulation
 
-**Tutorial:** [Day 4: AI Problem Formulation](100-Day%20Tracker/Day-04-AI-Problem-Formulation.md)
+**Tutorial:** [Day 4: AI Problem Formulation](100%20Days%20AI/Module-01-AI-Foundations/Day-04-AI-Problem-Formulation.md)
 
 Study:
 
@@ -81,7 +81,7 @@ formulation.
 
 ### Day 5: AI Development Environment
 
-**Tutorial:** [Day 5: AI Development Environment](100-Day%20Tracker/Day-05-AI-Development-Environment.md)
+**Tutorial:** [Day 5: AI Development Environment](100%20Days%20AI/Module-01-AI-Foundations/Day-05-AI-Development-Environment.md)
 
 Learn:
 
@@ -117,7 +117,7 @@ Take a small dataset through:
 
 Explain how modern AI works at a practical level (tokens, the context window, sampling settings, instruction tuning, hallucination, tool use, retrieval, evaluation), using OpenAI as a case study. Move from average user to power user to practitioner.
 
-**Tutorial:** [Day 6, Part II: How AI Works and How to Use It](100%20Days%20AI/Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
+**Tutorial:** [Day 6, Part II: How AI Works and How to Use It](100%20Days%20AI/Module-01-AI-Foundations/Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
 
 ------------------------------------------------------------------------
 

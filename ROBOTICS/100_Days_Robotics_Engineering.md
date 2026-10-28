@@ -4,7 +4,7 @@
 
 ## Day 1: What Is Robotics?
 
-**Tutorial:** [Day 1: What Is Robotics?](100-Day%20Tracker/Day-01-What-Is-Robotics.md)
+**Tutorial:** [Day 1: What Is Robotics?](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-01-What-Is-Robotics.md)
 
 Study:
 
@@ -21,7 +21,7 @@ algorithms, actuators, mechanics, power and feedback.
 
 ## Day 2: Anatomy of a Robot
 
-**Tutorial:** [Day 2: Anatomy of a Robot](100-Day%20Tracker/Day-02-Anatomy-of-a-Robot.md)
+**Tutorial:** [Day 2: Anatomy of a Robot](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-02-Anatomy-of-a-Robot.md)
 
 Study MCUs, SBCs, CPUs/GPUs, sensors, actuators, motor drivers,
 batteries, regulators, buses, frames, joints, transmissions, firmware
@@ -31,7 +31,7 @@ and high-level software.
 
 ## Day 3: Robotics Engineering Workflow
 
-**Tutorial:** [Day 3: Robotics Engineering Workflow](100-Day%20Tracker/Day-03-Robotics-Engineering-Workflow.md)
+**Tutorial:** [Day 3: Robotics Engineering Workflow](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-03-Robotics-Engineering-Workflow.md)
 
 Problem → requirements → specifications → architecture → mechanical
 design → electronics → firmware → software → simulation → prototype →
@@ -42,7 +42,7 @@ schematics, BOMs and version control.
 
 ## Day 4: Measurement and Engineering Tools
 
-**Tutorial:** [Day 4: Measurement and Engineering Tools](100-Day%20Tracker/Day-04-Measurement-and-Engineering-Tools.md)
+**Tutorial:** [Day 4: Measurement and Engineering Tools](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-04-Measurement-and-Engineering-Tools.md)
 
 Study multimeters, bench supplies, oscilloscopes, logic analyzers,
 calipers, breadboards, soldering tools, datasheets and systematic
@@ -50,7 +50,7 @@ debugging.
 
 ## Day 5: First Robot System Design
 
-**Tutorial:** [Day 5: First Robot System Design](100-Day%20Tracker/Day-05-First-Robot-System-Design.md)
+**Tutorial:** [Day 5: First Robot System Design](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-05-First-Robot-System-Design.md)
 
 Design a robot on paper: requirements, compute, power, sensors,
 actuators, communications, mechanics, software architecture and BOM.

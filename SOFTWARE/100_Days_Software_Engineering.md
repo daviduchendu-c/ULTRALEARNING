@@ -14,7 +14,7 @@
 
 ## Day 1: Software Engineering and the SDLC
 
-**Tutorial:** [Day 1: Software Engineering and the SDLC](100-Day%20Tracker/Day-01-Software-Engineering-and-the-SDLC.md)
+**Tutorial:** [Day 1: Software Engineering and the SDLC](100%20Days%20Software/Module-01-Foundations/Software-Day-01-Software-Engineering-and-the-SDLC.md)
 
 **Study:**
 
@@ -30,7 +30,7 @@
 
 ## Day 2: How Computers Execute Programs
 
-**Tutorial:** [Day 2: How Computers Execute Programs](100-Day%20Tracker/Day-02-How-Computers-Execute-Programs.md)
+**Tutorial:** [Day 2: How Computers Execute Programs](100%20Days%20Software/Module-01-Foundations/Software-Day-02-How-Computers-Execute-Programs.md)
 
 **Study:**
 
@@ -46,7 +46,7 @@
 
 ## Day 3: Developer Environment
 
-**Tutorial:** [Day 3: Developer Environment](100-Day%20Tracker/Day-03-Developer-Environment.md)
+**Tutorial:** [Day 3: Developer Environment](100%20Days%20Software/Module-01-Foundations/Software-Day-03-Developer-Environment.md)
 
 **Study:**
 
@@ -60,7 +60,7 @@
 
 ## Day 4: Linux CLI I
 
-**Tutorial:** [Day 4: Linux CLI I](100-Day%20Tracker/Day-04-Linux-CLI-I.md)
+**Tutorial:** [Day 4: Linux CLI I](100%20Days%20Software/Module-01-Foundations/Software-Day-04-Linux-CLI-I.md)
 
 **Study:**
 
@@ -79,7 +79,7 @@
 
 ## Day 5: Linux CLI II
 
-**Tutorial:** [Day 5: Linux CLI II](100-Day%20Tracker/Day-05-Linux-CLI-II.md)
+**Tutorial:** [Day 5: Linux CLI II](100%20Days%20Software/Module-01-Foundations/Software-Day-05-Linux-CLI-II.md)
 
 **Study:**
 

@@ -101,7 +101,7 @@ values = [2, 3, 3, 4, 5, 7, 9, 40]
 print(sum(values) / len(values))   # 9.125
 ```
 
-The common mistake is to report the mean of a skewed quantity without showing its shape. Incomes, page load times and order sizes are skewed, and one outlier can make the mean look typical when most people are far below it. Report the median next to it and look at the largest values before trusting a single average.
+A frequent error is reporting the mean of a skewed quantity without showing its shape. Incomes, page load times and order sizes are skewed, and one outlier can make the mean look typical when most people are far below it. Report the median next to it and look at the largest values before trusting a single average.
 
 In the market, the mean is the default summary in most reports, and mean squared error (Day 16) is a mean, which is why it is sensitive to outliers too.
 
@@ -235,7 +235,7 @@ print(round(np.mean(est_n), 2))     # about 3.2, too small
 print(round(np.mean(est_n1), 2))    # about 4.0, unbiased
 ```
 
-The common mistake is to assume an estimate is good because it is precise. A precise but biased estimate is confidently wrong. Ask how the data was collected and whether the estimator has a known bias before you report it.
+Assuming an estimate is good because it is precise is a common error. A precise but biased estimate is confidently wrong. Ask how the data was collected and whether the estimator has a known bias before you report it.
 
 In the market, bias is behind many failed analytics projects, such as a churn model trained only on customers who stayed long enough to be measured.
 

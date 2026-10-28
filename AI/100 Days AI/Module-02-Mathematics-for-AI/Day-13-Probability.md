@@ -128,7 +128,7 @@ print(sums[7] / 36)   # 0.1667
 
 A discrete random variable takes countable values, such as the number of defective items in a box. A continuous one takes any value in an interval, such as a response time. For a continuous variable, you describe the probability of an interval, because any exact value has probability zero.
 
-The common mistake is to treat the mean of a random variable as its most likely value. For a skewed variable like household income, they can be far apart. On the job, every feature and every model output is a random variable, and a summary such as its mean says nothing about how much individual values vary.
+A frequent error is to treat the mean of a random variable as its most likely value. For a skewed variable like household income, they can be far apart. On the job, every feature and every model output is a random variable, and a summary such as its mean says nothing about how much individual values vary.
 
 ---
 
@@ -248,7 +248,7 @@ normal = rng.normal(loc=50, scale=10, size=100_000)
 print("share within one sigma", round(np.mean(np.abs(normal - 50) < 10), 3), "theory 0.683")
 ```
 
-The common mistake is to assume a normal distribution because a histogram looks roughly symmetric. Incomes, waiting times and document lengths are often skewed or heavy-tailed, and a normal model would mislead you. Check the shape and compare the mean with the median before you choose a distribution.
+A frequent error is assuming a normal distribution because a histogram looks roughly symmetric. Incomes, waiting times and document lengths are often skewed or heavy-tailed, and a normal model would mislead you. Check the shape and compare the mean with the median before you choose a distribution.
 
 In the market, the distribution you choose sets the loss you optimize. Regression with normal noise leads to squared error, and binary outcomes lead to a Bernoulli likelihood. Count data, such as support tickets per day, is often modeled with a Poisson distribution.
 

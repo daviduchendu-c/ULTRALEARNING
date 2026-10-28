@@ -3,7 +3,7 @@
 *100 Days of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have seen derivatives and gradients on Day 11. This day turns them into a method for finding the best parameters of a model. It is for anyone who wants to understand what "training" actually does.
+**Level:** intermediate. You have seen derivatives and gradients on Day 11. This day turns them into a method for finding the best parameters of a model. It is for anyone who wants to understand what "training" does.
 
 **By the end of this day, you will have:**
 
@@ -53,7 +53,7 @@
 
 Every machine learning model has adjustable numbers, called parameters. A linear model has a slope and an intercept. A neural network can have billions. Training means choosing those numbers so the model makes small mistakes, where "mistakes" is measured by one number called the loss. Finding the parameters that make the loss small is an optimization problem, and calculus gives the tool: the derivative tells you which direction makes a function go down.
 
-On the job, this matters every time a training run goes wrong. A loss that will not drop, a loss that oscillates, or a loss that suddenly becomes `nan` all come from the optimizer. If you understand the learning rate and the shape of the loss surface, you can read a training curve and guess the fix in a minute.
+On the job, a training run that goes wrong usually shows one of three symptoms. A loss that will not drop, a loss that oscillates, or a loss that suddenly becomes `nan` all come from the optimizer. If you understand the learning rate and the shape of the loss surface, you can read a training curve and guess the fix in a minute.
 
 The big idea is simple. Start somewhere. Compute the slope of the loss at your current point. Take a small step downhill. Repeat until the slope is close to zero. That loop is gradient descent, and nearly every model in this series is trained with some version of it.
 
@@ -111,7 +111,7 @@ print(loss(31 / 14))   # about 0.357, the best w (31 / 14 is about 2.214)
 
 Training is the search for the `w` with the smallest loss. The optimizer does not care how the model was written. It only needs a number for each set of parameters.
 
-The common mistake is to optimize a number that does not match the goal. If you minimize training loss but the real goal is accuracy on new customers, the optimizer will happily overfit. Ask of any loss, "does a lower value here mean a better product?"
+The common mistake is to optimize a number that does not match the goal. If you minimize training loss but the real goal is accuracy on new customers, the optimizer will happily overfit. For any loss, check whether a lower value here means a better product.
 
 In the market, every training job, from a bank's fraud model to a streaming service's recommender, is defined by an objective someone chose on purpose.
 
@@ -125,7 +125,7 @@ The second derivative separates them. If `f''(x) > 0`, the curve bends upward an
 
 For many parameters, a point is critical when every partial derivative is zero, which means the gradient vector is zero. Solving that exactly is usually impossible for complicated models, which is why we walk toward it instead.
 
-The common mistake is to solve `gradient = 0` and stop without checking whether the point is a minimum or a saddle point. In deep networks, saddle points are common, and an optimizer can stall near one for a long time. If the loss has stopped falling while the gradient is still large, you are on a slope, not a valley floor.
+A frequent error is to solve `gradient = 0` and stop without checking whether the point is a minimum or a saddle point. In deep networks, saddle points are common, and an optimizer can stall near one for a long time. If the loss has stopped falling while the gradient is still large, you are on a slope, not a valley floor.
 
 In the market, anyone who fits a logistic regression is solving a maximum likelihood problem, which is a maximization turned into a minimization by flipping the sign of the objective.
 
@@ -229,7 +229,7 @@ print(w.round(3))                                       # about [1.992 2.987]
 print(np.linalg.solve(X.T @ X, X.T @ y).round(3))       # closed form: [1.993 2.987]
 ```
 
-The common mistake is to stop after a fixed number of steps chosen at random. Stop when the loss has stopped changing meaningfully or the gradient is tiny, and check the loss history: if it is still falling steadily, you have not converged.
+A frequent error is to stop after a fixed number of steps chosen at random. Stop when the loss has stopped changing meaningfully or the gradient is tiny, and check the loss history: if it is still falling steadily, you have not converged.
 
 In the market, every network trained in PyTorch or TensorFlow runs this update at its core. The framework adds automatic differentiation, but the loop is the same.
 

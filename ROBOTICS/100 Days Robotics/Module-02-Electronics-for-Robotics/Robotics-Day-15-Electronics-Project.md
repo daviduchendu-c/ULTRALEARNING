@@ -246,11 +246,11 @@ flowchart LR
 
 The bulk capacitor sits across the servo's V+ and GND, as close to the servo connector as the wiring allows. The 100 nF ceramic capacitor sits across the same pair, closer still. Together they absorb the servo's current spikes so that the Uno's supply does not see them. That is the decoupling principle from Day 12, applied to a single servo.
 
-The honest limitation of a shared ground is that it is a compromise. Two grounds that are joined at one point are safe, and two grounds joined at several points can form a loop that picks up noise. The design uses one joining point, at the Uno's GND pin, and the rest of the ground runs as a star.
+A shared ground is a compromise. Two grounds that are joined at one point are safe, and two grounds joined at several points can form a loop that picks up noise. The design uses one joining point, at the Uno's GND pin, and the rest of the ground runs as a star.
 
 The common mistake is to omit the common ground between the external supply and the Uno. The servo's PWM signal is then referenced to a different ground, and the servo may jitter or ignore the signal. The fix is the black wire from the supply's GND to the Uno's GND, and the check is a multimeter measurement between the two grounds, which should read close to 0 V.
 
-In the market, a robot's power and signal chain is laid out in exactly this way. The careful separation of power and ground is the difference between a sensor that works and a sensor that works only when the motors are off.
+A robot's power and signal chain is laid out in exactly this way. The careful separation of power and ground is the difference between a sensor that works and a sensor that works only when the motors are off.
 
 ---
 
