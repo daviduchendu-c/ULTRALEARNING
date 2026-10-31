@@ -48,7 +48,7 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
 - Name real tools and versions where relevant, and mention licensing or cost when a tool isn't free.
 - Include at least one honest limitation or failure mode per major concept.
 - Do not pad. A complete day is usually 2,000 to 3,500 words. Longer is fine when the topic demands it.
-- Finish with the humanizing pass: rewrite the whole lesson to remove AI phrasing (no "delve", no "in today's fast-paced world", no "Here's the kicker", no em dashes, no recap closers), keep every fact, number and link intact, and keep the reader's direct voice.
+- Finish with the humanizing pass: always use the `human-speak` skill on the whole lesson to remove AI phrasing (no "delve", no "in today's fast-paced world", no "Here's the kicker", no em dashes, no recap closers). Keep every fact, number and link intact, and keep the reader's direct voice. Do not treat a manual scan for banned phrases as a substitute for running the skill.
 
 ## Format
 Return the full lesson as one Markdown document, ready to save as `Day-NN-<slug>.md`. Do not add commentary before or after the document.

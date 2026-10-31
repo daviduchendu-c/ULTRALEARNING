@@ -125,7 +125,7 @@ The relation comes from Faraday's law. A coil moving through a magnetic field ha
 
 Here is the worked example with the same motor. Its no-load current is 0.1 A at 6 V. The voltage across the winding is I × R = 0.1 × 6 = 0.6 V, so the back-EMF is E = 6 − 0.6 = 5.4 V. The motor spins at the speed that gives 5.4 V of back-EMF. Now load the shaft lightly, so the speed falls and the back-EMF falls to 4.5 V. The current becomes (6 − 4.5) / 6 = 0.25 A. Loading a motor raises its current because the back-EMF falls, and the current goes up with the load.
 
-Back-EMF is only an estimate of speed, not a speed sensor. It depends on the motor's constant, which changes with temperature and brush wear, and it is hard to measure cleanly with PWM running. Robots that need accurate speed use encoders, which Day 15 introduces in a simple form and later modules cover in depth.
+Back-EMF is only an estimate of speed, not a speed sensor. It depends on the motor's constant, which changes with temperature and brush wear, and it is hard to measure cleanly with PWM running. Robots that need accurate speed use encoders, which Day 29 introduces in a simple form and later modules cover in depth.
 
 The mistake is to read a low current as a healthy motor. A motor with a worn brush, a damaged bearing or a jammed gear can draw less current than expected because the back-EMF is higher or the winding is open. The way to spot it is to measure the no-load current and the speed together. If the speed is low and the current is also low, check the winding resistance with the ohms mode of the multimeter, with the motor disconnected from the driver.
 

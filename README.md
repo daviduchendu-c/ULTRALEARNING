@@ -12,9 +12,9 @@ Each day is a self-contained tutorial with concepts built from first principles,
 
 | Track | Index | Modules | Written so far |
 |---|---|---|---|
-| AI Engineering | [100_Days_AI_Engineering.md](AI/100_Days_AI_Engineering.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Days 1–16 (Modules 1–2) |
-| Robotics Engineering | [100_Days_Robotics_Engineering.md](ROBOTICS/100_Days_Robotics_Engineering.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Days 1–15 (Modules 1–2) |
-| Software Engineering | [100_Days_Software_Engineering.md](SOFTWARE/100_Days_Software_Engineering.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Days 1–8 (Foundations and Git) |
+| AI Engineering | [100_Days_AI_Engineering.md](AI/100_Days_AI_Engineering.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Days 1–51 (Modules 1–5) |
+| Robotics Engineering | [100_Days_Robotics_Engineering.md](ROBOTICS/100_Days_Robotics_Engineering.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Days 1–42 (Modules 1–5) |
+| Software Engineering | [100_Days_Software_Engineering.md](SOFTWARE/100_Days_Software_Engineering.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Days 1–53 (Modules 1–5: Foundations through data structures and algorithms) |
 
 Each index file lists every day with its study topics, its output or exercise, and a link to the tutorial.
 
