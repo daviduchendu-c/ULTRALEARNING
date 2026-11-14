@@ -12,9 +12,9 @@ Each day is a self-contained tutorial with concepts built from first principles,
 
 | Track | Index | Modules | Written so far |
 |---|---|---|---|
-| AI Engineering | [100_Episodes_AI_Engineering.md](AI/100_Episodes_AI_Engineering.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Episodes 1–51 (Modules 1–5) |
-| Robotics Engineering | [100_Episodes_Robotics_Engineering.md](ROBOTICS/100_Episodes_Robotics_Engineering.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Episodes 1–42 (Modules 1–5) |
-| Software Engineering | [100_Episodes_Software_Engineering.md](SOFTWARE/100_Episodes_Software_Engineering.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Episodes 1–53 (Modules 1–5: Foundations through data structures and algorithms) |
+| AI Engineering | [AI_Engineering _100.md](AI/AI_Engineering%20_100.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Episodes 1–51 (Modules 1–5) |
+| Robotics Engineering | [Robotics_Engineering_100.md](ROBOTICS/Robotics_Engineering_100.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Episodes 1–42 (Modules 1–5) |
+| Software Engineering | [Software Engineering_100 .md](SOFTWARE/Software%20Engineering_100%20.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Episodes 1–53 (Modules 1–5: Foundations through data structures and algorithms) |
 
 Each index file lists every day with its study topics, its output or exercise, and a link to the tutorial.
 
@@ -23,17 +23,17 @@ Each index file lists every day with its study topics, its output or exercise, a
 ```
 100 ULTRALEARNING/
 ├── AI/
-│   ├── 100_Episodes_AI_Engineering.md           # AI track index
+│   ├── AI_Engineering _100.md                   # AI track index
 │   └── 100 Episodes AI/
 │       ├── Module-01-AI-Foundations/
 │       └── Module-02-Mathematics-for-AI/
 ├── ROBOTICS/
-│   ├── 100_Episodes_Robotics_Engineering.md     # Robotics track index
+│   ├── Robotics_Engineering_100.md              # Robotics track index
 │   └── 100 Episodes Robotics/
 │       ├── Module-01-Robotics-Engineering-Foundations/
 │       └── Module-02-Electronics-for-Robotics/
 ├── SOFTWARE/
-│   ├── 100_Episodes_Software_Engineering.md     # Software track index
+│   ├── Software Engineering_100 .md             # Software track index
 │   └── 100 Episodes Software/
 │       ├── Module-01-Foundations/
 │       └── Module-02-Git-and-Collaboration/
