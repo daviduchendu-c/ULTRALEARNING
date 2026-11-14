@@ -1,9 +1,9 @@
-# Day 35: Mechanisms
+# Episode 35: Mechanisms
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You need Day 34 for torque, force and stress, and you should be comfortable reading a motor datasheet. Today you choose the parts that carry motion from a motor to a wheel or an arm, so the numbers from Day 13 and Day 34 go straight into the calculations.
+**Level:** beginner to intermediate. You need Episode 34 for torque, force and stress, and you should be comfortable reading a motor datasheet. Today you choose the parts that carry motion from a motor to a wheel or an arm, so the numbers from Episode 13 and Episode 34 go straight into the calculations.
 
 **By the end of this day, you will have:**
 
@@ -16,16 +16,16 @@
 
 - Python 3.12 with pytest 8 or newer (`pip install pytest`)
 - A kit of spur gears, or a LEGO Technic set, or two 3D printed gears of different tooth counts. A LEGO Technic set with gears, axles and beams costs about $40 to $100 and is enough for every exercise. Gear kits for makers cost about $10 to $25.
-- A small DC gearmotor, the same one you used on Day 13, to drive the gear train
-- A digital caliper, reading to 0.01 mm, which you already have from Day 34
+- A small DC gearmotor, the same one you used on Episode 13, to drive the gear train
+- A digital caliper, reading to 0.01 mm, which you already have from Episode 34
 - A tachometer app on a phone, or an optical tachometer, about $10 to $20, for speed measurement
 - A small bearing kit with 608 ball bearings (8 mm bore, 22 mm outside diameter, 7 mm wide), about $8 for 10
-- Optional: a free CAD tool such as FreeCAD 1.0 or Onshape, which you will use from Day 37
+- Optional: a free CAD tool such as FreeCAD 1.0 or Onshape, which you will use from Episode 37
 
 **Prerequisites:**
 
-- Day 34: torque as force times lever arm, shear and bending stress, and the factor of safety
-- Day 13: stall torque and the link between motor torque and current
+- Episode 34: torque as force times lever arm, shear and bending stress, and the factor of safety
+- Episode 13: stall torque and the link between motor torque and current
 - Basic trigonometry, and the ability to compute a ratio and its inverse
 
 ---
@@ -184,7 +184,7 @@ The most common small bearing in makers' robots is the 608 ball bearing, with an
 
 Bearings have two failure modes that you can check on paper. The first is overload, where the load on the bearing exceeds its rating and the balls or races fatigue. The second is misalignment, where the shaft is not parallel to the housing and the bearing is forced to carry a load it was not built for. A bearing in a misaligned housing will run hot and wear quickly even when the load is low.
 
-The common mistake is to press a bearing into a 3D printed housing with a hole that is slightly too small, which crushes the outer race and gives it a rough feel within a few hours. Design a press fit with a clearance tolerance, test it with a bearing sample, and only then print the full part. Day 41 covers fits in more detail.
+The common mistake is to press a bearing into a 3D printed housing with a hole that is slightly too small, which crushes the outer race and gives it a rough feel within a few hours. Design a press fit with a clearance tolerance, test it with a bearing sample, and only then print the full part. Episode 41 covers fits in more detail.
 
 Bearings are in every motor, every wheel hub and every robot joint. Choosing the right bearing is as important as choosing the right gear, because the bearing decides how long the mechanism lasts.
 
@@ -206,7 +206,7 @@ Shafts and couplings appear in every drive train of every robot. They are the si
 
 ## Hands-on exercises
 
-1. **Measure a gear ratio.** Mount two gears of different tooth counts on shafts, one driven by your DC gearmotor from Day 13. Measure the speed of each shaft with a tachometer app or an optical tachometer. Compute the ratio from the speeds and compare it with the ratio from the tooth counts. The two should agree within about 2 percent.
+1. **Measure a gear ratio.** Mount two gears of different tooth counts on shafts, one driven by your DC gearmotor from Episode 13. Measure the speed of each shaft with a tachometer app or an optical tachometer. Compute the ratio from the speeds and compare it with the ratio from the tooth counts. The two should agree within about 2 percent.
 
 2. **Measure backlash.** Hold the output gear still with one hand. With a fingertip, rotate the input gear back and forth until the output gear begins to move. Measure the arc at the pitch circle with a ruler or with a marked disc. Record the angle at the output in degrees, and compare it with the value from the gear geometry.
 
@@ -220,16 +220,16 @@ Shafts and couplings appear in every drive train of every robot. They are the si
 
 ## Project: a transmission calculator
 
-This project is a Python package that sizes a robot's transmission. It computes gear and pulley ratios, lead screw forces, linkage Grashof checks and shaft stress. It is a full mini-project, because the results feed the drive design you will make in Day 36 and the robot chassis in Day 42.
+This project is a Python package that sizes a robot's transmission. It computes gear and pulley ratios, lead screw forces, linkage Grashof checks and shaft stress. It is a full mini-project, because the results feed the drive design you will make in Episode 36 and the robot chassis in Episode 42.
 
 **Goal:** write a command-line tool that reads a transmission description from a JSON file, computes speed, torque, force and stress at each stage, and prints a table with a pass or fail against your limits.
 
-**Repository name:** `100-days-robotics-day-35-mechanisms`
+**Repository name:** `100-episodes-robotics-day-35-mechanisms`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-35-mechanisms/
+100-episodes-robotics-day-35-mechanisms/
 ├── README.md
 ├── requirements.txt
 ├── transmission/
@@ -400,10 +400,10 @@ def shear_stress_solid_shaft(torque_nm, diameter_m):
 
 **Practice**
 
-- *Onshape Learn*: the free tutorials at learn.onshape.com include lessons on mates and mechanism motion. Use them in Day 39 and check your linkage motion there first.
+- *Onshape Learn*: the free tutorials at learn.onshape.com include lessons on mates and mechanism motion. Use them in Episode 39 and check your linkage motion there first.
 
 ---
 
 ## Tomorrow
 
-Tomorrow, on Day 36, you use these mechanisms to build a drivetrain. You compare the differential, skid steer, Ackermann, omni, mecanum and tracked systems on maneuverability, complexity, odometry and terrain. The ratio and efficiency from today decide the speed and torque each wheel gets, and the linkage check decides whether a steering arm can turn through the angles you need.
+Tomorrow, on Episode 36, you use these mechanisms to build a drivetrain. You compare the differential, skid steer, Ackermann, omni, mecanum and tracked systems on maneuverability, complexity, odometry and terrain. The ratio and efficiency from today decide the speed and torque each wheel gets, and the linkage check decides whether a steering arm can turn through the angles you need.

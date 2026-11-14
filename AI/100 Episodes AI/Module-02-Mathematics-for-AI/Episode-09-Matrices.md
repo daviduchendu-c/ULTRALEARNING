@@ -1,9 +1,9 @@
-# Day 9: Matrices
+# Episode 9: Matrices
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** beginner. You should be comfortable with Day 8's vectors and dot products. If you have used a spreadsheet or a pandas DataFrame, you already have the right picture.
+**Level:** beginner. You should be comfortable with Episode 8's vectors and dot products. If you have used a spreadsheet or a pandas DataFrame, you already have the right picture.
 
 **By the end of this day, you will have:**
 
@@ -22,8 +22,8 @@
 
 **Prerequisites:**
 
-- Day 7: functions, sums and exponents
-- Day 8: vectors, the dot product and cosine similarity
+- Episode 7: functions, sums and exponents
+- Episode 8: vectors, the dot product and cosine similarity
 - Basic Python: lists, nested loops, functions, and running a script from the terminal
 
 ---
@@ -64,7 +64,7 @@ On the job, matrices show up as the dataset that a pandas DataFrame converts int
 - **Entry (element)**: one number inside a matrix, identified by its row and column position.
 - **Shape**: the pair (number of rows, number of columns). In NumPy it is stored as `A.shape`.
 - **Square matrix**: a matrix with the same number of rows and columns.
-- **Row vector and column vector**: matrices with one row or one column. A vector from Day 8 is one of these, depending on how you write it.
+- **Row vector and column vector**: matrices with one row or one column. A vector from Episode 8 is one of these, depending on how you write it.
 - **Matrix addition**: adding two matrices of the same shape entry by entry.
 - **Matrix multiplication**: a row-by-column operation in which each entry of the result is a dot product of a row of the first matrix and a column of the second.
 - **Transpose**: the matrix you get by swapping rows and columns, written `A^T`.
@@ -121,7 +121,7 @@ A common mistake is multiplying in the wrong order. `A` with shape `(2, 3)` time
 
 Imagine two spreadsheets with the same layout. One holds the sales forecast for each product and region, and the other holds the adjustments from the regional managers. Adding them cell by cell gives the adjusted forecast. Matrix addition works the same way.
 
-If `A` and `B` both have shape `(m, n)`, then `(A + B)[i, j] = A[i, j] + B[i, j]` for every position. The shapes must match exactly. Scalar multiplication works entry by entry too, so `c A` multiplies every entry by `c`. Together these operations make matrices a vector space, which is the reason the rules you learned for vectors on Day 8 carry over.
+If `A` and `B` both have shape `(m, n)`, then `(A + B)[i, j] = A[i, j] + B[i, j]` for every position. The shapes must match exactly. Scalar multiplication works entry by entry too, so `c A` multiplies every entry by `c`. Together these operations make matrices a vector space, which is the reason the rules you learned for vectors on Episode 8 carry over.
 
 NumPy adds a useful extra rule called broadcasting. When you add a vector of shape `(n,)` to a matrix of shape `(m, n)`, NumPy repeats the vector for each row. Neural networks use this to add a bias to every example in a batch.
 
@@ -142,7 +142,7 @@ A common mistake is relying on broadcasting without checking the result. The exp
 
 Matrix multiplication looks strange the first time you see it, and the reason is that it is designed for composing transformations and combining tables, not for multiplying entries. The rule is simple to state: the entry in row `i` and column `j` of `A B` is the dot product of row `i` of `A` and column `j` of `B`.
 
-From first principles, if `A` has shape `(m, n)` and `B` has shape `(n, p)`, then `C = A B` has entries `C[i, j] = sum over k of A[i, k] * B[k, j]`. That sum is the dot product you learned on Day 8, and the summation notation from Day 7 is the formula. Each entry of the result is one dot product, so the product is `m * p` dot products, each of length `n`. Matrix multiplication is associative, so `(A B) C = A (B C)`, and it is distributive over addition. It is not commutative: in general `A B` is different from `B A`, and when the shapes differ one of the products may not exist at all.
+From first principles, if `A` has shape `(m, n)` and `B` has shape `(n, p)`, then `C = A B` has entries `C[i, j] = sum over k of A[i, k] * B[k, j]`. That sum is the dot product you learned on Episode 8, and the summation notation from Episode 7 is the formula. Each entry of the result is one dot product, so the product is `m * p` dot products, each of length `n`. Matrix multiplication is associative, so `(A B) C = A (B C)`, and it is distributive over addition. It is not commutative: in general `A B` is different from `B A`, and when the shapes differ one of the products may not exist at all.
 
 Here is the product written out with an explicit loop, so you can see the dot products:
 
@@ -194,7 +194,7 @@ One frequent error is forgetting that a transpose is needed to make shapes match
 
 The number 1 has a special property: multiplying anything by 1 leaves it unchanged. The identity matrix plays the same role for matrices. It is a square matrix with ones on the main diagonal, from the top left to the bottom right, and zeros everywhere else.
 
-From first principles, the identity matrix `I` of size `n` satisfies `I A = A` and `A I = A` for every matrix `A` of compatible shape. The size is important: for a matrix `A` with shape `(m, n)`, you need `I_n` on the right and `I_m` on the left. Each column of `I` is a standard basis vector, which is the same idea as the unit vectors of Day 8 stacked side by side.
+From first principles, the identity matrix `I` of size `n` satisfies `I A = A` and `A I = A` for every matrix `A` of compatible shape. The size is important: for a matrix `A` with shape `(m, n)`, you need `I_n` on the right and `I_m` on the left. Each column of `I` is a standard basis vector, which is the same idea as the unit vectors of Episode 8 stacked side by side.
 
 ```python
 import numpy as np
@@ -213,7 +213,7 @@ Confusing the identity with a matrix of ones is an easy error. `np.ones((3, 3))`
 
 Undoing an operation is a common idea. If you multiply a number by 4, you undo it by dividing by 4. The inverse of a matrix plays the same role: if `A` transforms a vector, `A^-1` transforms it back. For a square matrix `A`, the inverse is the matrix that satisfies `A^-1 A = I` and `A A^-1 = I`.
 
-From first principles, not every square matrix has an inverse. For a `2` by `2` matrix `[[a, b], [c, d]]`, the inverse exists when the determinant `a d - b c` is not zero, and then `A^-1 = (1 / (a d - b c)) [[d, -b], [-c, a]]`. If the determinant is zero, the matrix is singular. Its columns point in a way that squashes some direction to zero, and information is lost. You cannot recover the lost information by any matrix, so no inverse exists. Rank, which you meet on Day 10, is the general version of this test.
+From first principles, not every square matrix has an inverse. For a `2` by `2` matrix `[[a, b], [c, d]]`, the inverse exists when the determinant `a d - b c` is not zero, and then `A^-1 = (1 / (a d - b c)) [[d, -b], [-c, a]]`. If the determinant is zero, the matrix is singular. Its columns point in a way that squashes some direction to zero, and information is lost. You cannot recover the lost information by any matrix, so no inverse exists. Rank, which you meet on Episode 10, is the general version of this test.
 
 ```python
 import numpy as np
@@ -275,14 +275,14 @@ Write down each step that surprised you. The places where your hand calculation 
 
 This is a practical mini-project. You will implement matrix multiplication from scratch, verify it against NumPy, use it to compute the forward pass of a dense layer, and solve a small system with a residual check. The layer code is the same structure that every linear layer in a deep learning framework uses, so the shape checks you write here are the checks you will need in a real model.
 
-**Repo name:** `100-days-ai-engineering-day-09-matrices`
+**Repo name:** `100-episodes-ai-engineering-day-09-matrices`
 
 **Goal:** implement matrix multiplication and a dense-layer forward pass with explicit shape checks, test them and document the shape rules in the README.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-09-matrices/
+100-episodes-ai-engineering-day-09-matrices/
 ├── README.md
 ├── requirements.txt
 ├── matrix_ops.py
@@ -482,4 +482,4 @@ def test_solve_known_system():
 
 Tomorrow you ask what a matrix does to space. Every matrix you met today is a linear transformation: it moves vectors, stretches them, flips them or squashes them. You will learn what a basis is, how the rank of a matrix tells you how many independent directions a dataset really uses, and why orthogonal directions are so valuable. Those ideas lead to eigenvalues, the singular value decomposition and dimensionality reduction, which are the tools that compress large feature sets and reveal their structure.
 
-**Next:** [Day 10: Linear Algebra for ML](Day-10-Linear-Algebra-for-ML.md)
+**Next:** [Episode 10: Linear Algebra for ML](Episode-10-Linear-Algebra-for-ML.md)

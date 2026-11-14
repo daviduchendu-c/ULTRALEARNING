@@ -1,9 +1,9 @@
-# Day 6: Git Mental Model
+# Episode 6: Git Mental Model
 
-*100 Days of Software Engineering, Module 2: Git and Collaboration*
+*100 Episodes of Software Engineering, Module 2: Git and Collaboration*
 
 **Time:** about 3 hours
-**Level:** beginner. You should be comfortable in a terminal (Day 4). No Git experience is needed.
+**Level:** beginner. You should be comfortable in a terminal (Episode 4). No Git experience is needed.
 
 **By the end of this day, you will have:**
 
@@ -15,14 +15,14 @@
 **What you need:**
 
 - Git 2.23 or newer (this lesson was tested with Git 2.55.0, from `git --version`). Version 2.23 added `git switch` and `git restore`.
-- A terminal: Ubuntu on WSL 2 (Day 3), Git Bash, or PowerShell. The commands below work in all three.
-- A code editor that opens from the terminal (VS Code from Day 3, or `nano`)
+- A terminal: Ubuntu on WSL 2 (Episode 3), Git Bash, or PowerShell. The commands below work in all three.
+- A code editor that opens from the terminal (VS Code from Episode 3, or `nano`)
 - A free GitHub account
 
 **Prerequisites:**
 
-- Day 4: Linux CLI I (`cd`, `ls`, `cat`, and `man`)
-- Day 3: Developer Environment (PATH, absolute and relative paths)
+- Episode 4: Linux CLI I (`cd`, `ls`, `cat`, and `man`)
+- Episode 3: Developer Environment (PATH, absolute and relative paths)
 
 ---
 
@@ -76,7 +76,7 @@ Git feels hard because its commands are verbs (`add`, `commit`, `reset`, `checko
 
 Picture a workbench. Parts sit on it in various states of assembly. The bench is the working tree. Changes on the bench are real, but Git has not recorded them yet, so they are not in the project's history.
 
-Git keeps four areas, and you move content between them with explicit commands: the working tree, the staging area, the local repository (the `.git` folder), and the remote repository on GitHub (Day 8). Only the working tree is visible in File Explorer or your editor. The other three live inside `.git` or on the server.
+Git keeps four areas, and you move content between them with explicit commands: the working tree, the staging area, the local repository (the `.git` folder), and the remote repository on GitHub (Episode 8). Only the working tree is visible in File Explorer or your editor. The other three live inside `.git` or on the server.
 
 ```
  edit files      git add        git commit        git push
@@ -143,7 +143,7 @@ Git prints a summary such as `[main (root-commit) 5e1d437] Add notes file with f
 
 Write the first line of a message as a short summary, under about 72 characters, that explains the change. "fix" tells a reader nothing. "Stop the parser crashing on empty input" tells them what changed. Small commits with clear messages are easy to review, easy to revert, and easy to search in `git log`.
 
-Commits stay local until you push them, and they are permanent in the sense that a later commit does not erase an earlier one. If you commit a password and delete it in the next commit, the password is still in the history. Day 7 covers how to rewrite history, and why that is a team decision.
+Commits stay local until you push them, and they are permanent in the sense that a later commit does not erase an earlier one. If you commit a password and delete it in the next commit, the password is still in the history. Episode 7 covers how to rewrite history, and why that is a team decision.
 
 ---
 
@@ -234,7 +234,7 @@ git restore --source HEAD~1 notes.txt    # take the older version from the last 
 
 `git restore` discards unstaged edits permanently, because Git has no copy of them. Treat it with the same care as `rm`, and run `git status` before and after so you can see which area changed.
 
-Two related commands undo commits instead of files. `git reset` moves a branch pointer backward, and `git revert` adds a new commit that undoes an old one. Day 7 covers both, because the right choice depends on whether the commit has been shared.
+Two related commands undo commits instead of files. `git reset` moves a branch pointer backward, and `git revert` adds a new commit that undoes an old one. Episode 7 covers both, because the right choice depends on whether the commit has been shared.
 
 The common mistake is running `git restore .` in a folder with hours of unsaved work. Check `git status` first, and copy the folder if the work matters.
 
@@ -338,12 +338,12 @@ Done when you can name the hash, message and file for your largest commit.
 
 The code is deliberately tiny. The evidence you commit is the history: small commits, a clean ignore file and a written record of the undo drill.
 
-Suggested repo name: `100-days-software-day-06-git-mental-model`.
+Suggested repo name: `100-episodes-software-day-06-git-mental-model`.
 
 The repo layout:
 
 ```
-100-days-software-day-06-git-mental-model/
+100-episodes-software-day-06-git-mental-model/
 ├── .gitignore
 ├── README.md
 ├── greet.py
@@ -380,7 +380,7 @@ Step-by-step tasks:
    - [ ] `python greet.py --loud Ada` prints `HELLO, ADA!`
    - [ ] Each commit message says what changed
    - [ ] No `__pycache__/` folder is tracked
-8. Create an empty repository on GitHub with the same name, without a README, license or `.gitignore`. Run `git remote add origin <the HTTPS URL GitHub shows>` and `git push -u origin main`. Day 8 explains each piece.
+8. Create an empty repository on GitHub with the same name, without a README, license or `.gitignore`. Run `git remote add origin <the HTTPS URL GitHub shows>` and `git push -u origin main`. Episode 8 explains each piece.
 
 Done when:
 
@@ -444,6 +444,6 @@ This project is light on code because the lesson is about the history. A reviewe
 
 ## Tomorrow
 
-Day 7 works with the history you read today. You will create branches, merge them, resolve a merge conflict, rebase for a cleaner history, and recover work after a mistake. Keep the `git-practice` folder, because Day 7 begins from it.
+Episode 7 works with the history you read today. You will create branches, merge them, resolve a merge conflict, rebase for a cleaner history, and recover work after a mistake. Keep the `git-practice` folder, because Episode 7 begins from it.
 
-**Next:** [Day 7: Branches and Merging](Software-Day-07-Branches-and-Merging.md)
+**Next:** [Episode 7: Branches and Merging](Software-Episode-07-Branches-and-Merging.md)

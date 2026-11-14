@@ -1,10 +1,10 @@
-# Day 22: SPI
+# Episode 22: SPI
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** intermediate. You need Day 16 (the Uno and the register view), Day 17 (chip-select logic and active-low signals), Day 18 (ADC resolution and step size), Day 20 (UART framing) and Day 21 (I2C addresses and the bus trade-offs). The project uses an external analog-to-digital converter, so you will also measure voltages with your multimeter.
+**Level:** intermediate. You need Episode 16 (the Uno and the register view), Episode 17 (chip-select logic and active-low signals), Episode 18 (ADC resolution and step size), Episode 20 (UART framing) and Episode 21 (I2C addresses and the bus trade-offs). The project uses an external analog-to-digital converter, so you will also measure voltages with your multimeter.
 
 **By the end of this day, you will have:**
 
@@ -27,10 +27,10 @@
 
 **Prerequisites:**
 
-- Day 16: the Uno's pins and the register idea
-- Day 17: active-low signals
-- Day 18: ADC step size and the conversion from reading to volts
-- Day 20 and Day 21: framing, the cost of a bus, and the comparison that makes choosing a bus a design task
+- Episode 16: the Uno's pins and the register idea
+- Episode 17: active-low signals
+- Episode 18: ADC step size and the conversion from reading to volts
+- Episode 20 and Episode 21: framing, the cost of a bus, and the comparison that makes choosing a bus a design task
 
 ---
 
@@ -90,7 +90,7 @@ SPI has no formal specification the way I2C does. The electrical behavior is set
 - **SPI mode:** one of four combinations of CPOL and CPHA, numbered 0 to 3.
 - **MSB first:** the bit order in which data is sent, with the most significant bit first. Most SPI devices use this order.
 - **SPISettings:** the Arduino object that sets the clock speed, bit order and mode for a transaction.
-- **ADC (analog-to-digital converter):** a circuit that converts a voltage to a number, covered on Day 18.
+- **ADC (analog-to-digital converter):** a circuit that converts a voltage to a number, covered on Episode 18.
 - **DIP (dual in-line package):** a chip package with two rows of pins, which fits a breadboard.
 
 ---
@@ -180,7 +180,7 @@ A hand-held calculator takes a number and returns a result. The MCP3008 takes a 
 
 From first principles, the MCP3008's transaction begins with the chip-select line low. The controller sends three bytes. The first byte is 0x01, which is a start bit. The second byte is 0x80 OR'd with the channel number shifted left by four bits, which sets the single-ended mode and the channel. The third byte is 0x00, which only clocks out the result. The reply comes back on MISO at the same time. The 10-bit result is in the lower two bits of the second reply byte and all eight bits of the third reply byte. The result is (second byte AND 0x03) shifted left by eight, OR the third byte.
 
-The worked example is channel 0 with the pot at mid-scale. The reply gives a result of 512, which is 512 × 5 / 1024 = 2.5 V with VREF at 5 V. A result of 1023 means the input is at the full-scale voltage. The conversion from count to volts is the same as the Uno's internal ADC on Day 18, but the reference and the sample timing come from the external chip.
+The worked example is channel 0 with the pot at mid-scale. The reply gives a result of 512, which is 512 × 5 / 1024 = 2.5 V with VREF at 5 V. A result of 1023 means the input is at the full-scale voltage. The conversion from count to volts is the same as the Uno's internal ADC on Episode 18, but the reference and the sample timing come from the external chip.
 
 The common mistake is to read only one byte of the reply, which gives a value that is always near 0 or 255 and looks like a broken chip. The result needs three transfers and a mask. The second common mistake is to use a VREF different from the supply without changing the conversion. The MCP3008 uses VDD as its reference by default, so the calculation depends on the measured supply.
 
@@ -208,12 +208,12 @@ On the job, external ADCs are used where the microcontroller's internal ADC is t
 
 The goal is a repository that reads the MCP3008 over SPI, converts the result to volts, and checks the readings against a multimeter across the pot's range. It produces a calibration table with the error at each point, which is the evidence that the link is correct.
 
-**Repo name:** `100-days-robotics-day-22-spi`
+**Repo name:** `100-episodes-robotics-day-22-spi`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-22-spi/
+100-episodes-robotics-day-22-spi/
 ├── README.md
 ├── mcp3008_read/
 │   └── mcp3008_read.ino
@@ -358,4 +358,4 @@ The calibration table is the strongest evidence. A reviewer who sees the reading
 
 ## Tomorrow
 
-Day 23 turns the drivers you have written across this module into software architecture. You will organize the code for the ADC, timers, UART, I2C and SPI into layers, use a state machine to control the behavior of a sensor logger, and handle faults in a way that keeps the system running. The bus knowledge from today tells you what each driver has to hide, and the interrupt and timing rules from earlier days decide how the layers talk to each other.
+Episode 23 turns the drivers you have written across this module into software architecture. You will organize the code for the ADC, timers, UART, I2C and SPI into layers, use a state machine to control the behavior of a sensor logger, and handle faults in a way that keeps the system running. The bus knowledge from today tells you what each driver has to hide, and the interrupt and timing rules from earlier days decide how the layers talk to each other.

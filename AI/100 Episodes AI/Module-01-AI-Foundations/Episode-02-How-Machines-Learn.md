@@ -1,13 +1,13 @@
-# Day 2: How Machines Learn
+# Episode 2: How Machines Learn
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 3 to 4 hours
-**Level:** beginner to intermediate. For learners who finished Day 1 and can run Python scripts. No calculus is needed.
+**Level:** beginner to intermediate. For learners who finished Episode 1 and can run Python scripts. No calculus is needed.
 
 **By the end of this day, you will have:**
 
-- A printout of the numbers your Day 1 learned bot actually learned, and an explanation of why its strongest complaint word is "and"
+- A printout of the numbers your Episode 1 learned bot actually learned, and an explanation of why its strongest complaint word is "and"
 - A gradient descent loop written by hand that finds the same parameters as scikit-learn
 - A measurement of overfitting: training error against test error as a model gets more flexible
 - A working picture of the learning loop and of the four ways a model gets a learning signal
@@ -15,14 +15,14 @@
 **What you need:**
 
 - Python 3.11 or newer
-- A virtual environment (as on Day 1)
+- A virtual environment (as on Episode 1)
 - `numpy==2.2.6`, `pandas==2.2.3`, `scikit-learn==1.6.1` and `scipy==1.15.2` (pinned in the project section)
-- Your Day 1 `data/messages.csv`
+- Your Episode 1 `data/messages.csv`
 - Paper or a whiteboard tool for the loop diagram
 
 **Prerequisites:**
 
-- Day 1: What Is Artificial Intelligence? (training vs inference, models and parameters)
+- Episode 1: What Is Artificial Intelligence? (training vs inference, models and parameters)
 - Basic Python
 - How to activate a virtual environment
 
@@ -72,7 +72,7 @@ Tom Mitchell's textbook *Machine Learning* (1997) gives the classic definition. 
 |---|---|---|
 | 1847 | Augustin-Louis Cauchy describes the method of steepest descent. | The ancestor of [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent), which still trains almost every neural network. |
 | 1958 | Frank Rosenblatt publishes the [perceptron](https://en.wikipedia.org/wiki/Perceptron), a model whose weights are adjusted from examples. | The first widely known "learn the parameters from data" machine. |
-| 1986 | Rumelhart, Hinton and Williams popularize [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) for multi-layer networks. | How gradients are computed in deep learning (Day 43). |
+| 1986 | Rumelhart, Hinton and Williams popularize [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) for multi-layer networks. | How gradients are computed in deep learning (Episode 43). |
 | 2016 | DeepMind's AlphaGo beats Lee Sedol at Go. | Reinforcement learning plus deep learning at world-class level. |
 | 2018 onward | BERT and GPT-style models are pretrained on raw text with no human labels. | Self-supervised learning becomes the main way to train large models. |
 
@@ -118,7 +118,7 @@ Each example (also called a sample or a row) is one unit, such as one email or o
 
 Put formally, data is the set of recorded examples the system learns from. It must be relevant, large enough to show the pattern, and **representative** of the inputs the model will see later.
 
-Your Day 1 `messages.csv` has 30 rows, 10 per label. Every message is in English, and every complaint is about a delivery or a product. A model trained on it has never seen a complaint about a rude employee, so it has no way to recognize one.
+Your Episode 1 `messages.csv` has 30 rows, 10 per label. Every message is in English, and every complaint is about a delivery or a product. A model trained on it has never seen a complaint about a rude employee, so it has no way to recognize one.
 
 The usual mistakes are collecting from one source (one city, one season) and deploying everywhere, counting rows instead of asking what situations they cover, and leaving in duplicate rows, which make the model look better than it is. Spot them by asking where each row came from and by checking for repeats before you train. Module 3 covers data work.
 
@@ -134,7 +134,7 @@ A model can only do arithmetic, so every fact must become a number. All the numb
 
 A [feature](https://en.wikipedia.org/wiki/Feature_(machine_learning)) is one numeric property of an example that the model can use. All the features together form the **feature matrix**, `X`, with one row per example and one column per feature.
 
-On Day 1, `CountVectorizer` turned "Hi there!" into a row with a 1 in the "hi" column, a 1 in the "there" column, and 0 everywhere else. Thirty messages with 106 distinct words make a 30 by 106 matrix. The project prints that shape.
+On Episode 1, `CountVectorizer` turned "Hi there!" into a row with a 1 in the "hi" column, a 1 in the "there" column, and 0 everywhere else. Thirty messages with 106 distinct words make a 30 by 106 matrix. The project prints that shape.
 
 ```
             hi  there  how  do  reset  password  ...
@@ -142,7 +142,7 @@ Hi there!    1     1    0    0     0         0
 How do I...  0     0    1    1     1         1
 ```
 
-A feature that contains the answer, such as a "refund_issued" column when you predict complaints, is **data leakage**. It gives great test scores and useless predictions in production. Spot it by asking of every column whether you would know its value at the moment you need the prediction. Mixed scales also cause trouble: square meters next to cents can make some algorithms misbehave until you rescale. Day 21 covers feature engineering.
+A feature that contains the answer, such as a "refund_issued" column when you predict complaints, is **data leakage**. It gives great test scores and useless predictions in production. Spot it by asking of every column whether you would know its value at the moment you need the prediction. Mixed scales also cause trouble: square meters next to cents can make some algorithms misbehave until you rescale. Episode 21 covers feature engineering.
 
 In industry, much of the practical skill in classical ML is deciding which columns to build and which to leave out.
 
@@ -158,7 +158,7 @@ A label (also called the target, written `y`) is the correct output for an examp
 
 In `messages.csv`, the `label` column is `y`. In the rent data you build in the project, `rent` is `y` and `size_m2` is the only feature.
 
-People write labels, so labels contain errors. Is "Can you stop calling me?" a question or a complaint? Day 1 labeled it a complaint, and someone else might not. If labelers disagree on 10% of rows, no model can be reliably more than about 90% "correct" by those labels. Check a sample of labels by hand before you blame the model.
+People write labels, so labels contain errors. Is "Can you stop calling me?" a question or a complaint? Episode 1 labeled it a complaint, and someone else might not. If labelers disagree on 10% of rows, no model can be reliably more than about 90% "correct" by those labels. Check a sample of labels by hand before you blame the model.
 
 Labeling is a line item in real project budgets, often done by annotation teams or by domain experts such as doctors for medical images.
 
@@ -188,7 +188,7 @@ Everything the model "knows" lives in its parameters. Everything about how the s
 
 Parameters are the numbers inside the model that training adjusts to reduce the loss. **Hyperparameters** are settings you choose before training, such as the learning rate, the number of steps or a tree's depth. Training does not change them.
 
-The linear rent model has 2 parameters. The Day 1 Naive Bayes model stored one number per (label, word) pair, plus one per label: 3 × 106 + 3 = 321 numbers. GPT-style language models have billions.
+The linear rent model has 2 parameters. The Episode 1 Naive Bayes model stored one number per (label, word) pair, plus one per label: 3 × 106 + 3 = 321 numbers. GPT-style language models have billions.
 
 More parameters are not automatically better. A model with far more parameters than training examples can memorize every example and still fail on new ones. Parameter count also sets cost: a 7-billion-parameter model stored as 16-bit floats (2 bytes each) needs about 14 GB for its weights alone. You can spot memorization when training error is far lower than test error.
 
@@ -233,7 +233,7 @@ Take three apartments:
 
 MSE = (10,000 + 10,000 + 0) / 3 ≈ 6,667. The mean absolute error (MAE) for the same rows is (100 + 100 + 0) / 3 ≈ 66.7. Squaring punishes big misses. One miss of 300 contributes 90,000, nine times the contribution of a miss of 100.
 
-A loss that does not match the business goal gives a misleading result. A fraud model can reach 99.9% accuracy by answering "not fraud" every time if only 0.1% of transactions are fraud. The score looks good and the model catches nothing. You spot it by asking what the model would score if it always gave the most common answer. Day 6 shows the same trap with a baseline. Day 42 covers loss functions in depth.
+A loss that does not match the business goal gives a misleading result. A fraud model can reach 99.9% accuracy by answering "not fraud" every time if only 0.1% of transactions are fraud. The score looks good and the model catches nothing. You spot it by asking what the model would score if it always gave the most common answer. Episode 6 shows the same trap with a baseline. Episode 42 covers loss functions in depth.
 
 Teams choose their loss and their reported metric to match what the business cares about, such as cost of a missed fraud case against cost of a false alarm.
 
@@ -259,7 +259,7 @@ Model: `rent = w * size`. One training row: size 50, rent 600. The right answer 
 | 2 | 6 | 300 | -30,000 | 6 + 3 = 9 |
 | 3 | 9 | 450 | -15,000 | 9 + 1.5 = 10.5 |
 
-Each step halves the distance to 12, so after about 20 steps `w` is within 0.00002 of 12. You do not need calculus to follow this. Days 11 and 12 explain where the gradient formula comes from.
+Each step halves the distance to 12, so after about 20 steps `w` is within 0.00002 of 12. You do not need calculus to follow this. Episodes 11 and 12 explain where the gradient formula comes from.
 
 A learning rate that is too large overshoots. At 0.0004, starting from `w = 0`, `w` jumps to 24, then back to 0, forever. Anything larger flies off toward infinity. A learning rate that is too small wastes hours of compute. When a training loss rises or turns into `nan`, suspect the learning rate first.
 
@@ -274,7 +274,7 @@ loss
  └──────────────────────────────────── steps
 ```
 
-Real training scripts use refinements of this one update rule, such as SGD, Adam and AdamW. Day 44 covers them. Every large model you hear about is trained with a descendant of this update rule.
+Real training scripts use refinements of this one update rule, such as SGD, Adam and AdamW. Episode 44 covers them. Every large model you hear about is trained with a descendant of this update rule.
 
 ---
 
@@ -296,7 +296,7 @@ In the project you fit three models of increasing flexibility to only 15 rent ex
 
 As flexibility rises, training error falls and test error explodes. The degree-10 curve passes close to all 15 training points and swings wildly between and beyond them. That is overfitting in one table.
 
-The common mistakes are reporting the training score as the result, tuning settings against the test set until the test set leaks into your choices (Day 3 adds a separate validation set), and assuming the future looks like the test set. If the world changes, even a well-generalized model degrades. You spot the first two when test results look too good and then collapse in production.
+The common mistakes are reporting the training score as the result, tuning settings against the test set until the test set leaks into your choices (Episode 3 adds a separate validation set), and assuming the future looks like the test set. If the world changes, even a well-generalized model degrades. You spot the first two when test results look too good and then collapse in production.
 
 In the market, this gap between test results and live results is the reason teams monitor deployed models after launch.
 
@@ -314,7 +314,7 @@ After training, the rent for a 65 m² apartment is one multiplication and one ad
 
 The mistakes are forgetting the preprocessing from training, such as rescaling with the training mean and standard deviation, and feeding inputs outside the training range. The rent model has never seen a 400 m² apartment, so its prediction there is a guess dressed up as a number. You spot both when predictions in production look odd for inputs that differ from the training data.
 
-Inference cost per request decides whether an AI feature pays for itself, which is why serving gets its own day (Day 92).
+Inference cost per request decides whether an AI feature pays for itself, which is why serving gets its own day (Episode 92).
 
 ---
 
@@ -338,7 +338,7 @@ A teacher marks every practice answer right or wrong, and you learn from the mar
 
 The training data contains inputs and the correct label for each. The model learns the mapping between them. If the label is a category, the task is **classification**. If it is a number, the task is **regression**. [Wikipedia](https://en.wikipedia.org/wiki/Supervised_learning)
 
-Supervised learning means learning a function from labeled input-output pairs. Day 1's message classifier is classification, and today's rent model is regression.
+Supervised learning means learning a function from labeled input-output pairs. Episode 1's message classifier is classification, and today's rent model is regression.
 
 The limit is that labels are slow and costly. A medical image may need a specialist's time. Most deployed business ML, such as credit scoring, churn prediction and demand forecasting, is supervised.
 
@@ -362,7 +362,7 @@ print(groups)  # [1 1 1 0 0 0]
 
 The algorithm found two groups. The numbers 0 and 1 are arbitrary names for them. Swap the names and the grouping stays the same. (On some Windows 11 machines this prints a harmless warning about counting CPU cores. You can ignore it.)
 
-There is no single right answer to check against, so a useful grouping is hard to tell from a meaningless one. You asked for 2 groups, and the algorithm would happily find 5. Spot the problem by asking whether the groups mean anything to someone who knows the domain. Customer segmentation and grouping similar support tickets are common unsupervised jobs (Day 32).
+There is no single right answer to check against, so a useful grouping is hard to tell from a meaningless one. You asked for 2 groups, and the algorithm would happily find 5. Spot the problem by asking whether the groups mean anything to someone who knows the domain. Customer segmentation and grouping similar support tickets are common unsupervised jobs (Episode 32).
 
 ---
 
@@ -389,9 +389,9 @@ for context, target in pairs:
   'the cat sat on the' -> 'mat'
 ```
 
-Run this over billions of sentences and you have the pretraining task of a GPT-style language model (Day 73).
+Run this over billions of sentences and you have the pretraining task of a GPT-style language model (Episode 73).
 
-The model learns every pattern in the raw data, including errors and biases. The pretext task (guess the next word) is not the job you want done, so pretrained models are usually fine-tuned afterwards (Day 74), and you spot the gap when a pretrained model gets the style right but the task wrong. Most large language models, and many image and speech models, start with self-supervised pretraining.
+The model learns every pattern in the raw data, including errors and biases. The pretext task (guess the next word) is not the job you want done, so pretrained models are usually fine-tuned afterwards (Episode 74), and you spot the gap when a pretrained model gets the style right but the task wrong. Most large language models, and many image and speech models, start with self-supervised pretraining.
 
 ---
 
@@ -429,7 +429,7 @@ estimates: [0.24, 0.59]
 
 The agent pulls machine B 95% of the time (475 of 500). The code also shows the trade-off between **exploration** (trying the other machine in case it is better) and **exploitation** (using what you already know). Without the 10% exploration, an early unlucky streak could lock the agent onto the worse machine forever.
 
-RL needs many trials. In the real world, trials can be slow, expensive or dangerous (a robot falling over), so robotics RL usually trains in simulation first (Day 98). You spot a problem when the agent keeps repeating one action and never tests the others. RL also shows up in game AI, ad bidding and the preference-tuning stage of chat models (RLHF, Day 75).
+RL needs many trials. In the real world, trials can be slow, expensive or dangerous (a robot falling over), so robotics RL usually trains in simulation first (Episode 98). You spot a problem when the agent keeps repeating one action and never tests the others. RL also shows up in game AI, ad bidding and the preference-tuning stage of chat models (RLHF, Episode 75).
 
 ---
 
@@ -466,11 +466,11 @@ You should get MSE 10,050 and MAE 55. Write one sentence on which single row dom
 
 ## Project: open the black box and write the loop yourself
 
-This is the GitHub project for Day 2. You open up the model you built on Day 1, then write the training loop yourself so no part of it stays hidden.
+This is the GitHub project for Episode 2. You open up the model you built on Episode 1, then write the training loop yourself so no part of it stays hidden.
 
-**Goal:** see the learned parameters of your Day 1 bot, write gradient descent from scratch, confirm it matches scikit-learn, and measure overfitting.
+**Goal:** see the learned parameters of your Episode 1 bot, write gradient descent from scratch, confirm it matches scikit-learn, and measure overfitting.
 
-Suggested repo name: `100-days-ai-engineering-day-02-how-machines-learn`.
+Suggested repo name: `100-episodes-ai-engineering-day-02-how-machines-learn`.
 
 ### Repository layout
 
@@ -479,9 +479,9 @@ day-02-how-machines-learn/
 ├── README.md               # your results and answers
 ├── requirements.txt        # pinned library versions
 ├── data/
-│   ├── messages.csv        # copied from Day 1
+│   ├── messages.csv        # copied from Episode 1
 │   └── rent.csv            # generated by make_data.py
-├── inspect_bot.py          # prints what the Day 1 model learned
+├── inspect_bot.py          # prints what the Episode 1 model learned
 ├── make_data.py            # creates the synthetic rent dataset
 ├── gradient_descent.py     # hand-written training loop
 └── generalization.py       # train vs test error as flexibility grows
@@ -496,7 +496,7 @@ mkdir data
 python -m venv .venv
 ```
 
-Activate the environment as on Day 1 (`source .venv/bin/activate` on macOS or Linux, `.venv\Scripts\Activate.ps1` in PowerShell). Copy `data/messages.csv` from your Day 1 folder into `data/`.
+Activate the environment as on Episode 1 (`source .venv/bin/activate` on macOS or Linux, `.venv\Scripts\Activate.ps1` in PowerShell). Copy `data/messages.csv` from your Episode 1 folder into `data/`.
 
 Create `requirements.txt`:
 
@@ -507,12 +507,12 @@ scikit-learn==1.6.1
 scipy==1.15.2
 ```
 
-Run `pip install -r requirements.txt`. Pinning exact versions (`==`) means anyone who installs from this file gets the same libraries you used, so your numbers can be reproduced. Day 5 covers this in more detail.
+Run `pip install -r requirements.txt`. Pinning exact versions (`==`) means anyone who installs from this file gets the same libraries you used, so your numbers can be reproduced. Episode 5 covers this in more detail.
 
-### Step 2: inspect the Day 1 model (`inspect_bot.py`)
+### Step 2: inspect the Episode 1 model (`inspect_bot.py`)
 
 ```python
-"""Open up the Day 1 learned bot and print what it learned."""
+"""Open up the Episode 1 learned bot and print what it learned."""
 
 import numpy as np
 import pandas as pd
@@ -580,7 +580,7 @@ question: words that push a message toward this label
   where      +0.70
 ```
 
-The strongest complaint word is "and," not "broken" or "terrible." Complaints in this dataset tend to be long sentences joined with "and." That is a real pattern in these 30 rows and a useless one in the world. The model learns whatever correlates with the label, and 30 rows are too few to tell the difference. This is why 30 rows were not enough on Day 1. The five tied greeting words each appeared twice in the training messages, so the model cannot separate them.
+The strongest complaint word is "and," not "broken" or "terrible." Complaints in this dataset tend to be long sentences joined with "and." That is a real pattern in these 30 rows and a useless one in the world. The model learns whatever correlates with the label, and 30 rows are too few to tell the difference. This is why 30 rows were not enough on Episode 1. The five tied greeting words each appeared twice in the training messages, so the model cannot separate them.
 
 ### Step 3: generate data (`make_data.py`)
 
@@ -731,7 +731,7 @@ degree    train MSE     test MSE
 
 Paste all three outputs, then answer in full sentences:
 
-1. How many parameters did the Day 1 model learn, and where does the number 321 come from?
+1. How many parameters did the Episode 1 model learn, and where does the number 321 come from?
 2. Why is "and" the top complaint word? Name one change to the data that would fix it.
 3. Change `learning_rate` to 0.5, then to 1.1. Describe what the loss does in each case. Put it back to 0.02 afterwards.
 4. How close did gradient descent get to the true rule (300 + 12 × size)? Why can it never match it exactly with this data?
@@ -759,10 +759,10 @@ Paste all three outputs, then answer in full sentences:
 
 **Answers (check after you try):**
 
-1. Overfitting. Get more training data, use a simpler model (or regularization, Day 45), and confirm the held-out set comes from the same source as the training set.
+1. Overfitting. Get more training data, use a simpler model (or regularization, Episode 45), and confirm the held-out set comes from the same source as the training set.
 2. The labels are produced by a program from the raw data (hide a word, predict it), so no person has to read each example.
 3. The learning rate. A rate that is too large makes the parameters overshoot and grow until the numbers overflow.
-4. The test rows then influence the preprocessing, so a little information about the test set leaks into training. With 100 rows the effect is small, but the habit causes real leakage elsewhere (Day 3).
+4. The test rows then influence the preprocessing, so a little information about the test set leaks into training. With 100 rows the effect is small, but the habit causes real leakage elsewhere (Episode 3).
 5. Its beliefs come only from the actions it has tried. Without exploration it can never discover that an option it undervalued is better.
 6. It could be a real signal, since spam often contains it, but wanted newsletters may contain it too. Check how many non-spam emails contain it, and whether the word was added to emails after they were labeled.
 7. A hyperparameter choice. Training then finds 5 groups whether or not 5 real groups exist. That is the main weakness of unsupervised learning.
@@ -799,6 +799,6 @@ Paste all three outputs, then answer in full sentences:
 
 ## Tomorrow
 
-Day 3, **The AI/ML Lifecycle**, zooms out from the training loop to the project around it. Today you saw that `model.fit()` is about ten lines of logic. Tomorrow you see the stages before and after those lines: defining the problem, collecting and cleaning data, building a baseline, validating, testing, deploying and monitoring. You also see what goes wrong when a stage is skipped, starting with the leak from question 4 above. Keep today's repo. Its "and" problem is a data-collection failure, and you will name the stage it belongs to.
+Episode 3, **The AI/ML Lifecycle**, zooms out from the training loop to the project around it. Today you saw that `model.fit()` is about ten lines of logic. Tomorrow you see the stages before and after those lines: defining the problem, collecting and cleaning data, building a baseline, validating, testing, deploying and monitoring. You also see what goes wrong when a stage is skipped, starting with the leak from question 4 above. Keep today's repo. Its "and" problem is a data-collection failure, and you will name the stage it belongs to.
 
-**Next:** [Day 3: The AI/ML Lifecycle](Day-03-The-AI-ML-Lifecycle.md)
+**Next:** [Episode 3: The AI/ML Lifecycle](Episode-03-The-AI-ML-Lifecycle.md)

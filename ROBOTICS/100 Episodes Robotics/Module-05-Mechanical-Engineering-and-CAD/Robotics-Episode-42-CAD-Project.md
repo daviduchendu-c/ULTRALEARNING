@@ -1,9 +1,9 @@
-# Day 42: CAD Project
+# Episode 42: CAD Project
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 6 hours, which you can split over two sessions
-**Level:** intermediate. This is the capstone of Module 5. You need every earlier day in the module, and the motor and power work from Module 2. The project draws on the design rules, the fits, the assembly checks and the material choices from Days 34 to 41.
+**Level:** intermediate. This is the capstone of Module 5. You need every earlier day in the module, and the motor and power work from Module 2. The project draws on the design rules, the fits, the assembly checks and the material choices from Episodes 34 to 41.
 
 **By the end of this day, you will have:**
 
@@ -22,14 +22,14 @@
 - A two-wheel gearmotor kit with two 66 mm wheels, a castor, two 608 bearings, M3 bolts, nuts and standoffs, about $30 to $60 for the set
 - A digital caliper, reading to 0.01 mm, and a kitchen scale, reading to 1 g
 - A 2S or 3S battery, or a 6 V battery pack, of about 0.6 kg
-- The parts from Days 37 to 41 saved as STEP files, including the enclosure, the motor bracket and the wheel hub
+- The parts from Episodes 37 to 41 saved as STEP files, including the enclosure, the motor bracket and the wheel hub
 
 **Prerequisites:**
 
-- All of Module 5, Days 34 to 41
-- Day 13: motor drive, stall current and the battery
-- Day 36: the differential drive equations and odometry
-- Day 41: the DFM rules, the kerf and the hole compensation, and the checker
+- All of Module 5, Episodes 34 to 41
+- Episode 13: motor drive, stall current and the battery
+- Episode 36: the differential drive equations and odometry
+- Episode 41: the DFM rules, the kerf and the hole compensation, and the checker
 
 ---
 
@@ -81,7 +81,7 @@ The history shows that the chassis is where the mechanical, electrical and softw
 - **Track width:** the distance between the centres of the two driven wheels.
 - **Wheelbase:** the distance between the front and rear axles, or, for a differential robot with a castor, the distance from the drive axle to the castor axle.
 - **Castor:** a free-rotating support wheel, which carries weight without driving the robot.
-- **Centre of mass (CoM):** the point through which the weight of the robot acts, as defined on Day 34.
+- **Centre of mass (CoM):** the point through which the weight of the robot acts, as defined on Episode 34.
 - **Load transfer:** the change in the normal force on each wheel when the robot accelerates or brakes.
 - **Mass budget:** a list of the mass of each subsystem, with a total that must stay below a target.
 - **Bill of materials (BOM):** the list of parts, quantities, processes and files that a robot is built from.
@@ -99,12 +99,12 @@ A design package starts with a brief. The brief states what the robot must do, a
 
 | Item | Requirement | Reason |
 |---|---|---|
-| Drive | Differential drive, two driven wheels of 66 mm diameter | Matches the Day 36 drivetrain and odometry |
+| Drive | Differential drive, two driven wheels of 66 mm diameter | Matches the Episode 36 drivetrain and odometry |
 | Total mass | 1.8 kg or less, including battery | Motor size and battery life |
 | Top speed | 0.5 m/s | Safe speed for an indoor lab |
 | Acceleration limit | At least 1.0 m/s² with the castor in contact | Keeps the robot stable under software control |
 | Plate deflection | Under 0.5 mm at the battery load | Keeps the gears aligned |
-| Process | Laser-cut top plate, printed brackets and enclosure | Matches the process rules from Day 41 |
+| Process | Laser-cut top plate, printed brackets and enclosure | Matches the process rules from Episode 41 |
 | Repair | Every part removable with M3 tools | Serviceability |
 
 The brief also has a requirement it does not state outright: the robot must not tip or lift its castor under normal use. The stability check below tests that requirement, and it is the reason the software limit is set.
@@ -172,11 +172,11 @@ The common mistake is to check friction alone and to assume a robot that does no
 
 ## The assembly
 
-The assembly places the parts as instances, as you learned on Day 39. The chassis plate is the ground. The two motor brackets from Day 40 are fixed to the plate with M3 bolts. The motors are fixed to the brackets. The wheel hubs from Day 38 are placed on the motor shafts with revolute joints, and the castor is fixed to the plate with its own mount. The enclosure sits on four standoffs, which are fixed to the plate with M3 bolts from below.
+The assembly places the parts as instances, as you learned on Episode 39. The chassis plate is the ground. The two motor brackets from Episode 40 are fixed to the plate with M3 bolts. The motors are fixed to the brackets. The wheel hubs from Episode 38 are placed on the motor shafts with revolute joints, and the castor is fixed to the plate with its own mount. The enclosure sits on four standoffs, which are fixed to the plate with M3 bolts from below.
 
 The first principle is the order of the assembly. A part must be reachable with a screwdriver when it is added, and a fastener must be reachable after the part above it is placed. The motors must go on before the wheels, and the standoffs must go on before the board. Check the order with the exploded view.
 
-The degrees-of-freedom check from Day 39 gives the robot's motion. The chassis is grounded. Each wheel has a revolute joint, so each adds one degree of freedom. The castor adds a free rotation, which the model represents as a revolute joint with a vertical axis and a free swivel. The assembly count should show that the robot's two wheels are the only moving parts of the drive, and that the castor is the only other free motion.
+The degrees-of-freedom check from Episode 39 gives the robot's motion. The chassis is grounded. Each wheel has a revolute joint, so each adds one degree of freedom. The castor adds a free rotation, which the model represents as a revolute joint with a vertical axis and a free swivel. The assembly count should show that the robot's two wheels are the only moving parts of the drive, and that the castor is the only other free motion.
 
 The common mistake is to build the assembly by placing parts by eye. Use joints and mates, and then check the interference report. A clean assembly report is the first sign that the parts fit.
 
@@ -194,7 +194,7 @@ Here is the drawing note for the top plate:
 
 The note tells the cutter the material, the thickness and the kerf. It tells the manufacturer that the holes and slots are compensated, so that a reader does not "correct" them back to the nominal size. It also gives the general tolerance and the revision.
 
-The common mistake is to put the printed part's hole value on a laser-cut drawing, or to omit the kerf. A hole drawn for a printer is 3.58 mm, and the same hole cut by a laser is 3.25 mm drawn. Use the process rules from Day 41 for each part.
+The common mistake is to put the printed part's hole value on a laser-cut drawing, or to omit the kerf. A hole drawn for a printer is 3.58 mm, and the same hole cut by a laser is 3.25 mm drawn. Use the process rules from Episode 41 for each part.
 
 ---
 
@@ -248,7 +248,7 @@ The common mistake is to write a plan that lists the process but not the checks.
 
 2. **Test the castor limit.** Place the assembled chassis on a smooth floor with the battery in place. Push it gently forward until the castor lifts, and measure the force with a spring scale. Compare the result with the value you computed from the stability check.
 
-3. **Check the wheel alignment.** Drive the robot 1 m forward on a taped line. Measure the lateral error, and compare it with the expected error from the drivetrain's odometry from Day 36.
+3. **Check the wheel alignment.** Drive the robot 1 m forward on a taped line. Measure the lateral error, and compare it with the expected error from the drivetrain's odometry from Episode 36.
 
 4. **Measure a laser-cut hole.** Cut a coupon with the hole and slot from the DXF file, and measure the finished holes and slots. Use the measured kerf to check the drawn values, and update the drawing note if the kerf differs from 0.15 mm.
 
@@ -260,14 +260,14 @@ The common mistake is to write a plan that lists the process but not the checks.
 
 This project delivers a design package for the chassis: the CAD assembly, the drawings, the exploded view, the bill of materials, the manufacturing plan, and a Python check that compares the BOM with the assembly. It is the full project for Module 5, and it is the document a team would hand to a manufacturer or a teammate.
 
-**Goal:** a complete package for the two-wheel differential chassis described in this lesson. The package must pass the BOM check, the stability check and the DFM checker from Day 41, and it must be complete enough for another person to build the robot without asking you a question.
+**Goal:** a complete package for the two-wheel differential chassis described in this lesson. The package must pass the BOM check, the stability check and the DFM checker from Episode 41, and it must be complete enough for another person to build the robot without asking you a question.
 
-**Repository name:** `100-days-robotics-day-42-chassis-cad-project`
+**Repository name:** `100-episodes-robotics-day-42-chassis-cad-project`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-42-chassis-cad-project/
+100-episodes-robotics-day-42-chassis-cad-project/
 ├── README.md
 ├── requirements.txt
 ├── cad/
@@ -378,8 +378,8 @@ Write `assembly.json` with the same counts as the BOM table, and write `bom.csv`
 
 **Step-by-step tasks.**
 
-1. Create the repository and the virtual environment. Install pytest. Copy `dfm/rules.py` from Day 41 into the repo.
-2. Build the chassis in FreeCAD 1.0. Use the parts from Days 38, 40 and 41 as STEP files, placed as instances in the assembly. Use joints for the wheels and the castor, and fixed joints for the brackets and the standoffs.
+1. Create the repository and the virtual environment. Install pytest. Copy `dfm/rules.py` from Episode 41 into the repo.
+2. Build the chassis in FreeCAD 1.0. Use the parts from Episodes 38, 40 and 41 as STEP files, placed as instances in the assembly. Use joints for the wheels and the castor, and fixed joints for the brackets and the standoffs.
 3. Run the interference check in the assembly tool. Resolve every overlap, or record it as an intended fit with a reason.
 4. Write `stability.py` and run it. Confirm that it gives 1.23 m/s² for the worked example. Record the result in the README.
 5. Export the top plate as a DXF file for the laser cutter, with the holes and slots drawn at their compensated values.
@@ -388,7 +388,7 @@ Write `assembly.json` with the same counts as the BOM table, and write `bom.csv`
 8. Write `bom.csv` and `assembly.json`. Run `python check_bom.py bom.csv assembly.json` and fix every failure.
 9. Write `tests/test_check_bom.py` with a passing case, a case where the quantity is wrong, and a case where a file is missing. Use a temporary folder for the file check.
 10. Write `tests/test_stability.py` with a test for the worked example and a test that a battery moved forward reduces the castor lift acceleration.
-11. Run the DFM checker from Day 41 on the printed parts, using their design files, and record any violation.
+11. Run the DFM checker from Episode 41 on the printed parts, using their design files, and record any violation.
 12. Write `manufacturing_plan.md` with the process, the material, the tolerance, the checks and the order of assembly for every part.
 13. Write the README. It is the front page of the package, so it must state the brief, the requirements, the stability result, the mass budget, and where each file is.
 
@@ -475,4 +475,4 @@ Write `assembly.json` with the same counts as the BOM table, and write `bom.csv`
 
 ## Tomorrow
 
-Tomorrow, on Day 43, you move from mechanical design to electronics layout. You learn PCB fundamentals: layers, traces, pads, vias, footprints, solder mask, silkscreen, ground planes and power distribution. The enclosure you designed today holds a board, and the board's size, its mounting holes and its connectors come from the design package. The first board you design in Module 6 has to fit inside the enclosure that you just checked.
+Tomorrow, on Episode 43, you move from mechanical design to electronics layout. You learn PCB fundamentals: layers, traces, pads, vias, footprints, solder mask, silkscreen, ground planes and power distribution. The enclosure you designed today holds a board, and the board's size, its mounting holes and its connectors come from the design package. The first board you design in Module 6 has to fit inside the enclosure that you just checked.

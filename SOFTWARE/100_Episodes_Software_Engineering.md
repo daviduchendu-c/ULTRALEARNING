@@ -1,4 +1,4 @@
-# 100 Days of Software Engineering: Learn, Build, Teach, Launch
+# 100 Episodes of Software Engineering: Learn, Build, Teach, Launch
 
 ## Core resource stack
 
@@ -12,9 +12,9 @@
 
 # Module 1: Foundations
 
-## Day 1: Software Engineering and the SDLC
+## Episode 1: Software Engineering and the SDLC
 
-**Tutorial:** [Day 1: Software Engineering and the SDLC](100%20Days%20Software/Module-01-Foundations/Software-Day-01-Software-Engineering-and-the-SDLC.md)
+**Tutorial:** [Episode 1: Software Engineering and the SDLC](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-01-Software-Engineering-and-the-SDLC.md)
 
 **Study:**
 
@@ -28,9 +28,9 @@
 -   Technical debt
 -   Product thinking
 
-## Day 2: How Computers Execute Programs
+## Episode 2: How Computers Execute Programs
 
-**Tutorial:** [Day 2: How Computers Execute Programs](100%20Days%20Software/Module-01-Foundations/Software-Day-02-How-Computers-Execute-Programs.md)
+**Tutorial:** [Episode 2: How Computers Execute Programs](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-02-How-Computers-Execute-Programs.md)
 
 **Study:**
 
@@ -44,9 +44,9 @@
 -   Stack/heap intuition
 -   Binary and data representation
 
-## Day 3: Developer Environment
+## Episode 3: Developer Environment
 
-**Tutorial:** [Day 3: Developer Environment](100%20Days%20Software/Module-01-Foundations/Software-Day-03-Developer-Environment.md)
+**Tutorial:** [Episode 3: Developer Environment](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-03-Developer-Environment.md)
 
 **Study:**
 
@@ -58,9 +58,9 @@
 -   Package managers
 -   Debugging tools
 
-## Day 4: Linux CLI I
+## Episode 4: Linux CLI I
 
-**Tutorial:** [Day 4: Linux CLI I](100%20Days%20Software/Module-01-Foundations/Software-Day-04-Linux-CLI-I.md)
+**Tutorial:** [Episode 4: Linux CLI I](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-04-Linux-CLI-I.md)
 
 **Study:**
 
@@ -77,9 +77,9 @@
 -   Man
 -   Filesystem hierarchy
 
-## Day 5: Linux CLI II
+## Episode 5: Linux CLI II
 
-**Tutorial:** [Day 5: Linux CLI II](100%20Days%20Software/Module-01-Foundations/Software-Day-05-Linux-CLI-II.md)
+**Tutorial:** [Episode 5: Linux CLI II](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-05-Linux-CLI-II.md)
 
 **Study:**
 
@@ -95,7 +95,7 @@
 
 # Module 2: Git and Collaboration
 
-## Day 6: Git Mental Model
+## Episode 6: Git Mental Model
 
 **Study:**
 
@@ -108,7 +108,7 @@
 -   Restore
 -   .gitignore
 
-## Day 7: Branches and Merging
+## Episode 7: Branches and Merging
 
 **Study:**
 
@@ -119,7 +119,7 @@
 -   Clean history
 -   Recovery
 
-## Day 8: GitHub Workflow
+## Episode 8: GitHub Workflow
 
 **Study:**
 
@@ -134,7 +134,7 @@
 
 # Module 3: Python (Deep Foundation)
 
-## Day 9: Python Runtime and Syntax
+## Episode 9: Python Runtime and Syntax
 
 **Study:**
 
@@ -148,7 +148,7 @@
 -   Statements
 -   Naming
 
-## Day 10: Objects, Variables and Types
+## Episode 10: Objects, Variables and Types
 
 **Study:**
 
@@ -160,7 +160,7 @@
 -   None
 -   Truthiness
 
-## Day 11: Numbers and Operators
+## Episode 11: Numbers and Operators
 
 **Study:**
 
@@ -172,7 +172,7 @@
 -   Operators
 -   Precedence
 
-## Day 12: Strings and Unicode
+## Episode 12: Strings and Unicode
 
 **Study:**
 
@@ -183,7 +183,7 @@
 -   F-strings
 -   Encoding/decoding concepts
 
-## Day 13: Lists and Tuples
+## Episode 13: Lists and Tuples
 
 **Study:**
 
@@ -193,7 +193,7 @@
 -   Unpacking
 -   Comprehensions
 
-## Day 14: Dictionaries and Sets
+## Episode 14: Dictionaries and Sets
 
 **Study:**
 
@@ -203,7 +203,7 @@
 -   Sets
 -   Comprehensions
 
-## Day 15: Control Flow
+## Episode 15: Control Flow
 
 **Study:**
 
@@ -215,7 +215,7 @@
 -   Loop else
 -   Comprehensions
 
-## Day 16: Functions I
+## Episode 16: Functions I
 
 **Study:**
 
@@ -227,7 +227,7 @@
 -   Docstrings
 -   Annotations
 
-## Day 17: Functions II
+## Episode 17: Functions II
 
 **Study:**
 
@@ -239,7 +239,7 @@
 -   Closures
 -   Lambda
 
-## Day 18: Modules and Packages
+## Episode 18: Modules and Packages
 
 **Study:**
 
@@ -249,7 +249,7 @@
 -   Package structure
 -   Relative/absolute imports
 
-## Day 19: OOP I
+## Episode 19: OOP I
 
 **Study:**
 
@@ -260,7 +260,7 @@
 -   **init**
 -   Class/static methods
 
-## Day 20: OOP II
+## Episode 20: OOP II
 
 **Study:**
 
@@ -271,7 +271,7 @@
 -   Dataclasses
 -   Design tradeoffs
 
-## Day 21: Python Data Model
+## Episode 21: Python Data Model
 
 **Study:**
 
@@ -282,7 +282,7 @@
 -   Generators
 -   Context managers
 
-## Day 22: Exceptions and Debugging
+## Episode 22: Exceptions and Debugging
 
 **Study:**
 
@@ -294,7 +294,7 @@
 -   Debugger
 -   Logging
 
-## Day 23: Files and Standard Library
+## Episode 23: Files and Standard Library
 
 **Study:**
 
@@ -307,7 +307,7 @@
 -   Regex
 -   Subprocess concept
 
-## Day 24: Professional Python
+## Episode 24: Professional Python
 
 **Study:**
 
@@ -320,7 +320,7 @@
 -   Type checking
 -   Packaging concepts
 
-## Day 25: Testing Python
+## Episode 25: Testing Python
 
 **Study:**
 
@@ -330,7 +330,7 @@
 -   Integration tests
 -   Test organization
 
-## Day 26: Python Capstone
+## Episode 26: Python Capstone
 
 **Build:**
 
@@ -342,7 +342,7 @@
 
 # Module 4: C++ (Deep Foundation)
 
-## Day 27: C++ Toolchain
+## Episode 27: C++ Toolchain
 
 **Study:**
 
@@ -353,7 +353,7 @@
 -   Build process
 -   Warnings
 
-## Day 28: Core Syntax and Types
+## Episode 28: Core Syntax and Types
 
 **Study:**
 
@@ -364,7 +364,7 @@
 -   Conversions
 -   Input/output
 
-## Day 29: Control Flow and Functions
+## Episode 29: Control Flow and Functions
 
 **Study:**
 
@@ -374,7 +374,7 @@
 -   Overloads
 -   Pass-by-value/reference
 
-## Day 30: Arrays, Strings and Containers
+## Episode 30: Arrays, Strings and Containers
 
 **Study:**
 
@@ -385,7 +385,7 @@
 -   Iterators
 -   Algorithms
 
-## Day 31: Pointers and References
+## Episode 31: Pointers and References
 
 **Study:**
 
@@ -396,7 +396,7 @@
 -   Pointer arithmetic concepts
 -   Safety
 
-## Day 32: Memory and Lifetime
+## Episode 32: Memory and Lifetime
 
 **Study:**
 
@@ -405,7 +405,7 @@
 -   Object lifetime
 -   RAII
 
-## Day 33: Classes and Objects
+## Episode 33: Classes and Objects
 
 **Study:**
 
@@ -415,7 +415,7 @@
 -   Encapsulation
 -   Member functions
 
-## Day 34: Inheritance and Polymorphism
+## Episode 34: Inheritance and Polymorphism
 
 **Study:**
 
@@ -424,7 +424,7 @@
 -   Abstract interfaces
 -   Composition tradeoffs
 
-## Day 35: Templates and Generic Programming
+## Episode 35: Templates and Generic Programming
 
 **Study:**
 
@@ -432,7 +432,7 @@
 -   Generic algorithms
 -   Compile-time concepts
 
-## Day 36: STL Deep Dive
+## Episode 36: STL Deep Dive
 
 **Study:**
 
@@ -445,7 +445,7 @@
 -   Queues
 -   Stacks
 
-## Day 37: Modern C++
+## Episode 37: Modern C++
 
 **Study:**
 
@@ -455,7 +455,7 @@
 -   Range-for
 -   Optional concepts
 
-## Day 38: Errors, Debugging and Testing
+## Episode 38: Errors, Debugging and Testing
 
 **Study:**
 
@@ -465,7 +465,7 @@
 -   Sanitizers concepts
 -   Unit testing
 
-## Day 39: CMake and Project Structure
+## Episode 39: CMake and Project Structure
 
 **Study:**
 
@@ -475,7 +475,7 @@
 -   Dependencies
 -   Builds
 
-## Day 40: C++ Capstone
+## Episode 40: C++ Capstone
 
 **Build:**
 
@@ -484,7 +484,7 @@
 
 # Module 5: Data Structures and Algorithms
 
-## Day 41: Complexity Analysis
+## Episode 41: Complexity Analysis
 
 **Study:**
 
@@ -493,7 +493,7 @@
 -   Best/average/worst
 -   Amortized intuition
 
-## Day 42: Arrays and Strings
+## Episode 42: Arrays and Strings
 
 **Study:**
 
@@ -503,7 +503,7 @@
 -   Two pointers
 -   Sliding window
 
-## Day 43: Linked Lists
+## Episode 43: Linked Lists
 
 **Study:**
 
@@ -512,7 +512,7 @@
 -   Insertion/deletion
 -   Pointer reasoning
 
-## Day 44: Stacks and Queues
+## Episode 44: Stacks and Queues
 
 **Study:**
 
@@ -521,7 +521,7 @@
 -   Monotonic structures concept
 -   Applications
 
-## Day 45: Hash Tables
+## Episode 45: Hash Tables
 
 **Study:**
 
@@ -530,7 +530,7 @@
 -   Maps/sets
 -   Complexity tradeoffs
 
-## Day 46: Trees and BSTs
+## Episode 46: Trees and BSTs
 
 **Study:**
 
@@ -539,7 +539,7 @@
 -   Search/insert/delete concepts
 -   Recursion
 
-## Day 47: Heaps and Priority Queues
+## Episode 47: Heaps and Priority Queues
 
 **Study:**
 
@@ -548,7 +548,7 @@
 -   Top-k
 -   Scheduling
 
-## Day 48: Graphs
+## Episode 48: Graphs
 
 **Study:**
 
@@ -558,7 +558,7 @@
 -   Connected components
 -   Cycles
 
-## Day 49: Sorting
+## Episode 49: Sorting
 
 **Study:**
 
@@ -567,7 +567,7 @@
 -   Stability
 -   Complexity
 
-## Day 50: Searching and Recursion
+## Episode 50: Searching and Recursion
 
 **Study:**
 
@@ -576,7 +576,7 @@
 -   Call stack
 -   Divide-and-conquer
 
-## Day 51: Backtracking and Greedy
+## Episode 51: Backtracking and Greedy
 
 **Study:**
 
@@ -585,7 +585,7 @@
 -   Greedy-choice intuition
 -   Counterexamples
 
-## Day 52: Dynamic Programming
+## Episode 52: Dynamic Programming
 
 **Study:**
 
@@ -595,7 +595,7 @@
 -   Tabulation
 -   Common patterns
 
-## Day 53: DSA Assessment
+## Episode 53: DSA Assessment
 
 **Practice:**
 
@@ -606,7 +606,7 @@
 
 # Module 6: Web Foundations
 
-## Day 54: How the Web Works
+## Episode 54: How the Web Works
 
 **Study:**
 
@@ -618,7 +618,7 @@
 -   Request/response
 -   Browser
 
-## Day 55: HTML
+## Episode 55: HTML
 
 **Study:**
 
@@ -628,7 +628,7 @@
 -   Media
 -   Accessibility foundations
 
-## Day 56: CSS I
+## Episode 56: CSS I
 
 **Study:**
 
@@ -638,7 +638,7 @@
 -   Typography
 -   Units
 
-## Day 57: CSS II
+## Episode 57: CSS II
 
 **Study:**
 
@@ -648,7 +648,7 @@
 -   Media queries
 -   Layout debugging
 
-## Day 58: JavaScript I
+## Episode 58: JavaScript I
 
 **Study:**
 
@@ -659,7 +659,7 @@
 -   Functions
 -   Scope
 
-## Day 59: JavaScript II
+## Episode 59: JavaScript II
 
 **Study:**
 
@@ -669,7 +669,7 @@
 -   Modules
 -   Modern syntax
 
-## Day 60: DOM and Events
+## Episode 60: DOM and Events
 
 **Study:**
 
@@ -680,7 +680,7 @@
 -   Validation
 -   Browser devtools
 
-## Day 61: Async JavaScript
+## Episode 61: Async JavaScript
 
 **Study:**
 
@@ -690,7 +690,7 @@
 -   Fetch
 -   Errors
 
-## Day 62: JavaScript Deeper Concepts
+## Episode 62: JavaScript Deeper Concepts
 
 **Study:**
 
@@ -700,7 +700,7 @@
 -   Modules
 -   Memory/event-loop concepts
 
-## Day 63: TypeScript
+## Episode 63: TypeScript
 
 **Study:**
 
@@ -714,7 +714,7 @@
 
 # Module 7: React and Frontend Engineering
 
-## Day 64: React Components
+## Episode 64: React Components
 
 **Study:**
 
@@ -724,7 +724,7 @@
 -   Composition
 -   Rendering
 
-## Day 65: State and Events
+## Episode 65: State and Events
 
 **Study:**
 
@@ -733,7 +733,7 @@
 -   Controlled inputs
 -   Lifting state
 
-## Day 66: Effects and Data
+## Episode 66: Effects and Data
 
 **Study:**
 
@@ -742,7 +742,7 @@
 -   Synchronization
 -   Loading/error states
 
-## Day 67: Routing and Forms
+## Episode 67: Routing and Forms
 
 **Study:**
 
@@ -751,7 +751,7 @@
 -   Validation
 -   App structure
 
-## Day 68: Hooks and Reuse
+## Episode 68: Hooks and Reuse
 
 **Study:**
 
@@ -760,7 +760,7 @@
 -   State architecture
 -   Avoiding unnecessary effects
 
-## Day 69: React + TypeScript Project
+## Episode 69: React + TypeScript Project
 
 **Build:**
 
@@ -769,7 +769,7 @@
 
 # Module 8: Backend, APIs and Databases
 
-## Day 70: Node.js
+## Episode 70: Node.js
 
 **Study:**
 
@@ -780,7 +780,7 @@
 -   Environment
 -   Event-driven I/O
 
-## Day 71: Express / Web Backend
+## Episode 71: Express / Web Backend
 
 **Study:**
 
@@ -790,7 +790,7 @@
 -   Status codes
 -   Error handling
 
-## Day 72: REST API Design
+## Episode 72: REST API Design
 
 **Study:**
 
@@ -802,7 +802,7 @@
 -   Versioning
 -   Idempotency
 
-## Day 73: SQL Fundamentals
+## Episode 73: SQL Fundamentals
 
 **Study:**
 
@@ -812,7 +812,7 @@
 -   Filtering
 -   Aggregation
 
-## Day 74: Relational Modeling
+## Episode 74: Relational Modeling
 
 **Study:**
 
@@ -821,7 +821,7 @@
 -   Constraints
 -   Normalization
 
-## Day 75: PostgreSQL Deeper
+## Episode 75: PostgreSQL Deeper
 
 **Study:**
 
@@ -831,7 +831,7 @@
 -   Query planning intuition
 -   Isolation concepts
 
-## Day 76: Data Layer
+## Episode 76: Data Layer
 
 **Study:**
 
@@ -840,7 +840,7 @@
 -   Repositories
 -   Transactions
 
-## Day 77: Authentication
+## Episode 77: Authentication
 
 **Study:**
 
@@ -849,7 +849,7 @@
 -   Cookies
 -   Identity lifecycle
 
-## Day 78: Authorization and Security
+## Episode 78: Authorization and Security
 
 **Study:**
 
@@ -860,7 +860,7 @@
 -   Least privilege
 -   Common web risks
 
-## Day 79: Backend Testing
+## Episode 79: Backend Testing
 
 **Study:**
 
@@ -872,7 +872,7 @@
 
 # Module 9: Full Stack and Mobile
 
-## Day 80: Full-Stack Integration
+## Episode 80: Full-Stack Integration
 
 **Study:**
 
@@ -881,7 +881,7 @@
 -   Errors
 -   Deployment boundaries
 
-## Day 81: React Native Foundations
+## Episode 81: React Native Foundations
 
 **Study:**
 
@@ -890,7 +890,7 @@
 -   Navigation concepts
 -   Platform differences
 
-## Day 82: React Native Data and State
+## Episode 82: React Native Data and State
 
 **Study:**
 
@@ -900,7 +900,7 @@
 -   Permissions
 -   Offline UX
 
-## Day 83: Mobile Project
+## Episode 83: Mobile Project
 
 **Build:**
 
@@ -909,7 +909,7 @@
 
 # Module 10: Systems, Architecture and Cloud
 
-## Day 84: Networking for Developers
+## Episode 84: Networking for Developers
 
 **Study:**
 
@@ -922,7 +922,7 @@
 -   Proxies
 -   Load balancers
 
-## Day 85: Operating Systems for Developers
+## Episode 85: Operating Systems for Developers
 
 **Study:**
 
@@ -933,7 +933,7 @@
 -   Filesystems
 -   Concurrency
 
-## Day 86: System Design I
+## Episode 86: System Design I
 
 **Study:**
 
@@ -944,7 +944,7 @@
 -   Availability
 -   Scalability
 
-## Day 87: System Design II
+## Episode 87: System Design II
 
 **Study:**
 
@@ -955,7 +955,7 @@
 -   Object storage
 -   CDN
 
-## Day 88: System Design III
+## Episode 88: System Design III
 
 **Study:**
 
@@ -965,7 +965,7 @@
 -   Failure modes
 -   Observability
 
-## Day 89: Cloud Fundamentals
+## Episode 89: Cloud Fundamentals
 
 **Study:**
 
@@ -976,7 +976,7 @@
 -   Networking
 -   IAM
 
-## Day 90: Docker
+## Episode 90: Docker
 
 **Study:**
 
@@ -987,7 +987,7 @@
 -   Volumes
 -   Compose concepts
 
-## Day 91: CI/CD
+## Episode 91: CI/CD
 
 **Study:**
 
@@ -997,7 +997,7 @@
 -   Deployments
 -   GitHub Actions concepts
 
-## Day 92: Software Security
+## Episode 92: Software Security
 
 **Study:**
 
@@ -1007,7 +1007,7 @@
 -   Secrets
 -   Dependencies
 
-## Day 93: Software Architecture
+## Episode 93: Software Architecture
 
 **Study:**
 
@@ -1018,7 +1018,7 @@
 -   Patterns
 -   ADRs
 
-## Day 94: Production Engineering
+## Episode 94: Production Engineering
 
 **Study:**
 
@@ -1029,14 +1029,14 @@
 -   Incident learning
 -   Performance
 
-## Day 95: Software Capstone
+## Episode 95: Software Capstone
 
 **Build:**
 
 -   Production-style application: design, build, test, containerize,
     deploy and document
 
-## Day 96: Capstone Requirements and Architecture
+## Episode 96: Capstone Requirements and Architecture
 
 **Deliver:**
 
@@ -1048,7 +1048,7 @@
 -   ADRs
 -   Backlog
 
-## Day 97: Capstone Backend and Data
+## Episode 97: Capstone Backend and Data
 
 **Build:**
 
@@ -1058,7 +1058,7 @@
 -   Auth
 -   Tests
 
-## Day 98: Capstone Frontend and Mobile
+## Episode 98: Capstone Frontend and Mobile
 
 **Build:**
 
@@ -1068,7 +1068,7 @@
 -   Error/loading states
 -   Integration
 
-## Day 99: Capstone Infrastructure and Quality
+## Episode 99: Capstone Infrastructure and Quality
 
 **Deliver:**
 
@@ -1079,7 +1079,7 @@
 -   Observability
 -   End-to-end tests
 
-## Day 100: Capstone Ship and Teach
+## Episode 100: Capstone Ship and Teach
 
 **Ship:**
 
@@ -1141,7 +1141,7 @@ against documentation.
 -   Systems/cloud: university systems lectures and official
     vendor/container documentation.
 
-# Day 101: Career, Hiring and Monetization
+# Episode 101: Career, Hiring and Monetization
 
 ## 101.1 Choose a Marketable Direction
 

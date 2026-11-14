@@ -1,6 +1,6 @@
-# Day 42: Loss Functions
+# Episode 42: Loss Functions
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3 hours
 **Level:** intermediate. You can compute a forward pass, apply softmax and take a logarithm. Today you need the derivative of a log and the idea that a loss is a number to minimize.
@@ -21,10 +21,10 @@
 
 **Prerequisites:**
 
-- Day 13: probability, the idea of a probability distribution and conditional probability
-- Day 14: likelihood and maximum likelihood, at the level of the definitions
-- Day 15: entropy and cross-entropy as measures of surprise
-- Day 41: sigmoid, softmax and their derivatives
+- Episode 13: probability, the idea of a probability distribution and conditional probability
+- Episode 14: likelihood and maximum likelihood, at the level of the definitions
+- Episode 15: entropy and cross-entropy as measures of surprise
+- Episode 41: sigmoid, softmax and their derivatives
 
 ---
 
@@ -214,12 +214,12 @@ In the real market, alignment is one of the first questions in a model review: w
 
 **Goal:** implement four losses and their gradients, check each gradient numerically, and compare the gradient of MSE on a sigmoid output with the gradient of binary cross-entropy for a confident wrong prediction.
 
-**Repo name:** `100-days-ai-day-42-loss-functions`
+**Repo name:** `100-episodes-ai-day-42-loss-functions`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-42-loss-functions/
+100-episodes-ai-day-42-loss-functions/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -303,7 +303,7 @@ def cross_entropy_from_logits_grad(logits, labels):
 
 **Evidence to commit to GitHub:** the source, the tests, the README with the value table and the saturation output, and a `NOTES.md` that records one alignment mistake you could imagine making on a real project and the test that would catch it. The notes are evidence that you can connect the loss to the task, not only compute it.
 
-**Why this project is light on the model side:** the loss is a small function, and the project is about checking the math and the numerics. The full training loop comes on Day 50, where you will use these ideas in practice.
+**Why this project is light on the model side:** the loss is a small function, and the project is about checking the math and the numerics. The full training loop comes on Episode 50, where you will use these ideas in practice.
 
 ---
 
@@ -357,4 +357,4 @@ def cross_entropy_from_logits_grad(logits, labels):
 
 ## Tomorrow
 
-Day 43 uses the loss you can now compute to find the gradient of every weight in a network. You will build a computational graph, apply the chain rule backward from the loss and update the parameters. The gradient of cross-entropy with respect to the logits, p minus y, is the first step of that backward pass, so today's project is the starting point for the tiny network you will write by hand tomorrow.
+Episode 43 uses the loss you can now compute to find the gradient of every weight in a network. You will build a computational graph, apply the chain rule backward from the loss and update the parameters. The gradient of cross-entropy with respect to the logits, p minus y, is the first step of that backward pass, so today's project is the starting point for the tiny network you will write by hand tomorrow.

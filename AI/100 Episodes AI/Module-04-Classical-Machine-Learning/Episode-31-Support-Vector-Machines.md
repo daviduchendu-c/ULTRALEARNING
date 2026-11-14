@@ -1,9 +1,9 @@
-# Day 31: Support Vector Machines
+# Episode 31: Support Vector Machines
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 25 (linear models and the gradient) and Day 27 (distances). The geometry is the main work, so draw each picture on paper before you run the code.
+**Level:** intermediate. You need Episode 25 (linear models and the gradient) and Episode 27 (distances). The geometry is the main work, so draw each picture on paper before you run the code.
 
 **By the end of this day, you will have:**
 
@@ -24,10 +24,10 @@
 
 **Prerequisites:**
 
-- Day 8: dot products, norms and projections
-- Day 24: scaling inside a pipeline, and cross-validation
-- Day 25 or Day 26: a linear decision rule of the form `w^T x + b`
-- Day 27: why feature scaling changes distance-based methods, since SVMs depend on distances too
+- Episode 8: dot products, norms and projections
+- Episode 24: scaling inside a pipeline, and cross-validation
+- Episode 25 or Episode 26: a linear decision rule of the form `w^T x + b`
+- Episode 27: why feature scaling changes distance-based methods, since SVMs depend on distances too
 
 ---
 
@@ -216,14 +216,14 @@ The linear kernel scores near chance on this ring problem, and the RBF kernel sc
 
 This is a medium-weight project. The model is a standard library call, so the deliverable is the study: how the margin, the kernel and the hyperparameters change the boundary and the score.
 
-**Repo name:** `100-days-ai-engineering-day-31-support-vector-machines`
+**Repo name:** `100-episodes-ai-engineering-day-31-support-vector-machines`
 
 **Goal:** compare linear and RBF support vector classifiers on a dataset with a nonlinear boundary, tune them with cross-validation, and report the boundary and the support vector counts.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-31-support-vector-machines/
+100-episodes-ai-engineering-day-31-support-vector-machines/
 ├── README.md
 ├── requirements.txt
 ├── data.py
@@ -360,6 +360,6 @@ def test_split_sizes_are_60_20_20():
 
 ## Tomorrow
 
-Tomorrow you stop predicting labels and start looking for structure without them. Clustering groups rows that are similar, with no answer key. You will use k-means, compute centroids and distances, test different initializations, and meet hierarchical clustering and DBSCAN. The distances from Day 27 and the centroid idea from today's geometry come back in full.
+Tomorrow you stop predicting labels and start looking for structure without them. Clustering groups rows that are similar, with no answer key. You will use k-means, compute centroids and distances, test different initializations, and meet hierarchical clustering and DBSCAN. The distances from Episode 27 and the centroid idea from today's geometry come back in full.
 
-**Next:** [Day 32: Clustering](Day-32-Clustering.md)
+**Next:** [Episode 32: Clustering](Episode-32-Clustering.md)

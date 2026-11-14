@@ -1,9 +1,9 @@
-# Day 33: Sensor Integration Project
+# Episode 33: Sensor Integration Project
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 6 hours, spread over two sittings if you can
-**Level:** intermediate. You need Days 26 to 32 of this module, and the parts from them: the DC gearmotor and driver (Day 26), the servo with its calibration (Day 27), the encoder decoder (Day 29), the distance sensor (Day 30) and the MPU-6050 IMU (Day 31). The camera from Day 32 is optional here. This is the module's capstone, and it combines the sensors into one logged, timestamped and visualized dataset.
+**Level:** intermediate. You need Episodes 26 to 32 of this module, and the parts from them: the DC gearmotor and driver (Episode 26), the servo with its calibration (Episode 27), the encoder decoder (Episode 29), the distance sensor (Episode 30) and the MPU-6050 IMU (Episode 31). The camera from Episode 32 is optional here. This is the module's capstone, and it combines the sensors into one logged, timestamped and visualized dataset.
 
 **By the end of this day, you will have:**
 
@@ -15,17 +15,17 @@
 **What you need:**
 
 - Arduino Uno Rev3 with Arduino IDE 2.3 or newer, about $25 for an official board or $10 to $15 for a clone
-- The parts from earlier days: one DC gearmotor with an encoder, the TB6612FNG driver, one SG90 or MG996R servo with its calibration from Day 27, one HC-SR04 ultrasonic module, one MPU-6050 IMU breakout
-- A 5 V regulated supply for the servo, rated at 2 A or more for the MG996R, with a 1000 µF capacitor across it, as Day 27 set up
-- A 6 V bench supply with a 1.2 A current limit for the DC motor, as Day 13 set up
+- The parts from earlier days: one DC gearmotor with an encoder, the TB6612FNG driver, one SG90 or MG996R servo with its calibration from Episode 27, one HC-SR04 ultrasonic module, one MPU-6050 IMU breakout
+- A 5 V regulated supply for the servo, rated at 2 A or more for the MG996R, with a 1000 µF capacitor across it, as Episode 27 set up
+- A 6 V bench supply with a 1.2 A current limit for the DC motor, as Episode 13 set up
 - A USB cable and a PC or laptop with Python 3.12, NumPy 2.1 or newer, Matplotlib 3.9 or newer and pyserial 3.5, all free and open source
 - A rigid plate or bracket to mount the IMU on the servo horn, so that the gyroscope sees the servo's rotation. A piece of 3 mm acrylic or a 3D-printed bracket costs under $5.
 - A tape measure and a protractor, to check the servo angle independently
 
 **Prerequisites:**
 
-- Days 26 to 31: the calibrated servo, the decoder, the distance reading and the IMU bias calibration
-- Day 13: the power budget and the separate supplies for motors and logic
+- Episodes 26 to 31: the calibrated servo, the decoder, the distance reading and the IMU bias calibration
+- Episode 13: the power budget and the separate supplies for motors and logic
 - Module 3: serial communication, interrupts and reading registers over I2C
 - Comfort with CSV files and a basic Python script
 
@@ -222,7 +222,7 @@ Keep the servo's supply separate from the Arduino's 5 V pin, and keep the DC mot
 
 1. **Stream one sensor.** Connect the MPU-6050 and print its readings at 50 Hz with a device timestamp from millis(). Run for 60 seconds and count the lines. Compare the count with 3000, and compute the rate.
 
-2. **Add the encoder.** Attach the encoder from Day 29 with its interrupt pins, and add its count to the printed line. Turn the motor by hand and check that the count changes with the direction. Record the count at the start and the end of a 60-second run with the motor off.
+2. **Add the encoder.** Attach the encoder from Episode 29 with its interrupt pins, and add its count to the printed line. Turn the motor by hand and check that the count changes with the direction. Record the count at the start and the end of a 60-second run with the motor off.
 
 3. **Add the distance sensor.** Add the HC-SR04 on pins 7 and 8, reading it on every fifth loop. Check the distance against a ruler at 30 cm, and note how often the reading is missing.
 
@@ -243,7 +243,7 @@ This project is the module's capstone. It combines the encoder, the IMU, the dis
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-33-sensor-integration/
+100-episodes-robotics-engineering-day-33-sensor-integration/
 ├── README.md
 ├── firmware/
 │   └── sensor_stream/
@@ -347,7 +347,7 @@ void loop() {
     if (c == 'M') {
       float angle = Serial.parseFloat();
       if (angle < 0) angle = 0;
-      if (angle > 170) angle = 170;          // calibrated range from Day 27
+      if (angle > 170) angle = 170;          // calibrated range from Episode 27
       unsigned long tEvent = millis();
       pan.write((int)angle);
       Serial.print("E,");
@@ -380,9 +380,9 @@ void loop() {
 }
 ```
 
-The starter code sends a data line every 20 milliseconds with the device time, the encoder count, the accelerometer in g, the gyro in degrees per second and the distance in centimetres. It sends an event line when it receives an M command, with the device time at which the servo was commanded. It uses the Day 27 servo range and the Day 30 distance timing.
+The starter code sends a data line every 20 milliseconds with the device time, the encoder count, the accelerometer in g, the gyro in degrees per second and the distance in centimetres. It sends an event line when it receives an M command, with the device time at which the servo was commanded. It uses the Episode 27 servo range and the Episode 30 distance timing.
 
-Three points need care. The ultrasonic read blocks the loop for up to 10 ms, which is why it runs on every fifth loop and why the timeout is short. The gyro values are raw, with the bias not yet removed; subtract the bias from your Day 31 calibration in the analysis, not in the firmware, so the raw data stays available. The encoder count is read with interrupts disabled for a moment, which keeps the value consistent.
+Three points need care. The ultrasonic read blocks the loop for up to 10 ms, which is why it runs on every fifth loop and why the timeout is short. The gyro values are raw, with the bias not yet removed; subtract the bias from your Episode 31 calibration in the analysis, not in the firmware, so the raw data stays available. The encoder count is read with interrupts disabled for a moment, which keeps the value consistent.
 
 The Python logger `logger/log_streams.py` opens the serial port, sends the M commands on a schedule, writes each line with the host time as the first column, and counts malformed lines. The analysis scripts read the CSV and run the quality checks, compute the latency with the threshold method, and plot the run. Write them as part of the project.
 
@@ -473,4 +473,4 @@ This project moves a servo, a DC motor and a bench supply. Keep the servo's horn
 
 ## Tomorrow
 
-Tomorrow the module moves on to Module 5: Mechanical Engineering and CAD, which begins with Day 34, Mechanical Fundamentals. There you will learn the forces, torques, friction and stiffness that decide whether the motors, servos and mounts you tested in this module hold up under the loads a robot puts on them. The latency and the torque numbers from today will reappear in the mechanical design.
+Tomorrow the module moves on to Module 5: Mechanical Engineering and CAD, which begins with Episode 34, Mechanical Fundamentals. There you will learn the forces, torques, friction and stiffness that decide whether the motors, servos and mounts you tested in this module hold up under the loads a robot puts on them. The latency and the torque numbers from today will reappear in the mechanical design.

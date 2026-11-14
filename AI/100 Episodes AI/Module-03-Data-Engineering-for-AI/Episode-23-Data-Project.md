@@ -1,9 +1,9 @@
-# Day 23: Data Project
+# Episode 23: Data Project
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 6 hours, spread over two sessions if you can
-**Level:** intermediate. This is the module project. It asks you to take a messy dataset you did not design and carry it through every step of Days 17 to 22.
+**Level:** intermediate. This is the module project. It asks you to take a messy dataset you did not design and carry it through every step of Episodes 17 to 22.
 
 **By the end of this day, you will have:**
 
@@ -24,9 +24,9 @@
 
 **Prerequisites:**
 
-- Days 17 to 22: arrays, DataFrames, cleaning, EDA, feature engineering, splits and reproducibility
-- Day 14: the basics of a classification metric, such as accuracy and a confusion matrix
-- Day 13: conditional probability, so that you can read a predicted probability
+- Episodes 17 to 22: arrays, DataFrames, cleaning, EDA, feature engineering, splits and reproducibility
+- Episode 14: the basics of a classification metric, such as accuracy and a confusion matrix
+- Episode 13: conditional probability, so that you can read a predicted probability
 
 ---
 
@@ -118,7 +118,7 @@ The common mistake is to write the decisions only in code comments, which nobody
 
 A strategy for splitting the data is a plan for how each part will be used, and in what order. The training set fits the model. The validation set compares models and settings. The test set gives the final number, and it is opened once. The strategy is a promise that the final number is honest.
 
-From first principles, use a stratified split when the target is imbalanced, so that every part has the same share of positives. Use a fixed random seed so the split can be reproduced. Fit every preprocessing step on the training rows only, as you learned in Day 19. Choose the model on the validation rows, and then, after the choice is made, evaluate once on the test rows. If you look at the test score and then change the model, the test set has become a second validation set, and your final number is no longer honest.
+From first principles, use a stratified split when the target is imbalanced, so that every part has the same share of positives. Use a fixed random seed so the split can be reproduced. Fit every preprocessing step on the training rows only, as you learned in Episode 19. Choose the model on the validation rows, and then, after the choice is made, evaluate once on the test rows. If you look at the test score and then change the model, the test set has become a second validation set, and your final number is no longer honest.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -177,12 +177,12 @@ Work through these before you start the project, using the first thousand rows o
 
 Carry the UCI Adult census income dataset through every step of this module. Clean it with documented rules, explore it, build a preprocessing pipeline that is fitted on training data only, compare two models on validation data, and evaluate the chosen model once on the test set. Produce a cleaned file, an EDA report, the pipeline and a README with the assumptions. The test checks protect the steps that break most often.
 
-Suggested repository name: `100-days-ai-day-23-data-project`
+Suggested repository name: `100-episodes-ai-day-23-data-project`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-23-data-project/
+100-episodes-ai-day-23-data-project/
 ├── README.md
 ├── data/
 │   └── adult.data            (download, do not commit)

@@ -1,9 +1,9 @@
-# Day 28: Core Syntax and Types
+# Episode 28: Core Syntax and Types
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** beginner. You finished Day 27 and can build a project with CMake. You know what a variable is from another language, and this day shows where C++ asks you to be more exact. It is for anyone who has been surprised by a number that came out as `3` when they expected `3.5`.
+**Level:** beginner. You finished Episode 27 and can build a project with CMake. You know what a variable is from another language, and this day shows where C++ asks you to be more exact. It is for anyone who has been surprised by a number that came out as `3` when they expected `3.5`.
 
 **By the end of this day, you will have:**
 
@@ -15,14 +15,14 @@
 
 **What you need:**
 
-- The toolchain from Day 27: GCC 14 or newer (checked with g++ 16.1.0), CMake 3.25 or newer (checked with CMake 4.3.3), and Ninja 1.11 or newer
+- The toolchain from Episode 27: GCC 14 or newer (checked with g++ 16.1.0), CMake 3.25 or newer (checked with CMake 4.3.3), and Ninja 1.11 or newer
 - Git 2.40 or newer
 - A terminal, either Git Bash or PowerShell
 - A free GitHub account
 
 **Prerequisites:**
 
-- Day 27: the build steps, `-std=c++20`, the warning flags and a working `CMakeLists.txt`
+- Episode 27: the build steps, `-std=c++20`, the warning flags and a working `CMakeLists.txt`
 - Basic arithmetic and the idea of a variable in any language
 
 ---
@@ -99,7 +99,7 @@ int main() {
 
 The output is `24 78.5 B 1`. The `bool` prints as `1` because `std::cout` writes a `bool` as an integer unless you ask for `std::boolalpha`. That surprises people, and it is one of the small formatting rules you will meet in the input and output section.
 
-Brace initialization, such as `int students{24};`, is the modern form. It refuses narrowing conversions, which makes it safer. A common mistake is to declare a variable without an initial value and read it later. The value is then whatever bytes were in that memory, which is undefined behavior. The `-Wall` flag warns about the obvious cases, as you saw on Day 27. The rule is to give every variable a value at the point you declare it. In the market, code review checklists at most C++ teams include this rule, and linters enforce it.
+Brace initialization, such as `int students{24};`, is the modern form. It refuses narrowing conversions, which makes it safer. A common mistake is to declare a variable without an initial value and read it later. The value is then whatever bytes were in that memory, which is undefined behavior. The `-Wall` flag warns about the obvious cases, as you saw on Episode 27. The rule is to give every variable a value at the point you declare it. In the market, code review checklists at most C++ teams include this rule, and linters enforce it.
 
 ### Types
 
@@ -289,12 +289,12 @@ Done when you have pasted the exact error text into your notes.
 
 The project is a command-line tool. You enter a bill, a tip percentage and a number of people, and it prints the total with tip, each person's share and any leftover cents. The arithmetic is done with integer cents, so the results are exact, and a small test executable checks the rules.
 
-Suggested repo name: `100-days-software-day-28-core-syntax-and-types`.
+Suggested repo name: `100-episodes-software-day-28-core-syntax-and-types`.
 
 The repo layout:
 
 ```
-100-days-software-day-28-core-syntax-and-types/
+100-episodes-software-day-28-core-syntax-and-types/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -543,6 +543,6 @@ This project is short on code and heavy on decisions. The graded part is the typ
 
 ## Tomorrow
 
-Day 29 adds control flow and functions. You will write `if`, `switch`, `for` and `while`, define functions with parameters and return values, overload a function by its parameter types, and see the difference between passing a value and passing a reference. The types and `const` habits from today carry directly into function signatures, and the split calculator's `split_bill` function is the first step toward those ideas.
+Episode 29 adds control flow and functions. You will write `if`, `switch`, `for` and `while`, define functions with parameters and return values, overload a function by its parameter types, and see the difference between passing a value and passing a reference. The types and `const` habits from today carry directly into function signatures, and the split calculator's `split_bill` function is the first step toward those ideas.
 
-**Next:** [Day 29: Control Flow and Functions](Software-Day-29-Control-Flow-and-Functions.md)
+**Next:** [Episode 29: Control Flow and Functions](Software-Episode-29-Control-Flow-and-Functions.md)

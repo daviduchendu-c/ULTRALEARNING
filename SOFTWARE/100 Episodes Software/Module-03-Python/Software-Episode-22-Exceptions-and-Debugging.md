@@ -1,9 +1,9 @@
-# Day 22: Exceptions and Debugging
+# Episode 22: Exceptions and Debugging
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have written classes, generators and context managers from Day 19 to Day 21. This is for anyone who has seen a long traceback and stopped reading after the first line, or who has added `print` statements to find a bug and then forgotten to remove them.
+**Level:** intermediate. You have written classes, generators and context managers from Episode 19 to Episode 21. This is for anyone who has seen a long traceback and stopped reading after the first line, or who has added `print` statements to find a bug and then forgotten to remove them.
 
 **By the end of this day, you will have:**
 
@@ -18,17 +18,17 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (running scripts with `python`)
-- Day 11: Numbers and Operators (conversions that can fail)
-- Day 16 and Day 17: Functions (raising from functions)
-- Day 21: Python Data Model (context managers, the `finally` idea)
+- Episode 9: Python Runtime and Syntax (running scripts with `python`)
+- Episode 11: Numbers and Operators (conversions that can fail)
+- Episode 16 and Episode 17: Functions (raising from functions)
+- Episode 21: Python Data Model (context managers, the `finally` idea)
 
 ---
 
@@ -306,12 +306,12 @@ Done when you have recorded the debugger output and the logging output shows onl
 
 The project is a small config loader. It parses a JSON text, requires a port key, validates the port, translates low-level errors into its own exception hierarchy with chaining, uses `try`, `except`, `else` and `finally` for file reading, and logs its decisions. The tests check each error path and each log message. The evidence is a passing test suite and a findings document that records one traceback you read and one debugging session.
 
-Suggested repo name: `100-days-software-day-22-exceptions-and-debugging`.
+Suggested repo name: `100-episodes-software-day-22-exceptions-and-debugging`.
 
 Repo layout:
 
 ```
-100-days-software-day-22-exceptions-and-debugging/
+100-episodes-software-day-22-exceptions-and-debugging/
 ├── .gitignore
 ├── README.md
 ├── config_loader.py
@@ -550,6 +550,6 @@ The loader is small so each error path is easy to trace. A reviewer should be ab
 
 ## Tomorrow
 
-Day 23 is the standard library tour that most real programs depend on. You will work with `pathlib` for file paths, read and write text, binary and JSON and CSV files, handle dates and times with `datetime`, count and group with `collections`, match text with `re`, and run another program with `subprocess`. The file handling you practiced today, with its encodings and its `with` blocks, is the base for all of it.
+Episode 23 is the standard library tour that most real programs depend on. You will work with `pathlib` for file paths, read and write text, binary and JSON and CSV files, handle dates and times with `datetime`, count and group with `collections`, match text with `re`, and run another program with `subprocess`. The file handling you practiced today, with its encodings and its `with` blocks, is the base for all of it.
 
-**Next:** [Day 23: Files and Standard Library](Software-Day-23-Files-and-Standard-Library.md)
+**Next:** [Episode 23: Files and Standard Library](Software-Episode-23-Files-and-Standard-Library.md)

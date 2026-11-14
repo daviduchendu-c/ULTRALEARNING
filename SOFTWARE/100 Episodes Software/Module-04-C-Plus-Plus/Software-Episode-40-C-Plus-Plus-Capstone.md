@@ -1,9 +1,9 @@
-# Day 40: C++ Capstone
+# Episode 40: C++ Capstone
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 8 hours, spread over two sittings
-**Level:** intermediate. You have finished the module's concepts from Day 27 to Day 39. This day is the project that brings them together: a command-line expense ledger with a library, an application, tests, sanitizers and a continuous integration workflow. It is for anyone who wants proof that they can build and ship a small C++ program, not only pass small exercises.
+**Level:** intermediate. You have finished the module's concepts from Episode 27 to Episode 39. This day is the project that brings them together: a command-line expense ledger with a library, an application, tests, sanitizers and a continuous integration workflow. It is for anyone who wants proof that they can build and ship a small C++ program, not only pass small exercises.
 
 **By the end of this day, you will have:**
 
@@ -11,18 +11,18 @@
 - Used RAII for the file storage, smart pointers for ownership, containers for totals and lists, and exceptions for bad input
 - Tested the parser, the formatter, the ledger rules and the file round trip with GoogleTest
 - Built the project with Debug, Release and sanitizer presets, and read a sanitizer report from a deliberate bug
-- Run the workflow from Day 39 on a fresh repository and kept it green on `main`
+- Run the workflow from Episode 39 on a fresh repository and kept it green on `main`
 - A public GitHub repo with a README, a design note, a CLI demo and a workflow badge
 
 **What you need:**
 
-- Everything from Day 39: CMake 3.25 or newer (checked with CMake 4.3.3), Ninja 1.11 or newer, GCC 14 or newer (checked with g++ 16.1.0 on Windows), and Ubuntu 24.04 in WSL 2 with `sudo apt install g++-14 ninja-build`
+- Everything from Episode 39: CMake 3.25 or newer (checked with CMake 4.3.3), Ninja 1.11 or newer, GCC 14 or newer (checked with g++ 16.1.0 on Windows), and Ubuntu 24.04 in WSL 2 with `sudo apt install g++-14 ninja-build`
 - Git 2.40 or newer, and a free GitHub account
 - Internet access for `FetchContent` and GitHub Actions
 
 **Prerequisites:**
 
-- Days 27 to 39. You should be able to write a class, a test and a CMake target without copying a template you do not understand.
+- Episodes 27 to 39. You should be able to write a class, a test and a CMake target without copying a template you do not understand.
 
 ---
 
@@ -85,21 +85,21 @@ The common mistake is to put the logic in `main`, where it cannot be tested with
 
 ### Money and records
 
-Money needs exact arithmetic. Binary floating point cannot represent 0.10 exactly, so adding ten expenses of 0.10 can give a total that is a fraction of a cent off. The fix from Day 28 applies here: store amounts as whole cents in an `std::int64_t`, and convert to text only when a person reads it. The `Entry` struct stores the date, the category, the amount in cents and the description, and the amount type makes the unit explicit in the field name.
+Money needs exact arithmetic. Binary floating point cannot represent 0.10 exactly, so adding ten expenses of 0.10 can give a total that is a fraction of a cent off. The fix from Episode 28 applies here: store amounts as whole cents in an `std::int64_t`, and convert to text only when a person reads it. The `Entry` struct stores the date, the category, the amount in cents and the description, and the amount type makes the unit explicit in the field name.
 
 The text form of a record is a line of comma-separated values, such as `2026-10-31,food,1250,lunch with team`. The format is simple enough to read by eye and to parse with `std::string_view`, which avoids copies of the line. A parser must check every field. A date must have the shape `YYYY-MM-DD`, an amount must be a non-negative whole number of cents, and a line must have four fields. The parser throws `std::invalid_argument` with a short reason, and the ledger converts that into an error with the line number.
 
-The user types amounts such as `12.5` or `12.50`. The function `parse_amount` accepts whole numbers, one decimal place and two decimal places, and returns an optional value. An invalid amount returns nothing, which the command-line program turns into a message. This is the Day 37 `std::optional` pattern in use: a missing result is normal for user input, so the function says so in its return type.
+The user types amounts such as `12.5` or `12.50`. The function `parse_amount` accepts whole numbers, one decimal place and two decimal places, and returns an optional value. An invalid amount returns nothing, which the command-line program turns into a message. This is the Episode 37 `std::optional` pattern in use: a missing result is normal for user input, so the function says so in its return type.
 
 The common mistake is to round in the middle of a calculation, or to parse a float and then multiply by 100 and round. Both lose exactness at the edges. Parse the text directly into cents, as this project does. In the market, financial software stores money as integers in the smallest currency unit, and reviewers reject floating-point money at once.
 
 ### Storage and ownership
 
-The ledger does not know where its records live. It talks to an abstract `Storage` interface with two functions: read the lines, and write the lines. The interface is the Day 34 pattern. The application gives the ledger a `FileStorage`, which uses `std::ifstream` and `std::ofstream` to read and write `ledger.csv`. The tests give the ledger a `MemoryStorage`, which keeps the lines in a vector, so the tests run without touching the disk.
+The ledger does not know where its records live. It talks to an abstract `Storage` interface with two functions: read the lines, and write the lines. The interface is the Episode 34 pattern. The application gives the ledger a `FileStorage`, which uses `std::ifstream` and `std::ofstream` to read and write `ledger.csv`. The tests give the ledger a `MemoryStorage`, which keeps the lines in a vector, so the tests run without touching the disk.
 
-Ownership is explicit. The ledger holds its storage in a `std::unique_ptr<Storage>`, so exactly one owner exists, and the storage is destroyed with the ledger. The `FileStorage` itself uses RAII: its streams open in a function and close when the function returns, on every path, including when an error is thrown. Day 32 explained why this matters, and the file handling in this project is the same idea with the standard streams.
+Ownership is explicit. The ledger holds its storage in a `std::unique_ptr<Storage>`, so exactly one owner exists, and the storage is destroyed with the ledger. The `FileStorage` itself uses RAII: its streams open in a function and close when the function returns, on every path, including when an error is thrown. Episode 32 explained why this matters, and the file handling in this project is the same idea with the standard streams.
 
-A test that needs to look inside the storage keeps a raw pointer to it, and it does not own the storage. The pointer is valid only while the ledger is alive, which the test arranges by keeping the ledger in scope. That is the non-owning pointer rule from Day 31, applied to a real test.
+A test that needs to look inside the storage keeps a raw pointer to it, and it does not own the storage. The pointer is valid only while the ledger is alive, which the test arranges by keeping the ledger in scope. That is the non-owning pointer rule from Episode 31, applied to a real test.
 
 The common mistake is to pass the file path into every function, so the rest of the code depends on the file system. The fix is the interface, which keeps the file behind one class. The second mistake is to ignore a failed write. The `FileStorage` checks the stream after the write and closes it before returning. In the market, storage interfaces like this one are how teams test code that touches disks, databases or network services without running those services.
 
@@ -163,14 +163,14 @@ Done when the report names the bug line and the clean run passes.
 
 ## Project: an expense ledger with tests, presets and CI
 
-The project is a command-line expense ledger. It has a library that owns the rules, an application that parses the command line and calls the library, a GoogleTest suite, the three presets from Day 39, and the workflow from Day 39. The first commit must build and pass its tests, and the last commit must have a green workflow run on `main`.
+The project is a command-line expense ledger. It has a library that owns the rules, an application that parses the command line and calls the library, a GoogleTest suite, the three presets from Episode 39, and the workflow from Episode 39. The first commit must build and pass its tests, and the last commit must have a green workflow run on `main`.
 
-Suggested repo name: `100-days-software-day-40-cpp-capstone`.
+Suggested repo name: `100-episodes-software-day-40-cpp-capstone`.
 
 The repo layout:
 
 ```
-100-days-software-day-40-cpp-capstone/
+100-episodes-software-day-40-cpp-capstone/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -201,7 +201,7 @@ The repo layout:
     └── ledger_test.cpp
 ```
 
-Start from the Day 39 repository. Copy its `CMakePresets.json`, its `.github/workflows/ci.yml`, its root `CMakeLists.txt` and its `tests/CMakeLists.txt`. Change the project name in the root file to `expense_ledger`, change the two `add_subdirectory` lines to `libs/ledger` and `apps/ledger`, and in `tests/CMakeLists.txt` rename the test target to `ledger_test`, change its source to `ledger_test.cpp`, and link `ledger::ledger` in place of `textkit::textkit`. Then add the files below. The presets, the workflow and the warning policy stay unchanged.
+Start from the Episode 39 repository. Copy its `CMakePresets.json`, its `.github/workflows/ci.yml`, its root `CMakeLists.txt` and its `tests/CMakeLists.txt`. Change the project name in the root file to `expense_ledger`, change the two `add_subdirectory` lines to `libs/ledger` and `apps/ledger`, and in `tests/CMakeLists.txt` rename the test target to `ledger_test`, change its source to `ledger_test.cpp`, and link `ledger::ledger` in place of `textkit::textkit`. Then add the files below. The presets, the workflow and the warning policy stay unchanged.
 
 The public header for the records declares the `Entry` struct and the parsing and formatting functions:
 
@@ -761,15 +761,15 @@ target_link_libraries(ledger_cli PRIVATE ledger::ledger project_warnings)
 
 Step-by-step tasks:
 
-1. Create the layout. Start from the Day 39 files as described above, and add the library, application and test files. Add `build/`, `build-asan/` and `ledger.csv` to `.gitignore`. Initialize the repo with `git init -b main` and commit with the message "Add expense ledger library and tests".
-2. Run `cmake --preset debug`, `cmake --build --preset debug` and `ctest --preset debug --output-on-failure`. Confirm all test groups pass. If the release preset crashes inside `libstdc++` at run time, check `PATH` as described in Day 27: the compiler's `bin` folder must come before Git's.
+1. Create the layout. Start from the Episode 39 files as described above, and add the library, application and test files. Add `build/`, `build-asan/` and `ledger.csv` to `.gitignore`. Initialize the repo with `git init -b main` and commit with the message "Add expense ledger library and tests".
+2. Run `cmake --preset debug`, `cmake --build --preset debug` and `ctest --preset debug --output-on-failure`. Confirm all test groups pass. If the release preset crashes inside `libstdc++` at run time, check `PATH` as described in Episode 27: the compiler's `bin` folder must come before Git's.
 3. Run the application from the build folder, in an empty working folder so that `ledger.csv` is created there. Add two expenses with `add 2026-10-31 food 12.50 lunch with team` and `add 2026-10-31 travel 3 bus fare`. Each prints `added`.
 4. Run `list` and check that it prints both records, with the amounts as `12.50` and `3.00`. Run `totals` and check that it prints `food: 12.50`, `travel: 3.00` and `total: 15.50`.
 5. Try `add 2026-10-31 food 1.234 too precise`. Read the error and record it in the README.
 6. Run the release preset the same way. Then, in WSL, run `cmake --preset asan`, build and test, and confirm no sanitizer reports.
 7. Create a branch `feature/monthly-totals`. Write a failing test first for `std::map<std::string, std::int64_t> totals_by_month() const` that groups totals by the first seven characters of the date. Implement the function in the library and expose it through the command `ledger months`, then make the tests pass and check the new command by hand.
 8. Write `docs/design.md` with four short sections: the three layers and the rule each one owns, the reason amounts are stored as cents, the reason the file storage sits behind an interface, and one rule you checked in two places and why.
-9. Create an empty public GitHub repository named `100-days-software-day-40-cpp-capstone`. Merge the branch with `git merge --no-ff feature/monthly-totals -m "Add monthly totals"`, then push with `git remote add origin <URL>` and `git push -u origin main`.
+9. Create an empty public GitHub repository named `100-episodes-software-day-40-cpp-capstone`. Merge the branch with `git merge --no-ff feature/monthly-totals -m "Add monthly totals"`, then push with `git remote add origin <URL>` and `git push -u origin main`.
 10. Open the Actions tab and confirm the workflow runs and passes on `main` for all three jobs. Add the workflow badge to the top of `README.md` and push a final commit with the message "Add CI badge".
 
 Done when:
@@ -837,6 +837,6 @@ This is the capstone, so the bar is the whole repository. A reader should be abl
 
 ## Tomorrow
 
-Module 5 starts with Day 41, complexity analysis, where you measure how the time and memory of an algorithm grow with its input. The ledger has a clear example of that question: the category totals use a `std::map`, and the total for each new entry costs a lookup in the map. The next module asks you to compare that cost with the alternatives, and to choose the data structure from the numbers instead of from habit.
+Module 5 starts with Episode 41, complexity analysis, where you measure how the time and memory of an algorithm grow with its input. The ledger has a clear example of that question: the category totals use a `std::map`, and the total for each new entry costs a lookup in the map. The next module asks you to compare that cost with the alternatives, and to choose the data structure from the numbers instead of from habit.
 
-**Next:** Day 41, the first day of the Data Structures and Algorithms module, which is not yet written.
+**Next:** Episode 41, the first day of the Data Structures and Algorithms module, which is not yet written.

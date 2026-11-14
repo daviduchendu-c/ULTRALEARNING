@@ -1,9 +1,9 @@
-# Day 37: Interpretability and Error Analysis
+# Episode 37: Interpretability and Error Analysis
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 25 (coefficients), Day 29 and Day 30 (tree importances), Day 34 and Day 35 (metrics and residuals). The explanation tools are powerful and easy to misread, so you will test each one against a case where you know the truth.
+**Level:** intermediate. You need Episode 25 (coefficients), Episode 29 and Episode 30 (tree importances), Episode 34 and Episode 35 (metrics and residuals). The explanation tools are powerful and easy to misread, so you will test each one against a case where you know the truth.
 
 **By the end of this day, you will have:**
 
@@ -25,10 +25,10 @@
 
 **Prerequisites:**
 
-- Day 25: coefficients and what they mean under the linear model
-- Day 30: random forests and the impurity-based importances
-- Day 34 and Day 35: metrics and residual analysis
-- Day 36: pipelines, so that explanations use the same features the model used
+- Episode 25: coefficients and what they mean under the linear model
+- Episode 30: random forests and the impurity-based importances
+- Episode 34 and Episode 35: metrics and residual analysis
+- Episode 36: pipelines, so that explanations use the same features the model used
 
 ---
 
@@ -280,14 +280,14 @@ The mistake is changing the model when the labels are wrong, or cleaning the dat
 
 This is a medium-weight project. The tools are library calls. The main deliverable is a diagnosis, written in plain language, that names the largest problem and the action it calls for.
 
-**Repo name:** `100-days-ai-engineering-day-37-interpretability-and-error-analysis`
+**Repo name:** `100-episodes-ai-engineering-day-37-interpretability-and-error-analysis`
 
 **Goal:** explain a tree-based classifier with permutation importance, partial dependence and SHAP, find the error slices where it fails, and write a diagnosis that separates data problems from model problems.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-37-interpretability-and-error-analysis/
+100-episodes-ai-engineering-day-37-interpretability-and-error-analysis/
 ├── README.md
 ├── requirements.txt
 ├── explain.py
@@ -438,6 +438,6 @@ def test_small_slices_are_flagged():
 
 ## Tomorrow
 
-Tomorrow you put the whole module into one project. You will build a complete classical machine learning product: a data pipeline, a baseline, several models, an experiment comparison, an evaluation with the metrics from Day 34 and Day 35, an error analysis from today, a model selection step from Day 36, and a simple inference interface. Every earlier day returns in that build, and the goal is a system you could hand to a colleague with confidence.
+Tomorrow you put the whole module into one project. You will build a complete classical machine learning product: a data pipeline, a baseline, several models, an experiment comparison, an evaluation with the metrics from Episode 34 and Episode 35, an error analysis from today, a model selection step from Episode 36, and a simple inference interface. Every earlier day returns in that build, and the goal is a system you could hand to a colleague with confidence.
 
-**Next:** [Day 38: Classical ML Project](Day-38-Classical-ML-Project.md)
+**Next:** [Episode 38: Classical ML Project](Episode-38-Classical-ML-Project.md)

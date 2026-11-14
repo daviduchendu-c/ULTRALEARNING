@@ -1,9 +1,9 @@
-# Day 21: Feature Engineering
+# Episode 21: Feature Engineering
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need the cleaning and EDA habits from Days 19 and 20 and the basics of a train and test split. The project trains a small model, so a working scikit-learn install is part of the day.
+**Level:** intermediate. You need the cleaning and EDA habits from Episodes 19 and 20 and the basics of a train and test split. The project trains a small model, so a working scikit-learn install is part of the day.
 
 **By the end of this day, you will have:**
 
@@ -19,13 +19,13 @@
 - pytest 8.0 or newer (`pip install "pytest>=8.0"`)
 - A code editor such as VS Code (free) or Jupyter Lab
 - Git and a free GitHub account for the project section
-- The `make_subscriptions` function from Day 20, which the project copies into its own repository
+- The `make_subscriptions` function from Episode 20, which the project copies into its own repository
 
 **Prerequisites:**
 
-- Day 19: missing values, outliers and leakage, because feature code is where leakage most often enters
-- Day 20: distributions, skewness, correlations and the class balance
-- Day 14: the mean and standard deviation, and what standardization means
+- Episode 19: missing values, outliers and leakage, because feature code is where leakage most often enters
+- Episode 20: distributions, skewness, correlations and the class balance
+- Episode 14: the mean and standard deviation, and what standardization means
 
 ---
 
@@ -158,7 +158,7 @@ print(scaler.mean_)                        # [2000. 4.]
 print(scaler.transform(X_test).round(4))   # [[0.6124 0.6124]]
 ```
 
-`fit` must see only the training rows. If you fit the scaler on the full table, the test set's mean and spread leak into the training features. The common mistake is to call `fit_transform` on everything before splitting. The pipeline pattern shown in Day 19 avoids this automatically. Also note that a scaler does not change the shape of a skewed distribution. A feature with a long right tail stays skewed after standardization, which is why the log transform below is often needed too. In practice, standardized inputs are the default for linear and neural models, and the scaler's learned values are saved with the model so that the live system uses the same numbers.
+`fit` must see only the training rows. If you fit the scaler on the full table, the test set's mean and spread leak into the training features. The common mistake is to call `fit_transform` on everything before splitting. The pipeline pattern shown in Episode 19 avoids this automatically. Also note that a scaler does not change the shape of a skewed distribution. A feature with a long right tail stays skewed after standardization, which is why the log transform below is often needed too. In practice, standardized inputs are the default for linear and neural models, and the scaler's learned values are saved with the model so that the live system uses the same numbers.
 
 ---
 
@@ -181,7 +181,7 @@ rows = normalize(X, norm="l2")             # each row has length 1
 print(np.linalg.norm(rows, axis=1))        # [1. 1. 1.]
 ```
 
-The mistake is to apply min-max scaling to a feature with a single extreme outlier and then wonder why the other values are all bunched near zero. Clip or winsorize the outlier first, as in Day 19. The second mistake is to assume that "normalize" means the same thing in every library. The scikit-learn function `normalize` works row by row, while `MinMaxScaler` works column by column. Min-max scaling is common for image pixels and for neural network inputs with bounded ranges, while unit-length normalization is common for embeddings used in similarity search.
+The mistake is to apply min-max scaling to a feature with a single extreme outlier and then wonder why the other values are all bunched near zero. Clip or winsorize the outlier first, as in Episode 19. The second mistake is to assume that "normalize" means the same thing in every library. The scikit-learn function `normalize` works row by row, while `MinMaxScaler` works column by column. Min-max scaling is common for image pixels and for neural network inputs with bounded ranges, while unit-length normalization is common for embeddings used in similarity search.
 
 ---
 
@@ -201,7 +201,7 @@ print(np.log1p(spend).round(2).tolist())   # the large values shrink toward the 
 print(np.sqrt(spend).round(2).tolist())    # a milder compression
 ```
 
-Check the effect of a transformation by plotting the distribution before and after, as you learned in Day 20. The mistake is to apply a log to a variable that contains negative values, which gives `NaN` or an error, or to interpret a coefficient from a log-transformed model as if it were on the original scale. A one-unit change in `log1p(x)` is not a one-unit change in `x`. Log transforms are standard for prices, incomes, page views and any quantity that grows multiplicatively.
+Check the effect of a transformation by plotting the distribution before and after, as you learned in Episode 20. The mistake is to apply a log to a variable that contains negative values, which gives `NaN` or an error, or to interpret a coefficient from a log-transformed model as if it were on the original scale. A one-unit change in `log1p(x)` is not a one-unit change in `x`. Log transforms are standard for prices, incomes, page views and any quantity that grows multiplicatively.
 
 ---
 
@@ -269,14 +269,14 @@ Work in a notebook. Before each step, write down what you expect the output to s
 
 ### Goal
 
-Build a feature pipeline for the synthetic subscription data from Day 20. The pipeline includes a log transform, scaling, one-hot encoding and one engineered ratio. Measure whether the engineered feature improves the cross-validated AUC, and write up the result with the evidence. Every transformation is learned inside the cross-validation loop, so the score is honest.
+Build a feature pipeline for the synthetic subscription data from Episode 20. The pipeline includes a log transform, scaling, one-hot encoding and one engineered ratio. Measure whether the engineered feature improves the cross-validated AUC, and write up the result with the evidence. Every transformation is learned inside the cross-validation loop, so the score is honest.
 
-Suggested repository name: `100-days-ai-day-21-features`
+Suggested repository name: `100-episodes-ai-day-21-features`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-21-features/
+100-episodes-ai-day-21-features/
 ├── README.md
 ├── features/
 │   ├── __init__.py
@@ -301,7 +301,7 @@ scikit-learn>=1.5
 pytest>=8.0
 ```
 
-`features/generate.py`: copy the `make_subscriptions` function from your Day 20 repository, unchanged, into this file. Keep the planted bug from Day 20 in it, because the pipeline should handle it. If you do not have Day 20, use the function below, which reproduces the same relationships.
+`features/generate.py`: copy the `make_subscriptions` function from your Episode 20 repository, unchanged, into this file. Keep the planted bug from Episode 20 in it, because the pipeline should handle it. If you do not have Episode 20, use the function below, which reproduces the same relationships.
 
 ```python
 import numpy as np
@@ -539,4 +539,4 @@ Work each answer out in writing before you read the answers below.
 
 ## Tomorrow
 
-Tomorrow is datasets and data pipelines. Today you built a pipeline that transforms one table in one run. Day 22 asks what happens when the same transformations must run on new data, on the next month's file, and on live requests, with the same results every time. You will split datasets, batch and shuffle them, version them, and check that training and serving compute the same features.
+Tomorrow is datasets and data pipelines. Today you built a pipeline that transforms one table in one run. Episode 22 asks what happens when the same transformations must run on new data, on the next month's file, and on live requests, with the same results every time. You will split datasets, batch and shuffle them, version them, and check that training and serving compute the same features.

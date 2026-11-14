@@ -1,9 +1,9 @@
-# Day 15: Electronics Project
+# Episode 15: Electronics Project
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 6 hours, split over two sessions
-**Level:** intermediate. You need Days 6 to 14. The project uses everything from this module in one small system, so it is the first day where a mistake in one stage shows up in another.
+**Level:** intermediate. You need Episodes 6 to 14. The project uses everything from this module in one small system, so it is the first day where a mistake in one stage shows up in another.
 
 **By the end of this day, you will have:**
 
@@ -29,13 +29,13 @@
 
 **Prerequisites:**
 
-- Day 2: the sense, compute and act loop
-- Day 8: resistors, capacitors and connectors
-- Day 9: the logic level of a pin
-- Day 11: the ADC, the voltage divider and the noise from averaging
-- Day 12: the power budget, the fuse and the star ground
-- Day 13: the PWM signal and the flyback issues that apply to motors. The servo has its own internal motor, so the same protection thinking applies.
-- Day 14: reading the HC-SR04 timing and the servo's operating conditions from the datasheet
+- Episode 2: the sense, compute and act loop
+- Episode 8: resistors, capacitors and connectors
+- Episode 9: the logic level of a pin
+- Episode 11: the ADC, the voltage divider and the noise from averaging
+- Episode 12: the power budget, the fuse and the star ground
+- Episode 13: the PWM signal and the flyback issues that apply to motors. The servo has its own internal motor, so the same protection thinking applies.
+- Episode 14: reading the HC-SR04 timing and the servo's operating conditions from the datasheet
 
 ---
 
@@ -58,7 +58,7 @@
 
 ## Introduction
 
-Every robot in this series so far has been a set of parts. Today you connect them into a loop. A sensor measures the world and turns it into a signal. A controller reads that signal, applies a rule and decides what should happen. An actuator takes the decision and moves something. The loop is the same one that Day 1 drew as four boxes, and it is the basis of a robot vacuum, a parking sensor, a gate opener and a warehouse pallet stop.
+Every robot in this series so far has been a set of parts. Today you connect them into a loop. A sensor measures the world and turns it into a signal. A controller reads that signal, applies a rule and decides what should happen. An actuator takes the decision and moves something. The loop is the same one that Episode 1 drew as four boxes, and it is the basis of a robot vacuum, a parking sensor, a gate opener and a warehouse pallet stop.
 
 The project is deliberately small. An ultrasonic sensor, a microcontroller and a servo are cheap, and their failures are easy to see. The gate is incidental. The lesson is the discipline of drawing the system before you build it, measuring each stage against its datasheet, and documenting the result so that another person can reproduce it. That discipline is what a robotics employer checks first.
 
@@ -89,7 +89,7 @@ The servo and the ultrasonic sensor are old designs, but both are reliable when 
 - **Calibration:** a comparison of a measurement against a known reference, which reveals the error and sometimes allows a correction.
 - **Bulk capacitor:** a large capacitor on a supply rail that covers short current spikes.
 - **Resettable fuse (PTC):** a fuse that increases its resistance when it overheats and recovers when the fault is removed.
-- **Star ground:** the wiring pattern in which every subsystem returns to a single ground point, which is covered on Day 12.
+- **Star ground:** the wiring pattern in which every subsystem returns to a single ground point, which is covered on Episode 12.
 - **Control loop:** the cycle of sensing, deciding and acting, repeated fast enough to hold the system at its target.
 
 ---
@@ -244,7 +244,7 @@ flowchart LR
     C -- 5 V pin --> S
 ```
 
-The bulk capacitor sits across the servo's V+ and GND, as close to the servo connector as the wiring allows. The 100 nF ceramic capacitor sits across the same pair, closer still. Together they absorb the servo's current spikes so that the Uno's supply does not see them. That is the decoupling principle from Day 12, applied to a single servo.
+The bulk capacitor sits across the servo's V+ and GND, as close to the servo connector as the wiring allows. The 100 nF ceramic capacitor sits across the same pair, closer still. Together they absorb the servo's current spikes so that the Uno's supply does not see them. That is the decoupling principle from Episode 12, applied to a single servo.
 
 A shared ground is a compromise. Two grounds that are joined at one point are safe, and two grounds joined at several points can form a loop that picks up noise. The design uses one joining point, at the Uno's GND pin, and the rest of the ground runs as a star.
 
@@ -285,7 +285,7 @@ This project is the full system, documented for another person to build. It is t
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-15-electronics-project/
+100-episodes-robotics-engineering-day-15-electronics-project/
 ├── README.md
 ├── firmware/
 │   └── sensor_gate/

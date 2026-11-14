@@ -1,9 +1,9 @@
-# Day 47: Heaps and Priority Queues
+# Episode 47: Heaps and Priority Queues
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 46, understand tree height, and be comfortable with tuples and comparisons. This day is for anyone who has needed "the next most urgent item" from a changing set and used a sort in a loop to get it.
+**Level:** intermediate. You should have finished Episode 46, understand tree height, and be comfortable with tuples and comparisons. This day is for anyone who has needed "the next most urgent item" from a changing set and used a sort in a loop to get it.
 
 **By the end of this day, you will have:**
 
@@ -16,13 +16,13 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 46
+- Git 2.23 or newer, and the repository from Episode 46
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 44: Stacks and Queues (the difference between FIFO and priority order)
-- Day 46: Trees and BSTs (tree height and the idea of a complete tree)
+- Episode 44: Stacks and Queues (the difference between FIFO and priority order)
+- Episode 46: Trees and BSTs (tree height and the idea of a complete tree)
 - Module 3: Python tuples, comparisons and the `heapq` module in the standard library
 
 ---
@@ -49,7 +49,7 @@ In this guide you are going to cover the following:
 
 Every system with more work than workers needs to answer one question quickly: what should run next? A web server needs the request that has waited longest, a payment system needs the most overdue invoice, and an operating system needs the thread with the highest priority. A sorted list answers that question, but every new arrival means another sort. A plain queue answers it in order of arrival, which ignores urgency. A priority queue answers the question directly. It gives you the most important item in O(1), and it adds or removes items in O(log n).
 
-The structure that makes this efficient is the heap. A heap is a complete binary tree with one rule: each parent is no larger than its children, so the root holds the minimum. Because the tree is complete, it fits in a flat array with no node objects, which is why heaps are compact and fast. Heaps are the engine behind Python's `heapq`, the scheduler in most operating systems, the Dijkstra shortest-path algorithm you will meet on Day 48, and the top-k queries in search and analytics.
+The structure that makes this efficient is the heap. A heap is a complete binary tree with one rule: each parent is no larger than its children, so the root holds the minimum. Because the tree is complete, it fits in a flat array with no node objects, which is why heaps are compact and fast. Heaps are the engine behind Python's `heapq`, the scheduler in most operating systems, the Dijkstra shortest-path algorithm you will meet on Episode 48, and the top-k queries in search and analytics.
 
 This day builds the heap from scratch, so you see the two operations that keep the rule true, sift up and sift down. It then uses the heap for top-k selection and for a scheduler, and it compares the result with the standard library at every step.
 
@@ -105,7 +105,7 @@ for i in range(1, len(data)):
     assert data[parent] <= data[i]    # the heap property holds
 ```
 
-The limitation is that the heap only orders the top. Finding the second smallest item is not O(1), and searching for an arbitrary value is O(n). If you need sorted iteration or range queries, use a balanced BST from Day 46 instead.
+The limitation is that the heap only orders the top. Finding the second smallest item is not O(1), and searching for an arbitrary value is O(n). If you need sorted iteration or range queries, use a balanced BST from Episode 46 instead.
 
 The common mistake is to think a heap is sorted because the array looks ordered. A heap array like `[1, 3, 2, 7, 4, 5, 6]` is not sorted, and `[1, 2, 3]` is sorted but not the only valid heap shape. To spot a broken heap, check the parent-child relation for every index, which the test in this day does for you.
 
@@ -212,7 +212,7 @@ Priority scheduling runs in operating system kernels, in job queues such as Cele
 
 ## Hands-on exercises
 
-Work in the repository from Day 46. Keep the heap in `dsa/heap.py` and the scheduler in `dsa/scheduler.py`.
+Work in the repository from Episode 46. Keep the heap in `dsa/heap.py` and the scheduler in `dsa/scheduler.py`.
 
 Exercise 1 draws a heap. Insert the values 9, 4, 7, 1, 8, 2 into an empty min-heap by hand, drawing the tree and the array after each push and each sift. Then pop once and draw the result. Compare with the code's `as_list()` output after the same operations.
 
@@ -240,12 +240,12 @@ Done when the tests pass and the GitHub Actions run for your latest commit is gr
 
 The project is a job scheduler built on the heap you wrote. Jobs have a name and a priority, where a lower number means more urgent. Jobs with equal priority run in arrival order. The project includes a demo script and tests that compare the heap with the standard library, so you know the implementation is correct before you trust it with work.
 
-Suggested repo name: `100-days-software-day-47-heaps-and-priority-queues`. Copy the Day 46 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-47-heaps-and-priority-queues`. Copy the Episode 46 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-47-heaps-and-priority-queues/
+100-episodes-software-day-47-heaps-and-priority-queues/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -546,7 +546,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 46 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 46 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python schedule_demo.py` and confirm the order is send-email, send-receipt, resize-image, backup.
 3. Add a `peek_job` method to `Scheduler` that returns the next name without removing it. Add a test that it does not change `len`.
 4. Add a `top_k_by_priority(self, k)` method that returns the names of the k most urgent jobs without removing them. Hint: pop k items, collect the names, then push the same tuples back. Test it against a Scheduler with five jobs.
@@ -616,4 +616,4 @@ This project is light on new behavior and heavy on invariants. The skill is keep
 
 ## Tomorrow
 
-Day 48 covers graphs. A graph is a set of nodes with edges between them, and it generalizes the tree from Day 46 by allowing cycles and shared children. You will store graphs as adjacency lists, search them with breadth-first and depth-first search, count connected components, and detect cycles. The heap from today returns in Dijkstra's shortest-path algorithm, which you will meet at the end of the module.
+Episode 48 covers graphs. A graph is a set of nodes with edges between them, and it generalizes the tree from Episode 46 by allowing cycles and shared children. You will store graphs as adjacency lists, search them with breadth-first and depth-first search, count connected components, and detect cycles. The heap from today returns in Dijkstra's shortest-path algorithm, which you will meet at the end of the module.

@@ -1,9 +1,9 @@
-# Day 38: Errors, Debugging and Testing
+# Episode 38: Errors, Debugging and Testing
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 5 hours
-**Level:** intermediate. You have written classes, containers and smart pointers from Days 32 to 37. This day adds the discipline that keeps that code correct: how to report errors without losing the cleanup guarantees, how to find a bug with a debugger and sanitizers, and how to lock behavior in place with unit tests. It is for anyone who has been fixing bugs by adding print statements and hoping.
+**Level:** intermediate. You have written classes, containers and smart pointers from Episodes 32 to 37. This day adds the discipline that keeps that code correct: how to report errors without losing the cleanup guarantees, how to find a bug with a debugger and sanitizers, and how to lock behavior in place with unit tests. It is for anyone who has been fixing bugs by adding print statements and hoping.
 
 **By the end of this day, you will have:**
 
@@ -24,8 +24,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 37: the toolchain, classes, lifetime, RAII, containers, templates and smart pointers
-- Day 31: pointers and the dangling pointer rule
+- Episodes 27 to 37: the toolchain, classes, lifetime, RAII, containers, templates and smart pointers
+- Episode 31: pointers and the dangling pointer rule
 
 ---
 
@@ -118,7 +118,7 @@ The output is `age 30`, then `rejected: age cannot be negative`, then `not a num
 
 The design question is what to throw. Throw a type that carries the context a caller needs. The project defines `ConfigError`, which derives from `std::runtime_error` and records the line number. A caller can then print the line without parsing a message string.
 
-The common mistake is to catch an exception and do nothing, which hides the failure and lets the program continue with bad state. The other mistake is to throw from a destructor, which can end the program during unwinding, as Day 33 explained. You can spot a swallowed error when a program behaves strangely and logs nothing. In the market, services report exceptions to logging systems at the boundary, where the caller can act, and they let destructors release resources quietly.
+The common mistake is to catch an exception and do nothing, which hides the failure and lets the program continue with bad state. The other mistake is to throw from a destructor, which can end the program during unwinding, as Episode 33 explained. You can spot a swallowed error when a program behaves strangely and logs nothing. In the market, services report exceptions to logging systems at the boundary, where the caller can act, and they let destructors release resources quietly.
 
 ### Assertions
 
@@ -230,7 +230,7 @@ TEST(ParseConfig, NonNumericValueThrows) {
 }
 ```
 
-The common mistake is to write tests that check the implementation instead of the behavior, which break every time the code is rearranged. Test what the function promises, and keep each test to one rule. The second mistake is to write tests after a bug is found and not before. Write the failing test first, as Day 7 and Day 29 practiced, and then fix the code. In the market, unit tests run on every pull request, and teams that keep them fast and focused catch regressions before code is merged.
+The common mistake is to write tests that check the implementation instead of the behavior, which break every time the code is rearranged. Test what the function promises, and keep each test to one rule. The second mistake is to write tests after a bug is found and not before. Write the failing test first, as Episode 7 and Episode 29 practiced, and then fix the code. In the market, unit tests run on every pull request, and teams that keep them fast and focused catch regressions before code is merged.
 
 ---
 
@@ -284,12 +284,12 @@ Done when the test was red before the function existed and green after.
 
 The project parses a simple configuration format with lines of `key = value`. Blank lines and lines starting with `#` are skipped. A bad line throws a `ConfigError` that carries the line number. The GoogleTest suite checks the parser, the port validation and the exception types, and an option turns on both sanitizers.
 
-Suggested repo name: `100-days-software-day-38-errors-debugging-testing`.
+Suggested repo name: `100-episodes-software-day-38-errors-debugging-testing`.
 
 The repo layout:
 
 ```
-100-days-software-day-38-errors-debugging-testing/
+100-episodes-software-day-38-errors-debugging-testing/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -631,6 +631,6 @@ This project is the first one where tests and sanitizers decide whether the work
 
 ## Tomorrow
 
-Day 39 covers CMake and project structure. You used CMake from Day 27 and built targets, linked libraries and fetched GoogleTest today. Day 39 explains the target model in depth: library and executable targets, include paths that are public or private, dependencies from packages and FetchContent, presets for Debug and Release, and a GitHub Actions workflow that runs the build and the tests on every push. The sanitizer option from today becomes one preset that the workflow runs.
+Episode 39 covers CMake and project structure. You used CMake from Episode 27 and built targets, linked libraries and fetched GoogleTest today. Episode 39 explains the target model in depth: library and executable targets, include paths that are public or private, dependencies from packages and FetchContent, presets for Debug and Release, and a GitHub Actions workflow that runs the build and the tests on every push. The sanitizer option from today becomes one preset that the workflow runs.
 
-**Next:** [Day 39: CMake and Project Structure](Software-Day-39-CMake-and-Project-Structure.md)
+**Next:** [Episode 39: CMake and Project Structure](Software-Episode-39-CMake-and-Project-Structure.md)

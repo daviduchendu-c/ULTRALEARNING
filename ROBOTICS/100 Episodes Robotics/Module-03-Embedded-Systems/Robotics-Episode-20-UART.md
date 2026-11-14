@@ -1,10 +1,10 @@
-# Day 20: UART
+# Episode 20: UART
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** beginner to intermediate. You need Day 16 (the Uno and the Arduino IDE), Day 17 (logic levels), Day 18 (timing) and Day 19 (interrupts and why receiving must not lose bytes). You will need a second board or a USB-to-serial adapter for the project.
+**Level:** beginner to intermediate. You need Episode 16 (the Uno and the Arduino IDE), Episode 17 (logic levels), Episode 18 (timing) and Episode 19 (interrupts and why receiving must not lose bytes). You will need a second board or a USB-to-serial adapter for the project.
 
 **By the end of this day, you will have:**
 
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 16: the Uno's serial monitor and `Serial.begin`
-- Day 17: logic levels and the rule about matching voltages between two devices
-- Day 19: interrupts, and why a receive buffer must be read before it fills
+- Episode 16: the Uno's serial monitor and `Serial.begin`
+- Episode 17: logic levels and the rule about matching voltages between two devices
+- Episode 19: interrupts, and why a receive buffer must be read before it fills
 
 ---
 
@@ -183,12 +183,12 @@ On the job, the serial link is the first thing that a field technician checks wh
 
 The goal is a working link between two boards with a simple frame format and a checksum. The sender reads a potentiometer, builds a frame with a sequence number and the reading, computes a checksum and sends it. The receiver accepts only frames with a valid checksum and rejects the rest. This is the same pattern used by NMEA GPS sentences and many motor protocols.
 
-**Repo name:** `100-days-robotics-day-20-uart`
+**Repo name:** `100-episodes-robotics-day-20-uart`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-20-uart/
+100-episodes-robotics-day-20-uart/
 ├── README.md
 ├── sender/
 │   └── sender.ino
@@ -376,4 +376,4 @@ The evidence is the log. A reviewer who sees the clean run and the corrupted run
 
 ## Tomorrow
 
-Day 21 covers I2C, a two-wire bus that connects many devices to one pair of pins. Where the UART links two devices, I2C shares one data line and one clock line among many, and each device has an address. You will use the Wire library, scan the bus for devices, read a real sensor and handle the pull-up resistors that make the bus work. The framing and checksum habits from today carry over to I2C transactions, and the logic-level lessons carry over to the 3.3 V sensors you will use there.
+Episode 21 covers I2C, a two-wire bus that connects many devices to one pair of pins. Where the UART links two devices, I2C shares one data line and one clock line among many, and each device has an address. You will use the Wire library, scan the bus for devices, read a real sensor and handle the pull-up resistors that make the bus work. The framing and checksum habits from today carry over to I2C transactions, and the logic-level lessons carry over to the 3.3 V sensors you will use there.

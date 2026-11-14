@@ -1,9 +1,9 @@
-# Day 9: Semiconductor Fundamentals
+# Episode 9: Semiconductor Fundamentals
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You need Day 8's diode and relay material and Day 6's Ohm's law. Today you use transistors as switches, which is the most common role a semiconductor plays on a robot.
+**Level:** beginner to intermediate. You need Episode 8's diode and relay material and Episode 6's Ohm's law. Today you use transistors as switches, which is the most common role a semiconductor plays on a robot.
 
 **By the end of this day, you will have:**
 
@@ -14,7 +14,7 @@
 
 **What you need:**
 
-- Everything from Days 6 to 8 (breadboard, DMM, resistor assortment, LEDs, 1N4007 diodes, pushbuttons, 100 µF capacitor)
+- Everything from Episodes 6 to 8 (breadboard, DMM, resistor assortment, LEDs, 1N4007 diodes, pushbuttons, 100 µF capacitor)
 - Arduino Uno R3 (ATmega328P), about $25 official or about $10 for a clone, with Arduino IDE 2.3 or newer
 - A Raspberry Pi Pico (RP2040), board version Pico (original) or Pico 2, for the logic-level exercise. Pico runs at 3.3 V logic. Check that you have the 3.3 V version before you wire it to a 5 V source. The Pico is about $4 to $5. If you run MicroPython on it, install the current MicroPython release for the Pico from the Raspberry Pi documentation site.
 - 2N2222 NPN transistor, pack of 10 (about $3). Use the TO-92 package.
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 8: diodes, flyback, pushbuttons and the Arduino sketch structure
-- Day 7: voltage dividers
+- Episode 8: diodes, flyback, pushbuttons and the Arduino sketch structure
+- Episode 7: voltage dividers
 - Basic C-style Arduino code (`pinMode`, `digitalWrite`, `analogWrite`)
 
 ---
@@ -99,7 +99,7 @@ Think of two rooms. One room has extra people who can move freely, and the other
 
 Apply a forward voltage, positive on the p side and negative on the n side, and the barrier shrinks. Carriers cross easily, and current flows. Apply a reverse voltage, and the barrier grows. Almost nothing crosses, and only a tiny leakage current flows until the reverse breakdown voltage is reached.
 
-For silicon at room temperature, the barrier needs about 0.6 to 0.7 V of forward bias before the current is significant. That number is the forward voltage you measured on the diode in Day 8. Germanium is about 0.3 V, which is why it appeared in early radios. Silicon is used in most robot electronics because it is cheap, stable and handles higher temperature.
+For silicon at room temperature, the barrier needs about 0.6 to 0.7 V of forward bias before the current is significant. That number is the forward voltage you measured on the diode in Episode 8. Germanium is about 0.3 V, which is why it appeared in early radios. Silicon is used in most robot electronics because it is cheap, stable and handles higher temperature.
 
 The common mistake is treating the junction as a perfect switch. It is not. Above the forward voltage, current rises very steeply with voltage, so a small change in voltage has a big effect on current. That is why diodes need a series resistor when they conduct from a stiff source. The limitation is temperature: the forward voltage falls by about 2 mV per degree Celsius, so a hot diode conducts more easily.
 
@@ -109,7 +109,7 @@ The PN junction is the building block of diodes, BJTs, MOSFETs, LEDs and solar c
 
 ## Diodes
 
-A diode is a single PN junction in a package with two leads, anode and cathode. It conducts from anode to cathode when forward biased, and it blocks in reverse until breakdown. In Day 8 you used diodes as flyback clamps and reverse-polarity protectors. The physics is now clear. The forward voltage is the barrier, and the reverse voltage must stay below the breakdown rating.
+A diode is a single PN junction in a package with two leads, anode and cathode. It conducts from anode to cathode when forward biased, and it blocks in reverse until breakdown. In Episode 8 you used diodes as flyback clamps and reverse-polarity protectors. The physics is now clear. The forward voltage is the barrier, and the reverse voltage must stay below the breakdown rating.
 
 A rectifier diode such as the 1N4007 is built for low frequency, with 1 A current rating and 1,000 V reverse rating. A signal diode such as the 1N4148 is built for speed and low capacitance, and it suits logic and small-signal clamps. A Zener diode is designed to break down at a set reverse voltage, usually to clamp a supply at a known level.
 
@@ -165,7 +165,7 @@ Worked example. An Arduino Uno pin at 5 V drives a 2N2222 that switches a relay 
 
 Check the dissipation. At saturation, V_CE is about 0.2 V, so the transistor dissipates `0.2 × 0.071 ≈ 14 mW`. The relay coil dissipates the rest, and the transistor stays cool.
 
-A flyback diode goes across the relay coil, as explained on Day 8. Without it, the transistor must absorb the coil's voltage spike.
+A flyback diode goes across the relay coil, as explained on Episode 8. Without it, the transistor must absorb the coil's voltage spike.
 
 The common mistake is using a base resistor so large that the transistor is only partly on. Suppose you choose 10 kΩ: the base current is `4.3 / 10,000 = 0.43 mA`, which gives a collector current of up to `0.43 × β`. With β = 100, the maximum is 43 mA, not enough for 71 mA. The transistor stays in its linear region and heats up, so the relay chatters. The second mistake is forgetting that gain varies with temperature. A design that works cold can fail when hot. The forced-gain margin is there to absorb that variation.
 
@@ -183,7 +183,7 @@ With a 10 kΩ pull-up to 5 V and a pushbutton to ground, the released input read
 
 The value is a trade-off. A lower resistance pulls harder, is less sensitive to noise and draws more current when the input is held low. A higher resistance saves power and is more sensitive to noise and to stray capacitance. Common values are 4.7 kΩ to 10 kΩ. The I²C bus uses a 4.7 kΩ pull-up on each line in standard designs, because the bus capacitance needs a strong pull to meet its rise time.
 
-The common mistake is leaving a button without a pull-up or pull-down. The Arduino's `INPUT_PULLUP` mode fixes it in software, as used in the Day 8 sketch. The limitation of an internal pull-up is its fixed value, which is often around 20 to 50 kΩ on microcontrollers. That is weak for long wires, and an external 4.7 kΩ or 10 kΩ resistor is better.
+The common mistake is leaving a button without a pull-up or pull-down. The Arduino's `INPUT_PULLUP` mode fixes it in software, as used in the Episode 8 sketch. The limitation of an internal pull-up is its fixed value, which is often around 20 to 50 kΩ on microcontrollers. That is weak for long wires, and an external 4.7 kΩ or 10 kΩ resistor is better.
 
 Pull-ups and pull-downs appear on every digital input in a robot, from the emergency-stop line to the reset pin of a microcontroller.
 
@@ -195,7 +195,7 @@ Digital logic families define voltage thresholds for high and low. For a CMOS in
 
 The RP2040 on the Pico runs its I/O at 3.3 V. Its thresholds are fractions of its I/O supply, so a 5 V signal is not safe to feed directly to a Pico GPIO pin. Most RP2040 pins are not 5 V tolerant, and a 5 V signal can damage the pin.
 
-A 5 V output can talk safely to a 3.3 V input only when the input's maximum voltage rating is respected. The simple fix is a voltage divider, which you know from Day 7. To scale a 5 V signal to about 3.3 V, use `R_top / R_bottom = (5 − 3.3) / 3.3 ≈ 0.515`. Choose 1 kΩ on top and 2 kΩ on the bottom, which gives `5 × 2 / 3 ≈ 3.33 V`. The divider works for one-way signals that switch slowly. For fast or bidirectional buses, use a dedicated level shifter, such as a MOSFET-based bidirectional shifter.
+A 5 V output can talk safely to a 3.3 V input only when the input's maximum voltage rating is respected. The simple fix is a voltage divider, which you know from Episode 7. To scale a 5 V signal to about 3.3 V, use `R_top / R_bottom = (5 − 3.3) / 3.3 ≈ 0.515`. Choose 1 kΩ on top and 2 kΩ on the bottom, which gives `5 × 2 / 3 ≈ 3.33 V`. The divider works for one-way signals that switch slowly. For fast or bidirectional buses, use a dedicated level shifter, such as a MOSFET-based bidirectional shifter.
 
 A 3.3 V output into a 5 V input is often accepted, because the 5 V part's VIH is lower than 5 V. Check the datasheet for the specific input, because some 5 V parts specify a higher VIH.
 
@@ -260,12 +260,12 @@ This project is a light one. The arithmetic here is small, but it is the same ar
 
 **Goal:** write functions for the base resistor, the saturation check, the MOSFET conduction loss and the divider ratio, test them, and commit the Uno switching sketch with a README that records your measured V_CE and base current.
 
-**Repo name:** `100-days-robotics-engineering-day-09-semiconductor-fundamentals`
+**Repo name:** `100-episodes-robotics-engineering-day-09-semiconductor-fundamentals`
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-09-semiconductor-fundamentals/
+100-episodes-robotics-engineering-day-09-semiconductor-fundamentals/
 ├── README.md
 ├── transistor_calc.py
 ├── test_transistor_calc.py
@@ -385,4 +385,4 @@ def divider_ratio(v_high: float, v_target: float) -> float:
 
 Tomorrow you move from analog levels to numbers. Today a transistor switched one signal between on and off, and the logic-level section assumed a high and a low. Digital electronics gives those levels meaning. You will convert between decimal, binary and hexadecimal, read truth tables for gates such as AND, OR and XOR, and use bitwise operators to read several pins as one byte, which is how robot firmware reads switches and sensors.
 
-**Next:** [Day 10: Digital Electronics](Robotics-Day-10-Digital-Electronics.md)
+**Next:** [Episode 10: Digital Electronics](Robotics-Episode-10-Digital-Electronics.md)

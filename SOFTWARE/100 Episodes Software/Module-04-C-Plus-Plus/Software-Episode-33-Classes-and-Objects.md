@@ -1,6 +1,6 @@
-# Day 33: Classes and Objects
+# Episode 33: Classes and Objects
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
 **Level:** intermediate. You have written functions that take and return values, and you have used classes from the standard library such as `std::string` and `std::vector`. This day explains how to design your own class, what a constructor and a destructor must guarantee, and how access control keeps the rules of the class intact. It is for anyone whose classes are just a bag of public variables.
@@ -22,8 +22,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 32: the build, functions, references, pointers, and the constructor and destructor order
-- Day 28: integer types, which the project uses for money in cents
+- Episodes 27 to 32: the build, functions, references, pointers, and the constructor and destructor order
+- Episode 28: integer types, which the project uses for money in cents
 
 ---
 
@@ -116,13 +116,13 @@ int main() {
 }
 ```
 
-The output is `unnamed: 1` and `clicks: 11`. The default constructor delegates to the two-argument constructor, so the setup logic lives in one place. The `std::move` passes the string into the member without copying it, which Day 37 explains. Mark a single-argument constructor `explicit` so the compiler does not convert values to your type silently.
+The output is `unnamed: 1` and `clicks: 11`. The default constructor delegates to the two-argument constructor, so the setup logic lives in one place. The `std::move` passes the string into the member without copying it, which Episode 37 explains. Mark a single-argument constructor `explicit` so the compiler does not convert values to your type silently.
 
 The common mistake is to leave a member uninitialized in a constructor that does not set it. A plain `int` member with no initializer contains garbage, and the bug shows up later in an unrelated function. Give every member a value in the initializer list or with a default member initializer, such as `int value_ = 0;`. In the market, uninitialized members are one of the most common sources of bugs in C++ code review comments.
 
 ### Destructors
 
-A destructor is the cleanup routine that runs when an object dies. It is the other half of the lifetime rules from Day 32. Think of a hotel checkout. The guest returns the key card, settles the bill and clears the room, so the next guest starts clean. A destructor releases whatever the object acquired during its life.
+A destructor is the cleanup routine that runs when an object dies. It is the other half of the lifetime rules from Episode 32. Think of a hotel checkout. The guest returns the key card, settles the bill and clears the room, so the next guest starts clean. A destructor releases whatever the object acquired during its life.
 
 The rule of zero is the modern default. If a class holds only members that clean up themselves, such as `std::string` and `std::vector`, the class needs no destructor at all. The compiler generates one that destroys each member in reverse order of declaration.
 
@@ -162,7 +162,7 @@ int main() {
 }
 ```
 
-The output is `mix: one` and `mix: two`. The class has no destructor, and no memory leaks, because the members release their own storage when the `Playlist` is destroyed. A class that holds a raw pointer or a file handle does need a destructor, which the Day 32 buffer and file wrapper showed.
+The output is `mix: one` and `mix: two`. The class has no destructor, and no memory leaks, because the members release their own storage when the `Playlist` is destroyed. A class that holds a raw pointer or a file handle does need a destructor, which the Episode 32 buffer and file wrapper showed.
 
 The common mistake is to write a destructor that throws an exception. A destructor runs during stack unwinding, and a second exception during unwinding ends the program. Destructors should not throw, and the standard marks them `noexcept` by default. The other mistake is to put logic with side effects that matter, such as saving to disk, in a destructor, where errors cannot be reported. In the market, teams that build database and storage code keep destructors minimal and expose explicit `close` functions that can report errors.
 
@@ -202,7 +202,7 @@ int main() {
 
 The output is `22.5`. The commented line would not compile, and the compiler error names the private member. Because the only way to change the temperature is `set_celsius`, the range check runs every time, and no caller can bypass it.
 
-The keyword `protected` is for members that subclasses need, and it is the subject of Day 34. For now, prefer `private` by default, and make a member public only when it is meant to be part of the interface.
+The keyword `protected` is for members that subclasses need, and it is the subject of Episode 34. For now, prefer `private` by default, and make a member public only when it is meant to be part of the interface.
 
 The common mistake is to make everything `public` for convenience. Then every function in the program can break the rules of the class, and a bug can come from anywhere. The opposite mistake is to write a getter that returns a non-const reference to a private member, which gives callers the same power as a public variable. The rule is to return by value or by const reference. In the market, public data members are a common review finding in shared libraries, because they make future changes expensive.
 
@@ -306,12 +306,12 @@ Done when every invariant has a function and a test named next to it.
 
 The project is a bank account library. Its rules are that the balance is never negative, deposits and withdrawals must be positive, and an account must have an owner. A failed operation changes nothing and does not count as a transaction. The test checks each rule, and the demo shows the account in use.
 
-Suggested repo name: `100-days-software-day-33-classes-and-objects`.
+Suggested repo name: `100-episodes-software-day-33-classes-and-objects`.
 
 The repo layout:
 
 ```
-100-days-software-day-33-classes-and-objects/
+100-episodes-software-day-33-classes-and-objects/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -325,7 +325,7 @@ The repo layout:
     └── bank_account_test.cpp
 ```
 
-The header lists the public interface and keeps the data private. The money is stored as `std::int64_t` cents, which Day 28 introduced:
+The header lists the public interface and keeps the data private. The money is stored as `std::int64_t` cents, which Episode 28 introduced:
 
 ```cpp
 // src/bank_account.hpp
@@ -616,6 +616,6 @@ This project is short and sharp. A reviewer should be able to read the header an
 
 ## Tomorrow
 
-Day 34 extends classes with inheritance and polymorphism. You will make a base class with virtual functions, override them in derived classes, and see why a virtual destructor matters. You will also weigh inheritance against composition, which is a more flexible way to share behavior. The access specifiers and invariants from today decide what a derived class may change, so that the bank rules stay intact when the design grows.
+Episode 34 extends classes with inheritance and polymorphism. You will make a base class with virtual functions, override them in derived classes, and see why a virtual destructor matters. You will also weigh inheritance against composition, which is a more flexible way to share behavior. The access specifiers and invariants from today decide what a derived class may change, so that the bank rules stay intact when the design grows.
 
-**Next:** [Day 34: Inheritance and Polymorphism](Software-Day-34-Inheritance-and-Polymorphism.md)
+**Next:** [Episode 34: Inheritance and Polymorphism](Software-Episode-34-Inheritance-and-Polymorphism.md)

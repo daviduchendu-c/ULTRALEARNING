@@ -1,9 +1,9 @@
-# Day 46: Trees and BSTs
+# Episode 46: Trees and BSTs
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 45 and be comfortable with recursion at a basic level, meaning a function that calls itself on a smaller input. This day is for anyone who has seen file system folders or HTML documents and wants to know the structure behind them.
+**Level:** intermediate. You should have finished Episode 45 and be comfortable with recursion at a basic level, meaning a function that calls itself on a smaller input. This day is for anyone who has seen file system folders or HTML documents and wants to know the structure behind them.
 
 **By the end of this day, you will have:**
 
@@ -16,15 +16,15 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 45
+- Git 2.23 or newer, and the repository from Episode 45
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 - Paper for drawing trees, which you will use in every exercise
 
 **Prerequisites:**
 
-- Day 43: Linked Lists (nodes with references to other nodes)
-- Day 44: Stacks and Queues (the traversal order of a stack and a queue)
-- Day 45: Hash Tables (why a hash table cannot give you the next key)
+- Episode 43: Linked Lists (nodes with references to other nodes)
+- Episode 44: Stacks and Queues (the traversal order of a stack and a queue)
+- Episode 45: Hash Tables (why a hash table cannot give you the next key)
 
 ---
 
@@ -99,7 +99,7 @@ class TreeNode:
 root = TreeNode(5, TreeNode(3, TreeNode(1), TreeNode(4)), TreeNode(8))
 ```
 
-The limitation of the tree model is that it does not capture shared structure. A file that is linked from two folders forms a graph, and Day 48 covers that case. A tree can also hide its shape when you print it as a list, so draw it when you debug.
+The limitation of the tree model is that it does not capture shared structure. A file that is linked from two folders forms a graph, and Episode 48 covers that case. A tree can also hide its shape when you print it as a list, so draw it when you debug.
 
 The common mistake is to mix up height and depth. The depth of a node is measured from the root down, and the height of the tree is the maximum depth plus one, counting nodes. To spot it, check your definitions on a three-node chain. The depth of the bottom node is 2, and the height is 3 nodes.
 
@@ -133,7 +133,7 @@ print(preorder(tree, []))   # [5, 3, 1, 4, 8]
 
 Inorder traversal of a BST returns the keys in sorted order, which is the most useful fact about the structure. Preorder is useful for copying a tree, because you create each node before its children. Postorder is useful for deleting a tree, because you free the children before the parent. Level order is useful when you need the nodes by depth, such as drawing a tree one row at a time.
 
-The limitation of recursive traversal is the call stack. A tree with a depth of 10000 needs 10000 nested calls, which exceeds Python's default recursion limit of 1000. Day 50 explains the call stack and how to avoid the limit with an explicit stack.
+The limitation of recursive traversal is the call stack. A tree with a depth of 10000 needs 10000 nested calls, which exceeds Python's default recursion limit of 1000. Episode 50 explains the call stack and how to avoid the limit with an explicit stack.
 
 The common mistake is to write the recursive call for the right subtree before the left one, which reverses the order of inorder output. To spot it, trace a three-node tree on paper. The output for the tree above must start with 1.
 
@@ -194,13 +194,13 @@ The limitation of recursion is the stack depth. Python limits recursion to 1000 
 
 The common mistake is a missing or wrong base case. If `height` tests `node.left is None` instead of `node is None`, it crashes when a node has only one child. To spot it, test a single node, a chain and an empty tree. Each one exercises a different base case.
 
-Recursion appears in parsers, in file system walkers, in divide-and-conquer algorithms such as merge sort on Day 49 and in every tree and graph algorithm in this module.
+Recursion appears in parsers, in file system walkers, in divide-and-conquer algorithms such as merge sort on Episode 49 and in every tree and graph algorithm in this module.
 
 ---
 
 ## Hands-on exercises
 
-Work in the repository from Day 45. Keep the BST in `dsa/bst.py` and the demo in `height_demo.py`.
+Work in the repository from Episode 45. Keep the BST in `dsa/bst.py` and the demo in `height_demo.py`.
 
 Exercise 1 draws a tree. Insert the keys 5, 3, 8, 1, 4, 7 and 9 into a tree by hand, drawing the tree after each insert. Write the inorder, preorder and postorder lists before you check them in code. Then build the same tree with `BinarySearchTree` and compare.
 
@@ -230,12 +230,12 @@ The project is an ordered index over event timestamps. The BST stores timestamps
 
 The project uses integers as timestamps, which keeps the example simple. In a real log system, timestamps would be stored as sortable values, such as Unix seconds or ISO 8601 strings. Strings sort correctly in ISO format because the fields are in decreasing significance.
 
-Suggested repo name: `100-days-software-day-46-trees-and-bsts`. Copy the Day 45 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-46-trees-and-bsts`. Copy the Episode 45 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-46-trees-and-bsts/
+100-episodes-software-day-46-trees-and-bsts/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -543,7 +543,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 45 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 45 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python height_demo.py`. Copy the three lines into `docs/bst-notes.md` and explain why the sorted height grows with n while the random height grows slowly.
 3. Add a `range_keys` test that checks an interval whose low end is smaller than every key, and one whose high end is larger than every key.
 4. Add a `preorder`-based `copy` method that builds a new `BinarySearchTree` with the same keys, and test that `inorder()` on the copy equals the original.
@@ -613,4 +613,4 @@ This project is light on new code and heavy on careful reasoning about shape. Th
 
 ## Tomorrow
 
-Day 47 covers heaps and priority queues. A heap is a tree with a different rule: a parent is always smaller than its children, which lets you find the minimum in O(1) and remove it in O(log n). It is stored in an array rather than with node references, and it is the structure behind task schedulers and top-k queries. The height argument from today applies again, because a heap is a complete binary tree, so its height is always about log2 n.
+Episode 47 covers heaps and priority queues. A heap is a tree with a different rule: a parent is always smaller than its children, which lets you find the minimum in O(1) and remove it in O(log n). It is stored in an array rather than with node references, and it is the structure behind task schedulers and top-k queries. The height argument from today applies again, because a heap is a complete binary tree, so its height is always about log2 n.

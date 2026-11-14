@@ -1,9 +1,9 @@
-# Day 29: Control Flow and Functions
+# Episode 29: Control Flow and Functions
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** beginner. You can declare variables and read input from Day 28, and you know what a function is from another language. This day covers how a program decides and repeats, and how it splits work into named pieces. It is for anyone whose programs grow into one long `main` that nobody wants to touch.
+**Level:** beginner. You can declare variables and read input from Episode 28, and you know what a function is from another language. This day covers how a program decides and repeats, and how it splits work into named pieces. It is for anyone whose programs grow into one long `main` that nobody wants to touch.
 
 **By the end of this day, you will have:**
 
@@ -15,15 +15,15 @@
 
 **What you need:**
 
-- GCC 14 or newer (checked with g++ 16.1.0), CMake 3.25 or newer (checked with CMake 4.3.3), and Ninja 1.11 or newer, from Day 27
+- GCC 14 or newer (checked with g++ 16.1.0), CMake 3.25 or newer (checked with CMake 4.3.3), and Ninja 1.11 or newer, from Episode 27
 - Git 2.40 or newer
 - A terminal, either Git Bash or PowerShell
 - A free GitHub account
 
 **Prerequisites:**
 
-- Day 27: the build steps and the warning flags
-- Day 28: variables, types, `const`, operators and `std::cin` with a check for failed reads
+- Episode 27: the build steps and the warning flags
+- Episode 28: variables, types, `const`, operators and `std::cin` with a check for failed reads
 
 ---
 
@@ -329,12 +329,12 @@ Done when you can explain the `3.0f` result in one sentence.
 
 The project is a command-line tool. It reads whole-number scores from standard input until the input ends, then prints how many scores it read, the average, the lowest and highest score, and a count of each letter grade. Every rule lives in a function with a test.
 
-Suggested repo name: `100-days-software-day-29-control-flow-and-functions`.
+Suggested repo name: `100-episodes-software-day-29-control-flow-and-functions`.
 
 The repo layout:
 
 ```
-100-days-software-day-29-control-flow-and-functions/
+100-episodes-software-day-29-control-flow-and-functions/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -348,7 +348,7 @@ The repo layout:
     └── grades_test.cpp
 ```
 
-The header declares the functions and the statistics record. Declarations live here, and definitions live in `grades.cpp`, the same pattern as Day 27:
+The header declares the functions and the statistics record. Declarations live here, and definitions live in `grades.cpp`, the same pattern as Episode 27:
 
 ```cpp
 // src/grades.hpp
@@ -660,6 +660,6 @@ This project is light on new ideas and heavy on structure. A reviewer should be 
 
 ## Tomorrow
 
-Day 30 moves from single values to collections. You will store many items in `std::vector` and `std::array`, read and change `std::string` values, walk them with iterators, and use algorithms such as `std::sort` and `std::find_if`. The functions and reference rules from today decide how those collections are passed around, and the grade report's `Stats` record is the first step toward a container that holds every score.
+Episode 30 moves from single values to collections. You will store many items in `std::vector` and `std::array`, read and change `std::string` values, walk them with iterators, and use algorithms such as `std::sort` and `std::find_if`. The functions and reference rules from today decide how those collections are passed around, and the grade report's `Stats` record is the first step toward a container that holds every score.
 
-**Next:** [Day 30: Arrays, Strings and Containers](Software-Day-30-Arrays-Strings-and-Containers.md)
+**Next:** [Episode 30: Arrays, Strings and Containers](Software-Episode-30-Arrays-Strings-and-Containers.md)

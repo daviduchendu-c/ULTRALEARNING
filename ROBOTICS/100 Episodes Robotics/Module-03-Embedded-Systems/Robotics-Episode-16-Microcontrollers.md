@@ -1,10 +1,10 @@
-# Day 16: Microcontrollers
+# Episode 16: Microcontrollers
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 3 hours
 
-**Level:** beginner to intermediate. You need Day 6 (voltage, current and Ohm's law) and Day 10 (binary and logic levels). If you have not written firmware before, that is fine. This is the first day that puts code on a chip, and every later day in this module builds on it.
+**Level:** beginner to intermediate. You need Episode 6 (voltage, current and Ohm's law) and Episode 10 (binary and logic levels). If you have not written firmware before, that is fine. This is the first day that puts code on a chip, and every later day in this module builds on it.
 
 **By the end of this day, you will have:**
 
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 6: voltage, current and Ohm's law
-- Day 10: binary numbers, bits and the two logic levels
+- Episode 6: voltage, current and Ohm's law
+- Episode 10: binary numbers, bits and the two logic levels
 - Basic programming in any language, including variables, loops and functions
 
 ---
@@ -57,7 +57,7 @@ Almost every robot has a small computer hidden inside its electronics that does 
 
 Knowing how a microcontroller is built tells you what it can and cannot do. If you know that its memory is small, you will not try to store a camera image in it. If you know that its clock is fixed, you will understand why a timing loop runs at a predictable rate. If you know that it boots from flash memory, you will know what happens when the power comes on and why a bad program can make a board look dead. These facts decide how you design firmware, and they decide what goes wrong on the bench.
 
-Today you will look inside a real chip. You will flash a program onto an Arduino Uno, read the memory usage that the compiler reports, write to hardware registers directly, and compare the chip with a single-board computer such as a Raspberry Pi. Everything in the rest of this module, from GPIO on Day 17 to the RTOS on Day 24, is built on the ideas in this lesson.
+Today you will look inside a real chip. You will flash a program onto an Arduino Uno, read the memory usage that the compiler reports, write to hardware registers directly, and compare the chip with a single-board computer such as a Raspberry Pi. Everything in the rest of this module, from GPIO on Episode 17 to the RTOS on Episode 24, is built on the ideas in this lesson.
 
 ---
 
@@ -151,7 +151,7 @@ A kitchen has a stove, an oven, a sink and a fridge. Each one does a specific ta
 
 From first principles, a GPIO pin has a direction, an output level when it is an output, and a way to read the level when it is an input. The ATmega328P pins run at 5 V on an Uno, and an output can source or sink a limited current. The datasheet lists 40 mA as the absolute maximum per pin, and the recommended operating limit is much lower, around 20 mA. A pin driving an LED through a 220 ohm resistor from 5 V sees about (5 − 2) / 220 = 13.6 mA, which is within the limit. A pin that tries to drive a motor directly will overload.
 
-The Uno's peripherals are reached through the Arduino API or through registers. The API function `analogRead` uses the ADC peripheral, and `analogWrite` uses the PWM timers. Those topics are covered in Day 17 and Day 18. Today it is enough to know that peripherals run in parallel with the CPU. A timer keeps counting while your code does something else, and an ADC conversion finishes in the background after you start it.
+The Uno's peripherals are reached through the Arduino API or through registers. The API function `analogRead` uses the ADC peripheral, and `analogWrite` uses the PWM timers. Those topics are covered in Episode 17 and Episode 18. Today it is enough to know that peripherals run in parallel with the CPU. A timer keeps counting while your code does something else, and an ADC conversion finishes in the background after you start it.
 
 The common mistake is to treat every pin as interchangeable. On the Uno, some pins are shared with the USB serial connection (pins 0 and 1), some support PWM, and some are used for SPI and I2C (for example, A4 and A5 for I2C). Using a shared pin for an output can break serial debugging. The way to spot it is the pin map in the Uno's documentation, which you should print or keep open whenever you wire a board.
 
@@ -209,12 +209,12 @@ On the job, the typical robot has both. A ROS 2 robot uses a single-board comput
 
 The goal is a small repository that you can show to an employer. It contains a working blink in two forms, a memory report and a written comparison of two boards. The project is light on new concepts because the lesson is about understanding, but the evidence it produces is real and reviewable.
 
-**Repo name:** `100-days-robotics-day-16-microcontrollers`
+**Repo name:** `100-episodes-robotics-day-16-microcontrollers`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-16-microcontrollers/
+100-episodes-robotics-day-16-microcontrollers/
 ├── README.md
 ├── blink_millis/
 │   └── blink_millis.ino
@@ -360,4 +360,4 @@ This project is light for a robotics day because the concept is foundational. Th
 
 ## Tomorrow
 
-Day 17 uses the GPIO pins you met today. You will wire buttons and LEDs, learn logic levels and pull-up resistors, and handle the bounce that makes a cheap button look like it was pressed many times. The register knowledge from this lesson is the reason you will understand what a pull-up resistor does inside the chip, and the millis timing you wrote today is the tool you will use to debounce the button.
+Episode 17 uses the GPIO pins you met today. You will wire buttons and LEDs, learn logic levels and pull-up resistors, and handle the bounce that makes a cheap button look like it was pressed many times. The register knowledge from this lesson is the reason you will understand what a pull-up resistor does inside the chip, and the millis timing you wrote today is the tool you will use to debounce the button.

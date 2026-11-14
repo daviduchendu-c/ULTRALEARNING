@@ -1,6 +1,6 @@
-# Day 6: Electricity Fundamentals
+# Episode 6: Electricity Fundamentals
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 hours
 **Level:** beginner. No electronics background is needed. You should be comfortable with multiplication, division and unit prefixes (milli, kilo), because every lesson in this module is arithmetic on a circuit.
@@ -24,7 +24,7 @@
 
 **Prerequisites:**
 
-- Day 2: Anatomy of a Robot, especially the battery section and the gearbox arithmetic
+- Episode 2: Anatomy of a Robot, especially the battery section and the gearbox arithmetic
 - Basic algebra: rearranging `a = b × c` to solve for `b` or `c`
 - No electronics knowledge yet
 
@@ -53,7 +53,7 @@
 
 ## Introduction
 
-A robot you cannot power is a pile of parts. Every motor, sensor and computer on a robot runs on the same few physical quantities: how much energy is stored, how fast charge moves through a wire, how hard it is pushed, and how much of it turns into heat. Day 2 gave you the battery and the regulator as blocks on a diagram. Today you learn what flows between those blocks.
+A robot you cannot power is a pile of parts. Every motor, sensor and computer on a robot runs on the same few physical quantities: how much energy is stored, how fast charge moves through a wire, how hard it is pushed, and how much of it turns into heat. Episode 2 gave you the battery and the regulator as blocks on a diagram. Today you learn what flows between those blocks.
 
 Robot teams argue about these numbers every week: whether the 2S pack is big enough for the drive motors, or why the microcontroller reset when the gripper closed. Each question reduces to voltage, current and resistance, and the answer comes from two relationships, `V = IR` and `P = VI`, that you will use for the rest of this series.
 
@@ -154,7 +154,7 @@ Ohm's law describes resistors, which have a fixed resistance. An LED's forward v
 
 The common mistake is connecting an LED straight across a supply with no series resistor. A red LED drops about 2 V. On a 5 V supply, the leftover 3 V has almost nothing to push against, so the current climbs until the LED overheats and fails. Choose the resistor with Ohm's law. For a 15 mA target on 5 V, `R = (5 − 2) / 0.015 = 200 Ω`. Use the next standard value up, 220 Ω, which gives `3 / 220 ≈ 13.6 mA`. Stay below 20 mA for a standard 5 mm LED.
 
-Resistance matters to robots in sensor circuits, pull-up and pull-down networks (Day 9), voltage dividers (Day 7) and motor windings. Motor drivers and cable selection depend on it too.
+Resistance matters to robots in sensor circuits, pull-up and pull-down networks (Episode 9), voltage dividers (Episode 7) and motor windings. Motor drivers and cable selection depend on it too.
 
 ---
 
@@ -171,7 +171,7 @@ P = V² / R
 
 Take the 1 kΩ resistor with 9 mA through it. The power is `9 × 0.009 = 0.081 W`, or 81 mW, which a 1/4 W resistor handles. Check it another way: `0.009² × 1000 = 0.081 W`. The same answer.
 
-Energy is power over time, `E = P × t`. Batteries are rated in watt-hours (Wh), where 1 Wh = 3,600 J. A 3 W motor that runs for 2 hours uses `3 × 2 = 6 Wh`. A 2,000 mAh, 3.7 V lithium-ion cell stores `2 × 3.7 = 7.4 Wh`. At a steady 1.5 W load, the ideal runtime is `7.4 / 1.5 ≈ 4.9 hours`. Real runtime is shorter, because capacity falls at high discharge and as the cell ages, and because regulators (Day 2) lose energy as heat.
+Energy is power over time, `E = P × t`. Batteries are rated in watt-hours (Wh), where 1 Wh = 3,600 J. A 3 W motor that runs for 2 hours uses `3 × 2 = 6 Wh`. A 2,000 mAh, 3.7 V lithium-ion cell stores `2 × 3.7 = 7.4 Wh`. At a steady 1.5 W load, the ideal runtime is `7.4 / 1.5 ≈ 4.9 hours`. Real runtime is shorter, because capacity falls at high discharge and as the cell ages, and because regulators (Episode 2) lose energy as heat.
 
 The common mistake is unit mixing. Writing `P = 9 V × 9 mA = 81` and reporting 81 W, instead of 0.081 W, is the classic error. Convert to base units (volts, amperes, ohms, seconds) before any calculation, and convert to Wh only at the end for battery work. A second mistake is confusing power with energy. A high-power motor running for a second uses little energy.
 
@@ -195,7 +195,7 @@ The common mistake is ignoring peak voltage. A capacitor rated for 230 V AC has 
 
 ## Conductors and insulators
 
-Conductors like copper, silver and aluminum let charge move with little resistance. Insulators like plastic, glass, rubber and dry air hold charge in place. Semiconductors such as silicon sit between the two and can be switched. Day 9 covers them.
+Conductors like copper, silver and aluminum let charge move with little resistance. Insulators like plastic, glass, rubber and dry air hold charge in place. Semiconductors such as silicon sit between the two and can be switched. Episode 9 covers them.
 
 Copper is the default for robot wiring: cheap, flexible and low in resistance. Thicker wire has a lower gauge number and lower resistance, so choose the thickest wire that fits the current, and keep high-current runs short.
 
@@ -215,7 +215,7 @@ Consider a 9 V battery feeding an LED through a 470 Ω resistor, with the batter
 
 The common mistake is connecting two circuits with different references. When a microcontroller and a motor driver share a signal line, their grounds must be joined. Without a shared reference, the signal has no fixed meaning, and readings wander. The rule is to tie all grounds in a system to one point, and never tie a supply's positive terminal to another system's ground.
 
-Reference errors cause some of the loudest failures on robots. Motor current returns to the battery through a path that can share copper with logic signals, and the voltage drop along that path shifts the reference the sensors see. This is called ground bounce, and it is why motor power and sensor wiring are routed apart. You will meet it again on Day 12.
+Reference errors cause some of the loudest failures on robots. Motor current returns to the battery through a path that can share copper with logic signals, and the voltage drop along that path shifts the reference the sensors see. This is called ground bounce, and it is why motor power and sensor wiring are routed apart. You will meet it again on Episode 12.
 
 Printed circuit board designers route a solid ground plane for the same reason: one reference that every part sees the same way.
 
@@ -244,12 +244,12 @@ This is a light project. Today's concepts are measurement and arithmetic, so the
 
 **Goal:** write functions for Ohm's law, power, energy and battery runtime, test them against this lesson's worked examples, and commit the bench log with measured and calculated values side by side.
 
-**Repo name:** `100-days-robotics-engineering-day-06-electricity-fundamentals`
+**Repo name:** `100-episodes-robotics-engineering-day-06-electricity-fundamentals`
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-06-electricity-fundamentals/
+100-episodes-robotics-engineering-day-06-electricity-fundamentals/
 ├── README.md
 ├── electricity.py
 ├── test_electricity.py
@@ -358,4 +358,4 @@ def battery_runtime_h(capacity_mah: float, voltage_v: float, load_w: float) -> f
 
 Tomorrow you combine resistors. Today you analyzed one resistor on one source. Circuit analysis covers resistors in series and parallel, how they divide voltage and current, and Kirchhoff's laws for any loop or junction. You will predict every voltage and current before you wire the circuit, and the bench log from today is the test of those predictions.
 
-**Next:** [Day 7: Circuit Analysis](Robotics-Day-07-Circuit-Analysis.md)
+**Next:** [Episode 7: Circuit Analysis](Robotics-Episode-07-Circuit-Analysis.md)

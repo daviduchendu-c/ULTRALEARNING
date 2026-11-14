@@ -1,9 +1,9 @@
-# Day 17: Functions II
+# Episode 17: Functions II
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You wrote functions with parameters, returns, scope and annotations on Day 16. This is for anyone who has seen `*args` in a library signature and wondered what it does, or who needs a function that remembers a setting without a global variable.
+**Level:** intermediate. You wrote functions with parameters, returns, scope and annotations on Episode 16. This is for anyone who has seen `*args` in a library signature and wondered what it does, or who needs a function that remembers a setting without a global variable.
 
 **By the end of this day, you will have:**
 
@@ -18,16 +18,16 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 10: Objects, Variables and Types (references, the mutable default trap)
-- Day 13: Lists and Tuples (unpacking, `sorted`)
-- Day 16: Functions I (parameters, arguments, return, scope, LEGB, annotations)
+- Episode 10: Objects, Variables and Types (references, the mutable default trap)
+- Episode 13: Lists and Tuples (unpacking, `sorted`)
+- Episode 16: Functions I (parameters, arguments, return, scope, LEGB, annotations)
 
 ---
 
@@ -53,7 +53,7 @@ In this guide you are going to cover the following:
 
 ## Introduction
 
-Day 16 gave you functions with fixed parameters. Real code needs more flexibility. A logging function must accept any number of values. A formatting function must accept options by name and refuse to accept some of them by position, so that future changes do not break callers. A sorting call must accept a rule for ordering. A rate limiter must remember a count between calls. A tree walker must call itself. Python handles all of these with a small set of features, and each one is a tool you will meet in almost every library you read.
+Episode 16 gave you functions with fixed parameters. Real code needs more flexibility. A logging function must accept any number of values. A formatting function must accept options by name and refuse to accept some of them by position, so that future changes do not break callers. A sorting call must accept a rule for ordering. A rate limiter must remember a count between calls. A tree walker must call itself. Python handles all of these with a small set of features, and each one is a tool you will meet in almost every library you read.
 
 This day covers those features in the order you are likely to need them. Defaults and variable arguments come first, because they shape how a function is called. Keyword-only and positional-only parameters come next, because they let an author protect an API. Recursion, higher-order functions, closures and lambdas then show how a function can be data: passed to others, returned from one, and used to keep state.
 
@@ -107,7 +107,7 @@ The common mistake is writing `tags: list[str] = []` in the signature, which rea
 
 `*args` and `**kwargs` let a function accept a variable number of inputs. Think of a shared dinner bill. Some people order two dishes, some order one, and the waiter adds everything up without knowing the number in advance. `*args` is the list of dishes, and `**kwargs` is the list of named extras, such as "tip" or "discount".
 
-From first principles, inside a function, `args` is a tuple of the extra positional arguments, and `kwargs` is a dictionary of the extra keyword arguments that did not match a named parameter. The names `args` and `kwargs` are conventions; the `*` and `**` are what matter. On the caller's side, `f(*values)` unpacks a sequence into positional arguments, and `f(**options)` unpacks a dictionary into keyword arguments. That is the same unpacking you met on Day 13, applied to calls.
+From first principles, inside a function, `args` is a tuple of the extra positional arguments, and `kwargs` is a dictionary of the extra keyword arguments that did not match a named parameter. The names `args` and `kwargs` are conventions; the `*` and `**` are what matter. On the caller's side, `f(*values)` unpacks a sequence into positional arguments, and `f(**options)` unpacks a dictionary into keyword arguments. That is the same unpacking you met on Episode 13, applied to calls.
 
 ```python
 def total(*numbers: float) -> float:
@@ -231,7 +231,7 @@ print(triple(10), double(10))     # 30 20
 print(triple.__closure__[0].cell_contents)  # 3
 ```
 
-Each call to `make_multiplier` creates a new cell, so `triple` and `double` keep separate factors. The state lives in the closure rather than in a global variable, which is the design the Day 16 scope lesson recommended.
+Each call to `make_multiplier` creates a new cell, so `triple` and `double` keep separate factors. The state lives in the closure rather than in a global variable, which is the design the Episode 16 scope lesson recommended.
 
 The common mistake is the late-binding trap in a loop. A list of lambdas built with `[lambda x: x + i for i in range(3)]` all refer to the same variable `i`, which ends at 2, so every lambda returns `x + 2`. The fix is to bind the current value with a default argument, as in `lambda x, i=i: x + i`, or to create the function inside a helper that takes `i` as a parameter. Test closures created in loops with more than one input, because the bug only shows when the loop variable has changed. In the job market, callbacks registered in loops are a common source of this bug in event-driven code.
 
@@ -305,12 +305,12 @@ Done when the first list returns 12 three times and the second returns 10, 11 an
 
 The project is a small toolkit of function patterns: a total that accepts any number of values, a describe function with keyword details, a formatter with positional-only and keyword-only parameters, recursive math with a base case, a counter closure, and a sort helper with a lambda key. Each function is a pattern you will meet in real code. The evidence is a test suite that covers each pattern and a findings file that records the recursion limit result.
 
-Suggested repo name: `100-days-software-day-17-functions-ii`.
+Suggested repo name: `100-episodes-software-day-17-functions-ii`.
 
 Repo layout:
 
 ```
-100-days-software-day-17-functions-ii/
+100-episodes-software-day-17-functions-ii/
 ├── .gitignore
 ├── README.md
 ├── toolkit.py
@@ -515,7 +515,7 @@ The toolkit is small on purpose. A reviewer should be able to read each function
 
 ### Answers
 
-1. After three calls, `history` contains all three events, because the default list is created once and shared. The mechanism is the same as the shared mutable default in Day 10. The fixed signature is `def log(event, history=None):` with `history = [] if history is None else history` inside the function.
+1. After three calls, `history` contains all three events, because the default list is created once and shared. The mechanism is the same as the shared mutable default in Episode 10. The fixed signature is `def log(event, history=None):` with `history = [] if history is None else history` inside the function.
 2. `func(args)` passes the tuple as one argument, so the wrapped function receives a tuple where it expected separate values. The forwarding call is `func(*args)`, and the wrapper should also accept and forward `**kwargs` when the wrapped function accepts keyword arguments.
 3. Renaming a parameter removes the old name from the signature, so a caller that passes `timeout=5` gets a `TypeError`. The safe change, if callers should use positions, is to mark the parameters before `/` as positional-only, which lets the name change without breaking those callers. For keyword callers, the maintainer would add the new name and keep the old one as a deprecated keyword for a release.
 4. The base case is `n == 0`, and the calls move `n` away from zero, so the recursion never stops, and Python raises `RecursionError`. The recursive call should move toward the base case, which for counting down is `count_down(n - 1)` with a base case that returns for `n <= 0`.
@@ -554,6 +554,6 @@ The toolkit is small on purpose. A reviewer should be able to read each function
 
 ## Tomorrow
 
-Day 18 moves from functions to the organization of code across files. You will learn how an `import` statement finds a module, how a module's namespace works, what `__name__` means when a file runs or is imported, and how packages group modules into folders. You will also meet relative and absolute imports. The functions you wrote today will live in modules, and the tests you wrote will import them.
+Episode 18 moves from functions to the organization of code across files. You will learn how an `import` statement finds a module, how a module's namespace works, what `__name__` means when a file runs or is imported, and how packages group modules into folders. You will also meet relative and absolute imports. The functions you wrote today will live in modules, and the tests you wrote will import them.
 
-**Next:** [Day 18: Modules and Packages](Software-Day-18-Modules-and-Packages.md)
+**Next:** [Episode 18: Modules and Packages](Software-Episode-18-Modules-and-Packages.md)

@@ -1,10 +1,10 @@
-# Day 23: Embedded Software Architecture
+# Episode 23: Embedded Software Architecture
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** intermediate. You need Days 16 to 22, because today you organize the code from those days into one firmware. You should be able to write a small C++ class or a set of functions in a header and source file, and you should know what a `volatile` variable is from Day 19.
+**Level:** intermediate. You need Episodes 16 to 22, because today you organize the code from those days into one firmware. You should be able to write a small C++ class or a set of functions in a header and source file, and you should know what a `volatile` variable is from Episode 19.
 
 **By the end of this day, you will have:**
 
@@ -16,9 +16,9 @@
 **What you need:**
 
 - Arduino Uno Rev3 with Arduino IDE 2.3.x and the `Arduino AVR Boards` core at version 1.8.6
-- A DS3231 real-time clock breakout from Day 21, with its pull-ups
-- A 10 kOhm potentiometer from Day 18, on A0
-- One red LED with a 220 ohm resistor from Day 17, on pin 13 (the onboard LED is also acceptable)
+- A DS3231 real-time clock breakout from Episode 21, with its pull-ups
+- A 10 kOhm potentiometer from Episode 18, on A0
+- One red LED with a 220 ohm resistor from Episode 17, on pin 13 (the onboard LED is also acceptable)
 - A breadboard and jumper wires, about $5 to $8
 - A digital multimeter, about $15 to $25
 - Optional: `arduino-cli` 1.x, for command-line compile checks, free and open source
@@ -26,11 +26,11 @@
 
 **Prerequisites:**
 
-- Day 16: the Uno's registers and the difference between a sketch and its build output
-- Day 19: `volatile`, interrupts and the rule that shared data needs protection
-- Day 20: the frame format and checksum
-- Day 21: the DS3231 register map and the Wire return codes
-- Day 22: why each driver should hide its bus details from the rest of the code
+- Episode 16: the Uno's registers and the difference between a sketch and its build output
+- Episode 19: `volatile`, interrupts and the rule that shared data needs protection
+- Episode 20: the frame format and checksum
+- Episode 21: the DS3231 register map and the Wire return codes
+- Episode 22: why each driver should hide its bus details from the rest of the code
 
 ---
 
@@ -70,7 +70,7 @@ Today you combine the drivers from earlier days into one sensor logger. The logg
 |---|---|---|
 | 1960s to 1970s | Structured programming, led by Edsger Dijkstra and others, argues that code should be organized into small blocks with clear entry and exit points. | Module boundaries in firmware still follow this idea. |
 | 1970s to 1980s | Embedded systems move from assembly to C, which allows separate files, header declarations and modules. | C's header files are the origin of the interface files used in this lesson. |
-| 1990s | Real-time operating systems and the "superloop" design, a main loop that calls each task in turn, become common in industrial controllers. | The superloop is the design you will use today, and the RTOS on Day 24 is the next step. |
+| 1990s | Real-time operating systems and the "superloop" design, a main loop that calls each task in turn, become common in industrial controllers. | The superloop is the design you will use today, and the RTOS on Episode 24 is the next step. |
 | 2000s | Automotive standards, such as AUTOSAR, define layered architectures with a hardware abstraction layer, a services layer and an application layer. | Large robot and vehicle firmware uses the same layers, in a larger scale. |
 | Today | Layered firmware, state machines, watchdog timers and telemetry are standard in robot controllers, medical devices and vehicles. | A reviewer will ask how the firmware behaves on a fault before asking about the features. |
 
@@ -116,7 +116,7 @@ A power tool has a handle, a trigger and a battery connector, and each part has 
 
 From first principles, a module's header declares its types and its functions. The header is what the rest of the program includes. The source file defines the functions and keeps its variables `static`, so no other file can change them by accident. In C++, the same idea uses a namespace or a class, and the rule is identical: the interface is small, and the internals are hidden.
 
-The worked example is the RTC driver from Day 21. Its header declares one enum for the result of a read, one struct for the time and two functions. The header does not mention the register map or the 0x68 address. If the clock is replaced with a different chip, only the source file changes, and the application code stays the same. The status enum is the important part. It returns a value that the application can act on, instead of a number that the application has to decode.
+The worked example is the RTC driver from Episode 21. Its header declares one enum for the result of a read, one struct for the time and two functions. The header does not mention the register map or the 0x68 address. If the clock is replaced with a different chip, only the source file changes, and the application code stays the same. The status enum is the important part. It returns a value that the application can act on, instead of a number that the application has to decode.
 
 The common mistake is to expose internal variables through a header, such as a global `int lastTemperature` that every file can read and write. The result is that any file can change the state, and a bug in one file breaks another in a way that is hard to trace. The fix is to make the variable `static` in the source and offer a function to read it.
 
@@ -184,9 +184,9 @@ On the job, non-blocking architecture is a requirement for any robot loop that c
 
 A newspaper reporter writes the story, and a printer decides the page layout. The reporter does not need to know the printer's font. Telemetry works the same way. The application decides what happened, and the telemetry layer decides how to format it on the wire. If the format changes, the application does not change.
 
-From first principles, a telemetry module takes plain values, such as the state name, the reading and the fault code, and converts them into a frame. The frame has a start character, the body, a checksum and an end of line. The Day 20 frame format is the example. Keeping the format in one module means that the checksum rule is in one place, and that a second receiver, such as a logging script, reads the same format.
+From first principles, a telemetry module takes plain values, such as the state name, the reading and the fault code, and converts them into a frame. The frame has a start character, the body, a checksum and an end of line. The Episode 20 frame format is the example. Keeping the format in one module means that the checksum rule is in one place, and that a second receiver, such as a logging script, reads the same format.
 
-The worked example uses the Day 20 frame: `$LOG,<ms>,<state>,<adc>,<fault>*XX`. The application passes the four values, and the telemetry module builds the string, computes the XOR of the body and prints it. The telemetry module does not know what the states mean. It only knows how to format the values it is given. That separation is what makes the module reusable.
+The worked example uses the Episode 20 frame: `$LOG,<ms>,<state>,<adc>,<fault>*XX`. The application passes the four values, and the telemetry module builds the string, computes the XOR of the body and prints it. The telemetry module does not know what the states mean. It only knows how to format the values it is given. That separation is what makes the module reusable.
 
 The common mistake is to format the telemetry inside the application logic, so that each state prints its own message in its own style. The output then becomes inconsistent, and a parser breaks when someone adds a new state. A single telemetry function avoids this.
 
@@ -228,14 +228,14 @@ On the job, the watchdog and the fault policy are reviewed together. A safety re
 
 ## Project: a layered sensor logger with fault recovery
 
-The goal is a repository that contains a layered firmware for the Uno with four modules, a four-state machine, framed telemetry, a watchdog and a documented fault test. It brings together the work from Days 16 to 22 and shows how a firmware is organized so that a reviewer can read it.
+The goal is a repository that contains a layered firmware for the Uno with four modules, a four-state machine, framed telemetry, a watchdog and a documented fault test. It brings together the work from Episodes 16 to 22 and shows how a firmware is organized so that a reviewer can read it.
 
-**Repo name:** `100-days-robotics-day-23-embedded-software-architecture`
+**Repo name:** `100-episodes-robotics-day-23-embedded-software-architecture`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-23-embedded-software-architecture/
+100-episodes-robotics-day-23-embedded-software-architecture/
 ├── README.md
 ├── sensor_logger/
 │   ├── sensor_logger.ino
@@ -491,7 +491,7 @@ The `app::init()` function calls `hal::init()` as well, and the sketch calls bot
 
 1. Create the repository and folder tree. Initialize git and commit the README skeleton.
 2. Create the sketch folder with the nine files. Compile with `arduino-cli compile --fqbn arduino:avr:uno sensor_logger` and save the output to a text file in `docs/`.
-3. Wire the RTC, the pot and the LED as in Day 21 and Day 18. Upload and run for 60 seconds. Save the output to `logs/normal_run_60s.txt`.
+3. Wire the RTC, the pot and the LED as in Episode 21 and Episode 18. Upload and run for 60 seconds. Save the output to `logs/normal_run_60s.txt`.
 4. Measure the loop time. Add a `micros()` timer around `app::step()` in `loop()`, record the maximum over 60 seconds in `logs/loop_timing.csv`, and report it in the README.
 5. Run the fault test. Disconnect the DS3231 SDA wire for ten seconds, then reconnect it. Save the output to `logs/fault_test_10s_unplug.txt`. Note the time of each state change in the README.
 6. Write `docs/state_table.md` with the transition table from the lesson, and check each transition in your log.
@@ -574,4 +574,4 @@ The project looks small, but the layers, the state table and the fault test are 
 
 ## Tomorrow
 
-Day 24 moves the same ideas onto a real-time operating system. You will use an ESP32 with FreeRTOS, create tasks, pass data through queues, protect shared variables with mutexes and semaphores, and see how a race condition appears when two tasks share data without protection. The superloop from today is the design that an RTOS replaces, and the state machine and telemetry layers carry over directly into the tasks you will write.
+Episode 24 moves the same ideas onto a real-time operating system. You will use an ESP32 with FreeRTOS, create tasks, pass data through queues, protect shared variables with mutexes and semaphores, and see how a race condition appears when two tasks share data without protection. The superloop from today is the design that an RTOS replaces, and the state machine and telemetry layers carry over directly into the tasks you will write.

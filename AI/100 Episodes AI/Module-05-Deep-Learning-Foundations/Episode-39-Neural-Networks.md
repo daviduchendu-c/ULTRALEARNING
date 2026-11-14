@@ -1,9 +1,9 @@
-# Day 39: Neural Networks
+# Episode 39: Neural Networks
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You know Python functions, NumPy arrays and the dot product from Days 8 and 9. You do not need calculus yet, because today is about what a network computes, not how it learns.
+**Level:** beginner to intermediate. You know Python functions, NumPy arrays and the dot product from Episodes 8 and 9. You do not need calculus yet, because today is about what a network computes, not how it learns.
 
 **By the end of this day, you will have:**
 
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 8: vectors, the dot product and magnitude
-- Day 9: matrices, shapes and matrix multiplication
-- Day 10: the idea of a linear transformation
+- Episode 8: vectors, the dot product and magnitude
+- Episode 9: matrices, shapes and matrix multiplication
+- Episode 10: the idea of a linear transformation
 - Basic Python: functions, lists, and running scripts from a terminal
 
 ---
@@ -51,7 +51,7 @@
 
 ## Introduction
 
-Modules 1 to 4 gave you the tools: vectors, matrices, derivatives, probability and statistics. Module 5 uses them to build the model family behind most modern AI, the neural network. Today you learn only the first half of the story, which is what a network computes when you give it an input. Day 43 explains how it learns.
+Modules 1 to 4 gave you the tools: vectors, matrices, derivatives, probability and statistics. Module 5 uses them to build the model family behind most modern AI, the neural network. Today you learn only the first half of the story, which is what a network computes when you give it an input. Episode 43 explains how it learns.
 
 The idea is simple enough to write on one line: a neural network is a stack of weighted sums, each followed by a bend in the function. Stack enough of those and you can approximate surprisingly complicated mappings from images to labels, from sentences to translations, or from sensor readings to motor commands. The complexity comes from repetition and from the shape of the stack, not from any single piece.
 
@@ -65,7 +65,7 @@ On the job, the forward pass is the part that runs in production. Every time a r
 |---|---|---|
 | 1943 | Warren McCulloch and Walter Pitts publish a simple model of a neuron as a threshold logic unit. | The first mathematical neuron, with binary inputs and a firing rule. |
 | 1958 | Frank Rosenblatt introduces the perceptron, a neuron whose weights can be learned from examples. | The first learning machine built on the same ideas you study today. |
-| 1986 | David Rumelhart, Geoffrey Hinton and Ronald Williams popularize backpropagation for training multi-layer networks. | The training method you will implement on Day 43. |
+| 1986 | David Rumelhart, Geoffrey Hinton and Ronald Williams popularize backpropagation for training multi-layer networks. | The training method you will implement on Episode 43. |
 | 2012 | AlexNet, a deep convolutional network trained on GPUs, wins the ImageNet image classification challenge by a wide margin. | Deep networks became the default approach for perception. |
 | 2017 | The transformer architecture is introduced in the paper "Attention Is All You Need". | Most large language models are stacks of layers like the ones you learn today. |
 
@@ -109,7 +109,7 @@ A common mistake is to treat the brain comparison as evidence that a bigger netw
 
 Consider a judge scoring a diving competition. Each judge looks at several aspects of the dive, such as height, entry and form. The judge gives more weight to some aspects than others, adds a personal offset, and produces one score. A neuron works the same way: it looks at its inputs, gives each one an importance, adds an offset, and reports a single number.
 
-Written as an equation, a neuron with inputs x1 to xn computes z = w1 x1 + w2 x2 + ... + wn xn + b. The weights w and the bias b are the parameters. The output is then a = f(z), where f is the activation function. In vector form the sum is the dot product z = w . x + b, which you already know from Day 8.
+Written as an equation, a neuron with inputs x1 to xn computes z = w1 x1 + w2 x2 + ... + wn xn + b. The weights w and the bias b are the parameters. The output is then a = f(z), where f is the activation function. In vector form the sum is the dot product z = w . x + b, which you already know from Episode 8.
 
 ```python
 import numpy as np
@@ -122,7 +122,7 @@ z = np.dot(w, x) + b             # 0.2 - 0.3 - 0.4 + 0.1 = -0.4
 print(z)                         # -0.4
 ```
 
-The neuron has four parameters and one output. If you change any weight, the output changes, and that is the handle that learning will use on Day 43. Without an activation function, a neuron would be a linear model, which is why the next sections matter.
+The neuron has four parameters and one output. If you change any weight, the output changes, and that is the handle that learning will use on Episode 43. Without an activation function, a neuron would be a linear model, which is why the next sections matter.
 
 Confusing the bias with an input is a common error. The bias is a parameter, learned like a weight, and it is not multiplied by a feature. Forgetting it is one of the most common causes of a model that cannot fit a simple dataset, because the decision boundary is then forced through the origin.
 
@@ -140,7 +140,7 @@ The bias moves the threshold. Imagine a neuron with weights (1, 1) and no bias, 
 
 Here is a small experiment you can run. Set the weights to (1, 1) and compare the biases 0 and -3 on the inputs (1, 1), (2, 2) and (3, 3). The weighted sums are 2, 4 and 6. With bias 0 the pre-activations are 2, 4 and 6, and with bias -3 they are -1, 1 and 3. The bias did not change the inputs, only the threshold at which the neuron turns positive.
 
-A common mistake is to scale inputs badly. If one feature is in the range 0 to 1 and another in the range 0 to 1,000,000, the large feature dominates the weighted sum, and learning becomes slow and unstable. The fix is normalization, which you will study in Module 6 for images and again in Day 45. Real data pipelines in companies normalize features with statistics computed on the training set only, so the test set does not leak information.
+A common mistake is to scale inputs badly. If one feature is in the range 0 to 1 and another in the range 0 to 1,000,000, the large feature dominates the weighted sum, and learning becomes slow and unstable. The fix is normalization, which you will study in Module 6 for images and again in Episode 45. Real data pipelines in companies normalize features with statistics computed on the training set only, so the test set does not leak information.
 
 ---
 
@@ -169,7 +169,7 @@ Confusing the number of layers with the number of neurons is a common error. Ten
 
 Suppose every layer computed only a weighted sum with no activation function. Two linear layers, Z1 = X W1 + b1 followed by Z2 = Z1 W2 + b2, would combine into one linear map, because (X W1) W2 is X times the matrix W1 W2. Stacking ten such layers would still give you one matrix multiplication. The depth would be wasted.
 
-An activation function breaks this collapse. It is a nonlinear function applied to each neuron's output, so the next layer does not see a simple linear combination of the previous one. That nonlinearity lets the network bend its decision boundary, carve out curved regions and approximate functions that a straight line cannot. Day 41 compares the common choices, including sigmoid, tanh, ReLU and GELU. For today, the example below is enough.
+An activation function breaks this collapse. It is a nonlinear function applied to each neuron's output, so the next layer does not see a simple linear combination of the previous one. That nonlinearity lets the network bend its decision boundary, carve out curved regions and approximate functions that a straight line cannot. Episode 41 compares the common choices, including sigmoid, tanh, ReLU and GELU. For today, the example below is enough.
 
 ```python
 import numpy as np
@@ -181,9 +181,9 @@ z = np.array([-2.0, -0.5, 0.0, 1.5])
 print(relu(z))          # [0.  0.  0.  1.5]
 ```
 
-The limit of this idea is that a nonlinearity alone does not guarantee that a network will learn. A poorly chosen activation can make gradients vanish or explode, and you will see that on Day 44. Also, the claim that networks with one hidden layer can approximate any continuous function, the universal approximation theorem, says the network could represent the function, not that training will find it.
+The limit of this idea is that a nonlinearity alone does not guarantee that a network will learn. A poorly chosen activation can make gradients vanish or explode, and you will see that on Episode 44. Also, the claim that networks with one hidden layer can approximate any continuous function, the universal approximation theorem, says the network could represent the function, not that training will find it.
 
-A common mistake is to add an activation after the last layer by reflex. For regression to a real number, the output usually has no activation, because the target can be negative. For binary classification, a sigmoid turns the output into a probability. For multi-class classification, a softmax does. The right output activation depends on the loss function you choose on Day 42.
+A common mistake is to add an activation after the last layer by reflex. For regression to a real number, the output usually has no activation, because the target can be negative. For binary classification, a sigmoid turns the output into a probability. For multi-class classification, a softmax does. The right output activation depends on the loss function you choose on Episode 42.
 
 ---
 
@@ -191,9 +191,9 @@ A common mistake is to add an activation after the last layer by reflex. For reg
 
 The forward pass is the full computation from input to output. You feed in a batch, each layer computes its weighted sum and applies its activation, and the last layer produces a prediction. Nothing is learned during a forward pass. The weights are fixed, and the pass is arithmetic.
 
-Think of it as an assembly line. Each station reads the output of the station before, applies its own transformation and passes the result on. The line does not change its machines while it runs. Training changes the machines, and you will learn that on Day 43.
+Think of it as an assembly line. Each station reads the output of the station before, applies its own transformation and passes the result on. The line does not change its machines while it runs. Training changes the machines, and you will learn that on Episode 43.
 
-From first principles, a network with L layers has parameters (W1, b1), (W2, b2) and so on. Set a1 = x. For each layer l from 1 to L, compute z_l = a_{l-1} W_l + b_l and a_l = f_l(z_l). The prediction is a_L. You store the intermediate z and a values, because the backward pass on Day 43 needs them.
+From first principles, a network with L layers has parameters (W1, b1), (W2, b2) and so on. Set a1 = x. For each layer l from 1 to L, compute z_l = a_{l-1} W_l + b_l and a_l = f_l(z_l). The prediction is a_L. You store the intermediate z and a values, because the backward pass on Episode 43 needs them.
 
 ```python
 import numpy as np
@@ -237,12 +237,12 @@ The forward pass also shows up in deployment. When you export a model to ONNX or
 
 **Goal:** build a small library that computes neurons, dense layers and a two-layer network with NumPy only. Test each part against hand calculations and against a second implementation. Commit the code, the tests and a short README that explains the shapes.
 
-**Repo name:** `100-days-ai-day-39-neural-networks`
+**Repo name:** `100-episodes-ai-day-39-neural-networks`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-39-neural-networks/
+100-episodes-ai-day-39-neural-networks/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -412,7 +412,7 @@ Create `src/neural_net/network.py` yourself. It should define a class `TwoLayerN
 3. The view is mathematically convenient, because you can append a column of ones to the input and fold the bias into the weights. In code, however, the bias is a separate parameter with its own shape, and it is often stored separately so that regularization can skip it.
 4. The output has shape (16, 100). The number 784 is 28 times 28, which is the number of input features after flattening each image into a vector. The weight matrix therefore has shape (784, 100), plus a bias of shape (100,).
 5. Features on very different scales make the weighted sum dominated by the large features, so gradients for the small ones are tiny and the optimizer struggles. Scaling puts the features on comparable footing, which makes the loss surface easier to traverse.
-6. It is probably not the forward pass. High training accuracy with low test accuracy points to overfitting, which Day 45 covers. First check whether the train and test splits are clean, and whether the model is much larger than the data supports.
+6. It is probably not the forward pass. High training accuracy with low test accuracy points to overfitting, which Episode 45 covers. First check whether the train and test splits are clean, and whether the model is much larger than the data supports.
 
 ---
 
@@ -422,7 +422,7 @@ Create `src/neural_net/network.py` yourself. It should define a class `TwoLayerN
 
 - Wikipedia, "Artificial neural network", for the overview and the history of the field
 - Wikipedia, "Artificial neuron", for the mathematical definition used in this lesson
-- Wikipedia, "Activation function", for a survey of the nonlinearities you will meet on Day 41
+- Wikipedia, "Activation function", for a survey of the nonlinearities you will meet on Episode 41
 - Wikipedia, "Biological neuron model", for the biology that inspired the design
 - Stanford CS231n course notes, "Neural Networks Part 1: Setting up the Architecture", at cs231n.github.io/neural-networks-1
 
@@ -445,4 +445,4 @@ Create `src/neural_net/network.py` yourself. It should define a class `TwoLayerN
 
 ## Tomorrow
 
-Day 40 takes the single neuron you built today and asks what it cannot do. A perceptron is one neuron with a step activation, and it can only separate classes that a straight line divides. You will see why the XOR problem stopped early research in its tracks, and how a multi-layer perceptron solves it by stacking hidden layers. The forward pass you wrote today is the same computation you will use there, so the code you commit now becomes the base for tomorrow's experiments.
+Episode 40 takes the single neuron you built today and asks what it cannot do. A perceptron is one neuron with a step activation, and it can only separate classes that a straight line divides. You will see why the XOR problem stopped early research in its tracks, and how a multi-layer perceptron solves it by stacking hidden layers. The forward pass you wrote today is the same computation you will use there, so the code you commit now becomes the base for tomorrow's experiments.

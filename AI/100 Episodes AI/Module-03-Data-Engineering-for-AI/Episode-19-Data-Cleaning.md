@@ -1,9 +1,9 @@
-# Day 19: Data Cleaning
+# Episode 19: Data Cleaning
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need pandas from Day 18 and a basic idea of train and test sets from Day 14. The project is the longest so far, so plan for the full four hours.
+**Level:** intermediate. You need pandas from Episode 18 and a basic idea of train and test sets from Episode 14. The project is the longest so far, so plan for the full four hours.
 
 **By the end of this day, you will have:**
 
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 18: DataFrames, filtering, merging and `fillna`
-- Day 14: the mean, the median, quartiles and the idea of a train and test split
-- Day 13: the idea of a probability and a conditional probability
+- Episode 18: DataFrames, filtering, merging and `fillna`
+- Episode 14: the mean, the median, quartiles and the idea of a train and test split
+- Episode 13: the idea of a probability and a conditional probability
 
 ---
 
@@ -316,12 +316,12 @@ Work through these in a notebook first, then move them into the project.
 
 Build a cleaning module that takes a messy customer file, applies a documented set of rules, and writes two outputs: a cleaned dataset and a data quality report that records every decision with its count. The project uses a seeded generator, so the messy file is reproducible.
 
-Suggested repository name: `100-days-ai-day-19-data-cleaning`
+Suggested repository name: `100-episodes-ai-day-19-data-cleaning`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-19-data-cleaning/
+100-episodes-ai-day-19-data-cleaning/
 ├── README.md
 ├── cleaning/
 │   ├── __init__.py
@@ -588,4 +588,4 @@ Work each answer out in writing before you read the answers below.
 
 ## Tomorrow
 
-Tomorrow is exploratory data analysis. Today you decided which rows were trustworthy and recorded every decision. Day 20 asks what the cleaned data actually says: how each variable is distributed, which features move together, how imbalanced the labels are, and what patterns deserve a hypothesis before any model is trained. The quality report you built today is the starting point for that investigation.
+Tomorrow is exploratory data analysis. Today you decided which rows were trustworthy and recorded every decision. Episode 20 asks what the cleaned data actually says: how each variable is distributed, which features move together, how imbalanced the labels are, and what patterns deserve a hypothesis before any model is trained. The quality report you built today is the starting point for that investigation.

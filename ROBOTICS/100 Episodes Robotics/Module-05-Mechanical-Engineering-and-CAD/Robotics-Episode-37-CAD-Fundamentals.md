@@ -1,9 +1,9 @@
-# Day 37: CAD Fundamentals
+# Episode 37: CAD Fundamentals
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** beginner. You need the mechanics from Day 34 and the drivetrain sizes from Day 36, because the first model you build is a part that must fit those numbers. You do not need prior CAD experience. You do need to be comfortable with a mouse, keyboard shortcuts and a file browser.
+**Level:** beginner. You need the mechanics from Episode 34 and the drivetrain sizes from Episode 36, because the first model you build is a part that must fit those numbers. You do not need prior CAD experience. You do need to be comfortable with a mouse, keyboard shortcuts and a file browser.
 
 **By the end of this day, you will have:**
 
@@ -19,13 +19,13 @@
 - Optional alternative: Autodesk Fusion. Its Personal licence is free for non-commercial use, and Autodesk offers free educational licences. Check the current terms before you choose it, because they change.
 - Trimesh 4 or newer, installed with `pip install trimesh` (for the bounding box check)
 - Python 3.12 with pytest 8 or newer
-- A digital caliper, reading to 0.01 mm, from Day 34
+- A digital caliper, reading to 0.01 mm, from Episode 34
 - Optional: a 3D printer, or access to a makerspace, for printing the bracket in PLA or PETG
 
 **Prerequisites:**
 
-- Day 34: stress, the second moment of area, and the factor of safety, for choosing a bracket thickness
-- Day 36: the wheel and motor sizes of the drivetrain you chose
+- Episode 34: stress, the second moment of area, and the factor of safety, for choosing a bracket thickness
+- Episode 36: the wheel and motor sizes of the drivetrain you chose
 - Basic understanding of the three orthographic views of a part
 - A working text editor, and Git installed with a GitHub account
 
@@ -54,7 +54,7 @@
 
 Computer-aided design, or CAD, is the tool that turns a sketch of a robot part into a shape that a machine can cut, print or cast. A beginner usually opens a CAD tool, draws a box and pulls it into a solid, and that works until the first change. The first time the motor is moved 5 mm, or the bracket must be thicker, the box has to be redrawn by hand. A competent CAD user builds the model so that one change propagates correctly through the whole part.
 
-Today you learn the core of that method. You will draw a sketch that is fully constrained, meaning every line and point is pinned by a rule rather than by where your mouse happened to land. You will drive every dimension from a spreadsheet, build a three-dimensional part from the sketch, and export it. The motor bracket you make here is the first real part of the robot, and the same method carries through the assemblies on Day 39 and the chassis on Day 42.
+Today you learn the core of that method. You will draw a sketch that is fully constrained, meaning every line and point is pinned by a rule rather than by where your mouse happened to land. You will drive every dimension from a spreadsheet, build a three-dimensional part from the sketch, and export it. The motor bracket you make here is the first real part of the robot, and the same method carries through the assemblies on Episode 39 and the chassis on Episode 42.
 
 ---
 
@@ -137,7 +137,7 @@ A dimension fixes the size of a sketch element with a number. A parameter is a n
 
 Use parameters for the values that you might change: the bracket thickness, the motor hole spacing, the plate width and the hole diameter. Do not parameterize every line, because that makes the model hard to read. The rule is that a parameter should correspond to a decision you might revisit, not to a number that happens to be on the drawing.
 
-Here is a worked example. The motor is a 28 mm square motor with four M3 mounting holes on a 22 mm square pattern. Put the hole spacing in a spreadsheet cell named `hole_spacing` with the value 22 mm. The hole circle centres are at ±hole_spacing/2 from the centre. The bracket thickness, `t`, is 3 mm from the Day 34 calculation. The plate width is `w` = 40 mm. When you change the motor to a different model with a 25 mm hole pattern, you change one cell, and the holes move with it.
+Here is a worked example. The motor is a 28 mm square motor with four M3 mounting holes on a 22 mm square pattern. Put the hole spacing in a spreadsheet cell named `hole_spacing` with the value 22 mm. The hole circle centres are at ±hole_spacing/2 from the centre. The bracket thickness, `t`, is 3 mm from the Episode 34 calculation. The plate width is `w` = 40 mm. When you change the motor to a different model with a 25 mm hole pattern, you change one cell, and the holes move with it.
 
 The common mistake is to type the same number in twenty dimensions. When the value changes, only some of them are updated, and the part becomes inconsistent. A second mistake is to use a parameter with no unit, which makes the expression ambiguous. Always write the unit in the spreadsheet, such as "22 mm".
 
@@ -175,11 +175,11 @@ Parametric features make CAD useful for design changes, which are the usual chan
 
 ### Design intent
 
-Design intent is the reason behind a choice in the model. A hole is 3.4 mm because an M3 bolt must pass through it with a clearance. A plate is 3 mm thick because the Day 34 calculation gives a factor of safety of about 8 for the expected load. A design intent is a sentence that explains a number.
+Design intent is the reason behind a choice in the model. A hole is 3.4 mm because an M3 bolt must pass through it with a clearance. A plate is 3 mm thick because the Episode 34 calculation gives a factor of safety of about 8 for the expected load. A design intent is a sentence that explains a number.
 
 Write the intent in the README, and where possible in the feature names. A feature called "M3 clearance holes, 3.4 mm, for M3 bolt" tells the next reader more than "Pocket 001". The intent also tells you which parameters can change and which must not.
 
-Here is a worked example. Suppose the bracket is to be made from 3D printed PETG instead of aluminium. The intent of the thickness was a strength and stiffness margin for aluminium. PETG has a much lower elastic modulus than aluminium, roughly a few gigapascals against about 69 GPa, so the thickness must be rechecked with the Day 34 formulas, and the holes must be checked for the printed tolerance. The intent tells you which numbers to re-examine, and which, such as the M3 clearance, remain the same.
+Here is a worked example. Suppose the bracket is to be made from 3D printed PETG instead of aluminium. The intent of the thickness was a strength and stiffness margin for aluminium. PETG has a much lower elastic modulus than aluminium, roughly a few gigapascals against about 69 GPa, so the thickness must be rechecked with the Episode 34 formulas, and the holes must be checked for the printed tolerance. The intent tells you which numbers to re-examine, and which, such as the M3 clearance, remain the same.
 
 The common mistake is to change a dimension without checking whether its intent still holds. A student who lengthens the bracket arm to reach a further sensor may find that the bending stress has doubled, because for a fixed load the bending moment grows in proportion to the length. The intent sentence would have prompted the check.
 
@@ -203,16 +203,16 @@ Design intent is what a reviewer reads first, and it is what a manufacturer asks
 
 ## Project: a parametric motor bracket
 
-This project builds a motor bracket from a fully constrained sketch with a spreadsheet of parameters. You then export the part as STEP and STL, check its bounding box with a Python script, and write the design intent. It is a full mini-project, because the bracket is a real part that you will print or machine, and it is the first part you will check against the mechanics from Day 34.
+This project builds a motor bracket from a fully constrained sketch with a spreadsheet of parameters. You then export the part as STEP and STL, check its bounding box with a Python script, and write the design intent. It is a full mini-project, because the bracket is a real part that you will print or machine, and it is the first part you will check against the mechanics from Episode 34.
 
 **Goal:** a parametric bracket that holds a 28 mm square DC motor with four M3 holes on a 22 mm pattern, with a 6 mm shaft hole and a 3 mm plate. The bracket must rebuild correctly for a 25 mm pattern, and its bounding box must match its parameters.
 
-**Repository name:** `100-days-robotics-day-37-cad-fundamentals`
+**Repository name:** `100-episodes-robotics-day-37-cad-fundamentals`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-37-cad-fundamentals/
+100-episodes-robotics-day-37-cad-fundamentals/
 ├── README.md
 ├── requirements.txt
 ├── cad/
@@ -231,7 +231,7 @@ This project builds a motor bracket from a fully constrained sketch with a sprea
 name,value,unit,intent
 plate_w,40,mm,width of the bracket plate
 plate_h,30,mm,height of the bracket plate
-t,3,mm,plate thickness from Day 34 strength check
+t,3,mm,plate thickness from Episode 34 strength check
 hole_spacing,22,mm,M3 hole pattern of the motor
 hole_d,3.4,mm,M3 clearance holes
 shaft_d,6,mm,motor shaft hole
@@ -369,4 +369,4 @@ The script assumes the plate lies flat, with the 40 mm side on X, the 30 mm side
 
 ## Tomorrow
 
-Tomorrow, on Day 38, you move from sketches to three-dimensional features. You learn extrusions, revolutions, patterns, holes, fillets and chamfers, and you build a robot part with them. The bracket you made today is a pad and a pocket, and Day 38 adds the features that make a part strong and easy to manufacture, such as fillets at the root of a bend and a chamfer on a hole.
+Tomorrow, on Episode 38, you move from sketches to three-dimensional features. You learn extrusions, revolutions, patterns, holes, fillets and chamfers, and you build a robot part with them. The bracket you made today is a pad and a pocket, and Episode 38 adds the features that make a part strong and easy to manufacture, such as fillets at the root of a bend and a chamfer on a hole.

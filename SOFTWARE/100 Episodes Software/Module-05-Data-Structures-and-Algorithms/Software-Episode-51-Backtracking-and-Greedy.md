@@ -1,9 +1,9 @@
-# Day 51: Backtracking and Greedy
+# Episode 51: Backtracking and Greedy
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 50, be comfortable with recursion, and be willing to test an idea against a brute-force check before you trust it. This day is for anyone who has been asked to "find the best schedule" or "make change" and has written a loop that looked right but was wrong.
+**Level:** intermediate. You should have finished Episode 50, be comfortable with recursion, and be willing to test an idea against a brute-force check before you trust it. This day is for anyone who has been asked to "find the best schedule" or "make change" and has written a loop that looked right but was wrong.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 50
+- Git 2.23 or newer, and the repository from Episode 50
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 46: Trees and BSTs (the idea of a tree of choices, where each node is a decision)
-- Day 49: Sorting (sorting by a key, which the greedy algorithms rely on)
-- Day 50: Searching and Recursion (base cases, the call stack and recursion depth)
+- Episode 46: Trees and BSTs (the idea of a tree of choices, where each node is a decision)
+- Episode 49: Sorting (sorting by a key, which the greedy algorithms rely on)
+- Episode 50: Searching and Recursion (base cases, the call stack and recursion depth)
 
 ---
 
@@ -212,7 +212,7 @@ print(coin_change_greedy([1, 3, 4], 6))          # [4, 1, 1], three coins
 print(fewest_coins_bruteforce([1, 3, 4], 6))     # 2, from 3 and 3
 ```
 
-The limitation of brute force is cost. The search above tries every ordered sequence of coins, which grows fast with the amount. It is a reference for small inputs and is not meant for production. The right production tool for the general problem is dynamic programming, which Day 52 covers.
+The limitation of brute force is cost. The search above tries every ordered sequence of coins, which grows fast with the amount. It is a reference for small inputs and is not meant for production. The right production tool for the general problem is dynamic programming, which Episode 52 covers.
 
 The common mistake is to think a counterexample means the whole approach is useless. It means the greedy rule is not valid for that coin set. Greedy still works for canonical coin systems and for many scheduling problems, but the proof must match the problem.
 
@@ -222,7 +222,7 @@ Counterexamples are how engineers check cost rules in pricing engines, how secur
 
 ## Hands-on exercises
 
-Work in the repository from Day 50. Keep the search code in `dsa/backtracking.py`, the greedy code in `dsa/greedy.py`, and the meeting demo at the root.
+Work in the repository from Episode 50. Keep the search code in `dsa/backtracking.py`, the greedy code in `dsa/greedy.py`, and the meeting demo at the root.
 
 Exercise 1 traces permutations. On paper, write the state of `current` and `used` for the first six steps of `permutations([1, 2, 3])`. Mark each undo. Then compare your sequence of completed lists with the output.
 
@@ -250,12 +250,12 @@ Done when both claims are tested, and your notes state the counterexample in one
 
 The project is a meeting picker. Given a list of meetings, each with a start and an end hour, it chooses the largest set that does not overlap, so one person can attend as many as possible. It prints the chosen meetings in order. The tests compare the answer with a brute force over all subsets, so the greedy rule is checked against the true answer.
 
-Suggested repo name: `100-days-software-day-51-backtracking-and-greedy`. Copy the Day 50 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-51-backtracking-and-greedy`. Copy the Episode 50 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-51-backtracking-and-greedy/
+100-episodes-software-day-51-backtracking-and-greedy/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -555,7 +555,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 50 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 50 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python meetings_demo.py` and confirm the four meetings are the ones listed above. Work out by hand which meeting the greedy rule takes first, and why (12, 13) is taken after (10, 12).
 3. Add a `count_schedules(meetings)` function to `dsa/greedy.py` that returns how many subsets of meetings are valid, using brute force over `subsets`. Test it on the example schedule, where the answer is the number of valid groups, and state in a test why it is slower than the greedy rule.
 4. Write `docs/greedy-notes.md` with the prune counts from exercise 2, one paragraph on the greedy-choice property for interval scheduling, and one paragraph naming the coin counterexample and what it shows.
@@ -626,4 +626,4 @@ This project is light on new code and heavy on checking. The habit to take away 
 
 ## Tomorrow
 
-Day 52 covers dynamic programming. The coin counterexample from today shows that greedy fails for some coin sets, and the brute force search wastes work by solving the same subproblem many times. Dynamic programming solves each subproblem once, stores the answer, and reuses it. You will write memoized and tabulated versions of Fibonacci, the fewest-coins problem and the longest common subsequence, and compare each with today's brute force.
+Episode 52 covers dynamic programming. The coin counterexample from today shows that greedy fails for some coin sets, and the brute force search wastes work by solving the same subproblem many times. Dynamic programming solves each subproblem once, stores the answer, and reuses it. You will write memoized and tabulated versions of Fibonacci, the fewest-coins problem and the longest common subsequence, and compare each with today's brute force.

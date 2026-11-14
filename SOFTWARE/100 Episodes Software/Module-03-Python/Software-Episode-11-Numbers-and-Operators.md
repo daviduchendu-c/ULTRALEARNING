@@ -1,9 +1,9 @@
-# Day 11: Numbers and Operators
+# Episode 11: Numbers and Operators
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner. You are comfortable with variables and functions from Day 9 and Day 10. This is for anyone who has written a price calculator and watched a total come out as `10.499999999`, or who has wondered why `-7 // 2` is not `-3`.
+**Level:** beginner. You are comfortable with variables and functions from Episode 9 and Episode 10. This is for anyone who has written a price calculator and watched a total come out as `10.499999999`, or who has wondered why `-7 // 2` is not `-3`.
 
 **By the end of this day, you will have:**
 
@@ -16,15 +16,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - An editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed in the project with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (running scripts, expressions and statements)
-- Day 10: Objects, Variables and Types (identity, types, truthiness)
+- Episode 9: Python Runtime and Syntax (running scripts, expressions and statements)
+- Episode 10: Objects, Variables and Types (identity, types, truthiness)
 
 ---
 
@@ -150,7 +150,7 @@ print(3 > 2 and "yes")        # yes, not True
 print(0 or "fallback")        # fallback
 ```
 
-The `and` and `or` operators return the operand that decided the result, which is the basis of short-circuit evaluation. Day 15 covers that in control flow.
+The `and` and `or` operators return the operand that decided the result, which is the basis of short-circuit evaluation. Episode 15 covers that in control flow.
 
 The common mistake is letting a boolean slip into a numeric total. `sum([True, False, True])` returns `2`, which is correct for counting, but a value that was meant to be a rating or a price becomes a switch value silently. Type checkers flag this when annotations are present, and `mypy` treats `bool` as a subtype of `int`, so the check is about intent, not a hard rule. Reviewers in the job market look for explicit conversions at the boundary of a system.
 
@@ -258,12 +258,12 @@ Done when the final run is clean and you can explain what mypy caught.
 
 The project is a small money-and-math library with tests. It parses amounts with `Decimal`, splits a total into cents without losing a penny, and demonstrates the float problems side by side with the correct tools. The code is short because the discipline is what matters. The evidence is a passing test suite and a findings document in which you record each rounding decision.
 
-Suggested repo name: `100-days-software-day-11-numbers-and-operators`.
+Suggested repo name: `100-episodes-software-day-11-numbers-and-operators`.
 
 Repo layout:
 
 ```
-100-days-software-day-11-numbers-and-operators/
+100-episodes-software-day-11-numbers-and-operators/
 ├── .gitignore
 ├── README.md
 ├── money.py
@@ -468,6 +468,6 @@ The project is light on new features and heavy on decisions about types. A revie
 
 ## Tomorrow
 
-Day 12 moves from numbers to text. Strings are immutable sequences of characters, and they look simple until you meet Unicode, encodings and bytes. You will index and slice strings, format them with f-strings, and learn why the length of a string and the number of bytes it occupies can differ. The immutability rule from Day 10 applies throughout.
+Episode 12 moves from numbers to text. Strings are immutable sequences of characters, and they look simple until you meet Unicode, encodings and bytes. You will index and slice strings, format them with f-strings, and learn why the length of a string and the number of bytes it occupies can differ. The immutability rule from Episode 10 applies throughout.
 
-**Next:** [Day 12: Strings and Unicode](Software-Day-12-Strings-and-Unicode.md)
+**Next:** [Episode 12: Strings and Unicode](Software-Episode-12-Strings-and-Unicode.md)

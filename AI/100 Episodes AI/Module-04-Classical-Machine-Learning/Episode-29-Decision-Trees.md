@@ -1,9 +1,9 @@
-# Day 29: Decision Trees
+# Episode 29: Decision Trees
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You should be comfortable with the train and test workflow from Day 24 and with probabilities from Day 28. The entropy calculations use logarithms, so keep Day 26 nearby.
+**Level:** intermediate. You should be comfortable with the train and test workflow from Episode 24 and with probabilities from Episode 28. The entropy calculations use logarithms, so keep Episode 26 nearby.
 
 **By the end of this day, you will have:**
 
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 24: splits, overfitting and cross-validation
-- Day 26: probabilities and log loss, since entropy uses the same logarithms
-- Day 28: conditional probability, since impurity is computed from class proportions
+- Episode 24: splits, overfitting and cross-validation
+- Episode 26: probabilities and log loss, since entropy uses the same logarithms
+- Episode 28: conditional probability, since impurity is computed from class proportions
 - Recursion at the level of a function that calls itself on smaller inputs
 
 ---
@@ -57,7 +57,7 @@
 
 A decision tree is the closest thing machine learning has to a flowchart written from data. It asks a series of questions about the features, such as "is the income above 40,000", and each answer sends the row down a branch until it reaches a leaf that holds a prediction. People can read the result, check it against their own judgment and explain it to a regulator.
 
-The tree also matters because it is the building block of the strongest methods for tabular data. Random forests and gradient boosted trees, covered on Day 30, combine many trees, and in many industry benchmarks on structured data they beat neural networks. A single tree is usually not the final model, but understanding how one is built, and how it fails, is necessary before you can tune an ensemble.
+The tree also matters because it is the building block of the strongest methods for tabular data. Random forests and gradient boosted trees, covered on Episode 30, combine many trees, and in many industry benchmarks on structured data they beat neural networks. A single tree is usually not the final model, but understanding how one is built, and how it fails, is necessary before you can tune an ensemble.
 
 On the job, trees appear in credit approval rules, triage logic, medical screening aids and any setting where the team must show why a decision was made. The skill today is knowing how deep to let the tree grow, and recognizing the moment when a deeper tree is memorizing noise.
 
@@ -169,7 +169,7 @@ The mistake is comparing Gini values across different numbers of classes, becaus
 
 Entropy measures surprise. A coin that always lands heads is never surprising, so its entropy is zero. A fair coin is the most surprising, with one bit of entropy. For a node, entropy measures how many yes-or-no questions you would need on average to identify a row's class.
 
-From first principles, `H = - sum_k p_k log2 p_k`, with the convention that `0 log 0 = 0`. For a pure node `H = 0`. For a two-class node with equal proportions, `H = 1` bit. Entropy is the criterion that ID3 and C4.5 used, and it connects directly to the information-theoretic cross-entropy from Day 26. The logarithm makes it slightly more expensive to compute, but on modern hardware the cost is negligible.
+From first principles, `H = - sum_k p_k log2 p_k`, with the convention that `0 log 0 = 0`. For a pure node `H = 0`. For a two-class node with equal proportions, `H = 1` bit. Entropy is the criterion that ID3 and C4.5 used, and it connects directly to the information-theoretic cross-entropy from Episode 26. The logarithm makes it slightly more expensive to compute, but on modern hardware the cost is negligible.
 
 ```python
 import numpy as np
@@ -214,7 +214,7 @@ The mistake is ignoring the weights. A split that produces one pure child and on
 
 A tree that keeps splitting until every leaf is pure has memorized the training data. It is a perfect answer key for last year's exam and an unhelpful guide for this year's. The deeper the tree, the closer it gets to the answer key, and the further it moves from the general pattern.
 
-From first principles, a tree with enough leaves can isolate every training row, which gives zero training error. Its validation error falls at first, as the tree captures real structure, and then rises as it begins to fit noise. The gap between training and validation error is the measure of overfitting, the same idea from Day 24. Two strategies reduce it: stop growing the tree early with rules such as maximum depth and minimum leaf size, or grow a full tree and prune it back using a penalty on the number of leaves.
+From first principles, a tree with enough leaves can isolate every training row, which gives zero training error. Its validation error falls at first, as the tree captures real structure, and then rises as it begins to fit noise. The gap between training and validation error is the measure of overfitting, the same idea from Episode 24. Two strategies reduce it: stop growing the tree early with rules such as maximum depth and minimum leaf size, or grow a full tree and prune it back using a penalty on the number of leaves.
 
 ```python
 import numpy as np
@@ -249,7 +249,7 @@ for depth in range(1, 11):
     print(depth, round(scores.mean(), 3))
 ```
 
-The mistake is tuning depth alone and ignoring leaf size, or tuning on the test set. The limitation of a single tree is high variance: small changes in the training data can change the top split and everything below it. Ensembles, which you will meet on Day 30, reduce that variance. In industry, a single tree is often used when the rules must be shown to a regulator, and an ensemble is used when accuracy matters more than a single readable policy.
+The mistake is tuning depth alone and ignoring leaf size, or tuning on the test set. The limitation of a single tree is high variance: small changes in the training data can change the top split and everything below it. Ensembles, which you will meet on Episode 30, reduce that variance. In industry, a single tree is often used when the rules must be shown to a regulator, and an ensemble is used when accuracy matters more than a single readable policy.
 
 ---
 
@@ -269,14 +269,14 @@ The mistake is tuning depth alone and ignoring leaf size, or tuning on the test 
 
 This is a medium-weight project. The tree builder is short but needs care, and the depth study is the part that teaches the trade-off.
 
-**Repo name:** `100-days-ai-engineering-day-29-decision-trees`
+**Repo name:** `100-episodes-ai-engineering-day-29-decision-trees`
 
 **Goal:** implement a binary decision tree classifier with Gini impurity, check it against scikit-learn on a small dataset, and measure how depth changes the bias and variance on a real dataset.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-29-decision-trees/
+100-episodes-ai-engineering-day-29-decision-trees/
 ├── README.md
 ├── requirements.txt
 ├── tree.py
@@ -445,4 +445,4 @@ def test_deep_tree_memorizes_clean_data():
 
 Tomorrow you combine trees. A random forest trains many trees on resampled data and averages them, which reduces the variance you saw today. Gradient boosting trains trees one after another, each correcting the errors of the last. You will meet bagging, boosting, voting and the idea of stacking, and you will see why the ensembles often beat a single tree by a wide margin on structured data.
 
-**Next:** [Day 30: Ensemble Learning](Day-30-Ensemble-Learning.md)
+**Next:** [Episode 30: Ensemble Learning](Episode-30-Ensemble-Learning.md)

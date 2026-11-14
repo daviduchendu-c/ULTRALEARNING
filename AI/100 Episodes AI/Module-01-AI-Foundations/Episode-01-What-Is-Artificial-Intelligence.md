@@ -1,6 +1,6 @@
-# Day 1: What Is Artificial Intelligence?
+# Episode 1: What Is Artificial Intelligence?
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 3 hours
 **Level:** beginner. No prior AI or machine learning experience is needed.
@@ -182,7 +182,7 @@ input (784) ──► hidden (16) ──► hidden (16) ──► output (10)
 
 A frequent mistake is using deep learning on a small table of data. With 500 rows of customer records, a gradient-boosted tree (classical ML) usually beats a neural network and trains in seconds. Deep learning shines on large amounts of images, audio and text. Also, "the layers learn edges, then shapes" is a helpful story, not a guarantee. Real networks are harder to interpret.
 
-Face unlock, speech-to-text, photo search, machine translation and every large language model run on deep learning. You will study it from Day 39.
+Face unlock, speech-to-text, photo search, machine translation and every large language model run on deep learning. You will study it from Episode 39.
 
 ---
 
@@ -366,7 +366,7 @@ Think of a recipe card with blanks: "Bake at ___ degrees for ___ minutes." The c
 
 These are three separate things that beginners blur together:
 
-| Term | What it is | Temperature example | Day 1 project example |
+| Term | What it is | Temperature example | Episode 1 project example |
 |---|---|---|---|
 | **Model** | The function that maps input to output | `F = w × C + b` | Bag of words + Naive Bayes |
 | **Parameters** | The numbers inside the model | `w = 1.8`, `b = 32` | One number per (label, word) pair |
@@ -378,9 +378,9 @@ Stated precisely:
 - **Parameters** are the numbers inside a model that training adjusts. Modern LLMs have billions.
 - An **algorithm** is a precise, finite sequence of steps that solves a problem. The training procedure is an algorithm; the trained model is the result.
 
-In `F = w × C + b`, the model has 2 parameters. A model that predicts house price from size, rooms and age, `price = w1·size + w2·rooms + w3·age + b`, has 4. The 3Blue1Brown digit network from the deep learning section has 13,002. The algorithm that finds them can be the same idea in every case: adjust the numbers to reduce the error (gradient descent, Day 2).
+In `F = w × C + b`, the model has 2 parameters. A model that predicts house price from size, rooms and age, `price = w1·size + w2·rooms + w3·age + b`, has 4. The 3Blue1Brown digit network from the deep learning section has 13,002. The algorithm that finds them can be the same idea in every case: adjust the numbers to reduce the error (gradient descent, Episode 2).
 
-Watch your wording. Do not say "the algorithm decided" when you mean "the model predicted." The algorithm ran during training and finished. The model is what makes predictions. Also keep **parameters** separate from **hyperparameters**: hyperparameters are settings you choose before training (how many layers, how long to train), and training does not change them. Day 2 covers this.
+Watch your wording. Do not say "the algorithm decided" when you mean "the model predicted." The algorithm ran during training and finished. The model is what makes predictions. Also keep **parameters** separate from **hyperparameters**: hyperparameters are settings you choose before training (how many layers, how long to train), and training does not change them. Episode 2 covers this.
 
 When a vendor says "our model has 70 billion parameters," you should immediately think: memory needed to load it, cost per request, and whether a smaller model would do your task.
 
@@ -410,7 +410,7 @@ Here is one feature with four people on it. A bank wants to cut fraud.
 
 Do not pick a title before learning the skills. The overlap is large, and early in your career, a portfolio that shows you can take a problem from data to a working, evaluated system matters more than the label.
 
-This 100-day program aims at **ML and AI engineering**, with enough data science to be useful and enough research literacy to read papers.
+This 100-episode program aims at **ML and AI engineering**, with enough data science to be useful and enough research literacy to read papers.
 
 ---
 
@@ -495,7 +495,7 @@ Solid arrows from the top are **is-a-subset-of** relationships (methods). Dotted
 
 **Reference images to find:** search "AI vs ML vs deep learning diagram" and compare three of them. Most show only the nested circles in the methods part of the field map. Notice what they leave out: CV, NLP, agents and robotics, which do not fit inside one circle.
 
-**Video (about 20 minutes):** [3Blue1Brown: But what is a neural network?](https://www.youtube.com/watch?v=aircAruvnKk). Watch it now. You will see the neurons, weights and layers from the deep learning section before you study them properly on Day 39.
+**Video (about 20 minutes):** [3Blue1Brown: But what is a neural network?](https://www.youtube.com/watch?v=aircAruvnKk). Watch it now. You will see the neurons, weights and layers from the deep learning section before you study them properly on Episode 39.
 
 ---
 
@@ -509,7 +509,7 @@ Solid arrows from the top are **is-a-subset-of** relationships (methods). Dotted
 4. Add agents and robotics AI, with arrows showing what each borrows (see the systems part).
 5. Compare with the whole map in one picture. Mark anything you missed with a star.
 6. List five real products you use each week. Use these if you need ideas: a phone camera that finds faces, a maps app that suggests a route, a music app's recommendations, autocorrect, a voice assistant, a spam filter, a photo app that searches by "dog" or "beach."
-7. Place each product on your map, and next to it write one line in this form: `Product: category, because <one reason>`. The category must be one of: symbolic, classical ML, deep learning, generative. If you are not sure, write `unsure, check later`. That is an honest answer, and you will revisit it on Day 2.
+7. Place each product on your map, and next to it write one line in this form: `Product: category, because <one reason>`. The category must be one of: symbolic, classical ML, deep learning, generative. If you are not sure, write `unsure, check later`. That is an honest answer, and you will revisit it on Episode 2.
 
 **Exercise 2: Problem sorting.**
 
@@ -536,7 +536,7 @@ If you disagreed with three or more of these, reread the symbolic vs statistical
 
 ## Project: a rule-based bot and a learned bot that solve the same problem
 
-This is the GitHub project for Day 1. It is a small comparison rather than a product, and you will see the difference between the two approaches with your own hands.
+This is the GitHub project for Episode 1. It is a small comparison rather than a product, and you will see the difference between the two approaches with your own hands.
 
 **Goal:** a Python program that classifies short messages as **greeting**, **question**, or **complaint**, first with hand-written rules, then with a small learned model. Then you compare where each one fails.
 
@@ -697,7 +697,7 @@ if __name__ == "__main__":
         print(f"{text!r} -> {model.predict([text])[0]}")
 ```
 
-**Why cross-validation and not one split.** With 30 rows, a single train/test split leaves only 9 test rows. In one trial on this dataset, changing the random seed moved the score from 0.22 to 0.89. Five rounds, each testing on different rows, give a steadier number. You will study this properly on Days 28 and 63.
+**Why cross-validation and not one split.** With 30 rows, a single train/test split leaves only 9 test rows. In one trial on this dataset, changing the random seed moved the score from 0.22 to 0.89. Five rounds, each testing on different rows, give a steadier number. You will study this properly on Episodes 28 and 63.
 
 ### Step 5: compare them (`compare.py`)
 
@@ -847,6 +847,6 @@ In `README.md`, answer these questions in full sentences. Paste the accuracy tab
 
 ## Tomorrow
 
-Day 2, **How Machines Learn**, introduces data, features, labels, loss and training in detail. Bring your field map, your answer key results from Exercise 2, and your `compare.py` output. You will revisit the learned bot and ask what exactly it learned: which words pushed a message toward each label.
+Episode 2, **How Machines Learn**, introduces data, features, labels, loss and training in detail. Bring your field map, your answer key results from Exercise 2, and your `compare.py` output. You will revisit the learned bot and ask what exactly it learned: which words pushed a message toward each label.
 
-**Next:** [Day 2: How Machines Learn](Day-02-How-Machines-Learn.md)
+**Next:** [Episode 2: How Machines Learn](Episode-02-How-Machines-Learn.md)

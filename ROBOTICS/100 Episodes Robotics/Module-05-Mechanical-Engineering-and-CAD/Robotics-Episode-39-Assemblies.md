@@ -1,9 +1,9 @@
-# Day 39: Assemblies
+# Episode 39: Assemblies
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need the parts from Days 37 and 38, the drive and linkage ideas from Days 35 and 36, and the fits and clearances that Day 35 introduced for bearings. An assembly is the first place where the parts you have made must work together, so the checks you learn today catch the errors that single parts hide.
+**Level:** intermediate. You need the parts from Episodes 37 and 38, the drive and linkage ideas from Episodes 35 and 36, and the fits and clearances that Episode 35 introduced for bearings. An assembly is the first place where the parts you have made must work together, so the checks you learn today catch the errors that single parts hide.
 
 **By the end of this day, you will have:**
 
@@ -15,17 +15,17 @@
 **What you need:**
 
 - FreeCAD 1.0.x, with the Assembly workbench (in FreeCAD 1.0 the assembly tools are available in the Workbench menu; if they are missing, check the Addon Manager). Onshape (free plan) and Autodesk Fusion (Personal licence for non-commercial use) also support joints and mates.
-- The parts from Day 37 and Day 38, saved as separate files, plus a simplified motor model. A cylinder 28 mm square by 30 mm long with a 5 mm shaft is enough.
+- The parts from Episode 37 and Episode 38, saved as separate files, plus a simplified motor model. A cylinder 28 mm square by 30 mm long with a 5 mm shaft is enough.
 - Python 3.12 with pytest 8 or newer (`pip install pytest`)
 - A digital caliper, reading to 0.01 mm, for measuring the hub bore and the shaft
 - Optional: a 608 ball bearing and an 8 mm shaft, to test a press fit with a printed housing
 
 **Prerequisites:**
 
-- Day 37: sketches, spreadsheet parameters and reference geometry
-- Day 38: revolutions, patterns and fillets, and the hub part file
-- Day 35: bearing sizes and the basic idea of a fit between a shaft and a bore
-- Day 36: the drivetrain you chose, so you know which joints the wheels need
+- Episode 37: sketches, spreadsheet parameters and reference geometry
+- Episode 38: revolutions, patterns and fillets, and the hub part file
+- Episode 35: bearing sizes and the basic idea of a fit between a shaft and a bore
+- Episode 36: the drivetrain you chose, so you know which joints the wheels need
 
 ---
 
@@ -52,7 +52,7 @@
 
 A robot is an assembly. Each part is a shape on its own, but a robot only works when the parts fit, move freely where they should, and stay still where they must. An assembly is the model that puts parts together and tests whether they do. It catches the errors that single parts hide: a shaft that is too large for a bore, a wheel that rubs the chassis, a joint that is missing a degree of freedom, or a bolt that goes through the motor and not the bracket.
 
-Today you learn to build assemblies with joints, to count the degrees of freedom and check that they match the motion the robot needs, to test for interference, and to choose clearances and fits from standard tables. You also learn the hierarchy that keeps a large assembly readable, and the bill of materials that the workshop and the purchasing team use. The assembly you build here is the motor and wheel unit of the robot, and the checks carry through to the chassis on Day 42.
+Today you learn to build assemblies with joints, to count the degrees of freedom and check that they match the motion the robot needs, to test for interference, and to choose clearances and fits from standard tables. You also learn the hierarchy that keeps a large assembly readable, and the bill of materials that the workshop and the purchasing team use. The assembly you build here is the motor and wheel unit of the robot, and the checks carry through to the chassis on Episode 42.
 
 ---
 
@@ -112,7 +112,7 @@ The first principle is that every joint is a rule about contact or alignment. A 
 
 Here is a worked example for the motor unit. The bracket is fixed to the chassis, which is the ground. The motor is fixed to the bracket with a fixed joint, because its bolts hold it rigidly. The hub is placed on the motor shaft with a revolute joint about the shaft axis, which allows the hub to rotate. The hub's rotation is the only motion the unit needs, so the revolute joint is the correct choice.
 
-The common mistake is to use a fixed joint where the part must move, or a revolute joint where the part must be held. The result is either a blocked wheel or a wheel that wobbles. Check the joint type against the motion the robot needs, using the drivetrain from Day 36.
+The common mistake is to use a fixed joint where the part must move, or a revolute joint where the part must be held. The result is either a blocked wheel or a wheel that wobbles. Check the joint type against the motion the robot needs, using the drivetrain from Episode 36.
 
 Joints are the link between the CAD model and the motion of the real robot. A joint that is wrong in the model will be wrong in the machine, and the model is the cheapest place to find that error.
 
@@ -184,7 +184,7 @@ Hierarchies and BOMs are how robot teams stay organised as the model grows. A ma
 
 ## Hands-on exercises
 
-1. **Build the motor unit.** In FreeCAD 1.0, open the Assembly workbench and insert the bracket from Day 37 as the grounded part. Insert the simplified motor and fix it to the bracket with a fixed joint. Insert the hub from Day 38 and place it on the shaft with a revolute joint about the shaft axis.
+1. **Build the motor unit.** In FreeCAD 1.0, open the Assembly workbench and insert the bracket from Episode 37 as the grounded part. Insert the simplified motor and fix it to the bracket with a fixed joint. Insert the hub from Episode 38 and place it on the shaft with a revolute joint about the shaft axis.
 
 2. **Count the degrees of freedom.** Write the Kutzbach count for your unit on paper, with N, J and Σf. Compare it with the number of degrees of freedom the CAD tool reports. Change one joint to fixed and count again. Record the results.
 
@@ -202,12 +202,12 @@ This project builds the motor unit as an assembly and checks it with two Python 
 
 **Goal:** an assembly of the bracket, motor and hub, with a revolute joint on the hub, a degree-of-freedom check that gives one degree of freedom, a fit table with at least three fits classified, and a bill of materials.
 
-**Repository name:** `100-days-robotics-day-39-assemblies`
+**Repository name:** `100-episodes-robotics-day-39-assemblies`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-39-assemblies/
+100-episodes-robotics-day-39-assemblies/
 ├── README.md
 ├── requirements.txt
 ├── cad/
@@ -327,7 +327,7 @@ if __name__ == "__main__":
 
 **Step-by-step tasks.**
 
-1. Create the repository and the virtual environment. Install pytest. Copy the part STEP files from Day 37 and Day 38 into `cad/parts/`.
+1. Create the repository and the virtual environment. Install pytest. Copy the part STEP files from Episode 37 and Episode 38 into `cad/parts/`.
 2. Build the motor unit in FreeCAD 1.0. Insert the bracket as the grounded part, the motor with a fixed joint, and the hub with a revolute joint. Save the document as `cad/motor_unit.FCStd` and export `cad/motor_unit.step`.
 3. Write `assembly.json` for the unit, and run `python dof.py assembly.json`. The result must be 1. If it is not, find the joint that is wrong, and fix the model or the file.
 4. Write `tests/test_dof.py` with three tests: the motor unit gives 1, the same unit with a fixed hub gives 0, and an unconnected hub gives 6.
@@ -395,7 +395,7 @@ if __name__ == "__main__":
 
 - *Wikipedia*: "Engineering drawing", "Bill of materials", "Exploded-view drawing", "Interference fit", "Clearance (engineering)", "Tolerance (engineering)", "Degrees of freedom (mechanics)", "Kutzbach criterion" and "Mechanical joint"
 - *ISO*: the standard ISO 286-1 and ISO 286-2, on the ISO code system for tolerances on linear sizes. Search for its title on iso.org.
-- *ASME*: the standard ASME Y14.5 on geometric dimensioning and tolerancing, which you use in Day 41 for the drawings. Search for its title on asme.org.
+- *ASME*: the standard ASME Y14.5 on geometric dimensioning and tolerancing, which you use in Episode 41 for the drawings. Search for its title on asme.org.
 - *FreeCAD*: the Assembly workbench documentation at wiki.freecad.org, for joints and the exploded view
 
 **Tutorials**
@@ -416,4 +416,4 @@ if __name__ == "__main__":
 
 ## Tomorrow
 
-Tomorrow, on Day 40, you design the parts that make the robot work: motor brackets, sensor mounts, wheel hubs, chassis parts, servo mechanisms and enclosures. You apply the fits from today to the parts that carry the load, and the factor of safety from Day 34 to the parts that hold the electronics. The unit you checked today is the first of these components, and its interfaces set the dimensions of the rest.
+Tomorrow, on Episode 40, you design the parts that make the robot work: motor brackets, sensor mounts, wheel hubs, chassis parts, servo mechanisms and enclosures. You apply the fits from today to the parts that carry the load, and the factor of safety from Episode 34 to the parts that hold the electronics. The unit you checked today is the first of these components, and its interfaces set the dimensions of the rest.

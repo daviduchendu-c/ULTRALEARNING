@@ -1,9 +1,9 @@
-# Day 26: Logistic Regression
+# Episode 26: Logistic Regression
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You should have finished Day 25, since today reuses its weighted sum, its gradient and its training loop.
+**Level:** beginner to intermediate. You should have finished Episode 25, since today reuses its weighted sum, its gradient and its training loop.
 
 **By the end of this day, you will have:**
 
@@ -24,8 +24,8 @@
 
 **Prerequisites:**
 
-- Day 25: the linear model, the gradient descent loop and the ridge penalty
-- Day 24: train, validation and test splits and the baseline habit
+- Episode 25: the linear model, the gradient descent loop and the ridge penalty
+- Episode 24: train, validation and test splits and the baseline habit
 - The logarithm and its rules: `log(ab) = log a + log b` and the shape of `log x` near 0 and 1
 - Basic probability: a probability lies between 0 and 1, and the probabilities of complementary events sum to 1
 
@@ -107,7 +107,7 @@ w, b = 1.0, -2.0
 print(((w * X + b).ravel() > 0).astype(int))  # [0 0 1 1]
 ```
 
-The mistake to avoid is treating a linear classifier's score as a probability. A score of 0.9 from a support vector machine, which you will see on Day 31, is not a probability at all, and calibrating it requires an extra step. Logistic regression is designed to output something that behaves like a probability, although calibration can still drift. In industry, a classifier that flags suspicious transactions produces a score, and the bank sets a threshold to match its investigation capacity, which is classification plus a decision rule.
+The mistake to avoid is treating a linear classifier's score as a probability. A score of 0.9 from a support vector machine, which you will see on Episode 31, is not a probability at all, and calibrating it requires an extra step. Logistic regression is designed to output something that behaves like a probability, although calibration can still drift. In industry, a classifier that flags suspicious transactions produces a score, and the bank sets a threshold to match its investigation capacity, which is classification plus a decision rule.
 
 ### Logits
 
@@ -142,7 +142,7 @@ z = np.array([-4.0, 0.0, 4.0])
 print(sigmoid(z).round(4))  # [0.0180 0.5    0.9820]
 ```
 
-The practical issue is numerical overflow. For large negative `z`, `np.exp(-z)` becomes huge, and the expression can produce warnings or inaccurate results. Production code uses a stable form that branches on the sign of `z`, or relies on a library. The limitation of the sigmoid is that it saturates: for very large `|z|`, the gradient is almost zero, so the model learns slowly from confident mistakes. In the market, the sigmoid is the output layer of binary classifiers in deep learning, and the same saturation issue is one reason training deep networks needed better activations, which you will meet on Day 41.
+The practical issue is numerical overflow. For large negative `z`, `np.exp(-z)` becomes huge, and the expression can produce warnings or inaccurate results. Production code uses a stable form that branches on the sign of `z`, or relies on a library. The limitation of the sigmoid is that it saturates: for very large `|z|`, the gradient is almost zero, so the model learns slowly from confident mistakes. In the market, the sigmoid is the output layer of binary classifiers in deep learning, and the same saturation issue is one reason training deep networks needed better activations, which you will meet on Episode 41.
 
 ### Probabilities
 
@@ -189,7 +189,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y, s=12, edgecolor="k")
 plt.savefig("boundary.png")
 ```
 
-The mistake is assuming logistic regression can learn a curved boundary by itself. It cannot, unless you add nonlinear features, such as the square of a feature or an interaction term. The data here has a curved true boundary, so the straight line fits poorly. The fix is either to add `X[:, 1] ** 2` as a feature or to use a nonlinear model such as a decision tree on Day 29. In industry, the choice between a linear boundary and a curved one is a trade-off between explainability and fit.
+The mistake is assuming logistic regression can learn a curved boundary by itself. It cannot, unless you add nonlinear features, such as the square of a feature or an interaction term. The data here has a curved true boundary, so the straight line fits poorly. The fix is either to add `X[:, 1] ** 2` as a feature or to use a nonlinear model such as a decision tree on Episode 29. In industry, the choice between a linear boundary and a curved one is a trade-off between explainability and fit.
 
 ### Log loss
 
@@ -252,14 +252,14 @@ The mistake is leaving the threshold at 0.5 by habit. On an imbalanced problem, 
 
 This is a medium-weight project. The model is short. The deliverable is a threshold analysis that a non-technical stakeholder can act on.
 
-**Repo name:** `100-days-ai-engineering-day-26-logistic-regression`
+**Repo name:** `100-episodes-ai-engineering-day-26-logistic-regression`
 
 **Goal:** train a logistic regression on a binary dataset, check its calibration, choose a threshold using a stated cost, and report the test result once.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-26-logistic-regression/
+100-episodes-ai-engineering-day-26-logistic-regression/
 ├── README.md
 ├── requirements.txt
 ├── logreg.py
@@ -426,4 +426,4 @@ def test_probabilities_are_in_unit_interval():
 
 Tomorrow you meet a different way to classify: k-nearest neighbors. Instead of learning weights, the model stores the training data and decides by looking at the closest examples. You will work with distance metrics, choose k, and see why scaling features can change the answer completely. The contrast with today's model is useful, because it shows what a parametric model gains by summarizing data and what it loses.
 
-**Next:** [Day 27: k-Nearest Neighbors](Day-27-k-Nearest-Neighbors.md)
+**Next:** [Episode 27: k-Nearest Neighbors](Episode-27-k-Nearest-Neighbors.md)

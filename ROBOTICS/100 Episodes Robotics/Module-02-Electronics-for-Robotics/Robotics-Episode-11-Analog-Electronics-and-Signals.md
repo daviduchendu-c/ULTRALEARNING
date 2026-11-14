@@ -1,9 +1,9 @@
-# Day 11: Analog Electronics and Signals
+# Episode 11: Analog Electronics and Signals
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 4 hours
-**Level:** beginner to intermediate. You should have finished Days 6 to 10, so you can use Ohm's law, read a resistor's colour code and explain what a binary number is. Today is the first day where the real world enters the circuit, which makes it the day most robotics beginners find surprising.
+**Level:** beginner to intermediate. You should have finished Episodes 6 to 10, so you can use Ohm's law, read a resistor's colour code and explain what a binary number is. Today is the first day where the real world enters the circuit, which makes it the day most robotics beginners find surprising.
 
 **By the end of this day, you will have:**
 
@@ -28,9 +28,9 @@
 
 **Prerequisites:**
 
-- Days 6 to 10: voltage, current, resistance, Ohm's law, series and parallel circuits, and binary numbers
-- Day 8 components: you should know what a potentiometer is and how it changes the voltage at its wiper
-- A basic idea of a microcontroller pin, which Day 2 covered
+- Episodes 6 to 10: voltage, current, resistance, Ohm's law, series and parallel circuits, and binary numbers
+- Episode 8 components: you should know what a potentiometer is and how it changes the voltage at its wiper
+- A basic idea of a microcontroller pin, which Episode 2 covered
 
 ---
 
@@ -150,7 +150,7 @@ A ruler marked in millimetres measures length more precisely than one marked in 
 
 The ideal mapping for a unipolar ADC is code = floor(Vin / Vref × 2^N), where N is the number of bits. The reading ranges from 0 to 2^N − 1. The Arduino Uno's ATmega328P has a 10-bit ADC, with a default reference of the 5 V supply. Its LSB is 5 / 1024 = 4.88 mV. The Raspberry Pi Pico's RP2040 has a 12-bit ADC with a 3.3 V reference, so its LSB is 3.3 / 4096 = 0.806 mV. The Pico is about six times finer, but only if the input signal is not already noisier than that step, and only if you do not feed it more than 3.3 V, which would damage the pin.
 
-A DAC runs the process in reverse. It takes a binary code and produces a voltage. An 8-bit DAC with a 5 V reference has a 5 / 256 = 19.5 mV step. Many microcontrollers have a built-in DAC, but the Uno does not. On an Uno you produce an analog-like voltage with pulse-width modulation (PWM) and a low-pass filter, which Day 13 covers in detail.
+A DAC runs the process in reverse. It takes a binary code and produces a voltage. An 8-bit DAC with a 5 V reference has a 5 / 256 = 19.5 mV step. Many microcontrollers have a built-in DAC, but the Uno does not. On an Uno you produce an analog-like voltage with pulse-width modulation (PWM) and a low-pass filter, which Episode 13 covers in detail.
 
 Here is the worked example for today's divider. The 4.7 kΩ and 10 kΩ divider outputs 3.401 V. The Uno reads it as code = floor(3.401 / 5 × 1024) = floor(696.6) = 696. Converting back gives 696 × 5 / 1024 = 3.398 V. The 3 mV gap is less than one LSB, which is the best any 10-bit ADC can do. The Pico, fed by a divider scaled so its full range is 3.3 V, has a step about one sixth of the Uno's, so the same measurement is resolved far more finely.
 
@@ -168,7 +168,7 @@ A worked example makes the trade concrete. A distance sensor's output has a rand
 
 Interference is different. A 50 Hz or 60 Hz hum from mains wiring does not average out quickly unless the sample count spans whole cycles. The clean fix is to route the signal wire away from motor wires, to add a ground plane or shielded wire, and to filter the signal. The common mistake is to route a sensor cable along a motor cable for 30 cm, then blame the sensor. You spot it by unplugging the motor. If the noise vanishes, the wiring is the problem, not the sensor.
 
-Robots feel noise most strongly during motor starts. A DC motor's brushes make sparks and its current spikes, and both show up on the 5 V rail and on nearby sensor wires. Day 12 covers the power-rail fixes, and Day 13 covers the motor-side fixes. In industry, the same measurement problem appears in every sensor that sits near a motor, from the current sense on a servo drive to the encoder line on a warehouse robot.
+Robots feel noise most strongly during motor starts. A DC motor's brushes make sparks and its current spikes, and both show up on the 5 V rail and on nearby sensor wires. Episode 12 covers the power-rail fixes, and Episode 13 covers the motor-side fixes. In industry, the same measurement problem appears in every sensor that sits near a motor, from the current sense on a servo drive to the encoder line on a warehouse robot.
 
 ---
 
@@ -231,7 +231,7 @@ The project is light on mechanics and heavy on measurement. It is a small measur
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-11-analog-signals/
+100-episodes-robotics-engineering-day-11-analog-signals/
 ├── README.md
 ├── firmware/
 │   └── analog_logger/
@@ -383,6 +383,6 @@ This project is light on new hardware because the lesson's purpose is measuremen
 
 ## Tomorrow
 
-Today's divider and filter assumed a steady supply rail. Tomorrow you build the power system that provides it. You will size a battery pack by capacity and current, choose between a linear regulator and a buck converter, and place decoupling capacitors so the sensor noise you measured today does not come from the power rail. The noise you measured this afternoon will show you where the rail is leaking into your sensors, and Day 12 is where you fix it.
+Today's divider and filter assumed a steady supply rail. Tomorrow you build the power system that provides it. You will size a battery pack by capacity and current, choose between a linear regulator and a buck converter, and place decoupling capacitors so the sensor noise you measured today does not come from the power rail. The noise you measured this afternoon will show you where the rail is leaking into your sensors, and Episode 12 is where you fix it.
 
-**Next:** [Day 12: Robot Power Systems](Robotics-Day-12-Robot-Power-Systems.md)
+**Next:** [Episode 12: Robot Power Systems](Robotics-Episode-12-Robot-Power-Systems.md)

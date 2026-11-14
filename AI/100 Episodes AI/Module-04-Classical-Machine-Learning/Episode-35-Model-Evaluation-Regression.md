@@ -1,9 +1,9 @@
-# Day 35: Model Evaluation: Regression
+# Episode 35: Model Evaluation: Regression
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3 hours
-**Level:** intermediate. You need Day 25 (the residual and the mean squared error) and Day 34 (the habit of reporting several metrics with a baseline). The plots are where most of the insight comes from.
+**Level:** intermediate. You need Episode 25 (the residual and the mean squared error) and Episode 34 (the habit of reporting several metrics with a baseline). The plots are where most of the insight comes from.
 
 **By the end of this day, you will have:**
 
@@ -24,9 +24,9 @@
 
 **Prerequisites:**
 
-- Day 24: train, validation and test splits, and the baseline habit
-- Day 25: residuals, mean squared error and the linear model
-- Day 34: reporting several metrics with a stated purpose
+- Episode 24: train, validation and test splits, and the baseline habit
+- Episode 25: residuals, mean squared error and the linear model
+- Episode 34: reporting several metrics with a stated purpose
 - Square roots and the idea of an average of absolute values
 
 ---
@@ -208,14 +208,14 @@ The plot will show a clear U shape, which means the linear model misses the curv
 
 This is a medium-weight project. The metrics are short to compute, so the deliverable is a complete report with a baseline, a metric table and residual diagnostics that a reviewer can read in a few minutes.
 
-**Repo name:** `100-days-ai-engineering-day-35-model-evaluation-regression`
+**Repo name:** `100-episodes-ai-engineering-day-35-model-evaluation-regression`
 
 **Goal:** evaluate a regression model against a baseline, report MAE, RMSE and R-squared with the error in units that matter, and diagnose its residuals by plot and by group.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-35-model-evaluation-regression/
+100-episodes-ai-engineering-day-35-model-evaluation-regression/
 ├── README.md
 ├── requirements.txt
 ├── evaluate.py
@@ -368,6 +368,6 @@ def test_baseline_predicts_training_mean():
 
 ## Tomorrow
 
-Tomorrow you tune the model rather than measure it. Hyperparameters such as the depth of a tree, the penalty in ridge regression or the number of neighbors are set before training, and the choice changes the score. You will separate parameters from hyperparameters, compare grid search with random search, and see how leakage and a careless validation loop can make a tuned model look better than it is. The pipeline pattern from Day 24 is the tool that keeps the process honest.
+Tomorrow you tune the model rather than measure it. Hyperparameters such as the depth of a tree, the penalty in ridge regression or the number of neighbors are set before training, and the choice changes the score. You will separate parameters from hyperparameters, compare grid search with random search, and see how leakage and a careless validation loop can make a tuned model look better than it is. The pipeline pattern from Episode 24 is the tool that keeps the process honest.
 
-**Next:** [Day 36: Hyperparameters and Model Selection](Day-36-Hyperparameters-and-Model-Selection.md)
+**Next:** [Episode 36: Hyperparameters and Model Selection](Episode-36-Hyperparameters-and-Model-Selection.md)

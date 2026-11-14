@@ -1,10 +1,10 @@
-# Day 18: ADC, PWM and Timers
+# Episode 18: ADC, PWM and Timers
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** beginner to intermediate. You need Day 16 (the Uno, the Arduino IDE and `millis()`), Day 17 (logic levels and pull-ups) and Day 11 (the ADC as a concept and PWM as an average voltage). Today the numbers matter more than the wiring, so keep a notebook for your measurements.
+**Level:** beginner to intermediate. You need Episode 16 (the Uno, the Arduino IDE and `millis()`), Episode 17 (logic levels and pull-ups) and Episode 11 (the ADC as a concept and PWM as an average voltage). Today the numbers matter more than the wiring, so keep a notebook for your measurements.
 
 **By the end of this day, you will have:**
 
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 11: the ADC's job, the idea of sampling, and PWM as an average voltage
-- Day 16: `millis()` and the register-level view of a timer
-- Day 17: the debounce pattern and the rule about blocking code
+- Episode 11: the ADC's job, the idea of sampling, and PWM as an average voltage
+- Episode 16: `millis()` and the register-level view of a timer
+- Episode 17: the debounce pattern and the rule about blocking code
 
 ---
 
@@ -145,7 +145,7 @@ A stopwatch counts seconds by ticking, and the speed of the tick decides how pre
 
 From first principles, the timer's tick rate is the clock divided by the prescaler. The ATmega328P's clock is 16 MHz, and the prescaler options are 1, 8, 64, 256 and 1024 for Timer0 and Timer1, with additional options for Timer2. A prescaler of 64 gives a tick rate of 16,000,000 / 64 = 250,000 ticks per second, so each tick is 4 microseconds. Timer1 is 16 bits wide, so it counts from 0 to 65,535, and at that tick rate it overflows every 65,536 × 4 microseconds, about 262 milliseconds.
 
-The period of a compare match timer is T = (OCR + 1) × prescaler / F_CPU, where OCR is the value in the compare register. For a 1 kHz timer with prescaler 1, the OCR value is 16,000,000 / 1000 − 1 = 15,999. That is the number used in the project for an interrupt every millisecond, which you will see again on Day 19.
+The period of a compare match timer is T = (OCR + 1) × prescaler / F_CPU, where OCR is the value in the compare register. For a 1 kHz timer with prescaler 1, the OCR value is 16,000,000 / 1000 − 1 = 15,999. That is the number used in the project for an interrupt every millisecond, which you will see again on Episode 19.
 
 The worked example uses the PWM frequency formula for Timer0 in fast PWM mode. The frequency is F_CPU / (prescaler × 256). With the prescaler at 64, that is 16,000,000 / (64 × 256) = 976.6 Hz, which matches the Uno's 980 Hz output on pins 5 and 6. The arithmetic is the reason to know the prescaler: the same timer gives a different frequency with a different prescaler.
 
@@ -161,7 +161,7 @@ A kitchen timer that rings after a set number of minutes is more reliable than a
 
 From first principles, a control loop has a sample time T_s. Each cycle reads sensors, computes an output and writes that output. If the cycle takes longer than T_s, the loop runs late, and the control action is wrong by the lateness. If the cycle timing varies, the control action has jitter, which shows as a rough motion or a noisy output. A robot's motor controller might run at 1 kHz with T_s = 1 ms. A loop that takes 1.2 ms on one pass and 0.8 ms on the next has a timing error of 0.2 ms on each step, which is 20 percent of the period.
 
-The fix is to base the loop on a timer compare event, not on the loop's natural speed. The timer triggers the sample, and the main code does its work in the time that remains. This pattern appears again on Day 19 with interrupts and on Day 24 with RTOS timing.
+The fix is to base the loop on a timer compare event, not on the loop's natural speed. The timer triggers the sample, and the main code does its work in the time that remains. This pattern appears again on Episode 19 with interrupts and on Episode 24 with RTOS timing.
 
 The worked example compares two designs. A loop that calls `analogRead` and `digitalWrite` in order, with no fixed timing, runs at a rate that depends on the code's branches. A loop that waits for a timer flag and then runs has a fixed period, so the sample times are evenly spaced. You can measure the difference with `micros()` by recording the time between iterations and computing the standard deviation of the intervals.
 
@@ -191,12 +191,12 @@ On the job, fixed-rate control is a basic requirement of any motor controller, f
 
 The goal is a repository that reads a potentiometer, dims an LED, and logs the readings at a fixed rate, all with evidence you can check. The project is practical, and the results connect the theory of this lesson to numbers that a reviewer can recalculate.
 
-**Repo name:** `100-days-robotics-day-18-adc-pwm-timers`
+**Repo name:** `100-episodes-robotics-day-18-adc-pwm-timers`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-18-adc-pwm-timers/
+100-episodes-robotics-day-18-adc-pwm-timers/
 ├── README.md
 ├── dimmer/
 │   └── dimmer.ino
@@ -271,7 +271,7 @@ void loop() {
 }
 ```
 
-The timed logger uses a software schedule, not a hardware compare interrupt. That is a teaching choice. It is simpler to read, and it shows why jitter appears. The README should say so, and the report should compare the jitter with the timer-based design from Day 19.
+The timed logger uses a software schedule, not a hardware compare interrupt. That is a teaching choice. It is simpler to read, and it shows why jitter appears. The README should say so, and the report should compare the jitter with the timer-based design from Episode 19.
 
 **Step-by-step tasks:**
 
@@ -357,4 +357,4 @@ The evidence matters more than the code here. A reviewer who opens the calibrati
 
 ## Tomorrow
 
-Day 19 is about interrupts. Today you used timers to schedule sampling, and tomorrow you will let the hardware interrupt the program when an event happens. You will write interrupt service routines, handle a pin change with `attachInterrupt`, use a timer interrupt for a fixed-rate loop, and see why shared variables need care. The timer compare value from today is the same register you will use for that timer interrupt.
+Episode 19 is about interrupts. Today you used timers to schedule sampling, and tomorrow you will let the hardware interrupt the program when an event happens. You will write interrupt service routines, handle a pin change with `attachInterrupt`, use a timer interrupt for a fixed-rate loop, and see why shared variables need care. The timer compare value from today is the same register you will use for that timer interrupt.

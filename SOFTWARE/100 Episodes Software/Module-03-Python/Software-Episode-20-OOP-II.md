@@ -1,9 +1,9 @@
-# Day 20: OOP II
+# Episode 20: OOP II
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have written classes with attributes, methods and class-level helpers on Day 19. This is for anyone who has started to copy a class to make a slight variant, or who has built a class that does too many jobs and cannot be tested without everything else.
+**Level:** intermediate. You have written classes with attributes, methods and class-level helpers on Episode 19. This is for anyone who has started to copy a class to make a slight variant, or who has built a class that does too many jobs and cannot be tested without everything else.
 
 **By the end of this day, you will have:**
 
@@ -17,15 +17,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 11: Numbers and Operators (`Decimal` for money)
-- Day 19: OOP I (classes, instances, methods, class and static methods)
+- Episode 11: Numbers and Operators (`Decimal` for money)
+- Episode 19: OOP I (classes, instances, methods, class and static methods)
 
 ---
 
@@ -202,7 +202,7 @@ The common mistake is writing an abstract method with a body that raises `NotImp
 
 A dataclass is a class whose main job is to hold data. Think of a form with fixed fields, such as name, address and date of birth. The form has a standard layout, a standard way to compare two filled-in forms, and a standard printout. The `@dataclass` decorator generates those standard methods from the annotated fields.
 
-From first principles, `@dataclass` reads the class annotations, in order, and writes an `__init__` that takes them as parameters. It also writes `__repr__` for readable printing, and `__eq__`, which compares the fields. With `frozen=True`, it adds `__setattr__` and `__delattr__` methods that raise `FrozenInstanceError`, and it makes the instances hashable by their fields. `field(default_factory=list)` gives each instance its own list, which is the fix for the mutable default trap from Day 10. A method named `__post_init__` runs after the generated `__init__`, and it is the place to validate fields.
+From first principles, `@dataclass` reads the class annotations, in order, and writes an `__init__` that takes them as parameters. It also writes `__repr__` for readable printing, and `__eq__`, which compares the fields. With `frozen=True`, it adds `__setattr__` and `__delattr__` methods that raise `FrozenInstanceError`, and it makes the instances hashable by their fields. `field(default_factory=list)` gives each instance its own list, which is the fix for the mutable default trap from Episode 10. A method named `__post_init__` runs after the generated `__init__`, and it is the place to validate fields.
 
 ```python
 from dataclasses import dataclass, field
@@ -314,12 +314,12 @@ Done when the second cart is still empty, and the frozen item refuses assignment
 
 The project is a small checkout system. Payment methods are subclasses of an abstract base class, so the checkout can take any of them. The checkout itself is a composition: it holds a payment method and a receipt, and it delegates the charge. Items are frozen dataclasses with validation. The tests check inheritance, polymorphism, the abstract contract, composition with a fake, and the dataclass rules. The evidence is a passing test suite and a findings document with the tradeoff analysis.
 
-Suggested repo name: `100-days-software-day-20-oop-ii`.
+Suggested repo name: `100-episodes-software-day-20-oop-ii`.
 
 Repo layout:
 
 ```
-100-days-software-day-20-oop-ii/
+100-episodes-software-day-20-oop-ii/
 ├── .gitignore
 ├── README.md
 ├── payments.py
@@ -543,6 +543,6 @@ The project shows both relationships in one small codebase. A reviewer should be
 
 ## Tomorrow
 
-Day 21 opens the Python data model, the set of special methods that let your classes behave like built-in types. You will write `__repr__` and `__str__`, define equality and hashing rules, make objects iterable and iterators, write generators with `yield`, and build context managers with `with`. The dataclass from today already gives you `__repr__` and `__eq__`, and tomorrow you will see how those methods work underneath.
+Episode 21 opens the Python data model, the set of special methods that let your classes behave like built-in types. You will write `__repr__` and `__str__`, define equality and hashing rules, make objects iterable and iterators, write generators with `yield`, and build context managers with `with`. The dataclass from today already gives you `__repr__` and `__eq__`, and tomorrow you will see how those methods work underneath.
 
-**Next:** [Day 21: Python Data Model](Software-Day-21-Python-Data-Model.md)
+**Next:** [Episode 21: Python Data Model](Software-Episode-21-Python-Data-Model.md)

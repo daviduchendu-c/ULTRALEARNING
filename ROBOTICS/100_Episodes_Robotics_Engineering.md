@@ -1,10 +1,10 @@
-# 100 Days of Robotics Engineering
+# 100 Episodes of Robotics Engineering
 
-# Module 1: Robotics Engineering Foundations (Days 1-5)
+# Module 1: Robotics Engineering Foundations (Episodes 1-5)
 
-## Day 1: What Is Robotics?
+## Episode 1: What Is Robotics?
 
-**Tutorial:** [Day 1: What Is Robotics?](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-01-What-Is-Robotics.md)
+**Tutorial:** [Episode 1: What Is Robotics?](100%20Episodes%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Episode-01-What-Is-Robotics.md)
 
 **Study:**
 
@@ -19,9 +19,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Output:** General robot architecture block diagram.
 
-## Day 2: Anatomy of a Robot
+## Episode 2: Anatomy of a Robot
 
-**Tutorial:** [Day 2: Anatomy of a Robot](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-02-Anatomy-of-a-Robot.md)
+**Tutorial:** [Episode 2: Anatomy of a Robot](100%20Episodes%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Episode-02-Anatomy-of-a-Robot.md)
 
 **Study:**
 
@@ -42,9 +42,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Output:** Hardware/software architecture for a mobile robot.
 
-## Day 3: Robotics Engineering Workflow
+## Episode 3: Robotics Engineering Workflow
 
-**Tutorial:** [Day 3: Robotics Engineering Workflow](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-03-Robotics-Engineering-Workflow.md)
+**Tutorial:** [Episode 3: Robotics Engineering Workflow](100%20Episodes%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Episode-03-Robotics-Engineering-Workflow.md)
 
 **Workflow:**
 
@@ -72,9 +72,9 @@ algorithms, actuators, mechanics, power and feedback.
 -   BOMs
 -   Version control
 
-## Day 4: Measurement and Engineering Tools
+## Episode 4: Measurement and Engineering Tools
 
-**Tutorial:** [Day 4: Measurement and Engineering Tools](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-04-Measurement-and-Engineering-Tools.md)
+**Tutorial:** [Episode 4: Measurement and Engineering Tools](100%20Episodes%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Episode-04-Measurement-and-Engineering-Tools.md)
 
 **Study:**
 
@@ -88,9 +88,9 @@ algorithms, actuators, mechanics, power and feedback.
 -   Datasheets
 -   Systematic debugging
 
-## Day 5: First Robot System Design
+## Episode 5: First Robot System Design
 
-**Tutorial:** [Day 5: First Robot System Design](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-05-First-Robot-System-Design.md)
+**Tutorial:** [Episode 5: First Robot System Design](100%20Episodes%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Episode-05-First-Robot-System-Design.md)
 
 **Design a robot on paper:**
 
@@ -106,9 +106,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 2: Electronics for Robotics (Days 6-15)
+# Module 2: Electronics for Robotics (Episodes 6-15)
 
-## Day 6: Electricity Fundamentals
+## Episode 6: Electricity Fundamentals
 
 **Study:**
 
@@ -124,7 +124,7 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Core relationships:** `V = IR`, `P = VI`.
 
-## Day 7: Circuit Analysis
+## Episode 7: Circuit Analysis
 
 **Study:**
 
@@ -133,7 +133,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Voltage/current division
 -   Kirchhoff's Voltage and Current Laws
 
-## Day 8: Components
+## Episode 8: Components
 
 **Study:**
 
@@ -148,7 +148,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Connectors
 -   Fuses and protection components
 
-## Day 9: Semiconductor Fundamentals
+## Episode 9: Semiconductor Fundamentals
 
 **Study:**
 
@@ -160,7 +160,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Pull-ups/pull-downs
 -   Logic-level switching
 
-## Day 10: Digital Electronics
+## Episode 10: Digital Electronics
 
 **Study:**
 
@@ -173,7 +173,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Truth tables
 -   Combinational/sequential logic
 
-## Day 11: Analog Electronics and Signals
+## Episode 11: Analog Electronics and Signals
 
 **Study:**
 
@@ -186,7 +186,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Filters
 -   Signal conditioning
 
-## Day 12: Robot Power Systems
+## Episode 12: Robot Power Systems
 
 **Study:**
 
@@ -202,7 +202,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Protection
 -   Brownouts
 
-## Day 13: Motor Electronics
+## Episode 13: Motor Electronics
 
 **Study:**
 
@@ -215,7 +215,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Current limits
 -   Electrical noise
 
-## Day 14: Schematics and Datasheets
+## Episode 14: Schematics and Datasheets
 
 **Study:**
 
@@ -229,7 +229,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Operating conditions
 -   Timing diagrams
 
-## Day 15: Electronics Project
+## Episode 15: Electronics Project
 
 **Build:**
 
@@ -238,9 +238,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 3: Embedded Systems (Days 16-25)
+# Module 3: Embedded Systems (Episodes 16-25)
 
-## Day 16: Microcontrollers
+## Episode 16: Microcontrollers
 
 **Study:**
 
@@ -255,7 +255,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Boot process
 -   MCU vs SBC
 
-## Day 17: GPIO
+## Episode 17: GPIO
 
 **Study:**
 
@@ -266,7 +266,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   LEDs
 -   Debouncing
 
-## Day 18: ADC, PWM and Timers
+## Episode 18: ADC, PWM and Timers
 
 **Study:**
 
@@ -275,7 +275,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Timers
 -   Timing-sensitive control
 
-## Day 19: Interrupts
+## Episode 19: Interrupts
 
 **Study:**
 
@@ -286,7 +286,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Timer interrupts
 -   Blocking vs non-blocking code
 
-## Day 20: UART
+## Episode 20: UART
 
 **Study:**
 
@@ -296,7 +296,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Serial debugging
 -   Device communication
 
-## Day 21: I²C
+## Episode 21: I²C
 
 **Study:**
 
@@ -306,7 +306,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Multiple devices
 -   Debugging
 
-## Day 22: SPI
+## Episode 22: SPI
 
 **Study:**
 
@@ -315,7 +315,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Multiple devices
 -   SPI vs I²C vs UART
 
-## Day 23: Embedded Software Architecture
+## Episode 23: Embedded Software Architecture
 
 **Study:**
 
@@ -327,7 +327,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Telemetry
 -   Fault handling
 
-## Day 24: RTOS Fundamentals
+## Episode 24: RTOS Fundamentals
 
 **Study:**
 
@@ -340,7 +340,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Concurrency
 -   Race-condition concepts
 
-## Day 25: Embedded Project
+## Episode 25: Embedded Project
 
 **Build:**
 
@@ -352,9 +352,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 4: Sensors and Actuators (Days 26-33)
+# Module 4: Sensors and Actuators (Episodes 26-33)
 
-## Day 26: DC Motors
+## Episode 26: DC Motors
 
 **Study:**
 
@@ -367,7 +367,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Encoders
 -   Drivers
 
-## Day 27: Servo Motors
+## Episode 27: Servo Motors
 
 **Study:**
 
@@ -378,7 +378,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Range
 -   Calibration
 
-## Day 28: Stepper Motors
+## Episode 28: Stepper Motors
 
 **Study:**
 
@@ -389,7 +389,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Torque/speed
 -   Positioning
 
-## Day 29: Encoders
+## Episode 29: Encoders
 
 **Study:**
 
@@ -401,7 +401,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Position
 -   Odometry foundations
 
-## Day 30: Distance Sensors
+## Episode 30: Distance Sensors
 
 **Study:**
 
@@ -412,7 +412,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Noise
 -   Limitations
 
-## Day 31: IMUs
+## Episode 31: IMUs
 
 **Study:**
 
@@ -425,7 +425,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Calibration
 -   Orientation
 
-## Day 32: Cameras
+## Episode 32: Cameras
 
 **Study:**
 
@@ -438,7 +438,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Calibration
 -   Camera frames
 
-## Day 33: Sensor Integration Project
+## Episode 33: Sensor Integration Project
 
 **Build:**
 
@@ -449,9 +449,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 5: Mechanical Engineering and CAD (Days 34-42)
+# Module 5: Mechanical Engineering and CAD (Episodes 34-42)
 
-## Day 34: Mechanical Fundamentals
+## Episode 34: Mechanical Fundamentals
 
 **Study:**
 
@@ -465,7 +465,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Stiffness
 -   Equilibrium concepts
 
-## Day 35: Mechanisms
+## Episode 35: Mechanisms
 
 **Study:**
 
@@ -480,7 +480,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Shafts
 -   Couplings
 
-## Day 36: Robot Drivetrains
+## Episode 36: Robot Drivetrains
 
 **Study:**
 
@@ -493,7 +493,7 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Compare:** maneuverability, complexity, odometry and terrain.
 
-## Day 37: CAD Fundamentals
+## Episode 37: CAD Fundamentals
 
 **Study:**
 
@@ -504,7 +504,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Parametric modeling
 -   Design intent
 
-## Day 38: 3D Part Modeling
+## Episode 38: 3D Part Modeling
 
 **Study:**
 
@@ -516,7 +516,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Chamfers
 -   Parametric dimensions
 
-## Day 39: Assemblies
+## Episode 39: Assemblies
 
 **Study:**
 
@@ -527,7 +527,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Clearances
 -   Assembly hierarchy
 
-## Day 40: Robot Component Design
+## Episode 40: Robot Component Design
 
 **Design:**
 
@@ -538,7 +538,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Servo mechanisms
 -   Enclosures
 
-## Day 41: Design for Manufacturing
+## Episode 41: Design for Manufacturing
 
 **Study:**
 
@@ -549,7 +549,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Materials
 -   Assembly
 
-## Day 42: CAD Project
+## Episode 42: CAD Project
 
 **Design a complete small robot chassis with:**
 
@@ -561,9 +561,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 6: PCB Design (Days 43-47)
+# Module 6: PCB Design (Episodes 43-47)
 
-## Day 43: PCB Fundamentals
+## Episode 43: PCB Fundamentals
 
 **Study:**
 
@@ -577,7 +577,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Ground planes
 -   Power distribution
 
-## Day 44: Schematic Capture
+## Episode 44: Schematic Capture
 
 **Study:**
 
@@ -589,7 +589,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   ERC
 -   Component selection
 
-## Day 45: PCB Layout
+## Episode 45: PCB Layout
 
 **Study:**
 
@@ -601,7 +601,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   DRC
 -   Mechanical constraints
 
-## Day 46: Manufacturing and Bring-Up
+## Episode 46: Manufacturing and Bring-Up
 
 **Study:**
 
@@ -613,7 +613,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Continuity tests
 -   Board bring-up
 
-## Day 47: Robotics Controller PCB
+## Episode 47: Robotics Controller PCB
 
 **Design a controller board with:**
 
@@ -626,9 +626,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 7: Mathematics for Robotics (Days 48-55)
+# Module 7: Mathematics for Robotics (Episodes 48-55)
 
-## Day 48: Algebra and Trigonometry
+## Episode 48: Algebra and Trigonometry
 
 **Study:**
 
@@ -639,7 +639,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Identities
 -   Vectors
 
-## Day 49: Linear Algebra I
+## Episode 49: Linear Algebra I
 
 **Study:**
 
@@ -651,7 +651,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Inverse concepts
 -   Systems of equations
 
-## Day 50: Linear Algebra II
+## Episode 50: Linear Algebra II
 
 **Study:**
 
@@ -661,7 +661,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Determinants
 -   Eigenvalue/eigenvector concepts
 
-## Day 51: Coordinate Systems
+## Episode 51: Coordinate Systems
 
 **Study:**
 
@@ -669,7 +669,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Position vectors
 -   Frame changes
 
-## Day 52: Rotations
+## Episode 52: Rotations
 
 **Study:**
 
@@ -679,7 +679,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Roll/pitch/yaw
 -   Quaternion concepts
 
-## Day 53: Homogeneous Transformations
+## Episode 53: Homogeneous Transformations
 
 **Study:**
 
@@ -690,7 +690,7 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Exercise:** Implement in Python.
 
-## Day 54: Calculus for Robotics
+## Episode 54: Calculus for Robotics
 
 **Study:**
 
@@ -700,7 +700,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Integration
 -   Differential-equation concepts
 
-## Day 55: Probability
+## Episode 55: Probability
 
 **Study:**
 
@@ -714,9 +714,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 8: Robot Kinematics (Days 56-62)
+# Module 8: Robot Kinematics (Episodes 56-62)
 
-## Day 56: DOF and Configuration Space
+## Episode 56: DOF and Configuration Space
 
 **Study:**
 
@@ -727,7 +727,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Workspace
 -   Constraints
 
-## Day 57: Forward Kinematics
+## Episode 57: Forward Kinematics
 
 **Study:**
 
@@ -735,7 +735,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Planar arms
 -   Matrix formulations
 
-## Day 58: Denavit-Hartenberg Parameters
+## Episode 58: Denavit-Hartenberg Parameters
 
 **Study:**
 
@@ -743,7 +743,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   DH parameters
 -   Transformation chains
 
-## Day 59: Inverse Kinematics
+## Episode 59: Inverse Kinematics
 
 **Study:**
 
@@ -753,7 +753,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Multiple solutions
 -   Constraints
 
-## Day 60: Jacobians
+## Episode 60: Jacobians
 
 **Study:**
 
@@ -762,7 +762,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   End-effector velocity
 -   Jacobian mapping
 
-## Day 61: Singularities
+## Episode 61: Singularities
 
 **Study:**
 
@@ -771,7 +771,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Lost DOF
 -   Manipulability concepts
 
-## Day 62: Kinematics Project
+## Episode 62: Kinematics Project
 
 **Build a simulated arm with:**
 
@@ -782,9 +782,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 9: Dynamics and Control (Days 63-71)
+# Module 9: Dynamics and Control (Episodes 63-71)
 
-## Day 63: Robot Dynamics
+## Episode 63: Robot Dynamics
 
 **Study:**
 
@@ -796,7 +796,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Friction
 -   Equations of motion
 
-## Day 64: Dynamic System Modeling
+## Episode 64: Dynamic System Modeling
 
 **Study:**
 
@@ -805,7 +805,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   State variables
 -   State-space concepts
 
-## Day 65: Feedback Control
+## Episode 65: Feedback Control
 
 **Study:**
 
@@ -818,7 +818,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Disturbance
 -   Stability concepts
 
-## Day 66: PID
+## Episode 66: PID
 
 **Study:**
 
@@ -831,7 +831,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Saturation
 -   Windup concepts
 
-## Day 67: Motor Control
+## Episode 67: Motor Control
 
 **Study:**
 
@@ -840,7 +840,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Setpoints
 -   Closed-loop control
 
-## Day 68: State-Space Control
+## Episode 68: State-Space Control
 
 **Study:**
 
@@ -849,7 +849,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Observability
 -   State-feedback concepts
 
-## Day 69: Trajectory Generation
+## Episode 69: Trajectory Generation
 
 **Study:**
 
@@ -857,7 +857,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Smooth motion
 -   Polynomial trajectory concepts
 
-## Day 70: Motion Control
+## Episode 70: Motion Control
 
 **Study:**
 
@@ -865,7 +865,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Trajectory tracking
 -   Feedback tracking
 
-## Day 71: Control Project
+## Episode 71: Control Project
 
 **Build:**
 
@@ -874,9 +874,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 10: ROS 2 (Days 72-81)
+# Module 10: ROS 2 (Episodes 72-81)
 
-## Day 72: ROS 2 Foundations
+## Episode 72: ROS 2 Foundations
 
 **Study:**
 
@@ -888,7 +888,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Packages
 -   Distributions
 
-## Day 73: ROS 2 CLI and Turtlesim
+## Episode 73: ROS 2 CLI and Turtlesim
 
 **Study:**
 
@@ -899,7 +899,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   `rqt`
 -   Graph exploration
 
-## Day 74: Nodes and Topics
+## Episode 74: Nodes and Topics
 
 **Study:**
 
@@ -910,7 +910,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   QoS introduction
 -   Communication graphs
 
-## Day 75: Services and Actions
+## Episode 75: Services and Actions
 
 **Study:**
 
@@ -920,7 +920,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Feedback/results
 -   When to choose each communication model
 
-## Day 76: Parameters, Launch and Logging
+## Episode 76: Parameters, Launch and Logging
 
 **Study:**
 
@@ -931,7 +931,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Namespaces
 -   Remapping
 
-## Day 77: ROS 2 Packages
+## Episode 77: ROS 2 Packages
 
 **Study:**
 
@@ -942,7 +942,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   `colcon`
 -   Workspace sourcing
 
-## Day 78: TF2
+## Episode 78: TF2
 
 **Study:**
 
@@ -951,7 +951,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Parent-child frames
 -   Transform lookup
 
-## Day 79: URDF and Xacro
+## Episode 79: URDF and Xacro
 
 **Study:**
 
@@ -961,7 +961,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Robot trees
 -   Macros
 
-## Day 80: ros2_control
+## Episode 80: ros2_control
 
 **Study:**
 
@@ -970,7 +970,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Joint states/commands
 -   Controller management
 
-## Day 81: ROS 2 Project
+## Episode 81: ROS 2 Project
 
 **Build a multi-node system with:**
 
@@ -983,11 +983,11 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 11: Robot Simulation (Days 82-86)
+# Module 11: Robot Simulation (Episodes 82-86)
 
 > Use **modern Gazebo**, not Gazebo Classic, for a new curriculum.
 
-## Day 82: Gazebo Fundamentals
+## Episode 82: Gazebo Fundamentals
 
 **Study:**
 
@@ -999,7 +999,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Simulation time
 -   Spawning
 
-## Day 83: Simulated Sensors
+## Episode 83: Simulated Sensors
 
 **Study:**
 
@@ -1009,7 +1009,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Update rates
 -   Sensor noise
 
-## Day 84: ROS 2 + Gazebo
+## Episode 84: ROS 2 + Gazebo
 
 **Integrate with simulation:**
 
@@ -1019,7 +1019,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Controllers
 -   TF
 
-## Day 85: Simulated Mobile Robot
+## Episode 85: Simulated Mobile Robot
 
 **Build a differential-drive robot with:**
 
@@ -1027,7 +1027,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Controller
 -   ROS interfaces
 
-## Day 86: Simulated Manipulator
+## Episode 86: Simulated Manipulator
 
 **Build an arm with:**
 
@@ -1039,9 +1039,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 12: Autonomous Robotics (Days 87-94)
+# Module 12: Autonomous Robotics (Episodes 87-94)
 
-## Day 87: Odometry
+## Episode 87: Odometry
 
 **Study:**
 
@@ -1050,7 +1050,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Pose estimation
 -   Accumulated error
 
-## Day 88: Sensor Fusion
+## Episode 88: Sensor Fusion
 
 **Study:**
 
@@ -1061,7 +1061,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Kalman-filter intuition
 -   Multi-sensor estimates
 
-## Day 89: Localization
+## Episode 89: Localization
 
 **Study:**
 
@@ -1071,7 +1071,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Particle-filter intuition
 -   Map/odom frames
 
-## Day 90: Mapping and SLAM
+## Episode 90: Mapping and SLAM
 
 **Study:**
 
@@ -1081,7 +1081,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   LiDAR SLAM
 -   Visual-SLAM concepts
 
-## Day 91: Path Planning
+## Episode 91: Path Planning
 
 **Study:**
 
@@ -1093,7 +1093,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Collision checking
 -   Sampling-based concepts
 
-## Day 92: Navigation
+## Episode 92: Navigation
 
 **Study:**
 
@@ -1103,7 +1103,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Goal navigation
 -   Nav2 concepts
 
-## Day 93: Manipulation and Motion Planning
+## Episode 93: Manipulation and Motion Planning
 
 **Study:**
 
@@ -1113,7 +1113,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Trajectory execution
 -   MoveIt 2 concepts
 
-## Day 94: Autonomous Robot Project
+## Episode 94: Autonomous Robot Project
 
 **Build a simulated system that can:**
 
@@ -1127,9 +1127,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 13: Modern Robotics (Days 95-98)
+# Module 13: Modern Robotics (Episodes 95-98)
 
-## Day 95: NVIDIA Isaac Sim
+## Episode 95: NVIDIA Isaac Sim
 
 **Study:**
 
@@ -1143,7 +1143,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Python
 -   ROS 2 bridge
 
-## Day 96: Robotics Perception
+## Episode 96: Robotics Perception
 
 **Study:**
 
@@ -1154,7 +1154,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Point clouds
 -   Pose estimation
 
-## Day 97: Robot Learning
+## Episode 97: Robot Learning
 
 **Study:**
 
@@ -1166,7 +1166,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Domain randomization
 -   Sim-to-real concepts
 
-## Day 98: Modern Robot Architectures
+## Episode 98: Modern Robot Architectures
 
 **Study as integrated systems:**
 
@@ -1180,9 +1180,9 @@ algorithms, actuators, mechanics, power and feedback.
 
 ------------------------------------------------------------------------
 
-# Module 14: Complete Capstone (Days 99-100)
+# Module 14: Complete Capstone (Episodes 99-100)
 
-## Day 99: Engineer the Robot
+## Episode 99: Engineer the Robot
 
 **Produce:**
 
@@ -1207,7 +1207,7 @@ algorithms, actuators, mechanics, power and feedback.
 19. Risk/failure analysis
 20. Build schedule
 
-## Day 100: Integrate, Test and Teach
+## Episode 100: Integrate, Test and Teach
 
 **Present the complete system:**
 
@@ -1231,7 +1231,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Improvements
 
 **Suggested episode:**\
-`Day 100/100: I Built an Autonomous Robot From Scratch | 100 Days of Robotics Engineering`
+`Episode 100/100: I Built an Autonomous Robot From Scratch | 100 Episodes of Robotics Engineering`
 
 ------------------------------------------------------------------------
 
@@ -1313,7 +1313,7 @@ algorithms, actuators, mechanics, power and feedback.
 -   Isaac/robot learning: use current NVIDIA documentation because APIs
     and workflows change.
 
-# Day 101: Career, Hiring and Monetization
+# Episode 101: Career, Hiring and Monetization
 
 ## 101.1 Choose a Marketable Direction
 

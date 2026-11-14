@@ -1,10 +1,10 @@
-# Day 19: Interrupts
+# Episode 19: Interrupts
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** intermediate. You need Day 16 (the Uno, registers and `millis()`), Day 17 (debouncing) and Day 18 (timer compare values and prescalers). Interrupts change how code runs, so the debugging in this lesson is harder than in earlier days. Keep the serial logs.
+**Level:** intermediate. You need Episode 16 (the Uno, registers and `millis()`), Episode 17 (debouncing) and Episode 18 (timer compare values and prescalers). Interrupts change how code runs, so the debugging in this lesson is harder than in earlier days. Keep the serial logs.
 
 **By the end of this day, you will have:**
 
@@ -17,16 +17,16 @@
 
 - Arduino Uno Rev3 with Arduino IDE 2.3.x and the `Arduino AVR Boards` core at version 1.8.6
 - Two jumper wires, about $1
-- One pushbutton and a 10 kOhm pull-down or internal pull-up, as in Day 17, about $1
+- One pushbutton and a 10 kOhm pull-down or internal pull-up, as in Episode 17, about $1
 - A breadboard, about $5
 - Optional: a function generator or a second Uno for a more realistic test signal
 - Optional: a logic analyzer, about $10 to $20, to see the interrupt timing on a second channel
 
 **Prerequisites:**
 
-- Day 16: registers and bit operations, such as `|=` and `&=`
-- Day 17: pull-ups and contact bounce
-- Day 18: timer prescalers and the compare value formula
+- Episode 16: registers and bit operations, such as `|=` and `&=`
+- Episode 17: pull-ups and contact bounce
+- Episode 18: timer prescalers and the compare value formula
 
 ---
 
@@ -145,7 +145,7 @@ From first principles, the ATmega328P has two external interrupt pins, INT0 on p
 
 The ATmega328P also has pin-change interrupts for the other pins. The chip raises an interrupt when any pin in a group changes, and the code must find which pin changed. The Arduino core does not provide an API for pin-change interrupts, so you use the registers PCICR, PCMSK0, PCMSK1 and PCMSK2. The register approach is more work, and it is needed when you run out of external interrupt pins. For this lesson, the two external pins are enough.
 
-The worked example is the bounce problem from Day 17. A button wired to pin 2 with a falling-edge interrupt can trigger several times for one press, because the contact bounces. An ISR that counts edges reports three or four presses for each real press. The fix is to record the time of the edge in the ISR and ignore edges within 20 ms in the main loop, or to set a flag in the ISR and debounce in the loop. The ISR itself stays short.
+The worked example is the bounce problem from Episode 17. A button wired to pin 2 with a falling-edge interrupt can trigger several times for one press, because the contact bounces. An ISR that counts edges reports three or four presses for each real press. The fix is to record the time of the edge in the ISR and ignore edges within 20 ms in the main loop, or to set a flag in the ISR and debounce in the loop. The ISR itself stays short.
 
 The common mistake is to attach an interrupt to a pin that is also used for a serial port or a pin that changes too fast for the ISR. Pin 0 and pin 1 are shared with the USB serial connection, and an interrupt on them can conflict with uploads. The check is the pin map in the Uno's documentation before you wire anything.
 
@@ -157,7 +157,7 @@ External interrupts are how a robot knows that a bumper hit, an end-stop was rea
 
 A metronome clicks at a fixed rate, and a musician plays in time with it. A timer interrupt is a hardware metronome for a microcontroller. The timer counts clock ticks, and when it reaches a set value, the interrupt fires. The program uses the interrupt as the time base for its control loop, so the loop runs at a fixed rate with no jitter from the rest of the code.
 
-From first principles, the compare-match mode of Timer1 raises an interrupt when the counter equals the value in the output compare register OCR1A. The counter then resets to zero, which is the clear-timer-on-compare, or CTC, mode. Using the formula from Day 18, a 1 kHz interrupt needs OCR1A = F_CPU / (prescaler × f) − 1. With a prescaler of 1 and F_CPU of 16 MHz, that is 16,000,000 / (1 × 1000) − 1 = 15,999.
+From first principles, the compare-match mode of Timer1 raises an interrupt when the counter equals the value in the output compare register OCR1A. The counter then resets to zero, which is the clear-timer-on-compare, or CTC, mode. Using the formula from Episode 18, a 1 kHz interrupt needs OCR1A = F_CPU / (prescaler × f) − 1. With a prescaler of 1 and F_CPU of 16 MHz, that is 16,000,000 / (1 × 1000) − 1 = 15,999.
 
 Here is the register code for that timer, as it would appear in a sketch. It uses the names from the AVR header:
 
@@ -208,7 +208,7 @@ unsigned long readTicks() {
 
 The worked example is the race condition in the project. A loop that prints `ticks` without protection may show jumps or occasional values that are too large or too small. The fix removes the problem, and the difference between the two logs is the evidence that the race condition exists.
 
-The common mistake is to think `volatile` makes an access atomic. It does not. `volatile` only stops the compiler from caching the variable in a register. The atomic protection comes from the critical section. On a single-core chip, a critical section of a few microseconds is cheap, and on a multi-core chip, the protection must be more careful. The ESP32 on Day 24 has two cores, and its rules are different.
+The common mistake is to think `volatile` makes an access atomic. It does not. `volatile` only stops the compiler from caching the variable in a register. The atomic protection comes from the critical section. On a single-core chip, a critical section of a few microseconds is cheap, and on a multi-core chip, the protection must be more careful. The ESP32 on Episode 24 has two cores, and its rules are different.
 
 On the job, shared-variable bugs are among the hardest firmware bugs to find, because they appear only under load and disappear when you add a debug print. Keep shared data small, keep critical sections short and document the protection.
 
@@ -234,12 +234,12 @@ On the job, shared-variable bugs are among the hardest firmware bugs to find, be
 
 The goal is a repository that counts pulses with an external interrupt and runs a 1 kHz timer interrupt, with the count checked against a known reference. The project uses only the Uno and a jumper, so the cost is zero. It produces the kind of evidence a motor or encoder project needs.
 
-**Repo name:** `100-days-robotics-day-19-interrupts`
+**Repo name:** `100-episodes-robotics-day-19-interrupts`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-19-interrupts/
+100-episodes-robotics-day-19-interrupts/
 ├── README.md
 ├── pulse_counter/
 │   └── pulse_counter.ino
@@ -380,4 +380,4 @@ The project uses little new hardware, but it produces a lot of evidence. A revie
 
 ## Tomorrow
 
-Day 20 moves from pins to communication. The UART is the simplest serial protocol, and it sends one byte at a time over two wires. You will use the Uno's hardware serial port, learn the framing and the baud rate, and parse a simple text protocol from a second board or a USB adapter. The interrupt skills from today are how a UART receives bytes without losing them, so the ISR rules from this lesson will apply again.
+Episode 20 moves from pins to communication. The UART is the simplest serial protocol, and it sends one byte at a time over two wires. You will use the Uno's hardware serial port, learn the framing and the baud rate, and parse a simple text protocol from a second board or a USB adapter. The interrupt skills from today are how a UART receives bytes without losing them, so the ISR rules from this lesson will apply again.

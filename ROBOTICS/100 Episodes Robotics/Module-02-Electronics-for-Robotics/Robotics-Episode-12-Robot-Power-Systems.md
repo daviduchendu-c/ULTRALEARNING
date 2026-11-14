@@ -1,9 +1,9 @@
-# Day 12: Robot Power Systems
+# Episode 12: Robot Power Systems
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Days 6 to 11, especially Ohm's law, power (P = VI) and the voltage divider. You also need to be comfortable working with a battery and a bench supply, because today includes measurements on live packs.
+**Level:** intermediate. You need Episodes 6 to 11, especially Ohm's law, power (P = VI) and the voltage divider. You also need to be comfortable working with a battery and a bench supply, because today includes measurements on live packs.
 
 **By the end of this day, you will have:**
 
@@ -20,17 +20,17 @@
 - An inline fuse holder with a 3 A fast-blow fuse, about $3 in a kit.
 - A 5 V buck converter module, based on the LM2596 or MP1584 regulator, rated at least 3 A output, about $2 to $4.
 - A 5 W 10 Ω wire-wound resistor, about $1, as a known load.
-- Arduino Uno Rev3 with Arduino IDE 2.3 or newer, which you used on Day 11.
+- Arduino Uno Rev3 with Arduino IDE 2.3 or newer, which you used on Episode 11.
 - Two electrolytic capacitors, 470 µF at 16 V, and two 100 nF ceramic capacitors, about $2 in total.
 - A DC bench power supply with adjustable voltage and current limit, about $60 to $150 for a basic model. This is the safe way to test the power system before you connect the battery.
 - A digital multimeter that measures DC volts and amps, about $15 to $25. An inexpensive clamp meter, about $25, is useful but optional.
-- Breadboard, jumper wires, and the 10 kΩ and 5.6 kΩ resistors from Day 11.
+- Breadboard, jumper wires, and the 10 kΩ and 5.6 kΩ resistors from Episode 11.
 
 **Prerequisites:**
 
-- Day 2 (batteries and regulators at a high level) and Day 6 (power as P = VI)
-- Day 7: series and parallel circuits and voltage division
-- Day 11: the voltage divider and the ADC, which you use for the battery monitor
+- Episode 2 (batteries and regulators at a high level) and Episode 6 (power as P = VI)
+- Episode 7: series and parallel circuits and voltage division
+- Episode 11: the voltage divider and the ADC, which you use for the battery monitor
 - Comfort with the multimeter's current and voltage modes, including putting the meter in series with a load
 
 ---
@@ -147,7 +147,7 @@ A buck converter works by switching the input on and off at a frequency such as 
 
 A boost converter raises the voltage, and a buck-boost converter does either. The duty cycle for a boost is D = 1 − V_in / V_out. A single 3.7 V lithium-ion cell boosted to 5 V has D = 1 − 3.7 / 5 = 0.26, or 26 percent. Boost converters are more sensitive to load changes than bucks, and their input current is higher than their output current, which matters when you size the fuse.
 
-A switching regulator's drawback is noise. The switching frequency and its harmonics appear on the rail, and they can couple into a sensor's analog line, as you measured on Day 11. A common approach is to use a buck for the main 5 V rail, and to use a linear regulator or an LC filter for the quiet 3.3 V rail that feeds an analog sensor.
+A switching regulator's drawback is noise. The switching frequency and its harmonics appear on the rail, and they can couple into a sensor's analog line, as you measured on Episode 11. A common approach is to use a buck for the main 5 V rail, and to use a linear regulator or an LC filter for the quiet 3.3 V rail that feeds an analog sensor.
 
 The mistake is to choose a regulator by its maximum output current alone. The regulator must also stay within its input range at the lowest battery voltage and its thermal limit at the highest current. For the 2S pack, a buck with a 40 V input is fine, but a 3.3 V linear regulator fed from 8.4 V dissipates 5.1 × 0.15 = 0.77 W at a modest load, which is already a warm part. Check the input voltage range and the thermal derating on the datasheet before you order.
 
@@ -163,7 +163,7 @@ The first principles are simple. Current flows in a loop: from the source throug
 
 The standard fix is a star ground, where every subsystem returns to one common point, and the high-current returns (motors, battery, drivers) do not share wire with the low-current returns (sensors, microcontroller). In a robot the star point is usually the battery's negative terminal or the power input terminal. Keep the motor return short and thick, and run the sensor return separately to the star point.
 
-A rail is named after its voltage, such as 5 V, 3.3 V and VBAT. The name tells you what should be on that wire. When you draw a schematic, a rail is labelled once and each load is connected to it. Day 14 covers how rails appear in a schematic.
+A rail is named after its voltage, such as 5 V, 3.3 V and VBAT. The name tells you what should be on that wire. When you draw a schematic, a rail is labelled once and each load is connected to it. Episode 14 covers how rails appear in a schematic.
 
 The common mistake is to run the sensor ground through the motor's return path. The symptom is a sensor reading that changes when the motor starts, even though the sensor is not touched. Check it by measuring the voltage between the sensor's ground pin and the battery's negative terminal while the motor runs. If that voltage moves by tens of millivolts, the ground path is shared.
 
@@ -193,7 +193,7 @@ A car's fuse box has a fuse for each circuit, and a fuse blows before the wiring
 
 Fuses are sized by the maximum continuous current and the surge the circuit draws. A common rule is to choose a fuse rated at 125 to 150 percent of the maximum continuous current. A robot with a 2 A maximum load needs a fuse rated at about 2.5 to 3 A. The fuse must also tolerate the motor's start surge, which is why a fast-blow fuse is used for electronics and a slow-blow fuse for motors. The fuse is placed on the battery's positive lead, close to the battery, so a short anywhere on the rail is protected.
 
-The battery protection board (BMS) does three jobs. It stops charging when a cell reaches its upper voltage, typically 4.2 V per cell. It stops discharge when a cell reaches its lower voltage, which is usually set between 2.5 V and 3.0 V per cell by the board's design, so check the board's datasheet. It also cuts the output in a short circuit. A 2S board therefore cuts discharge at about 5.0 to 6.0 V across the pack, and the Day 2 figure of about 6 V nearly empty is the same threshold seen from the other side.
+The battery protection board (BMS) does three jobs. It stops charging when a cell reaches its upper voltage, typically 4.2 V per cell. It stops discharge when a cell reaches its lower voltage, which is usually set between 2.5 V and 3.0 V per cell by the board's design, so check the board's datasheet. It also cuts the output in a short circuit. A 2S board therefore cuts discharge at about 5.0 to 6.0 V across the pack, and the Episode 2 figure of about 6 V nearly empty is the same threshold seen from the other side.
 
 A brownout is a supply that dips below the voltage a chip needs. Each chip has a minimum operating voltage. When the rail sags below it, the chip can reset, lock up or behave unpredictably. Brownouts happen when a motor starts and draws a current spike that pulls the battery voltage down, which drops the regulator's input and then its output. The Raspberry Pi displays a warning icon when its 5 V supply falls below the level it needs, which is a built-in brownout indicator. The Arduino Uno can be configured to reset at a set threshold through the ATmega328P's brown-out detector, documented in the Microchip datasheet.
 
@@ -201,7 +201,7 @@ The design problem fits in one sentence: when a 6 V motor stalls at 2 A and the 
 
 Protection trips after a delay, and the fuse and BMS are slow compared with a chip's reset. A brief short may damage a MOSFET before the fuse opens. Protection reduces the risk; it does not remove the need for correct wiring and component ratings.
 
-The mistake is to treat a reset as a software bug. When the robot resets during a hard turn, check the battery voltage on a multimeter during the turn, or log it with the divider from Day 11. If the voltage dips below the regulator's minimum, the cause is power, and no software change will fix it.
+The mistake is to treat a reset as a software bug. When the robot resets during a hard turn, check the battery voltage on a multimeter during the turn, or log it with the divider from Episode 11. If the voltage dips below the regulator's minimum, the cause is power, and no software change will fix it.
 
 Every serious mobile robot has a BMS, a fused battery input and a power-good indicator. Product safety standards for battery-powered equipment are written around the same failure modes, so a reviewer will ask for the fuse, the BMS and the cutoff figures in the datasheet.
 
@@ -236,7 +236,7 @@ This project turns the lesson into a documented power system. It is a practical 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-12-robot-power-systems/
+100-episodes-robotics-engineering-day-12-robot-power-systems/
 ├── README.md
 ├── power/
 │   ├── budget.csv
@@ -360,7 +360,7 @@ This project is light on fabrication, but the electrical risk is real. The batte
 1. Energy is 7.4 × 2.5 = 18.5 Wh. Usable capacity is 2.5 × 0.8 = 2.0 Ah, so runtime is 2.0 / 1.8 = 1.11 hours, about 67 minutes. The maximum continuous current is 2.5 × 20 = 50 A at 20C, which is far above the 1.8 A average. Check the burst rating separately from the continuous rating.
 2. The linear regulator dissipates (8.4 − 3.3) × 0.3 = 1.53 W. A buck at 90 percent efficiency has an output of 3.3 × 0.3 = 0.99 W, so its input is 0.99 / 0.90 = 1.10 W and its loss is 0.11 W. The buck loses about one fourteenth of the linear regulator's heat.
 3. D = 1 − 3.7 / 5 = 0.26. The input current is higher because the input voltage is lower for the same power: P = V × I, so the input current is P / V_in, which is larger than P / V_out.
-4. Measure the battery or 5 V rail with a multimeter or the Day 11 divider on the same logger while the motors start. If the rail drops below the regulator or the chip's minimum during the reset, the cause is brownout. If the rail holds steady and the reset still happens, look at the code, the watchdog, or the stack.
+4. Measure the battery or 5 V rail with a multimeter or the Episode 11 divider on the same logger while the motors start. If the rail drops below the regulator or the chip's minimum during the reset, the cause is brownout. If the rail holds steady and the reset still happens, look at the code, the watchdog, or the stack.
 5. The most likely cause is shared ground: the motor return current flows through the same wire as the sensor's return, so the sensor sees a shifted ground. The fix is a star ground, with the motor return running separately to the battery's negative terminal and the sensor return running separately to the same point.
 6. Rate the fuse at 125 to 150 percent of the continuous current. For a branch with a 2.2 A stall that is only brief, a 3 A slow-blow fuse may be correct, because a fast-blow fuse may open during the start surge. The fuse must sit on the battery's positive lead close to the battery, so the whole supply is protected.
 
@@ -399,6 +399,6 @@ This project is light on fabrication, but the electrical risk is real. The batte
 
 ## Tomorrow
 
-Today you sized the supply, protected it and measured how it behaves under load. The next step is the part of the robot that draws most of that power: the motors. Day 13 covers how a DC motor behaves electrically, why its back-EMF limits its speed, how an H-bridge reverses it, and how PWM controls its average voltage. The stall currents you budgeted today are the numbers the motor driver and its flyback diode must survive, so keep the budget file open while you work.
+Today you sized the supply, protected it and measured how it behaves under load. The next step is the part of the robot that draws most of that power: the motors. Episode 13 covers how a DC motor behaves electrically, why its back-EMF limits its speed, how an H-bridge reverses it, and how PWM controls its average voltage. The stall currents you budgeted today are the numbers the motor driver and its flyback diode must survive, so keep the budget file open while you work.
 
-**Next:** [Day 13: Motor Electronics](Robotics-Day-13-Motor-Electronics.md)
+**Next:** [Episode 13: Motor Electronics](Robotics-Episode-13-Motor-Electronics.md)

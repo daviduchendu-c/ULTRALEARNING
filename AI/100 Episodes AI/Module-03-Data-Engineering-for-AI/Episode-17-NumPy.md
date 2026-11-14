@@ -1,9 +1,9 @@
-# Day 17: NumPy
+# Episode 17: NumPy
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You can write Python functions and loops and you have seen vectors and matrices in Days 8 and 9. Today you turn that math into code that runs on whole arrays at once.
+**Level:** intermediate. You can write Python functions and loops and you have seen vectors and matrices in Episodes 8 and 9. Today you turn that math into code that runs on whole arrays at once.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 8: vectors, the dot product and magnitude
-- Day 9: matrices, matrix multiplication, transpose and shapes
-- Day 16: summary statistics such as the mean and standard deviation
+- Episode 8: vectors, the dot product and magnitude
+- Episode 9: matrices, matrix multiplication, transpose and shapes
+- Episode 16: summary statistics such as the mean and standard deviation
 - Basic Python: functions, lists, `for` loops and importing modules
 
 ---
@@ -261,7 +261,7 @@ Vectorization has limits. Not every algorithm is an element-wise operation. A re
 
 ### Matrix operations
 
-Matrix operations are the arithmetic of linear algebra. You met them as ideas on Days 8 and 9. In NumPy, the `@` operator performs matrix multiplication, `.T` gives the transpose, and `np.linalg` provides solvers, inverses and decompositions. The distinction that trips up beginners is that `*` multiplies element by element, while `@` multiplies rows by columns.
+Matrix operations are the arithmetic of linear algebra. You met them as ideas on Episodes 8 and 9. In NumPy, the `@` operator performs matrix multiplication, `.T` gives the transpose, and `np.linalg` provides solvers, inverses and decompositions. The distinction that trips up beginners is that `*` multiplies element by element, while `@` multiplies rows by columns.
 
 Think of a spreadsheet. Element-wise multiplication multiplies each cell by the cell in the same position in another sheet. Matrix multiplication computes each cell of the result as a sum of products along a row of one sheet and a column of the other. The shapes must agree: an `(m, k)` matrix times a `(k, n)` matrix gives an `(m, n)` result.
 
@@ -334,12 +334,12 @@ Work through these in a notebook or a single script. Print the output of every s
 
 Build a small, tested Python package of array utilities that you would be willing to reuse in a feature pipeline. The package provides standardization with safe handling of constant columns, a broadcasting-based pairwise distance function, a covariance function that you check against NumPy's own implementation, and a reproducible synthetic dataset generator.
 
-Suggested repository name: `100-days-ai-day-17-numpy`
+Suggested repository name: `100-episodes-ai-day-17-numpy`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-17-numpy/
+100-episodes-ai-day-17-numpy/
 ├── README.md
 ├── numpy_toolkit/
 │   ├── __init__.py

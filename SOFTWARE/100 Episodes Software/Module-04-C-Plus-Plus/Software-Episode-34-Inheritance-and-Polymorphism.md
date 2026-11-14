@@ -1,9 +1,9 @@
-# Day 34: Inheritance and Polymorphism
+# Episode 34: Inheritance and Polymorphism
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** intermediate. You can write classes with constructors, destructors and private members from Day 33. This day adds the next layer: one class can be a kind of another, and a single call can do different work depending on the object it reaches. It is for anyone who has seen a class hierarchy in a framework and wondered how the right function gets called.
+**Level:** intermediate. You can write classes with constructors, destructors and private members from Episode 33. This day adds the next layer: one class can be a kind of another, and a single call can do different work depending on the object it reaches. It is for anyone who has seen a class hierarchy in a framework and wondered how the right function gets called.
 
 **By the end of this day, you will have:**
 
@@ -22,8 +22,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 33: the build, pointers and references, lifetime, and classes with access control
-- Day 30: `std::vector` and iterators
+- Episodes 27 to 33: the build, pointers and references, lifetime, and classes with access control
+- Episode 30: `std::vector` and iterators
 
 ---
 
@@ -299,12 +299,12 @@ Done when your two sentences name a concrete change for each design.
 
 The project builds one report two ways. The inheritance version uses an abstract `Shape` interface with three derived classes. The composition version uses a `std::variant` over three plain structs. Both produce the same total area, and the test checks that they agree. The demo prints the report using the inheritance version.
 
-Suggested repo name: `100-days-software-day-34-inheritance-and-polymorphism`.
+Suggested repo name: `100-episodes-software-day-34-inheritance-and-polymorphism`.
 
 The repo layout:
 
 ```
-100-days-software-day-34-inheritance-and-polymorphism/
+100-episodes-software-day-34-inheritance-and-polymorphism/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -737,6 +737,6 @@ This project is light on new code and heavy on design. A reviewer should see tha
 
 ## Tomorrow
 
-Day 35 covers templates and generic programming. You saw one form of generic code today with `std::variant` and `std::visit`, and templates are the compile-time version of the same idea. You will write function and class templates, use concepts from C++20 to state what a type must support, and write a generic algorithm that works on any container. The virtual calls from today give you the run-time form of polymorphism, and templates give you the compile-time form, so you can compare their costs directly.
+Episode 35 covers templates and generic programming. You saw one form of generic code today with `std::variant` and `std::visit`, and templates are the compile-time version of the same idea. You will write function and class templates, use concepts from C++20 to state what a type must support, and write a generic algorithm that works on any container. The virtual calls from today give you the run-time form of polymorphism, and templates give you the compile-time form, so you can compare their costs directly.
 
-**Next:** [Day 35: Templates and Generic Programming](Software-Day-35-Templates-and-Generic-Programming.md)
+**Next:** [Episode 35: Templates and Generic Programming](Software-Episode-35-Templates-and-Generic-Programming.md)

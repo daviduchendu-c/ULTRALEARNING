@@ -1,6 +1,6 @@
-# Day 3: Robotics Engineering Workflow
+# Episode 3: Robotics Engineering Workflow
 
-*100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
+*100 Episodes of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours
 **Level:** beginner. It is for anyone who has seen the parts of a robot and now wants to know the order in which to decide things. A basic terminal helps but is not required.
@@ -22,8 +22,8 @@
 
 **Prerequisites:**
 
-- Day 1: What Is Robotics? (the sense, compute, decide and act loop)
-- Day 2: Anatomy of a Robot (the layers and blocks of a mobile robot)
+- Episode 1: What Is Robotics? (the sense, compute, decide and act loop)
+- Episode 2: Anatomy of a Robot (the layers and blocks of a mobile robot)
 
 ---
 
@@ -97,7 +97,7 @@ A customer says, "I want a robot that brings coffee." That is a wish. Each step 
 
 The vocabulary of those steps is short. A problem statement says who has the problem, what it is and why it matters, in one or two sentences with no solution in them. A requirement is a "The system shall..." statement, and a good one is specific, measurable, achievable, relevant and testable. A specification (spec) holds the numbers, units, tolerances and test conditions behind a requirement. A constraint is a limit you did not choose, such as budget, size or deadline. So the coffee wish becomes the requirement "The robot shall carry a 500 g mug," and then the spec "Payload 0.5 kg, tilt under 5 degrees, maximum acceleration 0.5 m/s²."
 
-Here is the worked example you will carry through Day 5, the desk courier. In a small office, people walk across the room to pass light items (keys, a phone, a pen box) between two desks about 5 m apart.
+Here is the worked example you will carry through Episode 5, the desk courier. In a small office, people walk across the room to pass light items (keys, a phone, a pen box) between two desks about 5 m apart.
 
 | ID | Requirement | Specification | How to verify |
 |---|---|---|---|
@@ -120,7 +120,7 @@ Systems engineering and integration roles spend much of their time on requiremen
 
 The architecture is the floor plan before the furniture. It says "there is a kitchen here, and it connects to the dining room." It does not say which fridge to buy.
 
-It names the major blocks (compute, sensing, actuation, power, communication, mechanics and software layers), the interfaces between them, and the reason for each split. Day 2: Anatomy of a Robot gave you the typical blocks of a mobile robot. The rule that keeps an architecture honest is that each block traces back to a requirement.
+It names the major blocks (compute, sensing, actuation, power, communication, mechanics and software layers), the interfaces between them, and the reason for each split. Episode 2: Anatomy of a Robot gave you the typical blocks of a mobile robot. The rule that keeps an architecture honest is that each block traces back to a requirement.
 
 For the desk courier, R3 (avoid obstacles) creates a forward distance-sensing block. R5 (phone control) creates a Wi-Fi block. R1 and R2 together create a drive block with enough torque for 2 kg at 0.25 m/s. If you cannot point to a requirement for a block, either a requirement is missing or the block is not needed.
 
@@ -236,7 +236,7 @@ MCU header J1               Driver board J2
 
 The schematic uses electrical symbols and values. Drawn in KiCad, it would have the MCU symbol, the driver IC symbol, decoupling capacitors next to the driver's power pins, and net labels such as `PWM_A` and `VMOTOR`. It shows the parts and values that the other two diagrams hide.
 
-Two habits ruin drawings. A block diagram cluttered with pin numbers is hard to read, and a wiring diagram without wire colors or connector names is useless when you are debugging with a multimeter (Day 4: Measurement and Engineering Tools). A third problem is drift: diagrams fall out of step with reality as you change things on the bench. Update the drawing in the same commit as the change.
+Two habits ruin drawings. A block diagram cluttered with pin numbers is hard to read, and a wiring diagram without wire colors or connector names is useless when you are debugging with a multimeter (Episode 4: Measurement and Engineering Tools). A third problem is drift: diagrams fall out of step with reality as you change things on the bench. Update the drawing in the same commit as the change.
 
 In the market, a clear wiring diagram is what lets a technician who did not build the robot repair it.
 
@@ -273,11 +273,11 @@ A recipe lists every ingredient with a quantity, or the cook arrives at the shop
 ref,qty,description,manufacturer,mpn,supplier,unit_usd,ext_usd,notes
 U1,1,Microcontroller board,Raspberry Pi,Pico W,any authorized reseller,6.00,6.00,Wi-Fi for R5
 U2,1,Dual motor driver,Toshiba (chip),TB6612FNG breakout,SparkFun or Adafruit,8.00,8.00,check stall current
-M1-M2,2,Gearmotor with encoder,TBD,TBD,TBD,15.00,30.00,verify torque in Day 5
+M1-M2,2,Gearmotor with encoder,TBD,TBD,TBD,15.00,30.00,verify torque in Episode 5
 HW1,1,M3 screw and standoff kit,generic,,any,8.00,8.00,easy to forget
 ```
 
-The prices are placeholders for the format. Day 5: First Robot System Design replaces them with checked ranges. The four rows above total $52.00, against the $250 limit in R6.
+The prices are placeholders for the format. Episode 5: First Robot System Design replaces them with checked ranges. The four rows above total $52.00, against the $250 limit in R6.
 
 Most BOMs forget wires, connectors, screws, heat-shrink, shipping and spares. A common rule of thumb adds 10 to 20 percent for these and for parts you break. If your BOM total sits right at the budget, you have already failed R6 on paper. A CSV BOM kept in Git beats a spreadsheet emailed around, because every change is recorded with who, when and why.
 
@@ -334,14 +334,14 @@ In a portfolio, a repository with readable commit messages and tags shows a revi
 
 ## Project: a one-page requirements and test plan
 
-Today's skill is process, so the project is a written plan and not a working robot. A single page that shows the process working is enough evidence. You will apply the same method to your full design on Day 5: First Robot System Design.
+Today's skill is process, so the project is a written plan and not a working robot. A single page that shows the process working is enough evidence. You will apply the same method to your full design on Episode 5: First Robot System Design.
 
 **Goal:** a one-page plan for the desk courier or a robot of your own, kept in a small Git repository.
 
 ### Repository layout
 
 ```
-100-days-robotics-day-03-workflow/
+100-episodes-robotics-day-03-workflow/
 ├── README.md             # the one-page plan: problem, requirements, traceability, diagrams
 ├── bom.csv               # at least five rows; mark unknowns "TBD"
 ├── notebook/
@@ -446,6 +446,6 @@ The commit message should say what the commit contains.
 
 ## Tomorrow
 
-Day 4, **Measurement and Engineering Tools**, moves from the desk to the bench. Today you wrote specifications and test plans. Tomorrow you learn the instruments that produce the numbers in those plans: multimeters, bench power supplies, oscilloscopes, logic analyzers, calipers, breadboards and soldering tools. You will also learn to read a datasheet and debug in a fixed order. Your test log from today gets its first real column of measurements.
+Episode 4, **Measurement and Engineering Tools**, moves from the desk to the bench. Today you wrote specifications and test plans. Tomorrow you learn the instruments that produce the numbers in those plans: multimeters, bench power supplies, oscilloscopes, logic analyzers, calipers, breadboards and soldering tools. You will also learn to read a datasheet and debug in a fixed order. Your test log from today gets its first real column of measurements.
 
-**Next:** [Day 4: Measurement and Engineering Tools](Robotics-Day-04-Measurement-and-Engineering-Tools.md)
+**Next:** [Episode 4: Measurement and Engineering Tools](Robotics-Episode-04-Measurement-and-Engineering-Tools.md)

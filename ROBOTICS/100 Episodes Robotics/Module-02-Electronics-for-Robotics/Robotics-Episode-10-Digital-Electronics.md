@@ -1,9 +1,9 @@
-# Day 10: Digital Electronics
+# Episode 10: Digital Electronics
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 hours
-**Level:** beginner. You should have finished Days 6 to 9, especially the logic-level section of Day 9. Today every signal has two states, and the work is in combining them correctly.
+**Level:** beginner. You should have finished Episodes 6 to 9, especially the logic-level section of Episode 9. Today every signal has two states, and the work is in combining them correctly.
 
 **By the end of this day, you will have:**
 
@@ -13,7 +13,7 @@
 
 **What you need:**
 
-- Breadboard, jumper wires and a DMM (from Day 6)
+- Breadboard, jumper wires and a DMM (from Episode 6)
 - Arduino Uno R3 (ATmega328P), about $25 official or about $10 for a clone, with Arduino IDE 2.3 or newer
 - A 4-position DIP switch, or four 6 mm tactile pushbuttons with a latching option (about $3). Pushbuttons work if you hold them, and a DIP switch is better for this exercise.
 - Two 74HC00 quad 2-input NAND gate chips, DIP-14 package (about $1 each)
@@ -23,8 +23,8 @@
 
 **Prerequisites:**
 
-- Day 9: the logic-level thresholds (VIL and VIH) and pull-up resistors
-- Day 8: the Arduino sketch structure and the debounce idea
+- Episode 9: the logic-level thresholds (VIL and VIH) and pull-up resistors
+- Episode 8: the Arduino sketch structure and the debounce idea
 - Basic arithmetic with powers of two
 
 ---
@@ -124,13 +124,13 @@ Bits and bytes are how the robot stores its state, from a status flag to the 16-
 
 ## Logic levels
 
-Digital signals have two states, but in a real circuit they are voltages. Logic level is the mapping from voltage to logical value. In a 5 V CMOS system, a voltage near 0 V is read as low, and one near 5 V is read as high. The forbidden zone between them, which Day 9 described for the ATmega328P, can read either way.
+Digital signals have two states, but in a real circuit they are voltages. Logic level is the mapping from voltage to logical value. In a 5 V CMOS system, a voltage near 0 V is read as low, and one near 5 V is read as high. The forbidden zone between them, which Episode 9 described for the ATmega328P, can read either way.
 
 A traffic light must be clearly red or clearly green. An amber zone that could be read as either would cause collisions, so the design keeps a margin on each side.
 
-The thresholds differ by family. The ATmega328P at 5 V has a high threshold near 3.0 V and a low threshold near 1.5 V, as Day 9 showed. A 3.3 V system has a different pair of thresholds, and a 3.3 V output driving a 5 V input often works but must be checked on the datasheet.
+The thresholds differ by family. The ATmega328P at 5 V has a high threshold near 3.0 V and a low threshold near 1.5 V, as Episode 9 showed. A 3.3 V system has a different pair of thresholds, and a 3.3 V output driving a 5 V input often works but must be checked on the datasheet.
 
-The common mistake is assuming a floating input is low or high. It is neither, and it can be read as a random value. Tie every unused input of a gate to a defined level. The second mistake is mixing logic families without checking the thresholds, as Day 9 warned.
+The common mistake is assuming a floating input is low or high. It is neither, and it can be read as a random value. Tie every unused input of a gate to a defined level. The second mistake is mixing logic families without checking the thresholds, as Episode 9 warned.
 
 The limitation of logic levels is noise. A long wire near a motor can couple voltage spikes into a line and push it across a threshold. Design with pull-ups, short wires, decoupling capacitors and debounced inputs, as covered in earlier days.
 
@@ -217,7 +217,7 @@ A D flip-flop captures its D input on the rising edge of the clock. Between edge
 
 Take a clock at 1 kHz driving a toggle flip-flop. The output toggles every edge, so it completes one full cycle every two clock periods. Its frequency is `1000 / 2 = 500 Hz`. Cascade four toggles, each feeding the clock of the next, and you have a 4-bit binary counter, which counts from 0 to 15 and then wraps.
 
-The common mistake is changing the D input at the same time as the clock edge, which the flip-flop may capture either way. The fix is to change inputs only between edges, which is why microcontroller code writes outputs at known moments. The limitation of flip-flops is timing: every flip-flop has setup and hold times, and a signal that changes too close to the clock edge produces a metastable state. Asynchronous inputs, such as a button, must be synchronized through a flip-flop before the logic uses them. Day 8's debounce handles the bounce, and this two-flip-flop synchronizer handles the timing.
+The common mistake is changing the D input at the same time as the clock edge, which the flip-flop may capture either way. The fix is to change inputs only between edges, which is why microcontroller code writes outputs at known moments. The limitation of flip-flops is timing: every flip-flop has setup and hold times, and a signal that changes too close to the clock edge produces a metastable state. Asynchronous inputs, such as a button, must be synchronized through a flip-flop before the logic uses them. Episode 8's debounce handles the bounce, and this two-flip-flop synchronizer handles the timing.
 
 Sequential logic sits behind every counter that reads an encoder, every state machine that sequences a robot's startup, and every register in a microcontroller.
 
@@ -269,12 +269,12 @@ This project is a light one. The toolkit is a small Python module that handles t
 
 **Goal:** write functions to convert numbers to binary strings, to compute two's complement, to generate a truth table for any Boolean function of `n` inputs and to check De Morgan's law by brute force. Add the DIP switch sketch as firmware.
 
-**Repo name:** `100-days-robotics-engineering-day-10-digital-electronics`
+**Repo name:** `100-episodes-robotics-engineering-day-10-digital-electronics`
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-10-digital-electronics/
+100-episodes-robotics-engineering-day-10-digital-electronics/
 ├── README.md
 ├── bits.py
 ├── test_bits.py
@@ -396,4 +396,4 @@ def demorgan_holds() -> bool:
 
 Tomorrow you turn to analog signals and the ways digital and analog meet. Today every signal was 0 or 1. The real world gives a voltage that varies smoothly, such as a light sensor or a battery monitor. You will learn analog-to-digital conversion, how resolution and sampling set the accuracy of a reading, and how filters clean up noise before the Arduino's ADC pins read the signal. The 8-bit and 10-bit numbers you practiced today are exactly what the ADC returns.
 
-**Next:** [Day 11: Analog Electronics and Signals](Robotics-Day-11-Analog-Electronics-and-Signals.md)
+**Next:** [Episode 11: Analog Electronics and Signals](Robotics-Episode-11-Analog-Electronics-and-Signals.md)

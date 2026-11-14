@@ -1,9 +1,9 @@
-# Day 42: Arrays and Strings
+# Episode 42: Arrays and Strings
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You should have finished Day 41 and be comfortable with Python lists, strings, `while` loops and `dict`. This day is for anyone who writes nested loops over a list and wants a faster way that is still easy to read.
+**Level:** beginner to intermediate. You should have finished Episode 41 and be comfortable with Python lists, strings, `while` loops and `dict`. This day is for anyone who writes nested loops over a list and wants a faster way that is still easy to read.
 
 **By the end of this day, you will have:**
 
@@ -11,20 +11,20 @@
 - A prefix sum helper that answers any range sum in constant time after one pass
 - A two-pointer search on sorted data and a palindrome check that uses two pointers
 - A fixed-size and a variable-size sliding window, each proven correct by tests against a brute-force version
-- The extended repository from Day 41, with the new module and its tests running in GitHub Actions
+- The extended repository from Episode 41, with the new module and its tests running in GitHub Actions
 
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 41
+- Git 2.23 or newer, and the repository from Episode 41
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 - Optional: VS Code with the Python extension, for the debugger
 
 **Prerequisites:**
 
-- Day 41: Complexity Analysis (Big-O, the counting habit, `unittest`)
+- Episode 41: Complexity Analysis (Big-O, the counting habit, `unittest`)
 - Module 3: Python lists, slicing, `dict` and string methods
-- Day 8: GitHub Workflow, for pushing commits
+- Episode 8: GitHub Workflow, for pushing commits
 
 ---
 
@@ -49,9 +49,9 @@ In this guide you are going to cover the following:
 
 Arrays and strings are the most common data in software. A list of prices, a row of pixels, a log line, a username and a search query are all sequences. Most of the code you will read at work loops over one of them. The difference between a fast loop and a slow one is usually whether the loop does a fresh scan for every answer or reuses the work it has already done.
 
-Day 41 showed that two nested loops over n items do about n squared steps. This day shows the standard ways to remove that nested loop. Prefix sums turn many range queries into subtraction. Two pointers move through sorted data from both ends, so each element is visited once. A sliding window keeps a running summary of a segment and updates it as the segment moves. Each technique has a short proof, and each one has a brute-force version you can test against. The habit to build is simple: write the slow version first, then write the fast version and check that the two agree on many random inputs.
+Episode 41 showed that two nested loops over n items do about n squared steps. This day shows the standard ways to remove that nested loop. Prefix sums turn many range queries into subtraction. Two pointers move through sorted data from both ends, so each element is visited once. A sliding window keeps a running summary of a segment and updates it as the segment moves. Each technique has a short proof, and each one has a brute-force version you can test against. The habit to build is simple: write the slow version first, then write the fast version and check that the two agree on many random inputs.
 
-These patterns appear in log analysis, in time series dashboards, in spell checkers, in text search and in any interview question that begins with "given an array". They are also the basis for the more advanced structures in the rest of this module. Hash tables in Day 45 and heaps in Day 47 both come up in the same problems.
+These patterns appear in log analysis, in time series dashboards, in spell checkers, in text search and in any interview question that begins with "given an array". They are also the basis for the more advanced structures in the rest of this module. Hash tables in Episode 45 and heaps in Episode 47 both come up in the same problems.
 
 ---
 
@@ -143,7 +143,7 @@ def two_sum_sorted(nums: list[int], target: int) -> tuple[int, int] | None:
 print(two_sum_sorted([1, 3, 4, 6], 7))   # (0, 3), because 1 + 6 = 7
 ```
 
-The limitation is the sorted requirement. If the input is unsorted, sorting first costs O(n log n), and you lose the original indices unless you carry them along. For unsorted input, a hash table gives O(n) expected time, which Day 45 covers.
+The limitation is the sorted requirement. If the input is unsorted, sorting first costs O(n log n), and you lose the original indices unless you carry them along. For unsorted input, a hash table gives O(n) expected time, which Episode 45 covers.
 
 The common mistake is to move both pointers on every iteration, which skips valid pairs. Each step should move exactly one pointer, chosen by the comparison. Test with a pair near the middle, such as `[1, 2, 3, 4]` with target 5, to make sure the pointers meet correctly. Two pointers also appears in palindrome checks, where you compare characters from both ends:
 
@@ -197,7 +197,7 @@ print(max_window_sum([1, 2, 3, 4], 2))       # 7, from 3 + 4
 print(longest_unique_substring("abcabcbb"))  # 3, from "abc"
 ```
 
-The limitation is that the summary must support both adding and removing. A sum, a count and a dictionary of counts all do. A maximum does not, because removing the current maximum leaves you needing the next one. That case needs a monotonic deque, which Day 44 covers.
+The limitation is that the summary must support both adding and removing. A sum, a count and a dictionary of counts all do. A maximum does not, because removing the current maximum leaves you needing the next one. That case needs a monotonic deque, which Episode 44 covers.
 
 The common mistake is to forget to remove the element that leaves the window, so the sum keeps growing. To catch it, write the window on paper for a three-element array and check that the sum after each step equals the sum of the three elements currently inside. Another mistake in the variable window is to move `start` backward. The check `last_seen[ch] >= start` exists so that an old repeat outside the window is ignored.
 
@@ -207,7 +207,7 @@ Sliding windows appear in network rate limiting, where a service counts requests
 
 ## Hands-on exercises
 
-Work in the repository from Day 41. Create the new module and tests as described in the project, and use the same CI workflow.
+Work in the repository from Episode 41. Create the new module and tests as described in the project, and use the same CI workflow.
 
 Exercise 1 traces indices by hand. On paper, list the indices and values for `nums = [5, 2, 8, 1]`. Write down `nums[-2]`, `nums[1:3]` and `len(nums) - 1` before you run anything. Then run them in the Python shell and check each answer.
 
@@ -233,14 +233,14 @@ Done when `python -m unittest` passes and the GitHub Actions run for your latest
 
 ## Project: an arrays and strings toolkit
 
-The project is a small module of array and string utilities, with tests that compare each fast function to a slow reference. The repository from Day 41 is the starting point, so the workflow, the `dsa` package and the test layout stay the same. The project adds one module, one test file and a short notes file.
+The project is a small module of array and string utilities, with tests that compare each fast function to a slow reference. The repository from Episode 41 is the starting point, so the workflow, the `dsa` package and the test layout stay the same. The project adds one module, one test file and a short notes file.
 
-Suggested repo name: `100-days-software-day-42-arrays-and-strings`. Start by copying the Day 41 repository into a new folder, deleting the old `docs/growth-notes.md` if you do not need it, and renaming the folder.
+Suggested repo name: `100-episodes-software-day-42-arrays-and-strings`. Start by copying the Episode 41 repository into a new folder, deleting the old `docs/growth-notes.md` if you do not need it, and renaming the folder.
 
 The repo layout:
 
 ```
-100-days-software-day-42-arrays-and-strings/
+100-episodes-software-day-42-arrays-and-strings/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -409,7 +409,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 41 repository into the new folder and create `dsa/arrays.py` with the starter code. Run `python -m unittest` and confirm the new tests pass alongside the old ones.
+1. Copy the Episode 41 repository into the new folder and create `dsa/arrays.py` with the starter code. Run `python -m unittest` and confirm the new tests pass alongside the old ones.
 2. Create `tests/test_arrays.py` from the starter. Run it on its own with `python -m unittest tests.test_arrays -v` and read the list of test names.
 3. Add a brute-force `max_window_sum_naive` in the test file. It should compute every window with `sum` inside a loop. Add a randomized test that compares it with `max_window_sum` for 100 random lists.
 4. Add a brute-force `is_palindrome_naive` that builds a cleaned lowercase string and compares it with its reverse. Compare it with `is_palindrome` on 100 random strings drawn from the characters `"aA1 ,."`.
@@ -442,7 +442,7 @@ This project is light on new ideas, because the techniques are short. The point 
 
 1. Recomputing costs about n times q, and the prefix array costs n once plus q times a constant. The prefix array wins once q is more than a small number, because the setup is one pass. For q equal to 1 the loop is as fast. For q equal to 10 with n equal to 1000 the difference is already large.
 2. The loop never runs when the list is empty, because `left` is 0 and `right` is negative, so the function falls through to `return None`. Changing the condition to `left <= right` would allow `left` and `right` to be the same element, which pairs an element with itself. That is wrong when the target is twice that element.
-3. The sum can be updated by adding and removing an element, but a maximum cannot be updated after removal without knowing the next largest value. A monotonic deque keeps the candidates in order and gives O(n) total time, which Day 44 covers.
+3. The sum can be updated by adding and removing an element, but a maximum cannot be updated after removal without knowing the next largest value. A monotonic deque keeps the candidates in order and gives O(n) total time, which Episode 44 covers.
 4. A repeat before `start` belongs to an older window that has already been left behind, so it must not move `start` backward. Only a repeat inside the current window forces the left edge to move.
 5. Sorting plus two pointers is O(n log n) and beats O(n squared) when n is large enough that the difference matters. For small n the brute force can be just as fast. If the input is already sorted, the sort step costs little, and the two-pointer scan alone is O(n).
 6. Strings are immutable, so each `+=` can create a new string and copy the old contents, which makes the loop quadratic in the worst case. CPython has an optimization for some cases, but you cannot rely on it. The fix is to collect the characters in a list and call `"".join(parts)` once at the end.
@@ -479,4 +479,4 @@ This project is light on new ideas, because the techniques are short. The point 
 
 ## Tomorrow
 
-Day 43 moves from arrays, which store values side by side, to linked lists, which store each value in a node with a pointer to the next one. You will see why inserting into the middle of an array costs O(n) while a linked list can do it in O(1) once you hold the node, and why that tradeoff matters. The two-pointer habit from today, where one pointer moves faster than the other, returns in the fast and slow pointer technique for finding the middle of a list.
+Episode 43 moves from arrays, which store values side by side, to linked lists, which store each value in a node with a pointer to the next one. You will see why inserting into the middle of an array costs O(n) while a linked list can do it in O(1) once you hold the node, and why that tradeoff matters. The two-pointer habit from today, where one pointer moves faster than the other, returns in the fast and slow pointer technique for finding the middle of a list.

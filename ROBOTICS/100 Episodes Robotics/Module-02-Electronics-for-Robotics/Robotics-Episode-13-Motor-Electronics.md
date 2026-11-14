@@ -1,9 +1,9 @@
-# Day 13: Motor Electronics
+# Episode 13: Motor Electronics
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Days 6 to 12, especially Ohm's law, power, the switch-like behavior of a MOSFET from Day 9 and the power budget from Day 12. Today you drive a real motor, so the safety rules in this lesson apply to every exercise.
+**Level:** intermediate. You need Episodes 6 to 12, especially Ohm's law, power, the switch-like behavior of a MOSFET from Episode 9 and the power budget from Episode 12. Today you drive a real motor, so the safety rules in this lesson apply to every exercise.
 
 **By the end of this day, you will have:**
 
@@ -20,7 +20,7 @@
 - One logic-level N-channel MOSFET, IRLZ44N (55 V, 47 A in the datasheet), about $1
 - One 1N5819 Schottky diode (40 V, 1 A), about $0.20, or a 1N4007 general-purpose diode as an alternative
 - Resistors: one 100 Ω, one 10 kΩ, about $0.10 each
-- One 6 V regulated bench power supply with a current limit that you can set between 0.1 A and 1.5 A, about $60 to $150. A battery pack with an inline fuse is the alternative for the mobile exercises, covered in Day 12.
+- One 6 V regulated bench power supply with a current limit that you can set between 0.1 A and 1.5 A, about $60 to $150. A battery pack with an inline fuse is the alternative for the mobile exercises, covered in Episode 12.
 - An inline fuse holder with a 2 A fast-blow fuse, about $3
 - Digital multimeter with DC volts and DC amps modes, and an ohms mode, about $15 to $25
 - Breadboard and jumper wires, about $5
@@ -28,9 +28,9 @@
 
 **Prerequisites:**
 
-- Day 9: the N-channel MOSFET as a switch, the gate threshold and the pull-down resistor
-- Day 11: PWM as a way to set an average voltage, and the ADC for reading a signal
-- Day 12: the power budget, the fuse rating and the star ground
+- Episode 9: the N-channel MOSFET as a switch, the gate threshold and the pull-down resistor
+- Episode 11: PWM as a way to set an average voltage, and the ADC for reading a signal
+- Episode 12: the power budget, the fuse rating and the star ground
 - Comfort with setting a bench supply's current limit before connecting a load
 
 ---
@@ -125,7 +125,7 @@ The relation comes from Faraday's law. A coil moving through a magnetic field ha
 
 Here is the worked example with the same motor. Its no-load current is 0.1 A at 6 V. The voltage across the winding is I × R = 0.1 × 6 = 0.6 V, so the back-EMF is E = 6 − 0.6 = 5.4 V. The motor spins at the speed that gives 5.4 V of back-EMF. Now load the shaft lightly, so the speed falls and the back-EMF falls to 4.5 V. The current becomes (6 − 4.5) / 6 = 0.25 A. Loading a motor raises its current because the back-EMF falls, and the current goes up with the load.
 
-Back-EMF is only an estimate of speed, not a speed sensor. It depends on the motor's constant, which changes with temperature and brush wear, and it is hard to measure cleanly with PWM running. Robots that need accurate speed use encoders, which Day 29 introduces in a simple form and later modules cover in depth.
+Back-EMF is only an estimate of speed, not a speed sensor. It depends on the motor's constant, which changes with temperature and brush wear, and it is hard to measure cleanly with PWM running. Robots that need accurate speed use encoders, which Episode 29 introduces in a simple form and later modules cover in depth.
 
 The mistake is to read a low current as a healthy motor. A motor with a worn brush, a damaged bearing or a jammed gear can draw less current than expected because the back-EMF is higher or the winding is open. The way to spot it is to measure the no-load current and the speed together. If the speed is low and the current is also low, check the winding resistance with the ohms mode of the multimeter, with the motor disconnected from the driver.
 
@@ -173,7 +173,7 @@ The starting point is the inductor's voltage relation, V = L × di/dt. When the 
 
 The worked example shows the scale. A motor's effective inductance is about 1 mH. It carries 1 A and the switch opens in 1 microsecond. The voltage spike is V = 0.001 × 1 / 0.000001 = 1000 V. That is well above the 55 V rating of the IRLZ44N. With a 1N5819 diode across the motor, the spike is clamped to about 6 V plus the 0.3 V forward drop of the diode, so the MOSFET sees only about 6.3 V above the supply. The calculation is the reason the diode is not optional.
 
-The design of the switching stage has three parts. The gate of the MOSFET is pulled to ground through a 10 kΩ resistor, so the transistor stays off when the microcontroller pin floats, which Day 9 covered. A 100 Ω resistor in series with the gate limits the current into the microcontroller pin when the gate switches, and it slows the edges to reduce noise. The flyback diode is placed across the motor with its cathode to the supply and its anode to the MOSFET drain.
+The design of the switching stage has three parts. The gate of the MOSFET is pulled to ground through a 10 kΩ resistor, so the transistor stays off when the microcontroller pin floats, which Episode 9 covered. A 100 Ω resistor in series with the gate limits the current into the microcontroller pin when the gate switches, and it slows the edges to reduce noise. The flyback diode is placed across the motor with its cathode to the supply and its anode to the MOSFET drain.
 
 The catch is that the diode is slow to recover on a fast-recovery diode and not fast enough on a general-purpose diode, and the Schottky diode recovers quickly but has a limited reverse voltage. Check the diode's current and reverse voltage rating against the motor, and check that the MOSFET's drain-source voltage rating is well above the supply plus the spike.
 
@@ -207,7 +207,7 @@ The starting point is the power the current dissipates. In a conductor or a MOSF
 
 Here is the worked example. A 0.1 Ω shunt carries a 2 A stall current. Its voltage is 0.1 × 2 = 0.2 V, which an op-amp or ADC can read. Its dissipation is 2² × 0.1 = 0.4 W, so a 1 W shunt is the right rating, because a 0.25 W part would run hot and drift. The same arithmetic tells you that a shunt large enough to read easily is large enough to waste power, which is the trade-off in every current sensor.
 
-The bench supply limit is the simplest protection. Set it to a value above the running current and below the stall current, such as 1.2 A for the motor in this lesson. When the motor stalls, the supply holds the current at the limit and drops its voltage, so the motor stops and the supply does not overload. A battery has no such limit, so the battery branch needs a fuse, sized as Day 12 described: 125 to 150 percent of the continuous current, which for the 1.0 A stall motor and 0.25 A running current is about 2 A, placed on the battery's positive lead.
+The bench supply limit is the simplest protection. Set it to a value above the running current and below the stall current, such as 1.2 A for the motor in this lesson. When the motor stalls, the supply holds the current at the limit and drops its voltage, so the motor stops and the supply does not overload. A battery has no such limit, so the battery branch needs a fuse, sized as Episode 12 described: 125 to 150 percent of the continuous current, which for the 1.0 A stall motor and 0.25 A running current is about 2 A, placed on the battery's positive lead.
 
 A fuse's limit is its slowness. A fuse takes time to open, and a short that delivers 30 A can damage a MOSFET before the fuse opens. The bench supply limit is faster, but it only protects if the bench supply is in constant-current mode. The layered approach is the answer: fuse for the wiring, driver limits for the chip, and firmware limits for the motor.
 
@@ -219,7 +219,7 @@ On the job, current limiting is required by every motor controller. The best dri
 
 ### Electrical noise
 
-A brushed motor is an electrical noise source. As the brushes cross the commutator segments, the current switches, and small sparks create voltage spikes that travel along the power wires and radiate into nearby sensors. The motor's PWM adds a second source at the switching frequency, and the two together can shift a sensor reading by tens of millivolts, as Day 11's noise measurements showed.
+A brushed motor is an electrical noise source. As the brushes cross the commutator segments, the current switches, and small sparks create voltage spikes that travel along the power wires and radiate into nearby sensors. The motor's PWM adds a second source at the switching frequency, and the two together can shift a sensor reading by tens of millivolts, as Episode 11's noise measurements showed.
 
 The physics is the same as the flyback problem. A fast change in current, di/dt, induces a voltage across any inductance in the path. Wires have inductance of about 1 µH per metre, so a 10 cm loop of motor wire and its return has an inductance of roughly 0.1 µH. A current changing by 1 A in 10 ns induces V = 0.1 × 10^-6 × 1 / 10 × 10^-9 = 10 V. That is a large number for a small loop, and it explains why short, tight wiring matters.
 
@@ -257,12 +257,12 @@ Stop immediately if any component becomes hot to the touch, if the bench supply'
 
 This project is a measurement rig that you can reuse for any small motor and driver. It is a practical build, so the deliverable is a set of recorded measurements with the calculations that predict them, and a README that explains where the driver's limits sit.
 
-**Goal:** build a repeatable test rig for one motor and one driver, which records the stall current, the no-load current, the PWM voltage response and the driver temperature under a sustained load. The output is a characterization table you can compare against the datasheet and against the power budget from Day 12.
+**Goal:** build a repeatable test rig for one motor and one driver, which records the stall current, the no-load current, the PWM voltage response and the driver temperature under a sustained load. The output is a characterization table you can compare against the datasheet and against the power budget from Episode 12.
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-13-motor-electronics/
+100-episodes-robotics-engineering-day-13-motor-electronics/
 ├── README.md
 ├── firmware/
 │   └── driver_rig/
@@ -421,6 +421,6 @@ This project uses a motor and a driver that can heat, and it uses a supply that 
 
 ## Tomorrow
 
-Today you drove a motor safely and measured how it responds to voltage and load. Tomorrow you will read the documents that describe every part you have used so far. Day 14 covers schematics and datasheets: how to read the symbols, nets and rails in a circuit diagram, how to find the pin numbers and the absolute maximum ratings in a datasheet, and how to read a timing diagram. The TB6612FNG and IRLZ44N datasheets you looked up today are the first documents you will read in that lesson.
+Today you drove a motor safely and measured how it responds to voltage and load. Tomorrow you will read the documents that describe every part you have used so far. Episode 14 covers schematics and datasheets: how to read the symbols, nets and rails in a circuit diagram, how to find the pin numbers and the absolute maximum ratings in a datasheet, and how to read a timing diagram. The TB6612FNG and IRLZ44N datasheets you looked up today are the first documents you will read in that lesson.
 
-**Next:** [Day 14: Schematics and Datasheets](Robotics-Day-14-Schematics-and-Datasheets.md)
+**Next:** [Episode 14: Schematics and Datasheets](Robotics-Episode-14-Schematics-and-Datasheets.md)

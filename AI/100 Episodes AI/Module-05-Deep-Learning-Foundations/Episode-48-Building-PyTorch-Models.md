@@ -1,9 +1,9 @@
-# Day 48: Building PyTorch Models
+# Episode 48: Building PyTorch Models
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You know tensors (Day 46) and autograd (Day 47). Today you package a network the way production code does: as a class that owns its layers, describes its computation in one method and can be saved, loaded and tested.
+**Level:** intermediate. You know tensors (Episode 46) and autograd (Episode 47). Today you package a network the way production code does: as a class that owns its layers, describes its computation in one method and can be saved, loaded and tested.
 
 **By the end of this day, you will have:**
 
@@ -15,17 +15,17 @@
 **What you need:**
 
 - A computer with Python 3.11 or 3.12
-- PyTorch 2.5.1 from Day 46, with the same environment
+- PyTorch 2.5.1 from Episode 46, with the same environment
 - pytest 8.3.3, as before
 - Matplotlib 3.9.2 (`pip install matplotlib==3.9.2`), for the loss plot
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 39: the dense layer and its forward pass
-- Day 42: binary cross-entropy and why it is paired with logits
-- Day 45: dropout, batch normalization and the eval mode
-- Day 46 and Day 47: tensors, devices and autograd
+- Episode 39: the dense layer and its forward pass
+- Episode 42: binary cross-entropy and why it is paired with logits
+- Episode 45: dropout, batch normalization and the eval mode
+- Episode 46 and Episode 47: tensors, devices and autograd
 
 ---
 
@@ -122,7 +122,7 @@ In the real market, a model class is the unit that a team reviews, tests and ver
 
 Picture a set of standard building blocks, each with a label that says what it does. A dense layer, a dropout layer and an activation are the blocks you will use most often. PyTorch provides each one as a module, and you combine them in the constructor.
 
-From first principles, `nn.Linear(in_features, out_features)` computes X W^T + b, with weights of shape (out, in). Note the transpose: PyTorch stores the weight in the output-by-input layout, which differs from the input-by-output layout of your NumPy code on Day 39. `nn.Tanh`, `nn.ReLU` and `nn.Sigmoid` are activation modules, and `nn.Dropout(p)` and `nn.BatchNorm1d(num_features)` are the regularizers from Day 45. Each layer creates its own parameters with a default initialization, which you can change if you need to.
+From first principles, `nn.Linear(in_features, out_features)` computes X W^T + b, with weights of shape (out, in). Note the transpose: PyTorch stores the weight in the output-by-input layout, which differs from the input-by-output layout of your NumPy code on Episode 39. `nn.Tanh`, `nn.ReLU` and `nn.Sigmoid` are activation modules, and `nn.Dropout(p)` and `nn.BatchNorm1d(num_features)` are the regularizers from Episode 45. Each layer creates its own parameters with a default initialization, which you can change if you need to.
 
 ```python
 import torch
@@ -146,7 +146,7 @@ In industry, the standard layer types are shared across teams, and reviewers loo
 
 The forward method is the recipe. It takes the input tensor, passes it through the layers in order and returns the output. It is ordinary Python, so you can use conditionals, loops and helper functions inside it, as long as every operation is a differentiable tensor operation.
 
-From first principles, the forward method runs once for each call of the module, and the autograd graph from Day 47 is built during that call. Because the graph is rebuilt on each call, the forward method can change its behavior between calls, for example by skipping a layer when a flag is set. It must return the tensor that the loss expects, and for a binary classifier that tensor should be the logit, not a probability.
+From first principles, the forward method runs once for each call of the module, and the autograd graph from Episode 47 is built during that call. Because the graph is rebuilt on each call, the forward method can change its behavior between calls, for example by skipping a layer when a flag is set. It must return the tensor that the loss expects, and for a binary classifier that tensor should be the logit, not a probability.
 
 ```python
 import torch
@@ -175,9 +175,9 @@ Do not apply a sigmoid in the forward method and then pass the result to `BCEWit
 
 ## Losses
 
-A loss module is a function that compares the model's output with the target. PyTorch provides loss modules that you create once and call on each batch. For binary classification, `nn.BCEWithLogitsLoss` combines a sigmoid and the binary cross-entropy from Day 42 in one stable operation.
+A loss module is a function that compares the model's output with the target. PyTorch provides loss modules that you create once and call on each batch. For binary classification, `nn.BCEWithLogitsLoss` combines a sigmoid and the binary cross-entropy from Episode 42 in one stable operation.
 
-From first principles, the combined form computes the loss from the logit z and the label y with a formula that avoids computing log of a probability near zero. The gradient with respect to the logit is sigmoid(z) minus y, as you showed on Day 42. For multi-class classification, `nn.CrossEntropyLoss` takes logits and integer class labels and applies log softmax internally. For regression, `nn.MSELoss` takes predictions and real targets. The input conventions differ between losses, so read each one's documentation before use.
+From first principles, the combined form computes the loss from the logit z and the label y with a formula that avoids computing log of a probability near zero. The gradient with respect to the logit is sigmoid(z) minus y, as you showed on Episode 42. For multi-class classification, `nn.CrossEntropyLoss` takes logits and integer class labels and applies log softmax internally. For regression, `nn.MSELoss` takes predictions and real targets. The input conventions differ between losses, so read each one's documentation before use.
 
 ```python
 import torch
@@ -189,7 +189,7 @@ labels = torch.tensor([[1.0], [0.0]])
 print(loss_fn(logits, labels).item())   # about 0.2201
 ```
 
-The limitation of the loss module is that it is only one part of the objective. Weight decay, a penalty on outputs or a custom term must be added explicitly, and the optimizer's weight decay argument is not the same thing as adding a penalty to the loss for every parameter. Day 45 explained the difference.
+The limitation of the loss module is that it is only one part of the objective. Weight decay, a penalty on outputs or a custom term must be added explicitly, and the optimizer's weight decay argument is not the same thing as adding a penalty to the loss for every parameter. Episode 45 explained the difference.
 
 Do not pass probabilities to `BCEWithLogitsLoss`, or logits to `BCELoss`. Both run without a clear error when the values fall in range, and the model trains to a wrong answer. Check the name and the expected input of each loss every time, and test with a small example whose loss you can compute by hand.
 
@@ -199,9 +199,9 @@ In the real market, the loss module is usually the only part of training that en
 
 ## Optimizers
 
-An optimizer is an object that holds a reference to the parameters and updates them from their gradients. You construct it once with the list of parameters and the hyperparameters, and you call `step` after each backward pass. The optimizers you studied on Day 44 are available as classes in `torch.optim`.
+An optimizer is an object that holds a reference to the parameters and updates them from their gradients. You construct it once with the list of parameters and the hyperparameters, and you call `step` after each backward pass. The optimizers you studied on Episode 44 are available as classes in `torch.optim`.
 
-From first principles, `torch.optim.Adam(model.parameters(), lr=1e-3)` creates an optimizer whose state includes the moment estimates for each parameter, which the update uses. Calling `optimizer.zero_grad()` clears the gradients, `loss.backward()` fills them and `optimizer.step()` applies the update. The order is the same as on Day 47. Learning-rate schedulers in `torch.optim.lr_scheduler` change the rate between steps, and you attach them to the optimizer.
+From first principles, `torch.optim.Adam(model.parameters(), lr=1e-3)` creates an optimizer whose state includes the moment estimates for each parameter, which the update uses. Calling `optimizer.zero_grad()` clears the gradients, `loss.backward()` fills them and `optimizer.step()` applies the update. The order is the same as on Episode 47. Learning-rate schedulers in `torch.optim.lr_scheduler` change the rate between steps, and you attach them to the optimizer.
 
 ```python
 import torch
@@ -249,7 +249,7 @@ class ConfigurableMLP(nn.Module):
         return self.net(x)
 ```
 
-The limitation of configurable architectures is that a search over many shapes costs time and can overfit the validation set. Start from a reasonable default, change one thing at a time, and report the number of parameters with every result. A deep model that is much larger than the dataset will overfit, as Day 45 showed.
+The limitation of configurable architectures is that a search over many shapes costs time and can overfit the validation set. Start from a reasonable default, change one thing at a time, and report the number of parameters with every result. A deep model that is much larger than the dataset will overfit, as Episode 45 showed.
 
 Do not compare two architectures with different parameter counts and call the larger one better. Compare them at a matched budget, or report both the count and the accuracy, so the comparison is fair. In the real market, architecture decisions are judged against the cost of training and serving, not only the accuracy on a leaderboard.
 
@@ -269,12 +269,12 @@ Do not compare two architectures with different parameter counts and call the la
 
 **Goal:** write a configurable MLP as an `nn.Module`, train it on a synthetic circle dataset with the correct loss and optimizer, add tests for shapes, counts and saving, and compare a deep narrow model with a shallow wide one at a matched parameter count.
 
-**Repo name:** `100-days-ai-day-48-building-pytorch-models`
+**Repo name:** `100-episodes-ai-day-48-building-pytorch-models`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-48-building-pytorch-models/
+100-episodes-ai-day-48-building-pytorch-models/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -417,4 +417,4 @@ def accuracy(model, X, y):
 
 ## Tomorrow
 
-Day 49 deals with the data that feeds the model. You will meet `torch.utils.data.Dataset` and `DataLoader`, learn how batches are formed, shuffled and transformed, and write a custom dataset that reads from files. The model you built today accepts a batch of tensors, and the loader is the component that produces those batches from raw data reliably and efficiently.
+Episode 49 deals with the data that feeds the model. You will meet `torch.utils.data.Dataset` and `DataLoader`, learn how batches are formed, shuffled and transformed, and write a custom dataset that reads from files. The model you built today accepts a batch of tensors, and the loader is the component that produces those batches from raw data reliably and efficiently.

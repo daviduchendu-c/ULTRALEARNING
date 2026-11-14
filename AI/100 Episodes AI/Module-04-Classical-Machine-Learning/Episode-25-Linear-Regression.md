@@ -1,9 +1,9 @@
-# Day 25: Linear Regression
+# Episode 25: Linear Regression
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You need the Day 24 workflow and the vector and matrix basics from Day 8 and Day 9. The calculus is light, and you will check each derivative numerically.
+**Level:** beginner to intermediate. You need the Episode 24 workflow and the vector and matrix basics from Episode 8 and Episode 9. The calculus is light, and you will check each derivative numerically.
 
 **By the end of this day, you will have:**
 
@@ -24,9 +24,9 @@
 
 **Prerequisites:**
 
-- Day 8: dot product, vector norm and the idea of a projection
-- Day 9: matrix multiplication, transpose and solving linear systems
-- Day 24: train, validation and test splits, and the baseline habit
+- Episode 8: dot product, vector norm and the idea of a projection
+- Episode 9: matrix multiplication, transpose and solving linear systems
+- Episode 24: train, validation and test splits, and the baseline habit
 - Basic derivatives: the slope of a function and the chain rule at the level of one variable
 
 ---
@@ -126,13 +126,13 @@ mse = np.mean(residuals ** 2)
 print(residuals, mse)  # [ 0.5 -0.5  1.] 0.5
 ```
 
-The mistake to avoid is quoting MSE without its unit. It is in squared units, so a target in dollars gives an MSE in dollars squared, which is hard to read. The root mean squared error, covered on Day 35, puts it back on the original scale. The limitation is that MSE rewards models that predict the average well and can hide systematic patterns in the residuals, which is why you should always plot them. A residual plot that curves or fans out tells you the linear model is wrong in a specific way.
+The mistake to avoid is quoting MSE without its unit. It is in squared units, so a target in dollars gives an MSE in dollars squared, which is hard to read. The root mean squared error, covered on Episode 35, puts it back on the original scale. The limitation is that MSE rewards models that predict the average well and can hide systematic patterns in the residuals, which is why you should always plot them. A residual plot that curves or fans out tells you the linear model is wrong in a specific way.
 
 ### Least-squares intuition
 
 Picture a set of points on a graph and a ruler you slide until the total squared vertical distance to the points is as small as possible. That ruler is the least-squares line. The procedure does not need a search if the problem has a closed form, and for linear regression it does.
 
-From first principles, the loss is `L(w) = ||y - X w||^2`. Setting its gradient with respect to `w` to zero gives the normal equations `X^T X w = X^T y`. When `X^T X` is invertible, the solution is `w = (X^T X)^{-1} X^T y`. Geometrically, `X w` is the projection of `y` onto the column space of `X`, and the residual vector is perpendicular to that space. This is the orthogonality idea from Day 10, which explains why the residuals are uncorrelated with the features in the fitted model.
+From first principles, the loss is `L(w) = ||y - X w||^2`. Setting its gradient with respect to `w` to zero gives the normal equations `X^T X w = X^T y`. When `X^T X` is invertible, the solution is `w = (X^T X)^{-1} X^T y`. Geometrically, `X w` is the projection of `y` onto the column space of `X`, and the residual vector is perpendicular to that space. This is the orthogonality idea from Episode 10, which explains why the residuals are uncorrelated with the features in the fitted model.
 
 ```python
 import numpy as np
@@ -171,13 +171,13 @@ y = X @ np.array([2.0, 3.0]) + rng.normal(0, 1.0, 50)
 print(fit_gd(X, y))  # close to the least-squares answer
 ```
 
-The common mistake is not scaling the features. If one feature ranges from 0 to 1 and another from 0 to 100000, the loss surface is a long narrow valley, and gradient descent zigzags slowly. Standardize the features first, as you practiced on Day 24. Another mistake is stopping when the loss is small without checking the gradient, because a flat region can look like convergence when it is not. The limitation of plain gradient descent is that it uses the whole dataset each step, which is expensive for large data. Stochastic and mini-batch versions, covered on Day 44, handle that. In the market, every deep learning framework trains its models with variants of this loop, so the update rule you write today is the same idea at larger scale.
+The common mistake is not scaling the features. If one feature ranges from 0 to 1 and another from 0 to 100000, the loss surface is a long narrow valley, and gradient descent zigzags slowly. Standardize the features first, as you practiced on Episode 24. Another mistake is stopping when the loss is small without checking the gradient, because a flat region can look like convergence when it is not. The limitation of plain gradient descent is that it uses the whole dataset each step, which is expensive for large data. Stochastic and mini-batch versions, covered on Episode 44, handle that. In the market, every deep learning framework trains its models with variants of this loop, so the update rule you write today is the same idea at larger scale.
 
 ### Regularization introduction
 
 A student who memorizes every number in a textbook can answer the exact exercises but fails when a question changes slightly. A student who learns the rules handles new questions better. Regularization pushes a model toward the second kind of learning by discouraging large, fragile coefficients.
 
-From first principles, ridge regression adds a penalty `lambda ||w||^2` to the loss, leaving the intercept out of the penalty. The gradient gains a term `2 lambda w`, and the closed form becomes `w = (X^T X + lambda I)^{-1} X^T y`. Adding `lambda I` makes the matrix invertible even when features are correlated, and it shrinks coefficients toward zero. A larger `lambda` means stronger shrinkage, which reduces variance at the cost of some bias, the trade-off you met on Day 24.
+From first principles, ridge regression adds a penalty `lambda ||w||^2` to the loss, leaving the intercept out of the penalty. The gradient gains a term `2 lambda w`, and the closed form becomes `w = (X^T X + lambda I)^{-1} X^T y`. Adding `lambda I` makes the matrix invertible even when features are correlated, and it shrinks coefficients toward zero. A larger `lambda` means stronger shrinkage, which reduces variance at the cost of some bias, the trade-off you met on Episode 24.
 
 ```python
 import numpy as np
@@ -217,14 +217,14 @@ Record each number in a notebook cell with a short comment. The comments are par
 
 This is a medium-weight project. The model is short, so most of the value comes from testing the properties of the solution and comparing it with a library.
 
-**Repo name:** `100-days-ai-engineering-day-25-linear-regression`
+**Repo name:** `100-episodes-ai-engineering-day-25-linear-regression`
 
 **Goal:** implement linear regression with a closed-form solver, a gradient descent solver and a ridge penalty, verify that the solvers agree with scikit-learn, and write a short note on the coefficients and residuals.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-25-linear-regression/
+100-episodes-ai-engineering-day-25-linear-regression/
 ├── README.md
 ├── requirements.txt
 ├── linreg.py
@@ -371,7 +371,7 @@ def test_mse_is_zero_for_perfect_predictions():
 4. The learning rate is most likely too large, so each step overshoots the minimum. Reduce the learning rate, and standardize the features if the scales differ widely.
 5. At the least-squares solution, the prediction `X w` is the projection of `y` onto the column space of `X`. The residual is the part of `y` perpendicular to that space, so it is orthogonal to every column of `X`, which means it has zero inner product with every feature.
 6. Penalizing the intercept shrinks the average prediction toward zero, which pulls every prediction down when the target has a nonzero mean. The fix is to leave the intercept column out of the penalty, as the code does.
-7. A small gap between training and validation suggests the model generalizes, but it does not show the error is acceptable for the business. Check whether 4.0 MSE is good enough in the target's units, compare against the baseline from Day 24, look at the residuals for patterns, and confirm the test set score on data you have not used.
+7. A small gap between training and validation suggests the model generalizes, but it does not show the error is acceptable for the business. Check whether 4.0 MSE is good enough in the target's units, compare against the baseline from Episode 24, look at the residuals for patterns, and confirm the test set score on data you have not used.
 
 ---
 
@@ -408,4 +408,4 @@ def test_mse_is_zero_for_perfect_predictions():
 
 Tomorrow you keep the linear model but change its output. Logistic regression predicts a probability for a yes-or-no label by passing a weighted sum through the sigmoid function, and it is trained with log loss instead of squared error. You will meet the logit, the decision threshold and the decision boundary, and you will see that the training loop you wrote today carries over almost unchanged.
 
-**Next:** [Day 26: Logistic Regression](Day-26-Logistic-Regression.md)
+**Next:** [Episode 26: Logistic Regression](Episode-26-Logistic-Regression.md)

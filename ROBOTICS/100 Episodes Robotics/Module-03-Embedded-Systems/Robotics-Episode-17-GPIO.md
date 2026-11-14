@@ -1,10 +1,10 @@
-# Day 17: GPIO
+# Episode 17: GPIO
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 3 hours
 
-**Level:** beginner. You need Day 16 (the Arduino IDE, the Uno and the `millis()` timing pattern) and Day 6 (voltage and Ohm's law). Today you wire real buttons and LEDs, so check every connection against the schematic before you apply power.
+**Level:** beginner. You need Episode 16 (the Arduino IDE, the Uno and the `millis()` timing pattern) and Episode 6 (voltage and Ohm's law). Today you wire real buttons and LEDs, so check every connection against the schematic before you apply power.
 
 **By the end of this day, you will have:**
 
@@ -15,7 +15,7 @@
 
 **What you need:**
 
-- Arduino Uno Rev3 and Arduino IDE 2.3.x with the `Arduino AVR Boards` core at version 1.8.6, as in Day 16
+- Arduino Uno Rev3 and Arduino IDE 2.3.x with the `Arduino AVR Boards` core at version 1.8.6, as in Episode 16
 - Three tactile pushbuttons, 6 mm, about $3 for a pack of 10
 - Three 5 mm LEDs in different colors, about $3 for a pack
 - Three 220 ohm resistors for the LEDs, about $0.10 each
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 16: pin modes, `digitalWrite`, `millis()` and the Uno's pin map
-- Day 10: logic levels as voltage ranges, not exact values
+- Episode 16: pin modes, `digitalWrite`, `millis()` and the Uno's pin map
+- Episode 10: logic levels as voltage ranges, not exact values
 - Comfort reading a breadboard layout and a simple schematic
 
 ---
@@ -185,12 +185,12 @@ On the job, debouncing is done in hardware with a capacitor and a Schmitt-trigge
 
 The goal is a repository that shows a working debounced input, a state machine and the bounce evidence that proves the debounce works. The circuit is small, but the repository will show that you understand inputs and outputs well enough to handle a real robot panel.
 
-**Repo name:** `100-days-robotics-day-17-gpio`
+**Repo name:** `100-episodes-robotics-day-17-gpio`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-17-gpio/
+100-episodes-robotics-day-17-gpio/
 ├── README.md
 ├── bounce_test/
 │   └── bounce_test.ino
@@ -359,4 +359,4 @@ This project is practical, and it is light on new tools. The evidence is the poi
 
 ## Tomorrow
 
-Day 18 moves from digital signals to analog and timed signals. You will read a potentiometer with the analog-to-digital converter, set LED brightness with PWM, and use the hardware timers that generate both. The debounce timing from today is a simple form of the timer logic you will meet there, and the logic-level thinking you practiced here applies directly to the ADC input range.
+Episode 18 moves from digital signals to analog and timed signals. You will read a potentiometer with the analog-to-digital converter, set LED brightness with PWM, and use the hardware timers that generate both. The debounce timing from today is a simple form of the timer logic you will meet there, and the logic-level thinking you practiced here applies directly to the ADC input range.

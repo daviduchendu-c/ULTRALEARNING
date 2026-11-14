@@ -1,9 +1,9 @@
-# Day 11: Calculus I
+# Episode 11: Calculus I
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** intermediate. You need Day 7's functions and Day 8's vectors. You do not need prior calculus, but you should be willing to read a limit as a process and not as a result you look up.
+**Level:** intermediate. You need Episode 7's functions and Episode 8's vectors. You do not need prior calculus, but you should be willing to read a limit as a process and not as a result you look up.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 7: functions, exponents, logarithms and summation
-- Day 8: vectors and the dot product
-- Day 9: matrices, at least as a way of storing many numbers at once
+- Episode 7: functions, exponents, logarithms and summation
+- Episode 8: vectors and the dot product
+- Episode 9: matrices, at least as a way of storing many numbers at once
 - Basic Python: functions, loops and floating-point numbers
 
 ---
@@ -192,7 +192,7 @@ A common mistake is forgetting the inner derivative. Many beginners differentiat
 
 Stand on a hillside in fog. You cannot see the valley, but you can feel the ground under your feet and tell which direction is steepest uphill. The gradient is that direction. It is a vector that collects the partial derivatives, and it points in the direction in which the function increases fastest.
 
-The gradient of `f(x, y)` is `∇f = (∂f/∂x, ∂f/∂y)`. For a function of `n` variables it is a vector with `n` entries, one for each input. Its direction is the direction of steepest increase, and its magnitude is the rate of increase in that direction. The rate of change in any unit direction `u` is the dot product `∇f . u`, which is the connection to Day 8. The dot product is largest when `u` points along the gradient. Moving in the direction of `-∇f` decreases the function fastest, and that is the basis of gradient descent.
+The gradient of `f(x, y)` is `∇f = (∂f/∂x, ∂f/∂y)`. For a function of `n` variables it is a vector with `n` entries, one for each input. Its direction is the direction of steepest increase, and its magnitude is the rate of increase in that direction. The rate of change in any unit direction `u` is the dot product `∇f . u`, which is the connection to Episode 8. The dot product is largest when `u` points along the gradient. Moving in the direction of `-∇f` decreases the function fastest, and that is the basis of gradient descent.
 
 At `(2, 1)` for `f(x, y) = x^2 y + 3y`, the gradient is `(4, 7)`. Moving in the direction `(-4, -7)` lowers the function fastest, and a small step of size `0.01` in that direction changes `f` by about `-0.01 * ||(4, 7)||^2`, which is `-0.01 * 65 = -0.65`, to first order. That approximation holds only when the step is small.
 
@@ -244,7 +244,7 @@ print(round(w, 4), round(b, 4))        # 2.2667 1.0
 print(round(loss(w, b), 2))            # 0.33
 ```
 
-The limitation is that one step does not produce the best fit. The loss is still falling, and the right line is `y = 2x + 1`, which this data follows exactly. The learning rate of 0.1 is a guess, and a larger one could overshoot. Day 12 turns this single step into a loop and studies how the learning rate affects convergence.
+The limitation is that one step does not produce the best fit. The loss is still falling, and the right line is `y = 2x + 1`, which this data follows exactly. The learning rate of 0.1 is a guess, and a larger one could overshoot. Episode 12 turns this single step into a loop and studies how the learning rate affects convergence.
 
 Reading the gradient's sign as the amount to change the parameter is a common mistake. The gradient gives direction and relative size, and the learning rate sets the actual step. Skipping the learning rate, or setting it too large, is the usual cause of a loss that jumps up and down. In industry, every fine-tuning job, every regression that is solved iteratively and every custom loss in a research repository reduces to this pattern.
 
@@ -268,16 +268,16 @@ Record any place where your hand result and the numerical result disagree, and e
 
 ## Project: a numerical gradient checker
 
-This is a light project, and the reason is deliberate. Today's skill is understanding the derivative and checking it, not building a training loop. The code is a small set of functions, and the value is in the tests that compare the analytic gradient with the numerical one. Gradient descent as a full loop arrives on Day 12 and the complete implementation on Day 16.
+This is a light project, and the reason is deliberate. Today's skill is understanding the derivative and checking it, not building a training loop. The code is a small set of functions, and the value is in the tests that compare the analytic gradient with the numerical one. Gradient descent as a full loop arrives on Episode 12 and the complete implementation on Episode 16.
 
-**Repo name:** `100-days-ai-engineering-day-11-calculus-i`
+**Repo name:** `100-episodes-ai-engineering-day-11-calculus-i`
 
 **Goal:** write a central-difference derivative estimator, derive the gradient of a mean squared error loss by hand, implement it, and test that the two agree.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-11-calculus-i/
+100-episodes-ai-engineering-day-11-calculus-i/
 ├── README.md
 ├── requirements.txt
 ├── derivatives.py
@@ -455,4 +455,4 @@ def test_one_step_lowers_loss():
 
 Tomorrow you turn the single gradient step into an optimization loop. You will study objective functions, minima and maxima, the difference between local and global minima, and why a convex function is easy to optimize. Then you will implement gradient descent by hand, study how the learning rate decides whether training converges, and meet stochastic gradient descent, which estimates the gradient from a small batch of data. The gradient you computed today is the input to every step.
 
-**Next:** [Day 12: Calculus II: Optimization](Day-12-Calculus-II-Optimization.md)
+**Next:** [Episode 12: Calculus II: Optimization](Episode-12-Calculus-II-Optimization.md)

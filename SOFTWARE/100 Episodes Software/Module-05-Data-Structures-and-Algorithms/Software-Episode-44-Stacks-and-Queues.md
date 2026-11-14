@@ -1,9 +1,9 @@
-# Day 44: Stacks and Queues
+# Episode 44: Stacks and Queues
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You should have finished Day 43 and be comfortable with linked lists and `collections`. This day is for anyone who has used a call stack, a print spooler or a message broker without knowing the rules that make them behave.
+**Level:** beginner to intermediate. You should have finished Episode 43 and be comfortable with linked lists and `collections`. This day is for anyone who has used a call stack, a print spooler or a message broker without knowing the rules that make them behave.
 
 **By the end of this day, you will have:**
 
@@ -16,13 +16,13 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 43
+- Git 2.23 or newer, and the repository from Episode 43
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 42: Arrays and Strings (indexing, sliding windows)
-- Day 43: Linked Lists (head and tail references, deletion from both ends)
+- Episode 42: Arrays and Strings (indexing, sliding windows)
+- Episode 43: Linked Lists (head and tail references, deletion from both ends)
 - Module 3: Python `list`, `dict` and `collections`
 
 ---
@@ -65,7 +65,7 @@ Today also introduces the monotonic idea. A monotonic stack or deque keeps its c
 - **Monotonic:** always increasing or always decreasing, with no reversals.
 - **Monotonic stack:** a stack whose values stay in increasing or decreasing order, maintained by popping values that break the order.
 - **Monotonic deque:** a deque with the same rule, used to read the front value as the current maximum or minimum.
-- **Amortized O(1):** an average cost per operation over a sequence, where some operations are expensive but rare. Day 41 introduced it.
+- **Amortized O(1):** an average cost per operation over a sequence, where some operations are expensive but rare. Episode 41 introduced it.
 
 ---
 
@@ -93,7 +93,7 @@ queue.append("b")
 print(queue.popleft())        # a, the first one in
 ```
 
-The limitation of a stack is that you cannot reach the middle without popping everything above it. That is a feature when you need the most recent item, and a problem when you need an item in the middle. A queue has the same limit: you cannot jump the line without a different design, such as a priority queue, which Day 47 covers.
+The limitation of a stack is that you cannot reach the middle without popping everything above it. That is a feature when you need the most recent item, and a problem when you need an item in the middle. A queue has the same limit: you cannot jump the line without a different design, such as a priority queue, which Episode 47 covers.
 
 The common mistake is using `list.pop(0)` as a queue dequeue. To spot it, search your code for `pop(0)` or `insert(0, ...)`. Both are O(n) on a list, and in a loop they become O(n squared). The fix is to use `deque`.
 
@@ -120,7 +120,7 @@ The limitation of `deque` is that indexing in the middle is slower than in a lis
 
 The common mistake is to pass a `deque` where code expects a list and then slice it, such as `d[1:3]`. Slicing a deque is not supported, so you get a `TypeError`. Convert with `list(d)` first if you need a slice, and remember that the conversion is O(n).
 
-Deques appear in task schedulers that move work between two ends of a queue, in sliding window algorithms, and in breadth-first search, which you will meet on Day 48.
+Deques appear in task schedulers that move work between two ends of a queue, in sliding window algorithms, and in breadth-first search, which you will meet on Episode 48.
 
 ### Monotonic structures
 
@@ -191,7 +191,7 @@ print(balanced_brackets("([)]"))     # False
 
 A print queue is the other classic application. Jobs arrive at the back and the printer takes the job at the front. The project in this day builds that simulator, and it shows how waiting time depends on the order of arrival.
 
-The limitation of these tools is that they assume the work can be processed in arrival order. A print queue that gives urgent jobs priority needs a priority queue instead, which Day 47 covers.
+The limitation of these tools is that they assume the work can be processed in arrival order. A print queue that gives urgent jobs priority needs a priority queue instead, which Episode 47 covers.
 
 The common mistake in bracket checking is to forget the final stack check. Input such as `"((("` passes every closing-bracket test and returns True if you return early. Always check that the stack is empty at the end. To spot it, test a string that only contains openers.
 
@@ -201,7 +201,7 @@ Bracket checking appears in every language parser, in JSON and XML validators, a
 
 ## Hands-on exercises
 
-Work in the repository from Day 43. Keep the new module in `dsa/stacks_queues.py` and the simulator in the repository root.
+Work in the repository from Episode 43. Keep the new module in `dsa/stacks_queues.py` and the simulator in the repository root.
 
 Exercise 1 traces a stack. On paper, write the stack contents after each step of this sequence: push 1, push 2, push 3, pop, push 4, pop, pop. Write the value returned by each pop. Then run the same sequence on a list in the Python shell and compare.
 
@@ -229,12 +229,12 @@ Done when the randomized comparison passes, and the GitHub Actions run for your 
 
 The project is a print queue simulator. Jobs arrive in a queue with a page count, and the printer handles them in the order they arrived. The simulator reports how many pages were printed before each job starts, which is a simple model of waiting time. The stack and queue classes come from `dsa/stacks_queues.py`, and the monotonic functions go in the same module so the tests cover all of them.
 
-Suggested repo name: `100-days-software-day-44-stacks-and-queues`. Copy the Day 43 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-44-stacks-and-queues`. Copy the Episode 43 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-44-stacks-and-queues/
+100-episodes-software-day-44-stacks-and-queues/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -501,7 +501,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 43 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 43 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python print_queue.py` and check the output against the starts you worked out by hand: 0, 12 and 14 pages.
 3. Add a `Stack`-based function `reverse_words(text: str) -> str` to `dsa/stacks_queues.py` that pushes each word and pops them to rebuild the sentence in reverse order. Add a test for an empty string and for a sentence with two words.
 4. Extend `balanced_brackets` tests with a long string of 10000 openers followed by 10000 closers, and check that it returns True without a recursion error.
@@ -529,7 +529,7 @@ This project is light on new theory and heavy on careful testing. The print queu
 3. In `next_greater_element`, why can the algorithm pop several values for one new element, and still run in O(n) overall?
 4. In `sliding_window_max`, why does the code check `window[0] <= i - k` before reading the front value?
 5. A teammate uses `<` instead of `<=` in the window maximum pop condition. Describe a list where the output is still correct, and one where the deque grows larger than needed but the answer stays the same.
-6. You are building a support ticket system where urgent tickets must be handled first. Explain why a plain queue is the wrong choice, and name the structure from Day 47 that fits.
+6. You are building a support ticket system where urgent tickets must be handled first. Explain why a plain queue is the wrong choice, and name the structure from Episode 47 that fits.
 
 ### Answers
 
@@ -538,7 +538,7 @@ This project is light on new theory and heavy on careful testing. The print queu
 3. Each value is pushed once and popped at most once, so the total number of pops across the whole run is at most n. One expensive step can pop many values, but those pops are paid for by the earlier pushes.
 4. The front of the deque can hold an index that has already left the window. Removing it first makes sure the front is always inside the current window, so reading the front gives the correct maximum.
 5. With `<`, equal values stay in the deque, so `[5, 5, 5]` with k equal to 2 keeps both indexes. The front is still the correct maximum, so the answer is correct, but the deque holds more entries than needed. With `<=`, the older equal value is removed, which keeps the deque smaller.
-6. A plain queue returns tickets strictly in arrival order, so an urgent ticket waits behind everything that arrived earlier. A priority queue, built on a heap, returns the highest-priority item first, which Day 47 covers.
+6. A plain queue returns tickets strictly in arrival order, so an urgent ticket waits behind everything that arrived earlier. A priority queue, built on a heap, returns the highest-priority item first, which Episode 47 covers.
 
 ---
 
@@ -572,4 +572,4 @@ This project is light on new theory and heavy on careful testing. The print queu
 
 ## Tomorrow
 
-Day 45 covers hash tables. A hash table answers "is this key present" in O(1) average time by mapping keys to buckets, and it is the structure behind Python's `dict` and `set`. You will build a chained hash table, watch collisions happen on purpose, and measure how the load factor decides speed. Today's queues and stacks reappear there in one place: each bucket is a small list, and the table's resize rule uses the same amortized argument from Day 41.
+Episode 45 covers hash tables. A hash table answers "is this key present" in O(1) average time by mapping keys to buckets, and it is the structure behind Python's `dict` and `set`. You will build a chained hash table, watch collisions happen on purpose, and measure how the load factor decides speed. Today's queues and stacks reappear there in one place: each bucket is a small list, and the table's resize rule uses the same amortized argument from Episode 41.

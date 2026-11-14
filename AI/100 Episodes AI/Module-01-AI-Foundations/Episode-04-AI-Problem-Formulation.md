@@ -1,26 +1,26 @@
-# Day 4: AI Problem Formulation
+# Episode 4: AI Problem Formulation
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 2 to 3 hours
-**Level:** beginner. For learners who have finished Days 2 and 3 and want to choose the right type of model for a problem.
+**Level:** beginner. For learners who have finished Episodes 2 and 3 and want to choose the right type of model for a problem.
 
 **By the end of this day, you will have:**
 
 - A written formulation (input, output, formulation, metric, baseline) for each of 20 real problems
-- A formulation line for each of your two Day 3 briefs
+- A formulation line for each of your two Episode 3 briefs
 - A small project that frames one medical dataset three ways (regression, classification, ranking) and shows that each framing gives a different verdict
 
 **What you need:**
 
 - Pen and paper, or a text editor, for the written work
 - For the project script only: Python 3.11 or newer, `numpy==2.2.6`, `pandas==2.2.3`, `scikit-learn==1.6.1` and `scipy==1.15.2` (installed in the project section)
-- Your two problem briefs from Day 3
+- Your two problem briefs from Episode 3
 
 **Prerequisites:**
 
-- Day 2: How Machines Learn (features, labels, supervised and unsupervised learning, reinforcement learning)
-- Day 3: The AI/ML Lifecycle (problem definition, baselines, metrics)
+- Episode 2: How Machines Learn (features, labels, supervised and unsupervised learning, reinforcement learning)
+- Episode 3: The AI/ML Lifecycle (problem definition, baselines, metrics)
 
 ---
 
@@ -53,7 +53,7 @@
 
 Before you pick a model, you pick a **formulation**: the shape of the question the model answers. "Will this customer leave?" is classification. "How much will they spend?" is regression. "Which 50 customers should the retention team call first?" is ranking. These are three different models, trained on different labels, judged by different metrics, and they lead to different business actions, even when the data is the same.
 
-Choosing the wrong shape is one of the costliest mistakes in ML, because everything downstream (labels, loss, metric, evaluation, deployment) is built on it. On Day 3 you wrote problem briefs. Today you learn the menu of formulations, so the prediction line in those briefs is correct.
+Choosing the wrong shape is one of the costliest mistakes in ML, because everything downstream (labels, loss, metric, evaluation, deployment) is built on it. On Episode 3 you wrote problem briefs. Today you learn the menu of formulations, so the prediction line in those briefs is correct.
 
 On the job, the formulation is the first thing a senior engineer checks in a project proposal. A team that agrees on the formulation in week one avoids rebuilding the pipeline in week six.
 
@@ -67,8 +67,8 @@ On the job, the formulation is the first thing a senior engineer checks in a pro
 | Classification | Fisher's linear discriminant (1936), using the iris flower data | Spam filters, medical diagnosis, image classifiers |
 | Clustering | k-means, described by Lloyd at Bell Labs (1957) and published later | Customer segmentation, grouping documents by embeddings |
 | Forecasting | Box and Jenkins' ARIMA methods (1970) | Demand, energy and traffic forecasting with ML and deep learning |
-| Ranking | Information retrieval in the 1960s to 1990s; learning to rank in the 2000s | Search engines, feeds, retrieval for LLM applications (Day 78) |
-| Detection and segmentation | Viola-Jones face detection (2001) | Deep networks such as YOLO and Mask R-CNN (Days 58 and 59) |
+| Ranking | Information retrieval in the 1960s to 1990s; learning to rank in the 2000s | Search engines, feeds, retrieval for LLM applications (Episode 78) |
+| Detection and segmentation | Viola-Jones face detection (2001) | Deep networks such as YOLO and Mask R-CNN (Episodes 58 and 59) |
 | Generation | Statistical language models and Markov chains | LLMs and diffusion models |
 
 Each formulation is an old, well-studied question with its own metrics and tools. When you recognize the shape, the known solutions come with it.
@@ -119,7 +119,7 @@ Spam filtering, fraud scoring, ticket routing and medical triage are all classif
 
 Guessing a parcel's weight by lifting it is regression. The answer is a quantity on a scale, and being close counts for something.
 
-The model learns a function from inputs to a number, and training pushes the gap between the predicted number and the true one down. That gap is the loss, usually MSE or MAE (Day 2).
+The model learns a function from inputs to a number, and training pushes the gap between the predicted number and the true one down. That gap is the loss, usually MSE or MAE (Episode 2).
 
 Regression maps an input to a continuous number. [Wikipedia: Regression analysis](https://en.wikipedia.org/wiki/Regression_analysis)
 
@@ -151,7 +151,7 @@ Search engines, job boards, feeds and the retrieval step in LLM applications all
 
 Sorting a pile of photos into groups when nobody tells you what the groups are is clustering.
 
-With no labels, the only thing the algorithm can use is similarity. It puts examples that look alike in the same group and examples that look different in separate groups. That makes it unsupervised (Day 2).
+With no labels, the only thing the algorithm can use is similarity. It puts examples that look alike in the same group and examples that look different in separate groups. That makes it unsupervised (Episode 2).
 
 Clustering partitions unlabeled examples into groups so that members of a group are similar. [Wikipedia: Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
 
@@ -263,7 +263,7 @@ Predictive maintenance, network security and payment monitoring use anomaly dete
 
 Driving a car is control. Each steering choice changes what you see next, and the goal is arriving safely, not any single turn.
 
-Here the model's outputs change its own future inputs. So the model has to be judged on the whole sequence of choices, not on each one alone. That is the setting of reinforcement learning (Day 2), planning and classical control.
+Here the model's outputs change its own future inputs. So the model has to be judged on the whole sequence of choices, not on each one alone. That is the setting of reinforcement learning (Episode 2), planning and classical control.
 
 Control and decision-making chooses a sequence of actions in an environment to maximize long-term reward.
 
@@ -288,7 +288,7 @@ The formulation is a **choice**, not a fact about the data. What fixes it is the
 | Which 200 customers should the team call this week? | Ranking | cancelled yes/no, used for ordering | precision@200 | call the top of the list |
 | What kinds of customers do we have? | Clustering | none | usefulness to marketing | design a plan per segment |
 
-The data can be identical. The right row depends on the decision in your Day 3 brief. A team with a fixed call capacity of 200 needs ranking. A classifier tuned to a 0.5 threshold might flag 900 people, and nobody can call 900 people.
+The data can be identical. The right row depends on the decision in your Episode 3 brief. A team with a fixed call capacity of 200 needs ranking. A classifier tuned to a 0.5 threshold might flag 900 people, and nobody can call 900 people.
 
 Real systems often combine formulations. A self-driving stack uses detection, segmentation, forecasting (where will that pedestrian be in 2 seconds?) and control at once. An LLM chatbot uses ranking (retrieval) and generation. Formulate each component separately, and watch for the mistake of forcing the whole product into one label. You spot it when one metric is supposed to judge parts of the system that do different jobs.
 
@@ -352,13 +352,13 @@ Do not look at the answer key until you have written all 20. Some problems have 
 
 Score yourself. If you got fewer than 15 formulations right, reread the formulation finder section and redo the ones you missed. If you mixed up multi-class and multi-label (problems 12 and 14), reread the classification section.
 
-Then write the formulation line for each of your two Day 3 briefs. Keep the 20 lines and the two briefs together. You will check them again on later days.
+Then write the formulation line for each of your two Episode 3 briefs. Keep the 20 lines and the two briefs together. You will check them again on later days.
 
 ---
 
 ## Project: one dataset, three framings
 
-This is the GitHub project for Day 4. It is optional, but it turns the one-problem-many-formulations idea into numbers you can see. You will frame one dataset as regression, classification and ranking, and score each framing with its own metric.
+This is the GitHub project for Episode 4. It is optional, but it turns the one-problem-many-formulations idea into numbers you can see. You will frame one dataset as regression, classification and ranking, and score each framing with its own metric.
 
 **Goal:** a Python script that trains on the scikit-learn diabetes dataset (442 patients with 10 measurements each: age, sex, body mass index, blood pressure and six blood serum values, already scaled). The target is a number that measures how far the disease progressed one year later.
 
@@ -366,7 +366,7 @@ This is the GitHub project for Day 4. It is optional, but it turns the one-probl
 
 ```
 day-04-problem-formulation/
-├── README.md              # your 20 formulation lines, your two Day 3 formulation lines, and your answers to the questions below
+├── README.md              # your 20 formulation lines, your two Episode 3 formulation lines, and your answers to the questions below
 ├── three_framings.py      # one dataset scored as regression, classification and ranking
 └── requirements.txt       # pinned library versions
 ```
@@ -477,7 +477,7 @@ The data and the model stay the same. The verdict depends on the clinic's decisi
 ### Done when
 
 - Your 20 lines from Exercise 1 match the answer key, or you have written a defense for each place you differ.
-- Your two Day 3 briefs each have a formulation line.
+- Your two Episode 3 briefs each have a formulation line.
 - You can name the formulation, metric and baseline for a new product feature in under a minute.
 - `python three_framings.py` runs and prints the expected output above, and your README says which framing matches the clinic's decision and why.
 
@@ -536,6 +536,6 @@ The data and the model stay the same. The verdict depends on the clinic's decisi
 
 ## Tomorrow
 
-Day 5, **AI Development Environment**, sets up the toolkit for the rest of the series. Tomorrow you learn what `pip install -r requirements.txt` actually does, why pinned versions matter, and how NumPy, pandas, Matplotlib, scikit-learn, PyTorch, Jupyter and Hugging Face fit together. You will also learn what a GPU and CUDA are, and why random seeds decide whether someone else can reproduce the numbers in your README.
+Episode 5, **AI Development Environment**, sets up the toolkit for the rest of the series. Tomorrow you learn what `pip install -r requirements.txt` actually does, why pinned versions matter, and how NumPy, pandas, Matplotlib, scikit-learn, PyTorch, Jupyter and Hugging Face fit together. You will also learn what a GPU and CUDA are, and why random seeds decide whether someone else can reproduce the numbers in your README.
 
-**Next:** [Day 5: AI Development Environment](Day-05-AI-Development-Environment.md)
+**Next:** [Episode 5: AI Development Environment](Episode-05-AI-Development-Environment.md)

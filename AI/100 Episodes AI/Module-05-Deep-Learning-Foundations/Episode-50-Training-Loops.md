@@ -1,9 +1,9 @@
-# Day 50: Training Loops
+# Episode 50: Training Loops
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have every part of a training run from Days 42 to 49. Today you connect them into one loop, add a validation pass, save checkpoints you can resume from, and log metrics you can read later.
+**Level:** intermediate. You have every part of a training run from Episodes 42 to 49. Today you connect them into one loop, add a validation pass, save checkpoints you can resume from, and log metrics you can read later.
 
 **By the end of this day, you will have:**
 
@@ -15,19 +15,19 @@
 **What you need:**
 
 - A computer with Python 3.11 or 3.12
-- PyTorch 2.5.1 from Day 46, with the same environment
+- PyTorch 2.5.1 from Episode 46, with the same environment
 - NumPy 2.1.3, pytest 8.3.3 and Matplotlib 3.9.2, as before
-- The `make_files.py`, `dataset.py` and `transforms.py` modules from Day 49
-- The `ConfigurableMLP` from Day 48
+- The `make_files.py`, `dataset.py` and `transforms.py` modules from Episode 49
+- The `ConfigurableMLP` from Episode 48
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 42: the loss functions and their input conventions
-- Day 44: optimizers and learning-rate schedules
-- Day 45: validation sets, early stopping and why the test set is used once
-- Day 47: the zero, forward, loss, backward, step order and no-grad evaluation
-- Day 48 and Day 49: models, datasets and loaders
+- Episode 42: the loss functions and their input conventions
+- Episode 44: optimizers and learning-rate schedules
+- Episode 45: validation sets, early stopping and why the test set is used once
+- Episode 47: the zero, forward, loss, backward, step order and no-grad evaluation
+- Episode 48 and Episode 49: models, datasets and loaders
 
 ---
 
@@ -97,7 +97,7 @@ On the job, the training loop is the code that a team trusts most, because it pr
 
 Think of a pilot who switches the aircraft to a specific mode before takeoff. The mode changes how the instruments behave, and the pilot must switch back before landing. In PyTorch, `model.train()` and `model.eval()` are those mode switches.
 
-From first principles, the mode affects layers that behave differently in training and inference, such as dropout and batch normalization, which you met on Day 45. The mode does not change whether gradients are tracked. That is controlled by `torch.no_grad`. A loop should call `model.train()` at the start of each training epoch, because the validation pass switches the model to eval mode, and a forgotten switch back leaves dropout off during training.
+From first principles, the mode affects layers that behave differently in training and inference, such as dropout and batch normalization, which you met on Episode 45. The mode does not change whether gradients are tracked. That is controlled by `torch.no_grad`. A loop should call `model.train()` at the start of each training epoch, because the validation pass switches the model to eval mode, and a forgotten switch back leaves dropout off during training.
 
 ```python
 import torch.nn as nn
@@ -115,7 +115,7 @@ Do not evaluate in train mode. The accuracy then changes between runs because dr
 
 ## Forward
 
-The forward step runs the batch through the model and produces logits. It is the same call you have used since Day 48, with the batch moved to the device first. Moving the data inside the loop, rather than before it, keeps the loader's memory use low, because only one batch sits on the device at a time.
+The forward step runs the batch through the model and produces logits. It is the same call you have used since Episode 48, with the batch moved to the device first. Moving the data inside the loop, rather than before it, keeps the loader's memory use low, because only one batch sits on the device at a time.
 
 From first principles, each batch is a tensor of shape (batch, features), and the model returns logits of shape (batch, outputs). The loop does not need to know the architecture. It needs only the contract that the loss function expects, which is that the outputs are logits and the labels have the same shape.
 
@@ -127,13 +127,13 @@ def forward_step(model, xb, device):
 
 The limitation of this simple structure is that it does not handle models with several inputs or several outputs, such as a model that returns a dictionary. For those, the loop needs a small adapter that maps the batch to the model's arguments and the outputs to the loss. The adapter is worth writing once, and it is the place to test the contract.
 
-Do not move the model to a device after creating the optimizer, which you saw on Day 48, or move the labels but not the inputs. Check both on the first batch, and let the device error tell you which tensor is in the wrong place.
+Do not move the model to a device after creating the optimizer, which you saw on Episode 48, or move the labels but not the inputs. Check both on the first batch, and let the device error tell you which tensor is in the wrong place.
 
 ---
 
 ## Loss
 
-The loss compares the logits with the labels, using the loss function chosen for the task. For the circle task, that is `BCEWithLogitsLoss`, which expects logits and labels of the same shape, as Day 48 described. The loss is a scalar tensor, and it is the value that the backward pass starts from.
+The loss compares the logits with the labels, using the loss function chosen for the task. For the circle task, that is `BCEWithLogitsLoss`, which expects logits and labels of the same shape, as Episode 48 described. The loss is a scalar tensor, and it is the value that the backward pass starts from.
 
 From first principles, the loss for the batch is an average over the examples in the batch. An average over batches of different sizes is not the same as an average over examples, so the epoch loss should be a weighted average, weighting each batch's loss by its size. The loop in this lesson does that, which keeps the reported number comparable across batch sizes.
 
@@ -150,7 +150,7 @@ Do not log the loss from the first batch of each epoch and compare it with the l
 
 ## Zero gradients
 
-Before each backward pass, the gradients from the previous step must be cleared. Day 47 explained the reason: gradients accumulate in `.grad`, so the loop must reset them. The reset is one call on the optimizer, and it belongs before the forward pass, so that the order matches the description in the lesson.
+Before each backward pass, the gradients from the previous step must be cleared. Episode 47 explained the reason: gradients accumulate in `.grad`, so the loop must reset them. The reset is one call on the optimizer, and it belongs before the forward pass, so that the order matches the description in the lesson.
 
 From first principles, `optimizer.zero_grad()` sets each parameter's gradient to zero, or to `None` in recent versions of PyTorch, which saves memory and is treated as zero by the optimizer. Calling it before the forward pass is equivalent to calling it after the optimizer step, and both are correct. The one order that is wrong is calling it between the backward pass and the step, which erases the gradients before they are used.
 
@@ -167,7 +167,7 @@ Do not zero the gradients inside the batch loop of a gradient accumulation schem
 
 ## Backward
 
-The backward step computes the gradients of the loss with respect to the parameters, using the graph built during the forward pass. It is a single call, `loss.backward()`, and it fills in each parameter's `.grad` as Day 47 explained.
+The backward step computes the gradients of the loss with respect to the parameters, using the graph built during the forward pass. It is a single call, `loss.backward()`, and it fills in each parameter's `.grad` as Episode 47 explained.
 
 From first principles, the backward pass frees the graph by default, so the loss cannot be used for a second backward pass unless the graph is retained. In a normal loop, that is the behavior you want, because the next batch builds a new graph. The backward step is also the place where a training run most often fails with a NaN, when a gradient becomes infinite. A check on the loss value after each step catches it early.
 
@@ -176,7 +176,7 @@ def backward_step(loss):
     loss.backward()
 ```
 
-The limitation of checking for NaN is that it is a symptom, and the cause may be several steps earlier. Logging the gradient norm, as Day 47 suggested, shows the growth before the failure.
+The limitation of checking for NaN is that it is a symptom, and the cause may be several steps earlier. Logging the gradient norm, as Episode 47 suggested, shows the growth before the failure.
 
 Do not call `backward` on a loss that has been moved to the CPU as a Python float, which breaks the graph. Keep the loss as a tensor until the logging step. Calling `.item()` after the backward and optimizer step is safe.
 
@@ -195,7 +195,7 @@ def optimizer_step(optimizer, scheduler=None):
         scheduler.step()
 ```
 
-The limitation of the optimizer step is that it cannot undo a bad update. If a batch produces an enormous gradient, the parameters move far in one step, and the next validation loss shows the damage. Clipping gradients before the step, as you did on Day 47, limits that risk.
+The limitation of the optimizer step is that it cannot undo a bad update. If a batch produces an enormous gradient, the parameters move far in one step, and the next validation loss shows the damage. Clipping gradients before the step, as you did on Episode 47, limits that risk.
 
 Do not call `optimizer.step()` inside the validation loop, which updates the weights on validation data and makes the validation metric meaningless. The step belongs only in the training part of the loop. In the real market, this mistake is a form of leakage, and it is one that reviewers look for when they read a loop.
 
@@ -303,12 +303,12 @@ Do not log only the final metrics. Without the curves, you cannot tell whether t
 
 **Goal:** assemble the full training loop from the lesson, with validation, early stopping, a best checkpoint, a latest checkpoint for resuming, and a metric log. Prove that a run resumed from a checkpoint matches an uninterrupted run.
 
-**Repo name:** `100-days-ai-day-50-training-loops`
+**Repo name:** `100-episodes-ai-day-50-training-loops`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-50-training-loops/
+100-episodes-ai-day-50-training-loops/
 ├── README.md
 ├── requirements.txt
 ├── data/
@@ -332,7 +332,7 @@ Do not log only the final metrics. Without the curves, you cannot tell whether t
     └── metrics.csv
 ```
 
-**Starter code.** Create `requirements.txt` with PyTorch 2.5.1, NumPy 2.1.3, pytest 8.3.3 and Matplotlib 3.9.2 pinned. Copy `make_files.py`, `dataset.py`, `transforms.py` and `models.py` from Days 48 and 49 into `src/train_lab/`. Extend `make_files.py` to also write `data/val.csv` with 200 points from seed 2, and keep `data/test.csv` for the final report only. Use a model without dropout, since the resume test needs exact equality, and say so in the README.
+**Starter code.** Create `requirements.txt` with PyTorch 2.5.1, NumPy 2.1.3, pytest 8.3.3 and Matplotlib 3.9.2 pinned. Copy `make_files.py`, `dataset.py`, `transforms.py` and `models.py` from Episodes 48 and 49 into `src/train_lab/`. Extend `make_files.py` to also write `data/val.csv` with 200 points from seed 2, and keep `data/test.csv` for the final report only. Use a model without dropout, since the resume test needs exact equality, and say so in the README.
 
 Create `src/train_lab/loop.py` with the training and evaluation functions from the lesson, and add a `fit` function that runs the epochs. The `fit` function must take the model, the loaders, the optimizer, the loss, the device, the number of epochs, the patience, the checkpoint paths, the metric log path and the generator.
 
@@ -421,4 +421,4 @@ Create `src/train_lab/checkpoints.py` with `save_checkpoint` and `load_checkpoin
 
 ## Tomorrow
 
-Day 51 is the module project. You will take the loop from today, a dataset of your choice and a model you design, train it, evaluate it once on a test set, and write up the result as a project others can reproduce. The checklists from Days 39 to 50 become the review you run on your own work, and the final report is the evidence that the module built real skill.
+Episode 51 is the module project. You will take the loop from today, a dataset of your choice and a model you design, train it, evaluate it once on a test set, and write up the result as a project others can reproduce. The checklists from Episodes 39 to 50 become the review you run on your own work, and the final report is the evidence that the module built real skill.

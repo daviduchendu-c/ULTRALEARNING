@@ -1,13 +1,13 @@
-# Day 14: Schematics and Datasheets
+# Episode 14: Schematics and Datasheets
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 to 4 hours
-**Level:** intermediate. You need Days 6 to 13. Today is a reading and drawing day, so the difficulty is in patience and detail, not in new physics. It is the skill that separates a hobby build from a design someone else can build, repair or buy.
+**Level:** intermediate. You need Episodes 6 to 13. Today is a reading and drawing day, so the difficulty is in patience and detail, not in new physics. It is the skill that separates a hobby build from a design someone else can build, repair or buy.
 
 **By the end of this day, you will have:**
 
-- A schematic of the Day 13 motor switching stage, drawn in KiCad 9 with reference designators, net names and rail labels
+- A schematic of the Episode 13 motor switching stage, drawn in KiCad 9 with reference designators, net names and rail labels
 - An electrical rules check (ERC) run on that schematic, with each warning either fixed or explained
 - A datasheet review table for two parts, listing the absolute maximum ratings, the recommended operating conditions and the pinout
 - A timing analysis of the HC-SR04 ultrasonic sensor's trigger and echo signals, from its datasheet
@@ -18,14 +18,14 @@
 - A web browser with access to the datasheets for: the TB6612FNG (Toshiba), the IRLZ44N (Infineon or its original manufacturer), the 1N5819 (a major diode maker) and the HC-SR04 ultrasonic module. Each is free to download from the manufacturer's site or from a distributor such as Digi-Key or Mouser.
 - A PDF reader that shows bookmarks and lets you search the text.
 - A printed copy or a second screen for the datasheets, which is optional but helpful.
-- Optional: a physical Day 13 motor board, which you use to compare with the schematic.
+- Optional: a physical Episode 13 motor board, which you use to compare with the schematic.
 - Cost: free if you use the software and datasheets you already have, plus about $0 to $10 if you order a printed datasheet or a KiCad reference card.
 
 **Prerequisites:**
 
-- Day 8 components: resistors, capacitors, diodes, MOSFETs and connectors, with their symbols
-- Day 9: the MOSFET as a switch
-- Day 13: the H-bridge, the flyback diode and the switching stage you built on the breadboard
+- Episode 8 components: resistors, capacitors, diodes, MOSFETs and connectors, with their symbols
+- Episode 9: the MOSFET as a switch
+- Episode 13: the H-bridge, the flyback diode and the switching stage you built on the breadboard
 - A basic ability to read a table of numbers with units
 
 ---
@@ -112,7 +112,7 @@ Electrically, everything on one net is at the same voltage, at every instant, if
 
 Rails are nets with a fixed supply voltage, and they are named after the voltage, such as +5V, +3V3 and VBAT. A rail is drawn once with a symbol for a power port, and each load connects to it by name. The advantage is that the schematic stays readable when a board has forty loads on one rail.
 
-Here is the worked example from Day 13. The H-bridge switching stage has the supply net VBAT, the ground net GND and the motor terminal nets MOTOR_A and MOTOR_B. The MOSFET drain connects to MOTOR_B, the flyback diode cathode connects to VBAT and its anode connects to MOTOR_B. Each of those net names appears where it is used, so the reader can follow the current path without tracing wires across the sheet.
+Here is the worked example from Episode 13. The H-bridge switching stage has the supply net VBAT, the ground net GND and the motor terminal nets MOTOR_A and MOTOR_B. The MOSFET drain connects to MOTOR_B, the flyback diode cathode connects to VBAT and its anode connects to MOTOR_B. Each of those net names appears where it is used, so the reader can follow the current path without tracing wires across the sheet.
 
 A net name can lie. Two nets with different names may be joined on the board by a short that is not on the schematic, and a net with the same name on two sheets may not be connected at all unless the design tool joins them. The ERC checks some of this, and the rest is a careful review.
 
@@ -130,7 +130,7 @@ Reading a pin means identifying its direction, its type and its limits. Directio
 
 The TB6612FNG datasheet shows the pinout. Pin names such as AIN1, AIN2 and PWMA are the direction inputs and the PWM input for channel A, and AO1 and AO2 are the motor outputs. VM is the motor supply and VCC is the logic supply. The schematic for your breakout should show each of these pins connected to the net that carries the signal. Check the connections against the datasheet table, not against your memory of the breakout's silkscreen.
 
-A worked example of checking is short. The Day 13 exercise connected AIN1 to D7. In the datasheet, AIN1 is a logic input, and a 5 V logic high on a 5 V logic supply is within the input thresholds. The pin is correct. If you had connected AIN1 to the motor supply VM, you would have driven a logic input at 6 V, above its rating, and the chip would be at risk.
+A worked example of checking is short. The Episode 13 exercise connected AIN1 to D7. In the datasheet, AIN1 is a logic input, and a 5 V logic high on a 5 V logic supply is within the input thresholds. The pin is correct. If you had connected AIN1 to the motor supply VM, you would have driven a logic input at 6 V, above its rating, and the chip would be at risk.
 
 The common mistake is to read the pin numbers from the drawing rather than from the package. Surface-mount packages often number their pins counterclockwise from a dot or notch, and a breakout board may renumber them. Always check the pin one marking and the package drawing in the datasheet before you solder.
 
@@ -144,7 +144,7 @@ A power strip with its outlets labelled by their function makes it safe to plug 
 
 Connectors come down to the pin count and the mating orientation. A two-pin connector for a battery must be keyed so that it cannot be plugged in backward, and a motor connector should have distinct pins for the two motor terminals. The schematic must show the pin number, the net on each pin, and the orientation of the keying, so that the cable maker builds the right harness.
 
-A worked example for the HC-SR04 module and the servo from Day 15. The HC-SR04 has four pins: VCC, Trig, Echo and GND. The servo has three: signal, V+ and ground. A 4-pin header and a 3-pin header on the board make both connections clear. If the connector pin order does not match the module, the sensor is wired backward. Check the pin order against the module's silkscreen, not against a picture on a website.
+A worked example for the HC-SR04 module and the servo from Episode 15. The HC-SR04 has four pins: VCC, Trig, Echo and GND. The servo has three: signal, V+ and ground. A 4-pin header and a 3-pin header on the board make both connections clear. If the connector pin order does not match the module, the sensor is wired backward. Check the pin order against the module's silkscreen, not against a picture on a website.
 
 A connector's limits are contact resistance and mechanical wear. A jumper-wire connection on a breadboard can be 0.1 Ω or more, and it changes as the wires are moved. A connector carrying current should be sized for the current, with its contact rating checked in its datasheet, and a connector that carries motor current should be rated for it.
 
@@ -162,7 +162,7 @@ The rule is simple. A part rated for an absolute maximum of 5.5 V on its supply 
 
 Here is the worked example from the microcontroller. The ATmega328P datasheet from Microchip lists an absolute maximum current of 40 mA per I/O pin. A designer who drives an LED directly from a pin should keep the current well below that figure. With a 5 V supply, a forward LED drop of 2 V and a 220 Ω resistor, the current is I = (5 − 2) / 220 = 13.6 mA. The power in the resistor is I² × R = 0.0136² × 220 = 0.041 W, so a 1/4 W resistor is sufficient. The pin's 13.6 mA is well below 40 mA, and it sits near the level many designers use as a comfortable limit of 20 mA per pin.
 
-A second worked example is the MOSFET from Day 13. The IRLZ44N's datasheet lists a drain-source voltage rating of 55 V. The switching stage runs from a 6 V supply, and the flyback diode clamps the spike to about 6.3 V. The margin is 55 / 6.3 = 8.7 times, which is far above the requirement. A designer who used a 30 V MOSFET on the same stage would have a margin of 30 / 6.3 = 4.8 times, which is still acceptable, but the cost of the spike events in a real motor would reduce that margin.
+A second worked example is the MOSFET from Episode 13. The IRLZ44N's datasheet lists a drain-source voltage rating of 55 V. The switching stage runs from a 6 V supply, and the flyback diode clamps the spike to about 6.3 V. The margin is 55 / 6.3 = 8.7 times, which is far above the requirement. A designer who used a 30 V MOSFET on the same stage would have a margin of 30 / 6.3 = 4.8 times, which is still acceptable, but the cost of the spike events in a real motor would reduce that margin.
 
 A datasheet's ratings are tested under specific conditions, often at 25 degrees Celsius with a specific load. A part at 85 degrees Celsius inside a sealed robot may run at a lower current rating, which the datasheet's derating curve shows. Read the notes under the table and the curves, not only the headline number.
 
@@ -192,7 +192,7 @@ On the job, timing diagrams are the basis of the firmware for every sensor inter
 
 ## Hands-on exercises
 
-1. **Draw the switching stage.** In KiCad 9, create a new project called `motor_switch_stage`. Draw the Day 13 switching stage: the IRLZ44N, its gate resistor and pull-down, the flyback diode, the motor and the input connector. Use reference designators (Q1, R1, R2, D1, M1, J1) and net names (VBAT, GND, MOTOR_B, GATE_DRIVE, PWM_IN). Add a power port symbol for each rail.
+1. **Draw the switching stage.** In KiCad 9, create a new project called `motor_switch_stage`. Draw the Episode 13 switching stage: the IRLZ44N, its gate resistor and pull-down, the flyback diode, the motor and the input connector. Use reference designators (Q1, R1, R2, D1, M1, J1) and net names (VBAT, GND, MOTOR_B, GATE_DRIVE, PWM_IN). Add a power port symbol for each rail.
 
 2. **Run the electrical rules check.** In the schematic editor, run the ERC from the Inspect menu. Read every warning. For each warning, either fix the schematic or write a line in the review notes that explains why the warning is expected, such as an intentionally unconnected pin.
 
@@ -200,7 +200,7 @@ On the job, timing diagrams are the basis of the firmware for every sensor inter
 
 4. **Read the TB6612FNG datasheet.** Open the datasheet and find the absolute maximum ratings table, the recommended operating conditions and the pin functions table. Copy the VM, VCC and output current ratings into a table with three columns: parameter, absolute maximum and recommended. Note where the two differ and what that means for your choice of battery.
 
-5. **Read the IRLZ44N datasheet.** Find the drain-source voltage, the continuous drain current at 25 degrees Celsius, the gate threshold voltage and the on-resistance at a gate voltage of 5 V. Compare them with the calculation from Day 13, and write one sentence on whether the transistor's margin is adequate.
+5. **Read the IRLZ44N datasheet.** Find the drain-source voltage, the continuous drain current at 25 degrees Celsius, the gate threshold voltage and the on-resistance at a gate voltage of 5 V. Compare them with the calculation from Episode 13, and write one sentence on whether the transistor's margin is adequate.
 
 6. **Analyse the HC-SR04 timing.** Read the HC-SR04 datasheet timing diagram and its table of timing parameters. Write the trigger pulse width, the echo width formula, and the recommended measurement cycle. Calculate the echo width for 0.5 m, 2 m and 4 m, and write the timeout value you would set in code for a 4 m maximum range.
 
@@ -212,14 +212,14 @@ Stop if a datasheet's values contradict the schematic. Do not build a circuit wh
 
 ## Project: a schematic and datasheet pack for the motor switching stage
 
-This project documents the Day 13 switching stage as a reviewed design. A reviewer should be able to read the pack, check the ratings and rebuild the circuit without asking you a question. The project is light on fabrication and heavy on documentation, which is why it is a documentation project.
+This project documents the Episode 13 switching stage as a reviewed design. A reviewer should be able to read the pack, check the ratings and rebuild the circuit without asking you a question. The project is light on fabrication and heavy on documentation, which is why it is a documentation project.
 
 **Goal:** produce a complete, reviewed schematic and a datasheet review for the motor switching stage, with a BOM, an ERC report, a timing and rating table, and a list of the margins that the design relies on.
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-14-schematics-and-datasheets/
+100-episodes-robotics-engineering-day-14-schematics-and-datasheets/
 ├── README.md
 ├── kicad/
 │   ├── motor_switch_stage.kicad_pro
@@ -280,7 +280,7 @@ Fill the blank cells from the datasheets, and compute the margin as the absolute
 
 **Evidence to commit to GitHub:** the KiCad files, the BOM, the ERC report, the ratings table, the timing analysis, the datasheet README and the schematic image. A reviewer should be able to open the project in KiCad and reproduce the ERC report.
 
-This project carries no hazard beyond the reading, but it defines the stage that Day 15 will use with a real motor and sensor. Mark any value you could not verify as unverified, and do not build a board from an unverified value.
+This project carries no hazard beyond the reading, but it defines the stage that Episode 15 will use with a real motor and sensor. Mark any value you could not verify as unverified, and do not build a board from an unverified value.
 
 ---
 
@@ -337,6 +337,6 @@ This project carries no hazard beyond the reading, but it defines the stage that
 
 ## Tomorrow
 
-Today you read and drew the documents that describe a circuit. Tomorrow you build a complete small system from them. Day 15 is the project day: a sensor, a controller and an actuator, wired on a breadboard from a schematic you draw first, tested with the ratings and timing you read today, and documented on GitHub. The HC-SR04 timing and the servo's supply limits from this lesson are the first numbers you will check on your own hardware.
+Today you read and drew the documents that describe a circuit. Tomorrow you build a complete small system from them. Episode 15 is the project day: a sensor, a controller and an actuator, wired on a breadboard from a schematic you draw first, tested with the ratings and timing you read today, and documented on GitHub. The HC-SR04 timing and the servo's supply limits from this lesson are the first numbers you will check on your own hardware.
 
-**Next:** [Day 15: Electronics Project](Robotics-Day-15-Electronics-Project.md)
+**Next:** [Episode 15: Electronics Project](Robotics-Episode-15-Electronics-Project.md)

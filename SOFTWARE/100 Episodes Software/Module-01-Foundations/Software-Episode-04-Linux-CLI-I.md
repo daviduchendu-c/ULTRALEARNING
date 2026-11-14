@@ -1,6 +1,6 @@
-# Day 4: Linux CLI I
+# Episode 4: Linux CLI I
 
-*100 Days of Software Engineering, Module: Foundations*
+*100 Episodes of Software Engineering, Module: Foundations*
 
 **Time:** about 3 to 4 hours
 **Level:** beginner. You should be comfortable opening a terminal, and you will work in Ubuntu on WSL 2.
@@ -14,15 +14,15 @@
 
 **What you need:**
 
-- Windows Terminal with an Ubuntu tab (WSL 2 and Ubuntu, both installed on Day 3)
-- A code editor that opens from the terminal with `code .` (VS Code, set up on Day 3), or `nano`, which ships with Ubuntu
+- Windows Terminal with an Ubuntu tab (WSL 2 and Ubuntu, both installed on Episode 3)
+- A code editor that opens from the terminal with `code .` (VS Code, set up on Episode 3), or `nano`, which ships with Ubuntu
 - A GitHub account
 - Optional: the `tldr` package (`sudo apt install tldr`) and an `ssh` client for the practice site at the end
 
 **Prerequisites:**
 
-- Day 3: Developer Environment (Windows Terminal, WSL 2 with Ubuntu, PATH, absolute and relative paths). Everything today happens in your Ubuntu tab, not PowerShell.
-- Day 2: How Computers Execute Programs (processes and process IDs, which appear in `/proc`)
+- Episode 3: Developer Environment (Windows Terminal, WSL 2 with Ubuntu, PATH, absolute and relative paths). Everything today happens in your Ubuntu tab, not PowerShell.
+- Episode 2: How Computers Execute Programs (processes and process IDs, which appear in `/proc`)
 
 ---
 
@@ -94,7 +94,7 @@ Explore four of these directories:
 ```bash
 ls /                      # list the top level
 cat /etc/os-release       # which Ubuntu version is this?
-ls /proc                  # numbered folders: one per running process (PIDs, Day 2)
+ls /proc                  # numbered folders: one per running process (PIDs, Episode 2)
 cat /proc/meminfo         # memory facts, generated live by the kernel
 ```
 
@@ -152,9 +152,9 @@ drwxr-xr-x 3 ada  ada  4.0K Oct 24 09:10 dev
 -rw-r--r-- 1 ada  ada   220 Oct 24 09:12 notes.txt
 ```
 
-Read one line from left to right. The first character is the type: `-` for a regular file, `d` for a directory, `l` for a symlink. Then come the permissions (`rw-r--r--`, covered on Day 5: Linux CLI II), the link count, the owner and group (`ada ada`), the size in bytes (`220`), the last-modified time, and the name. Run `ls -l /` and find the `bin -> usr/bin` symlink from the filesystem hierarchy tree.
+Read one line from left to right. The first character is the type: `-` for a regular file, `d` for a directory, `l` for a symlink. Then come the permissions (`rw-r--r--`, covered on Episode 5: Linux CLI II), the link count, the owner and group (`ada ada`), the size in bytes (`220`), the last-modified time, and the name. Run `ls -l /` and find the `bin -> usr/bin` symlink from the filesystem hierarchy tree.
 
-People often decide a file is missing when it is only hidden. Add `-a`. The opposite problem is a huge directory flooding the screen, which a pager (Day 5: Linux CLI II) or a glob such as `ls *.log` fixes. Do not write scripts that parse `ls` output to get filenames, because names with spaces or newlines break them. Use `find` (Day 5: Linux CLI II) instead. On the job, `ls -lt /var/log` (newest logs first) is a standard first step in an incident.
+People often decide a file is missing when it is only hidden. Add `-a`. The opposite problem is a huge directory flooding the screen, which a pager (Episode 5: Linux CLI II) or a glob such as `ls *.log` fixes. Do not write scripts that parse `ls` output to get filenames, because names with spaces or newlines break them. Use `find` (Episode 5: Linux CLI II) instead. On the job, `ls -lt /var/log` (newest logs first) is a standard first step in an incident.
 
 ---
 
@@ -173,7 +173,7 @@ Walking from room to room is `cd`. You can give directions from where you stand,
 | `cd ~` or just `cd` | your home directory |
 | `cd -` | the previous directory (and prints it) |
 
-`cd` is a shell builtin. Run `type cd` and bash says so. It has to be one. A separate program would run as a child process (Day 2: How Computers Execute Programs), and it could change only its own directory, so the shell's directory would stay put. That is the same reason a variable set in a child process never reaches its parent (Day 3: Developer Environment).
+`cd` is a shell builtin. Run `type cd` and bash says so. It has to be one. A separate program would run as a child process (Episode 2: How Computers Execute Programs), and it could change only its own directory, so the shell's directory would stay put. That is the same reason a variable set in a child process never reaches its parent (Episode 3: Developer Environment).
 
 You are in `/home/ada/dev/day04/src` and want `/home/ada/dev/day03`.
 
@@ -182,7 +182,7 @@ You are in `/home/ada/dev/day04/src` and want `/home/ada/dev/day03`.
 
 Type `cd ~/de` and press Tab. Bash completes `~/dev/`. Press Tab twice when several matches exist, to list them.
 
-Spaces split arguments, so `cd My Projects` fails with "too many arguments." Use `cd "My Projects"` or `cd My\ Projects`, or let Tab add the backslash. Case matters, so `cd Dev` is not `cd dev`. In WSL, `cd /mnt/c/Users/<you>` works, but Linux tools run slowly there (Day 3: Developer Environment). Engineers use `cd -` constantly to bounce between a code folder and a log folder.
+Spaces split arguments, so `cd My Projects` fails with "too many arguments." Use `cd "My Projects"` or `cd My\ Projects`, or let Tab add the backslash. Case matters, so `cd Dev` is not `cd dev`. In WSL, `cd /mnt/c/Users/<you>` works, but Linux tools run slowly there (Episode 3: Developer Environment). Engineers use `cd -` constantly to bounce between a code folder and a log folder.
 
 ---
 
@@ -245,7 +245,7 @@ rmdir old-empty-folder   # fails safely if anything is still inside
 
 A file named `-notes` looks like a flag. Use `rm -- -notes` (the `--` means "no more options") or `rm ./-notes`.
 
-One extra space is a disaster. `rm * .txt` (with a space after `*`) deletes every file in the folder, then complains that `.txt` does not exist. `rm -rf` on the wrong path cannot be undone. GNU `rm` refuses `rm -rf /` by default, but `rm -rf /*` is not protected. Some people add `alias rm='rm -i'` to `~/.bashrc`. It helps, but it trains you to rely on a prompt that will not exist on a server. Version control (Day 6) and backups protect you. Production incidents often trace back to a cleanup command run in the wrong directory, which is why teams review cleanup scripts before they run them.
+One extra space is a disaster. `rm * .txt` (with a space after `*`) deletes every file in the folder, then complains that `.txt` does not exist. `rm -rf` on the wrong path cannot be undone. GNU `rm` refuses `rm -rf /` by default, but `rm -rf /*` is not protected. Some people add `alias rm='rm -i'` to `~/.bashrc`. It helps, but it trains you to rely on a prompt that will not exist on a server. Version control (Episode 6) and backups protect you. Production incidents often trace back to a cleanup command run in the wrong directory, which is why teams review cleanup scripts before they run them.
 
 ---
 
@@ -319,16 +319,16 @@ Do these in your Ubuntu tab. Write each answer, and the command that found it, i
 
 ## Project: a project folder and filesystem field guide, built from the CLI
 
-This is the GitHub project for Day 4. You will show that you can create, organize and inspect files using only the command line, and that you understand the Linux layout well enough to explain it to someone else.
+This is the GitHub project for Episode 4. You will show that you can create, organize and inspect files using only the command line, and that you understand the Linux layout well enough to explain it to someone else.
 
-**Repo name:** `100-days-software-day-04-linux-cli-i`
+**Repo name:** `100-episodes-software-day-04-linux-cli-i`
 
 ### Repository layout
 
 Finished state:
 
 ```
-100-days-software-day-04-linux-cli-i/
+100-episodes-software-day-04-linux-cli-i/
 ├── README.md
 ├── commands.md              # every command you ran, with a one-line explanation
 ├── fhs-field-guide.md       # ten directories you explored and what you found
@@ -338,7 +338,7 @@ Finished state:
 │   ├── images/
 │   ├── music/
 │   └── archive/
-└── habit-tracker/           # a skeleton for your Day 1 app
+└── habit-tracker/           # a skeleton for your Episode 1 app
     ├── README.md
     ├── src/
     │   └── app.py
@@ -353,8 +353,8 @@ Finished state:
 Paste this into your Ubuntu terminal:
 
 ```bash
-mkdir -p ~/dev/100-days-software-day-04-linux-cli-i/inbox
-cd ~/dev/100-days-software-day-04-linux-cli-i/inbox
+mkdir -p ~/dev/100-episodes-software-day-04-linux-cli-i/inbox
+cd ~/dev/100-episodes-software-day-04-linux-cli-i/inbox
 touch report-final.docx report-final-v2.docx budget.xlsx notes.txt todo.txt
 touch holiday.jpg beach.jpg screenshot.png song.mp3 podcast.mp3
 touch "meeting notes.txt" .old-config
@@ -402,7 +402,7 @@ Write `cheatsheet.md` in your own words. For each command from today, list its t
 
 ### Step 11: publish
 
-Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add file > Upload files** by dragging the folders in. From Day 6 you will push with `git` instead.
+Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add file > Upload files** by dragging the folders in. From Episode 6 you will push with `git` instead.
 
 ### README checklist
 
@@ -474,6 +474,6 @@ Run `explorer.exe .`, create the GitHub repo, and upload everything with **Add f
 
 ## Tomorrow
 
-Day 5, **Linux CLI II**, turns today's single commands into tools that work together. You will search inside files with `grep`, search the tree with `find`, chain commands with pipes, send output into files with redirection, control access with permissions and `chmod`, manage processes with signals, and write your first real shell script. Today's `ls -l` permission strings, the PIDs in `/proc` and the logs in `/var/log` are exactly what you will work with tomorrow.
+Episode 5, **Linux CLI II**, turns today's single commands into tools that work together. You will search inside files with `grep`, search the tree with `find`, chain commands with pipes, send output into files with redirection, control access with permissions and `chmod`, manage processes with signals, and write your first real shell script. Today's `ls -l` permission strings, the PIDs in `/proc` and the logs in `/var/log` are exactly what you will work with tomorrow.
 
-**Next:** [Day 5: Linux CLI II](Software-Day-05-Linux-CLI-II.md)
+**Next:** [Episode 5: Linux CLI II](Software-Episode-05-Linux-CLI-II.md)

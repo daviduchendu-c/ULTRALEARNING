@@ -12,9 +12,9 @@ Each day is a self-contained tutorial with concepts built from first principles,
 
 | Track | Index | Modules | Written so far |
 |---|---|---|---|
-| AI Engineering | [100_Days_AI_Engineering.md](AI/100_Days_AI_Engineering.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Days 1–51 (Modules 1–5) |
-| Robotics Engineering | [100_Days_Robotics_Engineering.md](ROBOTICS/100_Days_Robotics_Engineering.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Days 1–42 (Modules 1–5) |
-| Software Engineering | [100_Days_Software_Engineering.md](SOFTWARE/100_Days_Software_Engineering.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Days 1–53 (Modules 1–5: Foundations through data structures and algorithms) |
+| AI Engineering | [100_Episodes_AI_Engineering.md](AI/100_Episodes_AI_Engineering.md) | 12: foundations, math, data engineering, classical ML, deep learning, computer vision, NLP, LLMs, agents, MLOps/LLMOps, edge and robotics AI, capstone | Episodes 1–51 (Modules 1–5) |
+| Robotics Engineering | [100_Episodes_Robotics_Engineering.md](ROBOTICS/100_Episodes_Robotics_Engineering.md) | 14: foundations, electronics, embedded systems, sensors and actuators, mechanical design and CAD, PCB design, robot math, kinematics, control, ROS 2, simulation, autonomy, modern robotics, capstone | Episodes 1–42 (Modules 1–5) |
+| Software Engineering | [100_Episodes_Software_Engineering.md](SOFTWARE/100_Episodes_Software_Engineering.md) | Foundations, Git and collaboration, Python, C++, data structures and algorithms, web, React, backend and databases, full stack and mobile, systems and cloud, capstone | Episodes 1–53 (Modules 1–5: Foundations through data structures and algorithms) |
 
 Each index file lists every day with its study topics, its output or exercise, and a link to the tutorial.
 
@@ -23,21 +23,21 @@ Each index file lists every day with its study topics, its output or exercise, a
 ```
 100 ULTRALEARNING/
 ├── AI/
-│   ├── 100_Days_AI_Engineering.md           # AI track index
-│   └── 100 Days AI/
+│   ├── 100_Episodes_AI_Engineering.md           # AI track index
+│   └── 100 Episodes AI/
 │       ├── Module-01-AI-Foundations/
 │       └── Module-02-Mathematics-for-AI/
 ├── ROBOTICS/
-│   ├── 100_Days_Robotics_Engineering.md     # Robotics track index
-│   └── 100 Days Robotics/
+│   ├── 100_Episodes_Robotics_Engineering.md     # Robotics track index
+│   └── 100 Episodes Robotics/
 │       ├── Module-01-Robotics-Engineering-Foundations/
 │       └── Module-02-Electronics-for-Robotics/
 ├── SOFTWARE/
-│   ├── 100_Days_Software_Engineering.md     # Software track index
-│   └── 100 Days Software/
+│   ├── 100_Episodes_Software_Engineering.md     # Software track index
+│   └── 100 Episodes Software/
 │       ├── Module-01-Foundations/
 │       └── Module-02-Git-and-Collaboration/
-└── Day-Generator-Prompt.md                  # Prompt for writing new day lessons
+└── Episode-Generator-Prompt.md                  # Prompt for writing new day lessons
 ```
 
 ## What each day contains
@@ -52,7 +52,7 @@ Each index file lists every day with its study topics, its output or exercise, a
 8. Sources: official docs, tutorials, videos, and one practice resource
 9. A short preview of the next day
 
-Days in the software and robotics tracks use the same structure, with tools suited to each field (CI/CD and tests for software, ROS 2, simulators, and microcontrollers for robotics).
+Episodes in the software and robotics tracks use the same structure, with tools suited to each field (CI/CD and tests for software, ROS 2, simulators, and microcontrollers for robotics).
 
 ## How to use it
 
@@ -61,14 +61,14 @@ Days in the software and robotics tracks use the same structure, with tools suit
 3. Do the exercises and the project yourself before moving on.
 4. Commit the project to GitHub. The index and the lesson each say what evidence to commit (code, tests, results, a README).
 
-The curriculum ends with a capstone in Days 99–100 and a career section (Day 101) covering job direction, portfolio building, and first paid work.
+The curriculum ends with a capstone in Episodes 99–100 and a career section (Episode 101) covering job direction, portfolio building, and first paid work.
 
 ## Writing a new day
 
-[Day-Generator-Prompt.md](Day-Generator-Prompt.md) is a reusable prompt. Replace `{SERIES}`, `{DAY_NUMBER}`, and `{NOTION_OUTLINE}` with the track, day number, and that day's outline, then save the output as `Day-NN-<slug>.md` in the matching module folder. Then add the day to the track's index.
+[Episode-Generator-Prompt.md](Episode-Generator-Prompt.md) is a reusable prompt. Replace `{SERIES}`, `{EPISODE_NUMBER}`, and `{NOTION_OUTLINE}` with the track, day number, and that day's outline, then save the output as `Episode-NN-<slug>.md` in the matching module folder. Then add the day to the track's index.
 
 File names follow the track prefix:
 
-- AI: `Day-01-What-Is-Artificial-Intelligence.md`
-- Robotics: `Robotics-Day-01-What-Is-Robotics.md`
-- Software: `Software-Day-01-Software-Engineering-and-the-SDLC.md`
+- AI: `Episode-01-What-Is-Artificial-Intelligence.md`
+- Robotics: `Robotics-Episode-01-What-Is-Robotics.md`
+- Software: `Software-Episode-01-Software-Engineering-and-the-SDLC.md`

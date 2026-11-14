@@ -1,9 +1,9 @@
-# Day 8: Components
+# Episode 8: Components
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 hours
-**Level:** beginner. You should be comfortable with Day 6's Ohm's law and Day 7's divider rules. Today you learn what each common part does, how to read its datasheet and how to choose it for a robot.
+**Level:** beginner. You should be comfortable with Episode 6's Ohm's law and Episode 7's divider rules. Today you learn what each common part does, how to read its datasheet and how to choose it for a robot.
 
 **By the end of this day, you will have:**
 
@@ -13,7 +13,7 @@
 
 **What you need:**
 
-- Everything from Days 6 and 7 (breadboard, DMM, 9 V battery, resistor assortment, red LEDs, jumper wires)
+- Everything from Episodes 6 and 7 (breadboard, DMM, 9 V battery, resistor assortment, red LEDs, jumper wires)
 - Arduino Uno R3 (ATmega328P) microcontroller board, about $25 for an official board or about $10 for a compatible clone
 - USB-A to USB-B cable for the Uno (often included)
 - Arduino IDE 2.3 or newer, free from [arduino.cc](https://www.arduino.cc/en/software), installed on Windows, macOS or Linux
@@ -27,8 +27,8 @@
 
 **Prerequisites:**
 
-- Day 6: Ohm's law and power
-- Day 7: voltage dividers and KCL
+- Episode 6: Ohm's law and power
+- Episode 7: voltage dividers and KCL
 - Basic Arduino sketch structure: `setup()` runs once, `loop()` runs repeatedly. Your code uses `pinMode`, `digitalRead` and `digitalWrite`.
 
 ---
@@ -87,7 +87,7 @@ Components have changed more than the principles behind them. The table shows ho
 - **Forward voltage:** the voltage a diode or LED needs across it before it conducts strongly.
 - **Flyback:** the high voltage spike produced when current in an inductor is interrupted.
 - **Debounce:** the process of ignoring the rapid on-off chatter a mechanical switch produces when it closes or opens.
-- **Pull-up:** a resistor connecting a signal to a positive supply, so it reads high when nothing else drives it. Covered in Day 9.
+- **Pull-up:** a resistor connecting a signal to a positive supply, so it reads high when nothing else drives it. Covered in Episode 9.
 - **Pitch:** the center-to-center distance between connector pins, such as 2.54 mm.
 - **Fuse:** a part that melts or opens at a set current to protect the wiring.
 - **PTC (positive temperature coefficient) fuse:** a resettable fuse whose resistance rises sharply when it overheats, then falls when it cools.
@@ -96,7 +96,7 @@ Components have changed more than the principles behind them. The table shows ho
 
 ## Resistors
 
-A resistor is the friction of a circuit, as covered on Day 6. It is the simplest and most common part, and most of its datasheet entries are about power, tolerance and temperature behavior.
+A resistor is the friction of a circuit, as covered on Episode 6. It is the simplest and most common part, and most of its datasheet entries are about power, tolerance and temperature behavior.
 
 A resistor works like a narrow section of a water pipe. It slows the flow and turns some of the energy into heat. Its job is to set a current or a voltage ratio, and its limit is how much heat it can shed. The power rating matters because `P = I²R` heats the part whether or not the circuit is doing useful work.
 
@@ -118,7 +118,7 @@ Resistors fail in a few ways. They drift when they overheat, a surface-mount par
 
 ## Potentiometers
 
-A potentiometer is a variable resistor with three terminals. Two ends connect across a fixed resistance, and a wiper taps off the resistance in between. Turning the knob moves the wiper, so the potentiometer is a divider with an adjustable ratio, the same idea as Day 7.
+A potentiometer is a variable resistor with three terminals. Two ends connect across a fixed resistance, and a wiper taps off the resistance in between. Turning the knob moves the wiper, so the potentiometer is a divider with an adjustable ratio, the same idea as Episode 7.
 
 Imagine a garden hose with a movable tap. Moving the tap changes how far along the hose the water is drawn from. The resistance from one end to the wiper changes, and so does the voltage.
 
@@ -154,7 +154,7 @@ Imagine a heavy flywheel. Pushing it up to speed takes effort, and it resists sl
 
 Take a 10 mH coil that ramps from 0 A to 1 A in 10 ms. The voltage across it is `0.01 × (1 / 0.01) = 1 V`. A faster change needs a bigger voltage. Now suppose a relay coil with an inductance of 0.1 H, carrying 70 mA, is switched off in one microsecond. The voltage spike is `0.1 × 0.07 / 0.000001 = 7,000 V`. The real spike is limited by the switch, but it is large enough to destroy a transistor. This spike is the reason motors and relays need protection, which is covered in the relay section.
 
-The common mistake is thinking that an inductor is a short circuit at all times. It is a short circuit only for steady DC, where di/dt is zero. The second mistake is ignoring saturation. A coil with a magnetic core stops storing energy when the core saturates, and its inductance drops sharply. Datasheets list the saturation current, and it matters for power converters on Day 12.
+The common mistake is thinking that an inductor is a short circuit at all times. It is a short circuit only for steady DC, where di/dt is zero. The second mistake is ignoring saturation. A coil with a magnetic core stops storing energy when the core saturates, and its inductance drops sharply. Datasheets list the saturation current, and it matters for power converters on Episode 12.
 
 Inductors and motor windings show up in every DC motor on a robot. Motor coils are inductors, and the flyback problem they cause is why motor drivers include protection diodes.
 
@@ -162,7 +162,7 @@ Inductors and motor windings show up in every DC motor on a robot. Motor coils a
 
 ## Diodes
 
-A diode lets current flow in one direction. Its physics belongs to Day 9, where you meet the PN junction. Today you need the behavior: current flows freely when the anode is at a higher voltage than the cathode by the forward voltage, and almost none flows in reverse until the reverse breakdown voltage.
+A diode lets current flow in one direction. Its physics belongs to Episode 9, where you meet the PN junction. Today you need the behavior: current flows freely when the anode is at a higher voltage than the cathode by the forward voltage, and almost none flows in reverse until the reverse breakdown voltage.
 
 A one-way valve on a pipe works the same way. Water flows one way and is blocked the other way, and the valve needs a small pressure to open.
 
@@ -180,7 +180,7 @@ Diodes protect robot electronics every day, from flyback clamps on motor drivers
 
 A light-emitting diode is a diode that emits light when it conducts. Its forward voltage depends on the color: about 1.8 to 2.0 V for red, about 2.0 to 2.2 V for yellow and green, and about 3.0 to 3.4 V for white and blue. Its current rating is usually 20 mA continuous for a standard indicator LED.
 
-LEDs are current-driven parts. Their brightness follows the current, and a small change in voltage causes a large change in current. That is why an LED must always have a series resistor, as covered on Day 6.
+LEDs are current-driven parts. Their brightness follows the current, and a small change in voltage causes a large change in current. That is why an LED must always have a series resistor, as covered on Episode 6.
 
 For a red LED on a 5 V supply at 15 mA, use `R = (5 − 2) / 0.015 = 200 Ω`, and pick 220 Ω. On a 3.3 V microcontroller, the same LED at 10 mA needs `R = (3.3 − 1.9) / 0.010 = 140 Ω`, so use 150 Ω.
 
@@ -200,7 +200,7 @@ A dropped ball bounces before it lies still. Your eye sees one drop, but a senso
 
 Debounce removes the bounces. The simplest software method waits until the reading has been stable for a fixed time, typically 10 to 20 ms for a tactile button. The sketch later in this lesson does that. The hardware method is the RC filter from the capacitor section, a 10 kΩ and 100 nF network. Both work, but the software method is easier to tune and cheaper.
 
-The common mistake is assuming a button wired to a pin without a pull-up or pull-down resistor has a defined state. Its pin floats, and the reading is random. Day 9 covers pull-ups, and the Arduino `INPUT_PULLUP` mode provides one internally.
+The common mistake is assuming a button wired to a pin without a pull-up or pull-down resistor has a defined state. Its pin floats, and the reading is random. Episode 9 covers pull-ups, and the Arduino `INPUT_PULLUP` mode provides one internally.
 
 The limitation of mechanical switches is wear and bounce, and the rating is usually given as a number of operations, often tens of thousands for a tactile button. For a robot's emergency stop, use a switch rated for the current, with a clear mechanical latch and a normally closed contact, so a broken wire stops the machine.
 
@@ -214,7 +214,7 @@ A relay is an electrically operated switch. A small coil, energized by a modest 
 
 A light switch wired to a remote is a fair picture. The small signal travels to the mechanism, and the mechanism moves the heavy contact that carries the power.
 
-A common 5 V relay has a coil resistance of about 70 Ω. Across 5 V, the coil current is `5 / 70 ≈ 71 mA`, and the power is `5 × 0.071 ≈ 0.36 W`. The Arduino pin cannot supply that current safely. The Uno's pins are rated for 20 mA recommended and 40 mA absolute maximum, so the relay must be driven through a transistor or a driver, which Day 9 covers. A relay module handles this for you, and it usually includes an optocoupler and a flyback diode.
+A common 5 V relay has a coil resistance of about 70 Ω. Across 5 V, the coil current is `5 / 70 ≈ 71 mA`, and the power is `5 × 0.071 ≈ 0.36 W`. The Arduino pin cannot supply that current safely. The Uno's pins are rated for 20 mA recommended and 40 mA absolute maximum, so the relay must be driven through a transistor or a driver, which Episode 9 covers. A relay module handles this for you, and it usually includes an optocoupler and a flyback diode.
 
 The common mistake is leaving out the flyback diode. The inductance of the coil produces the spike described in the inductor section, and it can damage the driving transistor or the microcontroller. The limitation is mechanical: relay contacts bounce, have a finite electrical and mechanical life, and need an arc-suppression plan when they switch inductive loads. A relay also makes a click, which is a useful indicator but a problem in quiet spaces.
 
@@ -306,12 +306,12 @@ This project is a light one, with a small Python module for the calculations and
 
 **Goal:** write functions for resistor power, the RC time constant and capacitor voltage, and the coil voltage of an inductor. Add the debounced firmware. Write a one-page note that justifies the part choices for a small sensor-and-button board.
 
-**Repo name:** `100-days-robotics-engineering-day-08-components`
+**Repo name:** `100-episodes-robotics-engineering-day-08-components`
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-08-components/
+100-episodes-robotics-engineering-day-08-components/
 ├── README.md
 ├── PARTS.md
 ├── component_calc.py
@@ -426,4 +426,4 @@ def inductor_voltage_v(inductance_h: float, di_a: float, dt_s: float) -> float:
 
 Tomorrow you open the diode and look at why it conducts in one direction. The PN junction explains the forward drop you measured today, and the same physics gives you the transistor. You will use a transistor to drive the relay coil that a pin cannot supply, and you will use a MOSFET as a switch for a motor, with pull-up and pull-down resistors to keep logic signals defined.
 
-**Next:** [Day 9: Semiconductor Fundamentals](Robotics-Day-09-Semiconductor-Fundamentals.md)
+**Next:** [Episode 9: Semiconductor Fundamentals](Robotics-Episode-09-Semiconductor-Fundamentals.md)

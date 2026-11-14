@@ -1,9 +1,9 @@
-# Day 34: Model Evaluation: Classification
+# Episode 34: Model Evaluation: Classification
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 26 (probabilities and thresholds) and Day 24 (splits). Metrics are simple to compute and easy to misread, so most of the time goes to choosing and explaining them.
+**Level:** intermediate. You need Episode 26 (probabilities and thresholds) and Episode 24 (splits). Metrics are simple to compute and easy to misread, so most of the time goes to choosing and explaining them.
 
 **By the end of this day, you will have:**
 
@@ -24,9 +24,9 @@
 
 **Prerequisites:**
 
-- Day 24: train, validation and test splits, and the rule that the test set is used once
-- Day 26: predicted probabilities, thresholds, precision and recall introduced briefly
-- Day 28: conditional probability, which the rates below rely on
+- Episode 24: train, validation and test splits, and the rule that the test set is used once
+- Episode 26: predicted probabilities, thresholds, precision and recall introduced briefly
+- Episode 28: conditional probability, which the rates below rely on
 - Basic algebra with fractions
 
 ---
@@ -59,7 +59,7 @@ A classifier's score is a claim about the world, and the metric is the test of t
 
 The metrics are simple to compute once you have the four cells of the confusion matrix. The difficulty is in choosing which cell matters most, and in explaining the choice to a person who will act on the number. Doctors, underwriters, moderators and engineers all make decisions with thresholds, and each threshold encodes a trade-off between false alarms and missed cases.
 
-On the job, the metric is the first thing a reviewer asks about. A good report names the baseline, the class balance, the threshold, the cost assumption and the uncertainty. Today you build that report step by step, and you use the same discipline you practiced on Day 24.
+On the job, the metric is the first thing a reviewer asks about. A good report names the baseline, the class balance, the threshold, the cost assumption and the uncertainty. Today you build that report step by step, and you use the same discipline you practiced on Episode 24.
 
 ---
 
@@ -185,7 +185,7 @@ The mistake is comparing F1 across models with different thresholds without noti
 
 Specificity is the mirror of recall. It answers "of the real negatives, how many did the model correctly clear?" It matters when a false alarm causes harm, such as a diagnostic test that frightens a healthy patient, or a fraud rule that blocks a good customer.
 
-From first principles, specificity is `TN / (TN + FP)`, and the false positive rate is `FP / (FP + TN)`, which equals one minus specificity. Specificity and recall together describe how a classifier performs on each class. A common report pairs sensitivity and specificity, because medical tests are compared this way. Specificity does not depend on the base rate, which makes it stable across populations, but the predictive value of a test does depend on the base rate, as you saw on Day 28.
+From first principles, specificity is `TN / (TN + FP)`, and the false positive rate is `FP / (FP + TN)`, which equals one minus specificity. Specificity and recall together describe how a classifier performs on each class. A common report pairs sensitivity and specificity, because medical tests are compared this way. Specificity does not depend on the base rate, which makes it stable across populations, but the predictive value of a test does depend on the base rate, as you saw on Episode 28.
 
 ```python
 from sklearn.metrics import confusion_matrix
@@ -279,14 +279,14 @@ The mistake is choosing the threshold on the test set, which makes the reported 
 
 This is a medium-weight project. The code computes standard metrics, so the deliverable is a careful report that a non-technical stakeholder could act on.
 
-**Repo name:** `100-days-ai-engineering-day-34-model-evaluation-classification`
+**Repo name:** `100-episodes-ai-engineering-day-34-model-evaluation-classification`
 
 **Goal:** produce a metrics report for an imbalanced binary classifier, choose a threshold from stated costs on validation data, and report the test result once with its context.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-34-model-evaluation-classification/
+100-episodes-ai-engineering-day-34-model-evaluation-classification/
 ├── README.md
 ├── requirements.txt
 ├── metrics_report.py
@@ -436,4 +436,4 @@ def test_precision_is_zero_when_nothing_is_predicted_positive():
 
 Tomorrow you turn to regression. The classification metrics are about yes-or-no decisions, but many problems predict a number, such as a price or a delivery time. You will meet mean absolute error, mean squared error, root mean squared error, R-squared, and the residual analysis that tells you where a regression fails. The same habits, a baseline, a stated cost and a single test score, carry over directly.
 
-**Next:** [Day 35: Model Evaluation: Regression](Day-35-Model-Evaluation-Regression.md)
+**Next:** [Episode 35: Model Evaluation: Regression](Episode-35-Model-Evaluation-Regression.md)

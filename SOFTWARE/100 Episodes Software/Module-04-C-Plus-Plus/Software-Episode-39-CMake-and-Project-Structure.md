@@ -1,9 +1,9 @@
-# Day 39: CMake and Project Structure
+# Episode 39: CMake and Project Structure
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 5 hours
-**Level:** intermediate. You have built single-folder projects with CMake since Day 27, and you have linked libraries and fetched GoogleTest in Days 38 and earlier. This day turns that into a project that a team can grow: separate libraries, applications and tests, clear include paths, dependencies that are declared once, presets for each build mode, and a continuous integration workflow that builds and tests every change. It is for anyone whose CMake file has grown into a single long list of files that nobody dares to touch.
+**Level:** intermediate. You have built single-folder projects with CMake since Episode 27, and you have linked libraries and fetched GoogleTest in Episodes 38 and earlier. This day turns that into a project that a team can grow: separate libraries, applications and tests, clear include paths, dependencies that are declared once, presets for each build mode, and a continuous integration workflow that builds and tests every change. It is for anyone whose CMake file has grown into a single long list of files that nobody dares to touch.
 
 **By the end of this day, you will have:**
 
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 38: the build steps, targets, warnings as errors, GoogleTest and sanitizers
-- Day 6 and Day 8: Git branches, pushing to GitHub and pull requests
+- Episodes 27 to 38: the build steps, targets, warnings as errors, GoogleTest and sanitizers
+- Episode 6 and Episode 8: Git branches, pushing to GitHub and pull requests
 
 ---
 
@@ -106,9 +106,9 @@ The common mistake is to list every source file in one executable, which works u
 
 A library target groups code that several programs or tests use. Think of a toolbox. The tools are used in many jobs, so they are kept together and shared. CMake offers two main kinds: static libraries, which are copied into each program that uses them, and shared libraries, which are loaded at run time. The `add_library` command chooses the kind with the keywords `STATIC`, `SHARED` or `INTERFACE`, and without a keyword it follows the `BUILD_SHARED_LIBS` variable.
 
-Static libraries are simpler to ship in a small project, and they avoid run-time loading issues on Windows, where a shared library must be found next to the program or on the path. Shared libraries save space when many programs use the same code, and they allow the library to be replaced without rebuilding the programs. Days 29 to 38 used a static library in the same way, and this day keeps that choice.
+Static libraries are simpler to ship in a small project, and they avoid run-time loading issues on Windows, where a shared library must be found next to the program or on the path. Shared libraries save space when many programs use the same code, and they allow the library to be replaced without rebuilding the programs. Episodes 29 to 38 used a static library in the same way, and this day keeps that choice.
 
-The header-only libraries from Day 35 use `INTERFACE`. An interface library has no sources of its own. It carries include directories and compile options, and the targets that link it receive them. The project uses an interface library to hold the warning settings, so every target shares one policy.
+The header-only libraries from Episode 35 use `INTERFACE`. An interface library has no sources of its own. It carries include directories and compile options, and the targets that link it receive them. The project uses an interface library to hold the warning settings, so every target shares one policy.
 
 The common mistake is to build a library and then forget to mark its include directory as `PUBLIC`, so programs that link it cannot find its headers. The error is a missing header, which looks like a problem with the program rather than with the library. In the market, library packaging decisions such as static or shared linking are made per platform, and build engineers document them carefully.
 
@@ -220,12 +220,12 @@ Done when the header and the library file appear under the install prefix.
 
 The project is a small repository that a team could grow. It has a library, `textkit`, with word counting and slug generation. It has a command-line app, `textcli`, that uses the library. It has a GoogleTest suite, and it has presets for Debug, Release and sanitizers. A GitHub Actions workflow builds and tests it on every push.
 
-Suggested repo name: `100-days-software-day-39-cmake-and-project-structure`.
+Suggested repo name: `100-episodes-software-day-39-cmake-and-project-structure`.
 
 The repo layout:
 
 ```
-100-days-software-day-39-cmake-and-project-structure/
+100-episodes-software-day-39-cmake-and-project-structure/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -616,6 +616,6 @@ This project is light on new C++ and heavy on structure. A reviewer should see a
 
 ## Tomorrow
 
-Day 40 is the C++ capstone. You will build a small command-line expense ledger that stores records in a CSV file. It uses the RAII file handle and the buffer from Day 32, the smart pointers from Day 37, the containers from Day 36, the error types from Day 38 and the target layout from today. Its tests run on every push through the workflow you wrote today, so the capstone is a complete project from the first line of code to a green build.
+Episode 40 is the C++ capstone. You will build a small command-line expense ledger that stores records in a CSV file. It uses the RAII file handle and the buffer from Episode 32, the smart pointers from Episode 37, the containers from Episode 36, the error types from Episode 38 and the target layout from today. Its tests run on every push through the workflow you wrote today, so the capstone is a complete project from the first line of code to a green build.
 
-**Next:** [Day 40: C++ Capstone](Software-Day-40-C-Plus-Plus-Capstone.md)
+**Next:** [Episode 40: C++ Capstone](Software-Episode-40-C-Plus-Plus-Capstone.md)

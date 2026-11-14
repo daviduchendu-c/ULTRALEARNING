@@ -1,9 +1,9 @@
-# Day 32: Memory and Lifetime
+# Episode 32: Memory and Lifetime
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have used pointers and references from Day 31 and know that an object can be destroyed while a pointer still holds its address. This day explains where objects live, when they die, and how a C++ class can make cleanup automatic. It is for anyone who has leaked memory in a loop and wondered where it went.
+**Level:** intermediate. You have used pointers and references from Episode 31 and know that an object can be destroyed while a pointer still holds its address. This day explains where objects live, when they die, and how a C++ class can make cleanup automatic. It is for anyone who has leaked memory in a loop and wondered where it went.
 
 **By the end of this day, you will have:**
 
@@ -24,8 +24,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 31: the build, functions, references, pointers and the null-pointer habit
-- Day 28: integer types
+- Episodes 27 to 31: the build, functions, references, pointers and the null-pointer habit
+- Episode 28: integer types
 
 ---
 
@@ -98,7 +98,7 @@ int main() {
 
 The output is `10 20`. The variable `on_stack` needs no cleanup. The heap object needs an explicit `delete`. If you removed that line, the program would still print the same output, and it would leak four bytes. A single leak is small, but a leak in a loop that runs for a week adds up.
 
-The common mistake is to take the address of a stack variable and keep it after the function returns. That pointer refers to a stack slot that has been popped, and it is the dangling pointer from Day 31. The rule is simple: heap memory lives until you free it, and stack memory lives until its scope ends. In the market, the division between stack and heap matters most in embedded firmware and game engines, where allocations inside a frame loop cause visible stutter.
+The common mistake is to take the address of a stack variable and keep it after the function returns. That pointer refers to a stack slot that has been popped, and it is the dangling pointer from Episode 31. The rule is simple: heap memory lives until you free it, and stack memory lives until its scope ends. In the market, the division between stack and heap matters most in embedded firmware and game engines, where allocations inside a frame loop cause visible stutter.
 
 ### New and delete
 
@@ -163,7 +163,7 @@ int main() {
 }
 ```
 
-The output is `construct outer`, `construct inner`, `in inner scope`, `destruct inner`, `back in main`, and then `destruct outer`. The inner object dies at the closing brace of its block, and the outer object dies when `main` returns. The `std::move` in the constructor moves the string into the member, which avoids a copy. Day 37 explains move semantics in full.
+The output is `construct outer`, `construct inner`, `in inner scope`, `destruct inner`, `back in main`, and then `destruct outer`. The inner object dies at the closing brace of its block, and the outer object dies when `main` returns. The `std::move` in the constructor moves the string into the member, which avoids a copy. Episode 37 explains move semantics in full.
 
 Lifetime rules also apply to members. A class's members are constructed in the order they are declared, and destroyed in the reverse order. This matters when one member depends on another. The rule is to declare members in the order their dependencies are constructed, and to keep each destructor simple.
 
@@ -272,12 +272,12 @@ Done when you have both reports in your notes and can say which one the deleted 
 
 The project is a small library with two resource types. `IntBuffer` owns a heap array and copies it deeply. `FileHandle` owns a C file and closes it in its destructor. The demo prints the lifetime events, the test checks them, and the WSL build runs AddressSanitizer on both.
 
-Suggested repo name: `100-days-software-day-32-memory-and-lifetime`.
+Suggested repo name: `100-episodes-software-day-32-memory-and-lifetime`.
 
 The repo layout:
 
 ```
-100-days-software-day-32-memory-and-lifetime/
+100-episodes-software-day-32-memory-and-lifetime/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -627,7 +627,7 @@ This project is short but covers the rule that matters most in native code: ever
 
 ### Answers
 
-1. The bug is a leak, because no code can reach the memory after the pointer is lost, and the memory is never released. It stays allocated until the process ends. Prevent it by owning the memory with a RAII type, such as `std::unique_ptr` from Day 37, or by returning a value instead of a pointer.
+1. The bug is a leak, because no code can reach the memory after the pointer is lost, and the memory is never released. It stays allocated until the process ends. Prevent it by owning the memory with a RAII type, such as `std::unique_ptr` from Episode 37, or by returning a value instead of a pointer.
 2. `b` is destroyed first, then `a`, because objects are destroyed in the reverse order of construction. The last object created is the first to die, as with a stack of plates.
 3. Both copies point at the same memory. The first destructor frees it, and the second destructor frees it again. That is a double free, which is undefined behavior and often corrupts the heap. The fix is a deep copy or a deleted copy constructor.
 4. The wrapper's destructor runs during stack unwinding when the exception leaves the function, so the file is closed on every exit path. The function does not need a try block or a cleanup line.
@@ -665,6 +665,6 @@ This project is short but covers the rule that matters most in native code: ever
 
 ## Tomorrow
 
-Day 33 covers classes and objects. You have written classes in this day, with constructors, destructors and members. Day 33 explains access control with `public` and `private`, const member functions, initializer lists, and encapsulation as a way to protect the invariants that the buffer relies on. The lifetime rules from today decide when those invariants begin and end.
+Episode 33 covers classes and objects. You have written classes in this day, with constructors, destructors and members. Episode 33 explains access control with `public` and `private`, const member functions, initializer lists, and encapsulation as a way to protect the invariants that the buffer relies on. The lifetime rules from today decide when those invariants begin and end.
 
-**Next:** [Day 33: Classes and Objects](Software-Day-33-Classes-and-Objects.md)
+**Next:** [Episode 33: Classes and Objects](Software-Episode-33-Classes-and-Objects.md)

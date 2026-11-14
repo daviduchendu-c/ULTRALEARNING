@@ -1,9 +1,9 @@
-# Day 34: Mechanical Fundamentals
+# Episode 34: Mechanical Fundamentals
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You need the electronics basics from Module 2 and the motor and power work from Days 12 and 13, because today you size a motor and a bracket against real loads. You do not need calculus. Algebra and right-angle trigonometry are enough.
+**Level:** beginner to intermediate. You need the electronics basics from Module 2 and the motor and power work from Episodes 12 and 13, because today you size a motor and a bracket against real loads. You do not need calculus. Algebra and right-angle trigonometry are enough.
 
 **By the end of this day, you will have:**
 
@@ -21,13 +21,13 @@
 - A digital caliper that reads to 0.01 mm, about $12 to $20. Harbor Freight, Amazon and most hardware stores sell them.
 - A spring scale or a bathroom scale for a rough force test, about $10
 - A plastic or aluminium ruler, 300 mm long, about $2
-- Optional: a free CAD tool, which you will use from Day 37 onward. Today you only need a pencil and paper.
+- Optional: a free CAD tool, which you will use from Episode 37 onward. Today you only need a pencil and paper.
 
 **Prerequisites:**
 
-- Day 1 to Day 5: the engineering workflow and basic command-line work from Module 1
-- Day 12: power budgets, and how a load on a motor changes the current it draws
-- Day 13: stall current and torque, which you need again here
+- Episode 1 to Episode 5: the engineering workflow and basic command-line work from Module 1
+- Episode 12: power budgets, and how a load on a motor changes the current it draws
+- Episode 13: stall current and torque, which you need again here
 - Comfort with solving two linear equations and with sine and cosine of an angle
 
 ---
@@ -180,7 +180,7 @@ For the drive wheels of a 2 kg robot on a flat floor with rubber tyres, N is abo
 
 The common mistake is to use the coefficient for a clean surface when the floor is dusty or wet, or to forget that the normal force on the drive wheels is only part of the robot's weight when the centre of mass sits toward the castor. Measure the coefficient with a ramp and a block if the robot will work on a specific floor, because the table values are only rough guides.
 
-Friction appears in every joint, belt and wheel. It is also the reason a robot can drive up a ramp at all, and it sets the limit of the drivetrain that Day 36 covers.
+Friction appears in every joint, belt and wheel. It is also the reason a robot can drive up a ramp at all, and it sets the limit of the drivetrain that Episode 36 covers.
 
 ---
 
@@ -264,12 +264,12 @@ This project is a small Python package. It computes the things you learned today
 
 **Goal:** write a command-line script that takes the geometry and loads of a cantilever bracket and a mobile robot, computes the key quantities, checks them against a factor-of-safety limit, and writes a short text report.
 
-**Repository name:** `100-days-robotics-day-34-mechanical-fundamentals`
+**Repository name:** `100-episodes-robotics-day-34-mechanical-fundamentals`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-34-mechanical-fundamentals/
+100-episodes-robotics-day-34-mechanical-fundamentals/
 ├── README.md
 ├── requirements.txt
 ├── mechanics/
@@ -409,7 +409,7 @@ def tipping_margin(com_x, support_front_x, support_rear_x):
 - *Wikipedia*: "Force", "Torque", "Center of mass", "Mechanical equilibrium", "Friction", "Stress (mechanics)", "Strain (mechanics)", "Hooke's law", "Stiffness" and "Factor of safety"
 - *Wikipedia*: "Euler-Bernoulli beam theory" for the beam formulas, and "Second moment of area"
 - *MIT OpenCourseWare*: course 2.001 Mechanics and Materials I, which covers statics and stress in detail. Search for the course number on ocw.mit.edu.
-- *ASME*: the standard ASME Y14.5, which defines geometric dimensioning and tolerancing. You will use it from Day 41 onward. Search for its title on asme.org.
+- *ASME*: the standard ASME Y14.5, which defines geometric dimensioning and tolerancing. You will use it from Episode 41 onward. Search for its title on asme.org.
 
 **Tutorials**
 
@@ -430,4 +430,4 @@ def tipping_margin(com_x, support_front_x, support_rear_x):
 
 ## Tomorrow
 
-Tomorrow, on Day 35, you move from single parts to the parts that transmit motion between them: gears, pulleys, belts, chains, lead screws, linkages, bearings and shafts. Today's torque and stress calculations are the inputs to those designs. A gear that carries a torque of 0.4 N·m at a 20:1 reduction sees a different load on its teeth than the motor does, and the ratio you compute tomorrow decides the speed of the robot joint you build later.
+Tomorrow, on Episode 35, you move from single parts to the parts that transmit motion between them: gears, pulleys, belts, chains, lead screws, linkages, bearings and shafts. Today's torque and stress calculations are the inputs to those designs. A gear that carries a torque of 0.4 N·m at a 20:1 reduction sees a different load on its teeth than the motor does, and the ratio you compute tomorrow decides the speed of the robot joint you build later.

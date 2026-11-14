@@ -1,6 +1,6 @@
-# Day 6, Part II: How AI Works and How to Use It
+# Episode 6, Part II: How AI Works and How to Use It
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 3 hours
 **Level:** beginner to intermediate. For people who already use an AI chat tool and want to understand it, and who can run a short Python script.
@@ -20,7 +20,7 @@
 
 **Prerequisites:**
 
-- Day 6, Part I: the end-to-end experiment with a train/test split, a baseline and metrics
+- Episode 6, Part I: the end-to-end experiment with a train/test split, a baseline and metrics
 - Basic Python: functions, loops, reading and writing a CSV, reading environment variables
 
 ---
@@ -59,7 +59,7 @@
 
 Most people meet AI as a text box. You type, something answers, and the answer is often good enough that you stop asking how it was produced. That habit fails when the stakes rise: a wrong figure in a client report, an invented citation, a confidential contract pasted into an unapproved tool.
 
-Day 6, Part I used a model you could read line by line. A large language model has billions of parameters, so you cannot read its reasoning, but you can learn the mechanisms that drive it and measure what it does. The path has three stages: the average user, the power user and the practitioner.
+Episode 6, Part I used a model you could read line by line. A large language model has billions of parameters, so you cannot read its reasoning, but you can learn the mechanisms that drive it and measure what it does. The path has three stages: the average user, the power user and the practitioner.
 
 ---
 
@@ -175,7 +175,7 @@ To compare outputs, score both against a checklist written before you look, and 
 
 ## The practitioner: measure, decide, and know when not to use AI
 
-A practitioner treats a prompt like code. Build an eval set of about ten cases that includes the awkward ones. Count tokens from the usage numbers, multiply by the pricing page figures, and report cost per case and per thousand. Compare against a simple baseline, such as the rule set from Day 1. If the baseline scores as well, use it.
+A practitioner treats a prompt like code. Build an eval set of about ten cases that includes the awkward ones. Count tokens from the usage numbers, multiply by the pricing page figures, and report cost per case and per thousand. Compare against a simple baseline, such as the rule set from Episode 1. If the baseline scores as well, use it.
 
 Not using AI is often right: when a rule or lookup is exact and cheaper, when an error is costly and cannot be checked, when the data may not leave your environment, or when the eval shows no gain. A README that says "no AI here, and this is why" is strong work.
 
@@ -200,7 +200,7 @@ The script makes 40 calls: ten support messages, two prompt versions, two temper
 ### Repository layout
 
 ```
-100-days-ai-day-06-part-ii-how-ai-works/
+100-episodes-ai-day-06-part-ii-how-ai-works/
 ├── README.md
 ├── .gitignore
 ├── requirements.txt
@@ -215,8 +215,8 @@ The script makes 40 calls: ten support messages, two prompt versions, two temper
 ### Step 1: create the repo and environment
 
 ```bash
-mkdir 100-days-ai-day-06-part-ii-how-ai-works
-cd 100-days-ai-day-06-part-ii-how-ai-works
+mkdir 100-episodes-ai-day-06-part-ii-how-ai-works
+cd 100-episodes-ai-day-06-part-ii-how-ai-works
 mkdir data results
 python -m venv .venv
 ```
@@ -464,4 +464,4 @@ Write `README.md` with the summary table at the top. Tick each item only when it
 
 Tomorrow continues the module. Keep `data/eval_set.csv` and `results/results.csv` in the repo, since measuring against a fixed set carries forward.
 
-**Next:** [Day 7: Mathematical Foundations](../Module-02-Mathematics-for-AI/Day-07-Mathematical-Foundations.md)
+**Next:** [Episode 7: Mathematical Foundations](../Module-02-Mathematics-for-AI/Episode-07-Mathematical-Foundations.md)

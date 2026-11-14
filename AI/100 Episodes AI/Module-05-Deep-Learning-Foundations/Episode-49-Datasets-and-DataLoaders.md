@@ -1,9 +1,9 @@
-# Day 49: Datasets and DataLoaders
+# Episode 49: Datasets and DataLoaders
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You can build and train a model (Day 48). Today the data stops being a variable in your notebook and becomes a component with a defined interface, so that the training code does not care where the examples come from.
+**Level:** intermediate. You can build and train a model (Episode 48). Today the data stops being a variable in your notebook and becomes a component with a defined interface, so that the training code does not care where the examples come from.
 
 **By the end of this day, you will have:**
 
@@ -15,16 +15,16 @@
 **What you need:**
 
 - A computer with Python 3.11 or 3.12
-- PyTorch 2.5.1 from Day 46, with the same environment
+- PyTorch 2.5.1 from Episode 46, with the same environment
 - NumPy 2.1.3 and pytest 8.3.3, as before
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 46: tensors, shapes and dtypes
-- Day 48: a model that takes a batch of inputs and produces logits
-- Day 45: why augmentation must preserve the label, and why the validation data is not augmented
-- Day 13: sampling and randomness, at the level of a shuffled list
+- Episode 46: tensors, shapes and dtypes
+- Episode 48: a model that takes a batch of inputs and produces logits
+- Episode 45: why augmentation must preserve the label, and why the validation data is not augmented
+- Episode 13: sampling and randomness, at the level of a shuffled list
 
 ---
 
@@ -175,7 +175,7 @@ In industry, shuffling bugs are a classic source of inflated metrics in time-bas
 
 A transform is a small function that changes a sample as it is read. Normalization makes features comparable in scale. Augmentation creates a varied version of the sample that keeps the same label. Because transforms run inside `__getitem__`, each epoch can see a different version of the same example.
 
-From first principles, the mean and standard deviation for standardization must be computed on the training data only, and then applied unchanged to the validation and test data. Computing them over the whole dataset leaks information about the test set into the preprocessing, which is a form of leakage that Day 45 warned about. An augmentation such as a random horizontal flip is applied only to training samples, and it uses a random generator so that the same seed gives the same flips.
+From first principles, the mean and standard deviation for standardization must be computed on the training data only, and then applied unchanged to the validation and test data. Computing them over the whole dataset leaks information about the test set into the preprocessing, which is a form of leakage that Episode 45 warned about. An augmentation such as a random horizontal flip is applied only to training samples, and it uses a random generator so that the same seed gives the same flips.
 
 ```python
 import torch
@@ -284,12 +284,12 @@ Do not trust that the file is clean. Missing values, labels encoded as strings a
 
 **Goal:** write the circle dataset to CSV files, load the training file with a custom dataset that validates its labels, standardize the features with training statistics, apply a seeded augmentation to the training data only, and test the loader's batches and order.
 
-**Repo name:** `100-days-ai-day-49-datasets-and-dataloaders`
+**Repo name:** `100-episodes-ai-day-49-datasets-and-dataloaders`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-49-datasets-and-dataloaders/
+100-episodes-ai-day-49-datasets-and-dataloaders/
 ├── README.md
 ├── requirements.txt
 ├── data/
@@ -336,7 +336,7 @@ Create `src/data_lab/dataset.py` with the `CSVDataset` class from the lesson, an
 3. Compute the mean and standard deviation of the training features in the experiment script, and apply `Standardize` to the training and test datasets with those statistics only.
 4. Write `tests/test_loader.py`. Check that a loader with batch size 32 and `drop_last=True` produces only batches of size 32, that the number of batches is 12 for 400 samples, and that two loaders with the same generator seed produce the same first batch.
 5. Check that the test loader has `shuffle=False`, that it contains exactly 400 samples across all batches, and that the augmentation is not applied to it.
-6. Write `experiments/train_with_loader.py` that trains the Day 48 MLP for 50 epochs with the loader, prints the epoch loss and the test accuracy at the end, and saves the epoch losses to `results/epoch_losses.csv`.
+6. Write `experiments/train_with_loader.py` that trains the Episode 48 MLP for 50 epochs with the loader, prints the epoch loss and the test accuracy at the end, and saves the epoch losses to `results/epoch_losses.csv`.
 7. Repeat the training with and without the random flip augmentation, using three seeds, and record the test accuracy for each in the README.
 
 **README checklist:**
@@ -412,4 +412,4 @@ Create `src/data_lab/dataset.py` with the `CSVDataset` class from the lesson, an
 
 ## Tomorrow
 
-Day 50 puts everything together in a training loop. You will combine the model from Day 48, the loader from today, the optimizer and loss from Days 42 and 44, and a validation pass in eval mode with `no_grad`. You will also add checkpointing, so a run can be saved and resumed, and a metrics log. The loop you write tomorrow is the one that the final project on Day 51 depends on.
+Episode 50 puts everything together in a training loop. You will combine the model from Episode 48, the loader from today, the optimizer and loss from Episodes 42 and 44, and a validation pass in eval mode with `no_grad`. You will also add checkpointing, so a run can be saved and resumed, and a metrics log. The loop you write tomorrow is the one that the final project on Episode 51 depends on.

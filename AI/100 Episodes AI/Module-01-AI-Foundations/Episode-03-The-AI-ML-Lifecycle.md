@@ -1,9 +1,9 @@
-# Day 3: The AI/ML Lifecycle
+# Episode 3: The AI/ML Lifecycle
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 2 to 3 hours
-**Level:** beginner. Built for anyone who finished Day 2 and wants to see how a model fits into a real project.
+**Level:** beginner. Built for anyone who finished Episode 2 and wants to see how a model fits into a real project.
 
 **By the end of this day, you will have:**
 
@@ -19,7 +19,7 @@
 
 **Prerequisites:**
 
-- Day 2: How Machines Learn (features, labels, loss, generalization, train vs test)
+- Episode 2: How Machines Learn (features, labels, loss, generalization, train vs test)
 - Basic Python, for the leakage check
 
 ---
@@ -55,7 +55,7 @@
 
 ## Introduction
 
-On Day 2 you wrote a full training loop in about ten lines. In a real job those ten lines are the smallest part of the work. Before them, someone has to decide what problem is worth solving, find and clean the data, and decide what "good" means. After them, someone has to prove the model works on data it has never seen, ship it, watch it in production and fix it when the world changes. That whole path is the **ML lifecycle**.
+On Episode 2 you wrote a full training loop in about ten lines. In a real job those ten lines are the smallest part of the work. Before them, someone has to decide what problem is worth solving, find and clean the data, and decide what "good" means. After them, someone has to prove the model works on data it has never seen, ship it, watch it in production and fix it when the world changes. That whole path is the **ML lifecycle**.
 
 Many failed AI projects have a sound algorithm and still fail, because a stage was skipped. Common examples are no baseline, a test set that leaked into training, and no monitoring after launch. Today you learn the stages, what each one produces, and how each one breaks. This is the map for every project in the remaining 97 days.
 
@@ -140,7 +140,7 @@ Data collection means finding, gathering or creating the examples and labels the
 
 For late deliveries you need past orders (restaurant, time of day, distance, items), courier data, weather, and the label (actual arrival minus promised time, where more than 15 minutes means late). Six months of orders gives about 2 million rows.
 
-A frequent mistake is collecting data that does not cover the conditions you will face, such as six months of summer data for a winter launch. Another is ignoring privacy law: customer addresses are personal data under rules such as the EU's GDPR. Your Day 2 "and" problem was also a collection failure. Thirty hand-written rows did not cover enough ways of complaining. Check the date range and the groups in your data against the conditions of launch.
+A frequent mistake is collecting data that does not cover the conditions you will face, such as six months of summer data for a winter launch. Another is ignoring privacy law: customer addresses are personal data under rules such as the EU's GDPR. Your Episode 2 "and" problem was also a collection failure. Thirty hand-written rows did not cover enough ways of complaining. Check the date range and the groups in your data against the conditions of launch.
 
 Teams hire data engineers and buy datasets because collection is slow, and the legal review often takes longer than the modeling.
 
@@ -156,7 +156,7 @@ Exploratory data analysis (EDA) means counting rows, checking label balance, and
 
 In the delivery data you find that 8% of orders are late. Late orders cluster on Friday evenings. You also find 3,000 orders with a negative delivery time, which is impossible.
 
-The usual mistake is skipping EDA because the deadline is close. The 8% balance means a model that predicts "never late" is already 92% accurate, so you need that number before you celebrate a 93% model. If you cannot say what fraction of rows has each label, you skipped it. EDA notebooks are a standard part of data science interviews and take-home tests (Day 20).
+The usual mistake is skipping EDA because the deadline is close. The 8% balance means a model that predicts "never late" is already 92% accurate, so you need that number before you celebrate a 93% model. If you cannot say what fraction of rows has each label, you skipped it. EDA notebooks are a standard part of data science interviews and take-home tests (Episode 20).
 
 ---
 
@@ -170,7 +170,7 @@ Cleaning is fixing or removing data that is wrong, missing, duplicated or incons
 
 The 3,000 negative delivery times came from a timezone bug in one region. You fix the timezone instead of deleting the rows, because deleting them would remove an entire region from the data. You log the fix in a cleaning notes file.
 
-One mistake is silently dropping rows with missing values, which can remove a whole group of customers. Another is filling gaps with a statistic computed on all rows before splitting, which is a small leak (see the data leakage section). Count rows per group before and after cleaning to catch the first one. Data teams often say most project time goes into cleaning and preparing data. Day 19 covers it.
+One mistake is silently dropping rows with missing values, which can remove a whole group of customers. Another is filling gaps with a statistic computed on all rows before splitting, which is a small leak (see the data leakage section). Count rows per group before and after cleaning to catch the first one. Data teams often say most project time goes into cleaning and preparing data. Episode 19 covers it.
 
 ---
 
@@ -204,7 +204,7 @@ The mistake is having no baseline, so a 92% accurate model looks impressive. You
 
 ### Training
 
-The Day 2 loop: guess, measure, adjust.
+The Episode 2 loop: guess, measure, adjust.
 
 Training fits the model's parameters to examples. The fit is only meaningful if the model has seen nothing but the training rows, because later stages judge it on rows it has not seen.
 
@@ -226,7 +226,7 @@ Validation is measuring candidate models on a held-out validation set (or with c
 
 You try three tree depths. Depth 6 gets 0.74 recall on validation, depth 12 gets 0.71. You pick depth 6.
 
-The mistake is using the test set as the validation set. Every time you look at a score and change something, that data shapes your choices. Do it a hundred times on the test set and the test score stops being an honest estimate. You spot it when the "final" score was seen many times before the final report. Hyperparameter search tools such as Optuna and scikit-learn's `GridSearchCV` automate this loop. Day 36 covers it.
+The mistake is using the test set as the validation set. Every time you look at a score and change something, that data shapes your choices. Do it a hundred times on the test set and the test score stops being an honest estimate. You spot it when the "final" score was seen many times before the final report. Hyperparameter search tools such as Optuna and scikit-learn's `GridSearchCV` automate this loop. Episode 36 covers it.
 
 ---
 
@@ -268,7 +268,7 @@ Deployment is putting the model where it makes real predictions: an API the app 
 
 The delivery model is saved to a file, wrapped in a small web service, and called by the ordering app with a 50 ms time limit. It goes live for 5% of customers first, which is a canary release.
 
-Two mistakes are common: computing features differently in production than in training (training/serving skew, from Day 2: How Machines Learn), and having no way to roll back to the previous model. If production accuracy is far below test accuracy on day one, suspect skew. Common tools include FastAPI, Docker and cloud ML services such as AWS SageMaker, Google Vertex AI and Azure ML, which are paid beyond their free tiers. Day 92 covers serving.
+Two mistakes are common: computing features differently in production than in training (training/serving skew, from Episode 2: How Machines Learn), and having no way to roll back to the previous model. If production accuracy is far below test accuracy on day one, suspect skew. Common tools include FastAPI, Docker and cloud ML services such as AWS SageMaker, Google Vertex AI and Azure ML, which are paid beyond their free tiers. Episode 92 covers serving.
 
 ---
 
@@ -282,7 +282,7 @@ Two kinds of change matter. **Data drift** is when the inputs change over time (
 
 Three months after launch, the delivery model's recall drops to 0.55. The input monitor shows that average distance jumped, because the company started serving a new suburb. That is data drift. Separately, a new courier app changed how pickups work, so the old patterns mean something different. That is concept drift.
 
-The mistake is monitoring only whether the service is up. A model can answer quickly, in the right format, and still be wrong. Labels often arrive late (you only learn an order was late after it arrives), so you also need input monitoring to catch trouble early. Evidently is open source, and WhyLabs and Arize are commercial options. Day 93 covers monitoring.
+The mistake is monitoring only whether the service is up. A model can answer quickly, in the right format, and still be wrong. Labels often arrive late (you only learn an order was late after it arrives), so you also need input monitoring to catch trouble early. Evidently is open source, and WhyLabs and Arize are commercial options. Episode 93 covers monitoring.
 
 ---
 
@@ -405,7 +405,7 @@ What will someone do differently because of this prediction?
 - Groups that could be served worse: ...
 ```
 
-Then list three features you would want for your own case, and mark any that would not be available at prediction time. Keep the brief. Day 4 uses it.
+Then list three features you would want for your own case, and mark any that would not be available at prediction time. Keep the brief. Episode 4 uses it.
 
 ---
 
@@ -577,6 +577,6 @@ In `README.md`, write full sentences for each of these:
 
 ## Tomorrow
 
-Day 4, **AI Problem Formulation**, zooms in on the problem definition stage. Today you saw that a vague request ("use AI for late deliveries") has to become a precise prediction before anything else can happen. Tomorrow you learn the menu of shapes that prediction can take: classification, regression, ranking, clustering, generation, detection, segmentation, forecasting, recommendation, anomaly detection and control. You will map 20 real problems to the right shape, and see that the same dataset scored three different ways gives three very different answers to "is the model good?" Bring your two project briefs. You will check whether you chose the right formulation for each.
+Episode 4, **AI Problem Formulation**, zooms in on the problem definition stage. Today you saw that a vague request ("use AI for late deliveries") has to become a precise prediction before anything else can happen. Tomorrow you learn the menu of shapes that prediction can take: classification, regression, ranking, clustering, generation, detection, segmentation, forecasting, recommendation, anomaly detection and control. You will map 20 real problems to the right shape, and see that the same dataset scored three different ways gives three very different answers to "is the model good?" Bring your two project briefs. You will check whether you chose the right formulation for each.
 
-**Next:** [Day 4: AI Problem Formulation](Day-04-AI-Problem-Formulation.md)
+**Next:** [Episode 4: AI Problem Formulation](Episode-04-AI-Problem-Formulation.md)

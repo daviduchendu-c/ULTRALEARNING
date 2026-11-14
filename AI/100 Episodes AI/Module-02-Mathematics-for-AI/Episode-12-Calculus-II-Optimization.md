@@ -1,9 +1,9 @@
-# Day 12: Calculus II: Optimization
+# Episode 12: Calculus II: Optimization
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have seen derivatives and gradients on Day 11. This day turns them into a method for finding the best parameters of a model. It is for anyone who wants to understand what "training" does.
+**Level:** intermediate. You have seen derivatives and gradients on Episode 11. This day turns them into a method for finding the best parameters of a model. It is for anyone who wants to understand what "training" does.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 11: derivatives, partial derivatives, the chain rule and gradients
-- Day 7: functions, equations and graphs
-- Day 8 and Day 9: NumPy-style vectors and matrix products
+- Episode 11: derivatives, partial derivatives, the chain rule and gradients
+- Episode 7: functions, equations and graphs
+- Episode 8 and Episode 9: NumPy-style vectors and matrix products
 - Basic Python: functions, loops and lists
 
 ---
@@ -311,12 +311,12 @@ Create a folder called `day12-practice` and write your code in `practice.py`.
 
 ## Project: an optimization lab
 
-This project is practical. It turns the hand-written gradient descent into a small tested library and an experiment script that you could reuse for any loss. Name the repository `100-days-ai-engineering-day-12-optimization`.
+This project is practical. It turns the hand-written gradient descent into a small tested library and an experiment script that you could reuse for any loss. Name the repository `100-episodes-ai-engineering-day-12-optimization`.
 
 **Repo layout**
 
 ```
-100-days-ai-engineering-day-12-optimization/
+100-episodes-ai-engineering-day-12-optimization/
 ├── README.md
 ├── requirements.txt
 ├── optimizers.py
@@ -481,6 +481,6 @@ def test_history_length():
 
 ## Tomorrow
 
-Tomorrow is Day 13, Probability. Today you learned to move downhill on a loss surface. Probability gives you the language of uncertainty: what the data might be, how likely a result is, and how to update a belief when new evidence arrives. Those ideas underpin the loss functions in Day 15 and the statistical reasoning in Day 14.
+Tomorrow is Episode 13, Probability. Today you learned to move downhill on a loss surface. Probability gives you the language of uncertainty: what the data might be, how likely a result is, and how to update a belief when new evidence arrives. Those ideas underpin the loss functions in Episode 15 and the statistical reasoning in Episode 14.
 
-**Next:** [Day 13: Probability](Day-13-Probability.md)
+**Next:** [Episode 13: Probability](Episode-13-Probability.md)

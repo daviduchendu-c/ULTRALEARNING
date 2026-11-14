@@ -1,9 +1,9 @@
-# Day 8: Vectors
+# Episode 8: Vectors
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** beginner. You should be comfortable with Day 7's functions and sums. No geometry beyond the Pythagorean theorem is needed.
+**Level:** beginner. You should be comfortable with Episode 7's functions and sums. No geometry beyond the Pythagorean theorem is needed.
 
 **By the end of this day, you will have:**
 
@@ -22,7 +22,7 @@
 
 **Prerequisites:**
 
-- Day 7: functions, sums and the square root
+- Episode 7: functions, sums and the square root
 - Basic Python: lists, functions, `import`, and running a script from the terminal
 - The Pythagorean theorem: for a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides
 
@@ -113,7 +113,7 @@ print(house.shape)  # (3,)
 print(house[0])     # 120.0
 ```
 
-A common mistake is mixing features on very different scales. If area is measured in square meters and age in years, the area numbers dominate any calculation that uses distance. Scaling the features before comparing them is a standard fix, and you will see it in the Day 9 dataset exercises. Another mistake is assuming a vector has a column shape by default. In NumPy, `np.array([1, 2, 3])` has shape `(3,)`, which is neither a row nor a column, while `np.array([[1], [2], [3]])` has shape `(3, 1)`, which is a column. In production, a sentence embedding returned by a model API is a vector with a fixed dimension. BERT-base produces 768-dimensional vectors for each token, and every downstream system that stores or compares embeddings depends on that dimension staying the same.
+A common mistake is mixing features on very different scales. If area is measured in square meters and age in years, the area numbers dominate any calculation that uses distance. Scaling the features before comparing them is a standard fix, and you will see it in the Episode 9 dataset exercises. Another mistake is assuming a vector has a column shape by default. In NumPy, `np.array([1, 2, 3])` has shape `(3,)`, which is neither a row nor a column, while `np.array([[1], [2], [3]])` has shape `(3, 1)`, which is a column. In production, a sentence embedding returned by a model API is a vector with a fixed dimension. BERT-base produces 768-dimensional vectors for each token, and every downstream system that stores or compares embeddings depends on that dimension staying the same.
 
 ### Vector addition
 
@@ -152,7 +152,7 @@ A common mistake is treating scalar multiplication as a change in direction. It 
 
 Put a ruler from the origin to the tip of a vector. Its length is the magnitude. For the vector `(3, 4)`, the ruler is the hypotenuse of a right triangle with legs 3 and 4, so its length is 5. The Pythagorean theorem gives the answer directly.
 
-From first principles, the Euclidean magnitude, also called the L2 norm, of `v` is the square root of the sum of the squared components: `||v|| = sqrt(v1^2 + v2^2 + ... + vn^2)`. This is a sum from Day 7 wrapped in a square root. Magnitude is always zero or positive. It is zero only for the zero vector. Magnitude also has the property that scaling a vector by `c` scales its magnitude by the absolute value of `c`, which you can verify with the code below.
+From first principles, the Euclidean magnitude, also called the L2 norm, of `v` is the square root of the sum of the squared components: `||v|| = sqrt(v1^2 + v2^2 + ... + vn^2)`. This is a sum from Episode 7 wrapped in a square root. Magnitude is always zero or positive. It is zero only for the zero vector. Magnitude also has the property that scaling a vector by `c` scales its magnitude by the absolute value of `c`, which you can verify with the code below.
 
 ```python
 import numpy as np
@@ -225,7 +225,7 @@ print(proj)  # [1.32 1.76]
 
 The angle itself comes from the cosine formula, and NumPy's `arccos` returns it in radians. For these two vectors the angle is about 10.3 degrees. Sketch the two arrows on graph paper and measure the angle with a protractor to confirm it.
 
-Assuming that geometric intuition from two or three dimensions carries over unchanged to hundreds of dimensions is a common mistake. In high dimensions, random vectors are almost always nearly orthogonal, and the distances between random points become similar. This is one reason nearest-neighbor search in embedding spaces needs careful indexing and why the choice of similarity measure matters. The limitation is real: a picture helps you reason about two dimensions, and the algebra is what you trust for hundreds. In industry, the geometry of projection is behind principal component analysis, which you will meet on Day 10, and behind the least-squares fits that statisticians and engineers use every day.
+Assuming that geometric intuition from two or three dimensions carries over unchanged to hundreds of dimensions is a common mistake. In high dimensions, random vectors are almost always nearly orthogonal, and the distances between random points become similar. This is one reason nearest-neighbor search in embedding spaces needs careful indexing and why the choice of similarity measure matters. The limitation is real: a picture helps you reason about two dimensions, and the algebra is what you trust for hundreds. In industry, the geometry of projection is behind principal component analysis, which you will meet on Episode 10, and behind the least-squares fits that statisticians and engineers use every day.
 
 ---
 
@@ -249,14 +249,14 @@ Keep a short note of every step that surprised you. The surprises are the parts 
 
 This is a practical mini-project. You will build a small module of vector functions, test it against known answers and against NumPy, and commit the result. The module is the same set of operations that a retrieval or recommendation system runs millions of times per day, so writing it yourself is the fastest way to trust the library calls later.
 
-**Repo name:** `100-days-ai-engineering-day-08-vectors`
+**Repo name:** `100-episodes-ai-engineering-day-08-vectors`
 
 **Goal:** implement seven vector operations from scratch with NumPy, test them, and document where each one appears in a machine learning system.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-08-vectors/
+100-episodes-ai-engineering-day-08-vectors/
 ├── README.md
 ├── requirements.txt
 ├── vectors.py
@@ -451,4 +451,4 @@ def test_projection_matches_known_answer():
 
 Tomorrow you stack vectors into matrices. A matrix is a grid of numbers, and a dataset with one row per example and one column per feature is exactly that. You will learn how matrices add, multiply and transpose, how their shapes must line up, and how a single matrix multiplication computes the outputs of a neural network layer for a whole batch at once. The dot product you implemented today is the building block of every entry in that product.
 
-**Next:** [Day 9: Matrices](Day-09-Matrices.md)
+**Next:** [Episode 9: Matrices](Episode-09-Matrices.md)

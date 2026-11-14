@@ -1,6 +1,6 @@
-# Day 35: Templates and Generic Programming
+# Episode 35: Templates and Generic Programming
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
 **Level:** intermediate. You have written classes and used `std::vector`, `std::variant` and iterators. This day explains how one piece of code can work on many types, with the checking done by the compiler before the program runs. It is for anyone who has read a template error that stretched over forty lines and wondered what it was trying to say.
@@ -23,8 +23,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 34: the build, functions, references, classes, inheritance and `std::variant`
-- Day 30: `std::vector`, iterators and `<algorithm>`
+- Episodes 27 to 34: the build, functions, references, classes, inheritance and `std::variant`
+- Episode 30: `std::vector`, iterators and `<algorithm>`
 
 ---
 
@@ -164,7 +164,7 @@ int main() {
 }
 ```
 
-The output is `3` for the vector and `2` for the list. The same template works on two containers with different memory layouts, because it uses only `++`, `*` and comparison on iterators. A requirement such as random access, which `std::sort` needs, is a stronger rule on the iterator, and it is what made `std::map` unusable with `std::sort` on Day 30.
+The output is `3` for the vector and `2` for the list. The same template works on two containers with different memory layouts, because it uses only `++`, `*` and comparison on iterators. A requirement such as random access, which `std::sort` needs, is a stronger rule on the iterator, and it is what made `std::map` unusable with `std::sort` on Episode 30.
 
 The common mistake is to write a generic algorithm that quietly assumes a stronger iterator category than the caller provides, such as using `iterator + n`. The code compiles for vectors and fails for lists, and the error appears at the call site. The fix is to state the requirement in a concept, or to use only operations that every iterator provides. In the market, the Standard Template Library is the reference example, and teams that write their own algorithms copy its iterator categories closely.
 
@@ -245,12 +245,12 @@ Done when the file compiles with no warnings, which proves the checks hold.
 
 The project is a small header-only library with three templates and one concept. `BoundedStack<T>` holds up to a fixed number of values of any type. `sum_of` adds the values in any input range. `to_text` converts any type that can be printed. The test uses `static_assert` for compile-time checks and runtime checks for behavior.
 
-Suggested repo name: `100-days-software-day-35-templates-and-generic-programming`.
+Suggested repo name: `100-episodes-software-day-35-templates-and-generic-programming`.
 
 The repo layout:
 
 ```
-100-days-software-day-35-templates-and-generic-programming/
+100-episodes-software-day-35-templates-and-generic-programming/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -576,6 +576,6 @@ This project is short but dense. A reviewer should see that the templates are in
 
 ## Tomorrow
 
-Day 36 is the STL deep dive. You have used `std::vector`, `std::sort` and iterators, and the containers in the standard library are all class templates like the `BoundedStack` from today. Day 36 covers maps, sets, queues and stacks, the iterator invalidation rules for each one, and lambdas, which you used in this day's exercises and which the algorithms depend on. The generic-programming habits from today help you read the requirements listed on each container's reference page.
+Episode 36 is the STL deep dive. You have used `std::vector`, `std::sort` and iterators, and the containers in the standard library are all class templates like the `BoundedStack` from today. Episode 36 covers maps, sets, queues and stacks, the iterator invalidation rules for each one, and lambdas, which you used in this day's exercises and which the algorithms depend on. The generic-programming habits from today help you read the requirements listed on each container's reference page.
 
-**Next:** [Day 36: STL Deep Dive](Software-Day-36-STL-Deep-Dive.md)
+**Next:** [Episode 36: STL Deep Dive](Software-Episode-36-STL-Deep-Dive.md)

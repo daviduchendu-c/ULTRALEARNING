@@ -1,9 +1,9 @@
-# Day 24: Professional Python
+# Episode 24: Professional Python
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have written modules, classes and standard library code from Day 18 to Day 23. This is for anyone whose code works on their own machine and nowhere else, and who wants a project another person can install, format, check and build without guessing.
+**Level:** intermediate. You have written modules, classes and standard library code from Episode 18 to Episode 23. This is for anyone whose code works on their own machine and nowhere else, and who wants a project another person can install, format, check and build without guessing.
 
 **By the end of this day, you will have:**
 
@@ -18,7 +18,7 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`, and on Windows also `py --list`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - Internet access to install packages from PyPI, the Python Package Index, which is free
@@ -26,10 +26,10 @@
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (`python -m`, scripts)
-- Day 18: Modules and Packages (packages, `__init__.py`, `__main__.py`)
-- Day 19 and Day 20: OOP I and II (classes used in a real package)
-- Day 23: Files and Standard Library (the modules a package is likely to use)
+- Episode 9: Python Runtime and Syntax (`python -m`, scripts)
+- Episode 18: Modules and Packages (packages, `__init__.py`, `__main__.py`)
+- Episode 19 and Episode 20: OOP I and II (classes used in a real package)
+- Episode 23: Files and Standard Library (the modules a package is likely to use)
 
 ---
 
@@ -184,7 +184,7 @@ The common mistake is formatting only some files, or formatting by hand, so the 
 
 A linter reports code that might be wrong or unclear. Think of a proofreader who points out a repeated word, a sentence that trails off, or a name that is never used. The proofreader flags the places where a careful reader would stop, and leaves the meaning to the author.
 
-From first principles, Ruff's linter, run with `ruff check`, implements rules from several sources. The letter codes select groups: `E` and `F` come from pycodestyle and pyflakes, `I` checks import order, `B` from flake8-bugbear finds likely bugs, such as mutable default arguments from Day 16, and `UP` suggests newer syntax for the target Python version. The `select` list in `[tool.ruff.lint]` chooses the groups, and `ruff check --fix` applies safe automatic fixes. A rule that a team disagrees with can be ignored in the same table, with a comment that says why.
+From first principles, Ruff's linter, run with `ruff check`, implements rules from several sources. The letter codes select groups: `E` and `F` come from pycodestyle and pyflakes, `I` checks import order, `B` from flake8-bugbear finds likely bugs, such as mutable default arguments from Episode 16, and `UP` suggests newer syntax for the target Python version. The `select` list in `[tool.ruff.lint]` chooses the groups, and `ruff check --fix` applies safe automatic fixes. A rule that a team disagrees with can be ignored in the same table, with a comment that says why.
 
 ```bash
 python -m ruff check src tests
@@ -276,12 +276,12 @@ Done when the wheel and sdist exist in `dist` and you can name the file that hol
 
 The project is a small, installable package called `textstats`. It counts the most common words in a text, estimates a reading time, and exposes both through a `textstats` console command. The code uses only the standard library. The project's real subject is the workflow around the code: a virtual environment, a `pyproject.toml`, a src layout, Ruff for formatting and linting, a strict mypy check, tests, and a built wheel. The evidence is the set of command outputs and the wheel listing, all recorded in the findings file.
 
-Suggested repo name: `100-days-software-day-24-professional-python`.
+Suggested repo name: `100-episodes-software-day-24-professional-python`.
 
 Repo layout:
 
 ```
-100-days-software-day-24-professional-python/
+100-episodes-software-day-24-professional-python/
 ├── .gitignore
 ├── README.md
 ├── pyproject.toml
@@ -526,6 +526,6 @@ The package is small so that the workflow is the thing to study. A reviewer shou
 
 ## Tomorrow
 
-Day 25 is testing. You will write unit tests that check one function in isolation, use fixtures to set up shared state, write mocks to replace slow or external parts, and organize tests into integration suites that exercise several modules together. The `unittest` and `discover` commands from today are the runner for those tests, and the checks you set up here will run them on every change.
+Episode 25 is testing. You will write unit tests that check one function in isolation, use fixtures to set up shared state, write mocks to replace slow or external parts, and organize tests into integration suites that exercise several modules together. The `unittest` and `discover` commands from today are the runner for those tests, and the checks you set up here will run them on every change.
 
-**Next:** [Day 25: Testing Python](Software-Day-25-Testing-Python.md)
+**Next:** [Episode 25: Testing Python](Software-Episode-25-Testing-Python.md)

@@ -1,9 +1,9 @@
-# Day 43: Backpropagation
+# Episode 43: Backpropagation
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 4 hours
-**Level:** intermediate to advanced. This is the hardest day of the module so far. You need the chain rule from Day 11 and the forward pass and losses from Days 39 to 42. Take the scalar example slowly before you move to matrices.
+**Level:** intermediate to advanced. This is the hardest day of the module so far. You need the chain rule from Episode 11 and the forward pass and losses from Episodes 39 to 42. Take the scalar example slowly before you move to matrices.
 
 **By the end of this day, you will have:**
 
@@ -22,11 +22,11 @@
 
 **Prerequisites:**
 
-- Day 11: the derivative and the chain rule for a composition of two functions
-- Day 10: matrix multiplication and transposes
-- Day 39: the forward pass of a dense layer
-- Day 41: the derivatives of sigmoid and tanh
-- Day 42: binary cross-entropy and its gradient with respect to the logit
+- Episode 11: the derivative and the chain rule for a composition of two functions
+- Episode 10: matrix multiplication and transposes
+- Episode 39: the forward pass of a dense layer
+- Episode 41: the derivatives of sigmoid and tanh
+- Episode 42: binary cross-entropy and its gradient with respect to the logit
 
 ---
 
@@ -56,7 +56,7 @@ Training a neural network means changing its weights so that the loss goes down.
 
 The method is the chain rule applied in the right order, with each intermediate value remembered from the forward pass. Once you see the pattern on a graph with three nodes, you can apply it to a network with a hundred layers. That is why this lesson starts with a scalar example and only then moves to matrices.
 
-On the job, you will rarely write backpropagation by hand. Frameworks such as PyTorch build the graph for you and run the backward pass automatically. Still, the engineers who debug exploding gradients, frozen layers, NaN losses and custom operations are the ones who understand what the framework does underneath. You will use that understanding on Days 46 to 50.
+On the job, you will rarely write backpropagation by hand. Frameworks such as PyTorch build the graph for you and run the backward pass automatically. Still, the engineers who debug exploding gradients, frozen layers, NaN losses and custom operations are the ones who understand what the framework does underneath. You will use that understanding on Episodes 46 to 50.
 
 ---
 
@@ -158,13 +158,13 @@ The common mistake is to forget that the forward pass must be run in the trainin
 
 ## Loss
 
-The loss compresses the output into one number. For a batch of N examples with labels y and probabilities A2, the binary cross-entropy from Day 42 is L = -(1/N) sum of (y log A2 + (1 - y) log(1 - A2)). The loss is a scalar, which is important: backpropagation computes the gradient of one number with respect to many parameters, and that is the efficient direction.
+The loss compresses the output into one number. For a batch of N examples with labels y and probabilities A2, the binary cross-entropy from Episode 42 is L = -(1/N) sum of (y log A2 + (1 - y) log(1 - A2)). The loss is a scalar, which is important: backpropagation computes the gradient of one number with respect to many parameters, and that is the efficient direction.
 
 From first principles, the loss is the last node in the graph. Its gradient with respect to the output A2 is the first thing the backward pass computes. For binary cross-entropy, that gradient is (A2 - y) / (A2 (1 - A2)) divided by N. The backward pass then passes through the sigmoid, which multiplies by A2 (1 - A2), and the product simplifies to (A2 - y) / N. Starting from the logit gives the simpler form, which you will use in the code.
 
-The limitation is that the loss is a proxy for what you want. The gradient is correct for the loss you chose, not necessarily for the business outcome. If the loss averages over examples, a rare class may contribute very little to the gradient. This is why the loss design on Day 42 matters for the backward pass too.
+The limitation is that the loss is a proxy for what you want. The gradient is correct for the loss you chose, not necessarily for the business outcome. If the loss averages over examples, a rare class may contribute very little to the gradient. This is why the loss design on Episode 42 matters for the backward pass too.
 
-Do not compute the loss from a probability that has been clipped to exactly 0 or 1, because the gradient then becomes infinite or undefined. The fix is to clip with a small epsilon, or to compute the loss from logits, as Day 42 shows.
+Do not compute the loss from a probability that has been clipped to exactly 0 or 1, because the gradient then becomes infinite or undefined. The fix is to clip with a small epsilon, or to compute the loss from logits, as Episode 42 shows.
 
 ---
 
@@ -206,7 +206,7 @@ def backward(X, y, cache, params):
     return {"W1": dW1, "b1": db1, "W2": dW2, "b2": db2}
 ```
 
-The limitation is that the backward pass needs the forward values, so memory grows with depth and batch size. Techniques such as recomputing activations during the backward pass trade compute for memory. Do not call the backward pass twice on the same graph without zeroing the old gradients. Frameworks keep gradients by accumulation, so you must reset them before each batch. Forgetting that is one of the most frequent bugs in early training loops, and you will write the reset line on Day 50.
+The limitation is that the backward pass needs the forward values, so memory grows with depth and batch size. Techniques such as recomputing activations during the backward pass trade compute for memory. Do not call the backward pass twice on the same graph without zeroing the old gradients. Frameworks keep gradients by accumulation, so you must reset them before each batch. Forgetting that is one of the most frequent bugs in early training loops, and you will write the reset line on Episode 50.
 
 ---
 
@@ -214,7 +214,7 @@ The limitation is that the backward pass needs the forward values, so memory gro
 
 Once you have the gradients, the update is simple. Move each parameter a small step in the direction that decreases the loss: W = W - lr * dW. The learning rate lr controls the size of the step. Too small and training is slow, too large and the loss can oscillate or diverge.
 
-From first principles, gradient descent follows the negative gradient because the gradient points in the direction of steepest increase. A small step in the opposite direction decreases the loss to first order. The update is applied to every parameter in the network after each batch. Richer optimizers, such as momentum and Adam, change the direction and scale of the step, and you will study them on Day 44.
+From first principles, gradient descent follows the negative gradient because the gradient points in the direction of steepest increase. A small step in the opposite direction decreases the loss to first order. The update is applied to every parameter in the network after each batch. Richer optimizers, such as momentum and Adam, change the direction and scale of the step, and you will study them on Episode 44.
 
 Here is the update applied to a dictionary of parameters:
 
@@ -245,12 +245,12 @@ Do not update a parameter in place while it is still needed for the backward pas
 
 **Goal:** build a scalar autograd engine that builds a graph and runs the backward pass, then write the backward pass of a two-layer network by hand. Check every gradient against a finite difference, train the network on XOR, and document which seeds converge.
 
-**Repo name:** `100-days-ai-day-43-backpropagation`
+**Repo name:** `100-episodes-ai-day-43-backpropagation`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-43-backpropagation/
+100-episodes-ai-day-43-backpropagation/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -404,7 +404,7 @@ class Value:
 
 **Tutorials**
 
-- PyTorch documentation, "Autograd: Automatic Differentiation", at pytorch.org/tutorials, which shows the same ideas in the framework you will use from Day 46
+- PyTorch documentation, "Autograd: Automatic Differentiation", at pytorch.org/tutorials, which shows the same ideas in the framework you will use from Episode 46
 - Andrej Karpathy, "micrograd", the repository at github.com/karpathy/micrograd, which contains a scalar autograd engine in under one hundred lines
 - NumPy documentation, "numpy.ndarray.sum", at numpy.org/doc/stable, for the axis behavior used in the bias gradients
 
@@ -422,4 +422,4 @@ class Value:
 
 ## Tomorrow
 
-Day 44 keeps the gradients you can now compute and asks how to use them well. Plain gradient descent on the full dataset is slow and can be unstable, so you will compare batch gradient descent, stochastic gradient descent and mini-batches, then add momentum and Adam, and study learning-rate schedules. The training loop you build on Day 50 will call the backward pass you wrote today, and the optimizer you choose tomorrow decides how far each update moves the weights.
+Episode 44 keeps the gradients you can now compute and asks how to use them well. Plain gradient descent on the full dataset is slow and can be unstable, so you will compare batch gradient descent, stochastic gradient descent and mini-batches, then add momentum and Adam, and study learning-rate schedules. The training loop you build on Episode 50 will call the backward pass you wrote today, and the optimizer you choose tomorrow decides how far each update moves the weights.

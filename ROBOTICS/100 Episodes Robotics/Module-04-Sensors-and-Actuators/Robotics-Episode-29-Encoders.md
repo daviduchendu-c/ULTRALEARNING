@@ -1,9 +1,9 @@
-# Day 29: Encoders
+# Episode 29: Encoders
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Day 26 (gearing and the speed of a DC motor), Day 28 (why open-loop counting fails when a step is lost) and basic Arduino interrupts from Module 3. Today you measure motion directly, which is the fix for the problems you met in the last two days.
+**Level:** intermediate. You need Episode 26 (gearing and the speed of a DC motor), Episode 28 (why open-loop counting fails when a step is lost) and basic Arduino interrupts from Module 3. Today you measure motion directly, which is the fix for the problems you met in the last two days.
 
 **By the end of this day, you will have:**
 
@@ -16,7 +16,7 @@
 
 - Arduino Uno Rev3 with Arduino IDE 2.3 or newer, about $25 for an official board or $10 to $15 for a clone. Its external interrupt pins are 2 and 3.
 - Two DC gearmotors with built-in quadrature encoders on the motor shaft, such as the common N20 gearmotors with a Hall-effect encoder, about $6 to $12 each. Check the listed counts per revolution (CPR) and the gear ratio. Many of these motors list 12 CPR at the motor shaft, which gives 48 counts per motor revolution with 4x decoding.
-- The TB6612FNG motor driver from Day 13 to drive the motors, plus the 6 V bench supply with the 1.2 A current limit
+- The TB6612FNG motor driver from Episode 13 to drive the motors, plus the 6 V bench supply with the 1.2 A current limit
 - One AS5600 magnetic absolute encoder breakout, about $4 to $8, with a diametrically magnetized magnet of 6 mm diameter that matches the breakout's spacing. The AS5600 works at 3.3 V and 5 V logic on most breakouts. Check the breakout's logic level before you wire it.
 - A pull-up resistor set, 4.7 kΩ or 10 kΩ, for any open-collector encoder output, about $1
 - A 3D-printed or cardboard wheel of known radius, measured with calipers, about $5 in material, and a steel tape measure of at least 2 m, about $5
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 26: the output speed of a geared motor, counts per revolution and gear ratio
-- Day 28: why step counts drift and why a sensor is needed for true position
-- Day 13: a logic-level signal, pull-up resistors and the H-bridge driver
+- Episode 26: the output speed of a geared motor, counts per revolution and gear ratio
+- Episode 28: why step counts drift and why a sensor is needed for true position
+- Episode 13: a logic-level signal, pull-up resistors and the H-bridge driver
 - Module 3: attaching an interrupt handler to a pin, and reading a serial port
 - Basic trigonometry for converting an angle and a distance into x and y coordinates
 
@@ -185,7 +185,7 @@ The worked example uses the wheel from the earlier example, with a radius of 32.
 
 The common mistake is to use the wheel radius from the wheel's label or from memory. A wheel's effective radius under load is smaller than its free radius, because the tire compresses, and the effective radius is what matters for the distance. Measure it by rolling the wheel one full turn on a flat surface, measuring the distance, and dividing by 2 times pi. The track width has the same problem. Measure it between the contact points under the robot's weight, not between the wheel hubs.
 
-Odometry drifts, because each estimate depends on the last one. A small error in the radius or the track width grows with distance, and wheel slip adds error that the encoder cannot see. The error is therefore a function of distance travelled and of the surface, and a good odometry estimate on a smooth floor may drift by several percent on carpet. The fix is to fuse odometry with another sensor, such as an IMU from Day 31 or a camera from Day 32, and to measure the drift in the project.
+Odometry drifts, because each estimate depends on the last one. A small error in the radius or the track width grows with distance, and wheel slip adds error that the encoder cannot see. The error is therefore a function of distance travelled and of the surface, and a good odometry estimate on a smooth floor may drift by several percent on carpet. The fix is to fuse odometry with another sensor, such as an IMU from Episode 31 or a camera from Episode 32, and to measure the drift in the project.
 
 In ROS 2, the odometry is published as a nav_msgs/Odometry message, which carries the position, the orientation and the velocity, with a covariance that describes the estimate's uncertainty. Robot software uses this message as the input to localization, so the odometry must be correct before the rest of the stack can be trusted.
 
@@ -209,7 +209,7 @@ In the market, encoder failures are one of the most common causes of unexplained
 
 ## Hands-on exercises
 
-Keep the motors on the 6 V bench supply with the 1.2 A current limit, and keep the fuse in the circuit, as Day 13 set up. Never probe an encoder's output with the motor powered and the wheel held by hand, because the motor can drive the wheel into your fingers.
+Keep the motors on the 6 V bench supply with the 1.2 A current limit, and keep the fuse in the circuit, as Episode 13 set up. Never probe an encoder's output with the motor powered and the wheel held by hand, because the motor can drive the wheel into your fingers.
 
 1. **Confirm the counts per revolution.** Mark the motor shaft with a piece of tape. Turn the shaft by hand exactly one revolution while counting the pulses on channel A with a count loop in the Arduino. Compare the count with the datasheet's CPR. If it differs, check whether the datasheet gives counts before or after decoding.
 
@@ -234,7 +234,7 @@ This project builds a small two-wheeled test rig with an encoder on each drive w
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-29-encoders/
+100-episodes-robotics-engineering-day-29-encoders/
 ├── README.md
 ├── firmware/
 │   └── wheel_encoders/
@@ -387,7 +387,7 @@ This rig moves on the floor, and the encoders sit near the motor. Keep the rig o
 3. Counting only the rising edges of channel A gives one count per cycle of A, which is one quarter of the x4 resolution. The direction still appears right at low speed because the decoder's edge order is unchanged, but the count is coarse and the position error is four times larger per count. At high speed, the decoder may miss the edges it needs, and the count rate may be too low to track the motion.
 4. The left distance is 1200 times 2 times pi times 0.0325 divided by 1440, which is 1200 times 0.1418 mm, or 170.2 mm. The right distance is 1150 times 0.1418 mm, or 163.1 mm. The centre moves (170.2 plus 163.1) / 2, which is 166.6 mm. The heading change is (163.1 minus 170.2) / 160, which is minus 0.0444 radians, about minus 2.5 degrees. The robot turns slightly to the right, which is the side of the slower wheel.
 5. Two magnet causes are an off-centre magnet, which gives a reading that varies sinusoidally with angle, and a magnet with a field strength outside the chip's range, which gives a nonlinear reading. A mounting cause is a shaft with runout, which moves the magnet off the chip's axis as the shaft turns. The first test is to check the field strength register and to measure the runout with a dial indicator or by watching the magnet's distance as the shaft turns.
-6. The encoder counts the wheel's rotation, and the wheel turns the same amount on carpet as on a floor. The error is in the assumption that the wheel's turns become robot motion, because the carpet causes the wheel to slip or to deform, so the distance on the floor is less than the wheel's rolling distance. An IMU from Day 31 reports the robot's heading and acceleration independently of the wheels, and the camera in Day 32 can give a visual reference for the position.
+6. The encoder counts the wheel's rotation, and the wheel turns the same amount on carpet as on a floor. The error is in the assumption that the wheel's turns become robot motion, because the carpet causes the wheel to slip or to deform, so the distance on the floor is less than the wheel's rolling distance. An IMU from Episode 31 reports the robot's heading and acceleration independently of the wheels, and the camera in Episode 32 can give a visual reference for the position.
 
 ---
 
@@ -422,6 +422,6 @@ This rig moves on the floor, and the encoders sit near the motor. Keep the rig o
 
 ## Tomorrow
 
-Tomorrow you will measure something the wheels cannot see: how the robot is rotating and accelerating in space. Day 30 covers distance sensors, including ultrasonic, infrared, time-of-flight and LiDAR, and how each one measures range, field of view, resolution, noise and limits. A distance sensor is the second kind of reference, after the encoder, that a robot uses to correct its own map of the world.
+Tomorrow you will measure something the wheels cannot see: how the robot is rotating and accelerating in space. Episode 30 covers distance sensors, including ultrasonic, infrared, time-of-flight and LiDAR, and how each one measures range, field of view, resolution, noise and limits. A distance sensor is the second kind of reference, after the encoder, that a robot uses to correct its own map of the world.
 
-**Next:** [Day 30: Distance Sensors](Robotics-Day-30-Distance-Sensors.md)
+**Next:** [Episode 30: Distance Sensors](Robotics-Episode-30-Distance-Sensors.md)

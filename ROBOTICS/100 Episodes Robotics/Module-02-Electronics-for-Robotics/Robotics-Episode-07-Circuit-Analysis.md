@@ -1,9 +1,9 @@
-# Day 7: Circuit Analysis
+# Episode 7: Circuit Analysis
 
-*100 Days of Robotics Engineering, Module 2: Electronics for Robotics*
+*100 Episodes of Robotics Engineering, Module 2: Electronics for Robotics*
 
 **Time:** about 3 hours
-**Level:** beginner. You should have finished Day 6 and be comfortable applying `V = IR` and `P = VI` to a single resistor. Today you apply the same tools to several resistors at once.
+**Level:** beginner. You should have finished Episode 6 and be comfortable applying `V = IR` and `P = VI` to a single resistor. Today you apply the same tools to several resistors at once.
 
 **By the end of this day, you will have:**
 
@@ -13,8 +13,8 @@
 
 **What you need:**
 
-- Everything from Day 6 (breadboard, DMM, 9 V battery, resistor assortment, red LEDs)
-- Extra resistors: two 10 kΩ, one 4.7 kΩ, one 100 Ω, one 300 Ω, one 330 Ω, one 2.2 kΩ (about $3 extra if you bought the Day 6 assortment)
+- Everything from Episode 6 (breadboard, DMM, 9 V battery, resistor assortment, red LEDs)
+- Extra resistors: two 10 kΩ, one 4.7 kΩ, one 100 Ω, one 300 Ω, one 330 Ω, one 2.2 kΩ (about $3 extra if you bought the Episode 6 assortment)
 - Two more red LEDs, for a three-LED series string
 - A 5 V DC supply for the bench: a USB charger with a USB-A to jumper-wire breakout, or a regulated bench supply (about $20 for the breakout, or $80 and up for a bench supply)
 - Python 3.10 or newer, and `pytest` 8.x (`pip install pytest`)
@@ -22,7 +22,7 @@
 
 **Prerequisites:**
 
-- Day 6: Electricity Fundamentals, especially Ohm's law and the difference between measuring voltage across a part and current through it
+- Episode 6: Electricity Fundamentals, especially Ohm's law and the difference between measuring voltage across a part and current through it
 - Algebra with fractions and reciprocals
 - Basic Python: functions, tuples and `pytest.approx`
 
@@ -180,7 +180,7 @@ Take a node with 5 mA entering from one wire. Two branches leave: 2 mA through o
 
 Use KCL to find an unknown current. At a node with 12 mA entering, one branch carrying 4.5 mA and another unknown, the unknown is `12 − 4.5 = 7.5 mA`.
 
-The common mistake is signing errors. Pick a convention, such as currents entering a node are positive, and apply it everywhere. A limitation: KCL assumes steady current, so the law itself still holds for capacitors, but the currents are not steady while a capacitor charges. Day 8 introduces that transient case.
+The common mistake is signing errors. Pick a convention, such as currents entering a node are positive, and apply it everywhere. A limitation: KCL assumes steady current, so the law itself still holds for capacitors, but the currents are not steady while a capacitor charges. Episode 8 introduces that transient case.
 
 KCL is what every power-distribution board relies on. The total current from a battery equals the sum of the currents to every motor, driver and sensor it feeds, and the sum must match the battery's rating.
 
@@ -233,12 +233,12 @@ This project is light. The calculations are small, but building a tested calcula
 
 **Goal:** write functions for series and parallel resistance, the two divider rules and a KCL check, test them, and reproduce one divider in a SPICE netlist.
 
-**Repo name:** `100-days-robotics-engineering-day-07-circuit-analysis`
+**Repo name:** `100-episodes-robotics-engineering-day-07-circuit-analysis`
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-07-circuit-analysis/
+100-episodes-robotics-engineering-day-07-circuit-analysis/
 ├── README.md
 ├── netlists/
 │   └── divider.cir
@@ -354,4 +354,4 @@ def kcl_residual(currents_in: list[float], currents_out: list[float]) -> float:
 
 Tomorrow you meet the parts that fill these circuits. Today every component was a plain resistor. Tomorrow you cover potentiometers, capacitors, inductors, diodes, LEDs, switches, relays, connectors and fuses. Capacitors and inductors change over time, so the steady-state rules from today will need a time dimension. You will see how a capacitor's charge curve explains a button that bounces, and why a motor coil needs a flyback diode.
 
-**Next:** [Day 8: Components](Robotics-Day-08-Components.md)
+**Next:** [Episode 8: Components](Robotics-Episode-08-Components.md)

@@ -1,9 +1,9 @@
-# Day 12: Strings and Unicode
+# Episode 12: Strings and Unicode
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner. You know variables, types and operators from Day 9 to Day 11. This is for anyone who has sliced a name and broken an accent, or who has seen a file read as `Ã©` where `é` belongs.
+**Level:** beginner. You know variables, types and operators from Episode 9 to Episode 11. This is for anyone who has sliced a name and broken an accent, or who has seen a file read as `Ã©` where `é` belongs.
 
 **By the end of this day, you will have:**
 
@@ -17,15 +17,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2. On Windows PowerShell, check that the console shows accents correctly before the exercises (run `python -c "print('café')"`). If accents come out as question marks or odd symbols, set `$env:PYTHONUTF8 = "1"` for the session, which switches Python to UTF-8 mode
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (scripts, `python -m`, expressions)
-- Day 10: Objects, Variables and Types (immutability, method return values)
-- Day 11: Numbers and Operators (integer and float conversions)
+- Episode 9: Python Runtime and Syntax (scripts, `python -m`, expressions)
+- Episode 10: Objects, Variables and Types (immutability, method return values)
+- Episode 11: Numbers and Operators (integer and float conversions)
 
 ---
 
@@ -114,7 +114,7 @@ print(title[::-1])     # 41.3 nohtyP
 print(title[100:])     # empty string, no error
 ```
 
-Because a slice creates a new string, `title[:6] = "Java"` raises `TypeError`. Strings are immutable, as Day 10 explained, so you build a new string instead.
+Because a slice creates a new string, `title[:6] = "Java"` raises `TypeError`. Strings are immutable, as Episode 10 explained, so you build a new string instead.
 
 The common mistake is using `text[:n]` to truncate a display label and cutting a word or an emoji in half. Truncating by code points is a fine default, but for user-visible labels, count characters with the grapheme approach above, or truncate at a word boundary. The job market uses this constantly in list views, tables and notifications, where a bad cut looks broken to the user.
 
@@ -155,7 +155,7 @@ print("{:08.3f}".format(3.14159))  # 0003.142
 
 The `str.format` method is older and still common in older codebases. Both forms are correct. For new code, f-strings are the usual choice.
 
-The common mistake is formatting a number that is a string, or formatting a decimal string as a number, and getting `ValueError`. Convert to a number first, using `float` or `Decimal` from Day 11, and then format. Another common mistake is using `%` formatting from older code without knowing its rules. In the job market, you will read `%`-style logs in legacy services, so recognize it, even if you write new code with f-strings.
+The common mistake is formatting a number that is a string, or formatting a decimal string as a number, and getting `ValueError`. Convert to a number first, using `float` or `Decimal` from Episode 11, and then format. Another common mistake is using `%` formatting from older code without knowing its rules. In the job market, you will read `%`-style logs in legacy services, so recognize it, even if you write new code with f-strings.
 
 ### F-strings
 
@@ -174,7 +174,7 @@ print(f"{'nested ' + user.upper()}")  # nested ADA
 
 Inside an f-string, you may not reuse the quote character that encloses it before Python 3.12. Python 3.12 relaxed that rule, and the examples here use the newer behavior. Target 3.12 or newer to write them.
 
-The common mistake is building SQL, HTML or shell commands with f-strings. An f-string inserts whatever the variable contains, so a user-supplied name can change the meaning of the query. This is the classic injection bug. Use the parameter mechanism of the database driver, the escaping function of the template engine, or `subprocess` with a list of arguments. Day 23 covers `subprocess`. Security reviewers in the job market flag f-strings in query builders immediately.
+The common mistake is building SQL, HTML or shell commands with f-strings. An f-string inserts whatever the variable contains, so a user-supplied name can change the meaning of the query. This is the classic injection bug. Use the parameter mechanism of the database driver, the escaping function of the template engine, or `subprocess` with a list of arguments. Episode 23 covers `subprocess`. Security reviewers in the job market flag f-strings in query builders immediately.
 
 ### Encoding and decoding
 
@@ -247,12 +247,12 @@ Done when the grapheme counts are 1, 1 and 4 for the three strings, respectively
 
 The project is a small text-processing library with tests. It normalizes Unicode, builds URL slugs from titles with accents, counts words, and reports the difference between characters and bytes. The code is short. The discipline is in naming every encoding and testing the boundary cases. The evidence you commit is the passing test suite and a findings document with examples you ran.
 
-Suggested repo name: `100-days-software-day-12-strings-and-unicode`.
+Suggested repo name: `100-episodes-software-day-12-strings-and-unicode`.
 
 Repo layout:
 
 ```
-100-days-software-day-12-strings-and-unicode/
+100-episodes-software-day-12-strings-and-unicode/
 ├── .gitignore
 ├── README.md
 ├── text_tools.py
@@ -446,6 +446,6 @@ The project keeps the code small so that the encoding and normalization decision
 
 ## Tomorrow
 
-Day 13 moves from single strings to sequences of many items. Lists and tuples store ordered collections, and you will learn how to change them, copy them safely, unpack them into names, and build them with comprehensions. The mutability rule from Day 10 matters most here, because copying a list does not always copy everything inside it.
+Episode 13 moves from single strings to sequences of many items. Lists and tuples store ordered collections, and you will learn how to change them, copy them safely, unpack them into names, and build them with comprehensions. The mutability rule from Episode 10 matters most here, because copying a list does not always copy everything inside it.
 
-**Next:** [Day 13: Lists and Tuples](Software-Day-13-Lists-and-Tuples.md)
+**Next:** [Episode 13: Lists and Tuples](Software-Episode-13-Lists-and-Tuples.md)

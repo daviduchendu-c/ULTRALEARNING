@@ -1,9 +1,9 @@
-# Day 31: Pointers and References
+# Episode 31: Pointers and References
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have passed values by reference since Day 29 and used iterators since Day 30. This day explains what those tools are built on: memory addresses. It is for anyone who has seen `*` and `&` in an error message and wanted to know what they actually do.
+**Level:** intermediate. You have passed values by reference since Episode 29 and used iterators since Episode 30. This day explains what those tools are built on: memory addresses. It is for anyone who has seen `*` and `&` in an error message and wanted to know what they actually do.
 
 **By the end of this day, you will have:**
 
@@ -24,8 +24,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 30: the build, functions, reference parameters, arrays, vectors and iterators
-- Day 28: integer types and the `const` keyword
+- Episodes 27 to 30: the build, functions, reference parameters, arrays, vectors and iterators
+- Episode 28: integer types and the `const` keyword
 
 ---
 
@@ -165,9 +165,9 @@ int main() {
 
 The output is `first negative: -3 at index 2`. Change the array to all positive numbers and the program prints `no negative values`, without ever dereferencing a null pointer. The check costs one comparison, and it is much cheaper than a crash in production.
 
-The limit of null checks is that they only catch null. A pointer to freed memory is not null and passes the check. A null pointer that is used without a check is still a bug, and compilers will not warn you in every case. Tools such as sanitizers, covered on Day 38, catch more of them.
+The limit of null checks is that they only catch null. A pointer to freed memory is not null and passes the check. A null pointer that is used without a check is still a bug, and compilers will not warn you in every case. Tools such as sanitizers, covered on Episode 38, catch more of them.
 
-The common mistake is to return a null pointer and let the caller forget to check. The fix is to return `std::optional`, which Day 37 covers, when a missing result is normal. Use a raw pointer when the function is a low-level building block and the convention is documented. In the market, C APIs return null pointers for failure, and wrapper code checks them before any use.
+The common mistake is to return a null pointer and let the caller forget to check. The fix is to return `std::optional`, which Episode 37 covers, when a missing result is normal. Use a raw pointer when the function is a low-level building block and the convention is documented. In the market, C APIs return null pointers for failure, and wrapper code checks them before any use.
 
 ### References
 
@@ -235,7 +235,7 @@ Pointers and references are safe when you can answer three questions for each on
 
 Never return a pointer or reference to a local variable. Never store a pointer to an object that might be destroyed first. Never use a pointer after `delete`, after a vector reallocation or after the container that owns the object has been cleared. Always check a pointer that may be null before dereferencing it. Prefer references when the object must exist and prefer `std::optional` when a value may be missing.
 
-The compiler helps with some of this. GCC and Clang warn about returning the address of a local under `-Wall`, and most dangling-reference bugs are caught by sanitizers at run time. The sanitizer for use-after-free is AddressSanitizer, and it is the subject of Day 38. The sample below shows the bug the rules prevent:
+The compiler helps with some of this. GCC and Clang warn about returning the address of a local under `-Wall`, and most dangling-reference bugs are caught by sanitizers at run time. The sanitizer for use-after-free is AddressSanitizer, and it is the subject of Episode 38. The sample below shows the bug the rules prevent:
 
 ```text
 int* make_value() {
@@ -297,12 +297,12 @@ Done when you can point to the two lines in the sanitizer report.
 
 The project is a small library. It has three functions that work on raw pointers, a swap function that works on references, and a view class that wraps a pointer and a size. The view does not own the memory, and the tests check the boundary cases that cause the most bugs.
 
-Suggested repo name: `100-days-software-day-31-pointers-and-references`.
+Suggested repo name: `100-episodes-software-day-31-pointers-and-references`.
 
 The repo layout:
 
 ```
-100-days-software-day-31-pointers-and-references/
+100-episodes-software-day-31-pointers-and-references/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -608,6 +608,6 @@ This project is short and sharp. A reviewer should see that every function eithe
 
 ## Tomorrow
 
-Day 32 covers memory and lifetime. You will see where a variable lives on the stack and where `new` puts an object on the heap. You will learn how an object's lifetime starts and ends, why `new` and `delete` must match, and how RAII ties a resource's lifetime to a scope, so that the dangling pointer rules from today are enforced by the compiler instead of by memory discipline.
+Episode 32 covers memory and lifetime. You will see where a variable lives on the stack and where `new` puts an object on the heap. You will learn how an object's lifetime starts and ends, why `new` and `delete` must match, and how RAII ties a resource's lifetime to a scope, so that the dangling pointer rules from today are enforced by the compiler instead of by memory discipline.
 
-**Next:** [Day 32: Memory and Lifetime](Software-Day-32-Memory-and-Lifetime.md)
+**Next:** [Episode 32: Memory and Lifetime](Software-Episode-32-Memory-and-Lifetime.md)

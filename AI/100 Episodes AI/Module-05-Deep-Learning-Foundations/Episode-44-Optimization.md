@@ -1,9 +1,9 @@
-# Day 44: Optimization
+# Episode 44: Optimization
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You can compute gradients (Day 43) and you know what a learning rate does. Today you learn how to choose the step, not only the direction.
+**Level:** intermediate. You can compute gradients (Episode 43) and you know what a learning rate does. Today you learn how to choose the step, not only the direction.
 
 **By the end of this day, you will have:**
 
@@ -18,14 +18,14 @@
 - NumPy 2.1.3 (`pip install numpy==2.1.3`), free and open source under the BSD license
 - pytest 8.3.3 (`pip install pytest==8.3.3`), free and open source under the MIT license
 - Matplotlib 3.9.2 (`pip install matplotlib==3.9.2`), for the loss curves
-- The `TwoLayerNet` class from your Day 43 repository, with its `forward` and `backward` methods and a `params` dictionary holding W1, b1, W2 and b2
+- The `TwoLayerNet` class from your Episode 43 repository, with its `forward` and `backward` methods and a `params` dictionary holding W1, b1, W2 and b2
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 11 and Day 12: derivatives, gradients and the idea of a minimum
-- Day 13: the idea of a random sample and its mean
-- Day 43: the backward pass and the update step `params -= lr * grads`
+- Episode 11 and Episode 12: derivatives, gradients and the idea of a minimum
+- Episode 13: the idea of a random sample and its mean
+- Episode 43: the backward pass and the update step `params -= lr * grads`
 
 ---
 
@@ -51,7 +51,7 @@
 
 ## Introduction
 
-Day 43 told you which way to move each weight. Today you decide how far to move and how to combine the gradients from many examples. Those choices decide whether a network trains in minutes or never converges, and whether the final model generalizes. Two engineers with the same architecture and data can get very different results because one of them picked a learning rate of 0.1 and the other picked 0.001 with a warm-up.
+Episode 43 told you which way to move each weight. Today you decide how far to move and how to combine the gradients from many examples. Those choices decide whether a network trains in minutes or never converges, and whether the final model generalizes. Two engineers with the same architecture and data can get very different results because one of them picked a learning rate of 0.1 and the other picked 0.001 with a warm-up.
 
 The core tension is that the gradient of the full dataset is accurate but expensive, and the gradient of one example is cheap but noisy. Modern training sits between those extremes, using mini-batches and an adaptive method such as Adam. The rest of the methods, momentum and schedules, correct the problems that appear in the middle of training, when the loss surface is narrow in some directions and flat in others.
 
@@ -245,7 +245,7 @@ print(run_sgd_quadratic(0.005))   # both coordinates shrink
 print(run_sgd_quadratic(0.03))    # y grows: the factor is -2 per step
 ```
 
-Other failures are exploding gradients in deep recurrent networks and dying units in ReLU networks, which you met on Day 41. Gradient clipping limits the norm of the gradient before the update, so a single large gradient cannot throw the parameters far away. A clip of 1.0 is a common starting point in language models.
+Other failures are exploding gradients in deep recurrent networks and dying units in ReLU networks, which you met on Episode 41. Gradient clipping limits the norm of the gradient before the update, so a single large gradient cannot throw the parameters far away. A clip of 1.0 is a common starting point in language models.
 
 The limitation of clipping is that it changes the direction when it triggers, and a frequent clip hides a real problem, such as a bad learning rate or a data error. Do not turn on clipping and assume the instability is gone. Log how often clipping triggers. If it triggers on most steps, the learning rate is too high.
 
@@ -259,7 +259,7 @@ In the real market, the first sign of optimization instability is a loss that be
 2. **Momentum effect.** Using the momentum update with mu = 0.9 and a constant gradient g = 1, compute the velocity after one, two and ten steps. Compare it with the limit g / (1 - mu).
 3. **Adam first step.** For a single parameter with gradient 0.5 on the first step, compute m, v, m_hat and v_hat with the default constants. Show that the first update has size close to lr, regardless of the gradient size.
 4. **Schedule plot.** Plot the warm-up then cosine schedule for 1,000 steps with a warm-up of 100 steps and a maximum of 0.001. Describe the shape in one sentence.
-5. **Batch sweep.** Using the `TwoLayerNet` from Day 43 on the circle dataset, train with batch sizes 1, 16, 128 and the full dataset for the same number of epochs. Record the time per epoch and the final loss.
+5. **Batch sweep.** Using the `TwoLayerNet` from Episode 43 on the circle dataset, train with batch sizes 1, 16, 128 and the full dataset for the same number of epochs. Record the time per epoch and the final loss.
 
 ---
 
@@ -267,12 +267,12 @@ In the real market, the first sign of optimization instability is a loss that be
 
 **Goal:** implement SGD, SGD with momentum, and Adam from their update equations, check them on a badly scaled quadratic, then compare batch sizes, optimizers and schedules on a small network trained on a synthetic circle dataset. Write a recommendation backed by your numbers.
 
-**Repo name:** `100-days-ai-day-44-optimization`
+**Repo name:** `100-episodes-ai-day-44-optimization`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-44-optimization/
+100-episodes-ai-day-44-optimization/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -289,7 +289,7 @@ In the real market, the first sign of optimization instability is a loss that be
     └── circle_compare.py
 ```
 
-**Starter code.** Create `requirements.txt` with the pinned packages. Copy your `TwoLayerNet` from Day 43 into `src/optim_lab/network.py`. It must expose a `params` dictionary with the keys W1, b1, W2 and b2, and it must return gradients in a dictionary with the same keys. Then create `src/optim_lab/optimizers.py`:
+**Starter code.** Create `requirements.txt` with the pinned packages. Copy your `TwoLayerNet` from Episode 43 into `src/optim_lab/network.py`. It must expose a `params` dictionary with the keys W1, b1, W2 and b2, and it must return gradients in a dictionary with the same keys. Then create `src/optim_lab/optimizers.py`:
 
 ```python
 import numpy as np
@@ -431,4 +431,4 @@ def clip_grads(grads, max_norm):
 
 ## Tomorrow
 
-Day 45 asks what happens after the optimizer has done its work. A network that fits the training set perfectly can still fail on new data, and that gap is called overfitting. You will study weight decay, dropout, early stopping, data augmentation and batch normalization, and you will measure each one on the circle dataset you used today. The optimizer and schedule you chose here will be part of every comparison tomorrow.
+Episode 45 asks what happens after the optimizer has done its work. A network that fits the training set perfectly can still fail on new data, and that gap is called overfitting. You will study weight decay, dropout, early stopping, data augmentation and batch normalization, and you will measure each one on the circle dataset you used today. The optimizer and schedule you chose here will be part of every comparison tomorrow.

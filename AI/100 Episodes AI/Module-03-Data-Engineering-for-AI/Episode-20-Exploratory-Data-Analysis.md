@@ -1,6 +1,6 @@
-# Day 20: Exploratory Data Analysis
+# Episode 20: Exploratory Data Analysis
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 3.5 hours
 **Level:** intermediate. You can already load, filter, group and clean a table with pandas. Today the goal is to ask questions of the data and to test the answers, before a model is involved.
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 14: distributions, the mean, the median, the standard deviation and the idea of a confidence interval
-- Day 18: pandas grouping, resampling by date and filtering
-- Day 19: cleaning rules, so that you know what a valid value looks like
+- Episode 14: distributions, the mean, the median, the standard deviation and the idea of a confidence interval
+- Episode 18: pandas grouping, resampling by date and filtering
+- Episode 19: cleaning rules, so that you know what a valid value looks like
 
 ---
 
@@ -159,7 +159,7 @@ print(df.corr(method="pearson").round(2))
 print(df.corr(method="spearman").round(2))
 ```
 
-The `curved` column has a near-zero Pearson correlation with `x`, even though the two are tightly linked by a formula. This is the main limitation to remember. A correlation matrix can hide a relationship that is clear on a scatter plot. Always plot the pairs you care about. A second mistake is to treat high correlation between two features as a reason to drop one of them without checking whether both carry the same information for the target. Correlation tables are the first step in spotting redundant features and in spotting a feature that is almost a copy of the label, which is a sign of leakage from Day 19.
+The `curved` column has a near-zero Pearson correlation with `x`, even though the two are tightly linked by a formula. This is the main limitation to remember. A correlation matrix can hide a relationship that is clear on a scatter plot. Always plot the pairs you care about. A second mistake is to treat high correlation between two features as a reason to drop one of them without checking whether both carry the same information for the target. Correlation tables are the first step in spotting redundant features and in spotting a feature that is almost a copy of the label, which is a sign of leakage from Episode 19.
 
 ---
 
@@ -288,12 +288,12 @@ Work in a notebook. For each step, write a one-sentence prediction before you ru
 
 Build a reproducible exploratory analysis of a synthetic subscription dataset. The dataset contains a real relationship, a class imbalance and one bug in a single column after a known date. Your job is to describe the data, form and test hypotheses, find the bug, and report what you found with the evidence.
 
-Suggested repository name: `100-days-ai-day-20-eda`
+Suggested repository name: `100-episodes-ai-day-20-eda`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-20-eda/
+100-episodes-ai-day-20-eda/
 ├── README.md
 ├── eda/
 │   ├── __init__.py
@@ -566,4 +566,4 @@ Work each answer out in writing before you read the answers below.
 
 ## Tomorrow
 
-Tomorrow is feature engineering. Today you learned what your data looks like, which variables move together, how imbalanced the target is, and where the data can lie to you. Day 21 turns those observations into inputs a model can use. You will encode categories, scale numbers, create interactions between features, and choose which features to keep. Each of those steps should be justified by something you saw in today's plots and tables.
+Tomorrow is feature engineering. Today you learned what your data looks like, which variables move together, how imbalanced the target is, and where the data can lie to you. Episode 21 turns those observations into inputs a model can use. You will encode categories, scale numbers, create interactions between features, and choose which features to keep. Each of those steps should be justified by something you saw in today's plots and tables.

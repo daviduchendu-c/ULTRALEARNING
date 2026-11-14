@@ -1,6 +1,6 @@
-# Day 23: Files and Standard Library
+# Episode 23: Files and Standard Library
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
 **Level:** intermediate. You can handle exceptions, use context managers and write classes. This is for anyone who has rebuilt a date parser, a CSV reader or a counting loop that the standard library already provides, and who wants the tools that real Python programs use every day.
@@ -19,16 +19,16 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 12: Strings and Unicode (encodings, `encode` and `decode`)
-- Day 14: Dictionaries and Sets (counting and grouping by key)
-- Day 22: Exceptions and Debugging (`with` blocks, error handling for files)
+- Episode 12: Strings and Unicode (encodings, `encode` and `decode`)
+- Episode 14: Dictionaries and Sets (counting and grouping by key)
+- Episode 22: Exceptions and Debugging (`with` blocks, error handling for files)
 
 ---
 
@@ -311,12 +311,12 @@ Done when the version prints and the failing command raises an error with return
 
 The project is a small log analyzer that reads a CSV of events, parses timestamps, counts events by level, groups error codes with a regular expression, builds an hourly histogram, writes a JSON summary, reads the first bytes of a file in binary mode, and reports the Python version through a safe subprocess call. It uses only the standard library. The evidence is a passing test suite and a generated summary file that you commit as sample output.
 
-Suggested repo name: `100-days-software-day-23-files-and-standard-library`.
+Suggested repo name: `100-episodes-software-day-23-files-and-standard-library`.
 
 Repo layout:
 
 ```
-100-days-software-day-23-files-and-standard-library/
+100-episodes-software-day-23-files-and-standard-library/
 ├── .gitignore
 ├── README.md
 ├── analyzer.py
@@ -500,7 +500,7 @@ Step-by-step tasks:
 1. Initialize the repo with `git init -b main`, create the files and the `data/` folder above, and add `__pycache__/` to `.gitignore`.
 2. Run `python analyzer.py` from the project root. The script writes `docs/summary.json`. Paste the console output into `docs/findings.md`.
 3. Run `python -m unittest` and make every test pass.
-4. Run `python analyzer.py` from a different folder, for example by changing to the parent folder and running `python 100-days-software-day-23-files-and-standard-library/analyzer.py`. Confirm that the summary still lands in the project's `docs/` folder. Write one sentence in `docs/findings.md` on why that works.
+4. Run `python analyzer.py` from a different folder, for example by changing to the parent folder and running `python 100-episodes-software-day-23-files-and-standard-library/analyzer.py`. Confirm that the summary still lands in the project's `docs/` folder. Write one sentence in `docs/findings.md` on why that works.
 5. Add a function `top_codes(codes: list[str], n: int) -> list[tuple[str, int]]` that uses `Counter.most_common`. Add a test.
 6. Add a function `filter_level(events: list[dict[str, str]], level: str) -> list[dict[str, str]]` that uses a list comprehension, and a test.
 7. Run `python -m mypy analyzer.py tests/test_analyzer.py` and fix every issue.
@@ -570,6 +570,6 @@ The analyzer uses only modules from the standard library, which is itself a resu
 
 ## Tomorrow
 
-Day 24 turns a script into a project that other people can install, test and maintain. You will create a virtual environment, install dependencies with `pip`, lay out a project with a `pyproject.toml`, format code with Ruff, check types with mypy, and read the packaging concepts that connect a repo to a published package. The analyzer you built today is the kind of tool that gains from those steps.
+Episode 24 turns a script into a project that other people can install, test and maintain. You will create a virtual environment, install dependencies with `pip`, lay out a project with a `pyproject.toml`, format code with Ruff, check types with mypy, and read the packaging concepts that connect a repo to a published package. The analyzer you built today is the kind of tool that gains from those steps.
 
-**Next:** [Day 24: Professional Python](Software-Day-24-Professional-Python.md)
+**Next:** [Episode 24: Professional Python](Software-Episode-24-Professional-Python.md)

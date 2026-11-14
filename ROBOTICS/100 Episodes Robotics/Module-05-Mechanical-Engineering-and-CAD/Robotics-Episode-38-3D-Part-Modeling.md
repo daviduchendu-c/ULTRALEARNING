@@ -1,9 +1,9 @@
-# Day 38: 3D Part Modeling
+# Episode 38: 3D Part Modeling
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** beginner to intermediate. You need the sketch and parameter method from Day 37, because every feature today is built from a sketch and driven by a spreadsheet. You also need the stress ideas from Day 34, since fillets and chamfers exist to control stress and manufacturing.
+**Level:** beginner to intermediate. You need the sketch and parameter method from Episode 37, because every feature today is built from a sketch and driven by a spreadsheet. You also need the stress ideas from Episode 34, since fillets and chamfers exist to control stress and manufacturing.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 37: sketches, constraints, spreadsheet parameters and the pad and pocket features
-- Day 34: volume, mass, stress, and the idea of a stress concentration
-- Day 35: the bearing and shaft sizes that the hub must fit
+- Episode 37: sketches, constraints, spreadsheet parameters and the pad and pocket features
+- Episode 34: volume, mass, stress, and the idea of a stress concentration
+- Episode 35: the bearing and shaft sizes that the hub must fit
 - Basic understanding of what an STL file is
 
 ---
@@ -177,11 +177,11 @@ Chamfers appear on every shaft, bore and bolt hole that must be assembled by han
 
 ### Mass properties
 
-Mass properties are the volume, mass, centre of mass and moments of inertia of a solid. The CAD tool computes them from the geometry and a material density. The values matter for the robot, because the mass of each wheel affects the acceleration and the energy of the drive, and the centre of mass affects stability, as you saw on Day 34.
+Mass properties are the volume, mass, centre of mass and moments of inertia of a solid. The CAD tool computes them from the geometry and a material density. The values matter for the robot, because the mass of each wheel affects the acceleration and the energy of the drive, and the centre of mass affects stability, as you saw on Episode 34.
 
 The first principle is mass equals volume times density. For PLA at about 1.24 g/cm³ and aluminium at 2.70 g/cm³, a 10 cm³ part weighs about 12.4 g in PLA and 27 g in aluminium. The density you use in the CAD tool must match the material, not a default value.
 
-Here is the worked example for the hub. The body is 9.83 cm³ and the flange is 3.69 cm³. Both are rings with the same 6 mm bore, so the bore is already excluded from each. Together they give 13.52 cm³. The four 3.4 mm holes remove 4 × π × 1.7² × 3 = 109 mm³, or 0.11 cm³, which leaves about 13.4 cm³. In PLA, the mass is 13.4 × 1.24 = 16.6 g if the part is printed solid. Printed with 20 percent infill, the mass is closer to 8 to 10 g, but the strength falls, and the stress calculation from Day 34 must use the reduced stiffness of the infilled part.
+Here is the worked example for the hub. The body is 9.83 cm³ and the flange is 3.69 cm³. Both are rings with the same 6 mm bore, so the bore is already excluded from each. Together they give 13.52 cm³. The four 3.4 mm holes remove 4 × π × 1.7² × 3 = 109 mm³, or 0.11 cm³, which leaves about 13.4 cm³. In PLA, the mass is 13.4 × 1.24 = 16.6 g if the part is printed solid. Printed with 20 percent infill, the mass is closer to 8 to 10 g, but the strength falls, and the stress calculation from Episode 34 must use the reduced stiffness of the infilled part.
 
 The common mistake is to take the CAD mass as the printed mass. The printed mass depends on infill, wall count and support material, and the CAD mass is only for a solid part. Check the slicer's estimate for the printed mass, and state which value you use in the design review.
 
@@ -209,12 +209,12 @@ This project builds a wheel hub from five features, with every dimension driven 
 
 **Goal:** a parametric wheel hub with an outer diameter of 40 mm, a 6 mm bore, a flange with four 3.4 mm holes on a 16 mm pitch circle, a 1 mm outside fillet and a 0.5 mm bore chamfer. The model must rebuild correctly when any parameter changes within a stated range.
 
-**Repository name:** `100-days-robotics-day-38-3d-part-modeling`
+**Repository name:** `100-episodes-robotics-day-38-3d-part-modeling`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-38-3d-part-modeling/
+100-episodes-robotics-day-38-3d-part-modeling/
 ├── README.md
 ├── requirements.txt
 ├── cad/
@@ -379,4 +379,4 @@ The starter formula is a first approximation. It treats the body and the flange 
 
 ## Tomorrow
 
-Tomorrow, on Day 39, you combine parts into an assembly. You learn to place parts with joints or mates, to count the degrees of freedom of the assembly, to check interference and clearances, and to organise the assembly hierarchy. The hub you built today is the first part you will mount on a motor shaft, and the bore chamfer and the fit you chose will decide whether the hub slides on or binds.
+Tomorrow, on Episode 39, you combine parts into an assembly. You learn to place parts with joints or mates, to count the degrees of freedom of the assembly, to check interference and clearances, and to organise the assembly hierarchy. The hub you built today is the first part you will mount on a motor shaft, and the bore chamfer and the fit you chose will decide whether the hub slides on or binds.

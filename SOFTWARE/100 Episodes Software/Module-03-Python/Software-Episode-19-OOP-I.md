@@ -1,9 +1,9 @@
-# Day 19: OOP I
+# Episode 19: OOP I
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have written functions and organized them into modules on Day 16 to Day 18. This is for anyone who has passed the same three values through five functions and wished those values had a home of their own.
+**Level:** intermediate. You have written functions and organized them into modules on Episode 16 to Episode 18. This is for anyone who has passed the same three values through five functions and wished those values had a home of their own.
 
 **By the end of this day, you will have:**
 
@@ -17,16 +17,16 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 10: Objects, Variables and Types (identity, references, mutability)
-- Day 13 and Day 14: Lists, tuples, dictionaries and sets (the containers a class will hold)
-- Day 16 to Day 18: Functions, scope and modules
+- Episode 10: Objects, Variables and Types (identity, references, mutability)
+- Episode 13 and Episode 14: Lists, tuples, dictionaries and sets (the containers a class will hold)
+- Episode 16 to Episode 18: Functions, scope and modules
 
 ---
 
@@ -107,7 +107,7 @@ The common mistake is treating a class as if it were the same as a module, and p
 
 An instance is one object built from a class. Think of the cookies again. Each cookie has the same shape, but each has its own crumbs, its own topping and its own position on the tray. Changing one cookie does not change the others, and the same is true of instances.
 
-From first principles, each instance has its own namespace, which is a dictionary of attributes. The instance knows its class through `type(obj)` and `obj.__class__`. Two instances are equal only if the class defines an equality rule, which is a topic for Day 21. By default, `==` on two instances compares identity, which is the same rule you saw for plain objects on Day 10.
+From first principles, each instance has its own namespace, which is a dictionary of attributes. The instance knows its class through `type(obj)` and `obj.__class__`. Two instances are equal only if the class defines an equality rule, which is a topic for Episode 21. By default, `==` on two instances compares identity, which is the same rule you saw for plain objects on Episode 10.
 
 ```python
 class Counter:
@@ -146,7 +146,7 @@ a.min_year = 1900                  # creates an instance attribute on a
 print(Book.min_year, a.min_year, b.min_year)  # 1450 1900 1450
 ```
 
-After the assignment, `a` has its own `min_year`, and the class and the other instance are unchanged. This is the shadowing rule from Day 16, applied to attributes.
+After the assignment, `a` has its own `min_year`, and the class and the other instance are unchanged. This is the shadowing rule from Episode 16, applied to attributes.
 
 The common mistake is storing a mutable object, such as a list, as a class attribute, and then appending to it through an instance. Every instance then sees the change, because they all share the one list. Create mutable containers in `__init__` so that each instance has its own. The job market hits this bug in logging, caching and registry code, where a class-level dictionary grows across the whole program.
 
@@ -297,12 +297,12 @@ Done when the subclass call returns an `Ebook` and mypy is clean.
 
 The project is a small library catalog with a `Book` class and a `Library` class. The book validates its own data, borrows and returns itself, and can be built from a text line through a class method. The library holds books and answers questions about them. The tests check each rule. The evidence is the passing test suite and a findings document that explains which methods are instance, class and static methods, and why.
 
-Suggested repo name: `100-days-software-day-19-oop-i`.
+Suggested repo name: `100-episodes-software-day-19-oop-i`.
 
 Repo layout:
 
 ```
-100-days-software-day-19-oop-i/
+100-episodes-software-day-19-oop-i/
 ├── .gitignore
 ├── README.md
 ├── library.py
@@ -528,6 +528,6 @@ The project is a single file with two classes, which is a deliberate size. A rev
 
 ## Tomorrow
 
-Day 20 extends the class model in two directions. Inheritance lets one class reuse and specialize another, and composition lets a class hold other objects and delegate work to them. You will meet polymorphism, where one call works on several types, the abstract base class idea, and the `dataclass` decorator that removes the boilerplate from data-holding classes. You will also weigh the trade-offs, because inheritance is often the wrong tool.
+Episode 20 extends the class model in two directions. Inheritance lets one class reuse and specialize another, and composition lets a class hold other objects and delegate work to them. You will meet polymorphism, where one call works on several types, the abstract base class idea, and the `dataclass` decorator that removes the boilerplate from data-holding classes. You will also weigh the trade-offs, because inheritance is often the wrong tool.
 
-**Next:** [Day 20: OOP II](Software-Day-20-OOP-II.md)
+**Next:** [Episode 20: OOP II](Software-Episode-20-OOP-II.md)

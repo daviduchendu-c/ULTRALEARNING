@@ -1,31 +1,31 @@
-# Day 46: PyTorch Tensors
+# Episode 46: PyTorch Tensors
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You know NumPy arrays, shapes and broadcasting from Days 9 and 39. Today the same ideas move into PyTorch, and you add two things NumPy does not handle: the device a tensor lives on and the autograd flag that Day 47 explains.
+**Level:** beginner to intermediate. You know NumPy arrays, shapes and broadcasting from Episodes 9 and 39. Today the same ideas move into PyTorch, and you add two things NumPy does not handle: the device a tensor lives on and the autograd flag that Episode 47 explains.
 
 **By the end of this day, you will have:**
 
 - PyTorch 2.5.1 installed and verified in a clean virtual environment
 - A working understanding of tensor shapes, dtypes and devices, and of the difference between `view`, `reshape` and in-place operations
-- A tested PyTorch version of the Day 39 forward pass that matches your NumPy results to floating-point tolerance
+- A tested PyTorch version of the Episode 39 forward pass that matches your NumPy results to floating-point tolerance
 - A device report from your own machine, and a short benchmark that shows when moving work to a GPU helps
 
 **What you need:**
 
 - A computer with Python 3.11 or 3.12
 - PyTorch 2.5.1 (CPU build, or a CUDA build if you have an NVIDIA GPU). Install instructions are in the project section. PyTorch is free and open source under the BSD license.
-- NumPy 2.1.3 (`pip install numpy==2.1.3`), for the comparison with your Day 39 code
+- NumPy 2.1.3 (`pip install numpy==2.1.3`), for the comparison with your Episode 39 code
 - pytest 8.3.3 (`pip install pytest==8.3.3`)
 - An NVIDIA GPU with a recent driver is optional. The lesson works on a CPU, and the GPU section says what changes.
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 9: matrix shapes and matrix multiplication
-- Day 39: the forward pass of a dense layer in NumPy
-- Day 45: the idea of train and inference modes, which appears again here
+- Episode 9: matrix shapes and matrix multiplication
+- Episode 39: the forward pass of a dense layer in NumPy
+- Episode 45: the idea of train and inference modes, which appears again here
 
 ---
 
@@ -52,7 +52,7 @@
 
 Every model you have written so far used NumPy arrays. NumPy is excellent for learning, but it has no notion of a GPU, no automatic differentiation and no standard way to describe a neural network. PyTorch provides the array type, called a tensor, and it adds the three things a deep learning library needs: a device to run on, an autograd system that records operations, and a library of layers and optimizers built on top.
 
-The change looks small on the surface. The code `X @ W + b` is almost the same in both libraries. The differences are where bugs hide. A tensor created on the CPU and multiplied by a tensor on the GPU raises an error, a float64 tensor silently costs more memory and time than float32, and an in-place operation on a tensor that autograd needs produces a confusing error on Day 47. Learning to read a tensor's shape, dtype and device at a glance is the most useful habit you can form today.
+The change looks small on the surface. The code `X @ W + b` is almost the same in both libraries. The differences are where bugs hide. A tensor created on the CPU and multiplied by a tensor on the GPU raises an error, a float64 tensor silently costs more memory and time than float32, and an in-place operation on a tensor that autograd needs produces a confusing error on Episode 47. Learning to read a tensor's shape, dtype and device at a glance is the most useful habit you can form today.
 
 On the job, most debugging of deep learning code starts with tensor metadata. Engineers print shapes and devices to find a broadcasting mistake, check dtypes when a model runs out of memory, and move tensors between devices when a data pipeline and a model disagree. The skill is routine, and it is also the first thing an interviewer will test.
 
@@ -255,14 +255,14 @@ Do not call `.cpu()` or `.item()` inside the inner loop of training. It forces t
 
 ## Project: tensor basics and the forward pass in PyTorch
 
-**Goal:** install PyTorch 2.5.1, write a device and shape report, port your Day 39 forward pass to tensors, check that the two versions match, and benchmark the matrix multiplication on your hardware.
+**Goal:** install PyTorch 2.5.1, write a device and shape report, port your Episode 39 forward pass to tensors, check that the two versions match, and benchmark the matrix multiplication on your hardware.
 
-**Repo name:** `100-days-ai-day-46-pytorch-tensors`
+**Repo name:** `100-episodes-ai-day-46-pytorch-tensors`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-46-pytorch-tensors/
+100-episodes-ai-day-46-pytorch-tensors/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -401,4 +401,4 @@ def two_layer_forward(X, W1, b1, W2, b2):
 
 ## Tomorrow
 
-Day 47 is about autograd, the part of PyTorch that records the operations on tensors and computes their gradients automatically. You will see how `requires_grad` marks a tensor for tracking, how `backward` fills in `.grad`, why gradients accumulate, and how to stop tracking with `detach` and `torch.no_grad`. The scalar engine you built on Day 43 is the same idea at a larger scale, and you will check PyTorch's gradients against the ones you computed by hand.
+Episode 47 is about autograd, the part of PyTorch that records the operations on tensors and computes their gradients automatically. You will see how `requires_grad` marks a tensor for tracking, how `backward` fills in `.grad`, why gradients accumulate, and how to stop tracking with `detach` and `torch.no_grad`. The scalar engine you built on Episode 43 is the same idea at a larger scale, and you will check PyTorch's gradients against the ones you computed by hand.

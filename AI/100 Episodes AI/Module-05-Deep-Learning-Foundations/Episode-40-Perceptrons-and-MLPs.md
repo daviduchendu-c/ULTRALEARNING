@@ -1,9 +1,9 @@
-# Day 40: Perceptrons and MLPs
+# Episode 40: Perceptrons and MLPs
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You finished Day 39 and can compute a forward pass with NumPy. Today you add a learning rule for a single neuron and then see why one neuron is not enough.
+**Level:** beginner to intermediate. You finished Episode 39 and can compute a forward pass with NumPy. Today you add a learning rule for a single neuron and then see why one neuron is not enough.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 39: the neuron equation z = w . x + b, the forward pass and shapes
-- Day 8: the dot product and vectors as points in space
-- Day 10: lines and planes as the boundaries that a linear map can draw
+- Episode 39: the neuron equation z = w . x + b, the forward pass and shapes
+- Episode 8: the dot product and vectors as points in space
+- Episode 10: lines and planes as the boundaries that a linear map can draw
 - Basic Python: loops, functions and classes
 
 ---
@@ -51,7 +51,7 @@
 
 Yesterday you wrote the forward pass of a network but left the weights as numbers you chose or drew at random. Today you go one step further in two directions. First you give a single neuron a way to correct its own weights from its mistakes, which is the perceptron. Then you find the problem that a single neuron cannot solve, and you see how stacking neurons into layers solves it. That problem, XOR, was once blamed for stalling research on neural networks for more than a decade.
 
-The perceptron matters for two reasons. It is the first learning algorithm that adjusts a model from labeled examples, and it has the same structure as the modern training loop: predict, compare with the label, nudge the weights. Everything you learn on Days 42 to 50 is a refinement of that loop. The multi-layer perceptron matters because it is the simplest network that can represent functions a linear model cannot, and it is the ancestor of the dense layers you will use in every PyTorch model.
+The perceptron matters for two reasons. It is the first learning algorithm that adjusts a model from labeled examples, and it has the same structure as the modern training loop: predict, compare with the label, nudge the weights. Everything you learn on Episodes 42 to 50 is a refinement of that loop. The multi-layer perceptron matters because it is the simplest network that can represent functions a linear model cannot, and it is the ancestor of the dense layers you will use in every PyTorch model.
 
 On the job, you will rarely train a bare perceptron. You will meet it in a few places: a linear classifier as the last layer of a network, a quick baseline that tells you whether your features separate the classes at all, and a reminder that a model with no hidden layers has a hard ceiling on what it can express. When a teammate asks why you need a deeper model, the honest answer is in this lesson.
 
@@ -150,7 +150,7 @@ Consider the XOR problem again. The trick is to stop asking one neuron to do eve
 
 From first principles, an MLP with one hidden layer computes h = step(X W1 + b1) and then y = step(h W2 + b2), with W1 of shape (2, 2) and W2 of shape (2, 1) for two inputs and two hidden neurons. Each hidden neuron draws its own line in the input space. The output neuron then draws a line in the space of the hidden values, not in the original space. Because the hidden values are a nonlinear function of the inputs, a line in hidden space can be a curve in input space.
 
-The forward pass is the one you wrote on Day 39, with a step activation in place of the smooth ones. The new idea is the composition. The output of one layer becomes the input of the next, and the parameters of every layer together define the function.
+The forward pass is the one you wrote on Episode 39, with a step activation in place of the smooth ones. The new idea is the composition. The output of one layer becomes the input of the next, and the parameters of every layer together define the function.
 
 ```python
 import numpy as np
@@ -187,7 +187,7 @@ A hidden layer is any layer between the input and the output. Its values are nev
 
 From first principles, each hidden neuron defines one boundary in the input space. Two hidden neurons define two lines, which divide the plane into up to four regions. The output neuron then uses those regions. The more hidden neurons you add, the more lines you have, and the more complicated the regions can become. This is the sense in which hidden layers bend the boundary.
 
-The cost is capacity and training difficulty. Each hidden neuron has its own parameters, and the number of parameters grows with the width of the layers. More parameters mean more ways to fit noise. Deep networks with many hidden layers train slowly unless the activations, the initialization and the optimizer are chosen well, which you will study on Days 41, 44 and 45.
+The cost is capacity and training difficulty. Each hidden neuron has its own parameters, and the number of parameters grows with the width of the layers. More parameters mean more ways to fit noise. Deep networks with many hidden layers train slowly unless the activations, the initialization and the optimizer are chosen well, which you will study on Episodes 41, 44 and 45.
 
 ```
 Hidden space, after OR and NAND                 Label
@@ -224,11 +224,11 @@ From first principles, the representation is the function that maps the input x 
 
 In the hidden space, the points labeled 1 both map to (1, 1), and the points labeled 0 map to (0, 1) and (1, 0). The line h1 + h2 = 1.5 separates them.
 
-Representation learning becomes powerful when the network learns the hidden features from data rather than having them wired by hand. In that case, the features are not chosen by a person, and they can capture patterns no engineer would think of. The limitation is that learned representations are hard to interpret, and they can encode biases in the training data without anyone noticing. You will see both sides when you train networks on Days 50 and 51.
+Representation learning becomes powerful when the network learns the hidden features from data rather than having them wired by hand. In that case, the features are not chosen by a person, and they can capture patterns no engineer would think of. The limitation is that learned representations are hard to interpret, and they can encode biases in the training data without anyone noticing. You will see both sides when you train networks on Episodes 50 and 51.
 
 Do not assume that learned representations are automatically good. A network can achieve high accuracy by exploiting a shortcut in the data, such as a background color in an image, and its representation will reflect that shortcut. Checking the representation on new data and on slices of the data is part of the job.
 
-In the real market, representation learning is the reason pretrained models are valuable. Companies fine-tune a model whose early layers already encode useful features, such as edges in images or word meanings in text, and they reuse those features on their own task. Transfer learning, which you will meet on Day 57, depends on this idea.
+In the real market, representation learning is the reason pretrained models are valuable. Companies fine-tune a model whose early layers already encode useful features, such as edges in images or word meanings in text, and they reuse those features on their own task. Transfer learning, which you will meet on Episode 57, depends on this idea.
 
 ---
 
@@ -246,12 +246,12 @@ In the real market, representation learning is the reason pretrained models are 
 
 **Goal:** implement the perceptron learning rule, show that it learns AND and fails on XOR, then build a hand-wired MLP that computes XOR and print the hidden representation. Test each claim, and write up what the failure and the fix teach you about model capacity.
 
-**Repo name:** `100-days-ai-day-40-perceptrons-and-mlps`
+**Repo name:** `100-episodes-ai-day-40-perceptrons-and-mlps`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-40-perceptrons-and-mlps/
+100-episodes-ai-day-40-perceptrons-and-mlps/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -426,4 +426,4 @@ Before you go on, check `W1` by printing its columns. Column 0 should be the wei
 
 ## Tomorrow
 
-Day 41 asks what the step function should be replaced with. The step function you used today has zero slope everywhere except at the threshold, which makes learning from errors impossible in a deep network. Day 41 compares sigmoid, tanh, ReLU, leaky ReLU, GELU and softmax, and it shows why a smooth nonlinearity with a usable gradient is necessary once you stack many layers. The hidden layer you wired today becomes the place where those choices matter.
+Episode 41 asks what the step function should be replaced with. The step function you used today has zero slope everywhere except at the threshold, which makes learning from errors impossible in a deep network. Episode 41 compares sigmoid, tanh, ReLU, leaky ReLU, GELU and softmax, and it shows why a smooth nonlinearity with a usable gradient is necessary once you stack many layers. The hidden layer you wired today becomes the place where those choices matter.

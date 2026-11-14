@@ -1,6 +1,6 @@
-# Day 28: Naive Bayes
+# Episode 28: Naive Bayes
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3 hours
 **Level:** beginner to intermediate. You need the conditional probability rules from Module 2 and basic counting. The model is small enough to compute by hand, which you should do once.
@@ -24,11 +24,11 @@
 
 **Prerequisites:**
 
-- Day 24: train, validation and test splits, and the baseline habit
-- Day 26: probabilities, log loss and thresholds
+- Episode 24: train, validation and test splits, and the baseline habit
+- Episode 26: probabilities, log loss and thresholds
 - Basic text preprocessing: lowercasing, splitting into words and counting them
 - Basic counting: the probability of an event is the number of favorable outcomes over the total
-- The logarithm rules from Day 26, because you will sum log probabilities to avoid underflow
+- The logarithm rules from Episode 26, because you will sum log probabilities to avoid underflow
 
 ---
 
@@ -188,14 +188,14 @@ The limitations are practical. Word order is lost, so "not good" and "good not" 
 
 This is a medium-weight project. The model is short, so the value is in the evaluation, the smoothing study and the honest comparison with a baseline.
 
-**Repo name:** `100-days-ai-engineering-day-28-naive-bayes`
+**Repo name:** `100-episodes-ai-engineering-day-28-naive-bayes`
 
 **Goal:** build a multinomial Naive Bayes spam filter from scratch, check it against scikit-learn, study the effect of smoothing, and write up where the model fails.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-28-naive-bayes/
+100-episodes-ai-engineering-day-28-naive-bayes/
 ├── README.md
 ├── requirements.txt
 ├── nb.py
@@ -343,6 +343,6 @@ def test_smoothing_gives_no_zero_probabilities():
 
 ## Tomorrow
 
-Tomorrow you move from probabilities to rules that look like questions. A decision tree splits the data one feature at a time, choosing each split to make the groups purer. You will meet impurity measures such as Gini and entropy, compute information gain by hand, and see how a tree overfits when it grows too deep. The tree is the building block for the ensemble methods on Day 30.
+Tomorrow you move from probabilities to rules that look like questions. A decision tree splits the data one feature at a time, choosing each split to make the groups purer. You will meet impurity measures such as Gini and entropy, compute information gain by hand, and see how a tree overfits when it grows too deep. The tree is the building block for the ensemble methods on Episode 30.
 
-**Next:** [Day 29: Decision Trees](Day-29-Decision-Trees.md)
+**Next:** [Episode 29: Decision Trees](Episode-29-Decision-Trees.md)

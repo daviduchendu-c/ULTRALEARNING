@@ -1,9 +1,9 @@
-# Day 30: Arrays, Strings and Containers
+# Episode 30: Arrays, Strings and Containers
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** beginner to intermediate. You can write functions and loops from Days 28 and 29, and you have seen a `for` loop over a fixed set of values. This day moves from single values to collections of them. It is for anyone who has tried to store a list of words or scores and found that the plain C++ tools feel awkward.
+**Level:** beginner to intermediate. You can write functions and loops from Episodes 28 and 29, and you have seen a `for` loop over a fixed set of values. This day moves from single values to collections of them. It is for anyone who has tried to store a list of words or scores and found that the plain C++ tools feel awkward.
 
 **By the end of this day, you will have:**
 
@@ -23,8 +23,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 29: the build steps, functions, overloads and the difference between passing by value and by reference
-- Day 28: `std::cin`, `std::cout` and integer types
+- Episodes 27 to 29: the build steps, functions, overloads and the difference between passing by value and by reference
+- Episode 28: `std::cin`, `std::cout` and integer types
 
 ---
 
@@ -104,7 +104,7 @@ The output is `total: 416` and `third score: 77`. Indexes start at 0, so `scores
 
 A second trap is passing an array to a function. The array quietly becomes a pointer to its first element, and the function loses the size. The safer habit is to pass a container that knows its size, which the next sections introduce. Built-in arrays still matter because the C++ ABI and many C libraries use them directly.
 
-The common mistake is an off-by-one index, such as `scores[5]` on a five-element array. The compiler does not catch it, and the program may print a random value or crash later. Sanitizers catch it on Day 38. In the market, buffer overruns on built-in arrays are the root of many security advisories, which is why modern code prefers the containers below.
+The common mistake is an off-by-one index, such as `scores[5]` on a five-element array. The compiler does not catch it, and the program may print a random value or crash later. Sanitizers catch it on Episode 38. In the market, buffer overruns on built-in arrays are the root of many security advisories, which is why modern code prefers the containers below.
 
 ### Strings
 
@@ -127,7 +127,7 @@ int main() {
 
 The output is `Ada Lovelace has 12 characters` and `first letter: A`. The `+` operator joins strings, and `size()` returns the number of characters. `full[0]` is an unchecked index, so `full.at(0)` is the safer choice when the index comes from user input, because `at` throws `std::out_of_range` if the index is wrong.
 
-Strings also interact with the `const` and reference rules from Day 29. Pass a `std::string` into a function as `const std::string&` to avoid copying it. A `std::string_view`, which is C++17, is a non-owning view over characters and avoids copies even more. The project uses `std::string_view` for input text, so the function does not own or copy the file contents.
+Strings also interact with the `const` and reference rules from Episode 29. Pass a `std::string` into a function as `const std::string&` to avoid copying it. A `std::string_view`, which is C++17, is a non-owning view over characters and avoids copies even more. The project uses `std::string_view` for input text, so the function does not own or copy the file contents.
 
 The common mistake is to mix `char*` strings with `std::string` and to forget that a `char*` pointing at a temporary string becomes a dangling pointer when the temporary is destroyed. The fix is to store a `std::string`. You can spot the bug when a pointer to text works in one run and crashes in another. In the market, string handling bugs show up in web servers and logging code, and teams prefer owning types so that lifetimes are obvious.
 
@@ -155,9 +155,9 @@ int main() {
 }
 ```
 
-The output is `count: 5` and `average: 83`. The integer division truncates `83.2` to `83`, which is the Day 28 lesson again. The `static_cast` is needed because `size()` returns `std::size_t`, an unsigned type, and mixing it with `int` triggers a sign warning.
+The output is `count: 5` and `average: 83`. The integer division truncates `83.2` to `83`, which is the Episode 28 lesson again. The `static_cast` is needed because `size()` returns `std::size_t`, an unsigned type, and mixing it with `int` triggers a sign warning.
 
-A vector has a capacity that grows in steps, often doubling. If you know the final size, call `reserve` first to avoid repeated moves. When a vector grows, it relocates its elements to the new memory, which costs time in proportion to how many there are. Moves are cheaper than copies for large objects, and Day 37 explains when a type can be moved.
+A vector has a capacity that grows in steps, often doubling. If you know the final size, call `reserve` first to avoid repeated moves. When a vector grows, it relocates its elements to the new memory, which costs time in proportion to how many there are. Moves are cheaper than copies for large objects, and Episode 37 explains when a type can be moved.
 
 The common mistake is to hold a reference or iterator to an element and then call `push_back`. If the vector reallocates, the reference and iterator now point at freed memory. The fix is to finish using the reference before the change, or to store an index instead. You can spot the bug when a value changes in a way the code does not explain. In the market, vectors are the default container in game engines, simulation code and data pipelines, where this invalidation rule is a common source of crashes.
 
@@ -244,7 +244,7 @@ int main() {
 }
 ```
 
-The output is `found 90 at index 3` and `passing: 4`. After sorting, the values are `64 77 85 90 100`, so 90 sits at index 3. The lambda `[](int s) { return s >= 70; }` is an anonymous function, which Day 36 covers in depth. `std::find` and `std::count_if` return an iterator or a count, and the `end()` check tells you whether the search succeeded.
+The output is `found 90 at index 3` and `passing: 4`. After sorting, the values are `64 77 85 90 100`, so 90 sits at index 3. The lambda `[](int s) { return s >= 70; }` is an anonymous function, which Episode 36 covers in depth. `std::find` and `std::count_if` return an iterator or a count, and the `end()` check tells you whether the search succeeded.
 
 Algorithms do not change the container's size. `std::sort` reorders elements, and `std::remove` moves elements to the end without shrinking the vector. To actually remove them, combine `std::remove` with `erase`, which is the erase-remove idiom. C++20 offers `std::erase_if` as a shorter form.
 
@@ -299,12 +299,12 @@ Done when your notes explain why the vector reallocates and what the old iterato
 
 The project reads a text file, splits it into words, counts each word and prints the total, the number of unique words and the five most common words. It uses a string, a vector, sorting and counting, and it puts each step in its own function so the test can check the rules.
 
-Suggested repo name: `100-days-software-day-30-arrays-strings-containers`.
+Suggested repo name: `100-episodes-software-day-30-arrays-strings-containers`.
 
 The repo layout:
 
 ```
-100-days-software-day-30-arrays-strings-containers/
+100-episodes-software-day-30-arrays-strings-containers/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -586,7 +586,7 @@ This project is light on new syntax and heavy on choices. The reader should see 
 3. `normalize_word` is responsible, because it is the only place that changes case. The test "strip punctuation and lowercase" checks `normalize_word("Hello,") == "hello"`, so removing the `std::tolower` call makes that test fail.
 4. `std::remove` moves the kept elements to the front and returns an iterator to the new logical end. It does not shrink the vector. The complete call is `scores.erase(std::remove(scores.begin(), scores.end(), value), scores.end());`.
 5. Use `std::array<Reading, 1024>` because the size is known at compile time and never changes. It avoids heap allocation and makes the size part of the type. `std::vector` would work, but it adds an allocation and a capacity field that this case does not need.
-6. The function does not change the caller's data, which keeps it safe to call from anywhere and matches the const reference rule from Day 29. Returning a new vector makes the result explicit, and the caller decides whether to keep the original order.
+6. The function does not change the caller's data, which keeps it safe to call from anywhere and matches the const reference rule from Episode 29. Returning a new vector makes the result explicit, and the caller decides whether to keep the original order.
 
 ---
 
@@ -619,6 +619,6 @@ This project is light on new syntax and heavy on choices. The reader should see 
 
 ## Tomorrow
 
-Day 31 covers pointers and references in detail. You have used references since Day 29 and iterators today, and both are built on the same idea of pointing at memory. You will learn addresses, dereferencing, `nullptr`, pointer arithmetic over arrays, and the safety rules that keep a pointer from outliving the memory it points at. The invalidation bugs from today are the reason those rules matter.
+Episode 31 covers pointers and references in detail. You have used references since Episode 29 and iterators today, and both are built on the same idea of pointing at memory. You will learn addresses, dereferencing, `nullptr`, pointer arithmetic over arrays, and the safety rules that keep a pointer from outliving the memory it points at. The invalidation bugs from today are the reason those rules matter.
 
-**Next:** [Day 31: Pointers and References](Software-Day-31-Pointers-and-References.md)
+**Next:** [Episode 31: Pointers and References](Software-Episode-31-Pointers-and-References.md)

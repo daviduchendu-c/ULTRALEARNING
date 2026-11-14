@@ -1,9 +1,9 @@
-# Day 5: Linux CLI II
+# Episode 5: Linux CLI II
 
-*100 Days of Software Engineering, Module: Foundations*
+*100 Episodes of Software Engineering, Module: Foundations*
 
 **Time:** about 4 hours
-**Level:** intermediate. For learners who finished Day 4 and can move around Ubuntu, manage files and read `ls -l`.
+**Level:** intermediate. For learners who finished Episode 4 and can move around Ubuntu, manage files and read `ls -l`.
 
 **By the end of this day, you will have:**
 
@@ -13,7 +13,7 @@
 
 **What you need:**
 
-- The Ubuntu terminal on WSL from Day 3 (work in your Ubuntu tab)
+- The Ubuntu terminal on WSL from Episode 3 (work in your Ubuntu tab)
 - VS Code connected to WSL
 - Bash, which comes with Ubuntu
 - ShellCheck (installed in the project with `sudo apt install shellcheck`)
@@ -21,9 +21,9 @@
 
 **Prerequisites:**
 
-- Day 4: Linux CLI I (moving around, managing files, `less`, `man`, reading `ls -l`)
-- Day 3: Developer Environment (PATH, environment variables, VS Code connected to WSL)
-- Day 2: How Computers Execute Programs (every running program is a process)
+- Episode 4: Linux CLI I (moving around, managing files, `less`, `man`, reading `ls -l`)
+- Episode 3: Developer Environment (PATH, environment variables, VS Code connected to WSL)
+- Episode 2: How Computers Execute Programs (every running program is a process)
 
 ---
 
@@ -54,7 +54,7 @@ Yesterday you ran single commands. Today you combine them, and that is where the
 
 Along the way you learn permissions (who can read, change and run a file) and processes and signals (how to see what is running and stop it cleanly). On the job, these are the skills you use when a deploy fails at night and all you have is a terminal and a log file.
 
-First, make some practice data. This uses Day 4 commands and `printf`, which prints formatted text:
+First, make some practice data. This uses Episode 4 commands and `printf`, which prints formatted text:
 
 ```bash
 mkdir -p ~/dev/day05 && cd ~/dev/day05
@@ -108,7 +108,7 @@ find ~ -name "*.log"                         # every .log under your home
 find /etc -maxdepth 1 -type f -name "*.conf" # config files directly in /etc
 find ~ -type f -mtime -1                     # files changed in the last day
 find /usr -type f -size +50M 2>/dev/null     # large files; hide "Permission denied"
-find ~/dev -type d -name "__pycache__"       # Python bytecode caches from Day 3
+find ~/dev -type d -name "__pycache__"       # Python bytecode caches from Episode 3
 find ~/dev -name "*.log" -exec grep -l ERROR {} +   # which log files contain ERROR?
 ```
 
@@ -228,11 +228,11 @@ mkdir private && chmod 700 private
 
 Work out `754` yourself: 7 is `rwx`, 5 is `r-x`, and 4 is `r--`, so the result is `rwxr-xr--`.
 
-The mistake that does real damage is `chmod -R 777` "to fix a permission error." It lets every user change or replace your files, including web-facing files. Find out which user needs which access instead. A quieter version is `chmod -R 644` on a directory tree, which removes `x` from the directories too, so nobody can enter them and every `cd` fails with "Permission denied." Another surprise: uploading a script through the GitHub website does not keep the executable bit, so the README must tell users to run `chmod +x`. Git records that bit for you from Day 6 on. In teams, a Dockerfile or deploy script that fails with "Permission denied" is almost always a missing `x`.
+The mistake that does real damage is `chmod -R 777` "to fix a permission error." It lets every user change or replace your files, including web-facing files. Find out which user needs which access instead. A quieter version is `chmod -R 644` on a directory tree, which removes `x` from the directories too, so nobody can enter them and every `cd` fails with "Permission denied." Another surprise: uploading a script through the GitHub website does not keep the executable bit, so the README must tell users to run `chmod +x`. Git records that bit for you from Episode 6 on. In teams, a Dockerfile or deploy script that fails with "Permission denied" is almost always a missing `x`.
 
 ### Processes and job control
 
-Day 2 showed that every running program is a process. Now you get the control room: a list of everything running, and buttons to pause, resume and move work to the background.
+Episode 2 showed that every running program is a process. Now you get the control room: a list of everything running, and buttons to pause, resume and move work to the background.
 
 `ps aux` lists processes with their user, PID, CPU and memory use. `ps -ef` adds the PPID, the parent that started each one. `top` shows a live view (`q` quits), and `pgrep -a NAME` finds processes by name. Job control manages the commands your shell started. `&` runs a command in the background, `jobs` lists them, `fg` and `bg` move them between foreground and background, and Ctrl+Z pauses the foreground job. `$$` holds your shell's PID.
 
@@ -244,7 +244,7 @@ jobs                     # lists both as Running
 pgrep -a sleep           # 2087 sleep 300
                          # 2088 sleep 600
 ps -o pid,ppid,cmd -p 2087   # its PPID is your shell's PID
-ls /proc/2087            # Day 4's /proc, holding this process's details
+ls /proc/2087            # Episode 4's /proc, holding this process's details
 fg %1                    # sleep 300 now holds your terminal
                          # press Ctrl+Z: [1]+ Stopped  sleep 300
 bg %1                    # it continues in the background
@@ -339,7 +339,7 @@ exit 0                           # 0 = success; any other number = failure
 
 Common tests are `-f` (file exists), `-d` (directory exists), `-r` (readable), `-s` (exists and is not empty), `-z "$x"` (string is empty), `"$a" = "$b"` (strings are equal) and `"$n" -gt 5` (number is greater than 5). `&&` runs the next command only if this one succeeded. `||` runs it only if this one failed. `$?` holds the last exit status.
 
-Spaces around `=` are the first trap: `name = "Ada"` runs a command called `name` and fails with "command not found." A script saved with Windows (CRLF) line endings fails with `/usr/bin/env: 'bash\r': No such file or directory`. Check with `cat -A script.sh` (CRLF lines end in `^M$`), then fix it with `sed -i 's/\r$//' script.sh`, or switch the file to LF in VS Code's status bar. `set -e` does not trigger inside `if` conditions or on the left side of `&&`, so use it as a safety net and nothing more. Run ShellCheck (`sudo apt install shellcheck`, then `shellcheck script.sh`) to catch unquoted variables (SC2086) and the empty-variable `rm` danger (SC2115). Once a script passes roughly 100 lines or needs real data structures, rewrite it in Python (Day 9: Python Runtime and Syntax). Teams keep deploy, backup and CI glue in small shell scripts like this, and run ShellCheck on every pull request.
+Spaces around `=` are the first trap: `name = "Ada"` runs a command called `name` and fails with "command not found." A script saved with Windows (CRLF) line endings fails with `/usr/bin/env: 'bash\r': No such file or directory`. Check with `cat -A script.sh` (CRLF lines end in `^M$`), then fix it with `sed -i 's/\r$//' script.sh`, or switch the file to LF in VS Code's status bar. `set -e` does not trigger inside `if` conditions or on the left side of `&&`, so use it as a safety net and nothing more. Run ShellCheck (`sudo apt install shellcheck`, then `shellcheck script.sh`) to catch unquoted variables (SC2086) and the empty-variable `rm` danger (SC2115). Once a script passes roughly 100 lines or needs real data structures, rewrite it in Python (Episode 9: Python Runtime and Syntax). Teams keep deploy, backup and CI glue in small shell scripts like this, and run ShellCheck on every pull request.
 
 ### Quoting
 
@@ -365,7 +365,7 @@ Unquoted variables are the most common shell bug, and they stay hidden until a f
 Work in `~/dev/day05` with the `app.log` from the start of this guide.
 
 1. **grep.** Count the ERROR lines. Print the non-INFO lines with line numbers. Find every line that mentions `db`, regardless of case. Then run `grep -q NOPE app.log; echo $?`. *Check:* you get 3, four numbered lines, two lines, and `1`.
-2. **find.** List every `.sh` and `.log` file under `~/dev`. Find directories named `.venv` from Day 3. Find files in `~` modified in the last 60 minutes with `-mmin -60`. *Check:* `app.log` appears in the last result.
+2. **find.** List every `.sh` and `.log` file under `~/dev`. Find directories named `.venv` from Episode 3. Find files in `~` modified in the last 60 minutes with `-mmin -60`. *Check:* `app.log` appears in the last result.
 3. **Redirection.** Run `ls /etc /nope`, sending the listing to `ok.txt` and the error to `bad.txt`. Then reproduce the trap. Copy `app.log` to `trap.log`, run `sort trap.log > trap.log`, and check with `wc -l trap.log`. *Check:* `bad.txt` holds one line, and `trap.log` is now empty. Explain why in one sentence.
 4. **Pipes.** Build the login-shell pipeline from the Pipes section one stage at a time, and look at the output after each `|`. Then find the three most frequent words in a man page: `man ls | tr -s ' ' '\n' | sort | uniq -c | sort -rn | head -n 3`. *Check:* you can say what each stage contributed.
 5. **Permissions.** Create `hello.sh` from the chmod section and get it from "Permission denied" to running. Create a directory with mode `600` (no `x`) that contains one file, then try `ls` and `cd` on it. *Check:* you can explain why `cd` fails even though you own the directory, then fix it with `chmod 700`.
@@ -377,12 +377,12 @@ Work in `~/dev/day05` with the `app.log` from the start of this guide.
 
 **Goal.** Write a shell script that summarizes a log file. It counts entries by level, lists the most common error messages, and returns an exit code that tells automation whether the log crossed an error threshold. Then test it and lint it.
 
-**Repo name:** `100-days-software-day-05-logscan`
+**Repo name:** `100-episodes-software-day-05-logscan`
 
 ### Repository layout
 
 ```
-100-days-software-day-05-logscan/
+100-episodes-software-day-05-logscan/
 ├── README.md
 ├── logscan.sh                 # the main script
 ├── make-sample-log.sh         # generates realistic test data
@@ -410,7 +410,7 @@ Each line holds a date, a time, the level padded to five characters, then the me
 
 ### Starter code
 
-Create every file inside Ubuntu (`mkdir -p ~/dev/100-days-software-day-05-logscan && cd "$_" && code .`; `$_` is the last argument of the previous command). Files created this way get LF line endings.
+Create every file inside Ubuntu (`mkdir -p ~/dev/100-episodes-software-day-05-logscan && cd "$_" && code .`; `$_` is the last argument of the previous command). Files created this way get LF line endings.
 
 `make-sample-log.sh`:
 
@@ -583,7 +583,7 @@ echo "$pass passed, $fail failed"
 [ "$fail" -eq 0 ]
 ```
 
-The last line makes the test script exit 0 only when every check passes, so a CI server (Day 91: CI/CD) can run it as-is.
+The last line makes the test script exit 0 only when every check passes, so a CI server (Episode 91: CI/CD) can run it as-is.
 
 `.gitattributes`:
 
@@ -591,7 +591,7 @@ The last line makes the test script exit 0 only when every check passes, so a CI
 *.sh text eol=lf
 ```
 
-This tells Git to store and check out `.sh` files with LF endings, even on Windows. Day 6: Git Mental Model covers it properly.
+This tells Git to store and check out `.sh` files with LF endings, even on Windows. Episode 6: Git Mental Model covers it properly.
 
 ### Step 1: create the folder and files
 
@@ -708,6 +708,6 @@ Pick one.
 
 ## Tomorrow
 
-Day 6, Git Mental Model, starts the Git and Collaboration module, right after this last day of Foundations. Until now you have uploaded files to GitHub through the website, and you have seen the gaps. Empty folders vanish, the executable bit is lost, and nothing records how a file changed. Git fixes all three. You will learn what a repository, a commit and the staging area are, and you will drive Git from Ubuntu using the terminal skills from Day 4: Linux CLI I and today. Your first real commits can go into today's `logscan` repo, and the `.gitattributes` file you added will finally do its job.
+Episode 6, Git Mental Model, starts the Git and Collaboration module, right after this last day of Foundations. Until now you have uploaded files to GitHub through the website, and you have seen the gaps. Empty folders vanish, the executable bit is lost, and nothing records how a file changed. Git fixes all three. You will learn what a repository, a commit and the staging area are, and you will drive Git from Ubuntu using the terminal skills from Episode 4: Linux CLI I and today. Your first real commits can go into today's `logscan` repo, and the `.gitattributes` file you added will finally do its job.
 
-**Next:** [Day 6: Git Mental Model](../Module-02-Git-and-Collaboration/Software-Day-06-Git-Mental-Model.md)
+**Next:** [Episode 6: Git Mental Model](../Module-02-Git-and-Collaboration/Software-Episode-06-Git-Mental-Model.md)

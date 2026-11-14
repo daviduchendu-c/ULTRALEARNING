@@ -1,6 +1,6 @@
-# Day 27: C++ Toolchain
+# Episode 27: C++ Toolchain
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
 **Level:** beginner. You have written code in another language, such as Python or JavaScript, and you know what a function and a file are. C++ adds a build step, and this day is about that step. It is for anyone who has seen a wall of red compiler text and wondered where to start reading.
@@ -26,7 +26,7 @@
 
 **Prerequisites:**
 
-- Days 1 to 6 of the track, which cover the command line, Git and the commit workflow
+- Episodes 1 to 6 of the track, which cover the command line, Git and the commit workflow
 - Basic programming in any language: variables, functions and `if` statements
 - Knowing how to change directories and list files in a terminal
 
@@ -319,12 +319,12 @@ Done when `cmake --build build` finishes with no warnings and `compile_commands.
 
 The project is a small geometry program. Its code is deliberately short, so the work goes into the toolchain: separate files, a build that works from a clean folder, a warning policy, and a log that explains each stage.
 
-Suggested repo name: `100-days-software-day-27-cpp-toolchain`.
+Suggested repo name: `100-episodes-software-day-27-cpp-toolchain`.
 
 The repo layout:
 
 ```
-100-days-software-day-27-cpp-toolchain/
+100-episodes-software-day-27-cpp-toolchain/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -433,6 +433,6 @@ This project is light on logic and heavy on tooling, because the skill is readin
 
 ## Tomorrow
 
-Day 28 starts writing actual C++ code. You will declare variables, choose types, use `const`, read input with `std::cin` and print with `std::cout`. The builds from today are the foundation: every program you write from Day 28 onward runs through the same compile, link and warning steps, and the `-Wall -Wextra -Wpedantic -Werror` habit you set up here carries over.
+Episode 28 starts writing actual C++ code. You will declare variables, choose types, use `const`, read input with `std::cin` and print with `std::cout`. The builds from today are the foundation: every program you write from Episode 28 onward runs through the same compile, link and warning steps, and the `-Wall -Wextra -Wpedantic -Werror` habit you set up here carries over.
 
-**Next:** [Day 28: Core Syntax and Types](Software-Day-28-Core-Syntax-and-Types.md)
+**Next:** [Episode 28: Core Syntax and Types](Software-Episode-28-Core-Syntax-and-Types.md)

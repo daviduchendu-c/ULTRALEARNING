@@ -1,9 +1,9 @@
-# Day 10: Objects, Variables and Types
+# Episode 10: Objects, Variables and Types
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner. You finished Day 9 and can run a script. This is for anyone who has been surprised that changing one list changed another, or who has written `if x:` without knowing what it checks.
+**Level:** beginner. You finished Episode 9 and can run a script. This is for anyone who has been surprised that changing one list changed another, or who has written `if x:` without knowing what it checks.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer, with a GitHub account from Day 8
+- Git 2.40 or newer, with a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (running scripts, `python -m`, naming rules, indentation)
-- Day 6 to Day 8: Git basics and pushing a repo to GitHub
+- Episode 9: Python Runtime and Syntax (running scripts, `python -m`, naming rules, indentation)
+- Episode 6 to Episode 8: Git basics and pushing a repo to GitHub
 
 ---
 
@@ -53,7 +53,7 @@ Most bugs in Python that look mysterious come from one of three ideas. A name is
 
 This day builds that picture from the ground up. You will see what a variable is in Python, why assignment copies nothing, how `is` differs from `==`, and why some operations change the object they act on while others return a new one. You will also learn the two checks that new programmers get wrong most often: comparing with `None`, and testing whether a value is "empty" through truthiness.
 
-The official reference for these ideas is the Python Data Model chapter at docs.python.org/3/reference/datamodel.html. It is long, so read the sections on objects, values and types now, and return to the rest when you meet special methods on Day 21.
+The official reference for these ideas is the Python Data Model chapter at docs.python.org/3/reference/datamodel.html. It is long, so read the sections on objects, values and types now, and return to the rest when you meet special methods on Episode 21.
 
 ---
 
@@ -139,7 +139,7 @@ print(data)                   # still ['todo', 'done']
 
 The first function mutates the object both names refer to. The second function changes only what its local name refers to, and the caller's name is untouched. This is the mechanism behind a lot of surprises.
 
-The common mistake is using a mutable default argument, such as `def add(item, items=[])`. The default list is created once, when the function is defined, so every call that uses the default shares it. Use `None` as the default and create the list inside the function. Day 16 returns to this. In the job market, this bug appears in production code often enough that interviewers ask about it directly.
+The common mistake is using a mutable default argument, such as `def add(item, items=[])`. The default list is created once, when the function is defined, so every call that uses the default shares it. Use `None` as the default and create the list inside the function. Episode 16 returns to this. In the job market, this bug appears in production code often enough that interviewers ask about it directly.
 
 ### Dynamic and strong typing
 
@@ -200,7 +200,7 @@ else:
     print(f"price: {price:.2f}")
 ```
 
-The `float | None` annotation says the function may return a float or nothing. Day 16 covers annotations in full, and Day 14 covers `dict.get`.
+The `float | None` annotation says the function may return a float or nothing. Episode 16 covers annotations in full, and Episode 14 covers `dict.get`.
 
 The common mistake is forgetting that `None` is a value that can propagate. A function that returns `None` by accident is called, its result stored, and an error appears three functions later with `'NoneType' object has no attribute`. Read the traceback from the bottom up to find where the `None` first appeared. In the job market, `None` errors are among the most common runtime exceptions in Python services, and type checkers catch them when annotations are present.
 
@@ -271,12 +271,12 @@ Done when mypy reports `Success: no issues found` on the fixed file.
 
 The project is a small repo whose code demonstrates the object model in four short modules and tests the claims with `unittest`. It is light on new features. It is heavy on precision: each function encodes a rule from this day, and each test checks that rule. The evidence you commit is a set of passing tests plus a short write-up in which you explain each rule in your own words.
 
-Suggested repo name: `100-days-software-day-10-objects-variables-and-types`.
+Suggested repo name: `100-episodes-software-day-10-objects-variables-and-types`.
 
 Repo layout:
 
 ```
-100-days-software-day-10-objects-variables-and-types/
+100-episodes-software-day-10-objects-variables-and-types/
 ├── .gitignore
 ├── README.md
 ├── objects_lab.py
@@ -481,6 +481,6 @@ The project is light on code because the concepts are about precision, not volum
 
 ## Tomorrow
 
-Day 11 moves from objects to the numeric types that most programs use. You will work with integers and floats, see why `0.1 + 0.2` is not exactly `0.3`, learn how booleans are a subtype of integers, and practice conversions and operator precedence. The idea of an object with a type, which you studied today, is what makes those conversions meaningful.
+Episode 11 moves from objects to the numeric types that most programs use. You will work with integers and floats, see why `0.1 + 0.2` is not exactly `0.3`, learn how booleans are a subtype of integers, and practice conversions and operator precedence. The idea of an object with a type, which you studied today, is what makes those conversions meaningful.
 
-**Next:** [Day 11: Numbers and Operators](Software-Day-11-Numbers-and-Operators.md)
+**Next:** [Episode 11: Numbers and Operators](Software-Episode-11-Numbers-and-Operators.md)

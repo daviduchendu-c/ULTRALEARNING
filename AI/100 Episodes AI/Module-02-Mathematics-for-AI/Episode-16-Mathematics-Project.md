@@ -1,6 +1,6 @@
-# Day 16: Mathematics Project
+# Episode 16: Mathematics Project
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 4 hours
 **Level:** intermediate. This is the capstone of Module 2. You need the earlier days of this module and enough Python to write functions and tests. It is for readers who want proof that they can turn the mathematics into working code.
@@ -21,12 +21,12 @@
 
 **Prerequisites:**
 
-- Day 7: functions, summation notation and square roots
-- Day 8: the dot product and the length of a vector
-- Day 9: matrix shapes, multiplication and transposes
-- Day 11: derivatives, the chain rule and gradients
-- Day 12: gradient descent, the learning rate and the update loop
-- Day 13 to Day 15: probability, statistics and cross-entropy, used to read the loss and the results
+- Episode 7: functions, summation notation and square roots
+- Episode 8: the dot product and the length of a vector
+- Episode 9: matrix shapes, multiplication and transposes
+- Episode 11: derivatives, the chain rule and gradients
+- Episode 12: gradient descent, the learning rate and the update loop
+- Episode 13 to Episode 15: probability, statistics and cross-entropy, used to read the loss and the results
 
 ---
 
@@ -179,9 +179,9 @@ print(gradient)   # [-5. -8.]
 print(w)          # [0.5 0.8]
 ```
 
-Repeating the step is the training loop. Record the loss at each iteration. If it grows, the learning rate is too large (Day 12). If it is flat from the start, the gradient may be wrong. The common mistake is a sign or scale error that the falling loss hides. A finite difference check catches it: compute `(loss(w + h) - loss(w - h)) / (2h)` for a small `h` and compare it with the analytic gradient. The tests in this project do exactly that.
+Repeating the step is the training loop. Record the loss at each iteration. If it grows, the learning rate is too large (Episode 12). If it is flat from the start, the gradient may be wrong. The common mistake is a sign or scale error that the falling loss hides. A finite difference check catches it: compute `(loss(w + h) - loss(w - h)) / (2h)` for a small `h` and compare it with the analytic gradient. The tests in this project do exactly that.
 
-The honest limitation is that full-batch gradient descent reads every row at each step, which is slow for millions of rows. Day 12's mini-batch methods are used then. In the market, frameworks compute gradients automatically, but engineers who can derive and check a gradient by hand are the ones who notice when an automatic gradient or a custom loss is wrong.
+The honest limitation is that full-batch gradient descent reads every row at each step, which is slow for millions of rows. Episode 12's mini-batch methods are used then. In the market, frameworks compute gradients automatically, but engineers who can derive and check a gradient by hand are the ones who notice when an automatic gradient or a custom loss is wrong.
 
 ---
 
@@ -207,14 +207,14 @@ Create a folder called `day16-warmup` and write your code in `warmup.py`. Do eac
 
 ## Project: mathlab, linear regression from scratch
 
-This project is practical and is the module's capstone. You will implement a small machine learning library with no framework and test every piece against a trusted reference. Name the repository `100-days-ai-engineering-day-16-mathematics-project`.
+This project is practical and is the module's capstone. You will implement a small machine learning library with no framework and test every piece against a trusted reference. Name the repository `100-episodes-ai-engineering-day-16-mathematics-project`.
 
 The starter gives you the data generator, the tests and the main script. The functions you must write raise `NotImplementedError`. At the start, all seven tests fail, and when you are done they should all pass.
 
 **Repo layout**
 
 ```
-100-days-ai-engineering-day-16-mathematics-project/
+100-episodes-ai-engineering-day-16-mathematics-project/
 ├── README.md
 ├── requirements.txt
 ├── main.py
@@ -518,4 +518,4 @@ final mse 0.2353
 
 ## Tomorrow
 
-Tomorrow begins Module 3, Data Engineering for AI, with Day 17 on NumPy. You now have the mathematics for a learning system: vectors and matrices to hold data, derivatives to move the weights, probability and information theory to define the loss, and statistics to judge the result. Day 17 turns the array ideas you used in `mathlab` into a working toolkit for ndarrays, shapes and dimensions, so the data is in the right form before any model sees it.
+Tomorrow begins Module 3, Data Engineering for AI, with Episode 17 on NumPy. You now have the mathematics for a learning system: vectors and matrices to hold data, derivatives to move the weights, probability and information theory to define the loss, and statistics to judge the result. Episode 17 turns the array ideas you used in `mathlab` into a working toolkit for ndarrays, shapes and dimensions, so the data is in the right form before any model sees it.

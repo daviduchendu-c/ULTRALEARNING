@@ -1,9 +1,9 @@
-# Day 32: Cameras
+# Episode 32: Cameras
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 4.5 hours
-**Level:** intermediate. You need Day 30 (range sensing and its field of view), Day 29 (frames and the idea of a reference measurement) and basic Python. Today a camera stops being a picture and becomes a measuring instrument.
+**Level:** intermediate. You need Episode 30 (range sensing and its field of view), Episode 29 (frames and the idea of a reference measurement) and basic Python. Today a camera stops being a picture and becomes a measuring instrument.
 
 **By the end of this day, you will have:**
 
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 30: the field of view of a range sensor, the beam width at a distance and the sign of an error
-- Day 29: the difference between a measured quantity and its estimate, and repeated runs
-- Day 31: the idea of a sensor frame and its orientation relative to the robot
+- Episode 30: the field of view of a range sensor, the beam width at a distance and the sign of an error
+- Episode 29: the difference between a measured quantity and its estimate, and repeated runs
+- Episode 31: the idea of a sensor frame and its orientation relative to the robot
 - Python: running a script, reading an image array and writing a CSV file
 
 ---
@@ -263,7 +263,7 @@ This project builds a calibrated camera pipeline that measures distance to a kno
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-32-cameras/
+100-episodes-robotics-engineering-day-32-cameras/
 ├── README.md
 ├── calibration/
 │   ├── images/                  # 15 checkerboard photos
@@ -412,6 +412,6 @@ The camera itself is safe. The hazard is the single-board computer and the mount
 
 ## Tomorrow
 
-Tomorrow you bring the whole module together. Day 33 is the sensor integration project: you collect data from the encoders, the IMU, a distance sensor and the servo command at the same time, timestamp each stream, log it, and check the timing between a commanded motion and the sensors' response. The camera from today can be added as a later stream, and the calibration habits carry over to every sensor in the module.
+Tomorrow you bring the whole module together. Episode 33 is the sensor integration project: you collect data from the encoders, the IMU, a distance sensor and the servo command at the same time, timestamp each stream, log it, and check the timing between a commanded motion and the sensors' response. The camera from today can be added as a later stream, and the calibration habits carry over to every sensor in the module.
 
-**Next:** [Day 33: Sensor Integration Project](Robotics-Day-33-Sensor-Integration-Project.md)
+**Next:** [Episode 33: Sensor Integration Project](Robotics-Episode-33-Sensor-Integration-Project.md)

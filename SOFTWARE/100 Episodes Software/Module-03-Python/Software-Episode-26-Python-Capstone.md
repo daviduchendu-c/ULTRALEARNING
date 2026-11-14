@@ -1,9 +1,9 @@
-# Day 26: Python Capstone
+# Episode 26: Python Capstone
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 6 hours, spread over one or two sittings
-**Level:** intermediate. You have finished Days 9 to 25. This is for anyone who can write each piece on its own and now needs to put them into one service that another person can run, test, read and change.
+**Level:** intermediate. You have finished Episodes 9 to 25. This is for anyone who can write each piece on its own and now needs to put them into one service that another person can run, test, read and change.
 
 **By the end of this day, you will have:**
 
@@ -18,7 +18,7 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - Tools installed in the project's virtual environment: `pytest` 8.x, `ruff` 0.6 or newer, `mypy` 1.10 or newer (all free, open source)
@@ -26,10 +26,10 @@
 
 **Prerequisites:**
 
-- Day 9 to Day 18: Runtime, types, collections, control flow, functions and modules
-- Day 19 and Day 20: Classes, inheritance, composition and dataclasses
-- Day 21 to Day 23: Protocols, errors and logging, and the standard library
-- Day 24 and Day 25: The project layout, packaging, and testing with pytest
+- Episode 9 to Episode 18: Runtime, types, collections, control flow, functions and modules
+- Episode 19 and Episode 20: Classes, inheritance, composition and dataclasses
+- Episode 21 to Episode 23: Protocols, errors and logging, and the standard library
+- Episode 24 and Episode 25: The project layout, packaging, and testing with pytest
 
 ---
 
@@ -280,12 +280,12 @@ Done when you can state which level caught the broken rule, and why.
 
 The project is a command-line expense tracker with SQLite storage. It records an expense with an amount, a category, an optional note and a date, reports totals by category for a month, and removes an expense by its id. It has a service layer that applies the rules, a storage layer that uses parameterized SQL and transactions, a CLI with clear exit codes, logging controlled by a flag, two levels of tests, a README and a design note. The work is organized as feature branches merged with `--no-ff`, and it ends with a tagged release.
 
-Suggested repo name: `100-days-software-day-26-python-capstone`.
+Suggested repo name: `100-episodes-software-day-26-python-capstone`.
 
 Repo layout:
 
 ```
-100-days-software-day-26-python-capstone/
+100-episodes-software-day-26-python-capstone/
 ├── .gitignore
 ├── README.md
 ├── pyproject.toml
@@ -860,6 +860,6 @@ The capstone is complete when a stranger can clone the repo, follow the README, 
 
 ## Tomorrow
 
-Module 3 is complete. Day 27 begins Module 4, the C++ track, with its toolchain: the compiler, the linker, translation units, header files, the build process and compiler warnings. The language is different, and the idea of a build is the same one you have just practiced: a set of inputs that must be turned into a program the same way every time.
+Module 3 is complete. Episode 27 begins Module 4, the C++ track, with its toolchain: the compiler, the linker, translation units, header files, the build process and compiler warnings. The language is different, and the idea of a build is the same one you have just practiced: a set of inputs that must be turned into a program the same way every time.
 
-**Next:** Day 27 is "C++ Toolchain" in the C++ module of the track index.
+**Next:** Episode 27 is "C++ Toolchain" in the C++ module of the track index.

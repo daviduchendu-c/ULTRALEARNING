@@ -1,10 +1,10 @@
-# Day 24: RTOS Fundamentals
+# Episode 24: RTOS Fundamentals
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** advanced beginner to intermediate. You need Day 19 (interrupts and shared data), Day 23 (the superloop and the state machine) and a working PlatformIO or Arduino IDE setup from earlier days. Today the target is an ESP32, not the Uno, because the Uno's 2 KB of SRAM is too small for a real multitasking demonstration.
+**Level:** advanced beginner to intermediate. You need Episode 19 (interrupts and shared data), Episode 23 (the superloop and the state machine) and a working PlatformIO or Arduino IDE setup from earlier days. Today the target is an ESP32, not the Uno, because the Uno's 2 KB of SRAM is too small for a real multitasking demonstration.
 
 **By the end of this day, you will have:**
 
@@ -26,9 +26,9 @@
 
 **Prerequisites:**
 
-- Day 16: the difference between a sketch and its build output
-- Day 19: interrupts and shared data
-- Day 23: the superloop, the state machine and the telemetry frame
+- Episode 16: the difference between a sketch and its build output
+- Episode 19: interrupts and shared data
+- Episode 23: the superloop, the state machine and the telemetry frame
 - A basic understanding of how a CPU runs more than one program at a time, from an operating systems course or equivalent
 
 ---
@@ -56,7 +56,7 @@
 
 ## Introduction
 
-A superloop from Day 23 runs one task after another, and each task must finish quickly so the next one can run. That design is simple, and it works well for a logger that samples a sensor every 200 ms. It becomes hard to manage when the system has many jobs with different deadlines. A motor control loop that must run every millisecond, a radio that must respond within 10 ms and a display that updates every half second all compete for the same loop. Every time one job gets slower, the others miss their timing.
+A superloop from Episode 23 runs one task after another, and each task must finish quickly so the next one can run. That design is simple, and it works well for a logger that samples a sensor every 200 ms. It becomes hard to manage when the system has many jobs with different deadlines. A motor control loop that must run every millisecond, a radio that must respond within 10 ms and a display that updates every half second all compete for the same loop. Every time one job gets slower, the others miss their timing.
 
 A real-time operating system (RTOS) solves that problem by giving each job its own task, with its own stack and its own priority. The scheduler decides which task runs, and a higher-priority task can interrupt a lower one at any time. Tasks communicate through queues, semaphores and mutexes instead of shared globals. The result is a system where each job is written as if it runs alone, and the RTOS handles the interleaving.
 
@@ -176,7 +176,7 @@ From first principles, an increment such as `count = count + 1` is three operati
 
 The worked example is the race demo in the project. Two tasks each increment a shared integer one million times, and the expected final result is two million. Without protection, the result is usually lower, and the difference is the number of lost updates. With a mutex around each increment, the result is exact, and the program takes longer. The gap between the two results is the cost of the protection and the evidence that the race exists.
 
-The common mistake is to use `volatile` as protection. As in Day 19, `volatile` only stops the compiler from caching the variable. It does not make the increment atomic, and the race remains. The correct tools are a mutex, a critical section with `portENTER_CRITICAL` for very short operations, or an atomic type. For a multi-word structure, a mutex is the normal choice.
+The common mistake is to use `volatile` as protection. As in Episode 19, `volatile` only stops the compiler from caching the variable. It does not make the increment atomic, and the race remains. The correct tools are a mutex, a critical section with `portENTER_CRITICAL` for very short operations, or an atomic type. For a multi-word structure, a mutex is the normal choice.
 
 On the job, race conditions are one of the most expensive firmware bugs, because they are hard to reproduce. A design that gives each shared variable one owner, and passes data by queue, avoids most of them.
 
@@ -214,14 +214,14 @@ On the job, priority inversion and deadlock are the two bugs that real-time revi
 
 ## Project: a two-task sensor pipeline and a race demo
 
-The goal is a repository that runs a sensor task and a logger task on an ESP32, passes samples through a queue, protects a shared counter with a mutex, and includes a race demo that shows lost updates without protection. The project uses the same ideas as the superloop from Day 23, but it is built on tasks instead of a loop.
+The goal is a repository that runs a sensor task and a logger task on an ESP32, passes samples through a queue, protects a shared counter with a mutex, and includes a race demo that shows lost updates without protection. The project uses the same ideas as the superloop from Episode 23, but it is built on tasks instead of a loop.
 
-**Repo name:** `100-days-robotics-day-24-rtos-fundamentals`
+**Repo name:** `100-episodes-robotics-day-24-rtos-fundamentals`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-24-rtos-fundamentals/
+100-episodes-robotics-day-24-rtos-fundamentals/
 ├── README.md
 ├── pipeline/
 │   ├── platformio.ini
@@ -456,4 +456,4 @@ This project is light on hardware and heavy on evidence. The lost-update count a
 
 ## Tomorrow
 
-Day 25 is the module project. You will combine the sensors, the buses, the state machine, the telemetry and the tasks from this module into one embedded device. The device will read several sensors, drive an actuator, send telemetry over a serial link and handle its faults in a structured way. The RTOS task design from today and the layered architecture from Day 23 are both used there, so the choices you made in those lessons will decide how cleanly the final project fits together.
+Episode 25 is the module project. You will combine the sensors, the buses, the state machine, the telemetry and the tasks from this module into one embedded device. The device will read several sensors, drive an actuator, send telemetry over a serial link and handle its faults in a structured way. The RTOS task design from today and the layered architecture from Episode 23 are both used there, so the choices you made in those lessons will decide how cleanly the final project fits together.

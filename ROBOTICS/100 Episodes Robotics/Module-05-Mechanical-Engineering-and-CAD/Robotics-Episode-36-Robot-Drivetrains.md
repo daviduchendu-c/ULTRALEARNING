@@ -1,9 +1,9 @@
-# Day 36: Robot Drivetrains
+# Episode 36: Robot Drivetrains
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Day 35 for ratios and gear trains, Day 13 for motor drive, and Day 34 for friction and wheel slip. The lesson uses basic 2D geometry and vectors, and it introduces the kinematics you will develop fully in Module 8.
+**Level:** intermediate. You need Episode 35 for ratios and gear trains, Episode 13 for motor drive, and Episode 34 for friction and wheel slip. The lesson uses basic 2D geometry and vectors, and it introduces the kinematics you will develop fully in Module 8.
 
 **By the end of this day, you will have:**
 
@@ -15,18 +15,18 @@
 **What you need:**
 
 - Python 3.12 with numpy 2.1 or newer, matplotlib 3.9 or newer, and pytest 8 or newer
-- A two-wheel differential chassis with two geared DC motors and wheel encoders. Kits from Pololu, DFRobot and similar suppliers cost about $30 to $60. If you built a chassis for Day 33, use it.
+- A two-wheel differential chassis with two geared DC motors and wheel encoders. Kits from Pololu, DFRobot and similar suppliers cost about $30 to $60. If you built a chassis for Episode 33, use it.
 - Optional: a set of four mecanum wheels, about $60 to $120 for a kit, and three omni wheels, about $10 to $15 each
-- A microcontroller board from Day 16 to Day 25, such as an ESP32 or Arduino Uno, to drive the motors
+- A microcontroller board from Episode 16 to Episode 25, such as an ESP32 or Arduino Uno, to drive the motors
 - A 5 m measuring tape, about $5, and masking tape to mark the floor
 - A phone with a stopwatch, and a notebook to log the results
 
 **Prerequisites:**
 
-- Day 35: gear ratios, the efficiency of a gear train, and the role of the gearbox in a wheel drive
-- Day 34: friction, stress and factor of safety, and the friction limit of a tyre on the floor
-- Day 13: motor drive through an H-bridge
-- Day 29: encoders and how they count rotation
+- Episode 35: gear ratios, the efficiency of a gear train, and the role of the gearbox in a wheel drive
+- Episode 34: friction, stress and factor of safety, and the friction limit of a tyre on the floor
+- Episode 13: motor drive through an H-bridge
+- Episode 29: encoders and how they count rotation
 - Comfort with sine, cosine and vectors in two dimensions
 
 ---
@@ -237,12 +237,12 @@ This project is a Python simulator for three drivetrains: differential, Ackerman
 
 **Goal:** write a simulator that takes a sequence of wheel commands for each drivetrain, integrates the pose over time, and writes a plot of the path and a table of the final pose error under calibration errors.
 
-**Repository name:** `100-days-robotics-day-36-robot-drivetrains`
+**Repository name:** `100-episodes-robotics-day-36-robot-drivetrains`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-36-robot-drivetrains/
+100-episodes-robotics-day-36-robot-drivetrains/
 ├── README.md
 ├── requirements.txt
 ├── drivetrains/
@@ -404,4 +404,4 @@ Write `drivetrains/integrate.py` with a function that runs a list of commands an
 
 ## Tomorrow
 
-Tomorrow, on Day 37, you open a CAD tool for the first time. You learn sketches, constraints, dimensions, reference geometry, parametric modelling and design intent. The drivetrain you chose today sets the wheel size, the track width and the wheel mounting that you must draw. A sketch that does not match the kinematics of the robot is the first error that Day 37 teaches you to avoid.
+Tomorrow, on Episode 37, you open a CAD tool for the first time. You learn sketches, constraints, dimensions, reference geometry, parametric modelling and design intent. The drivetrain you chose today sets the wheel size, the track width and the wheel mounting that you must draw. A sketch that does not match the kinematics of the robot is the first error that Episode 37 teaches you to avoid.

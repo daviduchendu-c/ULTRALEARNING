@@ -1,9 +1,9 @@
-# Day 30: Distance Sensors
+# Episode 30: Distance Sensors
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Day 29 (encoders and the idea of a reference measurement), Day 13 (logic levels and the voltage differences between boards) and Module 3 (reading a digital pin and a serial port). Today you give the robot a way to see the distance to the things around it.
+**Level:** intermediate. You need Episode 29 (encoders and the idea of a reference measurement), Episode 13 (logic levels and the voltage differences between boards) and Module 3 (reading a digital pin and a serial port). Today you give the robot a way to see the distance to the things around it.
 
 **By the end of this day, you will have:**
 
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 29: a reference measurement, repeated runs and the difference between accuracy and resolution
-- Day 13: logic levels, pull-up resistors and the danger of connecting a 5 V output to a 3.3 V input
+- Episode 29: a reference measurement, repeated runs and the difference between accuracy and resolution
+- Episode 13: logic levels, pull-up resistors and the danger of connecting a 5 V output to a 3.3 V input
 - Module 3: reading a digital pin with pulseIn() and reading a serial port
 - Basic trigonometry: sine, cosine and tangent of an angle in a right triangle
 
@@ -55,7 +55,7 @@
 
 ## Introduction
 
-A robot that cannot measure distance walks into walls. Encoders from Day 29 tell the robot how far its wheels have turned, but they say nothing about what is in front of it. A distance sensor fills that gap. It measures the gap between the sensor and the nearest surface, and that measurement is the basis of obstacle avoidance, docking, mapping and most of the localization a mobile robot does.
+A robot that cannot measure distance walks into walls. Encoders from Episode 29 tell the robot how far its wheels have turned, but they say nothing about what is in front of it. A distance sensor fills that gap. It measures the gap between the sensor and the nearest surface, and that measurement is the basis of obstacle avoidance, docking, mapping and most of the localization a mobile robot does.
 
 No single sensor is right for every task. An ultrasonic sensor is cheap and wide, but it is slow and easily fooled by soft surfaces. A time-of-flight sensor is fast and precise over a short range, but its beam is narrow. A LiDAR scans a plane with many points per second, but it costs far more. Today you measure each type under the same conditions, so that the choice in your own robot rests on numbers you collected yourself.
 
@@ -291,7 +291,7 @@ This project compares the error, precision and field of view of two or three ran
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-30-distance-sensors/
+100-episodes-robotics-engineering-day-30-distance-sensors/
 ├── README.md
 ├── firmware/
 │   └── range_logger/
@@ -369,7 +369,7 @@ void loop() {
 
 The logger prints one line every 100 milliseconds with the time, the ultrasonic distance in centimetres and the ToF distance in millimetres. A value of -1 means no reading. The ToF reading is taken only when a new measurement is ready, so an old value is never repeated. The ultrasonic reading is taken on every cycle, which is fine for a study at a fixed target.
 
-The analysis script `analysis/error_study.py` reads each run's CSV, computes the mean, the standard deviation and the error against the ruler distance, and writes the summary. Write it as part of the project, following the same structure as the odometry script in Day 29.
+The analysis script `analysis/error_study.py` reads each run's CSV, computes the mean, the standard deviation and the error against the ruler distance, and writes the summary. Write it as part of the project, following the same structure as the odometry script in Episode 29.
 
 **Step-by-step tasks:**
 
@@ -458,6 +458,6 @@ The rig is light and safe, but the HC-SR04 and the VL53L1X are only sensors. The
 
 ## Tomorrow
 
-Tomorrow you will measure motion of the robot itself, through its acceleration and rotation. Day 31 covers IMUs: accelerometers, gyroscopes and magnetometers, their axes, bias and drift, and how calibration and orientation estimates work. The IMU is the sensor that tells the robot it is tilting or turning when its wheels cannot tell it, and it pairs with the encoder odometry from Day 29 in almost every mobile robot.
+Tomorrow you will measure motion of the robot itself, through its acceleration and rotation. Episode 31 covers IMUs: accelerometers, gyroscopes and magnetometers, their axes, bias and drift, and how calibration and orientation estimates work. The IMU is the sensor that tells the robot it is tilting or turning when its wheels cannot tell it, and it pairs with the encoder odometry from Episode 29 in almost every mobile robot.
 
-**Next:** [Day 31: IMUs](Robotics-Day-31-IMUs.md)
+**Next:** [Episode 31: IMUs](Robotics-Episode-31-IMUs.md)

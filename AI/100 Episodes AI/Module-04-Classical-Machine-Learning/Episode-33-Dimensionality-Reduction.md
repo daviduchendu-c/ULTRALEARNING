@@ -1,9 +1,9 @@
-# Day 33: Dimensionality Reduction
+# Episode 33: Dimensionality Reduction
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You should have finished Module 2 Day 10 (linear algebra, eigenvalues and the SVD), since this day applies those ideas to real pipelines. The nonlinear methods are presented as tools with limits, not as magic.
+**Level:** intermediate. You should have finished Module 2 Episode 10 (linear algebra, eigenvalues and the SVD), since this day applies those ideas to real pipelines. The nonlinear methods are presented as tools with limits, not as magic.
 
 **By the end of this day, you will have:**
 
@@ -25,10 +25,10 @@
 
 **Prerequisites:**
 
-- Module 2 Day 10: eigenvalues, the singular value decomposition and PCA as a projection
-- Day 24: train, validation and test splits, and the leakage rules
-- Day 27: distances and why high-dimensional neighborhoods behave differently
-- Day 32: clustering and the question of whether structure is real
+- Module 2 Episode 10: eigenvalues, the singular value decomposition and PCA as a projection
+- Episode 24: train, validation and test splits, and the leakage rules
+- Episode 27: distances and why high-dimensional neighborhoods behave differently
+- Episode 32: clustering and the question of whether structure is real
 
 ---
 
@@ -209,14 +209,14 @@ The mistake is reading distances between clusters in a t-SNE plot as real distan
 
 This is a medium-weight project. The code is short and uses library methods. The deliverable is a reduction that is tested against a downstream model, with honest plots and a clear recommendation.
 
-**Repo name:** `100-days-ai-engineering-day-33-dimensionality-reduction`
+**Repo name:** `100-episodes-ai-engineering-day-33-dimensionality-reduction`
 
 **Goal:** reduce a high-dimensional dataset with PCA, check how much predictive information survives at each number of components, and produce a two-dimensional visualization that is labeled as a picture, not a measurement.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-33-dimensionality-reduction/
+100-episodes-ai-engineering-day-33-dimensionality-reduction/
 ├── README.md
 ├── requirements.txt
 ├── reduce.py
@@ -373,6 +373,6 @@ def test_three_components_capture_the_three_signals():
 
 ## Tomorrow
 
-Tomorrow you measure classifiers properly. Accuracy is only one number, and on imbalanced data it can hide almost every mistake that matters. You will work with the confusion matrix, precision, recall, F1, specificity, ROC and precision-recall curves, and threshold selection. The thresholds from Day 26 and the probabilities from Day 28 return, and the reduced features from today become a live test of your metrics.
+Tomorrow you measure classifiers properly. Accuracy is only one number, and on imbalanced data it can hide almost every mistake that matters. You will work with the confusion matrix, precision, recall, F1, specificity, ROC and precision-recall curves, and threshold selection. The thresholds from Episode 26 and the probabilities from Episode 28 return, and the reduced features from today become a live test of your metrics.
 
-**Next:** [Day 34: Model Evaluation: Classification](Day-34-Model-Evaluation-Classification.md)
+**Next:** [Episode 34: Model Evaluation: Classification](Episode-34-Model-Evaluation-Classification.md)

@@ -1,9 +1,9 @@
-# Day 26: DC Motors
+# Episode 26: DC Motors
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Day 13 (motor electronics), Day 12 (the power budget) and Day 14 (reading datasheets). This day turns the electrical behavior you measured into a mechanical picture: torque, speed and gearing. Those three numbers decide which motor a robot wheel or joint needs.
+**Level:** intermediate. You need Episode 13 (motor electronics), Episode 12 (the power budget) and Episode 14 (reading datasheets). This day turns the electrical behavior you measured into a mechanical picture: torque, speed and gearing. Those three numbers decide which motor a robot wheel or joint needs.
 
 **By the end of this day, you will have:**
 
@@ -14,20 +14,20 @@
 
 **What you need:**
 
-- The small 6 V brushed DC gearmotor and TB6612FNG driver from Day 13, plus the bench supply set to 6.0 V with a 1.2 A current limit
+- The small 6 V brushed DC gearmotor and TB6612FNG driver from Episode 13, plus the bench supply set to 6.0 V with a 1.2 A current limit
 - A digital multimeter with DC volts, DC amps and ohms modes, about $15 to $25
 - A phone with a free optical tachometer app. Several are on the Google Play Store and the Apple App Store. Search "optical tachometer" and check the reviews, since accuracy varies.
 - A 10 cm wheel or pulley taped to the motor shaft, and a 500 g to 1 kg spring scale, about $10 to $15 for a hanging scale
 - A string, a cardboard lever arm and some tape
 - Python 3.12 with NumPy 2.1 or newer and Matplotlib 3.9 or newer, both free and open source
-- Arduino IDE 2.3 or newer if you reuse the Day 13 sketch for the H-bridge
+- Arduino IDE 2.3 or newer if you reuse the Episode 13 sketch for the H-bridge
 - Optional: a gearmotor with a published gear ratio, such as 30:1 or 48:1. Check the listed ratio before you run the lesson's numbers on a different motor.
 
 **Prerequisites:**
 
-- Day 13: the back-EMF relation E = V minus I times R, the stall current and the H-bridge
-- Day 12: the power budget and the idea of a fuse sized for the continuous current
-- Day 14: reading a datasheet for the rated voltage, stall current and no-load speed
+- Episode 13: the back-EMF relation E = V minus I times R, the stall current and the H-bridge
+- Episode 12: the power budget and the idea of a fuse sized for the continuous current
+- Episode 14: reading a datasheet for the rated voltage, stall current and no-load speed
 - Basic Python: running a script, reading a CSV file and plotting a line
 
 ---
@@ -57,7 +57,7 @@
 
 Almost every mobile robot moves because a motor turns a wheel through a gearbox. The motor's electrical data on the nameplate tells you very little about whether it will move the robot up a ramp. Three numbers matter: how much torque it can give at the shaft, how fast it turns when unloaded, and how much current it draws while it works. A team that picks a motor from its price or its size alone finds out in testing that the wheels slip, the robot stalls on carpet or the driver overheats.
 
-Today you connect Day 13's electrical model to the mechanical side. You will measure the motor's torque constant and speed constant, then use them to predict the torque at the wheel after a gearbox. The motor you use is the same one from Day 13, so every number you measure today can be checked against the driver limits and the fuse rating you already set.
+Today you connect Episode 13's electrical model to the mechanical side. You will measure the motor's torque constant and speed constant, then use them to predict the torque at the wheel after a gearbox. The motor you use is the same one from Episode 13, so every number you measure today can be checked against the driver limits and the fuse rating you already set.
 
 ---
 
@@ -85,7 +85,7 @@ The physics has not changed. What changed is the cost of the magnets, the electr
 - **Gearbox ratio:** the number of motor turns for each output turn. A 48:1 ratio means the output turns once for every 48 motor turns.
 - **Gearbox efficiency:** the fraction of the input power that reaches the output. Spur gearboxes are often 80 to 90 percent efficient when new.
 - **Rpm (revolutions per minute):** a speed in turns per minute. One rpm equals 2π divided by 60 radians per second, about 0.1047 rad/s.
-- **Duty cycle:** the fraction of time a PWM signal is on, as Day 13 defined it.
+- **Duty cycle:** the fraction of time a PWM signal is on, as Episode 13 defined it.
 - **Continuous current:** the current the motor can draw for a long time without overheating.
 - **Spring scale:** a hanging scale that reads force in newtons or grams-force, used here to measure torque at a known lever arm.
 
@@ -99,7 +99,7 @@ The analogy is a revolving door with a set of hands that push it. The hands are 
 
 The first principle is the force on a current-carrying wire in a magnetic field. For a wire of length L carrying current I at right angles to a field B, the force is F = B × L × I. A coil of radius r gives a torque of about T = B × L × I × r, where L is the length of wire in the field. The torque is proportional to the current, which is why the motor's torque constant Kt is a simple number once the magnet and winding are fixed.
 
-The worked example uses the motor from Day 13. Suppose the motor produces 0.027 N·m of torque at a current of 1.0 A. Its torque constant is Kt = 0.027 / 1.0 = 0.027 N·m per ampere. At a current of 0.25 A, the torque is 0.027 × 0.25 = 0.0068 N·m. The number is small, which is why most small brushed motors are paired with a gearbox before they drive anything heavy.
+The worked example uses the motor from Episode 13. Suppose the motor produces 0.027 N·m of torque at a current of 1.0 A. Its torque constant is Kt = 0.027 / 1.0 = 0.027 N·m per ampere. At a current of 0.25 A, the torque is 0.027 × 0.25 = 0.0068 N·m. The number is small, which is why most small brushed motors are paired with a gearbox before they drive anything heavy.
 
 The common mistake is to assume the torque constant is the same for every motor of the same size. Winding turns, magnet strength and the rotor's diameter all change Kt, and a datasheet's torque figure is a result of those choices. Measure it, or use the datasheet's value only after checking the units.
 
@@ -125,7 +125,7 @@ In the robotics market, current-based torque estimation is used in many low-cost
 
 ## Speed and back-EMF
 
-A spinning motor is also a generator. When it turns, the coils cut through the magnetic field and produce a voltage that opposes the supply. Day 13 called this back-EMF. The faster the motor spins, the larger the back-EMF, and the smaller the current that the supply can push through the winding.
+A spinning motor is also a generator. When it turns, the coils cut through the magnetic field and produce a voltage that opposes the supply. Episode 13 called this back-EMF. The faster the motor spins, the larger the back-EMF, and the smaller the current that the supply can push through the winding.
 
 The first principle is E = Ke × ω, where E is the back-EMF in volts, ω is the shaft speed in radians per second, and Ke is the speed constant in volts per radian per second. For a motor, Ke equals Kt when both are in SI units. That identity comes from energy conservation: the electrical power converted to mechanical power, E × I, equals the mechanical power, T × ω, which gives Kt = Ke.
 
@@ -133,7 +133,7 @@ The worked example uses the no-load data. At 6.0 V with a winding resistance of 
 
 The common mistake is to read the motor's speed from the supply voltage alone. The no-load speed is proportional to the supply voltage only when the winding drop is small, and the winding drop is I times R, which grows with load. A robot that drives at a fixed PWM duty will therefore slow down when the load rises, and the speed is set by the load as well as the duty cycle.
 
-Speed is measured in the real world with a tachometer. A phone app that counts reflections from a strip of tape on the shaft is accurate to a few rpm for a steady motor, and it is free. An encoder on the shaft is the usual measurement for a robot, and Day 29 covers it. Back-EMF estimation, which Day 13 introduced, is a cheaper but less accurate method.
+Speed is measured in the real world with a tachometer. A phone app that counts reflections from a strip of tape on the shaft is accurate to a few rpm for a steady motor, and it is free. An encoder on the shaft is the usual measurement for a robot, and Episode 29 covers it. Back-EMF estimation, which Episode 13 introduced, is a cheaper but less accurate method.
 
 ---
 
@@ -147,7 +147,7 @@ The worked example gives the same numbers as before. Stall torque is T_stall = 0
 
 The common mistake is to pick a motor that gives the required torque at its no-load speed. The required torque and speed must lie inside the curve at the operating point, which is the point where the load's torque line crosses the motor's curve. A motor that works at 20 rpm with 0.01 N·m may fail at 5 rpm with 0.02 N·m, because the curve gives less torque at low speed and more torque at high speed.
 
-The torque-speed curve is also how datasheets are read. A gearbox shifts the curve, and the PWM duty cycle scales it. The operating envelope is the region under the curve that the driver can supply, which Day 13's current limits bound.
+The torque-speed curve is also how datasheets are read. A gearbox shifts the curve, and the PWM duty cycle scales it. The operating envelope is the region under the curve that the driver can supply, which Episode 13's current limits bound.
 
 In the job market, the torque-speed curve is the first plot in every motor selection report, and it is the figure a reviewer asks for when a robot is underpowered.
 
@@ -171,7 +171,7 @@ On the job, gear ratio is the first design choice for a drivetrain. A warehouse 
 
 ## Stall current and heat
 
-A motor at stall draws its largest current and produces its largest torque, but it also converts all of its electrical power into heat in the winding. The stall power is I squared times R, which for the Day 13 motor at 1.0 A and 6.0 Ω is 6.0 W. A motor is designed to take that power only for a short time.
+A motor at stall draws its largest current and produces its largest torque, but it also converts all of its electrical power into heat in the winding. The stall power is I squared times R, which for the Episode 13 motor at 1.0 A and 6.0 Ω is 6.0 W. A motor is designed to take that power only for a short time.
 
 The first principle is that the winding's temperature rises with the power dissipated and falls with the heat carried away. The rise follows a thermal time constant, which for a small motor is often tens of seconds. Energy in the winding is E = P times t. If the winding can store, say, 20 joules before it reaches its insulation limit, the motor can take 6 W for about 3.3 seconds. The number is an estimate, but it shows that stall time is limited by the rating.
 
@@ -187,11 +187,11 @@ In the market, stall and thermal behavior decides whether an actuator survives f
 
 ## Drivers and the operating envelope
 
-A driver is the amplifier between the microcontroller and the motor, as Day 13 explained. From the motor's point of view, the driver sets the supply voltage and limits the current. The motor's torque-speed curve is then the region that the driver can supply, which is called the operating envelope.
+A driver is the amplifier between the microcontroller and the motor, as Episode 13 explained. From the motor's point of view, the driver sets the supply voltage and limits the current. The motor's torque-speed curve is then the region that the driver can supply, which is called the operating envelope.
 
 The first principle is that the envelope is set by three limits. The torque limit is the stall torque at the supply voltage, or the current limit times Kt, whichever is lower. The speed limit is the no-load speed at the supply voltage, reduced by the gearbox ratio. The thermal limit is the time the motor can spend in the high-current region before its temperature exceeds the rated value.
 
-The worked example uses the TB6612FNG from Day 13, which is rated for about 1.2 A average and a higher peak. With the 6.0 V supply, the current limit of 1.2 A sets a torque ceiling of 0.027 times 1.2, which is 0.032 N·m at the motor shaft. The motor's own stall current of 1.0 A is below that limit, so the motor is the limit, not the driver. A larger motor on the same driver would make the driver the limit.
+The worked example uses the TB6612FNG from Episode 13, which is rated for about 1.2 A average and a higher peak. With the 6.0 V supply, the current limit of 1.2 A sets a torque ceiling of 0.027 times 1.2, which is 0.032 N·m at the motor shaft. The motor's own stall current of 1.0 A is below that limit, so the motor is the limit, not the driver. A larger motor on the same driver would make the driver the limit.
 
 The common mistake is to pick a driver from its voltage rating alone. The voltage rating must exceed the battery's full charge voltage, and the current rating must exceed the stall current for the stall duration. A 2S lithium polymer pack at 8.4 V full may exceed a driver's motor-supply limit even when the motor is 6 V, so check the battery's full voltage, not its nominal voltage.
 
@@ -205,7 +205,7 @@ On the job, drivers are matched to the motor by voltage, current and envelope. T
 
 A DC motor by itself does not report its position or speed. The back-EMF estimate works for some tasks, but it is noisy and it depends on the motor constant, which drifts. An encoder is a sensor on the motor shaft that reports the rotation in pulses, and it is the standard way to measure speed and position in a robot.
 
-The first principle is that an encoder counts events, and the speed is the number of counts per second divided by the counts per revolution. Day 29 covers encoders in detail, including quadrature signals and direction. For today's characterization, a simple tachometer is enough, and an optical tachometer app gives an accurate speed reading for a steady motor.
+The first principle is that an encoder counts events, and the speed is the number of counts per second divided by the counts per revolution. Episode 29 covers encoders in detail, including quadrature signals and direction. For today's characterization, a simple tachometer is enough, and an optical tachometer app gives an accurate speed reading for a steady motor.
 
 The worked example is the conversion from counts to speed. A motor encoder with 11 pulses per revolution on the motor shaft, read at the output of a 48:1 gearbox with 4 times quadrature decoding, gives 11 times 48 times 4 counts per output revolution. That is 2112 counts per output turn. A count rate of 1408 counts per second corresponds to 1408 / 2112 = 0.667 output turns per second, or 40 rpm.
 
@@ -217,7 +217,7 @@ Encoders are a part of the motor system, and they are often sold with the motor.
 
 ## Hands-on exercises
 
-Keep the motor's supply current limited and keep the fuse in the circuit, as Day 13 set up. The bench supply stays at 6.0 V with the current limit at 1.2 A. Never run the motor from an unprotected battery, and stop the test if the motor or the driver gets too hot to hold comfortably.
+Keep the motor's supply current limited and keep the fuse in the circuit, as Episode 13 set up. The bench supply stays at 6.0 V with the current limit at 1.2 A. Never run the motor from an unprotected battery, and stop the test if the motor or the driver gets too hot to hold comfortably.
 
 1. **Measure the winding resistance and the no-load data.** With the motor disconnected from the driver, measure the winding resistance with the multimeter's ohms mode and record it. Connect the motor to the bench supply at 6.0 V, let it spin free for 30 seconds, and record the no-load current. Measure the no-load speed with the optical tachometer app and a strip of reflective tape on the shaft. Record three readings and take the average.
 
@@ -242,7 +242,7 @@ This project is a repeatable measurement of one motor and its gearbox. It produc
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-26-dc-motors/
+100-episodes-robotics-engineering-day-26-dc-motors/
 ├── README.md
 ├── analysis/
 │   ├── fit_torque_constant.py
@@ -381,7 +381,7 @@ This project is light on hazard, but the stall tests heat the motor. Keep each s
 - [Wikipedia: Gear train](https://en.wikipedia.org/wiki/Gear_train) for the ratio and efficiency of gearboxes.
 - [Wikipedia: Back-EMF](https://en.wikipedia.org/wiki/Back-EMF) for the speed relation, although the article title may vary by language. Search the title if the link moves.
 - The datasheet of the motor you bought. Search the supplier's name and the motor's part number. Pololu and SparkFun list the stall torque, stall current and no-load speed on their product pages.
-- The TB6612FNG datasheet from Toshiba, from Day 13, for the current and thermal limits.
+- The TB6612FNG datasheet from Toshiba, from Episode 13, for the current and thermal limits.
 
 *Tutorials*
 
@@ -402,6 +402,6 @@ This project is light on hazard, but the stall tests heat the motor. Keep each s
 
 ## Tomorrow
 
-Tomorrow you will use the servo motor, which adds a position feedback loop to a motor and a gearbox in one package. Day 27 covers the servo's command signal, its feedback concept, its torque rating and its calibration. Where a DC motor needs an encoder to know its position, a servo has the feedback built in, and today's torque-speed curve is still the test for whether a servo has enough torque for the joint.
+Tomorrow you will use the servo motor, which adds a position feedback loop to a motor and a gearbox in one package. Episode 27 covers the servo's command signal, its feedback concept, its torque rating and its calibration. Where a DC motor needs an encoder to know its position, a servo has the feedback built in, and today's torque-speed curve is still the test for whether a servo has enough torque for the joint.
 
-**Next:** [Day 27: Servo Motors](Robotics-Day-27-Servo-Motors.md)
+**Next:** [Episode 27: Servo Motors](Robotics-Episode-27-Servo-Motors.md)

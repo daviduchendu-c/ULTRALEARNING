@@ -1,9 +1,9 @@
-# Day 30: Ensemble Learning
+# Episode 30: Ensemble Learning
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 29 (decision trees) and Day 24 (bias, variance and cross-validation). The boosting section uses gradients, so Day 25 helps.
+**Level:** intermediate. You need Episode 29 (decision trees) and Episode 24 (bias, variance and cross-validation). The boosting section uses gradients, so Episode 25 helps.
 
 **By the end of this day, you will have:**
 
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 29: how a decision tree splits and how depth controls variance
-- Day 24: bias, variance, overfitting and k-fold cross-validation
-- Day 25: the gradient of a squared loss, used again in boosting
+- Episode 29: how a decision tree splits and how depth controls variance
+- Episode 24: bias, variance, overfitting and k-fold cross-validation
+- Episode 25: the gradient of a squared loss, used again in boosting
 - Comfort with averages and the idea of a sample drawn with replacement
 
 ---
@@ -139,7 +139,7 @@ rf.fit(X, y)
 print("out-of-bag accuracy", round(rf.oob_score_, 3))
 ```
 
-The mistake is treating feature importances as causal. Impurity-based importances favor features with many distinct values, and they can be misleading when features are correlated. Use permutation importance on held-out data for a more careful reading, which Day 37 covers. The limitation of random forests is that they are less accurate than boosting on many tabular tasks, and their predictions are slow to compute when the forest is large. In the market, a random forest is a common first serious model for insurance and retail data, because it needs little tuning and rarely fails badly.
+The mistake is treating feature importances as causal. Impurity-based importances favor features with many distinct values, and they can be misleading when features are correlated. Use permutation importance on held-out data for a more careful reading, which Episode 37 covers. The limitation of random forests is that they are less accurate than boosting on many tabular tasks, and their predictions are slow to compute when the forest is large. In the market, a random forest is a common first serious model for insurance and retail data, because it needs little tuning and rarely fails badly.
 
 ### Boosting
 
@@ -265,14 +265,14 @@ The mistake is building the stack without the out-of-fold step, or reusing the s
 
 This is a medium-weight project. The code is short because scikit-learn does the heavy lifting. The value is in an honest comparison that uses one outer test set and a clear report.
 
-**Repo name:** `100-days-ai-engineering-day-30-ensemble-learning`
+**Repo name:** `100-episodes-ai-engineering-day-30-ensemble-learning`
 
 **Goal:** compare a single decision tree, bagging, a random forest, gradient boosting, soft voting and stacking on the same tabular dataset, using cross-validation for model choice and a held-out test set for the final number.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-30-ensemble-learning/
+100-episodes-ai-engineering-day-30-ensemble-learning/
 ├── README.md
 ├── requirements.txt
 ├── models.py
@@ -420,4 +420,4 @@ def test_every_model_fits_and_predicts_binary_labels():
 
 Tomorrow you move to the margin. A support vector machine looks for the separating boundary that stays as far as possible from the closest examples on each side. You will meet hyperplanes, margins and support vectors, and you will see how the kernel trick lets a linear method separate data that is not linearly separable. The model is a useful contrast to the trees, because it depends on a few boundary points rather than on every row.
 
-**Next:** [Day 31: Support Vector Machines](Day-31-Support-Vector-Machines.md)
+**Next:** [Episode 31: Support Vector Machines](Episode-31-Support-Vector-Machines.md)

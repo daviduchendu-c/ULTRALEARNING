@@ -1,20 +1,20 @@
-# Day Generator Prompt
+# Episode Generator Prompt
 
-Paste this into a new chat or a Claude Project. Replace `{SERIES}`, `{DAY_NUMBER}` and `{NOTION_OUTLINE}`. For the outline, paste that day's section from your Notion page.
+Paste this into a new chat or a Claude Project. Replace `{SERIES}`, `{EPISODE_NUMBER}` and `{NOTION_OUTLINE}`. For the outline, paste that day's section from your Notion page.
 
 ---
 
-You are a senior engineer and patient teacher writing one day of a 100-day self-study series. Write the lesson as a complete, detailed, self-contained article in the style of a GeeksforGeeks tutorial crossed with a CS50 lecture: every concept is broken down from first principles, with examples, diagrams and real references. The reader is an young Adult  learning to get hired and to deliver paid work, so every day must build real skill, not just awareness.
+You are a senior engineer and patient teacher writing one episode of a 100-episode self-study series. Write the lesson as a complete, detailed, self-contained article in the style of a GeeksforGeeks tutorial crossed with a CS50 lecture: every concept is broken down from first principles, with examples, diagrams and real references. The reader is an young Adult  learning to get hired and to deliver paid work, so every day must build real skill, not just awareness.
 
 ## Inputs
 - Series: {SERIES}  (AI Engineering / Robotics Engineering / Software Engineering)
-- Day: {DAY_NUMBER}
+- Episode: {EPISODE_NUMBER}
 - Outline for this day from my Notion page (treat it as the required scope; cover every item, and go deeper where it helps):
 {NOTION_OUTLINE}
 
 ## Output structure (use these headings, in this order)
 1. **Title, metadata and table of contents**:
-   - "Day N: Title", module name, then one line each for **Time** (for example "about 3 hours") and **Level** (beginner, intermediate or advanced, with one line on who it is for).
+   - "Episode N: Title", module name, then one line each for **Time** (for example "about 3 hours") and **Level** (beginner, intermediate or advanced, with one line on who it is for).
    - **By the end of this day, you will have:** a bulleted list of the concrete outputs the reader walks away with.
    - **What you need:** a bulleted list of the equipment, installs and accounts needed before starting, each with the version where relevant.
    - **Prerequisites:** a bulleted list of the skills and earlier days the reader must already have.
@@ -29,7 +29,7 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
    - Use ASCII diagrams or Mermaid where a picture explains a structure, and name a reference image to search for when a visual helps.
 6. **Hands-on exercises**: concrete, checkable steps.
 7. **Project (GitHub, project-based)**: choose the form that fits the topic.
-   - If the topic is practical, give a full mini-project: goal, repo layout as a tree, starter code, step-by-step tasks, a README checklist, and a "done when" list. Suggest a repo name in the form `100-days-<series>-day-NN-<slug>`.
+   - If the topic is practical, give a full mini-project: goal, repo layout as a tree, starter code, step-by-step tasks, a README checklist, and a "done when" list. Suggest a repo name in the form `100-episodes-<series>-day-NN-<slug>`.
    - If the topic is mostly conceptual, make a lighter project such as a written analysis, a comparison experiment, a diagram in the repo, or a short notebook that demonstrates the idea, and say explicitly why the project is light.
    - Never skip the project. Always state what evidence (code, tests, results, a README) the reader should commit to GitHub.
 8. **Check your understanding**: 5 to 7 questions that test reasoning, not recall, then answers after the questions.
@@ -51,4 +51,4 @@ You are a senior engineer and patient teacher writing one day of a 100-day self-
 - Finish with the humanizing pass: always use the `human-speak` skill on the whole lesson to remove AI phrasing (no "delve", no "in today's fast-paced world", no "Here's the kicker", no em dashes, no recap closers). Keep every fact, number and link intact, and keep the reader's direct voice. Do not treat a manual scan for banned phrases as a substitute for running the skill.
 
 ## Format
-Return the full lesson as one Markdown document, ready to save as `Day-NN-<slug>.md`. Do not add commentary before or after the document.
+Return the full lesson as one Markdown document, ready to save as `Episode-NN-<slug>.md`. Do not add commentary before or after the document.

@@ -1,9 +1,9 @@
-# Day 9: Python Runtime and Syntax
+# Episode 9: Python Runtime and Syntax
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner. You have written a few lines of code in any language, or you finished Day 3 and have Python installed. This is for anyone who types `python` and hopes for the best, and wants to know what actually happens next.
+**Level:** beginner. You have written a few lines of code in any language, or you finished Episode 3 and have Python installed. This is for anyone who types `python` and hopes for the best, and wants to know what actually happens next.
 
 **By the end of this day, you will have:**
 
@@ -16,17 +16,17 @@
 **What you need:**
 
 - Python 3.14 (any version from 3.12 upward works for this day). Check with `python --version`. On Windows, the `py` launcher is also fine: `py -3.14 --version`.
-- Git 2.40 or newer, from Day 6 and Day 7
-- A GitHub account from Day 8
+- Git 2.40 or newer, from Episode 6 and Episode 7
+- A GitHub account from Episode 8
 - A code editor that understands Python, such as Visual Studio Code with the Python extension from Microsoft (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 
 **Prerequisites:**
 
-- Day 2: How Computers Execute Programs (CPU, memory, the idea of machine code)
-- Day 3: Developer Environment (terminal, editor, PATH)
-- Day 4 and Day 5: Linux CLI (`cd`, `ls`, running commands)
-- Day 6 to Day 8: Git basics, branches and GitHub
+- Episode 2: How Computers Execute Programs (CPU, memory, the idea of machine code)
+- Episode 3: Developer Environment (terminal, editor, PATH)
+- Episode 4 and Episode 5: Linux CLI (`cd`, `ls`, running commands)
+- Episode 6 to Episode 8: Git basics, branches and GitHub
 
 ---
 
@@ -145,11 +145,11 @@ if __name__ == "__main__":
     main()
 ```
 
-Running `python hello.py` prints `hello from __main__`. Running `python -m hello` from the same folder prints `hello from __main__` as well. Importing the file from another script with `import hello` prints nothing, because the `if __name__ == "__main__":` guard is false when the file is imported. Day 18 explains that guard in full. For now, remember that a script which runs code on import will surprise you later.
+Running `python hello.py` prints `hello from __main__`. Running `python -m hello` from the same folder prints `hello from __main__` as well. Importing the file from another script with `import hello` prints nothing, because the `if __name__ == "__main__":` guard is false when the file is imported. Episode 18 explains that guard in full. For now, remember that a script which runs code on import will surprise you later.
 
 On Windows, `py -3.14 hello.py` picks a specific version, which is useful when several versions are installed. On Linux and macOS, `python3.14 hello.py` does the same. Pin the version in the command when a project depends on it.
 
-The common mistake is running a script from the wrong folder, then getting a `FileNotFoundError` for a file that exists. Relative paths resolve against the current working directory, not against the script's folder. Use `pathlib.Path(__file__).parent` when a script must find files next to itself. Day 23 covers `pathlib` properly.
+The common mistake is running a script from the wrong folder, then getting a `FileNotFoundError` for a file that exists. Relative paths resolve against the current working directory, not against the script's folder. Use `pathlib.Path(__file__).parent` when a script must find files next to itself. Episode 23 covers `pathlib` properly.
 
 ### Bytecode
 
@@ -219,7 +219,7 @@ The common mistake is trying to assign inside an expression that does not allow 
 
 ### Naming
 
-A name is a label that points to a value. The label is not the value, and the value is not stored in the label. This is the idea that Day 10 develops in full. For now, focus on the rules for what makes a valid name, and on the conventions that make names easy to read.
+A name is a label that points to a value. The label is not the value, and the value is not stored in the label. This is the idea that Episode 10 develops in full. For now, focus on the rules for what makes a valid name, and on the conventions that make names easy to read.
 
 From first principles, a Python identifier must start with a letter or underscore, and may then contain letters, digits and underscores. Letters beyond ASCII are allowed, so `café` is a valid name. A keyword cannot be an identifier. The `keyword` module lists the reserved words for the running interpreter, and `str.isidentifier()` tests a string against the grammar.
 
@@ -287,12 +287,12 @@ Done when the compile step exits without printing an error.
 
 The project is a small, honest repo: it reports the interpreter it runs under, checks names against the language rules, and prints the bytecode of a function. None of it is large. Its job is to show that you can run Python deliberately and read what it tells you. This is a light project in terms of code, and that is intentional. The skill here is precision about the runtime, and the evidence is the output you commit.
 
-Suggested repo name: `100-days-software-day-09-python-runtime-and-syntax`.
+Suggested repo name: `100-episodes-software-day-09-python-runtime-and-syntax`.
 
 Repo layout:
 
 ```
-100-days-software-day-09-python-runtime-and-syntax/
+100-episodes-software-day-09-python-runtime-and-syntax/
 ├── .gitignore
 ├── .python-version
 ├── README.md
@@ -400,7 +400,7 @@ Step-by-step tasks:
 3. Run `python naming_check.py`. Check that each result matches the rules in the Naming section. Add `"lambda"` and `"my-name"` to the list and rerun. Record both results.
 4. Run `python -m unittest` from the project root. It should report four tests and `OK`. The `tests/__init__.py` file must exist, or unittest finds zero tests and still prints a misleading result.
 5. Run `python bytecode_peek.py`. Copy the first five lines of the output into `docs/evidence.md` and write one sentence explaining what they do.
-6. Commit with the message "Add runtime report, naming check and bytecode view". Push the repo to GitHub as you learned on Day 8.
+6. Commit with the message "Add runtime report, naming check and bytecode view". Push the repo to GitHub as you learned on Episode 8.
 
 Done when:
 
@@ -465,6 +465,6 @@ The README should list the three run commands: `python runtime_report.py`, `pyth
 
 ## Tomorrow
 
-Day 10 keeps the runtime in view and asks what a name actually refers to. You will learn how Python objects carry an identity, a type and a value, why two names can point to one object, why assignment does not copy, and how mutability decides what that means in practice. The name rules you learned today are the surface. Tomorrow is the object model underneath.
+Episode 10 keeps the runtime in view and asks what a name actually refers to. You will learn how Python objects carry an identity, a type and a value, why two names can point to one object, why assignment does not copy, and how mutability decides what that means in practice. The name rules you learned today are the surface. Tomorrow is the object model underneath.
 
-**Next:** [Day 10: Objects, Variables and Types](Software-Day-10-Objects-Variables-and-Types.md)
+**Next:** [Episode 10: Objects, Variables and Types](Software-Episode-10-Objects-Variables-and-Types.md)

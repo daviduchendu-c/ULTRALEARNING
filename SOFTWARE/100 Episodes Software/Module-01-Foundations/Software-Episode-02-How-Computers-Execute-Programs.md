@@ -1,6 +1,6 @@
-# Day 2: How Computers Execute Programs
+# Episode 2: How Computers Execute Programs
 
-*100 Days of Software Engineering, Module: Foundations*
+*100 Episodes of Software Engineering, Module: Foundations*
 
 **Time:** about 2 to 3 hours
 **Level:** beginner. No new programming skills are needed. You will read short code samples, run small experiments in a browser and Windows Task Manager, and write a one-page trace of a feature from your own app idea.
@@ -10,19 +10,19 @@
 - A clear picture of the path from source code to a running process: translation, CPU, memory and storage
 - A drawing of a call stack, and an explanation of how it differs from the heap
 - Worked conversions between binary, hexadecimal and decimal, plus an explanation of why `0.1 + 0.2` is not `0.3` and why one character can be several bytes
-- A small notes repository with a one-page trace of one feature from your Day 1 app through the machine
+- A small notes repository with a one-page trace of one feature from your Episode 1 app through the machine
 
 **What you need:**
 
 - A web browser with developer tools (Chrome, Edge or Firefox)
 - Windows Task Manager and Notepad (both built into Windows)
 - Any text editor for your notes
-- git 2.40 or newer, from Day 1 (only to commit your notes)
+- git 2.40 or newer, from Episode 1 (only to commit your notes)
 - Nothing else is installed today. The Python and C samples run in online tools: [Python Tutor](https://pythontutor.com/) and [Compiler Explorer](https://godbolt.org/)
 
 **Prerequisites:**
 
-- Day 1: Software Engineering and the SDLC (the app idea you wrote there is the input to today's trace)
+- Episode 1: Software Engineering and the SDLC (the app idea you wrote there is the input to today's trace)
 - Comfort opening a terminal and running a command
 
 ---
@@ -109,7 +109,7 @@ int main(void) {
 
 Both print `49`. The C version declares that `x` is an `int`. The Python version leaves the type open and works it out while the program runs. That difference shapes how each language gets translated.
 
-Source code is text, so invisible characters matter. A word processor adds formatting and curly quotes that break code, so write code in a code editor (you will set one up on Day 3: Developer Environment). Windows and Linux also end lines differently, which causes trouble on Day 5: Linux CLI II. To spot it, look for a script that fails with strange errors on a line that looks fine.
+Source code is text, so invisible characters matter. A word processor adds formatting and curly quotes that break code, so write code in a code editor (you will set one up on Episode 3: Developer Environment). Windows and Linux also end lines differently, which causes trouble on Episode 5: Linux CLI II. To spot it, look for a script that fails with strange errors on a line that looks fine.
 
 On a real team, source files live in a git repository and every change is reviewed as a text diff.
 
@@ -301,7 +301,7 @@ new TextEncoder().encode("é")   // Uint8Array [195, 169]
 "é".length                      // 1 character
 ```
 
-In Python (which you will install on Day 3: Developer Environment), the same conversions are `bin(11)`, which gives `'0b1011'`, `int("1011", 2)`, which gives `11`, `hex(255)`, which gives `'0xff'`, `ord("A")`, which gives `65`, and `"é".encode("utf-8")`, which gives `b'\xc3\xa9'`.
+In Python (which you will install on Episode 3: Developer Environment), the same conversions are `bin(11)`, which gives `'0b1011'`, `int("1011", 2)`, which gives `11`, `hex(255)`, which gives `'0xff'`, `ord("A")`, which gives `65`, and `"é".encode("utf-8")`, which gives `b'\xc3\xa9'`.
 
 Never store money as floating point. Store cents as integers, or use a decimal type (Python's `decimal` module, PostgreSQL's `numeric`). To spot the bug, look for a total that is off by one cent after many items. Never assume one character is one byte either: a name field limited to "50 bytes" can cut a non-English name in half. Text such as `JosÃ©` where `José` should be means UTF-8 bytes were read with the wrong encoding.
 
@@ -351,12 +351,12 @@ Write your answers in a notes file. You will use them in the project.
 
 ## Project: trace one feature through the machine
 
-Your project is a one-page trace. You take one feature from your Day 1 app, such as "a user adds a habit called Read 20 pages", and follow it through everything you learned today: source code, translation, process, memory, bytes, storage and failure. This is a conceptual day, so the repository holds notes, not a program. You will use git from Day 1 to keep it.
+Your project is a one-page trace. You take one feature from your Episode 1 app, such as "a user adds a habit called Read 20 pages", and follow it through everything you learned today: source code, translation, process, memory, bytes, storage and failure. This is a conceptual day, so the repository holds notes, not a program. You will use git from Episode 1 to keep it.
 
 ### Repository layout
 
 ```
-100-days-software-day-02-how-computers-execute-programs/
+100-episodes-software-day-02-how-computers-execute-programs/
 ├── README.md          # what the repo is and which feature you traced
 ├── machine-notes.md   # your answers from exercises 1 to 6
 └── trace.md           # the one-page trace of your feature
@@ -364,7 +364,7 @@ Your project is a one-page trace. You take one feature from your Day 1 app, such
 
 ### Step 1: create the repository and the notes
 
-1. Create a folder named `100-days-software-day-02-how-computers-execute-programs`, and run `git init` inside it.
+1. Create a folder named `100-episodes-software-day-02-how-computers-execute-programs`, and run `git init` inside it.
 2. Create `README.md` with two sentences: what the repo is, and the feature you picked.
 3. Create `machine-notes.md` and paste in your answers from the exercises, with a heading for each one.
 
@@ -461,6 +461,6 @@ git commit -m "Add feature trace"
 
 ## Tomorrow
 
-Day 3, Developer Environment, turns your laptop into a working engineer's machine. You will install VS Code, Git and Python on Windows 11, set up WSL 2 so you have a real Linux system for Day 4: Linux CLI I and Day 5: Linux CLI II, and learn how the terminal finds programs through PATH and environment variables. Today's ideas come back in each part. The terminal starts processes, PATH decides which program file gets loaded into memory, and the debugger pauses the CPU on a line so you can inspect the stack frames you drew today.
+Episode 3, Developer Environment, turns your laptop into a working engineer's machine. You will install VS Code, Git and Python on Windows 11, set up WSL 2 so you have a real Linux system for Episode 4: Linux CLI I and Episode 5: Linux CLI II, and learn how the terminal finds programs through PATH and environment variables. Today's ideas come back in each part. The terminal starts processes, PATH decides which program file gets loaded into memory, and the debugger pauses the CPU on a line so you can inspect the stack frames you drew today.
 
-**Next:** [Day 3: Developer Environment](Software-Day-03-Developer-Environment.md)
+**Next:** [Episode 3: Developer Environment](Software-Episode-03-Developer-Environment.md)

@@ -1,9 +1,9 @@
-# Day 48: Graphs
+# Episode 48: Graphs
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 to 4 hours
-**Level:** intermediate. You should have finished Day 47, be comfortable with trees and queues, and be ready to reason about visited sets. This day is for anyone who has worked on a social network, a route planner, a dependency graph or a build system and wanted to know what the code underneath does.
+**Level:** intermediate. You should have finished Episode 47, be comfortable with trees and queues, and be ready to reason about visited sets. This day is for anyone who has worked on a social network, a route planner, a dependency graph or a build system and wanted to know what the code underneath does.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 47
+- Git 2.23 or newer, and the repository from Episode 47
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 44: Stacks and Queues (the stack and queue behavior that DFS and BFS rely on)
-- Day 46: Trees and BSTs (tree traversals, which are a special case of graph search)
-- Day 47: Heaps and Priority Queues (the priority queue used in shortest weighted paths, which this day only mentions)
+- Episode 44: Stacks and Queues (the stack and queue behavior that DFS and BFS rely on)
+- Episode 46: Trees and BSTs (tree traversals, which are a special case of graph search)
+- Episode 47: Heaps and Priority Queues (the priority queue used in shortest weighted paths, which this day only mentions)
 
 ---
 
@@ -120,7 +120,7 @@ def bfs(self, start) -> dict:
     return dist
 ```
 
-The limitation is that BFS counts edges, not weights. If roads have different lengths, the shortest path in hops can be the longest one in distance. Weighted shortest paths need Dijkstra's algorithm with a priority queue, which Day 47 prepared you for, and which this module does not implement.
+The limitation is that BFS counts edges, not weights. If roads have different lengths, the shortest path in hops can be the longest one in distance. Weighted shortest paths need Dijkstra's algorithm with a priority queue, which Episode 47 prepared you for, and which this module does not implement.
 
 The common mistake is to mark a vertex as visited when it is removed from the queue instead of when it is added. A vertex can then be queued several times, and the distances can be wrong on graphs with many paths. To spot the problem, test a graph where two paths of different lengths lead to the same vertex.
 
@@ -151,7 +151,7 @@ def dfs(self, start) -> list:
 
 The limitation of DFS is that it does not give shortest paths, because it may follow a long route before it finds a short one. It is also sensitive to the order of neighbors, so two runs on the same graph can produce different orders if the adjacency lists are built differently.
 
-The common mistake is to check `seen` only when a vertex is popped and forget to check it before pushing, which pushes the same vertex many times. The code above checks both places. The second mistake is to use a recursive DFS on a deep graph and hit Python's recursion limit, which Day 50 explains. To spot it, test a chain of 2000 vertices.
+The common mistake is to check `seen` only when a vertex is popped and forget to check it before pushing, which pushes the same vertex many times. The code above checks both places. The second mistake is to use a recursive DFS on a deep graph and hit Python's recursion limit, which Episode 50 explains. To spot it, test a chain of 2000 vertices.
 
 DFS is used in compilers to detect unreachable code, in test runners to discover tests, and in game engines to find all rooms connected to a starting room.
 
@@ -226,7 +226,7 @@ Cycle detection appears in package managers, which refuse to install circular de
 
 ## Hands-on exercises
 
-Work in the repository from Day 47. Keep the graph in `dsa/graph.py` and the build order tool in `dsa/build_order.py`.
+Work in the repository from Episode 47. Keep the graph in `dsa/graph.py` and the build order tool in `dsa/build_order.py`.
 
 Exercise 1 traces BFS by hand. Draw a graph with six vertices and seven edges on paper. Run BFS from one vertex by writing the queue and the distance table after each step. Compare your distances with `g.bfs(start)`.
 
@@ -256,12 +256,12 @@ The project is a small build order tool. You give it a list of pairs, where each
 
 The tool uses the directed graph from this day. Each prerequisite points to the tasks that depend on it, and the topological order from Kahn's algorithm gives the build sequence.
 
-Suggested repo name: `100-days-software-day-48-graphs`. Copy the Day 47 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-48-graphs`. Copy the Episode 47 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-48-graphs/
+100-episodes-software-day-48-graphs/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -601,7 +601,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 47 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 47 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python build_demo.py` and confirm the output matches the order you worked out by hand.
 3. Add a `shortest_path(self, start, goal)` method to `Graph` that uses the `bfs` distances and walks backward from the goal. Keep a parent dictionary during BFS, and return the list of vertices on one shortest path, or `None` if the goal is unreachable. Add tests for a reachable goal, an unreachable goal and the start equal to the goal.
 4. Extend `build_order` so that a task with a missing prerequisite is still handled. Decide whether the missing prerequisite should become a vertex, and write a test that states your choice.
@@ -672,4 +672,4 @@ This project is light on new theory and heavy on the difference between a graph 
 
 ## Tomorrow
 
-Day 49 covers sorting. You have now used sorting several times without building one, including the sorted lists in the top-k checks and the tests that compare results to `sorted`. Day 49 builds merge sort, quicksort and heap sort, compares their complexity, and explains stability, which is the property that equal items keep their original order. The recursion pattern from the tree and graph days returns in merge sort, which splits the input in half at each step.
+Episode 49 covers sorting. You have now used sorting several times without building one, including the sorted lists in the top-k checks and the tests that compare results to `sorted`. Episode 49 builds merge sort, quicksort and heap sort, compares their complexity, and explains stability, which is the property that equal items keep their original order. The recursion pattern from the tree and graph days returns in merge sort, which splits the input in half at each step.

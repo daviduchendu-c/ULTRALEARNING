@@ -1,9 +1,9 @@
-# Day 43: Linked Lists
+# Episode 43: Linked Lists
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You should have finished Day 42, be comfortable with classes and `dataclass`, and be willing to draw boxes and arrows on paper. This day is for anyone who has written `node.next = node.next.next` and was not sure what it did.
+**Level:** beginner to intermediate. You should have finished Episode 42, be comfortable with classes and `dataclass`, and be willing to draw boxes and arrows on paper. This day is for anyone who has written `node.next = node.next.next` and was not sure what it did.
 
 **By the end of this day, you will have:**
 
@@ -11,19 +11,19 @@
 - A doubly linked list where you can remove a node in O(1) when you already hold a reference to it
 - The pointer-reasoning habit: drawing the before and after state of every pointer change
 - A browser history built on a doubly linked list, with back, forward and visit
-- The repository from Day 42 extended with new modules and tests that pass in GitHub Actions
+- The repository from Episode 42 extended with new modules and tests that pass in GitHub Actions
 
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 42
+- Git 2.23 or newer, and the repository from Episode 42
 - Paper and a pencil for drawing pointers, which is more useful here than any tool
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 41: Complexity Analysis, especially the operation counting habit
-- Day 42: Arrays and Strings, especially the difference between indexing and traversal
+- Episode 41: Complexity Analysis, especially the operation counting habit
+- Episode 42: Arrays and Strings, especially the difference between indexing and traversal
 - Module 3: Python classes, `dataclass` and generators with `yield`
 
 ---
@@ -159,7 +159,7 @@ The limitation is memory overhead and cache behavior. Each node is a separate ob
 
 The common mistake is to forget to update `tail` in the same operation that changes the last node. If you delete the last node and leave `tail` pointing at it, the next `append` attaches a new node to a node that is no longer in the list, and the value silently disappears. The method `delete` below handles that case explicitly.
 
-Singly linked lists show up as the chains of buckets inside hash tables, where each slot holds the entries that collided. Day 45 uses them for that purpose.
+Singly linked lists show up as the chains of buckets inside hash tables, where each slot holds the entries that collided. Episode 45 uses them for that purpose.
 
 ### Doubly linked lists
 
@@ -288,7 +288,7 @@ Pointer reasoning is used when engineers debug cache eviction code, implement co
 
 ## Hands-on exercises
 
-Work in the repository from Day 42. Keep a sheet of paper next to you for the drawings.
+Work in the repository from Episode 42. Keep a sheet of paper next to you for the drawings.
 
 Exercise 1 draws a list. Create a singly linked list with the values 10, 20 and 30 by hand. Draw the nodes and arrows. Then draw the state after `push_front(5)`, after `pop_front()` and after `delete_by_value(20)`. Compare each drawing with the code output.
 
@@ -318,12 +318,12 @@ The project is a `BrowserHistory` class that stores visited pages in a doubly li
 
 This is a real use case. The back and forward buttons in a browser behave the same way, and the forward history is cut off when you open a new page from an older one.
 
-Suggested repo name: `100-days-software-day-43-linked-lists`. Copy the Day 42 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-43-linked-lists`. Copy the Episode 42 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-43-linked-lists/
+100-episodes-software-day-43-linked-lists/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -694,7 +694,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 42 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 42 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Draw the list state for `BrowserHistory` through this sequence: start at "home", visit "a", visit "b", back 2, visit "c". Check the drawing against `history.forward()`, which should stay on "c".
 3. Add a method `history_list(self) -> list[str]` to `BrowserHistory` that returns every page in order, from the first visited to the last. Add a test that checks it after a visit that truncates forward history.
 4. Write `docs/linked-list-notes.md` with three sections: why `remove` takes a node, why `visit` is O(k) for k discarded pages with an amortized argument, and what a singly linked list would cost for `back`.
@@ -761,4 +761,4 @@ This project is light on new theory and heavy on pointer care. The browser histo
 
 ## Tomorrow
 
-Day 44 covers stacks and queues. A stack is a last-in, first-out structure, and a queue is first-in, first-out, and both are often built on top of the linked lists from today. You will build a stack and a queue, see how a deque handles both ends, and use a monotonic stack to answer "next greater element" questions in O(n). The pointer habit from today will help you check that a queue's head and tail stay consistent.
+Episode 44 covers stacks and queues. A stack is a last-in, first-out structure, and a queue is first-in, first-out, and both are often built on top of the linked lists from today. You will build a stack and a queue, see how a deque handles both ends, and use a monotonic stack to answer "next greater element" questions in O(n). The pointer habit from today will help you check that a queue's head and tail stay consistent.

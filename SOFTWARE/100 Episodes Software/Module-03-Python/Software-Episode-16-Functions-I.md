@@ -1,9 +1,9 @@
-# Day 16: Functions I
+# Episode 16: Functions I
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You can write branches and loops from Day 15 and you understand references from Day 10. This is for anyone who has pasted the same block of code three times, or who has passed the wrong value into a function and got an answer that looked plausible.
+**Level:** beginner to intermediate. You can write branches and loops from Episode 15 and you understand references from Episode 10. This is for anyone who has pasted the same block of code three times, or who has passed the wrong value into a function and got an answer that looked plausible.
 
 **By the end of this day, you will have:**
 
@@ -17,16 +17,16 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (scripts, `__name__`, indentation)
-- Day 10: Objects, Variables and Types (names, references, mutable defaults)
-- Day 15: Control Flow (branches and loops inside functions)
+- Episode 9: Python Runtime and Syntax (scripts, `__name__`, indentation)
+- Episode 10: Objects, Variables and Types (names, references, mutable defaults)
+- Episode 15: Control Flow (branches and loops inside functions)
 
 ---
 
@@ -122,13 +122,13 @@ print(make_label(prefix="drink", name="tea"))   # drink: tea
 
 The second call uses positional matching for `prefix`. The third skips `prefix` and names `sep`, which is clearer when a function has several defaults.
 
-The common mistake is a default that holds a mutable object, such as `def add(item, items=[])`. The default list is created once, when the function is defined. Every call that omits `items` shares it, so items accumulate across calls. Use `None` as the default and create the list inside the function. Day 10 covered this trap, and it returns here because it is one of the most frequent interview questions about functions. Another common mistake is forgetting that `print(make_label(prefix="drink", name="tea"))` works only because the keyword names match the parameters exactly.
+The common mistake is a default that holds a mutable object, such as `def add(item, items=[])`. The default list is created once, when the function is defined. Every call that omits `items` shares it, so items accumulate across calls. Use `None` as the default and create the list inside the function. Episode 10 covered this trap, and it returns here because it is one of the most frequent interview questions about functions. Another common mistake is forgetting that `print(make_label(prefix="drink", name="tea"))` works only because the keyword names match the parameters exactly.
 
 ### Return
 
 `return` sends a value back to the caller and ends the function. Think of a service counter, where the clerk takes your form, processes it, and hands you a receipt. The receipt is the return value, and the counter closes for that transaction when the receipt is handed over.
 
-From first principles, when Python reaches `return value`, it evaluates the expression, leaves the function, and gives the value to the caller. If the function reaches its end without a `return`, the result is `None`. A bare `return` also gives `None`. A function can return several values by separating them with commas. Python packs them into a tuple, and the caller can unpack the tuple on Day 13's pattern.
+From first principles, when Python reaches `return value`, it evaluates the expression, leaves the function, and gives the value to the caller. If the function reaches its end without a `return`, the result is `None`. A bare `return` also gives `None`. A function can return several values by separating them with commas. Python packs them into a tuple, and the caller can unpack the tuple on Episode 13's pattern.
 
 ```python
 def split_total(total: float, parts: int) -> tuple[float, float]:
@@ -255,7 +255,7 @@ print(area("3", 4))           # prints 3333: str * int repeats the string
 
 The second call shows the limit. Python runs the function without complaint and returns the string `'3333'`, where the annotation promised a float, because annotations are not checked at runtime. Mypy would flag the call before the program runs.
 
-The common mistake is believing that annotations make the code safe. They make intent visible and let a checker find problems, but they do not validate input from users or files. Validate external data explicitly, as you did with `ValueError` in Day 11. A second mistake is annotating with `float` when `int` is also allowed. Python's numeric tower treats `int` as acceptable where `float` is expected, so `float` is the correct annotation for a value that may be an integer. In the job market, typed codebases use mypy or pyright in continuous integration, and a function without annotations is harder to review.
+The common mistake is believing that annotations make the code safe. They make intent visible and let a checker find problems, but they do not validate input from users or files. Validate external data explicitly, as you did with `ValueError` in Episode 11. A second mistake is annotating with `float` when `int` is also allowed. Python's numeric tower treats `int` as acceptable where `float` is expected, so `float` is the correct annotation for a value that may be an integer. In the job market, typed codebases use mypy or pyright in continuous integration, and a function without annotations is harder to review.
 
 ---
 
@@ -309,12 +309,12 @@ Done when `help` shows your docstring and mypy reports the error on the bad call
 
 The project is a small calculations module with documented functions, type annotations, and tests that check parameter binding, returns, defaults, and scope. The functions are simple. Their contracts are precise, and the tests make the contracts visible. The evidence is the passing test suite and a findings document that shows the `help` output and the mypy result.
 
-Suggested repo name: `100-days-software-day-16-functions-i`.
+Suggested repo name: `100-episodes-software-day-16-functions-i`.
 
 Repo layout:
 
 ```
-100-days-software-day-16-functions-i/
+100-episodes-software-day-16-functions-i/
 ├── .gitignore
 ├── README.md
 ├── calculations.py
@@ -527,6 +527,6 @@ The module is light on new syntax and heavy on contracts. A reviewer should be a
 
 ## Tomorrow
 
-Day 17 extends functions in three directions. You will use default values more carefully, collect variable numbers of arguments with `*args` and `**kwargs`, require some parameters to be keyword-only or positional-only, and see how functions become values that can be passed around. You will meet closures, which keep a value alive after the function that created it returns, and lambda expressions, which are small anonymous functions. Day 16's scope rules are what make closures work.
+Episode 17 extends functions in three directions. You will use default values more carefully, collect variable numbers of arguments with `*args` and `**kwargs`, require some parameters to be keyword-only or positional-only, and see how functions become values that can be passed around. You will meet closures, which keep a value alive after the function that created it returns, and lambda expressions, which are small anonymous functions. Episode 16's scope rules are what make closures work.
 
-**Next:** [Day 17: Functions II](Software-Day-17-Functions-II.md)
+**Next:** [Episode 17: Functions II](Software-Episode-17-Functions-II.md)

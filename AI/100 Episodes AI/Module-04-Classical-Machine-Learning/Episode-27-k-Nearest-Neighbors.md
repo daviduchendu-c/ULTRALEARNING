@@ -1,9 +1,9 @@
-# Day 27: k-Nearest Neighbors
+# Episode 27: k-Nearest Neighbors
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You need Day 8 (vectors and norms) and Day 24 (splits and cross-validation). The model is easy to run, so the time goes to the choices around it.
+**Level:** beginner to intermediate. You need Episode 8 (vectors and norms) and Episode 24 (splits and cross-validation). The model is easy to run, so the time goes to the choices around it.
 
 **By the end of this day, you will have:**
 
@@ -24,9 +24,9 @@
 
 **Prerequisites:**
 
-- Day 8: vectors, the dot product and the Euclidean norm
-- Day 24: train, validation and test splits, and cross-validation
-- Day 25 or Day 26: the idea of a model that maps features to a prediction
+- Episode 8: vectors, the dot product and the Euclidean norm
+- Episode 24: train, validation and test splits, and cross-validation
+- Episode 25 or Episode 26: the idea of a model that maps features to a prediction
 - Comfort with NumPy broadcasting, since the distance computation depends on it
 
 ---
@@ -85,7 +85,7 @@ On the job, nearest-neighbor search is used for recommendations, duplicate detec
 - **Neighborhood**: the set of k training points closest to a query.
 - **Majority vote**: a classification rule that picks the most common label among the neighbors.
 - **Feature scaling**: transforming features so they have comparable ranges, such as standardization to zero mean and unit variance.
-- **Curse of dimensionality**: the effect in which distances become less informative as the number of features grows, covered in detail on Day 33.
+- **Curse of dimensionality**: the effect in which distances become less informative as the number of features grows, covered in detail on Episode 33.
 
 ---
 
@@ -136,7 +136,7 @@ The mistake is ignoring the cost of prediction. A million training rows with fif
 
 A small k is like asking the one closest friend. The answer is detailed but noisy, because one friend may have an unusual taste. A large k is like polling the whole street. The answer is stable but may ignore local differences that matter. The best k is somewhere in between, and you find it by measurement.
 
-From first principles, k controls the bias and variance trade-off from Day 24. At `k = 1`, the training error is zero, because each training point is its own nearest neighbor, which is a clear sign of overfitting. As k grows, the decision boundary becomes smoother and the variance falls, but the model may start to underfit when k approaches the size of a class. Choose k on a validation set or with cross-validation, and prefer an odd value for binary problems to avoid ties.
+From first principles, k controls the bias and variance trade-off from Episode 24. At `k = 1`, the training error is zero, because each training point is its own nearest neighbor, which is a clear sign of overfitting. As k grows, the decision boundary becomes smoother and the variance falls, but the model may start to underfit when k approaches the size of a class. Choose k on a validation set or with cross-validation, and prefer an odd value for binary problems to avoid ties.
 
 ```python
 import numpy as np
@@ -159,7 +159,7 @@ The mistake is choosing k by looking at training accuracy, which is always best 
 
 Suppose you measure people by height in centimeters and by income in dollars. Income differences of thousands dwarf height differences of tens of centimeters. A distance computed on the raw values is almost entirely about income, and the height information is ignored. The effect is large, and it can reverse the predictions.
 
-From first principles, Euclidean distance adds squared differences across features, so a feature with a large numeric range dominates the sum. Standardizing each feature to zero mean and unit variance puts the features on a comparable scale, so each contributes according to its pattern rather than its units. Scaling must be fitted on the training part only and applied to the other parts, as you practiced on Day 24, because the mean and standard deviation are statistics of the data.
+From first principles, Euclidean distance adds squared differences across features, so a feature with a large numeric range dominates the sum. Standardizing each feature to zero mean and unit variance puts the features on a comparable scale, so each contributes according to its pattern rather than its units. Scaling must be fitted on the training part only and applied to the other parts, as you practiced on Episode 24, because the mean and standard deviation are statistics of the data.
 
 ```python
 import numpy as np
@@ -220,14 +220,14 @@ The mistake is treating the regressor as if it extrapolates. A neighbor method c
 
 This is a medium-weight project. The algorithm is short, so the deliverable is a careful study of how scaling, metric and k change predictions, with tests that guard the implementation.
 
-**Repo name:** `100-days-ai-engineering-day-27-k-nearest-neighbors`
+**Repo name:** `100-episodes-ai-engineering-day-27-k-nearest-neighbors`
 
 **Goal:** implement a kNN classifier from scratch, check it against scikit-learn, and report how scaling and the choice of k change cross-validated accuracy on a real dataset.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-27-k-nearest-neighbors/
+100-episodes-ai-engineering-day-27-k-nearest-neighbors/
 ├── README.md
 ├── requirements.txt
 ├── knn.py
@@ -348,7 +348,7 @@ def test_matches_scikit_learn_on_blobs():
 4. The regressor returns a value close to the nearest training values, which is usually the boundary value of the training range. A linear model would extend the fitted line, which may or may not be right, but it is a principled guess rather than a copy of the boundary.
 5. Each prediction computes the distance to every stored point, so the work grows with the number of rows. A k-d tree, a ball tree, or an approximate index such as HNSW reduces the number of distances computed per query.
 6. The scaler learns the mean and variance from the rows that will later be used for testing, so the test statistics influence the training features. A pipeline refits the scaler inside each fold, so the held-out rows never contribute to the fitted statistics.
-7. In high dimensions, most points become roughly equally far from each other, so the nearest and the farthest neighbors are not very different in distance. A linear model is less affected because it sums weighted features instead of relying on distances. With 500 features, I would first try dimensionality reduction such as PCA from Day 33, or a model that does not rely on distance, and compare them with kNN on validation data.
+7. In high dimensions, most points become roughly equally far from each other, so the nearest and the farthest neighbors are not very different in distance. A linear model is less affected because it sums weighted features instead of relying on distances. With 500 features, I would first try dimensionality reduction such as PCA from Episode 33, or a model that does not rely on distance, and compare them with kNN on validation data.
 
 ---
 
@@ -383,4 +383,4 @@ def test_matches_scikit_learn_on_blobs():
 
 Tomorrow you bring in probability directly. Naive Bayes classifies a row by combining the evidence from each feature with Bayes' theorem, using an independence assumption that is almost never true and works surprisingly well anyway. You will compute posterior probabilities by hand, see why the assumption is wrong, and apply the model to text classification, where it is still a strong baseline.
 
-**Next:** [Day 28: Naive Bayes](Day-28-Naive-Bayes.md)
+**Next:** [Episode 28: Naive Bayes](Episode-28-Naive-Bayes.md)

@@ -1,9 +1,9 @@
-# Day 8: GitHub Workflow
+# Episode 8: GitHub Workflow
 
-*100 Days of Software Engineering, Module 2: Git and Collaboration*
+*100 Episodes of Software Engineering, Module 2: Git and Collaboration*
 
 **Time:** about 3 to 4 hours
-**Level:** beginner to intermediate. You should have completed Days 6 and 7 and have a local repo with commits and branches. Some of the work is in a web browser, so you need a GitHub account.
+**Level:** beginner to intermediate. You should have completed Episodes 6 and 7 and have a local repo with commits and branches. Some of the work is in a web browser, so you need a GitHub account.
 
 **By the end of this day, you will have:**
 
@@ -18,12 +18,12 @@
 - A GitHub account (free). Public repositories are free, and the free plan includes unlimited public repos.
 - Authentication for Git over HTTPS. GitHub no longer accepts your account password for Git operations. Git for Windows includes Git Credential Manager, which asks for a sign-in the first time you push. Ubuntu users can use the same approach through `git-credential-manager` or an SSH key.
 - Optional: the GitHub CLI (`gh`) from cli.github.com. The lesson uses the website and plain Git, so `gh` is not required.
-- The todo CLI repo from Day 7, or a new folder for this lesson
+- The todo CLI repo from Episode 7, or a new folder for this lesson
 
 **Prerequisites:**
 
-- Day 6: Git Mental Model (commits, hashes, `git log`, `git diff`, `.gitignore`)
-- Day 7: Branches and Merging (branches, merge, rebase, `git reflog`)
+- Episode 6: Git Mental Model (commits, hashes, `git log`, `git diff`, `.gitignore`)
+- Episode 7: Branches and Merging (branches, merge, rebase, `git reflog`)
 
 ---
 
@@ -51,7 +51,7 @@
 
 Git stores history on your machine. GitHub is where that history is shared, discussed and released. A team uses it to decide what to work on (issues), propose a change (pull requests), check each other's work (code review), explain the project to a stranger (the README), and publish a version that people can install (releases). Many software teams run their daily work through these features, and a public GitHub profile with a well-kept project is a proof of skill that an employer can check.
 
-Today you learn the mechanics that connect a local repo to the shared one, and the workflow that teams build on top of them. The Git commands are the same as on Day 6 and Day 7. The new skill is knowing which change belongs in which place: a bug report in an issue, the code change in a branch, the explanation in the README, and the version in a tag.
+Today you learn the mechanics that connect a local repo to the shared one, and the workflow that teams build on top of them. The Git commands are the same as on Episode 6 and Episode 7. The new skill is knowing which change belongs in which place: a bug report in an issue, the code change in a branch, the explanation in the README, and the version in a tag.
 
 [GitHub Docs](https://docs.github.com) is the official reference for every feature in this lesson. [Wikipedia: Code review](https://en.wikipedia.org/wiki/Code_review) explains why teams review changes at all.
 
@@ -80,7 +80,7 @@ A remote is a bookmark that points at another repository. Your local repo can ha
 
 ```bash
 git remote -v
-git remote add origin https://github.com/<your-user>/100-days-software-day-08-github-workflow.git
+git remote add origin https://github.com/<your-user>/100-episodes-software-day-08-github-workflow.git
 git remote -v
 ```
 
@@ -88,7 +88,7 @@ The first `git remote -v` prints nothing for a fresh repo. After `git remote add
 
 The URL can be HTTPS, which works with a token-based sign-in, or SSH, which uses a key pair. HTTPS is simpler at first. Both forms appear on the repository's green "Code" button on GitHub, and you can switch between them with `git remote set-url origin <new-url>`.
 
-The common mistake is pointing `origin` at the wrong repository, such as a fork you did not intend to push to. Check `git remote -v` before the first push. A second mistake is assuming a remote is a backup. It is a shared copy, and a force push there can erase other people's commits. Day 7 explains why.
+The common mistake is pointing `origin` at the wrong repository, such as a fork you did not intend to push to. Check `git remote -v` before the first push. A second mistake is assuming a remote is a backup. It is a shared copy, and a force push there can erase other people's commits. Episode 7 explains why.
 
 ---
 
@@ -97,8 +97,8 @@ The common mistake is pointing `origin` at the wrong repository, such as a fork 
 Cloning creates a new local folder that holds the full repository, including every branch and every commit, and it sets `origin` for you. It is the first thing you do when you join a project.
 
 ```bash
-git clone https://github.com/<your-user>/100-days-software-day-08-github-workflow.git
-cd 100-days-software-day-08-github-workflow
+git clone https://github.com/<your-user>/100-episodes-software-day-08-github-workflow.git
+cd 100-episodes-software-day-08-github-workflow
 git status -sb
 ```
 
@@ -124,7 +124,7 @@ git push -u origin feature/add-done-marker
 
 The `-u` flag (short for `--set-upstream`) records that the local branch tracks `origin/feature/add-done-marker`. After that, `git push` and `git pull` work without arguments. Without upstream tracking, Git stops and prints the exact command to run, which is a useful hint.
 
-Fetch and pull are separate on purpose. `git fetch` downloads remote commits and updates the remote-tracking branches such as `origin/main`, but it does not change your branches. `git pull` does a fetch and then integrates the result. Many teams run `git pull --rebase` to keep history straight, as in Day 7, and set it as the default with `git config --global pull.rebase true`.
+Fetch and pull are separate on purpose. `git fetch` downloads remote commits and updates the remote-tracking branches such as `origin/main`, but it does not change your branches. `git pull` does a fetch and then integrates the result. Many teams run `git pull --rebase` to keep history straight, as in Episode 7, and set it as the default with `git config --global pull.rebase true`.
 
 Here is a real case, tested with a second clone of the same remote. Your local `main` and the remote `main` each have one new commit:
 
@@ -278,8 +278,8 @@ Done when `git status -sb` in `git-practice` shows `## main...origin/main` with 
 
 Exercise 2 creates a GitHub repo and pushes to it.
 
-1. On GitHub, create a new public repository named `100-days-software-day-08-github-workflow`. Do not add a README, license or `.gitignore`, since your local repo already has content.
-2. Copy the HTTPS URL from the Code button, then run `git remote add origin <url>` in your Day 7 todo repo, or in a new repo you create for this lesson.
+1. On GitHub, create a new public repository named `100-episodes-software-day-08-github-workflow`. Do not add a README, license or `.gitignore`, since your local repo already has content.
+2. Copy the HTTPS URL from the Code button, then run `git remote add origin <url>` in your Episode 7 todo repo, or in a new repo you create for this lesson.
 3. Run `git push -u origin main`. Authenticate when Git Credential Manager asks.
 4. Refresh the repo page and confirm your commits are listed.
 
@@ -315,14 +315,14 @@ Done when the release page shows `v0.1.0` with your notes.
 
 ## Project: publish the todo CLI with issues, a reviewed pull request and a release
 
-The project takes the todo CLI from Day 7 and publishes it the way a team would. You will open issues, use a pull request to fix one, write the README, add a continuous integration check, and publish version `0.1.0`. The code is the same small program. The evidence is the workflow.
+The project takes the todo CLI from Episode 7 and publishes it the way a team would. You will open issues, use a pull request to fix one, write the README, add a continuous integration check, and publish version `0.1.0`. The code is the same small program. The evidence is the workflow.
 
-Suggested repo name: `100-days-software-day-08-github-workflow`.
+Suggested repo name: `100-episodes-software-day-08-github-workflow`.
 
 The repo layout:
 
 ```
-100-days-software-day-08-github-workflow/
+100-episodes-software-day-08-github-workflow/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -359,7 +359,7 @@ GitHub Actions runs this file on every push and pull request. It is free for pub
 
 Step-by-step tasks:
 
-1. Copy `todo.py`, `tests/__init__.py` and `tests/test_todo.py` from Day 7 into the new folder, add the `.gitignore` from Day 7 (including `__pycache__/` and `todos.txt`), and create an empty `CHANGELOG.md`. Commit with a clear message.
+1. Copy `todo.py`, `tests/__init__.py` and `tests/test_todo.py` from Episode 7 into the new folder, add the `.gitignore` from Episode 7 (including `__pycache__/` and `todos.txt`), and create an empty `CHANGELOG.md`. Commit with a clear message.
 2. Create the GitHub repo, push `main`, and confirm the commit list on GitHub.
 3. Add `ci.yml` in a branch named `ci/add-workflow`. Commit, push, and open a pull request. Wait for the CI check and confirm it passes on the Actions tab. Merge the PR.
 4. Open issue 1: "Mark tasks as done". Open issue 2: "Document the commands in the README". These are the two issues you will fix.
@@ -446,4 +446,4 @@ The code takes an hour to write. The workflow is the part a reviewer looks at: a
 
 ## Tomorrow
 
-Day 9 starts Module 3, Python (Deep Foundation), with the Python runtime and syntax. The Git and GitHub habits from this module carry over directly, because every later day builds on a repo with a README, issues, pull requests and tags. Keep the todo CLI repo, because later days return to it.
+Episode 9 starts Module 3, Python (Deep Foundation), with the Python runtime and syntax. The Git and GitHub habits from this module carry over directly, because every later day builds on a repo with a README, issues, pull requests and tags. Keep the todo CLI repo, because later days return to it.

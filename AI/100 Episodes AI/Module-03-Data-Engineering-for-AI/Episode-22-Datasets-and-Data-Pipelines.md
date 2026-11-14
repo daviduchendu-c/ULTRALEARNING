@@ -1,9 +1,9 @@
-# Day 22: Datasets and Data Pipelines
+# Episode 22: Datasets and Data Pipelines
 
-*100 Days of AI Engineering, Module 3: Data Engineering for AI*
+*100 Episodes of AI Engineering, Module 3: Data Engineering for AI*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have built cleaning and feature code in Days 19 to 21. Today the question changes from "is this transformation right?" to "will it stay right when the data changes, when it runs again, and when it runs in production?"
+**Level:** intermediate. You have built cleaning and feature code in Episodes 19 to 21. Today the question changes from "is this transformation right?" to "will it stay right when the data changes, when it runs again, and when it runs in production?"
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 18: pandas filtering and reading and writing CSV
-- Day 19: train, validation and test splits and the leakage rules
-- Day 21: the feature pipeline and the fact that fitted transformers must be reused unchanged
+- Episode 18: pandas filtering and reading and writing CSV
+- Episode 19: train, validation and test splits and the leakage rules
+- Episode 21: the feature pipeline and the fact that fitted transformers must be reused unchanged
 
 ---
 
@@ -257,7 +257,7 @@ print(np.allclose(build_features(batch).iloc[[0]].to_numpy(),
                   build_features(single).to_numpy()))   # True
 ```
 
-The common mistake is for the serving path to receive integers where training saw floats, or a missing field where training filled a default. Both change the result. A second source of skew is time: a feature that uses "the last 30 days" computed at training time must be computed at the same point in time at serving. Feature stores solve this by recording the timestamp of each feature value. The honest limitation is that a shared function does not protect you from a change in the source data. It protects you from a change in the code only. Monitor the distribution of features in production, as you learned in Day 20, to catch the rest.
+The common mistake is for the serving path to receive integers where training saw floats, or a missing field where training filled a default. Both change the result. A second source of skew is time: a feature that uses "the last 30 days" computed at training time must be computed at the same point in time at serving. Feature stores solve this by recording the timestamp of each feature value. The honest limitation is that a shared function does not protect you from a change in the source data. It protects you from a change in the code only. Monitor the distribution of features in production, as you learned in Episode 20, to catch the rest.
 
 ---
 
@@ -281,12 +281,12 @@ Work through these in a notebook first, then move them into the project.
 
 Build a small package that does five things reproducibly: writes a dataset in a fixed format, creates a manifest with its content hash, splits the rows by a stable key, yields shuffled mini-batches with a seed per epoch, and computes features with one function that both training and serving call. The tests check each property, including the ones that break most often.
 
-Suggested repository name: `100-days-ai-day-22-datapipe`
+Suggested repository name: `100-episodes-ai-day-22-datapipe`
 
 ### Repo layout
 
 ```text
-100-days-ai-day-22-datapipe/
+100-episodes-ai-day-22-datapipe/
 ├── README.md
 ├── datapipe/
 │   ├── __init__.py
@@ -316,7 +316,7 @@ pytest>=8.0
 
 `datapipe/__init__.py`: leave it empty.
 
-`datapipe/generate.py`: copy the `make_subscriptions` function from your Day 21 repository, or use this short version, which keeps the columns the features need.
+`datapipe/generate.py`: copy the `make_subscriptions` function from your Episode 21 repository, or use this short version, which keeps the columns the features need.
 
 ```python
 import numpy as np
@@ -627,4 +627,4 @@ Work each answer out in writing before you read the answers below.
 
 ## Tomorrow
 
-Tomorrow is the data project. Everything from Days 17 to 22 comes together on one messy dataset. You will clean it, explore it, engineer the features, split it reproducibly and write down every assumption you made. Day 23 is where you practice the discipline of this module on a dataset you did not design, so the stable split and the shared feature function you built today will be the first things you reach for.
+Tomorrow is the data project. Everything from Episodes 17 to 22 comes together on one messy dataset. You will clean it, explore it, engineer the features, split it reproducibly and write down every assumption you made. Episode 23 is where you practice the discipline of this module on a dataset you did not design, so the stable split and the shared feature function you built today will be the first things you reach for.

@@ -1,9 +1,9 @@
-# Day 5: First Robot System Design
+# Episode 5: First Robot System Design
 
-*100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
+*100 Episodes of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 5 hours
-**Level:** intermediate. For learners who have finished Days 1 to 4 and are comfortable with Git, Markdown and basic Python. No hardware is needed.
+**Level:** intermediate. For learners who have finished Episodes 1 to 4 and are comfortable with Git, Markdown and basic Python. No hardware is needed.
 
 **By the end of this day, you will have:**
 
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 2: Anatomy of a Robot. You reuse its architecture and block diagrams.
-- Day 3: Robotics Engineering Workflow. You reuse its requirements, its stopping-distance method and its template repository.
-- Day 4: Measurement and Engineering Tools. You reuse its datasheet reading and bench-test habits, including the stall test.
+- Episode 2: Anatomy of a Robot. You reuse its architecture and block diagrams.
+- Episode 3: Robotics Engineering Workflow. You reuse its requirements, its stopping-distance method and its template repository.
+- Episode 4: Measurement and Engineering Tools. You reuse its datasheet reading and bench-test habits, including the stall test.
 - Basic Python and Markdown
 
 ---
@@ -57,7 +57,7 @@ Module 1 leads here. A paper design shows, at the cost of a pencil, that your mo
 
 Robotics teams run design reviews on documents like this before anyone orders hardware. A design in a public repo, with numbers and recorded trade-offs, is strong portfolio evidence. It shows that you can make decisions with numbers instead of following a kit's instructions.
 
-Today you walk through a reference design, the **desk courier** from Day 3, decision by decision. Then you produce your own, either for the courier or for a robot of your choice.
+Today you walk through a reference design, the **desk courier** from Episode 3, decision by decision. Then you produce your own, either for the courier or for a robot of your choice.
 
 ---
 
@@ -92,7 +92,7 @@ Think of the brief you give a builder before they pour a foundation. Every later
 
 From first principles, a design is a set of choices, and a choice is only good or bad relative to something. Requirements are that something. Each gets an ID, a number and a way to verify it, so a reviewer can point at "R4" and ask whether you met it.
 
-A requirement is a testable statement of what the robot must do or be, written before you pick parts. These are the Day 3 requirements plus three found during design. R7 is a learning goal. Writing it down matters, because it changes decisions.
+A requirement is a testable statement of what the robot must do or be, written before you pick parts. These are the Episode 3 requirements plus three found during design. R7 is a learning goal. Writing it down matters, because it changes decisions.
 
 | ID | Requirement | Specification |
 |---|---|---|
@@ -169,7 +169,7 @@ That is above the 118 rpm needed, so firmware can cap the speed at 0.4 m/s and s
 
 Candidates are the JGA25-370 family of 25 mm gearmotors with Hall encoders (sold by many suppliers in 6 V and 12 V versions with many gear ratios), or Pololu's 25D metal gearmotors with encoders, which are better documented and cost more. Read the actual listing's rated voltage, rpm, stall torque and stall current, because they vary widely between gear ratios.
 
-The motor driver is sized from current. The Day 4 stall test estimated about 1.8 A at full voltage for a motor this size. The TB6612FNG's 1.2 A continuous rating is too close. The decision is the Cytron MDD3A (two channels, 3 A continuous each), with the TB6612FNG as a cheaper fallback only if bench tests show a stall current under about 1 A.
+The motor driver is sized from current. The Episode 4 stall test estimated about 1.8 A at full voltage for a motor this size. The TB6612FNG's 1.2 A continuous rating is too close. The decision is the Cytron MDD3A (two channels, 3 A continuous each), with the TB6612FNG as a cheaper fallback only if bench tests show a stall current under about 1 A.
 
 The common mistakes are taking torque from a seller's headline without the voltage it was measured at, forgetting the ramp, and using the no-load rpm as the driving speed. You spot them by asking of every motor number: at what voltage, and at what load? The limitation is that rolling resistance on carpet can be several times higher than on hard floors. If the office has thick carpet, rerun the numbers with a higher coefficient. On the job, motor and gearbox sizing is a standard calculation in every mobile robot and AGV design, usually kept in a spreadsheet like the one you build today.
 
@@ -207,13 +207,13 @@ From first principles, each sensor serves a requirement, speaks a particular int
 
 | Sensor | Serves | Choice | Interface |
 |---|---|---|---|
-| Two ToF distance sensors, angled about 20° left and right of forward | R3 | VL53L0X breakouts (up to about 2 m) | I2C, with XSHUT pins to set different addresses (Day 2) |
+| Two ToF distance sensors, angled about 20° left and right of forward | R3 | VL53L0X breakouts (up to about 2 m) | I2C, with XSHUT pins to set different addresses (Episode 2) |
 | Front bump switch | R3, R8 | Lever microswitch behind the front edge | GPIO interrupt |
 | Wheel encoders | R2, R7 (odometry) | Built into the gearmotors | GPIO, counted by the MCU |
 | 6-axis IMU | R7 (better heading) | LSM6DSOX breakout, or an MPU-6050 module (an older part, often sold as clones) | I2C |
 | Battery voltage | R4, R8 | Resistor divider into an ADC pin | ADC |
 
-Is the ToF fast enough? At 0.4 m/s, a sensor that updates at 30 Hz lets the robot move 0.4 / 30 ≈ 13 mm between readings. The stopping distance from Day 3 at 0.4 m/s is v² / (2a) = 0.16 / 1.0 = 0.16 m, plus 0.04 m for 100 ms of reaction time, for 0.20 m in total. Detection at 0.30 m leaves 0.10 m of margin. That is tight, so firmware slows to 0.25 m/s whenever an object is within 0.6 m.
+Is the ToF fast enough? At 0.4 m/s, a sensor that updates at 30 Hz lets the robot move 0.4 / 30 ≈ 13 mm between readings. The stopping distance from Episode 3 at 0.4 m/s is v² / (2a) = 0.16 / 1.0 = 0.16 m, plus 0.04 m for 100 ms of reaction time, for 0.20 m in total. Detection at 0.30 m leaves 0.10 m of margin. That is tight, so firmware slows to 0.25 m/s whenever an object is within 0.6 m.
 
 The limitation is that two narrow ToF beams can miss a thin chair leg between them. The bump switch is the last line of defense. A LiDAR, such as a Slamtec RPLIDAR A1, would close that gap and enable mapping. It is deferred to a later version to protect the budget.
 
@@ -225,7 +225,7 @@ The common mistake is checking that a sensor can see far enough and never checki
 
 A battery pack is a fuel tank, and the power budget is the fuel gauge you work out before the trip. You add up what each load burns, divide the tank by that, and see whether the trip fits.
 
-From first principles, power in watts is what each part draws, and energy in watt-hours is power multiplied by time. The battery must supply the average power for the required hours, with margin, and every wire, fuse and switch must survive the peak. Days 6 and 7 explain the electrical rules behind these numbers.
+From first principles, power in watts is what each part draws, and energy in watt-hours is power multiplied by time. The battery must supply the average power for the required hours, with margin, and every wire, fuse and switch must survive the peak. Episodes 6 and 7 explain the electrical rules behind these numbers.
 
 Power budget:
 
@@ -250,7 +250,7 @@ The Pi 5 is designed for 5 V at up to 5 A. The decision is a 5 V, 5 A buck regul
 
 For protection, fit a 2S protection board (BMS, battery management system) on the pack. Put a 7.5 A blade fuse right after the battery, because the realistic peak is about 6.5 A at 7.4 V (37 W of motors plus 11 W of electronics, divided by 7.4 V). Add a latching power switch rated at least 10 A DC, and use 18 AWG wire on the battery path.
 
-A full 2S pack reads 8.4 V, above the Pico's 3.3 V ADC limit. A divider with 20 kΩ on top and 10 kΩ on the bottom scales 8.4 V to 2.8 V, so firmware can monitor the battery. Days 6 and 7 explain why the divider works.
+A full 2S pack reads 8.4 V, above the Pico's 3.3 V ADC limit. A divider with 20 kΩ on top and 10 kΩ on the bottom scales 8.4 V to 2.8 V, so firmware can monitor the battery. Episodes 6 and 7 explain why the divider works.
 
 The limitation is that a buck regulator needs its input to stay above its output by a margin. When the pack falls toward 6.0 V (3.0 V per cell), the 5 V rail may sag and reset the Pi. Firmware warns at 6.8 V and shuts down cleanly at 6.4 V.
 
@@ -267,7 +267,7 @@ From first principles, every link needs enough rate to carry its data and low en
 | Link | From → to | Physical | Rate | Content |
 |---|---|---|---|---|
 | Phone ⇄ Pi | Phone browser to Pi | Wi-Fi | 10 to 20 Hz | Drive commands, status |
-| Pi ⇄ Pico | Pi to Pico | USB serial, 115,200 baud | 20 Hz down, 50 Hz up | Day 3 interface agreement |
+| Pi ⇄ Pico | Pi to Pico | USB serial, 115,200 baud | 20 Hz down, 50 Hz up | Episode 3 interface agreement |
 | Pico ⇄ sensors | Pico to ToF and IMU | I2C at 400 kHz | 30 to 100 Hz | Distance, acceleration, rotation |
 | Pico → driver | Pico to MDD3A | PWM and direction pins | about 20 kHz PWM | Motor commands |
 | Encoders → Pico | Motors to Pico | GPIO, 3.3 V logic | Continuous | Quadrature pulses |
@@ -384,10 +384,10 @@ Risk register (top five):
 
 | Risk | Likelihood | Impact | Plan |
 |---|---|---|---|
-| Motors weaker than the listing claims | Medium | High | Day 4 bench stall test before buying the second motor |
+| Motors weaker than the listing claims | Medium | High | Episode 4 bench stall test before buying the second motor |
 | Pi resets when motors start (brownout) | Medium | High | Separate 5 V buck, bulk capacitor at the driver, firmware acceleration limit |
 | ToF misses thin chair legs | High | Medium | Bump switch, slow zone at 0.6 m, LiDAR in v2 |
-| Li-ion pack mishandled | Low | Very high | BMS, fuse, proper charger, charging rules from Day 4 |
+| Li-ion pack mishandled | Low | Very high | BMS, fuse, proper charger, charging rules from Episode 4 |
 | BOM over budget | High (already true) | Medium | Decision recorded in the Bill of materials and budget section |
 
 Before you call the design done, check:
@@ -408,7 +408,7 @@ The common mistake is running the review as a formality and ticking boxes withou
 
 1. **Carpet rerun.** Repeat the torque calculation from the Actuators section with a rolling resistance coefficient of 0.08. Check: rolling force 1.57 N, total 4.28 N, 2.14 N per wheel, torque 0.070 N·m, and 0.14 N·m with the safety factor of 2. That is 47 percent of the 0.30 N·m stall spec. It is under stall, but above the one-third guideline. Decide what you would change: a larger motor, a higher-torque gearbox, or a thinner margin you accept and record.
 2. **Runtime with a LiDAR.** Add a 2.5 W LiDAR to the power budget. Recalculate the 2S2P runtime.
-3. **Stopping at top speed.** If you raise top speed to 0.5 m/s, what detection distance do you need with 0.10 m of margin? Use the Day 3 method.
+3. **Stopping at top speed.** If you raise top speed to 0.5 m/s, what detection distance do you need with 0.10 m of margin? Use the Episode 3 method.
 4. **Matrix sensitivity.** Change the R7 weight from 4 to 2 in the Compute decision matrix. Which option wins? Write one sentence on what that means for your choice.
 5. **Datasheet check.** Find a real listing or datasheet for one gearmotor you would buy. Record rated voltage, no-load rpm, stall torque and stall current. Does it meet the spec from the Actuators section?
 
@@ -418,12 +418,12 @@ The common mistake is running the review as a formality and ticking boxes withou
 
 This project is a paper design because the outline asks for one. The evidence of skill is the reasoning: numbers, trade-offs and recorded decisions. Hardware comes later, and this repo becomes the plan you check it against.
 
-Start from the Day 3 template repo, and reuse and update the Day 2 diagrams.
+Start from the Episode 3 template repo, and reuse and update the Episode 2 diagrams.
 
 ### Repository layout
 
 ```
-100-days-robotics-day-05-first-robot-design/
+100-episodes-robotics-day-05-first-robot-design/
 ├── README.md                     # summary, key numbers, diagram, links
 ├── docs/
 │   ├── requirements.md           # R-table with specs and verification
@@ -466,7 +466,7 @@ Expected output: about 3.10 N, 0.101 N·m and 118 rpm.
 
 ### Steps
 
-1. Choose your robot: the desk courier, or your own idea from Day 1 with its own requirements.
+1. Choose your robot: the desk courier, or your own idea from Episode 1 with its own requirements.
 2. Write the requirements first. Commit.
 3. Work through the Mechanics to Software architecture sections in order, one document each, committing after each one.
 4. Build the BOM with price ranges, a target column and the requirement each part serves. Total it and compare it with the budget.
@@ -550,6 +550,6 @@ Evidence to commit: all Markdown documents, `bom.csv`, `power-budget.csv`, the M
 
 ## Tomorrow
 
-Day 6, **Electricity Fundamentals**, is the first day of Module 2: Electronics for Robotics, and it follows the last day of Module 1. Today you used watts, volts, amps and watt-hours without explaining them. Tomorrow covers charge, voltage, current, resistance, power and energy, DC and AC, conductors, and what "ground" means, built around `V = IR` and `P = VI`. Every line of today's power budget is a `P = VI` calculation, and the battery divider is `V = IR` in action. Keep the Day 5 repo open. By the end of Module 2, you will be able to check every electrical number in it yourself.
+Episode 6, **Electricity Fundamentals**, is the first day of Module 2: Electronics for Robotics, and it follows the last day of Module 1. Today you used watts, volts, amps and watt-hours without explaining them. Tomorrow covers charge, voltage, current, resistance, power and energy, DC and AC, conductors, and what "ground" means, built around `V = IR` and `P = VI`. Every line of today's power budget is a `P = VI` calculation, and the battery divider is `V = IR` in action. Keep the Episode 5 repo open. By the end of Module 2, you will be able to check every electrical number in it yourself.
 
-**Next:** [Day 6: Electricity Fundamentals](../Module-02-Electronics-for-Robotics/Robotics-Day-06-Electricity-Fundamentals.md)
+**Next:** [Episode 6: Electricity Fundamentals](../Module-02-Electronics-for-Robotics/Robotics-Episode-06-Electricity-Fundamentals.md)

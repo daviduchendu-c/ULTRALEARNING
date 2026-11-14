@@ -1,6 +1,6 @@
-# Day 24: ML Workflow and Baselines
+# Episode 24: ML Workflow and Baselines
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3 hours
 **Level:** beginner to intermediate. You can write Python functions and load a CSV file. Today is about habits, so the code is short but the reasoning is the point.
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 7: summation notation and the idea of a function
-- Day 8 and Day 9: vectors and matrices at the level of shapes and dot products
+- Episode 7: summation notation and the idea of a function
+- Episode 8 and Episode 9: vectors and matrices at the level of shapes and dot products
 - Module 2 statistics: the mean, the variance and the idea of a random sample
 - Comfort with Python lists, dictionaries and functions
 
@@ -55,7 +55,7 @@
 
 Most machine learning failures in industry come from the workflow around the algorithm. A model is trained on data that already contained the answer, it is scored on the same rows it learned from, or it is compared with nothing at all. The result looks impressive in a notebook and fails in production within a week.
 
-Today you learn the order of operations that avoids those failures. You will define a question, split the data before you look at it too closely, build the simplest model that could possibly work, and only then try anything more complicated. The discipline is more valuable than any single algorithm, and it applies to every model you will meet from Day 25 onward.
+Today you learn the order of operations that avoids those failures. You will define a question, split the data before you look at it too closely, build the simplest model that could possibly work, and only then try anything more complicated. The discipline is more valuable than any single algorithm, and it applies to every model you will meet from Episode 25 onward.
 
 On the job, a data scientist or ML engineer is judged on whether a model beats a sensible baseline on data it has never seen, and whether the team can reproduce that claim next month. Those two things depend on the workflow you practice today.
 
@@ -111,7 +111,7 @@ pred = baseline.predict(X_test)
 print("baseline accuracy:", accuracy_score(y_test, pred))
 ```
 
-If 76 percent of rows belong to class 0, this baseline gets 76 percent accuracy without learning anything. That number is the bar. A model with 78 percent accuracy looks like a small gain, but its precision on the minority class may be worse than the baseline, which is why Day 34 introduces metrics beyond accuracy.
+If 76 percent of rows belong to class 0, this baseline gets 76 percent accuracy without learning anything. That number is the bar. A model with 78 percent accuracy looks like a small gain, but its precision on the minority class may be worse than the baseline, which is why Episode 34 introduces metrics beyond accuracy.
 
 A common mistake is skipping the baseline because the real model "obviously" works. The fix is to write the baseline score in the first line of your report. Another mistake is choosing a weak baseline, such as a model with no features at all, and then claiming a large improvement. Use a baseline that a competent colleague would accept as fair. In the market, teams at companies such as banks and retailers routinely compare a new scorecard to the existing rule-based process, which is the baseline in practice.
 
@@ -143,7 +143,7 @@ In industry, time-based splits are common in fraud detection and demand forecast
 
 Generalization is the question you actually care about. A student who memorized last year's exam answers will do well on last year's paper and poorly on this year's. What matters is performance on the next exam, which is drawn from the same subject but contains new questions.
 
-From first principles, if the training rows and future rows come from the same distribution, then the gap between training error and error on new data measures how much the model has learned that transfers. The gap is the generalization error. Keeping the test set separate is the only reliable way to estimate it, because training error is always optimistic. A model that scores 99 percent on its training rows and 70 percent on validation rows has a large gap, and the fix is usually more data, a simpler model or regularization, which Day 25 introduces.
+From first principles, if the training rows and future rows come from the same distribution, then the gap between training error and error on new data measures how much the model has learned that transfers. The gap is the generalization error. Keeping the test set separate is the only reliable way to estimate it, because training error is always optimistic. A model that scores 99 percent on its training rows and 70 percent on validation rows has a large gap, and the fix is usually more data, a simpler model or regularization, which Episode 25 introduces.
 
 ```python
 from sklearn.metrics import accuracy_score
@@ -247,14 +247,14 @@ Keep a short table of each number. The table is evidence that you followed the w
 
 This is a practical, medium-weight project. The code is short. The main deliverable is a workflow you can rerun from a clean clone, with a report that compares a baseline against a model using cross-validation and a sealed test set.
 
-**Repo name:** `100-days-ai-engineering-day-24-ml-workflow-and-baselines`
+**Repo name:** `100-episodes-ai-engineering-day-24-ml-workflow-and-baselines`
 
 **Goal:** build a reproducible script that splits data, reports baselines, trains one pipeline model with cross-validation, and scores the held-out test set exactly once.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-24-ml-workflow-and-baselines/
+100-episodes-ai-engineering-day-24-ml-workflow-and-baselines/
 ├── README.md
 ├── requirements.txt
 ├── data/
@@ -435,4 +435,4 @@ This project is a good place to practice the discipline. A correct workflow with
 
 Tomorrow you build your first real model: linear regression. You will see the straight-line model as a sum of weighted features, measure its errors with the mean squared error, derive the least-squares solution, and then train it by gradient descent. You will also meet regularization, the first tool you use to reduce the variance you diagnosed today. Bring the baseline table from this project, because tomorrow's model has to beat it.
 
-**Next:** [Day 25: Linear Regression](Day-25-Linear-Regression.md)
+**Next:** [Episode 25: Linear Regression](Episode-25-Linear-Regression.md)

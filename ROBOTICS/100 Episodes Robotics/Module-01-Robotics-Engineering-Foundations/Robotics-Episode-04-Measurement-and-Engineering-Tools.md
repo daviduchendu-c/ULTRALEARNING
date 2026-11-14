@@ -1,6 +1,6 @@
-# Day 4: Measurement and Engineering Tools
+# Episode 4: Measurement and Engineering Tools
 
-*100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
+*100 Episodes of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours (plus shopping time if you buy tools)
 **Level:** beginner. You do not need to own any tools or have used them before. Every exercise has a no-hardware option.
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 1: What Is Robotics?
-- Day 2: Anatomy of a Robot (the motor driver and the hardware layers)
-- Day 3: Robotics Engineering Workflow (test plans with a "Result" column, and the engineering notebook)
+- Episode 1: What Is Robotics?
+- Episode 2: Anatomy of a Robot (the motor driver and the hardware layers)
+- Episode 3: Robotics Engineering Workflow (test plans with a "Result" column, and the engineering notebook)
 
 ---
 
@@ -55,7 +55,7 @@
 
 A robot that "doesn't work" tells you nothing. A motor driver that reads 7.8 V on its supply pin and 0 V on its standby pin tells you exactly what to fix. Measurement turns guessing into engineering.
 
-On Day 3 you wrote test plans with a "Result" column. Today you learn the instruments that fill it in, how to use them without hurting yourself or your parts, and how to read the datasheet that says what the number should be. Test engineers, technicians and firmware engineers are judged on how quickly they find a fault on a bench.
+On Episode 3 you wrote test plans with a "Result" column. Today you learn the instruments that fill it in, how to use them without hurting yourself or your parts, and how to read the datasheet that says what the number should be. Test engineers, technicians and firmware engineers are judged on how quickly they find a fault on a bench.
 
 ---
 
@@ -97,7 +97,7 @@ A digital multimeter measures:
 
 A multimeter is a measurement with a limit built in: it shows an average. A 5 V PWM signal at 25 percent duty reads about 1.25 V, which hides the switching. You need a scope for that.
 
-Take an LED with a 2.0 V forward voltage and a 330 Ω resistor, running from 5 V. The expected current is (5.0 − 2.0) / 330 = 9.1 mA. Put the meter in series on the mA range and read about 9 mA. If you read 0 mA, check each joint with continuity. If you read about 15 mA, measure the resistor, because it may be 200 Ω. (Day 6 covers Ohm's law properly. For now, compare measured with expected.)
+Take an LED with a 2.0 V forward voltage and a 330 Ω resistor, running from 5 V. The expected current is (5.0 − 2.0) / 330 = 9.1 mA. Put the meter in series on the mA range and read about 9 mA. If you read 0 mA, check each joint with continuity. If you read about 15 mA, measure the resistor, because it may be 200 Ω. (Episode 6 covers Ohm's law properly. For now, compare measured with expected.)
 
 The classic mistake is leaving the red lead in the current (A) jack and then measuring a battery's voltage. In current mode the meter is nearly a short circuit, so you blow the meter's fuse, or with a LiPo you create a dangerous short. Move the lead back to V/Ω after every current measurement. Two others are measuring resistance on a powered circuit, which gives a wrong reading and can damage the meter, and trusting a cheap meter's printed "CAT III 1000 V" label. Many cheap meters do not meet the ratings they print. They are fine for robots and not for mains.
 
@@ -116,7 +116,7 @@ Here is a safe gearmotor test.
 1. With nothing connected, set 7.4 V (the battery's nominal voltage) and a 0.5 A limit.
 2. Connect the motor. It spins freely and draws 0.15 A. The supply stays in CV mode.
 3. Grip the wheel to stall it. The supply jumps to CC mode at 0.5 A, and the voltage drops to, say, 2.1 V.
-4. The motor's winding resistance is about 2.1 / 0.5 = 4.2 Ω. At the full 7.4 V, the stall current would be about 7.4 / 4.2 ≈ 1.8 A. That number goes straight into the motor driver choice from Day 2.
+4. The motor's winding resistance is about 2.1 / 0.5 = 4.2 Ω. At the full 7.4 V, the stall current would be about 7.4 / 4.2 ≈ 1.8 A. That number goes straight into the motor driver choice from Episode 2.
 
 The most common mistake is turning the supply on with the current limit at maximum, so the first short circuit destroys the part you are testing. Do not charge lithium batteries from a bench supply either. Use a charger with balancing and cutoff. Also remember that motors push energy back when they slow down, and large motors can push the supply's output above its set voltage.
 
@@ -245,7 +245,7 @@ A typical datasheet has these parts, in roughly this order:
 
 "Typical" values are not guarantees, so design with the minimum or maximum value that hurts most.
 
-Take the TB6612FNG motor driver from Day 2. Open Toshiba's datasheet (search "TB6612FNG datasheet" on toshiba.semicon-storage.com) and find:
+Take the TB6612FNG motor driver from Episode 2. Open Toshiba's datasheet (search "TB6612FNG datasheet" on toshiba.semicon-storage.com) and find:
 
 - Motor supply absolute maximum: 15 V. A 3S LiPo at 12.6 V full charge is close to that, so check the recommended operating range before trusting it.
 - Output current: 1.2 A average and 3.2 A peak per channel. The stall estimate from the bench power supply test (about 1.8 A) exceeds the 1.2 A average. You either limit stall time in firmware or choose a bigger driver.
@@ -271,7 +271,7 @@ The loop:
  6. Record in notebook  ←  5. Compare result  ←  4. Test one change
 ```
 
-The rules: check power first, then ground, then clocks and resets, then signals, then code. Split the system in half and test the middle. Change one thing at a time. Write everything down in the notebook from Day 3.
+The rules: check power first, then ground, then clocks and resets, then signals, then code. Split the system in half and test the middle. Change one thing at a time. Write everything down in the notebook from Episode 3.
 
 Take the fault "the left motor does nothing."
 
@@ -338,10 +338,10 @@ The topic is practical, and buying tools is optional. The project produces evide
 
 ### Repository layout
 
-Repo name: `100-days-robotics-day-04-measurement-tools`
+Repo name: `100-episodes-robotics-day-04-measurement-tools`
 
 ```
-100-days-robotics-day-04-measurement-tools/
+100-episodes-robotics-day-04-measurement-tools/
 ├── README.md
 ├── safety.md                    # your bench rules, adapted from the safety section
 ├── toolkit.csv                  # tools: owned / planned, price, why
@@ -459,6 +459,6 @@ Complete the debugging case from the exercises, following the six-step loop, and
 
 ## Tomorrow
 
-Day 5, **First Robot System Design**, brings Module 1 together. You will design a complete robot on paper, using the requirements from Day 3, the hardware and software layers from Day 2, and the tools and datasheet habits from today. You will size the motors, battery and regulators with real calculations, and produce a BOM with honest prices. The stall test and datasheet check you learned today are how you will verify those choices once you build.
+Episode 5, **First Robot System Design**, brings Module 1 together. You will design a complete robot on paper, using the requirements from Episode 3, the hardware and software layers from Episode 2, and the tools and datasheet habits from today. You will size the motors, battery and regulators with real calculations, and produce a BOM with honest prices. The stall test and datasheet check you learned today are how you will verify those choices once you build.
 
-**Next:** [Day 5: First Robot System Design](Robotics-Day-05-First-Robot-System-Design.md)
+**Next:** [Episode 5: First Robot System Design](Robotics-Episode-05-First-Robot-System-Design.md)

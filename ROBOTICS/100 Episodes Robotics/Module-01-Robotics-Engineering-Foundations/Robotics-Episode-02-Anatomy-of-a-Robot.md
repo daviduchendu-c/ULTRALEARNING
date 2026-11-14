@@ -1,9 +1,9 @@
-# Day 2: Anatomy of a Robot
+# Episode 2: Anatomy of a Robot
 
-*100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
+*100 Episodes of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours
-**Level:** beginner. No electronics knowledge is needed. You should be comfortable with Day 1's loop and with basic arithmetic, because most of today's work is unit-by-unit calculation.
+**Level:** beginner. No electronics knowledge is needed. You should be comfortable with Episode 1's loop and with basic arithmetic, because most of today's work is unit-by-unit calculation.
 
 **By the end of this day, you will have:**
 
@@ -21,8 +21,8 @@
 
 **Prerequisites:**
 
-- Day 1: What Is Robotics? (the sense, compute, decide and act loop, and open loop versus closed loop)
-- Your five-robot table from Day 1, Exercise 1, if you made it
+- Episode 1: What Is Robotics? (the sense, compute, decide and act loop, and open loop versus closed loop)
+- Your five-robot table from Episode 1, Exercise 1, if you made it
 - No electronics knowledge yet
 
 ---
@@ -75,7 +75,7 @@ Most failures happen at the boundaries between layers. A motor browns out the co
 
 ## The map of a mobile robot
 
-This is Day 1's loop, expanded into the layers you will meet in this series.
+This is Episode 1's loop, expanded into the layers you will meet in this series.
 
 ```
  ┌─────────────────────────── HIGH-LEVEL SOFTWARE (SBC, Linux, ROS 2) ───────────────────────────┐
@@ -164,7 +164,7 @@ Common robot actuators:
 
 - **Brushed DC gearmotor:** cheap and simple. It needs an H-bridge driver, and an encoder for closed-loop control.
 - **Hobby servo:** motor, gearbox, position sensor and controller in one box. You send a pulse and it holds an angle.
-- **Stepper motor:** moves in fixed steps. Often run open loop, so Day 1's point about missed steps applies.
+- **Stepper motor:** moves in fixed steps. Often run open loop, so Episode 1's point about missed steps applies.
 - **Brushless DC (BLDC) motor:** efficient and powerful. It needs an ESC or FOC driver. Drones and many modern robot joints use them.
 - **Smart servo:** a servo with a digital bus and feedback, such as the ROBOTIS Dynamixel.
 
@@ -326,7 +326,7 @@ Job postings for embedded robotics roles often ask for STM32 or ESP32 firmware n
 
 ## Project: draw the architecture of a small wheeled robot
 
-The skill today is reasoning about layers. A diagram and one page of calculations show it, so this project is a single note instead of a code repository. You will reuse the diagram on Day 5: First Robot System Design.
+The skill today is reasoning about layers. A diagram and one page of calculations show it, so this project is a single note instead of a code repository. You will reuse the diagram on Episode 5: First Robot System Design.
 
 **Goal:** the architecture of a small indoor differential-drive robot (two driven wheels plus a caster) that drives by remote command and avoids obstacles in front of it.
 
@@ -339,7 +339,7 @@ day-02-anatomy-of-a-robot/
 └── architecture.png      # optional: an export or a photo of a hand drawing
 ```
 
-A single Markdown file is enough. If you commit it to GitHub, name the repository `100-days-robotics-day-02-anatomy-of-a-robot`.
+A single Markdown file is enough. If you commit it to GitHub, name the repository `100-episodes-robotics-day-02-anatomy-of-a-robot`.
 
 ### Step 1: start from the diagram
 
@@ -450,6 +450,6 @@ Write what happens if the USB link drops, the battery runs low, or the front sen
 
 ## Tomorrow
 
-Day 3, **Robotics Engineering Workflow**, covers process. Today you learned what a robot is made of. Tomorrow you learn the order in which engineers make those decisions: problem, requirements, specifications, architecture, then mechanics, electronics, firmware and software, followed by simulation, prototyping, testing and documentation. Keep today's architecture note open. You will write the requirements it should have started from, and check which of your part choices survive them.
+Episode 3, **Robotics Engineering Workflow**, covers process. Today you learned what a robot is made of. Tomorrow you learn the order in which engineers make those decisions: problem, requirements, specifications, architecture, then mechanics, electronics, firmware and software, followed by simulation, prototyping, testing and documentation. Keep today's architecture note open. You will write the requirements it should have started from, and check which of your part choices survive them.
 
-**Next:** [Day 3: Robotics Engineering Workflow](Robotics-Day-03-Robotics-Engineering-Workflow.md)
+**Next:** [Episode 3: Robotics Engineering Workflow](Robotics-Episode-03-Robotics-Engineering-Workflow.md)

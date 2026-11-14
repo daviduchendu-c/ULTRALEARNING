@@ -1,9 +1,9 @@
-# Day 32: Clustering
+# Episode 32: Clustering
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 27 (distances and neighborhoods) and Day 31 (centroids and the geometry of boundaries). Clustering has no answer key, so you will judge results with reasoning and metrics rather than with accuracy.
+**Level:** intermediate. You need Episode 27 (distances and neighborhoods) and Episode 31 (centroids and the geometry of boundaries). Clustering has no answer key, so you will judge results with reasoning and metrics rather than with accuracy.
 
 **By the end of this day, you will have:**
 
@@ -24,10 +24,10 @@
 
 **Prerequisites:**
 
-- Day 27: distance metrics and why scaling matters
-- Day 24: the habit of comparing methods and not trusting a single run
-- Day 31: the idea of a centroid as a summary of a region
-- Day 25: the mean as the value that minimizes squared error
+- Episode 27: distance metrics and why scaling matters
+- Episode 24: the habit of comparing methods and not trusting a single run
+- Episode 31: the idea of a centroid as a summary of a region
+- Episode 25: the mean as the value that minimizes squared error
 
 ---
 
@@ -142,7 +142,7 @@ The mistake is ignoring empty clusters. If no point is assigned to a centroid, t
 
 The centroid is the balance point of a cluster, the place where the points would sit if you hung them on a weightless bar. For squared distance, the mean is the best single representative of a set of points, which is why k-means uses it.
 
-From first principles, for a set of points `S`, the value `c` that minimizes `sum_{x in S} ||x - c||^2` is the mean of `S`. This follows from setting the gradient to zero, the same kind of argument you used on Day 25. A consequence is that centroids summarize a cluster and move as the points change, which means they are not members of the data. A centroid can sit in an empty region, far from any actual row, and that is a sign that the cluster is not compact. Centroids are useful for interpretation: you can read them as a typical profile of each group.
+From first principles, for a set of points `S`, the value `c` that minimizes `sum_{x in S} ||x - c||^2` is the mean of `S`. This follows from setting the gradient to zero, the same kind of argument you used on Episode 25. A consequence is that centroids summarize a cluster and move as the points change, which means they are not members of the data. A centroid can sit in an empty region, far from any actual row, and that is a sign that the cluster is not compact. Centroids are useful for interpretation: you can read them as a typical profile of each group.
 
 ```python
 import numpy as np
@@ -163,7 +163,7 @@ The mistake is treating a centroid as an example of a typical row. The centroid 
 
 Consider two groups of stores in a city. Whether they look similar depends on whether you measure distance in kilometers, in travel time or in the number of shared customers. Each choice produces different clusters, and the algorithm has no opinion about which is right.
 
-From first principles, k-means implicitly uses squared Euclidean distance, so features with large ranges dominate the assignment, as you saw in the kNN lesson on Day 27. Standardize features before clustering unless their units are comparable. For binary or count data, a different distance such as Jaccard or cosine distance may be more natural. Hierarchical clustering and DBSCAN accept other metrics. The choice of metric is therefore part of the model, and it should be reported.
+From first principles, k-means implicitly uses squared Euclidean distance, so features with large ranges dominate the assignment, as you saw in the kNN lesson on Episode 27. Standardize features before clustering unless their units are comparable. For binary or count data, a different distance such as Jaccard or cosine distance may be more natural. Hierarchical clustering and DBSCAN accept other metrics. The choice of metric is therefore part of the model, and it should be reported.
 
 ```python
 import numpy as np
@@ -257,14 +257,14 @@ The mistake is choosing `eps` without a plot of the k-distance, which shows how 
 
 This is a medium-weight project. The algorithms are standard library calls, so the value is in the validation: stability across seeds, the choice of k, and a clear profile of each cluster.
 
-**Repo name:** `100-days-ai-engineering-day-32-clustering`
+**Repo name:** `100-episodes-ai-engineering-day-32-clustering`
 
 **Goal:** segment a numeric customer dataset with k-means, check the choice of k and the stability of the clusters, compare with DBSCAN, and describe each segment in plain language.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-32-clustering/
+100-episodes-ai-engineering-day-32-clustering/
 ├── README.md
 ├── requirements.txt
 ├── segment.py
@@ -423,6 +423,6 @@ def test_profile_has_one_entry_per_cluster():
 
 ## Tomorrow
 
-Tomorrow you deal with the curse of dimensionality directly. Many datasets have far more features than they need, and distances become less informative as the number of features grows. Principal component analysis from Day 10 returns as a practical tool, and you will also meet t-SNE and UMAP, which are used to draw high-dimensional data in two dimensions, along with their limitations for analysis.
+Tomorrow you deal with the curse of dimensionality directly. Many datasets have far more features than they need, and distances become less informative as the number of features grows. Principal component analysis from Episode 10 returns as a practical tool, and you will also meet t-SNE and UMAP, which are used to draw high-dimensional data in two dimensions, along with their limitations for analysis.
 
-**Next:** [Day 33: Dimensionality Reduction](Day-33-Dimensionality-Reduction.md)
+**Next:** [Episode 33: Dimensionality Reduction](Episode-33-Dimensionality-Reduction.md)

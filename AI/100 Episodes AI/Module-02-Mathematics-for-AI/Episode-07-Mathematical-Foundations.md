@@ -1,6 +1,6 @@
-# Day 7: Mathematical Foundations
+# Episode 7: Mathematical Foundations
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
 **Level:** beginner. You need high-school algebra and some comfort with Python. If you have forgotten what an exponent is, this day rebuilds it from the ground up.
@@ -22,7 +22,7 @@
 
 **Prerequisites:**
 
-- Days 1 to 6 of this series
+- Episodes 1 to 6 of this series
 - Basic Python: variables, functions, lists, `for` loops and `import`
 - Algebra at the level of solving `2x + 3 = 11`
 
@@ -114,7 +114,7 @@ A common mistake is writing a function that is secretly not a function, for exam
 
 An equation is a balance scale. Both sides must weigh the same, and when you add or remove weight on one side, you must do the same to the other. Solving an equation means finding the values of the unknown that keep the scale level.
 
-An equation states that two expressions have equal values. The equation `2x + 3 = 11` is true only when `x = 4`. You find that value by undoing operations in reverse order: subtract 3 from both sides to get `2x = 8`, then divide both sides by 2 to get `x = 4`. Equations with two unknowns, such as `x + y = 10` and `x - y = 2`, have a single solution pair when the two equations are independent. Day 9 returns to systems of equations and writes them in matrix form.
+An equation states that two expressions have equal values. The equation `2x + 3 = 11` is true only when `x = 4`. You find that value by undoing operations in reverse order: subtract 3 from both sides to get `2x = 8`, then divide both sides by 2 to get `x = 4`. Equations with two unknowns, such as `x + y = 10` and `x - y = 2`, have a single solution pair when the two equations are independent. Episode 9 returns to systems of equations and writes them in matrix form.
 
 NumPy can check a solution without any manual algebra:
 
@@ -236,16 +236,16 @@ Check that each answer is correct before you move on. Write any mistakes in your
 
 ## Project: a notation checker and a plotting lab
 
-This project is light on purpose. Today's topic is vocabulary and a set of rules you must recognize, not a full system to build. A focused script and a short write-up are enough to prove that you can read the notation and test it. The heavier implementation work starts on Day 8 and reaches its peak on Day 16.
+This project is light on purpose. Today's topic is vocabulary and a set of rules you must recognize, not a full system to build. A focused script and a short write-up are enough to prove that you can read the notation and test it. The heavier implementation work starts on Episode 8 and reaches its peak on Episode 16.
 
-**Repo name:** `100-days-ai-engineering-day-07-mathematical-foundations`
+**Repo name:** `100-episodes-ai-engineering-day-07-mathematical-foundations`
 
 **Goal:** write a short Python script that verifies the algebraic identities from today, plot the functions they describe and commit the evidence with a README that explains each result.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-07-mathematical-foundations/
+100-episodes-ai-engineering-day-07-mathematical-foundations/
 ├── README.md
 ├── requirements.txt
 ├── identities.py
@@ -368,4 +368,4 @@ if __name__ == "__main__":
 
 Tomorrow moves from single numbers to vectors, which are ordered lists of numbers that describe a point, a direction or a feature set. Everything you wrote today, the functions, exponents and sums, reappears as operations on vectors. You will implement addition, scaling, magnitude and the dot product with NumPy, and you will see why the dot product measures how closely two feature vectors point in the same direction.
 
-**Next:** [Day 8: Vectors](Day-08-Vectors.md)
+**Next:** [Episode 8: Vectors](Episode-08-Vectors.md)

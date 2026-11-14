@@ -1,9 +1,9 @@
-# Day 14: Statistics
+# Episode 14: Statistics
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You need Day 13 (probability) and comfort with formulas that use sums. It is for readers who will summarize datasets, judge whether a result is real and report uncertainty to people who do not read math.
+**Level:** beginner to intermediate. You need Episode 13 (probability) and comfort with formulas that use sums. It is for readers who will summarize datasets, judge whether a result is real and report uncertainty to people who do not read math.
 
 **By the end of this day, you will have:**
 
@@ -22,8 +22,8 @@
 
 **Prerequisites:**
 
-- Day 13: events, random variables, conditional probability and the normal and binomial distributions
-- Day 7: summation notation and square roots
+- Episode 13: events, random variables, conditional probability and the normal and binomial distributions
+- Episode 7: summation notation and square roots
 - Basic Python: functions, loops and list comprehensions
 
 ---
@@ -103,7 +103,7 @@ print(sum(values) / len(values))   # 9.125
 
 A frequent error is reporting the mean of a skewed quantity without showing its shape. Incomes, page load times and order sizes are skewed, and one outlier can make the mean look typical when most people are far below it. Report the median next to it and look at the largest values before trusting a single average.
 
-In the market, the mean is the default summary in most reports, and mean squared error (Day 16) is a mean, which is why it is sensitive to outliers too.
+In the market, the mean is the default summary in most reports, and mean squared error (Episode 16) is a mean, which is why it is sensitive to outliers too.
 
 ---
 
@@ -170,7 +170,7 @@ The problem with covariance is its units. Hours times points means nothing to mo
 
 The common mistake is to read covariance as strength. A covariance of 100 measured in thousands of dollars is not stronger than a covariance of 2 measured in dollars. Changing units changes the number.
 
-In the market, covariance matrices are the basis of portfolio risk models, and they are the starting point for principal components (Day 10).
+In the market, covariance matrices are the basis of portfolio risk models, and they are the starting point for principal components (Episode 10).
 
 ---
 
@@ -278,7 +278,7 @@ In the market, confidence intervals appear in A/B test dashboards, clinical tria
 
 ## Statistical distributions
 
-Every summary assumes something about shape. Statistical distributions describe that shape, and Day 13 introduced the main families. The practical question is what a real dataset looks like. Compare the mean with the median, look at the histogram and check the tails. For a right-skewed variable such as income, the mean is larger than the median.
+Every summary assumes something about shape. Statistical distributions describe that shape, and Episode 13 introduced the main families. The practical question is what a real dataset looks like. Compare the mean with the median, look at the histogram and check the tails. For a right-skewed variable such as income, the mean is larger than the median.
 
 The central limit theorem explains why the normal distribution appears so often. The mean of many independent values tends toward a normal distribution, even when the values are not normal. This is why the confidence interval formula works for means of samples, not for individual raw values.
 
@@ -323,12 +323,12 @@ Create a folder called `day14-practice` and write your code in `practice.py`. Us
 
 ## Project: statistics from scratch
 
-This project is practical. It implements the descriptive statistics from this lesson from their formulas and tests every function against NumPy. Name the repository `100-days-ai-engineering-day-14-statistics`.
+This project is practical. It implements the descriptive statistics from this lesson from their formulas and tests every function against NumPy. Name the repository `100-episodes-ai-engineering-day-14-statistics`.
 
 **Repo layout**
 
 ```
-100-days-ai-engineering-day-14-statistics/
+100-episodes-ai-engineering-day-14-statistics/
 ├── README.md
 ├── requirements.txt
 ├── stats_from_scratch.py
@@ -547,6 +547,6 @@ def test_correlation_bounds():
 
 ## Tomorrow
 
-Tomorrow is Day 15, Information Theory. Today you summarized data and checked whether a summary can be trusted. Information theory asks how much an observation tells you, and how many bits a random outcome needs. You will meet entropy, cross-entropy and KL divergence, which explain why classifiers are trained with cross-entropy loss. The variance and probability ideas from this day and Day 13 are the foundation for that work.
+Tomorrow is Episode 15, Information Theory. Today you summarized data and checked whether a summary can be trusted. Information theory asks how much an observation tells you, and how many bits a random outcome needs. You will meet entropy, cross-entropy and KL divergence, which explain why classifiers are trained with cross-entropy loss. The variance and probability ideas from this day and Episode 13 are the foundation for that work.
 
-**Next:** [Day 15: Information Theory](Day-15-Information-Theory.md)
+**Next:** [Episode 15: Information Theory](Episode-15-Information-Theory.md)

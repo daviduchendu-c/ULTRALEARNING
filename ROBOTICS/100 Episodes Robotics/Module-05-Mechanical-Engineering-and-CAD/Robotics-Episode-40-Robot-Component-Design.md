@@ -1,9 +1,9 @@
-# Day 40: Robot Component Design
+# Episode 40: Robot Component Design
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need the load and stiffness calculations from Day 34, the fits from Day 39, and the CAD features from Day 37 and Day 38. Today you design parts for a purpose: a mount that holds a sensor, a servo arm that transmits torque, a chassis plate that carries the electronics, and an enclosure that protects them.
+**Level:** intermediate. You need the load and stiffness calculations from Episode 34, the fits from Episode 39, and the CAD features from Episode 37 and Episode 38. Today you design parts for a purpose: a mount that holds a sensor, a servo arm that transmits torque, a chassis plate that carries the electronics, and an enclosure that protects them.
 
 **By the end of this day, you will have:**
 
@@ -24,10 +24,10 @@
 
 **Prerequisites:**
 
-- Day 34: stress, deflection of a cantilever, and the factor of safety
-- Day 35: torque at a joint and the stall torque of a motor
-- Day 37 and Day 38: sketches, features, parameters and holes
-- Day 39: clearance and fit, and the bill of materials for a unit
+- Episode 34: stress, deflection of a cantilever, and the factor of safety
+- Episode 35: torque at a joint and the stall torque of a motor
+- Episode 37 and Episode 38: sketches, features, parameters and holes
+- Episode 39: clearance and fit, and the bill of materials for a unit
 
 ---
 
@@ -116,11 +116,11 @@ Requirements and interfaces are the first step in every component in this lesson
 
 ### Motor brackets
 
-A motor bracket was designed on Day 34 and Day 37. Its job is to hold the motor against the torque it produces. The torque is reacted at the bolts, which must carry the shear, and the bracket must carry the bending moment from the motor's weight and the reaction.
+A motor bracket was designed on Episode 34 and Episode 37. Its job is to hold the motor against the torque it produces. The torque is reacted at the bolts, which must carry the shear, and the bracket must carry the bending moment from the motor's weight and the reaction.
 
 The first principle is that the bracket resists two loads: the reaction torque, which twists the bracket, and the weight, which bends it. A motor of 0.4 N·m stall torque, held by a bracket with two bolts 16 mm apart, puts a shear force of about 0.4 / 0.016 = 25 N on each bolt if the bolts carry the torque directly. That is a large load for a 3 mm bolt in plastic, and it is why a motor bracket is usually metal or thick plastic with a bolt pattern that carries the torque in shear through the bracket face.
 
-Here is a worked example. A 28 mm square motor with a 6 mm shaft, weighing 35 g, is held by a PETG bracket 3 mm thick. The weight is 0.035 × 9.81 = 0.34 N, which is small. The torque is the larger load, so the designer checks the bolt shear at the shaft and the fatigue of the bracket around the bolt holes. A stress concentration factor of 2 or 3 at the holes, from Day 38, must be included in the check for any cyclic load.
+Here is a worked example. A 28 mm square motor with a 6 mm shaft, weighing 35 g, is held by a PETG bracket 3 mm thick. The weight is 0.035 × 9.81 = 0.34 N, which is small. The torque is the larger load, so the designer checks the bolt shear at the shaft and the fatigue of the bracket around the bolt holes. A stress concentration factor of 2 or 3 at the holes, from Episode 38, must be included in the check for any cyclic load.
 
 The common mistake is to design the bracket for the weight and forget the torque. The bracket bends a little, and the motor rotates in its seat, which loosens the bolts over time. Include the stall torque in the load case.
 
@@ -158,7 +158,7 @@ Servo mechanisms are used in grippers, in pan and tilt heads, in small robot arm
 
 ### Chassis parts and wheel hubs
 
-The chassis carries the drivetrain, the electronics and the load. Chassis parts are usually plates, rails and brackets that are cut from sheet material or printed. The wheel hubs you designed on Day 38 are chassis parts, and their interfaces are the bore and the bolt pattern.
+The chassis carries the drivetrain, the electronics and the load. Chassis parts are usually plates, rails and brackets that are cut from sheet material or printed. The wheel hubs you designed on Episode 38 are chassis parts, and their interfaces are the bore and the bolt pattern.
 
 The first principle for a chassis plate is that it must be stiff enough not to bend under the wheels and the battery. A plate of 3 mm aluminium carrying a 2 kg robot with a 10 cm span between supports deflects by a small amount, but a plate of 3 mm PLA can deflect enough to misalign the gears. Use ribs, a larger thickness or a stiffer material when the span is long.
 
@@ -226,12 +226,12 @@ This project builds a parametric enclosure for a small circuit board. It is writ
 
 **Goal:** a base and a lid for a board of 50 mm by 40 mm, with four mounting holes in the floor, a 1.5 mm clearance, a 2 mm wall and a 20 mm internal height. The script must generate both parts, export them as STEP and STL, and pass the outside-dimension test.
 
-**Repository name:** `100-days-robotics-day-40-component-design`
+**Repository name:** `100-episodes-robotics-day-40-component-design`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-40-component-design/
+100-episodes-robotics-day-40-component-design/
 ├── README.md
 ├── requirements.txt
 ├── enclosure.py
@@ -445,4 +445,4 @@ def test_lid_is_thin_plate():
 
 ## Tomorrow
 
-Tomorrow, on Day 41, you learn design for manufacturing. You look at 3D printing, machining and laser cutting, the tolerances each process can hold, fasteners, materials and assembly. The enclosure and the brackets you designed today only work if they can be made with the tolerance and the process you chose, and Day 41 teaches you the rules that decide that.
+Tomorrow, on Episode 41, you learn design for manufacturing. You look at 3D printing, machining and laser cutting, the tolerances each process can hold, fasteners, materials and assembly. The enclosure and the brackets you designed today only work if they can be made with the tolerance and the process you chose, and Episode 41 teaches you the rules that decide that.

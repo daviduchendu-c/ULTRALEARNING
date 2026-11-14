@@ -1,9 +1,9 @@
-# Day 15: Control Flow
+# Episode 15: Control Flow
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You can write functions that return values, and you know truthiness and comprehensions from Day 10 and Day 13. This is for anyone whose program takes the wrong branch, or who writes a loop that runs forever because the stop condition never becomes true.
+**Level:** beginner to intermediate. You can write functions that return values, and you know truthiness and comprehensions from Episode 10 and Episode 13. This is for anyone whose program takes the wrong branch, or who writes a loop that runs forever because the stop condition never becomes true.
 
 **By the end of this day, you will have:**
 
@@ -17,17 +17,17 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). The `match` statement needs 3.10 or newer, so check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (indentation, statements)
-- Day 10: Objects, Variables and Types (truthiness)
-- Day 13: Lists and Tuples (iteration, unpacking)
-- Day 14: Dictionaries and Sets (iterating over mappings)
+- Episode 9: Python Runtime and Syntax (indentation, statements)
+- Episode 10: Objects, Variables and Types (truthiness)
+- Episode 13: Lists and Tuples (iteration, unpacking)
+- Episode 14: Dictionaries and Sets (iterating over mappings)
 
 ---
 
@@ -158,7 +158,7 @@ print("liftoff")
 
 The `while` loop changes `countdown` on each pass. If that line were missing, the loop would never end, and the program would hang until you interrupt it with Ctrl+C.
 
-The common mistake is a `while` loop whose condition never changes in a way that makes it false. The loop runs forever, and the program appears frozen. Before writing a `while`, write the line that changes the condition, and check that it moves toward the stop. A second mistake is modifying the list you are iterating over. Iterate over a copy or build a new list. Day 13 covered this. In the job market, runaway loops in retry logic cause production incidents, so a bounded number of attempts is a common requirement.
+The common mistake is a `while` loop whose condition never changes in a way that makes it false. The loop runs forever, and the program appears frozen. Before writing a `while`, write the line that changes the condition, and check that it moves toward the stop. A second mistake is modifying the list you are iterating over. Iterate over a copy or build a new list. Episode 13 covered this. In the job market, runaway loops in retry logic cause production incidents, so a bounded number of attempts is a common requirement.
 
 ### Range
 
@@ -226,7 +226,7 @@ The common mistake is reading the `else` of a loop as the `else` of the `if` ins
 
 ### Comprehensions with conditions
 
-A comprehension is a loop written as one expression. You met it on Day 13 and Day 14. Think of a filter on a conveyor belt. Items pass through the filter, and only the ones that satisfy the rule come out the other side. The `if` clause is the filter.
+A comprehension is a loop written as one expression. You met it on Episode 13 and Episode 14. Think of a filter on a conveyor belt. Items pass through the filter, and only the ones that satisfy the rule come out the other side. The `if` clause is the filter.
 
 From first principles, `[expr for item in iterable if condition]` runs the loop, evaluates the condition, and includes `expr` only when the condition is true. The same pattern works for sets and dictionaries. A comprehension is an expression, so it can be used as an argument to a function, but it cannot contain `break` or `continue`. If you need to stop early, use a loop.
 
@@ -294,12 +294,12 @@ Done when the function returns the correct count and mypy is clean.
 
 The project is a small command handler and a grade reporter. It uses `match` to parse commands, `if` and `elif` for grades, a `while` loop with a sentinel for input, `break` and loop `else` for search, and a comprehension with a condition for filtering. Each branch and each loop exit path has a test. The evidence is a test suite that covers the paths and a findings document that records one case where the loop `else` made the logic clearer.
 
-Suggested repo name: `100-days-software-day-15-control-flow`.
+Suggested repo name: `100-episodes-software-day-15-control-flow`.
 
 Repo layout:
 
 ```
-100-days-software-day-15-control-flow/
+100-episodes-software-day-15-control-flow/
 ├── .gitignore
 ├── README.md
 ├── control_lab.py
@@ -514,6 +514,6 @@ The project covers every control structure from this day, and each test checks o
 
 ## Tomorrow
 
-Day 16 starts the function half of the course. You will define functions with parameters and return values, understand how arguments are bound, learn the LEGB rule that decides which name a function sees, and write docstrings and type annotations. The branches and loops from today are the body of most functions, and the mutable default trap from Day 10 returns in a new form.
+Episode 16 starts the function half of the course. You will define functions with parameters and return values, understand how arguments are bound, learn the LEGB rule that decides which name a function sees, and write docstrings and type annotations. The branches and loops from today are the body of most functions, and the mutable default trap from Episode 10 returns in a new form.
 
-**Next:** [Day 16: Functions I](Software-Day-16-Functions-I.md)
+**Next:** [Episode 16: Functions I](Software-Episode-16-Functions-I.md)

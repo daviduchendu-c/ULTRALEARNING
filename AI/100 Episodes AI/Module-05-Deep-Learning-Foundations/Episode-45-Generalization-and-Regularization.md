@@ -1,14 +1,14 @@
-# Day 45: Generalization and Regularization
+# Episode 45: Generalization and Regularization
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You can train a small network (Days 43 and 44) and read a training curve. Today the question changes from "does the loss go down?" to "does the model work on data it has never seen?"
+**Level:** intermediate. You can train a small network (Episodes 43 and 44) and read a training curve. Today the question changes from "does the loss go down?" to "does the model work on data it has never seen?"
 
 **By the end of this day, you will have:**
 
 - A clear definition of overfitting, and a measured example in which a network memorizes a small training set
-- Working weight decay, early stopping and input-noise augmentation applied to the network from Day 43
+- Working weight decay, early stopping and input-noise augmentation applied to the network from Episode 43
 - Tested NumPy implementations of inverted dropout and batch normalization, with the behavior that differs between training and inference
 - An experiment table that compares the generalization gap for each method and states which one helped on your data
 
@@ -18,15 +18,15 @@
 - NumPy 2.1.3 (`pip install numpy==2.1.3`), free and open source under the BSD license
 - pytest 8.3.3 (`pip install pytest==8.3.3`), free and open source under the MIT license
 - Matplotlib 3.9.2 (`pip install matplotlib==3.9.2`), for the training curves
-- The `TwoLayerNet` class and the Adam optimizer from your Day 43 and Day 44 repositories
+- The `TwoLayerNet` class and the Adam optimizer from your Episode 43 and Episode 44 repositories
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 13: the idea of a sample and its variance
-- Day 14: estimating a quantity from a sample and the idea of an estimate that varies from sample to sample
-- Day 43: the backward pass of the two-layer network
-- Day 44: the Adam optimizer and the training loop
+- Episode 13: the idea of a sample and its variance
+- Episode 14: estimating a quantity from a sample and the idea of an estimate that varies from sample to sample
+- Episode 43: the backward pass of the two-layer network
+- Episode 44: the Adam optimizer and the training loop
 
 ---
 
@@ -259,12 +259,12 @@ Do not use training-mode batch statistics at inference, and do not forget to upd
 
 **Goal:** create a small training set in which the network overfits, then apply weight decay, early stopping and augmentation one at a time and in combination. Measure the generalization gap for each setting on the same split, and write up which method helped on your data and by how much.
 
-**Repo name:** `100-days-ai-day-45-generalization-and-regularization`
+**Repo name:** `100-episodes-ai-day-45-generalization-and-regularization`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-45-generalization-and-regularization/
+100-episodes-ai-day-45-generalization-and-regularization/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -281,7 +281,7 @@ Do not use training-mode batch statistics at inference, and do not forget to upd
     └── generalization_table.py
 ```
 
-**Starter code.** Create `requirements.txt` with the pinned packages. Copy `network.py` from Day 43 into `src/regularize_lab/network.py`, and copy `optimizers.py` from Day 44 into `src/regularize_lab/`. Create `src/regularize_lab/data.py` so that it generates a circle dataset with the labeling rule from Day 44, with a function `make_circles(n, seed)` that returns X of shape (n, 2) and y of shape (n, 1). Then create the regularizer helpers below in `src/regularize_lab/regularizers.py`.
+**Starter code.** Create `requirements.txt` with the pinned packages. Copy `network.py` from Episode 43 into `src/regularize_lab/network.py`, and copy `optimizers.py` from Episode 44 into `src/regularize_lab/`. Create `src/regularize_lab/data.py` so that it generates a circle dataset with the labeling rule from Episode 44, with a function `make_circles(n, seed)` that returns X of shape (n, 2) and y of shape (n, 1). Then create the regularizer helpers below in `src/regularize_lab/regularizers.py`.
 
 ```python
 import numpy as np
@@ -403,4 +403,4 @@ Write `src/regularize_lab/batchnorm.py` with the two functions from the lesson, 
 
 ## Tomorrow
 
-Day 46 moves from NumPy to PyTorch. You will install PyTorch 2.5.1, learn how tensors store shapes, dtypes and devices, and move computation between the CPU and a GPU when one is available. Every concept from the last six days reappears as a tensor operation, and the model you built by hand will become a few lines of framework code. The regularizers from today will also map directly onto the PyTorch modules you meet later.
+Episode 46 moves from NumPy to PyTorch. You will install PyTorch 2.5.1, learn how tensors store shapes, dtypes and devices, and move computation between the CPU and a GPU when one is available. Every concept from the last six days reappears as a tensor operation, and the model you built by hand will become a few lines of framework code. The regularizers from today will also map directly onto the PyTorch modules you meet later.

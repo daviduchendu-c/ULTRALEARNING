@@ -1,6 +1,6 @@
-# Day 13: Probability
+# Episode 13: Probability
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
 **Level:** beginner to intermediate. You need arithmetic, fractions and a little algebra. It is for readers who want to reason about uncertain data and who have heard of Bayes' theorem without knowing what it does.
@@ -22,9 +22,9 @@
 
 **Prerequisites:**
 
-- Day 7: fractions, exponents and summation notation
-- Day 8: the idea of a vector of numbers
-- Day 12: the idea that a model is a function with parameters fitted to data
+- Episode 7: fractions, exponents and summation notation
+- Episode 8: the idea of a vector of numbers
+- Episode 12: the idea that a model is a function with parameters fitted to data
 - Basic Python: functions, loops and list comprehensions
 
 ---
@@ -52,7 +52,7 @@
 
 Machine learning models do not know anything for certain. A spam filter assigns a chance that an email is spam. A medical model gives a risk score. A language model gives a probability for every possible next word. Probability is the language that lets you state these outputs precisely, check whether they are right, and explain them to someone who has to act on them.
 
-On the job, probability shows up in two places. The first is interpretation: a fraud model that says "95 percent" is only useful if you know how often it is right when it says 95 percent. The second is design: many loss functions are probability ideas in disguise, as Day 15 shows.
+On the job, probability shows up in two places. The first is interpretation: a fraud model that says "95 percent" is only useful if you know how often it is right when it says 95 percent. The second is design: many loss functions are probability ideas in disguise, as Episode 15 shows.
 
 The big idea is that probability is counting. List what can happen, count the outcomes you care about, and divide. Bayes' theorem and the rest are careful bookkeeping on top of that.
 
@@ -276,12 +276,12 @@ Create a folder called `day13-practice` and write your code in `practice.py`. Do
 
 ## Project: a probability lab
 
-This project is light, because the topic is mostly conceptual. The goal is a repository that puts exact calculations beside simulations and shows that they agree. Name it `100-days-ai-engineering-day-13-probability`.
+This project is light, because the topic is mostly conceptual. The goal is a repository that puts exact calculations beside simulations and shows that they agree. Name it `100-episodes-ai-engineering-day-13-probability`.
 
 **Repo layout**
 
 ```
-100-days-ai-engineering-day-13-probability/
+100-episodes-ai-engineering-day-13-probability/
 ├── README.md
 ├── requirements.txt
 ├── probability_lab.py
@@ -450,6 +450,6 @@ def test_dice_events_are_independent():
 
 ## Tomorrow
 
-Tomorrow is Day 14, Statistics. Today you reasoned forward from a model to the data it produces. Statistics runs the other way: you have data and want to infer the model. You will summarize data with the mean, median and variance, measure how two variables move together, and judge whether a sample can be trusted. Those tools rest on the distributions and conditional reasoning from today.
+Tomorrow is Episode 14, Statistics. Today you reasoned forward from a model to the data it produces. Statistics runs the other way: you have data and want to infer the model. You will summarize data with the mean, median and variance, measure how two variables move together, and judge whether a sample can be trusted. Those tools rest on the distributions and conditional reasoning from today.
 
-**Next:** [Day 14: Statistics](Day-14-Statistics.md)
+**Next:** [Episode 14: Statistics](Episode-14-Statistics.md)

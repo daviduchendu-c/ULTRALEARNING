@@ -1,10 +1,10 @@
-# Day 25: Embedded Project
+# Episode 25: Embedded Project
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 6 hours, split over two sessions if needed
 
-**Level:** intermediate. You need Days 16 to 24. The project combines GPIO, the ADC, PWM, interrupts or debouncing, I2C, serial telemetry, a state machine, FreeRTOS tasks and layered code. If one of those is weak, go back to its day before you start, because the project will expose it.
+**Level:** intermediate. You need Episodes 16 to 24. The project combines GPIO, the ADC, PWM, interrupts or debouncing, I2C, serial telemetry, a state machine, FreeRTOS tasks and layered code. If one of those is weak, go back to its day before you start, because the project will expose it.
 
 **By the end of this day, you will have:**
 
@@ -31,13 +31,13 @@
 
 **Prerequisites:**
 
-- Day 13: MOSFET switching, the flyback diode and the current sizing rule
-- Day 17: debouncing and active-low buttons
-- Day 18: ADC conversion and PWM duty
-- Day 21: I2C addresses, pull-ups and the Wire return codes
-- Day 20: framed serial telemetry with a checksum
-- Day 23: layers, interfaces, the state machine and the watchdog
-- Day 24: tasks, queues and mutexes
+- Episode 13: MOSFET switching, the flyback diode and the current sizing rule
+- Episode 17: debouncing and active-low buttons
+- Episode 18: ADC conversion and PWM duty
+- Episode 21: I2C addresses, pull-ups and the Wire return codes
+- Episode 20: framed serial telemetry with a checksum
+- Episode 23: layers, interfaces, the state machine and the watchdog
+- Episode 24: tasks, queues and mutexes
 
 ---
 
@@ -91,7 +91,7 @@ The thermostat is an old idea, and the hysteresis rule that keeps it stable is t
 - **Relative humidity (RH):** the amount of water vapor in air, as a percentage of the maximum it can hold at that temperature.
 - **CRC (cyclic redundancy check):** a checksum calculated with a polynomial. The SHT31 uses an 8-bit CRC on each two-byte value.
 - **Single-shot measurement:** a sensor command that makes one measurement and then waits for a read.
-- **Flyback diode:** a diode across an inductive load that absorbs the energy stored when the load is switched off. Day 13 covered it.
+- **Flyback diode:** a diode across an inductive load that absorbs the energy stored when the load is switched off. Episode 13 covered it.
 - **Manual override:** a mode in which the operator sets the output directly, bypassing the automatic control.
 - **Command frame:** a message from the operator to the device, with a fixed format and a checksum.
 - **Requirements list:** a numbered list of what the device must do, with a test for each item.
@@ -121,7 +121,7 @@ On the job, sensor and actuator selection is a power and timing budget. Engineer
 
 A radio on a boat sends its position and also receives instructions from shore. The two directions have different rules. The position report must arrive on schedule, and an instruction must be checked before the crew acts on it. The device in this project has the same two directions over one USB serial link.
 
-From first principles, the device sends telemetry frames at 2 Hz from the telemetry task. The frames use the format from Day 20 and Day 23: a start character, a body, a star and a two-digit hexadecimal checksum. The operator can send command frames back, and the device parses them in the telemetry task, validates the checksum, and sends a command struct into a queue for the control task. The control task is the only task that changes the fan output, which keeps the rule that one owner controls each output.
+From first principles, the device sends telemetry frames at 2 Hz from the telemetry task. The frames use the format from Episode 20 and Episode 23: a start character, a body, a star and a two-digit hexadecimal checksum. The operator can send command frames back, and the device parses them in the telemetry task, validates the checksum, and sends a command struct into a queue for the control task. The control task is the only task that changes the fan output, which keeps the rule that one owner controls each output.
 
 Two commands are enough for this project. `A` returns the device to automatic control. `F` followed by a number from 0 to 100 sets the manual fan duty as a percentage. The checksum rule for commands is the same as for telemetry, so the device rejects a command with a bad checksum and reports the rejection in the next telemetry frame.
 
@@ -167,9 +167,9 @@ On the job, telemetry is the first tool that a support engineer uses when a fiel
 
 A house built with a plan has rooms, doors and utilities in known places. A house built without a plan may work, but every repair takes longer. Firmware is the same. A structure that separates the sensor driver, the control logic, the telemetry and the hardware layer makes each change smaller and each test clearer.
 
-From first principles, the project uses the layered structure from Day 23, extended to tasks on the ESP32. The sensor driver owns the I2C bus and returns a status code and a value. The control module owns the state machine and the fan output. The telemetry module owns the frame format and the command parser. The hardware layer owns the pin numbers and the PWM setup. Each module has a header with its interface and a source file with its internals.
+From first principles, the project uses the layered structure from Episode 23, extended to tasks on the ESP32. The sensor driver owns the I2C bus and returns a status code and a value. The control module owns the state machine and the fan output. The telemetry module owns the frame format and the command parser. The hardware layer owns the pin numbers and the PWM setup. Each module has a header with its interface and a source file with its internals.
 
-The task structure follows the Day 24 pipeline. The sensor task runs every 500 ms, reads the SHT31 and the pot, and puts a snapshot into a queue. The control task receives snapshots and commands, runs the state machine and writes the fan duty. The telemetry task formats a frame every 500 ms and parses incoming commands into the command queue. Only the control task writes the fan output, and only the sensor task uses the I2C bus.
+The task structure follows the Episode 24 pipeline. The sensor task runs every 500 ms, reads the SHT31 and the pot, and puts a snapshot into a queue. The control task receives snapshots and commands, runs the state machine and writes the fan duty. The telemetry task formats a frame every 500 ms and parses incoming commands into the command queue. Only the control task writes the fan output, and only the sensor task uses the I2C bus.
 
 The worked example is the requirements list. The project needs about ten requirements, for example: the fan turns on above the setpoint plus 0.5 degrees, the fan is off in FAULT, the telemetry arrives at 2 Hz with valid checksums, and a bad command is rejected. Each requirement has a test in the matrix, a measured result and a pass or fail mark. A requirement without a test is a wish, and a test without a requirement is a guess.
 
@@ -199,12 +199,12 @@ On the job, a finished device is reviewed against its requirements, its test mat
 
 The goal is a repository that contains the complete fan controller, a requirements list, a bench test matrix, a state table, a serial command set and a fault test with logs. It is the module capstone, so the evidence matters as much as the code.
 
-**Repo name:** `100-days-robotics-day-25-embedded-project`
+**Repo name:** `100-episodes-robotics-day-25-embedded-project`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-25-embedded-project/
+100-episodes-robotics-day-25-embedded-project/
 ├── README.md
 ├── platformio.ini
 ├── src/
@@ -235,7 +235,7 @@ The goal is a repository that contains the complete fan controller, a requiremen
     └── bench.jpg
 ```
 
-Put `platformio.ini` at the project root with the `[env:esp32dev]` section from Day 24. The `src/` folder holds the module files, and PlatformIO compiles them together.
+Put `platformio.ini` at the project root with the `[env:esp32dev]` section from Episode 24. The `src/` folder holds the module files, and PlatformIO compiles them together.
 
 **Pin map (wire it exactly so):**
 
@@ -618,7 +618,7 @@ void setup() {
 void loop() { delay(1000); }
 ```
 
-This starter code has two known issues for the lesson to find and document. First, the `Snapshot` in `controlTask` is read with `xQueuePeek` and not copied under a lock, which is safe because the queue copies the struct. Second, the `stateMutex` is created but never used, and the README should say whether it should be removed or used for the fan state read by the telemetry task. The button check is an edge detector polled every 20 ms. It is not a full debounce, so the button test in the matrix should show whether a single press can produce more than one event on your switch. If it does, add the stable-time check from Day 17 before you mark the requirement as passed.
+This starter code has two known issues for the lesson to find and document. First, the `Snapshot` in `controlTask` is read with `xQueuePeek` and not copied under a lock, which is safe because the queue copies the struct. Second, the `stateMutex` is created but never used, and the README should say whether it should be removed or used for the fan state read by the telemetry task. The button check is an edge detector polled every 20 ms. It is not a full debounce, so the button test in the matrix should show whether a single press can produce more than one event on your switch. If it does, add the stable-time check from Episode 17 before you mark the requirement as passed.
 
 **Step-by-step tasks:**
 
@@ -716,4 +716,4 @@ This project is the module capstone. The code matters, but the reviewer will rea
 
 ## Tomorrow
 
-Day 26 begins the next module, which moves from the microcontroller to the robot system around it. The fan controller you built today is a single node. A robot is many nodes that share data, timing and faults. The telemetry frame, the state machine and the test matrix from this project are the pieces you will reuse when the nodes need to talk to a larger system, and the report you wrote will show the next reviewer what this device does and how you proved it.
+Episode 26 begins the next module, which moves from the microcontroller to the robot system around it. The fan controller you built today is a single node. A robot is many nodes that share data, timing and faults. The telemetry frame, the state machine and the test matrix from this project are the pieces you will reuse when the nodes need to talk to a larger system, and the report you wrote will show the next reviewer what this device does and how you proved it.

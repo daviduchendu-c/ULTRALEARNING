@@ -1,9 +1,9 @@
-# Day 10: Linear Algebra for ML
+# Episode 10: Linear Algebra for ML
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Days 8 and 9 without hesitation. Today's ideas are more abstract, so take the pictures slowly.
+**Level:** intermediate. You need Episodes 8 and 9 without hesitation. Today's ideas are more abstract, so take the pictures slowly.
 
 **By the end of this day, you will have:**
 
@@ -23,9 +23,9 @@
 
 **Prerequisites:**
 
-- Day 8: vectors, the dot product, magnitude and projection
-- Day 9: matrix multiplication, shapes, transpose, identity and inverses
-- Day 7: summation notation and the idea of a function
+- Episode 8: vectors, the dot product, magnitude and projection
+- Episode 9: matrix multiplication, shapes, transpose, identity and inverses
+- Episode 7: summation notation and the idea of a function
 - Basic statistics: the mean and what it means for values to vary
 
 ---
@@ -121,7 +121,7 @@ Treating an affine layer as linear is a common mistake when you reason about it,
 
 A basis is a set of building blocks for a space. In a city, north and east are a basis for position: every location is some number of blocks north plus some number of blocks east. The building blocks must be independent, since a third direction that is just a mix of north and east adds nothing.
 
-From first principles, a set of vectors is a basis for a space when it is linearly independent and spans the space. The standard basis for `R^n` consists of the unit vectors along each axis, such as `(1, 0)` and `(0, 1)` in the plane. Every vector in the plane has a unique expression in any basis. The coordinates of a vector in a new basis are the solution to a linear system, which you solved on Day 9. Changing basis is a change of description, not a change of the vector itself.
+From first principles, a set of vectors is a basis for a space when it is linearly independent and spans the space. The standard basis for `R^n` consists of the unit vectors along each axis, such as `(1, 0)` and `(0, 1)` in the plane. Every vector in the plane has a unique expression in any basis. The coordinates of a vector in a new basis are the solution to a linear system, which you solved on Episode 9. Changing basis is a change of description, not a change of the vector itself.
 
 ```python
 import numpy as np
@@ -140,7 +140,7 @@ A common mistake is assuming that the standard axes are the most meaningful basi
 
 Suppose you have three ingredients, but one of them is always a mix of the other two. You have only two independent ingredients, however many you list. Rank counts the independent directions a matrix actually uses.
 
-The rank of a matrix is the maximum number of linearly independent columns, which equals the maximum number of linearly independent rows. It is the dimension of the column space, the set of all possible outputs `A x`. A matrix with `m` rows and `n` columns has rank at most `min(m, n)`. A matrix is full rank when its rank equals that maximum. For a square matrix, full rank is the same as being invertible, which connects this concept to Day 9.
+The rank of a matrix is the maximum number of linearly independent columns, which equals the maximum number of linearly independent rows. It is the dimension of the column space, the set of all possible outputs `A x`. A matrix with `m` rows and `n` columns has rank at most `min(m, n)`. A matrix is full rank when its rank equals that maximum. For a square matrix, full rank is the same as being invertible, which connects this concept to Episode 9.
 
 ```python
 import numpy as np
@@ -247,16 +247,16 @@ Record each place where your hand calculation and the code disagreed, along with
 
 ## Project: PCA from scratch with NumPy
 
-This is a medium-weight project. Principal component analysis is short to write once you understand it, and the value is in testing the properties and writing a clear analysis of what it does to a dataset. The project is lighter than the Day 8 and Day 9 projects because the code is a single class, and the main deliverable is the written analysis.
+This is a medium-weight project. Principal component analysis is short to write once you understand it, and the value is in testing the properties and writing a clear analysis of what it does to a dataset. The project is lighter than the Episode 8 and Episode 9 projects because the code is a single class, and the main deliverable is the written analysis.
 
-**Repo name:** `100-days-ai-engineering-day-10-linear-algebra-for-ml`
+**Repo name:** `100-episodes-ai-engineering-day-10-linear-algebra-for-ml`
 
 **Goal:** implement PCA with NumPy's SVD, check that its components are orthonormal, measure how much reconstruction error each extra component removes, and explain the result in the README.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-10-linear-algebra-for-ml/
+100-episodes-ai-engineering-day-10-linear-algebra-for-ml/
 ├── README.md
 ├── requirements.txt
 ├── pca.py
@@ -433,4 +433,4 @@ def test_reconstruction_error_shrinks_with_more_components():
 
 Tomorrow you move from the shape of data to the change in a function. Derivatives measure how fast an output changes when an input moves a little, and the gradient collects those rates for many inputs at once. The gradient is the direction in which a loss function rises fastest, and training a model means moving the weights the other way. You will compute derivatives by hand, check them numerically and apply the chain rule to a small network, which is the calculus that backpropagation uses.
 
-**Next:** [Day 11: Calculus I](Day-11-Calculus-I.md)
+**Next:** [Episode 11: Calculus I](Episode-11-Calculus-I.md)

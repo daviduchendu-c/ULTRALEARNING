@@ -1,9 +1,9 @@
-# Day 21: Python Data Model
+# Episode 21: Python Data Model
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate to advanced. You can write classes with methods and validate their input from Day 19 and Day 20. This is for anyone who has wondered how `len(x)`, `for item in x` and `with open(...)` work on their own objects, and who wants their classes to fit into the language rather than fight it.
+**Level:** intermediate to advanced. You can write classes with methods and validate their input from Episode 19 and Episode 20. This is for anyone who has wondered how `len(x)`, `for item in x` and `with open(...)` work on their own objects, and who wants their classes to fit into the language rather than fight it.
 
 **By the end of this day, you will have:**
 
@@ -18,16 +18,16 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 10: Objects, Variables and Types (identity, `is`, `==`, hashing)
-- Day 14: Dictionaries and Sets (hashability)
-- Day 19 and Day 20: OOP I and II (classes, methods, inheritance, dataclasses)
+- Episode 10: Objects, Variables and Types (identity, `is`, `==`, hashing)
+- Episode 14: Dictionaries and Sets (hashability)
+- Episode 19 and Episode 20: OOP I and II (classes, methods, inheritance, dataclasses)
 
 ---
 
@@ -139,7 +139,7 @@ print([price])          # [Money('2.5', 'USD')], containers use __repr__
 
 The list output shows the repr, which is why a good `__repr__` matters when debugging a collection of objects.
 
-The common mistake is writing a `__repr__` that hides information, such as returning only the class name. Then a list of objects prints as a list of identical strings, and the bug is invisible. The second mistake is putting user-facing formatting in `__repr__`, which makes logs and error messages hard to read. In the job market, the `dataclass` decorator from Day 20 generates a `__repr__` for this reason, and reviewers check that custom representations keep the important fields.
+The common mistake is writing a `__repr__` that hides information, such as returning only the class name. Then a list of objects prints as a list of identical strings, and the bug is invisible. The second mistake is putting user-facing formatting in `__repr__`, which makes logs and error messages hard to read. In the job market, the `dataclass` decorator from Episode 20 generates a `__repr__` for this reason, and reviewers check that custom representations keep the important fields.
 
 ### Iterables
 
@@ -321,12 +321,12 @@ Done when the `end` line appears even when the block fails, and the timer report
 
 The project is a small library that brings together the protocols from this day. `Money` has text forms, equality and hashing rules, and addition. `Countdown` is an iterable that returns fresh iterators. `chunks` is a generator. `Timer` and `labelled` are context managers. The tests check each protocol, and they include the cases that break when a protocol is wrong. The evidence is a passing test suite and a findings file that explains which protocol fixed which bug.
 
-Suggested repo name: `100-days-software-day-21-python-data-model`.
+Suggested repo name: `100-episodes-software-day-21-python-data-model`.
 
 Repo layout:
 
 ```
-100-days-software-day-21-python-data-model/
+100-episodes-software-day-21-python-data-model/
 ├── .gitignore
 ├── README.md
 ├── datamodel_lab.py
@@ -601,6 +601,6 @@ The project is compact because each protocol is short. A reviewer should be able
 
 ## Tomorrow
 
-Day 22 covers what happens when things go wrong. You will read tracebacks from the bottom up, use `try`, `except`, `else` and `finally` with precision, raise and chain exceptions, define custom exception classes, and use assertions and logging. You will also step through a program with the built-in debugger. The context managers you wrote today are the tool that guarantees clean-up when an error occurs.
+Episode 22 covers what happens when things go wrong. You will read tracebacks from the bottom up, use `try`, `except`, `else` and `finally` with precision, raise and chain exceptions, define custom exception classes, and use assertions and logging. You will also step through a program with the built-in debugger. The context managers you wrote today are the tool that guarantees clean-up when an error occurs.
 
-**Next:** [Day 22: Exceptions and Debugging](Software-Day-22-Exceptions-and-Debugging.md)
+**Next:** [Episode 22: Exceptions and Debugging](Software-Episode-22-Exceptions-and-Debugging.md)

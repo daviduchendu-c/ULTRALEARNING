@@ -1,9 +1,9 @@
-# Day 38: Classical ML Project
+# Episode 38: Classical ML Project
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 6 hours, spread over two sittings
-**Level:** intermediate. This is the capstone for Module 4. You should have finished Days 24 to 37, since every stage of the build uses one of them.
+**Level:** intermediate. This is the capstone for Module 4. You should have finished Episodes 24 to 37, since every stage of the build uses one of them.
 
 **By the end of this day, you will have:**
 
@@ -26,10 +26,10 @@
 
 **Prerequisites:**
 
-- Days 24 to 27: workflow, linear models, logistic regression and nearest neighbors
-- Days 28 to 32: naive Bayes, trees, ensembles, SVMs and clustering, at least at the level of knowing when each one fits
-- Days 33 to 37: dimensionality reduction, classification and regression metrics, hyperparameter search and error analysis
-- Comfort with pipelines and `ColumnTransformer` from Day 36
+- Episodes 24 to 27: workflow, linear models, logistic regression and nearest neighbors
+- Episodes 28 to 32: naive Bayes, trees, ensembles, SVMs and clustering, at least at the level of knowing when each one fits
+- Episodes 33 to 37: dimensionality reduction, classification and regression metrics, hyperparameter search and error analysis
+- Comfort with pipelines and `ColumnTransformer` from Episode 36
 
 ---
 
@@ -309,7 +309,7 @@ def evaluate_on_test(model, test, threshold):
     }
 ```
 
-The mistake is to pick the threshold on the test set because it gives a better number there. That is leakage through the choice, as Day 36 showed. The second mistake is to report the validation score as the final result, which is optimistic because the threshold was chosen on it. The limitation of this design is that the final model is refit on training and validation together, so the threshold chosen with the smaller model may shift slightly. The project reports this as a known limitation rather than hiding it, and the README includes the threshold and the test result from the refit model.
+The mistake is to pick the threshold on the test set because it gives a better number there. That is leakage through the choice, as Episode 36 showed. The second mistake is to report the validation score as the final result, which is optimistic because the threshold was chosen on it. The limitation of this design is that the final model is refit on training and validation together, so the threshold chosen with the smaller model may shift slightly. The project reports this as a known limitation rather than hiding it, and the README includes the threshold and the test result from the refit model.
 
 ---
 
@@ -495,14 +495,14 @@ The mistake is to load the model once per request in a service, which is slow, o
 
 This is the capstone project. It is larger than the earlier projects, and the goal is a repository that a colleague can clone, run and review in an afternoon.
 
-**Repo name:** `100-days-ai-engineering-day-38-classical-ml-project`
+**Repo name:** `100-episodes-ai-engineering-day-38-classical-ml-project`
 
 **Goal:** build a reproducible classifier for the Adult Census Income dataset with a data contract, a baseline, four candidate models, a logged experiment table, a threshold chosen for a recall target, one test evaluation, an error-slice report and a command-line inference interface.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-38-classical-ml-project/
+100-episodes-ai-engineering-day-38-classical-ml-project/
 ├── README.md
 ├── MODEL_CARD.md
 ├── requirements.txt
@@ -752,7 +752,7 @@ plus validation before the final test evaluation.
 **Watch**
 
 - Google Machine Learning Crash Course, the sections on production ML systems and on data, at developers.google.com/machine-learning/crash-course.
-- StatQuest with Josh Starmer (YouTube), the videos on the topics from Days 24 to 37 you want to review before the project.
+- StatQuest with Josh Starmer (YouTube), the videos on the topics from Episodes 24 to 37 you want to review before the project.
 
 **Practice**
 
@@ -764,4 +764,4 @@ plus validation before the final test evaluation.
 
 Tomorrow starts Module 5, deep learning foundations, where the classical tools you have built are the baseline the neural networks must beat. You will meet the artificial neuron, the weights and biases that you have seen as coefficients, the layers that stack them and the forward pass that computes a prediction. Keep this repository open. The logistic regression you trained today is a single neuron with a sigmoid, and the same evaluation discipline applies to every network that follows.
 
-**Next:** [Day 39: Neural Networks](../Module-05-Deep-Learning-Foundations/Day-39-Neural-Networks.md)
+**Next:** [Episode 39: Neural Networks](../Module-05-Deep-Learning-Foundations/Episode-39-Neural-Networks.md)

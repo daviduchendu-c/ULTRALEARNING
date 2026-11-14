@@ -1,30 +1,30 @@
-# Day 47: Autograd
+# Episode 47: Autograd
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You wrote backpropagation by hand on Day 43 and you know tensors from Day 46. Today you let PyTorch do the backward pass, and you learn exactly where its rules can surprise you.
+**Level:** intermediate. You wrote backpropagation by hand on Episode 43 and you know tensors from Episode 46. Today you let PyTorch do the backward pass, and you learn exactly where its rules can surprise you.
 
 **By the end of this day, you will have:**
 
 - A clear model of how PyTorch records a computational graph while the forward pass runs
 - Hands-on evidence of gradient accumulation, detaching and the difference between training and no-grad evaluation
-- A test that matches PyTorch's gradients to the hand-written gradients from Day 43, to float64 precision
+- A test that matches PyTorch's gradients to the hand-written gradients from Episode 43, to float64 precision
 - A small toolkit for gradient control: zeroing, clipping, freezing, hooks and gradient checks
 
 **What you need:**
 
 - A computer with Python 3.11 or 3.12
-- PyTorch 2.5.1 installed in the environment from Day 46 (CPU or CUDA build)
+- PyTorch 2.5.1 installed in the environment from Episode 46 (CPU or CUDA build)
 - NumPy 2.1.3 and pytest 8.3.3, as in earlier days
-- The `TwoLayerNet` forward and backward from your Day 43 repository, which you will compare against
+- The `TwoLayerNet` forward and backward from your Episode 43 repository, which you will compare against
 - Git and a free GitHub account for the project section
 
 **Prerequisites:**
 
-- Day 43: the computational graph, the chain rule and the backward pass
-- Day 46: tensors, shapes, dtypes and devices
-- Day 45: train and eval modes, since they affect what gets recorded
+- Episode 43: the computational graph, the chain rule and the backward pass
+- Episode 46: tensors, shapes, dtypes and devices
+- Episode 45: train and eval modes, since they affect what gets recorded
 
 ---
 
@@ -49,7 +49,7 @@
 
 ## Introduction
 
-Writing the backward pass by hand, as you did on Day 43, is the best way to understand gradients. It is also too slow and too error-prone for a real model. A transformer has hundreds of layers and dozens of operation types, and nobody writes its gradients manually. Autograd is the PyTorch system that records every tensor operation during the forward pass, builds a graph from it, and runs the backward pass for you.
+Writing the backward pass by hand, as you did on Episode 43, is the best way to understand gradients. It is also too slow and too error-prone for a real model. A transformer has hundreds of layers and dozens of operation types, and nobody writes its gradients manually. Autograd is the PyTorch system that records every tensor operation during the forward pass, builds a graph from it, and runs the backward pass for you.
 
 The system is simple once you see its rules. Operations on tensors that require gradients are recorded. Calling `backward` on a scalar loss walks the recorded graph in reverse and accumulates gradients into the `.grad` field of each leaf tensor. Most of the surprises come from three rules: gradients accumulate rather than replace, the graph is freed after one backward pass unless you ask otherwise, and in-place changes to values needed for the backward pass raise errors.
 
@@ -67,7 +67,7 @@ On the job, autograd bugs show up as models that do not train, gradients that do
 | 2015 | Chainer introduces define-by-run, where the graph is recorded as the Python code runs. | The idea behind PyTorch autograd used in this lesson. |
 | 2017 | PyTorch is released, with eager define-by-run autograd, and later versions add higher-order gradients and more operations. | Autograd now handles most operations used in research and production. |
 
-**Takeaway:** PyTorch's autograd is reverse-mode automatic differentiation applied to a graph recorded as the code runs. The graph is the same one you drew on Day 43, built for you.
+**Takeaway:** PyTorch's autograd is reverse-mode automatic differentiation applied to a graph recorded as the code runs. The graph is the same one you drew on Episode 43, built for you.
 
 ---
 
@@ -223,7 +223,7 @@ with torch.no_grad():
 print(preds.requires_grad)   # False
 ```
 
-The limitation of clipping is that it changes the direction of the update when it triggers, and a model that always clips is not really training at the rate you set. Log how often it triggers, as Day 44 recommended. Freezing also has a subtle risk: a frozen layer still runs its forward pass, so it still costs time and memory, and freezing many layers can make a model unable to adapt to a new domain.
+The limitation of clipping is that it changes the direction of the update when it triggers, and a model that always clips is not really training at the rate you set. Log how often it triggers, as Episode 44 recommended. Freezing also has a subtle risk: a frozen layer still runs its forward pass, so it still costs time and memory, and freezing many layers can make a model unable to adapt to a new domain.
 
 Do not evaluate a model without `no_grad` and then wonder why memory grows during validation. Each validation batch builds a graph that is never used, and the memory is kept until the references are dropped. In industry, the standard evaluation loop puts the model in eval mode and wraps the forward pass in `torch.no_grad`, and the two calls do different jobs, so both are needed.
 
@@ -241,14 +241,14 @@ Do not evaluate a model without `no_grad` and then wonder why memory grows durin
 
 ## Project: autograd checked against hand-written gradients
 
-**Goal:** rebuild the Day 43 two-layer network in PyTorch, check that autograd produces the same gradients as your hand-written backward pass, and build a small set of gradient control tools with tests. Write up the cases where autograd surprised you.
+**Goal:** rebuild the Episode 43 two-layer network in PyTorch, check that autograd produces the same gradients as your hand-written backward pass, and build a small set of gradient control tools with tests. Write up the cases where autograd surprised you.
 
-**Repo name:** `100-days-ai-day-47-autograd`
+**Repo name:** `100-episodes-ai-day-47-autograd`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-47-autograd/
+100-episodes-ai-day-47-autograd/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -265,7 +265,7 @@ Do not evaluate a model without `no_grad` and then wonder why memory grows durin
     └── compare_gradients.py
 ```
 
-**Starter code.** Create `requirements.txt` with PyTorch 2.5.1, NumPy 2.1.3 and pytest 8.3.3 pinned. Copy `network.py` from Day 43 into `src/autograd_lab/numpy_reference.py`, keeping its `forward` and `backward` methods. Then create `src/autograd_lab/torch_net.py`:
+**Starter code.** Create `requirements.txt` with PyTorch 2.5.1, NumPy 2.1.3 and pytest 8.3.3 pinned. Copy `network.py` from Episode 43 into `src/autograd_lab/numpy_reference.py`, keeping its `forward` and `backward` methods. Then create `src/autograd_lab/torch_net.py`:
 
 ```python
 import torch
@@ -348,7 +348,7 @@ Create `src/autograd_lab/control.py` with two helpers: `freeze(module)`, which s
 **Read**
 
 - Wikipedia, "Automatic differentiation", for the forward and reverse modes
-- Wikipedia, "Backpropagation", for the algorithm you wrote by hand on Day 43
+- Wikipedia, "Backpropagation", for the algorithm you wrote by hand on Episode 43
 - Wikipedia, "Gradient clipping", for the rescaling method and its purpose
 - PyTorch documentation, "Autograd mechanics", at pytorch.org/docs/stable/notes/autograd.html, which describes the graph, the leaf tensors and the rules you met today
 - PyTorch documentation, "torch.autograd", at pytorch.org/docs/stable, for `backward`, `grad` and the context managers
@@ -361,7 +361,7 @@ Create `src/autograd_lab/control.py` with two helpers: `freeze(module)`, which s
 
 **Watch**
 
-- Andrej Karpathy, "The spelled-out intro to neural networks and backpropagation: building micrograd", on YouTube, which builds the same kind of engine you wrote on Day 43
+- Andrej Karpathy, "The spelled-out intro to neural networks and backpropagation: building micrograd", on YouTube, which builds the same kind of engine you wrote on Episode 43
 - The PyTorch official channel on YouTube, for talks on autograd and the graph
 
 **Practice**
@@ -372,4 +372,4 @@ Create `src/autograd_lab/control.py` with two helpers: `freeze(module)`, which s
 
 ## Tomorrow
 
-Day 48 uses autograd to build real models. You will write classes that subclass `nn.Module`, define layers in the constructor and the computation in `forward`, and connect a loss and an optimizer. The parameters you tracked today are the ones `nn.Module` registers automatically, and the gradient checks you wrote will apply to any model you define. The two-layer network from Day 43 becomes about twenty lines of framework code.
+Episode 48 uses autograd to build real models. You will write classes that subclass `nn.Module`, define layers in the constructor and the computation in `forward`, and connect a loss and an optimizer. The parameters you tracked today are the ones `nn.Module` registers automatically, and the gradient checks you wrote will apply to any model you define. The two-layer network from Episode 43 becomes about twenty lines of framework code.

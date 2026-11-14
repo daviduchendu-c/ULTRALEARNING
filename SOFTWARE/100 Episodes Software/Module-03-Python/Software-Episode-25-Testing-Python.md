@@ -1,9 +1,9 @@
-# Day 25: Testing Python
+# Episode 25: Testing Python
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have packaged and checked a project on Day 24, and you have used `unittest` for small checks since Day 11. This is for anyone who has changed one function and broken three others, or who has written a test that passes today and fails tomorrow for no visible reason.
+**Level:** intermediate. You have packaged and checked a project on Episode 24, and you have used `unittest` for small checks since Episode 11. This is for anyone who has changed one function and broken three others, or who has written a test that passes today and fails tomorrow for no visible reason.
 
 **By the end of this day, you will have:**
 
@@ -17,18 +17,18 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - Tools installed inside the project's virtual environment: `pytest` 8.x (free, open source, MIT licensed), `ruff` 0.6 or newer, and `mypy` 1.10 or newer
-- The packaging workflow from Day 24: a `pyproject.toml`, a `src` layout, and `pip install -e ".[dev]"`
+- The packaging workflow from Episode 24: a `pyproject.toml`, a `src` layout, and `pip install -e ".[dev]"`
 
 **Prerequisites:**
 
-- Day 13 and Day 14: Lists, tuples, dictionaries and sets (the data the tests assert on)
-- Day 19 and Day 20: OOP I and II (classes and their methods, which the tests exercise)
-- Day 22: Exceptions and Debugging (`pytest.raises` relies on exceptions)
-- Day 24: Professional Python (the project layout and the commands)
+- Episode 13 and Episode 14: Lists, tuples, dictionaries and sets (the data the tests assert on)
+- Episode 19 and Episode 20: OOP I and II (classes and their methods, which the tests exercise)
+- Episode 22: Exceptions and Debugging (`pytest.raises` relies on exceptions)
+- Episode 24: Professional Python (the project layout and the commands)
 
 ---
 
@@ -242,12 +242,12 @@ Done when you can explain why the renamed file is collected and the first one is
 
 The project is a small todo store with JSON persistence, built as a package with a `src` layout. The store assigns ids, validates titles, marks tasks done, notifies a callback, and saves and loads its state. The unit tests check each behavior with fixtures and a mock notifier. The integration tests check the file round trip, a corrupt file and a failed save. The commands are the evidence: the fast suite runs without the integration marker, the full suite runs everything, and mypy and Ruff check the source.
 
-Suggested repo name: `100-days-software-day-25-testing-python`.
+Suggested repo name: `100-episodes-software-day-25-testing-python`.
 
 Repo layout:
 
 ```
-100-days-software-day-25-testing-python/
+100-episodes-software-day-25-testing-python/
 ├── .gitignore
 ├── README.md
 ├── pyproject.toml
@@ -596,6 +596,6 @@ The project is small so that the testing choices are visible. A reviewer should 
 
 ## Tomorrow
 
-Day 26 is the capstone for Module 3. You will build a multi-module command-line service that stores its data in SQLite, logs its actions, and has tests, documentation and a Git workflow that another developer could follow. The packaging from Day 24, the errors from Day 22, the standard library from Day 23 and the testing from today all come together in one project.
+Episode 26 is the capstone for Module 3. You will build a multi-module command-line service that stores its data in SQLite, logs its actions, and has tests, documentation and a Git workflow that another developer could follow. The packaging from Episode 24, the errors from Episode 22, the standard library from Episode 23 and the testing from today all come together in one project.
 
-**Next:** [Day 26: Python Capstone](Software-Day-26-Python-Capstone.md)
+**Next:** [Episode 26: Python Capstone](Software-Episode-26-Python-Capstone.md)

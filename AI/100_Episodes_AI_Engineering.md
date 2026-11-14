@@ -1,12 +1,12 @@
-# 100 Days of AI Engineering
+# 100 Episodes of AI Engineering
 
 # Module 1: AI Foundations
 
-## Days 1-6
+## Episodes 1-6
 
-### Day 1: What Is Artificial Intelligence?
+### Episode 1: What Is Artificial Intelligence?
 
-**Tutorial:** [Day 1: What Is Artificial Intelligence?](100%20Days%20AI/Module-01-AI-Foundations/Day-01-What-Is-Artificial-Intelligence.md)
+**Tutorial:** [Episode 1: What Is Artificial Intelligence?](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-01-What-Is-Artificial-Intelligence.md)
 
 Study:
 
@@ -25,9 +25,9 @@ Study:
 **Output:** Create an AI field map showing how ML, DL, CV, NLP, LLMs,
 agents and robotics AI relate.
 
-### Day 2: How Machines Learn
+### Episode 2: How Machines Learn
 
-**Tutorial:** [Day 2: How Machines Learn](100%20Days%20AI/Module-01-AI-Foundations/Day-02-How-Machines-Learn.md)
+**Tutorial:** [Episode 2: How Machines Learn](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-02-How-Machines-Learn.md)
 
 Study:
 
@@ -46,9 +46,9 @@ Study:
 -   Self-supervised learning
 -   Reinforcement learning
 
-### Day 3: The AI/ML Lifecycle
+### Episode 3: The AI/ML Lifecycle
 
-**Tutorial:** [Day 3: The AI/ML Lifecycle](100%20Days%20AI/Module-01-AI-Foundations/Day-03-The-AI-ML-Lifecycle.md)
+**Tutorial:** [Episode 3: The AI/ML Lifecycle](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-03-The-AI-ML-Lifecycle.md)
 
 Study:
 
@@ -58,9 +58,9 @@ monitoring → iteration.
 
 Learn why AI engineering is mostly the work around `model.fit()`.
 
-### Day 4: AI Problem Formulation
+### Episode 4: AI Problem Formulation
 
-**Tutorial:** [Day 4: AI Problem Formulation](100%20Days%20AI/Module-01-AI-Foundations/Day-04-AI-Problem-Formulation.md)
+**Tutorial:** [Episode 4: AI Problem Formulation](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-04-AI-Problem-Formulation.md)
 
 Study:
 
@@ -79,9 +79,9 @@ Study:
 **Exercise:** Take 20 real problems and identify the correct ML
 formulation.
 
-### Day 5: AI Development Environment
+### Episode 5: AI Development Environment
 
-**Tutorial:** [Day 5: AI Development Environment](100%20Days%20AI/Module-01-AI-Foundations/Day-05-AI-Development-Environment.md)
+**Tutorial:** [Episode 5: AI Development Environment](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-05-AI-Development-Environment.md)
 
 Learn:
 
@@ -99,7 +99,7 @@ Learn:
 -   Reproducibility
 -   Random seeds
 
-### Day 6: First End-to-End AI Experiment
+### Episode 6: First End-to-End AI Experiment
 
 Take a small dataset through:
 
@@ -113,19 +113,19 @@ Take a small dataset through:
 -   error inspection
 -   documentation
 
-### Day 6, Part II: How AI Works and How to Use It
+### Episode 6, Part II: How AI Works and How to Use It
 
 Explain how modern AI works at a practical level (tokens, the context window, sampling settings, instruction tuning, hallucination, tool use, retrieval, evaluation), using OpenAI as a case study. Move from average user to power user to practitioner.
 
-**Tutorial:** [Day 6, Part II: How AI Works and How to Use It](100%20Days%20AI/Module-01-AI-Foundations/Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
+**Tutorial:** [Episode 6, Part II: How AI Works and How to Use It](100%20Episodes%20AI/Module-01-AI-Foundations/Episode-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
 
 ------------------------------------------------------------------------
 
 # Module 2: Mathematics for AI
 
-## Days 7-16
+## Episodes 7-16
 
-### Day 7: Mathematical Foundations
+### Episode 7: Mathematical Foundations
 
 Review:
 
@@ -138,7 +138,7 @@ Review:
 -   Function composition
 -   Graphs
 
-### Day 8: Vectors
+### Episode 8: Vectors
 
 Study:
 
@@ -153,7 +153,7 @@ Study:
 
 Implement operations with NumPy.
 
-### Day 9: Matrices
+### Episode 9: Matrices
 
 Study:
 
@@ -168,7 +168,7 @@ Study:
 
 Connect matrices to datasets and neural-network layers.
 
-### Day 10: Linear Algebra for ML
+### Episode 10: Linear Algebra for ML
 
 Study:
 
@@ -180,7 +180,7 @@ Study:
 -   Singular Value Decomposition concept
 -   Dimensionality reduction intuition
 
-### Day 11: Calculus I
+### Episode 11: Calculus I
 
 Study:
 
@@ -193,7 +193,7 @@ Study:
 
 Connect derivatives to learning.
 
-### Day 12: Calculus II: Optimization
+### Episode 12: Calculus II: Optimization
 
 Study:
 
@@ -207,7 +207,7 @@ Study:
 
 Implement gradient descent manually.
 
-### Day 13: Probability
+### Episode 13: Probability
 
 Study:
 
@@ -218,7 +218,7 @@ Study:
 -   Bayes' theorem
 -   Probability distributions
 
-### Day 14: Statistics
+### Episode 14: Statistics
 
 Study:
 
@@ -233,7 +233,7 @@ Study:
 -   Confidence concepts
 -   Statistical distributions
 
-### Day 15: Information Theory
+### Episode 15: Information Theory
 
 Study:
 
@@ -243,7 +243,7 @@ Study:
 -   KL divergence concept
 -   Why cross-entropy appears in classification and language models
 
-### Day 16: Mathematics Project
+### Episode 16: Mathematics Project
 
 Implement from scratch:
 
@@ -258,9 +258,9 @@ Avoid ML frameworks for this project.
 
 # Module 3: Data Engineering for AI
 
-## Days 17-23
+## Episodes 17-23
 
-### Day 17: NumPy
+### Episode 17: NumPy
 
 Study:
 
@@ -273,7 +273,7 @@ Study:
 -   matrix operations
 -   random generation
 
-### Day 18: pandas
+### Episode 18: pandas
 
 Study:
 
@@ -286,7 +286,7 @@ Study:
 -   missing data
 -   transformations
 
-### Day 19: Data Cleaning
+### Episode 19: Data Cleaning
 
 Study:
 
@@ -299,7 +299,7 @@ Study:
 -   Label errors
 -   Data quality
 
-### Day 20: Exploratory Data Analysis
+### Episode 20: Exploratory Data Analysis
 
 Study:
 
@@ -311,7 +311,7 @@ Study:
 -   Hypothesis formation
 -   Data-driven debugging
 
-### Day 21: Feature Engineering
+### Episode 21: Feature Engineering
 
 Study:
 
@@ -323,7 +323,7 @@ Study:
 -   Feature interactions
 -   Feature selection
 
-### Day 22: Datasets and Data Pipelines
+### Episode 22: Datasets and Data Pipelines
 
 Study:
 
@@ -335,7 +335,7 @@ Study:
 -   Reproducible preprocessing
 -   Training/serving consistency
 
-### Day 23: Data Project
+### Episode 23: Data Project
 
 Take a messy dataset and produce:
 
@@ -349,9 +349,9 @@ Take a messy dataset and produce:
 
 # Module 4: Classical Machine Learning
 
-## Days 24-38
+## Episodes 24-38
 
-### Day 24: ML Workflow and Baselines
+### Episode 24: ML Workflow and Baselines
 
 Study:
 
@@ -363,7 +363,7 @@ Study:
 -   Bias/variance
 -   Cross-validation
 
-### Day 25: Linear Regression
+### Episode 25: Linear Regression
 
 Study and derive:
 
@@ -376,7 +376,7 @@ Study and derive:
 
 Implement from scratch, then compare with scikit-learn.
 
-### Day 26: Logistic Regression
+### Episode 26: Logistic Regression
 
 Study:
 
@@ -388,7 +388,7 @@ Study:
 -   Log loss
 -   Thresholds
 
-### Day 27: k-Nearest Neighbors
+### Episode 27: k-Nearest Neighbors
 
 Study:
 
@@ -398,7 +398,7 @@ Study:
 -   Scaling sensitivity
 -   Classification/regression
 
-### Day 28: Naive Bayes
+### Episode 28: Naive Bayes
 
 Study:
 
@@ -407,7 +407,7 @@ Study:
 -   Independence assumption
 -   Text-classification applications
 
-### Day 29: Decision Trees
+### Episode 29: Decision Trees
 
 Study:
 
@@ -420,7 +420,7 @@ Study:
 -   Overfitting
 -   Tree depth
 
-### Day 30: Ensemble Learning
+### Episode 30: Ensemble Learning
 
 Study:
 
@@ -431,7 +431,7 @@ Study:
 -   Voting
 -   Stacking concepts
 
-### Day 31: Support Vector Machines
+### Episode 31: Support Vector Machines
 
 Study:
 
@@ -441,7 +441,7 @@ Study:
 -   Kernels concept
 -   Linear vs nonlinear separation
 
-### Day 32: Clustering
+### Episode 32: Clustering
 
 Study:
 
@@ -453,7 +453,7 @@ Study:
 -   Hierarchical clustering concept
 -   DBSCAN concept
 
-### Day 33: Dimensionality Reduction
+### Episode 33: Dimensionality Reduction
 
 Study:
 
@@ -463,7 +463,7 @@ Study:
 -   Projection
 -   t-SNE/UMAP concepts and limitations
 
-### Day 34: Model Evaluation: Classification
+### Episode 34: Model Evaluation: Classification
 
 Study:
 
@@ -477,7 +477,7 @@ Study:
 -   PR curves
 -   Threshold selection
 
-### Day 35: Model Evaluation: Regression
+### Episode 35: Model Evaluation: Regression
 
 Study:
 
@@ -487,7 +487,7 @@ Study:
 -   R²
 -   Residual analysis
 
-### Day 36: Hyperparameters and Model Selection
+### Episode 36: Hyperparameters and Model Selection
 
 Study:
 
@@ -498,7 +498,7 @@ Study:
 -   Leakage
 -   Pipeline-based evaluation
 
-### Day 37: Interpretability and Error Analysis
+### Episode 37: Interpretability and Error Analysis
 
 Study:
 
@@ -510,7 +510,7 @@ Study:
 -   Failure analysis
 -   Dataset problems vs model problems
 
-### Day 38: Classical ML Project
+### Episode 38: Classical ML Project
 
 Build a complete ML product:
 
@@ -527,9 +527,9 @@ Build a complete ML product:
 
 # Module 5: Deep Learning Foundations
 
-## Days 39-51
+## Episodes 39-51
 
-### Day 39: Neural Networks
+### Episode 39: Neural Networks
 
 Study:
 
@@ -542,7 +542,7 @@ Study:
 -   Activations
 -   Forward pass
 
-### Day 40: Perceptrons and MLPs
+### Episode 40: Perceptrons and MLPs
 
 Study:
 
@@ -552,7 +552,7 @@ Study:
 -   Hidden layers
 -   Representation learning
 
-### Day 41: Activation Functions
+### Episode 41: Activation Functions
 
 Study:
 
@@ -564,7 +564,7 @@ Study:
 -   Softmax
 -   Why nonlinearities matter
 
-### Day 42: Loss Functions
+### Episode 42: Loss Functions
 
 Study:
 
@@ -574,7 +574,7 @@ Study:
 -   Negative log likelihood
 -   Task/loss alignment
 
-### Day 43: Backpropagation
+### Episode 43: Backpropagation
 
 Go deeply into:
 
@@ -588,7 +588,7 @@ Go deeply into:
 
 Implement a tiny neural network manually.
 
-### Day 44: Optimization
+### Episode 44: Optimization
 
 Study:
 
@@ -600,7 +600,7 @@ Study:
 -   Learning-rate schedules
 -   Optimization instability
 
-### Day 45: Generalization and Regularization
+### Episode 45: Generalization and Regularization
 
 Study:
 
@@ -611,7 +611,7 @@ Study:
 -   Data augmentation
 -   Batch normalization concept
 
-### Day 46: PyTorch Tensors
+### Episode 46: PyTorch Tensors
 
 Study:
 
@@ -622,7 +622,7 @@ Study:
 -   Tensor operations
 -   CPU/GPU movement
 
-### Day 47: Autograd
+### Episode 47: Autograd
 
 Study:
 
@@ -633,7 +633,7 @@ Study:
 -   Detaching
 -   Gradient control
 
-### Day 48: Building PyTorch Models
+### Episode 48: Building PyTorch Models
 
 Study:
 
@@ -644,7 +644,7 @@ Study:
 -   Optimizers
 -   Model architecture
 
-### Day 49: Datasets and DataLoaders
+### Episode 49: Datasets and DataLoaders
 
 Study:
 
@@ -655,7 +655,7 @@ Study:
 -   DataLoader
 -   Custom datasets
 
-### Day 50: Training Loops
+### Episode 50: Training Loops
 
 Build a complete loop:
 
@@ -669,7 +669,7 @@ Build a complete loop:
 -   checkpointing
 -   metrics
 
-### Day 51: Deep Learning Project
+### Episode 51: Deep Learning Project
 
 Train, evaluate and document a neural network from scratch using
 PyTorch.
@@ -678,9 +678,9 @@ PyTorch.
 
 # Module 6: Computer Vision
 
-## Days 52-61
+## Episodes 52-61
 
-### Day 52: Digital Images
+### Episode 52: Digital Images
 
 Study:
 
@@ -692,7 +692,7 @@ Study:
 -   Color spaces
 -   Normalization
 
-### Day 53: Classical Image Processing
+### Episode 53: Classical Image Processing
 
 Study:
 
@@ -704,7 +704,7 @@ Study:
 -   Morphological operations concepts
 -   Contours/features concepts
 
-### Day 54: Convolution
+### Episode 54: Convolution
 
 Study:
 
@@ -717,7 +717,7 @@ Study:
 
 Implement simple convolution manually.
 
-### Day 55: Convolutional Neural Networks
+### Episode 55: Convolutional Neural Networks
 
 Study:
 
@@ -727,11 +727,11 @@ Study:
 -   Classifiers
 -   CNN architecture
 
-### Day 56: Image Classification
+### Episode 56: Image Classification
 
 Build: dataset → augmentation → CNN → training → metrics → inference.
 
-### Day 57: Transfer Learning
+### Episode 57: Transfer Learning
 
 Study:
 
@@ -741,7 +741,7 @@ Study:
 -   Frozen layers
 -   Domain adaptation concepts
 
-### Day 58: Object Detection
+### Episode 58: Object Detection
 
 Study:
 
@@ -751,7 +751,7 @@ Study:
 -   NMS
 -   One-stage/two-stage detector concepts
 
-### Day 59: Image Segmentation
+### Episode 59: Image Segmentation
 
 Study:
 
@@ -760,7 +760,7 @@ Study:
 -   Masks
 -   Pixel-level prediction
 
-### Day 60: Vision for Robotics and Edge Systems
+### Episode 60: Vision for Robotics and Edge Systems
 
 Study:
 
@@ -771,7 +771,7 @@ Study:
 -   Detection-to-action pipelines
 -   Compute limitations
 
-### Day 61: Computer Vision Project
+### Episode 61: Computer Vision Project
 
 Create a vision application that trains/evaluates a model and performs
 inference on new visual data.
@@ -780,9 +780,9 @@ inference on new visual data.
 
 # Module 7: NLP and Sequence Modeling
 
-## Days 62-69
+## Episodes 62-69
 
-### Day 62: NLP Foundations
+### Episode 62: NLP Foundations
 
 Study:
 
@@ -794,7 +794,7 @@ Study:
 -   Tokenization
 -   NLP tasks
 
-### Day 63: Text Representations
+### Episode 63: Text Representations
 
 Study:
 
@@ -804,7 +804,7 @@ Study:
 -   Sparse vectors
 -   Semantic limitations
 
-### Day 64: Embeddings
+### Episode 64: Embeddings
 
 Study:
 
@@ -815,7 +815,7 @@ Study:
 -   Semantic spaces
 -   Contextual embeddings introduction
 
-### Day 65: Sequence Models
+### Episode 65: Sequence Models
 
 Study:
 
@@ -825,7 +825,7 @@ Study:
 -   Vanishing gradients
 -   LSTM/GRU concepts
 
-### Day 66: Attention
+### Episode 66: Attention
 
 Study:
 
@@ -836,7 +836,7 @@ Study:
 -   Weighted representations
 -   Self-attention intuition
 
-### Day 67: Transformers
+### Episode 67: Transformers
 
 Study:
 
@@ -848,7 +848,7 @@ Study:
 -   Layer normalization
 -   Encoder vs decoder
 
-### Day 68: NLP with Transformers
+### Episode 68: NLP with Transformers
 
 Explore:
 
@@ -858,7 +858,7 @@ Explore:
 -   Translation
 -   Question answering
 
-### Day 69: NLP Project
+### Episode 69: NLP Project
 
 Build and evaluate a transformer-based NLP application.
 
@@ -866,9 +866,9 @@ Build and evaluate a transformer-based NLP application.
 
 # Module 8: Large Language Models
 
-## Days 70-80
+## Episodes 70-80
 
-### Day 70: What Is an LLM?
+### Episode 70: What Is an LLM?
 
 Study:
 
@@ -881,7 +881,7 @@ Study:
 -   Inference
 -   Foundation models
 
-### Day 71: Tokenization
+### Episode 71: Tokenization
 
 Study:
 
@@ -893,7 +893,7 @@ Study:
 -   Token counts
 -   Why tokenization affects behavior
 
-### Day 72: How LLMs Generate Text
+### Episode 72: How LLMs Generate Text
 
 Study:
 
@@ -905,7 +905,7 @@ Study:
 -   Top-k/top-p concepts
 -   Stopping criteria
 
-### Day 73: Pretraining
+### Episode 73: Pretraining
 
 Study:
 
@@ -915,7 +915,7 @@ Study:
 -   Scaling concepts
 -   Compute/data/model relationships
 
-### Day 74: Fine-Tuning
+### Episode 74: Fine-Tuning
 
 Study:
 
@@ -926,7 +926,7 @@ Study:
 -   LoRA concepts
 -   Dataset design
 
-### Day 75: Alignment and Preference Optimization
+### Episode 75: Alignment and Preference Optimization
 
 Conceptually study:
 
@@ -936,7 +936,7 @@ Conceptually study:
 -   DPO-style preference optimization
 -   Safety/alignment goals and limitations
 
-### Day 76: Prompt Engineering as Interface Design
+### Episode 76: Prompt Engineering as Interface Design
 
 Study:
 
@@ -949,7 +949,7 @@ Study:
 -   Prompt injection awareness
 -   Reliability limitations
 
-### Day 77: Embeddings and Semantic Search
+### Episode 77: Embeddings and Semantic Search
 
 Study:
 
@@ -959,14 +959,14 @@ Study:
 -   Chunk representations
 -   Vector indexes/databases concepts
 
-### Day 78: Retrieval-Augmented Generation
+### Episode 78: Retrieval-Augmented Generation
 
 Study the complete pipeline:
 
 documents → parsing → chunking → embeddings → indexing → retrieval →
 context construction → generation → citations/evaluation.
 
-### Day 79: LLM Evaluation
+### Episode 79: LLM Evaluation
 
 Study:
 
@@ -979,7 +979,7 @@ Study:
 -   Regression test sets
 -   Cost/latency/quality tradeoffs
 
-### Day 80: LLM Application Project
+### Episode 80: LLM Application Project
 
 Build a grounded knowledge assistant with retrieval, evaluation and
 documented failure cases.
@@ -988,9 +988,9 @@ documented failure cases.
 
 # Module 9: AI Agents and Automation
 
-## Days 81-88
+## Episodes 81-88
 
-### Day 81: What Is an AI Agent?
+### Episode 81: What Is an AI Agent?
 
 Study:
 
@@ -1004,7 +1004,7 @@ Study:
 -   Goals
 -   Agent loop
 
-### Day 82: Tool Use and Function Calling
+### Episode 82: Tool Use and Function Calling
 
 Study:
 
@@ -1017,7 +1017,7 @@ Study:
 -   Permissions
 -   Tool-result handling
 
-### Day 83: Agent State and Memory
+### Episode 83: Agent State and Memory
 
 Study:
 
@@ -1029,7 +1029,7 @@ Study:
 -   Memory quality
 -   When not to remember information
 
-### Day 84: Planning and Workflows
+### Episode 84: Planning and Workflows
 
 Study:
 
@@ -1040,7 +1040,7 @@ Study:
 -   Sequential/parallel workflows
 -   Human approval checkpoints
 
-### Day 85: Agent Frameworks
+### Episode 85: Agent Frameworks
 
 Learn how modern frameworks implement these ideas:
 
@@ -1051,7 +1051,7 @@ Learn how modern frameworks implement these ideas:
 Learn the architecture each library implements, because the
 library itself is replaceable.
 
-### Day 86: Agentic RAG
+### Episode 86: Agentic RAG
 
 Combine:
 
@@ -1063,7 +1063,7 @@ Combine:
 -   Generation
 -   Evaluation
 
-### Day 87: Agent Evaluation and Observability
+### Episode 87: Agent Evaluation and Observability
 
 Study:
 
@@ -1077,7 +1077,7 @@ Study:
 -   Regression tests
 -   Human evaluation
 
-### Day 88: Agent Project
+### Episode 88: Agent Project
 
 Build an agent that safely uses multiple tools to complete a bounded
 real-world workflow, with evaluation and logs.
@@ -1086,9 +1086,9 @@ real-world workflow, with evaluation and logs.
 
 # Module 10: MLOps and LLMOps
 
-## Days 89-95
+## Episodes 89-95
 
-### Day 89: Reproducible ML
+### Episode 89: Reproducible ML
 
 Study:
 
@@ -1100,7 +1100,7 @@ Study:
 -   Model artifacts
 -   Reproducible experiments
 
-### Day 90: Experiment Tracking
+### Episode 90: Experiment Tracking
 
 Study:
 
@@ -1113,7 +1113,7 @@ Study:
 
 Use MLflow or equivalent tooling.
 
-### Day 91: Model Registry and Versioning
+### Episode 91: Model Registry and Versioning
 
 Study:
 
@@ -1124,7 +1124,7 @@ Study:
 -   Reproducible loading
 -   Rollback concepts
 
-### Day 92: Model Serving
+### Episode 92: Model Serving
 
 Study:
 
@@ -1137,7 +1137,7 @@ Study:
 -   Throughput
 -   Scaling concepts
 
-### Day 93: Monitoring
+### Episode 93: Monitoring
 
 Study:
 
@@ -1150,7 +1150,7 @@ Study:
 -   Quality monitoring
 -   Cost monitoring
 
-### Day 94: AI Deployment Architecture
+### Episode 94: AI Deployment Architecture
 
 Study:
 
@@ -1165,7 +1165,7 @@ Study:
 -   Scaling
 -   Security and secrets
 
-### Day 95: Production AI Project
+### Episode 95: Production AI Project
 
 Take a trained model or LLM application through:
 
@@ -1181,9 +1181,9 @@ Take a trained model or LLM application through:
 
 # Module 11: Edge AI and Robotics AI
 
-## Days 96-98
+## Episodes 96-98
 
-### Day 96: Edge AI
+### Episode 96: Edge AI
 
 Study:
 
@@ -1198,7 +1198,7 @@ Study:
 -   Pruning concepts
 -   Hardware acceleration
 
-### Day 97: AI for Robotics
+### Episode 97: AI for Robotics
 
 Study how AI connects to:
 
@@ -1215,7 +1215,7 @@ Study how AI connects to:
 Understand the boundary between classical robotics algorithms and
 learned systems.
 
-### Day 98: Reinforcement Learning and Embodied AI
+### Episode 98: Reinforcement Learning and Embodied AI
 
 Study:
 
@@ -1237,9 +1237,9 @@ Study:
 
 # Module 12: AI Engineering Capstone
 
-## Days 99-100
+## Episodes 99-100
 
-### Day 99: Design the AI System
+### Episode 99: Design the AI System
 
 Start with a problem, not a model.
 
@@ -1266,7 +1266,7 @@ Produce:
 19. Test plan
 20. Build backlog
 
-### Day 100: Build, Evaluate, Deploy and Teach
+### Episode 100: Build, Evaluate, Deploy and Teach
 
 Your capstone should demonstrate several layers:
 
@@ -1291,8 +1291,8 @@ Your final presentation should explain:
 
 Suggested episode:
 
-**Day 100/100: I Built and Deployed a Complete AI System From Scratch
-\| 100 Days of AI Engineering**
+**Episode 100/100: I Built and Deployed a Complete AI System From Scratch
+\| 100 Episodes of AI Engineering**
 
 ------------------------------------------------------------------------
 
@@ -1384,7 +1384,7 @@ Suggested episode:
     evaluation and observability rather than framework memorization.
 -   MLOps: MLflow docs and production case studies.
 
-# Day 101: Career, Hiring and Monetization
+# Episode 101: Career, Hiring and Monetization
 
 ## 101.1 Choose a Marketable Direction
 

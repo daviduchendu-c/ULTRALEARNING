@@ -1,9 +1,9 @@
-# Day 18: Modules and Packages
+# Episode 18: Modules and Packages
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** intermediate. You have written functions in single files from Day 9 to Day 17. This is for anyone whose project has grown past one file, and who has hit an `ImportError`, a name clash with a standard library module, or a script that runs code when another file imports it.
+**Level:** intermediate. You have written functions in single files from Episode 9 to Episode 17. This is for anyone whose project has grown past one file, and who has hit an `ImportError`, a name clash with a standard library module, or a script that runs code when another file imports it.
 
 **By the end of this day, you will have:**
 
@@ -17,15 +17,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 
 **Prerequisites:**
 
-- Day 9: Python Runtime and Syntax (`python -m`, the `__main__` guard, script mode)
-- Day 16: Functions I (defining and calling functions)
-- Day 17: Functions II (keyword arguments, closures used as helpers)
+- Episode 9: Python Runtime and Syntax (`python -m`, the `__main__` guard, script mode)
+- Episode 16: Functions I (defining and calling functions)
+- Episode 17: Functions II (keyword arguments, closures used as helpers)
 
 ---
 
@@ -228,12 +228,12 @@ Done when the first run fails with a relative import error and the second succee
 
 The project is a small package with a geometry subpackage, a reporting module, a command-line interface, and a `__main__.py` entry point. The code is simple, and the structure is the lesson. The evidence is a passing test suite, a working `python -m shapes_app` command, and a findings file that shows the package layout and one import error you fixed.
 
-Suggested repo name: `100-days-software-day-18-modules-and-packages`.
+Suggested repo name: `100-episodes-software-day-18-modules-and-packages`.
 
 Repo layout:
 
 ```
-100-days-software-day-18-modules-and-packages/
+100-episodes-software-day-18-modules-and-packages/
 ├── .gitignore
 ├── README.md
 ├── shapes_app/
@@ -467,6 +467,6 @@ The package is small so the structure is easy to inspect. A reviewer should be a
 
 ## Tomorrow
 
-Day 19 begins object-oriented programming. You will define classes, create instances, store attributes, write methods, and use the special `__init__` method. You will also learn the difference between instance methods, class methods and static methods, and when each one belongs in a design. The packages you built today will hold the classes you write tomorrow, one class per module where that keeps the code clear.
+Episode 19 begins object-oriented programming. You will define classes, create instances, store attributes, write methods, and use the special `__init__` method. You will also learn the difference between instance methods, class methods and static methods, and when each one belongs in a design. The packages you built today will hold the classes you write tomorrow, one class per module where that keeps the code clear.
 
-**Next:** [Day 19: OOP I](Software-Day-19-OOP-I.md)
+**Next:** [Episode 19: OOP I](Software-Episode-19-OOP-I.md)

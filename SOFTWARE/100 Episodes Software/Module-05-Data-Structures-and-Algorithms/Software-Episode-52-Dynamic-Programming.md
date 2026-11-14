@@ -1,9 +1,9 @@
-# Day 52: Dynamic Programming
+# Episode 52: Dynamic Programming
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 4 hours
-**Level:** advanced. You should have finished Day 51, be comfortable with recursion and with two-dimensional lists, and be ready to write a small table by hand. This day is for anyone who has seen a recursive solution take minutes on an input that should take milliseconds, and wants to know why and how to fix it.
+**Level:** advanced. You should have finished Episode 51, be comfortable with recursion and with two-dimensional lists, and be ready to write a small table by hand. This day is for anyone who has seen a recursive solution take minutes on an input that should take milliseconds, and wants to know why and how to fix it.
 
 **By the end of this day, you will have:**
 
@@ -16,15 +16,15 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 51
+- Git 2.23 or newer, and the repository from Episode 51
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 - Paper for the tables, which is the most useful tool for this day
 
 **Prerequisites:**
 
-- Day 41: Complexity Analysis (counting the work of recursive calls)
-- Day 50: Searching and Recursion (base cases and recursion depth)
-- Day 51: Backtracking and Greedy (the brute-force searches used as references)
+- Episode 41: Complexity Analysis (counting the work of recursive calls)
+- Episode 50: Searching and Recursion (base cases and recursion depth)
+- Episode 51: Backtracking and Greedy (the brute-force searches used as references)
 
 ---
 
@@ -140,7 +140,7 @@ def fib_memo(n: int) -> int:
 print(fib_memo(80))   # 23416728348467685, computed instantly
 ```
 
-The limitation of memoization is recursion depth, which is the same limit you saw on Day 50. Each new level of the recursion is a frame on the call stack, so `fib_memo(2000)` raises `RecursionError` even though the work is small. The tabulated version avoids that.
+The limitation of memoization is recursion depth, which is the same limit you saw on Episode 50. Each new level of the recursion is a frame on the call stack, so `fib_memo(2000)` raises `RecursionError` even though the work is small. The tabulated version avoids that.
 
 The common mistake is to memoize with a key that does not capture the whole state. If the cache key for fewest coins is the amount but the function also depends on the coin set, the cache returns wrong answers when the coins change. To spot it, call the function with two different coin sets and check the results.
 
@@ -199,7 +199,7 @@ Common DP patterns show up in version control, in genome analysis, in logistics 
 
 ## Hands-on exercises
 
-Work in the repository from Day 51. Keep the DP functions in `dsa/dynamic.py` and the diff tool in `dsa/diff.py`.
+Work in the repository from Episode 51. Keep the DP functions in `dsa/dynamic.py` and the diff tool in `dsa/diff.py`.
 
 Exercise 1 writes states on paper. For the fewest-coins problem with coins 1, 3 and 4, draw a table with amounts 0 to 8 and fill in the answer for each by hand, using the transition. Check your row against `fewest_coins`.
 
@@ -227,12 +227,12 @@ Done when every case agrees, and your notes explain why the backward loop is req
 
 The project is a line diff tool. Given two versions of a text as lists of lines, it reports which lines were kept, removed or added, in order. It is the same idea that powers the changed-lines view in version control. The core is the LCS table: lines in the longest common subsequence are kept, and the rest are removed or added. The tests check that the kept and removed lines rebuild the old text, and that the kept and added lines rebuild the new text.
 
-Suggested repo name: `100-days-software-day-52-dynamic-programming`. Copy the Day 51 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-52-dynamic-programming`. Copy the Episode 51 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-52-dynamic-programming/
+100-episodes-software-day-52-dynamic-programming/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -531,7 +531,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 51 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 51 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python diff_demo.py` on the sample. Check that the lines that changed are exactly the ones you expect from reading the two versions.
 3. Add a `edit_distance(a: str, b: str) -> int` function to `dsa/dynamic.py` using a table of size (len(a) + 1) by (len(b) + 1), with insert, delete and substitute costs of 1. Test it on "kitten" and "sitting", which should give 3, and against a brute force on short strings.
 4. Write `docs/dp-notes.md` with the counts from exercise 2, one paragraph on why `fib_table` survives n equal to 1200 and `fib_memo` does not, and one paragraph on the transition for LCS.
@@ -602,4 +602,4 @@ This project is light on new theory and heavy on the table. The skill is writing
 
 ## Tomorrow
 
-Day 53 is the DSA assessment, the checkpoint for the module. You will work mixed problems from the five days on arrays, linked structures, hashing, trees, heaps, graphs, sorting, search, greedy and dynamic programming. For each problem you will write the complexity, explain why your approach works, compare it with an alternative, and solve it both untimed and under a clock. The repository from today already contains the test habits you will use, and the assessment harness you build tomorrow runs the same kind of checks.
+Episode 53 is the DSA assessment, the checkpoint for the module. You will work mixed problems from the five days on arrays, linked structures, hashing, trees, heaps, graphs, sorting, search, greedy and dynamic programming. For each problem you will write the complexity, explain why your approach works, compare it with an alternative, and solve it both untimed and under a clock. The repository from today already contains the test habits you will use, and the assessment harness you build tomorrow runs the same kind of checks.

@@ -1,6 +1,6 @@
-# Day 1: What Is Robotics?
+# Episode 1: What Is Robotics?
 
-*100 Days of Robotics Engineering, Module 1: Robotics Engineering Foundations*
+*100 Episodes of Robotics Engineering, Module 1: Robotics Engineering Foundations*
 
 **Time:** about 4 hours
 **Level:** beginner. No electronics or robotics experience is needed. Some Python helps for the project, and the project explains every idea it uses.
@@ -53,7 +53,7 @@ A robot is a machine that senses its environment, decides what to do, and acts o
 
 A washing machine that adjusts its spin when the drum is unbalanced is a robot in this sense. So is a warehouse arm that picks boxes, and so is a delivery drone. They differ in how much they sense, how much they decide, and how much they can change in the world.
 
-Robotics engineers combine mechanics, electronics, embedded software, control theory and, more and more, machine learning. Today gives you the vocabulary and one working model you can run on a laptop. Day 2 opens the hardware.
+Robotics engineers combine mechanics, electronics, embedded software, control theory and, more and more, machine learning. Today gives you the vocabulary and one working model you can run on a laptop. Episode 2 opens the hardware.
 
 [Wikipedia: Robotics](https://en.wikipedia.org/wiki/Robotics) is the reference for today. Read the introduction and the section on "Components of robots."
 
@@ -232,7 +232,7 @@ This project needs no robot. You will simulate a two-wheeled robot, drive it tow
 ### Repository layout
 
 ```
-100-days-robotics-day-01-what-is-robotics/
+100-episodes-robotics-day-01-what-is-robotics/
 ├── README.md          # results, and answers to the questions in Step 6
 ├── diff_drive.py      # the robot's kinematics: wheel speeds in, pose out
 ├── sim.py             # open-loop and closed-loop runs, and the plot
@@ -245,8 +245,8 @@ This project needs no robot. You will simulate a two-wheeled robot, drive it tow
 Run these from the folder where you keep projects:
 
 ```bash
-mkdir 100-days-robotics-day-01-what-is-robotics
-cd 100-days-robotics-day-01-what-is-robotics
+mkdir 100-episodes-robotics-day-01-what-is-robotics
+cd 100-episodes-robotics-day-01-what-is-robotics
 git init
 python -m venv .venv
 ```
@@ -463,7 +463,7 @@ Create `README.md`. Paste the two printed lines at the top, then answer these qu
 - `paths.png` is in the repository and shows both paths and the goal.
 - The README includes the printed output and answers all five questions.
 - You can explain, without notes, why the closed-loop run reaches the goal and the open-loop run does not.
-- The repository is pushed to GitHub with the four files above, under the name `100-days-robotics-day-01-what-is-robotics`.
+- The repository is pushed to GitHub with the four files above, under the name `100-episodes-robotics-day-01-what-is-robotics`.
 
 ---
 
@@ -517,6 +517,6 @@ Create `README.md`. Paste the two printed lines at the top, then answer these qu
 
 ## Tomorrow
 
-Day 2, **Anatomy of a Robot**, opens the box. You will map each block from today's loop to real hardware: microcontrollers such as the Arduino Uno, single-board computers such as the Raspberry Pi, motor drivers, batteries and frames. Bring your five-robot table, because tomorrow you will compare each robot's parts with parts you can buy.
+Episode 2, **Anatomy of a Robot**, opens the box. You will map each block from today's loop to real hardware: microcontrollers such as the Arduino Uno, single-board computers such as the Raspberry Pi, motor drivers, batteries and frames. Bring your five-robot table, because tomorrow you will compare each robot's parts with parts you can buy.
 
-**Next:** [Day 2: Anatomy of a Robot](Robotics-Day-02-Anatomy-of-a-Robot.md)
+**Next:** [Episode 2: Anatomy of a Robot](Robotics-Episode-02-Anatomy-of-a-Robot.md)

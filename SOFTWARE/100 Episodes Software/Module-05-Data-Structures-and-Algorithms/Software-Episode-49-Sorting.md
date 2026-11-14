@@ -1,9 +1,9 @@
-# Day 49: Sorting
+# Episode 49: Sorting
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 48, be comfortable with recursion and with the heap from Day 47, and have used `sorted` in Python. This day is for anyone who has called `sort` on a list of records and not known whether the result would keep the old order for equal items.
+**Level:** intermediate. You should have finished Episode 48, be comfortable with recursion and with the heap from Episode 47, and have used `sorted` in Python. This day is for anyone who has called `sort` on a list of records and not known whether the result would keep the old order for equal items.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 48
+- Git 2.23 or newer, and the repository from Episode 48
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 41: Complexity Analysis (Big-O, and the average and worst case distinction)
-- Day 46: Trees and BSTs (recursion on halves of a structure)
-- Day 47: Heaps and Priority Queues (`MinHeap` from the project)
+- Episode 41: Complexity Analysis (Big-O, and the average and worst case distinction)
+- Episode 46: Trees and BSTs (recursion on halves of a structure)
+- Episode 47: Heaps and Priority Queues (`MinHeap` from the project)
 
 ---
 
@@ -50,7 +50,7 @@ In this guide you are going to cover the following:
 
 Sorting is the most common operation in software that you rarely write yourself. It runs when a search results page orders items by relevance, when a report lists customers by revenue, and when a database answers an `ORDER BY` clause. Python's built-in `sorted` and `list.sort` are fast and reliable, so you will almost always use them. This day exists for the cases where you need to know what they do: why the output is stable, why a sort can be slow on some inputs, and why no comparison sort can beat a certain speed.
 
-Sorting algorithms also teach a set of techniques that reappear across this module. Merge sort is divide and conquer, the same method as the recursive searches in Day 50. Heap sort uses the heap from Day 47. Quicksort uses partitioning, which is a two-pointer scan from Day 42. The question to ask of each algorithm is the same one you asked on Day 41: how much work does it do as n grows, and what does it do in the worst case?
+Sorting algorithms also teach a set of techniques that reappear across this module. Merge sort is divide and conquer, the same method as the recursive searches in Episode 50. Heap sort uses the heap from Episode 47. Quicksort uses partitioning, which is a two-pointer scan from Episode 42. The question to ask of each algorithm is the same one you asked on Episode 41: how much work does it do as n grows, and what does it do in the worst case?
 
 The outline asks for comparison sorting, merge, quick and heap concepts, stability and complexity. The project uses a stable sort in a practical job: ranking players by score, with ties broken by name. That task is a common interview question and a common product requirement.
 
@@ -183,7 +183,7 @@ Quicksort and its variants power the default sort in many C libraries and the in
 
 ### Heap sort
 
-Think of a line of people who must be sorted by height. Instead of arranging the whole line, you repeatedly pull out the shortest person who remains and place them next. A heap makes that pull cheap, because the minimum sits at the root. Heap sort is that idea, with the heap from Day 47.
+Think of a line of people who must be sorted by height. Instead of arranging the whole line, you repeatedly pull out the shortest person who remains and place them next. A heap makes that pull cheap, because the minimum sits at the root. Heap sort is that idea, with the heap from Episode 47.
 
 From first principles, building the heap from n items costs O(n) with the bottom-up method. Then n pops each cost O(log n), so the total is O(n log n) in every case. Heap sort uses no extra memory beyond the heap if you implement it in place, which is its main advantage over merge sort. The version in this day builds a separate heap, so it uses O(n) extra space, but the time is the same.
 
@@ -244,7 +244,7 @@ Sorting complexity decides how a database plans a query, how a search engine ran
 
 ## Hands-on exercises
 
-Work in the repository from Day 48. Keep the sorting functions in `dsa/sorting.py` and the leaderboard in `dsa/leaderboard.py`.
+Work in the repository from Episode 48. Keep the sorting functions in `dsa/sorting.py` and the leaderboard in `dsa/leaderboard.py`.
 
 Exercise 1 counts comparisons. Add a counter to a copy of insertion sort. Run it on a sorted list, a reversed list and a random list of 100 items. Record the counts in `docs/sorting-notes.md`.
 
@@ -272,12 +272,12 @@ Done when your notes show all four times and a sentence on the reason.
 
 The project is a leaderboard. Players have a name and a score, and the board must list them by score from highest to lowest, with ties broken by name in alphabetical order. The trick is to use stability. Sort by name first, then sort by score with a stable sort, and the names stay in alphabetical order within each score. The tests check the result against Python's `sorted` with a two-part key, so you can see that both methods agree.
 
-Suggested repo name: `100-days-software-day-49-sorting`. Copy the Day 48 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-49-sorting`. Copy the Episode 48 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-49-sorting/
+100-episodes-software-day-49-sorting/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -530,7 +530,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 48 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 48 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python leaderboard_demo.py` and confirm the order against the expected output in the notes above.
 3. Add a `top_n(players, n)` function to `dsa/leaderboard.py` that returns the first n places from `rank`, and test it with n larger than the list.
 4. Write `docs/sorting-notes.md` with the times from exercise 5, one paragraph on why `rank` needs stability, and one paragraph on the quicksort fixed-pivot result from exercise 4.
@@ -601,4 +601,4 @@ This project is light on new code and heavy on one idea: stability lets you buil
 
 ## Tomorrow
 
-Day 50 covers searching and recursion. Binary search uses the sorted order from today to find a value in O(log n), and it is the first algorithm in this module that depends on the input being sorted. You will write iterative and recursive binary search, see how the call stack grows with recursion, and use divide and conquer to compute powers in O(log n) multiplications.
+Episode 50 covers searching and recursion. Binary search uses the sorted order from today to find a value in O(log n), and it is the first algorithm in this module that depends on the input being sorted. You will write iterative and recursive binary search, see how the call stack grows with recursion, and use divide and conquer to compute powers in O(log n) multiplications.

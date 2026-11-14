@@ -1,9 +1,9 @@
-# Day 41: Activation Functions
+# Episode 41: Activation Functions
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 3 hours
-**Level:** intermediate. You can write a forward pass (Day 39) and you have seen why a perceptron with a step function cannot learn from its errors (Day 40). Today you need to differentiate simple functions, so basic calculus from Day 11 is enough.
+**Level:** intermediate. You can write a forward pass (Episode 39) and you have seen why a perceptron with a step function cannot learn from its errors (Episode 40). Today you need to differentiate simple functions, so basic calculus from Episode 11 is enough.
 
 **By the end of this day, you will have:**
 
@@ -22,10 +22,10 @@
 
 **Prerequisites:**
 
-- Day 11: derivatives, the chain rule in its simplest form and the meaning of slope
-- Day 12: how a derivative tells you the direction of change
-- Day 39: neurons, layers and the forward pass
-- Day 40: why a step function gives no useful gradient
+- Episode 11: derivatives, the chain rule in its simplest form and the meaning of slope
+- Episode 12: how a derivative tells you the direction of change
+- Episode 39: neurons, layers and the forward pass
+- Episode 40: why a step function gives no useful gradient
 
 ---
 
@@ -51,7 +51,7 @@
 
 ## Introduction
 
-An activation function is the one part of a neuron that is not a weighted sum. It takes the pre-activation z and returns a new value, and that small step is what lets a stack of layers represent curves, corners and combinations rather than straight lines. Day 40 showed that the step function can do this in principle, but its slope is zero everywhere except at the jump, so a learning rule based on slopes cannot use it. Modern networks need activations that are nonlinear and have useful derivatives.
+An activation function is the one part of a neuron that is not a weighted sum. It takes the pre-activation z and returns a new value, and that small step is what lets a stack of layers represent curves, corners and combinations rather than straight lines. Episode 40 showed that the step function can do this in principle, but its slope is zero everywhere except at the jump, so a learning rule based on slopes cannot use it. Modern networks need activations that are nonlinear and have useful derivatives.
 
 Choosing an activation has real consequences. It decides how gradients flow backward during training, whether units can die and stop learning, and how stable the numbers stay as the network gets deeper. Two networks with the same layers can train in very different ways if you swap one activation for another. Many training failures that look like a bad learning rate are really activation problems.
 
@@ -90,7 +90,7 @@ On the job, you will pick activations in every model you build. A transformer la
 
 ## Why nonlinearities matter
 
-Start with a stack of linear layers. Each layer computes a matrix product and a bias. Two linear layers compose into one linear map, as you saw on Day 39. A stack of ten linear layers is still one matrix multiplication, so it can only draw a straight boundary, however deep you make it.
+Start with a stack of linear layers. Each layer computes a matrix product and a bias. Two linear layers compose into one linear map, as you saw on Episode 39. A stack of ten linear layers is still one matrix multiplication, so it can only draw a straight boundary, however deep you make it.
 
 From first principles, if f is linear, then f(a x + b y) = a f(x) + b f(y). Composing two linear functions gives another linear function, so depth adds no new expressive power. An activation function g breaks this property, because g(a x + b y) is generally not a g(x) + b g(y). Each nonlinear layer folds the space in a new way, and the number of folds grows quickly with depth and width. That is the source of a deep network's ability to draw complicated regions.
 
@@ -116,7 +116,7 @@ In the real market, every production model combines these two properties. The no
 
 Picture a dimmer switch that is never fully off or fully on. As you turn the knob, the light brightens slowly at the ends and quickly in the middle. The sigmoid is that kind of curve. It maps any real number to a value between 0 and 1, and it changes most rapidly near zero.
 
-From first principles, the logistic sigmoid is sigma(z) = 1 / (1 + exp(-z)). At z = 0 it returns 0.5, at large positive z it approaches 1, and at large negative z it approaches 0. Its derivative is sigma'(z) = sigma(z) (1 - sigma(z)). That formula is convenient because the derivative can be computed from the output, which you will reuse on Day 43. The largest value of the derivative is 0.25, at z = 0.
+From first principles, the logistic sigmoid is sigma(z) = 1 / (1 + exp(-z)). At z = 0 it returns 0.5, at large positive z it approaches 1, and at large negative z it approaches 0. Its derivative is sigma'(z) = sigma(z) (1 - sigma(z)). That formula is convenient because the derivative can be computed from the output, which you will reuse on Episode 43. The largest value of the derivative is 0.25, at z = 0.
 
 ```python
 import numpy as np
@@ -184,7 +184,7 @@ print(relu_grad(z))      # [0. 0. 1.]
 
 ReLU has its own failure mode. A unit whose pre-activation is always negative outputs zero and has zero gradient, so it never updates. This is called a dead unit. Dead units can appear after a large learning-rate step pushes a neuron's bias far negative, and a network can lose a large fraction of its units this way. Watching the fraction of activations that are exactly zero is a simple check.
 
-The common mistake is to treat ReLU as a fix for every training problem. It is a good default for hidden layers in convolutional and feed-forward networks, but it does not make the output layer any easier, and it does not fix a bad initialization or a learning rate that is too high. On the job, ReLU appears in almost every image classifier that runs on a phone, because it is fast and it works well with the convolution operations on Day 55.
+The common mistake is to treat ReLU as a fix for every training problem. It is a good default for hidden layers in convolutional and feed-forward networks, but it does not make the output layer any easier, and it does not fix a bad initialization or a learning rate that is too high. On the job, ReLU appears in almost every image classifier that runs on a phone, because it is fast and it works well with the convolution operations on Episode 55.
 
 ---
 
@@ -241,7 +241,7 @@ In the real market, GELU appears inside the feed-forward blocks of many language
 
 Imagine a panel of three judges who each give a raw score to three contestants. The scores can be any real numbers. To turn them into a shared share of the vote, you exponentiate each score so everything is positive, then divide by the total. That is softmax.
 
-From first principles, softmax(z)_i = exp(z_i) / sum over j of exp(z_j). The outputs are positive and sum to one, so they form a probability distribution. Subtracting the maximum score from every entry before exponentiating gives the same result and avoids overflow for large values. The derivative is not a single number per entry, because each output depends on all of the inputs, but in practice you rarely write it by hand, because the cross-entropy loss on Day 42 combines the two cleanly.
+From first principles, softmax(z)_i = exp(z_i) / sum over j of exp(z_j). The outputs are positive and sum to one, so they form a probability distribution. Subtracting the maximum score from every entry before exponentiating gives the same result and avoids overflow for large values. The derivative is not a single number per entry, because each output depends on all of the inputs, but in practice you rarely write it by hand, because the cross-entropy loss on Episode 42 combines the two cleanly.
 
 ```python
 import numpy as np
@@ -277,12 +277,12 @@ The common mistake is to apply softmax to a set of values that are not logits of
 
 **Goal:** build an activation module with forward and derivative functions, test every derivative numerically, and measure how the product of derivatives changes with depth for sigmoid, tanh and ReLU.
 
-**Repo name:** `100-days-ai-day-41-activation-functions`
+**Repo name:** `100-episodes-ai-day-41-activation-functions`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-41-activation-functions/
+100-episodes-ai-day-41-activation-functions/
 ├── README.md
 ├── requirements.txt
 ├── src/
@@ -426,4 +426,4 @@ def softmax(z):
 
 ## Tomorrow
 
-Day 42 turns the outputs of the network into a number that tells the learning algorithm how wrong it was. You will compare mean squared error, binary cross-entropy, categorical cross-entropy and negative log likelihood, and you will see why the choice of loss must match the activation at the output. The softmax you wrote today appears again there, where it pairs with cross-entropy to give a clean gradient.
+Episode 42 turns the outputs of the network into a number that tells the learning algorithm how wrong it was. You will compare mean squared error, binary cross-entropy, categorical cross-entropy and negative log likelihood, and you will see why the choice of loss must match the activation at the output. The softmax you wrote today appears again there, where it pairs with cross-entropy to give a clean gradient.

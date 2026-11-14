@@ -1,9 +1,9 @@
-# Day 36: STL Deep Dive
+# Episode 36: STL Deep Dive
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have used `std::vector`, iterators and `<algorithm>` from Day 30, and class templates from Day 35. This day widens your view to the rest of the Standard Template Library: maps, sets, queues, stacks and lambdas, and how to choose among them. It is for anyone who reaches for a vector every time and then writes a loop to search it.
+**Level:** intermediate. You have used `std::vector`, iterators and `<algorithm>` from Episode 30, and class templates from Episode 35. This day widens your view to the rest of the Standard Template Library: maps, sets, queues, stacks and lambdas, and how to choose among them. It is for anyone who reaches for a vector every time and then writes a loop to search it.
 
 **By the end of this day, you will have:**
 
@@ -23,8 +23,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 35: the build, classes, pointers, lifetime, inheritance and templates
-- Day 30: vectors, strings, iterators and the basic algorithms
+- Episodes 27 to 35: the build, classes, pointers, lifetime, inheritance and templates
+- Episode 30: vectors, strings, iterators and the basic algorithms
 
 ---
 
@@ -97,7 +97,7 @@ The table is a starting point. A `std::unordered_map` has average O(1) lookups a
 
 ### Iterators
 
-Day 30 introduced iterators as bookmarks in a book. The standard library groups them into categories, and each category supports a different set of operations. The categories, from least to most capable, are input, forward, bidirectional and random access. A `std::vector` has random-access iterators, which allow `it + 3`. A `std::list` has bidirectional iterators, which allow only `++` and `--`. A `std::map` and a `std::set` also have bidirectional iterators.
+Episode 30 introduced iterators as bookmarks in a book. The standard library groups them into categories, and each category supports a different set of operations. The categories, from least to most capable, are input, forward, bidirectional and random access. A `std::vector` has random-access iterators, which allow `it + 3`. A `std::list` has bidirectional iterators, which allow only `++` and `--`. A `std::map` and a `std::set` also have bidirectional iterators.
 
 The rule that matters most in practice is invalidation. Inserting into a `std::map` or `std::set` does not invalidate existing iterators, because the nodes do not move. Inserting into a `std::vector` can reallocate, which invalidates every iterator. The reference page for each container lists which operations invalidate which iterators, and reading that page before you store an iterator across a change is the habit that prevents the bug.
 
@@ -123,7 +123,7 @@ The common mistake is to assume all containers behave the same. The fix is to ch
 
 ### Algorithms
 
-The algorithms from Day 30 work on any range, and they become more useful with lambdas. The two you will use most are `std::transform`, which applies a function to each element and writes the result to another range, and `std::accumulate`, which folds a range into one value. Both take iterators and a function, and both are defined in the `<numeric>` and `<algorithm>` headers.
+The algorithms from Episode 30 work on any range, and they become more useful with lambdas. The two you will use most are `std::transform`, which applies a function to each element and writes the result to another range, and `std::accumulate`, which folds a range into one value. Both take iterators and a function, and both are defined in the `<numeric>` and `<algorithm>` headers.
 
 ```cpp
 #include <algorithm>
@@ -265,7 +265,7 @@ int main() {
 
 The output is `run resize`, `run upload` and `run notify`, in that order. `front` reads the oldest item, and `pop` removes it without returning it, so you read the value before you pop. The common mistake is to call `front` on an empty queue, which is undefined behavior. The loop condition `!jobs.empty()` prevents it.
 
-A queue does not allow priority. If some jobs must run first, use `std::priority_queue`, which Day 47 covers in the data structures module. In the market, queues connect producers and consumers in message systems, print spoolers and task runners.
+A queue does not allow priority. If some jobs must run first, use `std::priority_queue`, which Episode 47 covers in the data structures module. In the market, queues connect producers and consumers in message systems, print spoolers and task runners.
 
 ### Stacks
 
@@ -342,12 +342,12 @@ Done when the counter reflects the number of calls and you have noted the lifeti
 
 The project reads log lines of the form `LEVEL component: message`, such as `ERROR db: connection refused`. It puts the lines into a queue, parses each one into a struct, counts the levels in a map, collects the component names in a set, filters the errors with a lambda, and checks bracket balance with a stack. The test checks each part.
 
-Suggested repo name: `100-days-software-day-36-stl-deep-dive`.
+Suggested repo name: `100-episodes-software-day-36-stl-deep-dive`.
 
 The repo layout:
 
 ```
-100-days-software-day-36-stl-deep-dive/
+100-episodes-software-day-36-stl-deep-dive/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -702,6 +702,6 @@ This project is short but shows five containers and two algorithms in one place.
 
 ## Tomorrow
 
-Day 37 covers modern C++: smart pointers, move semantics, `auto`, range-based `for`, and `std::optional`. You have already used `std::optional` in the log parser and moved values with `std::move`. Day 37 explains the rules behind both, and shows how `std::unique_ptr` and `std::shared_ptr` take over the ownership job that you did by hand in the Day 32 buffer. The containers from today store those smart pointers without any change to their behavior.
+Episode 37 covers modern C++: smart pointers, move semantics, `auto`, range-based `for`, and `std::optional`. You have already used `std::optional` in the log parser and moved values with `std::move`. Episode 37 explains the rules behind both, and shows how `std::unique_ptr` and `std::shared_ptr` take over the ownership job that you did by hand in the Episode 32 buffer. The containers from today store those smart pointers without any change to their behavior.
 
-**Next:** [Day 37: Modern C++](Software-Day-37-Modern-C-Plus-Plus.md)
+**Next:** [Episode 37: Modern C++](Software-Episode-37-Modern-C-Plus-Plus.md)

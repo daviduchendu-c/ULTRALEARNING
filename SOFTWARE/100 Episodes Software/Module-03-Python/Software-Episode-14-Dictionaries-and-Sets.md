@@ -1,9 +1,9 @@
-# Day 14: Dictionaries and Sets
+# Episode 14: Dictionaries and Sets
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You know lists, tuples, comprehensions and mutability from Day 13. This is for anyone who has searched a list inside a loop and watched the program slow down as the data grew.
+**Level:** beginner to intermediate. You know lists, tuples, comprehensions and mutability from Episode 13. This is for anyone who has searched a list inside a loop and watched the program slow down as the data grew.
 
 **By the end of this day, you will have:**
 
@@ -17,15 +17,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 10: Objects, Variables and Types (identity, equality, mutability)
-- Day 13: Lists and Tuples (membership cost, copying, comprehensions)
+- Episode 10: Objects, Variables and Types (identity, equality, mutability)
+- Episode 13: Lists and Tuples (membership cost, copying, comprehensions)
 
 ---
 
@@ -69,7 +69,7 @@ The official reference is the section "Mapping Types (dict)" and "Set Types (set
 - **frozenset:** an immutable set. It can be a key or an item of another set.
 - **Collision:** two different keys that produce the same slot in a hash table. The structure resolves it and keeps both keys.
 - **Insertion order:** the order in which keys were first added to a dictionary, which Python preserves when iterating.
-- **Comprehension:** an expression that builds a collection in one statement, covered on Day 13 for lists.
+- **Comprehension:** an expression that builds a collection in one statement, covered on Episode 13 for lists.
 
 ---
 
@@ -97,7 +97,7 @@ The common mistake is believing that a dictionary lookup is always constant time
 
 Hashability is a promise. An object is hashable when it has a `__hash__` method that returns the same number for its whole life, and when equal objects produce equal hashes. Think of a locker key that never changes its cut. If the key changed after you put it in the locker, you could not find the locker again.
 
-From first principles, Python sets `__hash__` for immutable built-in types, such as `int`, `float`, `str`, `bytes`, `tuple` (when its contents are hashable) and `frozenset`. Mutable containers such as `list`, `dict` and `set` set their `__hash__` to `None`, so `hash([1, 2])` raises `TypeError`. A class you write has a default hash based on identity, unless you define `__eq__`, in which case Python sets `__hash__` to `None` unless you define it too. Day 21 explains the data model methods in full.
+From first principles, Python sets `__hash__` for immutable built-in types, such as `int`, `float`, `str`, `bytes`, `tuple` (when its contents are hashable) and `frozenset`. Mutable containers such as `list`, `dict` and `set` set their `__hash__` to `None`, so `hash([1, 2])` raises `TypeError`. A class you write has a default hash based on identity, unless you define `__eq__`, in which case Python sets `__hash__` to `None` unless you define it too. Episode 21 explains the data model methods in full.
 
 ```python
 print(hash((1, 2)) == hash((1, 2)))   # True
@@ -130,7 +130,7 @@ for sku, qty in stock.items():
     print(sku, qty)
 ```
 
-The `|` operator on dictionaries returns a new dictionary, and when keys overlap the right side wins. The original `stock` is unchanged, which is the same non-mutating style you used for lists on Day 13.
+The `|` operator on dictionaries returns a new dictionary, and when keys overlap the right side wins. The original `stock` is unchanged, which is the same non-mutating style you used for lists on Episode 13.
 
 The common mistake is using `d[key]` for a value that might be missing, then catching `KeyError` in a wide `except` block. Use `get` when a default makes sense, and `in` when you need to branch on presence. The second mistake is changing a dictionary while iterating over it, which raises `RuntimeError` when the size changes. Iterate over `list(d)` when you need to modify the dictionary during the loop. Code reviewers catch these patterns in data pipelines, where a dictionary often holds the state of a long-running process.
 
@@ -157,7 +157,7 @@ The common mistake is using a set when order matters, such as a queue of tasks o
 
 ### Comprehensions for dicts and sets
 
-Comprehensions build dictionaries and sets with the same shape as list comprehensions from Day 13. The difference is the brackets and the output. Think of a sorting table with two outputs: one tray gets the labeled drawers, and the other gets the unique tags. The source is the same, and the destination changes.
+Comprehensions build dictionaries and sets with the same shape as list comprehensions from Episode 13. The difference is the brackets and the output. Think of a sorting table with two outputs: one tray gets the labeled drawers, and the other gets the unique tags. The source is the same, and the destination changes.
 
 From first principles, `{key_expr: value_expr for item in iterable if condition}` builds a dictionary, and `{expr for item in iterable if condition}` builds a set. Later items with the same key overwrite earlier ones in a dictionary comprehension, and duplicates vanish in a set comprehension. The `if` clause filters, and it works in both forms.
 
@@ -175,7 +175,7 @@ print(paid)                     # {'A1': 2.5, 'B2': 4.25}
 
 The first comprehension calls `orders.count` for each unique SKU, which is quadratic. The next section's project uses a single pass instead, and the difference becomes visible on large inputs.
 
-The common mistake is using `orders.count(sku)` inside a comprehension and not noticing that it scans the whole list each time. That is correct output with poor performance. Count in one pass with a loop, `collections.Counter`, or a dictionary updated with `get`. Day 23 covers `collections`. In the job market, interviewers look for exactly this kind of hidden quadratic work.
+The common mistake is using `orders.count(sku)` inside a comprehension and not noticing that it scans the whole list each time. That is correct output with poor performance. Count in one pass with a loop, `collections.Counter`, or a dictionary updated with `get`. Episode 23 covers `collections`. In the job market, interviewers look for exactly this kind of hidden quadratic work.
 
 ---
 
@@ -229,12 +229,12 @@ Done when the function never mutates the input dictionary and mypy is clean.
 
 The project is a small inventory library that counts scanned codes, merges stock counts, finds the unique codes, looks up prices with defaults, and groups codes by category. Each function uses one of the structures from this day, and each test checks the rule it depends on. The evidence is the passing test suite and a findings document that records the timing comparison from the exercise.
 
-Suggested repo name: `100-days-software-day-14-dictionaries-and-sets`.
+Suggested repo name: `100-episodes-software-day-14-dictionaries-and-sets`.
 
 Repo layout:
 
 ```
-100-days-software-day-14-dictionaries-and-sets/
+100-episodes-software-day-14-dictionaries-and-sets/
 ├── .gitignore
 ├── README.md
 ├── inventory.py
@@ -426,6 +426,6 @@ The project is small because the lesson is about choosing the right structure. A
 
 ## Tomorrow
 
-Day 15 turns to control flow: the `if`, `elif` and `else` branches you have been reading in every example, the `match` statement for structured patterns, `for` and `while` loops, `range`, `break` and `continue`, the `else` clause on loops, and comprehensions with conditions. You will use the dictionaries and sets from today as the data that loops walk through.
+Episode 15 turns to control flow: the `if`, `elif` and `else` branches you have been reading in every example, the `match` statement for structured patterns, `for` and `while` loops, `range`, `break` and `continue`, the `else` clause on loops, and comprehensions with conditions. You will use the dictionaries and sets from today as the data that loops walk through.
 
-**Next:** [Day 15: Control Flow](Software-Day-15-Control-Flow.md)
+**Next:** [Episode 15: Control Flow](Software-Episode-15-Control-Flow.md)

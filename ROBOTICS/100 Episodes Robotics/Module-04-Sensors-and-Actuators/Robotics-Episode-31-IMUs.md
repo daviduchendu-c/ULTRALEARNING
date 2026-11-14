@@ -1,9 +1,9 @@
-# Day 31: IMUs
+# Episode 31: IMUs
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need Day 29 (odometry and its drift), Day 30 (noise and filtering) and Module 3 (I2C and reading registers). Today you learn the sensor that tells a robot how it is tilted and how fast it is turning, independently of its wheels.
+**Level:** intermediate. You need Episode 29 (odometry and its drift), Episode 30 (noise and filtering) and Module 3 (I2C and reading registers). Today you learn the sensor that tells a robot how it is tilted and how fast it is turning, independently of its wheels.
 
 **By the end of this day, you will have:**
 
@@ -25,8 +25,8 @@
 
 **Prerequisites:**
 
-- Day 29: odometry, the difference between an estimated pose and a measured one, and drift
-- Day 30: noise, filtering and the difference between accuracy and precision
+- Episode 29: odometry, the difference between an estimated pose and a measured one, and drift
+- Episode 30: noise, filtering and the difference between accuracy and precision
 - Module 3: reading registers over I2C with Wire.beginTransmission() and Wire.requestFrom()
 - Basic trigonometry: atan2 and the relation between a tilt angle and the gravity vector
 
@@ -54,7 +54,7 @@
 
 ## Introduction
 
-A wheel encoder tells a robot how far its wheels have turned. It does not tell the robot that it has tipped onto a ramp, that it has slid sideways on ice, or that it has rotated while the wheels were locked. An inertial measurement unit, or IMU, reports the robot's own acceleration and rotation, independent of the wheels. Combined with the encoders from Day 29, it gives the robot a much better estimate of its orientation than either sensor alone.
+A wheel encoder tells a robot how far its wheels have turned. It does not tell the robot that it has tipped onto a ramp, that it has slid sideways on ice, or that it has rotated while the wheels were locked. An inertial measurement unit, or IMU, reports the robot's own acceleration and rotation, independent of the wheels. Combined with the encoders from Episode 29, it gives the robot a much better estimate of its orientation than either sensor alone.
 
 The IMU has a serious weakness of its own. Its gyroscope drifts, its accelerometer is confused by motion, and its magnetometer is confused by steel and by the robot's own motors. The skill of today's lesson is knowing which sensor to trust at which moment, and checking each one against a known angle, so that you can tell a real tilt from a sensor error.
 
@@ -197,7 +197,7 @@ The worked example uses the numbers above. Suppose the gyro bias is calibrated t
 
 The common mistake is to choose alpha without measuring the sensors. A very high alpha trusts the gyro too much, and a drift returns. A low alpha trusts the accelerometer too much, and the estimate jitters with motion. The right alpha depends on the gyro's drift and the accelerometer's noise, and the project measures both, so you can set alpha from the data.
 
-A Kalman filter, which the Day 31 project does not require, is a more general version of the same idea, and it uses a model of the sensors' noise to set the weights. The complementary filter is simpler and is enough for a level robot. In the market, a robot with a nine-axis IMU and a fused orientation output often uses a Kalman-type filter inside the sensor or in the robot's software, and the complementary filter is a good first step.
+A Kalman filter, which the Episode 31 project does not require, is a more general version of the same idea, and it uses a model of the sensors' noise to set the weights. The complementary filter is simpler and is enough for a level robot. In the market, a robot with a nine-axis IMU and a fused orientation output often uses a Kalman-type filter inside the sensor or in the robot's software, and the complementary filter is a good first step.
 
 The complementary filter is also the first place to check the frame convention. A sign error in the gyro or the accelerometer gives a filter that drifts in the wrong direction, and the test on the turntable shows it at once.
 
@@ -230,7 +230,7 @@ This project builds a tilt and heading estimator, calibrates it and tests it aga
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-31-imus/
+100-episodes-robotics-engineering-day-31-imus/
 ├── README.md
 ├── firmware/
 │   └── imu_filter/
@@ -421,6 +421,6 @@ The IMU is a small, cheap board with no hazard of its own. The hazard is the rob
 
 ## Tomorrow
 
-Tomorrow you will look at the sensor that sees the world in the widest detail: the camera. Day 32 covers RGB cameras, stereo and depth concepts, resolution, frame rate, exposure, field of view, calibration and the camera frame. A camera can correct the drift that you measured today, if it can see a known feature, and that is the reason robots that use cameras for localization still keep the IMU and the encoder.
+Tomorrow you will look at the sensor that sees the world in the widest detail: the camera. Episode 32 covers RGB cameras, stereo and depth concepts, resolution, frame rate, exposure, field of view, calibration and the camera frame. A camera can correct the drift that you measured today, if it can see a known feature, and that is the reason robots that use cameras for localization still keep the IMU and the encoder.
 
-**Next:** [Day 32: Cameras](Robotics-Day-32-Cameras.md)
+**Next:** [Episode 32: Cameras](Robotics-Episode-32-Cameras.md)

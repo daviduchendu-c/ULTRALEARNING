@@ -1,9 +1,9 @@
-# Day 5: AI Development Environment
+# Episode 5: AI Development Environment
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 4 hours (installing PyTorch can take a while on a slow connection)
-**Level:** beginner to intermediate. For anyone who can use a terminal and has done Days 1 to 4.
+**Level:** beginner to intermediate. For anyone who can use a terminal and has done Episodes 1 to 4.
 
 **By the end of this day, you will have:**
 
@@ -22,11 +22,11 @@
 
 **Prerequisites:**
 
-- Day 1: What Is Artificial Intelligence?
-- Day 2: How Machines Learn
-- Day 3: The AI/ML Lifecycle
-- Day 4: AI Problem Formulation
-- How to open a terminal, and how to create and activate a virtual environment (Days 1, 2 and 4 covered it)
+- Episode 1: What Is Artificial Intelligence?
+- Episode 2: How Machines Learn
+- Episode 3: The AI/ML Lifecycle
+- Episode 4: AI Problem Formulation
+- How to open a terminal, and how to create and activate a virtual environment (Episodes 1, 2 and 4 covered it)
 
 ---
 
@@ -139,7 +139,7 @@ a = np.array([[1.0, 2.0], [3.0, 4.0]])
 print(a.shape, a.mean(), a.sum(axis=0))   # (2, 2) 2.5 [4. 6.]
 ```
 
-`axis=0` collapses the rows, so the sum runs down each column. The most common NumPy error is a shape mismatch, such as a `(100,)` array where a function expects `(100, 1)`. That is why `gradient_descent.py` in Day 2: How Machines Learn used `x_train.reshape(-1, 1)`. When something goes wrong, print `shape` first. NumPy gets a full day later (Day 17).
+`axis=0` collapses the rows, so the sum runs down each column. The most common NumPy error is a shape mismatch, such as a `(100,)` array where a function expects `(100, 1)`. That is why `gradient_descent.py` in Episode 2: How Machines Learn used `x_train.reshape(-1, 1)`. When something goes wrong, print `shape` first. NumPy gets a full day later (Episode 17).
 
 Every pandas column, every scikit-learn input and every PyTorch tensor behaves like a NumPy array, so NumPy fluency shows up in nearly every data and ML interview.
 
@@ -162,7 +162,7 @@ print(df.groupby("city")["sales"].sum())
 # Lagos    320
 ```
 
-Chained assignment such as `df[df.sales > 100]["city"] = "X"` may change a temporary copy, and the original table stays the same. Use `df.loc[df.sales > 100, "city"] = "X"` instead. Also run `df.dtypes` after reading a CSV: numbers stored as text will not add up, and the symptom is a sum that looks like joined strings. Day 18 covers pandas in depth.
+Chained assignment such as `df[df.sales > 100]["city"] = "X"` may change a temporary copy, and the original table stays the same. Use `df.loc[df.sales > 100, "city"] = "X"` instead. Also run `df.dtypes` after reading a CSV: numbers stored as text will not add up, and the symptom is a sum that looks like joined strings. Episode 18 covers pandas in depth.
 
 Cleaning and summarizing tables is a large share of day-to-day data and ML work, and pandas is the tool most teams use for it.
 
@@ -197,7 +197,7 @@ model = LogisticRegression(max_iter=1000).fit(X_train, y_train)   # change this 
 model = RandomForestClassifier().fit(X_train, y_train)            # ...and the rest of the code stays
 ```
 
-The common mistake is fitting a scaler on all the data before splitting, which is the leak from Day 3: The AI/ML Lifecycle. The tell is a validation score that looks too good and falls apart on new data. Put preprocessing inside a `Pipeline` so it is fit on training rows only.
+The common mistake is fitting a scaler on all the data before splitting, which is the leak from Episode 3: The AI/ML Lifecycle. The tell is a validation score that looks too good and falls apart on new data. Put preprocessing inside a `Pipeline` so it is fit on training rows only.
 
 For tabular business data, such as churn, fraud and forecasting, scikit-learn models are still a first choice in industry.
 
@@ -209,7 +209,7 @@ NumPy is a calculator that handles whole grids at once. PyTorch is the same calc
 
 Training a neural network means adjusting weights to reduce a loss. That needs fast grids of numbers (tensors) and the gradients of the loss with respect to every weight. PyTorch records the operations as you run them and computes the gradients automatically.
 
-PyTorch provides tensors (arrays that can live on a CPU or a GPU), automatic differentiation (it computes the gradients you wrote by hand in Day 2: How Machines Learn), and the building blocks of neural networks.
+PyTorch provides tensors (arrays that can live on a CPU or a GPU), automatic differentiation (it computes the gradients you wrote by hand in Episode 2: How Machines Learn), and the building blocks of neural networks.
 
 ```python
 import torch
@@ -262,7 +262,7 @@ python -m pip freeze > requirements-lock.txt   # record every installed package,
 
 `pip freeze` lists dependencies you never asked for, such as `scipy`, `joblib` and `threadpoolctl`. Keep `requirements.txt` short and readable. Commit the frozen lock file next to it for exact rebuilds.
 
-The usual mistakes are installing into the system Python with no environment, then wondering why another project broke, and forgetting to activate, so `pip install` goes somewhere else. Check with `python -c "import sys; print(sys.prefix)"`, which should end in `.venv`. Committing `.venv` to Git is another one. It is large and specific to one machine, so add it to `.gitignore`. On Windows PowerShell, activation can fail with an execution policy error. Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or use the Command Prompt activation from Day 1: What Is Artificial Intelligence?
+The usual mistakes are installing into the system Python with no environment, then wondering why another project broke, and forgetting to activate, so `pip install` goes somewhere else. Check with `python -c "import sys; print(sys.prefix)"`, which should end in `.venv`. Committing `.venv` to Git is another one. It is large and specific to one machine, so add it to `.gitignore`. On Windows PowerShell, activation can fail with an execution policy error. Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, or use the Command Prompt activation from Episode 1: What Is Artificial Intelligence?
 
 You will see other tools at work: `uv` (a fast, free installer from Astral), Poetry, and conda. Conda is popular for scientific packages. Anaconda's default channel has commercial licensing terms for larger organizations, while Miniforge with conda-forge is free. This series uses `venv` and `pip`, which come with Python. Whatever the tool, employers expect a project to come with a pinned, rebuildable environment.
 
@@ -314,11 +314,11 @@ A result is **reproducible** when the same code, data and environment give the s
 
 In the project, two runs with seed 42 give identical accuracy and an identical PyTorch number. Runs with no seed differ each time. `random_state=42` in scikit-learn and `torch.manual_seed(42)` are separate settings, so you need both.
 
-Seeding only one library is the most common slip, and you spot it when two runs of the same script disagree. A second one is choosing the seed that gives the best score ("seed hacking"). If your result changes a lot between seeds, report the mean and spread over several seeds. On Day 1: What Is Artificial Intelligence?, one seed gave 0.22 and another gave 0.89. A third is results that depend on unrecorded state: notebook cells run out of order, a file edited by hand, or a dataset downloaded as "latest."
+Seeding only one library is the most common slip, and you spot it when two runs of the same script disagree. A second one is choosing the seed that gives the best score ("seed hacking"). If your result changes a lot between seeds, report the mean and spread over several seeds. On Episode 1: What Is Artificial Intelligence?, one seed gave 0.22 and another gave 0.89. A third is results that depend on unrecorded state: notebook cells run out of order, a file edited by hand, or a dataset downloaded as "latest."
 
 A fourth is expecting bit-for-bit identical numbers across machines. Different CPUs, operating systems, math libraries and GPU kernels can change floating-point results slightly. Some GPU operations are nondeterministic by default. PyTorch's reproducibility notes explain `torch.use_deterministic_algorithms(True)`, at some speed cost. Aim for identical results on one machine and close results across machines.
 
-In regulated work such as finance or health, you may need to reproduce a model's results months later. Day 89 covers reproducible pipelines.
+In regulated work such as finance or health, you may need to reproduce a model's results months later. Episode 89 covers reproducible pipelines.
 
 ---
 
@@ -366,11 +366,11 @@ Record the speedup on your machine. It varies a lot by machine. One Windows lapt
 
 ## Project: an AI environment starter repo
 
-This is the GitHub project for Day 5. You will copy this repo at the start of every later project.
+This is the GitHub project for Episode 5. You will copy this repo at the start of every later project.
 
 **Goal:** a repo with pinned requirements, a `.gitignore`, an environment check, a library tour, a notebook and a reproducibility test.
 
-Suggested repo name: `100-days-ai-engineering-day-05-ai-environment`.
+Suggested repo name: `100-episodes-ai-engineering-day-05-ai-environment`.
 
 ### Repository layout
 
@@ -401,7 +401,7 @@ mkdir notebooks
 python -m venv .venv
 ```
 
-Activate it (as on Day 1: What Is Artificial Intelligence?) and upgrade pip: `python -m pip install --upgrade pip`.
+Activate it (as on Episode 1: What Is Artificial Intelligence?) and upgrade pip: `python -m pip install --upgrade pip`.
 
 ### Step 2: pinned requirements
 
@@ -661,7 +661,7 @@ A score of 1.000 is rounded. The model is very confident on clear sentences like
 
 ### Step 8: prove the environment with an old result
 
-If you did the optional Day 4 check, copy `three_framings.py` into this repo, run it, and confirm it prints the same numbers as on Day 4: AI Problem Formulation. If it does, your new environment reproduces an old result. Note that in the README.
+If you did the optional Episode 4 check, copy `three_framings.py` into this repo, run it, and confirm it prints the same numbers as on Episode 4: AI Problem Formulation. If it does, your new environment reproduces an old result. Note that in the README.
 
 ### Step 9: write the README
 
@@ -669,7 +669,7 @@ Include:
 
 1. **Setup:** the exact commands to create the environment and install, for your operating system.
 2. **Environment:** paste the full output of `env_check.py`.
-3. **Results:** the outputs of `tour.py` and `reproducibility.py`, and the Day 4 rerun if you did it.
+3. **Results:** the outputs of `tour.py` and `reproducibility.py`, and the Episode 4 rerun if you did it.
 4. **Answers:**
    - What is the difference between `requirements.txt` and `requirements-lock.txt` in this repo, and when would you use each?
    - Your Exercise 3 speedup, and why NumPy is faster.
@@ -705,7 +705,7 @@ Include:
 4. A CPU-only PyTorch build is installed (`torch.version.cuda` is `None`). The NVIDIA driver is missing or too old (`nvidia-smi` fails or shows an old version). The active environment is not the one where the CUDA build was installed.
 5. Neural network training is dominated by large matrix multiplications that GPUs run in parallel, and PyTorch has GPU implementations of them. scikit-learn's random forest runs on the CPU. Tree building involves many branching decisions, which GPUs are not designed for.
 6. Probably not. Different CPUs, operating systems, math library builds and GPU kernels can change floating-point results slightly. Exact repeatability is expected on the same setup, and small differences across setups are normal. Large differences mean a real mismatch, such as different versions or data.
-7. The maximum of 20 noisy results is biased upward, the same as picking the best validation score in Day 3: The AI/ML Lifecycle. Report the mean and the spread (standard deviation or range) across seeds.
+7. The maximum of 20 noisy results is biased upward, the same as picking the best validation score in Episode 3: The AI/ML Lifecycle. Report the mean and the spread (standard deviation or range) across seeds.
 
 ---
 
@@ -743,6 +743,6 @@ Include:
 
 ## Tomorrow
 
-Day 6, **First End-to-End AI Experiment**, puts the module together in one project. Using the environment you built today, you will take a real medical dataset through every stage of the lifecycle from Day 3 (The AI/ML Lifecycle). You will load it, inspect it, preprocess it, split it, beat a baseline, measure it with metrics chosen by the formulation work in Day 4 (AI Problem Formulation), save predictions, and read the model's mistakes one by one. Copy today's `requirements.txt`, `.gitignore` and `env_check.py` into the new repo. That is what a starter repo is for.
+Episode 6, **First End-to-End AI Experiment**, puts the module together in one project. Using the environment you built today, you will take a real medical dataset through every stage of the lifecycle from Episode 3 (The AI/ML Lifecycle). You will load it, inspect it, preprocess it, split it, beat a baseline, measure it with metrics chosen by the formulation work in Episode 4 (AI Problem Formulation), save predictions, and read the model's mistakes one by one. Copy today's `requirements.txt`, `.gitignore` and `env_check.py` into the new repo. That is what a starter repo is for.
 
-**Next:** [Day 6: First End-to-End AI Experiment](Day-06-First-End-to-End-AI-Experiment.md)
+**Next:** [Episode 6: First End-to-End AI Experiment](Episode-06-First-End-to-End-AI-Experiment.md)

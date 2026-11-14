@@ -1,9 +1,9 @@
-# Day 50: Searching and Recursion
+# Episode 50: Searching and Recursion
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 49, understand sorted order and tree recursion, and be comfortable reading a traceback. This day is for anyone who has written a recursive function and not been sure why it sometimes crashes with `RecursionError`.
+**Level:** intermediate. You should have finished Episode 49, understand sorted order and tree recursion, and be comfortable reading a traceback. This day is for anyone who has written a recursive function and not been sure why it sometimes crashes with `RecursionError`.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 49
+- Git 2.23 or newer, and the repository from Episode 49
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 46: Trees and BSTs (recursive functions over a structure)
-- Day 49: Sorting (sorted order, and merge sort's divide step)
-- Day 42: Arrays and Strings (two-pointer ranges and the off-by-one rules)
+- Episode 46: Trees and BSTs (recursive functions over a structure)
+- Episode 49: Sorting (sorted order, and merge sort's divide step)
+- Episode 42: Arrays and Strings (two-pointer ranges and the off-by-one rules)
 
 ---
 
@@ -170,7 +170,7 @@ def sum_to_iterative(n: int) -> int:
 print(sum_to_iterative(5000))   # 12502500
 ```
 
-The limitation of the loop version is that it can be less clear for problems that naturally split into parts, such as tree traversal or merge sort. For those, the usual choice is recursion with a note about the maximum depth, or an explicit stack, as the tree traversal from Day 46 showed.
+The limitation of the loop version is that it can be less clear for problems that naturally split into parts, such as tree traversal or merge sort. For those, the usual choice is recursion with a note about the maximum depth, or an explicit stack, as the tree traversal from Episode 46 showed.
 
 The common mistake is to assume that recursion depth equals the number of items in the list. For a balanced tree or merge sort it is about log n, but for a chain it is n. The depth depends on the shape of the recursion, not on the size of the input alone. To spot the risk, test the function on the worst input shape you can imagine.
 
@@ -198,7 +198,7 @@ print(fast_power(3, 13))    # 1594323
 print(3 ** 13)              # 1594323, the built-in agrees
 ```
 
-The limitation is that divide and conquer only helps when the subproblems do not overlap in a costly way. When they do, as in the naive Fibonacci recursion, the same subproblem is solved many times, and the total cost explodes. Day 52 handles that case with dynamic programming.
+The limitation is that divide and conquer only helps when the subproblems do not overlap in a costly way. When they do, as in the naive Fibonacci recursion, the same subproblem is solved many times, and the total cost explodes. Episode 52 handles that case with dynamic programming.
 
 The common mistake is to write the halves so that they overlap or miss elements, such as using `mid` in both halves of a split, or dropping the last element. To spot it, count the elements in the two halves on paper for a list of five items. They must add to five and not share an index.
 
@@ -208,7 +208,7 @@ Divide and conquer appears in merge sort, in binary search in sorted data, in fa
 
 ## Hands-on exercises
 
-Work in the repository from Day 49. Keep the search functions in `dsa/searching.py` and the release log in `dsa/release_lookup.py`.
+Work in the repository from Episode 49. Keep the search functions in `dsa/searching.py` and the release log in `dsa/release_lookup.py`.
 
 Exercise 1 traces binary search by hand. For the list `[2, 4, 6, 8, 10, 12, 14]` and target 10, write `lo`, `hi` and `mid` for each step until the target is found. Then do the same for target 5, which is absent.
 
@@ -236,12 +236,12 @@ Done when all comparisons pass and your count for exponent 1024 is about 11 squa
 
 The project is a release log that answers one question: which version was in effect on a given date. Releases are stored as sorted ISO dates, which sort correctly as strings. A binary search finds the last release on or before the date, using an upper bound. The tests compare the answers with a linear scan, and they check the boundary dates, where the off-by-one errors live.
 
-Suggested repo name: `100-days-software-day-50-searching-and-recursion`. Copy the Day 49 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-50-searching-and-recursion`. Copy the Episode 49 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-50-searching-and-recursion/
+100-episodes-software-day-50-searching-and-recursion/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -548,7 +548,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 49 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 49 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python release_demo.py` and confirm the four lines match the expected output in the notes above.
 3. Add a `versions_between(self, start, end)` method to `ReleaseLog` that returns every version released from `start` to `end`, inclusive, using `lower_bound` and `upper_bound`. Test it with a range that contains no releases and a range that contains all of them.
 4. Write `docs/searching-notes.md` with the step counts from exercise 2, one paragraph on the recursion limit from exercise 4, and one paragraph on why `upper_bound` is the right tool for "on or before a date".
@@ -619,4 +619,4 @@ This project is light on new code and heavy on boundaries. The lookup is short, 
 
 ## Tomorrow
 
-Day 51 covers backtracking and greedy algorithms. Backtracking is a systematic search through choices, pruned when a partial answer cannot work, and it uses the recursion and call stack from today. Greedy algorithms make the best local choice at each step, which is fast when it is right and misleading when it is not. You will solve N-Queens and subset problems with pruning, and you will find a coin set where the greedy choice fails, which is a counterexample.
+Episode 51 covers backtracking and greedy algorithms. Backtracking is a systematic search through choices, pruned when a partial answer cannot work, and it uses the recursion and call stack from today. Greedy algorithms make the best local choice at each step, which is fast when it is right and misleading when it is not. You will solve N-Queens and subset problems with pruning, and you will find a coin set where the greedy choice fails, which is a counterexample.

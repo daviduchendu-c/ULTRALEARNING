@@ -1,9 +1,9 @@
-# Day 7: Branches and Merging
+# Episode 7: Branches and Merging
 
-*100 Days of Software Engineering, Module 2: Git and Collaboration*
+*100 Episodes of Software Engineering, Module 2: Git and Collaboration*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You should have completed Day 6 and be comfortable with `git add`, `git commit`, `git status` and `git log`. This is for anyone who has been afraid of "merge conflict" messages.
+**Level:** beginner to intermediate. You should have completed Episode 6 and be comfortable with `git add`, `git commit`, `git status` and `git log`. This is for anyone who has been afraid of "merge conflict" messages.
 
 **By the end of this day, you will have:**
 
@@ -16,14 +16,14 @@
 **What you need:**
 
 - Git 2.23 or newer (tested with Git 2.55.0, from `git --version`)
-- The `git-practice` repo from Day 6, or a new folder you can use for this lesson
+- The `git-practice` repo from Episode 6, or a new folder you can use for this lesson
 - A terminal (Ubuntu on WSL 2, Git Bash, or PowerShell) and an editor that opens from the terminal
 - A free GitHub account for the project
 
 **Prerequisites:**
 
-- Day 6: Git Mental Model (working tree, staging, commits, hashes, `git log`, `git diff`, `git restore`, `.gitignore`)
-- Day 4: Linux CLI I (`cd`, `ls`, `cat`)
+- Episode 6: Git Mental Model (working tree, staging, commits, hashes, `git log`, `git diff`, `git restore`, `.gitignore`)
+- Episode 4: Linux CLI I (`cd`, `ls`, `cat`)
 
 ---
 
@@ -63,7 +63,7 @@ Two people fix two bugs in the same file on the same afternoon. Branches let eac
 - **Squash:** combining several commits into one.
 - **Reflog:** a local log of where `HEAD` and each branch pointed, and when. It is the main recovery tool.
 - **Stash:** a temporary shelf for uncommitted changes.
-- **Force push:** pushing a branch when the remote does not contain your commits, which replaces the remote history. Day 8 covers remotes.
+- **Force push:** pushing a branch when the remote does not contain your commits, which replaces the remote history. Episode 8 covers remotes.
 
 ---
 
@@ -84,7 +84,7 @@ git log --oneline --graph --decorate --all
 
 The main pitfall is working on the wrong branch. Commits go to whichever branch `HEAD` points at, so check `git branch` before your first commit. The second pitfall is deleting a branch that still holds unmerged commits. `git branch -d` refuses to delete such a branch, and `git branch -D` deletes it anyway, which is why the first command is the safe default.
 
-Teams prefix branch names, such as `feature/`, `fix/` or `chore/`, so the list of branches shows what each one is for. Branches stay on your laptop until you push them, which Day 8 covers.
+Teams prefix branch names, such as `feature/`, `fix/` or `chore/`, so the list of branches shows what each one is for. Branches stay on your laptop until you push them, which Episode 8 covers.
 
 ---
 
@@ -269,7 +269,7 @@ Recovery has a hard limit. The reflog is local, and it expires. A clone on anoth
 
 ## Hands-on exercises
 
-Work in the `git-practice` repo from Day 6. If you do not have it, create a new one with `mkdir git-practice && cd git-practice && git init -b main`, add a `notes.txt` file, and commit it.
+Work in the `git-practice` repo from Episode 6. If you do not have it, create a new one with `mkdir git-practice && cd git-practice && git init -b main`, add a `notes.txt` file, and commit it.
 
 Exercise 1 creates a branch and fast-forwards it.
 
@@ -325,12 +325,12 @@ Done when you have recreated a deleted branch from the reflog, and can describe 
 
 The project is a tiny Python todo tool. The code is small so the Git work is visible: two branches that conflict on purpose, a rebase, a recovery, and a commit history you can narrate.
 
-Suggested repo name: `100-days-software-day-07-branches-and-merging`.
+Suggested repo name: `100-episodes-software-day-07-branches-and-merging`.
 
 The repo layout:
 
 ```
-100-days-software-day-07-branches-and-merging/
+100-episodes-software-day-07-branches-and-merging/
 ├── .gitignore
 ├── README.md
 ├── todo.py
@@ -408,7 +408,7 @@ Step-by-step tasks:
 5. Create `feature/tests` from `main`, add one test for `list_tasks` on an empty list, and commit. Then add a commit to `main` that changes the README. Rebase `feature/tests` onto `main` and fast-forward merge it.
 6. Recovery drill: create `feature/scratch`, add a commit with a broken file, and delete the branch with `git branch -D feature/scratch`. Use `git reflog` to find the commit, recreate the branch, and confirm the file is back.
 7. Write `docs/branch-log.md` with three short sections: the conflict you resolved and how, the rebase and why it was safe, and the recovery command you used and what it returned. Commit it.
-8. Create an empty GitHub repository with the name above, then `git remote add origin <URL>` and `git push -u origin main`. Day 8 covers the details.
+8. Create an empty GitHub repository with the name above, then `git remote add origin <URL>` and `git push -u origin main`. Episode 8 covers the details.
 
 Done when:
 
@@ -471,6 +471,6 @@ This project is light on code and heavy on history, because the skill being test
 
 ## Tomorrow
 
-Day 8 moves your repo onto GitHub. You will connect a local repo to a remote, clone a repo, push and pull, open issues and pull requests, review code, and publish a release with a version tag. The branches and merges from today become the pull requests you will open tomorrow.
+Episode 8 moves your repo onto GitHub. You will connect a local repo to a remote, clone a repo, push and pull, open issues and pull requests, review code, and publish a release with a version tag. The branches and merges from today become the pull requests you will open tomorrow.
 
-**Next:** [Day 8: GitHub Workflow](Software-Day-08-GitHub-Workflow.md)
+**Next:** [Episode 8: GitHub Workflow](Software-Episode-08-GitHub-Workflow.md)

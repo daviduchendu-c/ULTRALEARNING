@@ -1,9 +1,9 @@
-# Day 53: DSA Assessment
+# Episode 53: DSA Assessment
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 4 hours, split into an untimed session of about 2 hours and a timed session of about 1 hour, with time for the write-up
-**Level:** intermediate to advanced. You should have finished Days 41 to 52. This day is for checking what you can do without notes, and for finding the topics that need another pass before the next module on web foundations.
+**Level:** intermediate to advanced. You should have finished Episodes 41 to 52. This day is for checking what you can do without notes, and for finding the topics that need another pass before the next module on web foundations.
 
 **By the end of this day, you will have:**
 
@@ -16,13 +16,13 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 52
+- Git 2.23 or newer, and the repository from Episode 52
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 - A timer or clock for the timed session, and a blank sheet of paper for the untimed one
 
 **Prerequisites:**
 
-- Days 41 to 52, with the repository and tests from each day working
+- Episodes 41 to 52, with the repository and tests from each day working
 - The habit of checking a solution against a brute force before you trust it
 
 ---
@@ -76,16 +76,16 @@ Each concept below follows the same flow: an everyday analogy, the first princip
 
 Think of a doctor who sees a patient with a set of symptoms and must decide which of several diagnoses fits. The doctor works out the pattern before picking a treatment. The skill is matching the pattern. Mixed problems in an assessment work the same way. The problem gives you a few words, such as "longest", "contiguous" or "shortest path", and you must map them to a technique.
 
-From first principles, every technique in this module answers a family of questions. "Contiguous segment with a property" points to a sliding window. "Pairs that sum to a target" points to two pointers if the input is sorted, and to a hash table if it is not. "Shortest route in edges" points to BFS. "Choices with a constraint" points to backtracking. "Best total with a limit" points to dynamic programming or a greedy rule, and the counterexample habit from Day 51 tells you which. Build a list of these signal words for yourself, and check it against the day you learned each technique.
+From first principles, every technique in this module answers a family of questions. "Contiguous segment with a property" points to a sliding window. "Pairs that sum to a target" points to two pointers if the input is sorted, and to a hash table if it is not. "Shortest route in edges" points to BFS. "Choices with a constraint" points to backtracking. "Best total with a limit" points to dynamic programming or a greedy rule, and the counterexample habit from Episode 51 tells you which. Build a list of these signal words for yourself, and check it against the day you learned each technique.
 
 ```python
 # Signal words and the technique they usually point to
-# "contiguous", "window", "substring" -> sliding window (Day 42)
-# "pair that sums to", sorted input   -> two pointers (Day 42)
-# "pair that sums to", any input      -> hash table (Day 45)
-# "shortest path", unweighted         -> BFS (Day 48)
-# "all arrangements", "all subsets"   -> backtracking (Day 51)
-# "best with a limit", overlap        -> DP or greedy, then test (Day 51, Day 52)
+# "contiguous", "window", "substring" -> sliding window (Episode 42)
+# "pair that sums to", sorted input   -> two pointers (Episode 42)
+# "pair that sums to", any input      -> hash table (Episode 45)
+# "shortest path", unweighted         -> BFS (Episode 48)
+# "all arrangements", "all subsets"   -> backtracking (Episode 51)
+# "best with a limit", overlap        -> DP or greedy, then test (Episode 51, Episode 52)
 ```
 
 The limitation of signal words is that they mislead. "Subsequence" can mean LCS or a sliding window, and "minimum" can mean a heap, a greedy rule or a DP table. The signal narrows the options, and the constraints of the problem decide among them. Read the input size and any ordering guarantee before you commit.
@@ -167,7 +167,7 @@ Timed practice matches the pressure of an incident, where the fix must be found 
 
 ## Hands-on exercises
 
-Work in the repository from Day 52. Keep the harness in `dsa/assessment.py`, the demo in `assess_demo.py`, and your results in `docs/assessment-log.md`.
+Work in the repository from Episode 52. Keep the harness in `dsa/assessment.py`, the demo in `assess_demo.py`, and your results in `docs/assessment-log.md`.
 
 Exercise 1 is the untimed session. Without notes, solve these three problems on paper: find two numbers in an unsorted list that sum to a target, find the k-th largest value in a list, and decide whether one node can reach another in an undirected graph given as an edge list. For each, write the complexity and one comparison in `docs/assessment-log.md`.
 
@@ -183,7 +183,7 @@ Done when your log has three timed rows with those three fields filled in.
 
 Exercise 4 compares the two sessions. Write a short paragraph in the log that compares the untimed and timed results, and names the gap that the difference shows, recall, understanding or explanation.
 
-Done when the paragraph names one gap and one specific topic from Days 41 to 52 that you will review.
+Done when the paragraph names one gap and one specific topic from Episodes 41 to 52 that you will review.
 
 Exercise 5 writes the gap list. Rank the topics where your results were weakest, from most to least important, and write one action for each. Put the list at the top of `docs/assessment-log.md`.
 
@@ -195,12 +195,12 @@ Done when the gap list has at least two topics, each with an action you can fini
 
 The project is an assessment harness. It holds a bank of problems, each with an automatic check that compares a candidate solution with a trusted reference on random inputs. It runs candidates with an optional time limit, records a pass or fail for each, and scores the set. The tests use reference solutions to confirm that the harness accepts correct code, rejects wrong code and flags a timeout. You then add problems to the bank, and write the gap list from your own results.
 
-Suggested repo name: `100-days-software-day-53-dsa-assessment`. Copy the Day 52 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-53-dsa-assessment`. Copy the Episode 52 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-53-dsa-assessment/
+100-episodes-software-day-53-dsa-assessment/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -514,7 +514,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 52 repository, add the files above, and run `python -m unittest`. All tests should pass, including the harness tests that use the reference solutions.
+1. Copy the Episode 52 repository, add the files above, and run `python -m unittest`. All tests should pass, including the harness tests that use the reference solutions.
 2. Run `python assess_demo.py` and read the FAIL lines. Explain in one sentence why each one fails.
 3. Write your solutions for the three problems from the untimed session in `tests/test_assessment_solutions.py`, in a dictionary keyed by problem name. Run the test and record the score.
 4. Add two more problems to `BANK`, each with a check function that compares with a trusted slow solution on random inputs. Pick two from the timed session, such as "longest substring without repeats" and "shortest path in edges". Add a harness test for each.
@@ -583,4 +583,4 @@ This project is light on new algorithms and heavy on honest measurement. The mos
 
 ## Tomorrow
 
-Day 54 begins the Web Foundations module, and it changes the subject from algorithms to the systems you use every day. You will learn how the web works: the client and server model, URLs, DNS, TCP and IP at the level of intuition, and the request and response cycle of HTTP and HTTPS. The data structures from this module return inside the browser, which uses trees for the page and maps for headers and cookies, so the habits of complexity and of explaining a design carry over directly.
+Episode 54 begins the Web Foundations module, and it changes the subject from algorithms to the systems you use every day. You will learn how the web works: the client and server model, URLs, DNS, TCP and IP at the level of intuition, and the request and response cycle of HTTP and HTTPS. The data structures from this module return inside the browser, which uses trees for the page and maps for headers and cookies, so the habits of complexity and of explaining a design carry over directly.

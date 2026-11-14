@@ -1,9 +1,9 @@
-# Day 6: First End-to-End AI Experiment
+# Episode 6: First End-to-End AI Experiment
 
-*100 Days of AI Engineering, Module 1: AI Foundations*
+*100 Episodes of AI Engineering, Module 1: AI Foundations*
 
 **Time:** about 4 to 5 hours
-**Level:** beginner to intermediate. For learners who have finished Days 1 to 5 and can run Python scripts from a terminal.
+**Level:** beginner to intermediate. For learners who have finished Episodes 1 to 5 and can run Python scripts from a terminal.
 
 **By the end of this day, you will have:**
 
@@ -14,15 +14,15 @@
 **What you need:**
 
 - Python 3.11 or newer
-- `numpy`, `pandas`, `scipy`, `scikit-learn` and `matplotlib` at the versions from Day 5 (pinned in the project section)
+- `numpy`, `pandas`, `scipy`, `scikit-learn` and `matplotlib` at the versions from Episode 5 (pinned in the project section)
 - A terminal and a text editor
 
 **Prerequisites:**
 
-- Day 2: How Machines Learn (train vs test)
-- Day 3: The AI/ML Lifecycle (the lifecycle stages and baselines)
-- Day 4: AI Problem Formulation (classification, and why accuracy can mislead)
-- Day 5: AI Development Environment (your pinned environment)
+- Episode 2: How Machines Learn (train vs test)
+- Episode 3: The AI/ML Lifecycle (the lifecycle stages and baselines)
+- Episode 4: AI Problem Formulation (classification, and why accuracy can mislead)
+- Episode 5: AI Development Environment (your pinned environment)
 
 ---
 
@@ -62,7 +62,7 @@ The [Breast Cancer Wisconsin (Diagnostic)](https://scikit-learn.org/stable/datas
 
 It ships with scikit-learn, so you need no download, and it is small enough to inspect by eye. It is a teaching dataset. Nothing you build today is a medical tool, and the limitations part of the report template in the project section says why.
 
-| Stage (Day 3) | Today's version |
+| Stage (Episode 3) | Today's version |
 |---|---|
 | Problem definition | Flag tumors likely to be malignant for further review |
 | Data collection | Already done: 569 rows from one hospital, early 1990s |
@@ -121,7 +121,7 @@ Before comparing people's heights, you convert everyone to the same unit. Prepro
 
 Preprocessing transforms features so the model can use them well. Here the transform is standardization: each feature gets mean 0 and standard deviation 1, so a feature measured in thousands (area) does not dominate one measured in hundredths (smoothness). `StandardScaler` learns each feature's mean and standard deviation from the training rows, then applies `(value - mean) / std`. Putting it inside `make_pipeline(StandardScaler(), LogisticRegression())` makes sure the test rows are scaled with training statistics, never their own.
 
-Three mistakes show up here. The first is scaling the whole dataset before splitting, which is the small leak from Days 2 and 3. You can spot it when the scaler is fit on `X` before `train_test_split` is called. The second is scaling the target in classification, which makes no sense because labels are categories. The third is assuming every model needs scaling. Tree models (Day 29) do not care about feature scale, but logistic regression's optimizer converges much better with it.
+Three mistakes show up here. The first is scaling the whole dataset before splitting, which is the small leak from Episodes 2 and 3. You can spot it when the scaler is fit on `X` before `train_test_split` is called. The second is scaling the target in classification, which makes no sense because labels are categories. The third is assuming every model needs scaling. Tree models (Episode 29) do not care about feature scale, but logistic regression's optimizer converges much better with it.
 
 In production, the fitted scaler is saved with the model, so a new input is transformed exactly the way the training data was.
 
@@ -197,7 +197,7 @@ Saving predictions means writing, for every test row, the true label, the predic
 
 The common mistakes are saving only labels and losing the probabilities, and losing the row ID, so you cannot join predictions back to the original features. You notice the second one the first time you try to look at a wrong prediction and cannot find which row it was.
 
-Production systems log every prediction with an ID and the model version, which is what makes monitoring (Day 93) possible.
+Production systems log every prediction with an ID and the model version, which is what makes monitoring (Episode 93) possible.
 
 ---
 
@@ -209,7 +209,7 @@ Error inspection means reading the misclassified rows one by one, comparing thei
 
 The mistake is stopping at the metric. A related one is looking only at errors and never at correct predictions for comparison. A third is drawing big conclusions from 5 rows. Error analysis gives you hypotheses to test, not proof.
 
-ML teams use error analysis to choose the next step, such as more data of a certain kind, a new feature, or a different threshold. Day 37 is devoted to it.
+ML teams use error analysis to choose the next step, such as more data of a certain kind, a new feature, or a different threshold. Episode 37 is devoted to it.
 
 ---
 
@@ -249,7 +249,7 @@ Read `target_names` and work out which number means malignant. Then print the da
 
 **Goal:** a repo that anyone can clone and run with three commands to reproduce your numbers, with an experiment report that explains them.
 
-Suggested repo name: `100-days-ai-engineering-day-06-first-experiment`.
+Suggested repo name: `100-episodes-ai-engineering-day-06-first-experiment`.
 
 ### Repository layout
 
@@ -257,9 +257,9 @@ Suggested repo name: `100-days-ai-engineering-day-06-first-experiment`.
 day-06-first-experiment/
 ├── README.md                # how to set up and run
 ├── REPORT.md                # the experiment report (written in step 7)
-├── .gitignore               # from Day 5
+├── .gitignore               # from Episode 5
 ├── requirements.txt
-├── env_check.py             # optional, copied from Day 5
+├── env_check.py             # optional, copied from Episode 5
 ├── src/
 │   ├── data.py              # loading and splitting, shared by every script
 │   ├── inspect_data.py      # inspection
@@ -281,7 +281,7 @@ mkdir src
 python -m venv .venv
 ```
 
-Activate it, copy `.gitignore` (and optionally `env_check.py`) from Day 5, then create `requirements.txt`. This project does not need PyTorch or Jupyter, so the list is shorter than Day 5's, with the same versions:
+Activate it, copy `.gitignore` (and optionally `env_check.py`) from Episode 5, then create `requirements.txt`. This project does not need PyTorch or Jupyter, so the list is shorter than Episode 5's, with the same versions:
 
 ```text
 numpy==2.2.6
@@ -477,7 +477,7 @@ A few lines deserve a comment:
 - `zero_division=0` in the precision call: the baseline never predicts malignant, so its precision is 0 / 0. Without this argument, scikit-learn warns and uses 0 anyway. With it, the choice is explicit.
 - `model.classes_` lists the classes in the order `predict_proba` uses (alphabetical here: benign, malignant). Looking up the column by name is safer than assuming it is column 1.
 - `labels=["malignant", "benign"]` puts the positive class first in the confusion matrix, so the top-left cell is TP, matching the metrics section.
-- Logistic regression is a classification model despite its name. It learns one weight per feature and outputs a probability between 0 and 1. Day 26 explains how.
+- Logistic regression is a classification model despite its name. It learns one weight per feature and outputs a probability between 0 and 1. Episode 26 explains how.
 
 Run `python src/train.py`. Expected output:
 
@@ -592,7 +592,7 @@ threshold  caught  missed  false alarms
 
 Lowering the threshold to 0.3 catches 2 more cancers with no extra false alarms on this test set. Going to 0.1 catches one more but adds 5 false alarms.
 
-This threshold was picked by looking at the test set, which is the Day 3 mistake. To choose a threshold properly, pick it on a validation set (or with cross-validation on the training rows), then report its test result once. Put this caveat in your report.
+This threshold was picked by looking at the test set, which is the Episode 3 mistake. To choose a threshold properly, pick it on a validation set (or with cross-validation on the training rows), then report its test result once. Put this caveat in your report.
 
 ### Step 7: write `REPORT.md`
 
@@ -696,7 +696,7 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 - [Wikipedia: Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix)
 - [Wikipedia: Precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall)
 - [Wikipedia: Sensitivity and specificity](https://en.wikipedia.org/wiki/Sensitivity_and_specificity)
-- [Wikipedia: Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) (read the introduction only; Day 26 covers the rest)
+- [Wikipedia: Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) (read the introduction only; Episode 26 covers the rest)
 - [scikit-learn: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 - [scikit-learn: Pipelines and composite estimators](https://scikit-learn.org/stable/modules/compose.html)
 - "Model Cards for Model Reporting," Mitchell et al., 2019. Search the title on arxiv.org.
@@ -707,7 +707,7 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 
 **Watch:**
 - StatQuest with Josh Starmer: "Machine Learning Fundamentals: The Confusion Matrix" and "Machine Learning Fundamentals: Sensitivity and Specificity." Search the titles on the [StatQuest channel](https://www.youtube.com/@statquest).
-- StatQuest: "Logistic Regression" (the first video in the series), for intuition before Day 26.
+- StatQuest: "Logistic Regression" (the first video in the series), for intuition before Episode 26.
 
 **Practice:**
 - [Kaggle: Titanic, Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic): repeat today's stages on a dataset that needs real cleaning (missing ages, text columns). Submit one prediction file and compare your score with your baseline.
@@ -716,8 +716,8 @@ Then add a short "Environment" section (paste the `env_check.py` output, or at l
 
 ## Tomorrow
 
-Next is Day 6, Part II: **How AI Works and How to Use It**, which steps back from the experiment you just built and explains how AI systems work and how to use them well.
+Next is Episode 6, Part II: **How AI Works and How to Use It**, which steps back from the experiment you just built and explains how AI systems work and how to use them well.
 
-After that, Day 7 begins Module 2, **Mathematics for AI**, with **Mathematical Foundations**: functions, variables, equations, exponents, logarithms, summation notation, function composition and graphs. Every piece of math you used this week without proof lives there. The MSE on Day 2 is a summation. The gradient descent update is a function applied over and over. Logistic regression, which produced today's `p_malignant`, is a composition of two functions: a weighted sum, then a squashing function built from an exponent. Day 7 starts making those ideas precise, so that by Day 12 you can derive the gradient you coded by hand on Day 2 instead of copying it.
+After that, Episode 7 begins Module 2, **Mathematics for AI**, with **Mathematical Foundations**: functions, variables, equations, exponents, logarithms, summation notation, function composition and graphs. Every piece of math you used this week without proof lives there. The MSE on Episode 2 is a summation. The gradient descent update is a function applied over and over. Logistic regression, which produced today's `p_malignant`, is a composition of two functions: a weighted sum, then a squashing function built from an exponent. Episode 7 starts making those ideas precise, so that by Episode 12 you can derive the gradient you coded by hand on Episode 2 instead of copying it.
 
-**Next:** [Day 6, Part II: How AI Works and How to Use It](Day-06-Part-II-How-AI-Works-and-How-to-Use-It.md)
+**Next:** [Episode 6, Part II: How AI Works and How to Use It](Episode-06-Part-II-How-AI-Works-and-How-to-Use-It.md)

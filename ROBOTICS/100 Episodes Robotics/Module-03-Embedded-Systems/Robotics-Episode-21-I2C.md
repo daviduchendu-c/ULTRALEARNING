@@ -1,10 +1,10 @@
-# Day 21: I²C
+# Episode 21: I²C
 
-*100 Days of Robotics Engineering, Module 3: Embedded Systems*
+*100 Episodes of Robotics Engineering, Module 3: Embedded Systems*
 
 **Time:** about 4 hours
 
-**Level:** intermediate. You need Day 16 (the Uno and Arduino IDE), Day 17 (pull-up resistors), Day 19 (why a bus transaction can be interrupted) and Day 20 (framing, baud rate and the logic-level rules). Today you connect real sensors, so check the voltage of each device before you power it.
+**Level:** intermediate. You need Episode 16 (the Uno and Arduino IDE), Episode 17 (pull-up resistors), Episode 19 (why a bus transaction can be interrupted) and Episode 20 (framing, baud rate and the logic-level rules). Today you connect real sensors, so check the voltage of each device before you power it.
 
 **By the end of this day, you will have:**
 
@@ -25,10 +25,10 @@
 
 **Prerequisites:**
 
-- Day 16: `Serial.begin`, the serial monitor and the register view of pins
-- Day 17: pull-up resistors and the active-low convention
-- Day 19: why a transaction must not be interrupted by unrelated code, and the blocking-versus-non-blocking pattern
-- Day 20: logic levels between boards and the rule that devices must share a ground
+- Episode 16: `Serial.begin`, the serial monitor and the register view of pins
+- Episode 17: pull-up resistors and the active-low convention
+- Episode 19: why a transaction must not be interrupted by unrelated code, and the blocking-versus-non-blocking pattern
+- Episode 20: logic levels between boards and the rule that devices must share a ground
 
 ---
 
@@ -183,12 +183,12 @@ I2C debugging is one of the most common tasks in robot integration. A reviewer w
 
 The goal is a repository that scans the bus, reads a real-time clock and records bus measurements. The project proves that you can work with a two-wire bus, read device registers, decode BCD values and check your wiring against the specification.
 
-**Repo name:** `100-days-robotics-day-21-i2c`
+**Repo name:** `100-episodes-robotics-day-21-i2c`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-21-i2c/
+100-episodes-robotics-day-21-i2c/
 ├── README.md
 ├── scanner/
 │   └── scanner.ino
@@ -379,4 +379,4 @@ The project is practical and it uses a real device. The evidence shows that the 
 
 ## Tomorrow
 
-Day 22 covers SPI, a faster bus that uses four wires and a separate select line for each device. You will compare SPI with I2C and UART, read an external analog-to-digital converter over SPI and learn why the chip-select line matters. The bus-design habits from today, including the address map and the capacitance estimate, carry over directly, because SPI has its own capacitance and cable limits.
+Episode 22 covers SPI, a faster bus that uses four wires and a separate select line for each device. You will compare SPI with I2C and UART, read an external analog-to-digital converter over SPI and learn why the chip-select line matters. The bus-design habits from today, including the address map and the capacitance estimate, carry over directly, because SPI has its own capacitance and cable limits.

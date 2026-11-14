@@ -1,9 +1,9 @@
-# Day 15: Information Theory
+# Episode 15: Information Theory
 
-*100 Days of AI Engineering, Module 2: Mathematics for AI*
+*100 Episodes of AI Engineering, Module 2: Mathematics for AI*
 
 **Time:** about 3 hours
-**Level:** intermediate. You need Day 13 (probability) and the logarithm rules from Day 7. It is for readers who want to understand the loss functions behind classifiers and language models, and who want to stop treating them as black boxes.
+**Level:** intermediate. You need Episode 13 (probability) and the logarithm rules from Episode 7. It is for readers who want to understand the loss functions behind classifiers and language models, and who want to stop treating them as black boxes.
 
 **By the end of this day, you will have:**
 
@@ -21,11 +21,11 @@
 
 **Prerequisites:**
 
-- Day 7: logarithms, exponents and summation notation
-- Day 8: the dot product
-- Day 11: derivatives and the chain rule, used once for the gradient comparison
-- Day 13: probability distributions and the idea that a model outputs a probability for each class
-- Day 14: the mean, which is the average of per-example losses
+- Episode 7: logarithms, exponents and summation notation
+- Episode 8: the dot product
+- Episode 11: derivatives and the chain rule, used once for the gradient comparison
+- Episode 13: probability distributions and the idea that a model outputs a probability for each class
+- Episode 14: the mean, which is the average of per-example losses
 
 ---
 
@@ -259,12 +259,12 @@ Create a folder called `day15-practice` and write your code in `practice.py`. Us
 
 ## Project: an information theory lab
 
-This project is light, because the topic is conceptual. The goal is a small repository with the measures implemented, the identities tested and one experiment on the gradient gap. Name it `100-days-ai-engineering-day-15-information-theory`.
+This project is light, because the topic is conceptual. The goal is a small repository with the measures implemented, the identities tested and one experiment on the gradient gap. Name it `100-episodes-ai-engineering-day-15-information-theory`.
 
 **Repo layout**
 
 ```
-100-days-ai-engineering-day-15-information-theory/
+100-episodes-ai-engineering-day-15-information-theory/
 ├── README.md
 ├── requirements.txt
 ├── info_theory.py
@@ -472,6 +472,6 @@ def test_one_hot_cross_entropy_is_negative_log_probability():
 
 ## Tomorrow
 
-Tomorrow is Day 16, the Mathematics Project. You will build vectors, matrices, a linear regression model, the mean squared error loss and a gradient descent loop from scratch, using NumPy arrays but no machine learning framework. Every piece comes from Days 8 to 15: the vector and matrix operations, the derivative of the loss, the optimization loop and the loss measures you have just studied.
+Tomorrow is Episode 16, the Mathematics Project. You will build vectors, matrices, a linear regression model, the mean squared error loss and a gradient descent loop from scratch, using NumPy arrays but no machine learning framework. Every piece comes from Episodes 8 to 15: the vector and matrix operations, the derivative of the loss, the optimization loop and the loss measures you have just studied.
 
-**Next:** [Day 16: Mathematics Project](Day-16-Mathematics-Project.md)
+**Next:** [Episode 16: Mathematics Project](Episode-16-Mathematics-Project.md)

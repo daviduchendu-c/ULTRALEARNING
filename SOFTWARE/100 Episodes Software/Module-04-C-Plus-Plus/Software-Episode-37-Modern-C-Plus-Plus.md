@@ -1,9 +1,9 @@
-# Day 37: Modern C++
+# Episode 37: Modern C++
 
-*100 Days of Software Engineering, Module 4: C++ (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 4: C++ (Deep Foundation)*
 
 **Time:** about 4 hours
-**Level:** intermediate. You have written classes with destructors from Day 32, used containers and lambdas from Day 36, and seen `std::move` and `std::optional` in code. This day explains what those features do and how they replace most of the manual memory management from the earlier days. It is for anyone whose C++ still looks like the C++ of ten years ago.
+**Level:** intermediate. You have written classes with destructors from Episode 32, used containers and lambdas from Episode 36, and seen `std::move` and `std::optional` in code. This day explains what those features do and how they replace most of the manual memory management from the earlier days. It is for anyone whose C++ still looks like the C++ of ten years ago.
 
 **By the end of this day, you will have:**
 
@@ -23,8 +23,8 @@
 
 **Prerequisites:**
 
-- Days 27 to 36: the build, classes, lifetime and RAII, containers and lambdas
-- Day 35: templates, because `std::unique_ptr`, `std::shared_ptr` and `std::optional` are all class templates
+- Episodes 27 to 36: the build, classes, lifetime and RAII, containers and lambdas
+- Episode 35: templates, because `std::unique_ptr`, `std::shared_ptr` and `std::optional` are all class templates
 
 ---
 
@@ -48,7 +48,7 @@
 
 ## Introduction
 
-Day 32 showed a class that owns heap memory and frees it in its destructor, which is RAII. That pattern is correct, but writing it for every resource is repetitive and easy to get wrong. Modern C++ provides standard types that do the job for you. `std::unique_ptr` owns one object and frees it when it goes out of scope. `std::shared_ptr` lets several owners share one object, and frees it when the last owner leaves. `std::optional` says that a value may be absent, without a null pointer.
+Episode 32 showed a class that owns heap memory and frees it in its destructor, which is RAII. That pattern is correct, but writing it for every resource is repetitive and easy to get wrong. Modern C++ provides standard types that do the job for you. `std::unique_ptr` owns one object and frees it when it goes out of scope. `std::shared_ptr` lets several owners share one object, and frees it when the last owner leaves. `std::optional` says that a value may be absent, without a null pointer.
 
 The other large change is move semantics. Before C++11, returning a large object or putting one into a container meant copying it, and programmers avoided that by passing pointers everywhere. A move transfers the internal resources of an object to another object, leaving the source in a valid but unspecified state. Moves are why the vector grows quickly and why returning a big object by value is cheap.
 
@@ -280,12 +280,12 @@ Done when you can say which loop copies and which one does not.
 
 The project is a registry of documents. A document is a title and a list of lines. The registry takes ownership of a document when it is published, shares that ownership with the caller, and lets anyone watch a document through a weak pointer. The first line of a document is returned as an optional, because an empty document has none.
 
-Suggested repo name: `100-days-software-day-37-modern-cpp`.
+Suggested repo name: `100-episodes-software-day-37-modern-cpp`.
 
 The repo layout:
 
 ```
-100-days-software-day-37-modern-cpp/
+100-episodes-software-day-37-modern-cpp/
 ├── .gitignore
 ├── CMakeLists.txt
 ├── README.md
@@ -655,6 +655,6 @@ This project is short and ownership-focused. A reviewer should be able to read t
 
 ## Tomorrow
 
-Day 38 covers errors, debugging and testing. You will use exceptions with the RAII habit from Day 32, assertions for conditions that must never happen, the debugger, the AddressSanitizer and UndefinedBehaviorSanitizer, and a unit test framework, GoogleTest, wired into CTest. The smart pointers from today make the leak checks quiet, and the sanitizers are what will catch the bugs that the types do not prevent.
+Episode 38 covers errors, debugging and testing. You will use exceptions with the RAII habit from Episode 32, assertions for conditions that must never happen, the debugger, the AddressSanitizer and UndefinedBehaviorSanitizer, and a unit test framework, GoogleTest, wired into CTest. The smart pointers from today make the leak checks quiet, and the sanitizers are what will catch the bugs that the types do not prevent.
 
-**Next:** [Day 38: Errors, Debugging and Testing](Software-Day-38-Errors-Debugging-and-Testing.md)
+**Next:** [Episode 38: Errors, Debugging and Testing](Software-Episode-38-Errors-Debugging-and-Testing.md)

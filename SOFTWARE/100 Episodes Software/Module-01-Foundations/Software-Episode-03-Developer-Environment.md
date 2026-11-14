@@ -1,6 +1,6 @@
-# Day 3: Developer Environment
+# Episode 3: Developer Environment
 
-*100 Days of Software Engineering, Module: Foundations*
+*100 Episodes of Software Engineering, Module: Foundations*
 
 **Time:** about 4 hours, including installs and one restart
 **Level:** beginner. For anyone on a Windows 11 machine who has used a terminal a little and wants a working developer setup.
@@ -23,7 +23,7 @@
 
 **Prerequisites:**
 
-- Day 2: How Computers Execute Programs (processes, storage and memory)
+- Episode 2: How Computers Execute Programs (processes, storage and memory)
 
 ---
 
@@ -50,7 +50,7 @@
 
 On your first day at a job, someone will ask you to "get the project running locally." That means an editor, a terminal, the right language versions, the right packages, and settings stored in environment variables. Engineers who can do this in an hour, and fix it when it breaks, become productive quickly. Engineers who cannot lose days to errors like `'python' is not recognized` or `command not found`.
 
-Those errors come from a small set of ideas: where files live, how the terminal finds programs (PATH), how programs read settings (environment variables), and how tools get installed (package managers). Today you install the machine you will use for the next 97 days, including a real Linux system through WSL 2, which Days 4 and 5 need. Then you learn what each part did.
+Those errors come from a small set of ideas: where files live, how the terminal finds programs (PATH), how programs read settings (environment variables), and how tools get installed (package managers). Today you install the machine you will use for the next 97 days, including a real Linux system through WSL 2, which Episodes 4 and 5 need. Then you learn what each part did.
 
 ---
 
@@ -89,7 +89,7 @@ Then update Ubuntu's packages:
 sudo apt update && sudo apt upgrade -y
 ```
 
-`&&` runs the second command only if the first succeeds. Day 5 covers it in detail.
+`&&` runs the second command only if the first succeeds. Episode 5 covers it in detail.
 
 If `wsl --install` fails with a message about virtualization (error code 0x80370102 is common), virtualization is off in your firmware. Restart into the BIOS or UEFI settings, enable Intel VT-x or AMD-V (SVM), and try again. WSL 2 uses RAM while it runs, and `wsl --shutdown` stops it if your laptop feels slow.
 
@@ -145,7 +145,7 @@ Spaces break paths unless you quote them: `cd "My Projects"`. Working on files u
 
 When you call a friend, your phone does not search the whole world. It checks your contacts in order. PATH is the shell's contact list for programs.
 
-`PATH` is an environment variable that holds a list of folders. When you type a command name without a folder, the shell checks each folder in PATH, in order, and runs the first match. On Windows the list is separated by semicolons, and the shell also tries endings such as `.exe` and `.cmd`. On Linux the list is separated by colons. The current folder is not on PATH, which is why you run your own scripts as `./script.sh` on Day 5. If no folder has the program, you get `'x' is not recognized...` in PowerShell or `x: command not found` in bash.
+`PATH` is an environment variable that holds a list of folders. When you type a command name without a folder, the shell checks each folder in PATH, in order, and runs the first match. On Windows the list is separated by semicolons, and the shell also tries endings such as `.exe` and `.cmd`. On Linux the list is separated by colons. The current folder is not on PATH, which is why you run your own scripts as `./script.sh` on Episode 5. If no folder has the program, you get `'x' is not recognized...` in PowerShell or `x: command not found` in bash.
 
 In PowerShell:
 
@@ -220,7 +220,7 @@ A package manager installs, upgrades and removes **packages**, and resolves thei
 | Windows apps | **winget** (built into Windows 11) | `winget install --id Git.Git -e` | Installs programs system-wide or per user |
 | Linux system | **apt** (Ubuntu) | `sudo apt install tree` | Needs `sudo` because it changes the system |
 | Python libraries | **pip** inside a **venv** | `pip install requests` | Per project, recorded in `requirements.txt` |
-| JavaScript libraries | **npm** (comes with Node.js, Day 70) | `npm install express` | Per project, recorded in `package.json` |
+| JavaScript libraries | **npm** (comes with Node.js, Episode 70) | `npm install express` | Per project, recorded in `package.json` |
 
 Create a Python environment that belongs to one project:
 
@@ -271,7 +271,7 @@ The classic beginner bug is forgetting to save. A dot on an editor tab means uns
 
 Guessing at a bug is like finding a gas leak by sniffing each room. A debugger is a meter you can hold up to any pipe while the gas flows.
 
-A **debugger** runs your program under control. You set a **breakpoint** on a line. When execution reaches it, the process pauses (the CPU stops running that thread), and you can inspect variables and the **call stack** from Day 2. Then you step. **Step over** runs the current line. **Step into** enters a function call. **Step out** finishes the current function. In VS Code, F9 toggles a breakpoint, F5 starts or continues, F10 steps over, F11 steps into, Shift+F11 steps out, and Shift+F5 stops. Two other tools are useful too. Python's `breakpoint()` drops into the `pdb` debugger in the terminal. A **traceback** names the error, and you read it from the last line up.
+A **debugger** runs your program under control. You set a **breakpoint** on a line. When execution reaches it, the process pauses (the CPU stops running that thread), and you can inspect variables and the **call stack** from Episode 2. Then you step. **Step over** runs the current line. **Step into** enters a function call. **Step out** finishes the current function. In VS Code, F9 toggles a breakpoint, F5 starts or continues, F10 steps over, F11 steps into, Shift+F11 steps out, and Shift+F5 stops. Two other tools are useful too. Python's `breakpoint()` drops into the `pdb` debugger in the terminal. A **traceback** names the error, and you read it from the last line up.
 
 The `average.py` file in the project has a bug. It prints `56.666666666666664` for `[80, 90, 100]`, but the answer should be 90.0. Put a breakpoint on line 7, `total += numbers[i]`, and press F5. Watch `i` in the **Variables** pane. It takes the values 0 and 1, never 2. The loop skips the last number, so `total` ends at 170, and 170 / 3 = 56.67. The fix is `range(len(numbers))`, or better, `sum(numbers) / len(numbers)`.
 
@@ -298,9 +298,9 @@ Install commands are in the install section. Complete those first.
 2. **Terminal.** Open a PowerShell tab and an Ubuntu tab. In each, print where you are (`Get-Location` and `pwd`). *Check:* one shows `C:\Users\...`, the other `/home/...`.
 3. **Filesystem.** In Ubuntu, run `cd /mnt/c/Users` and `ls`, then `cd ~` and `explorer.exe .`. *Check:* File Explorer opens on your Linux home, and you can say why `/mnt/c` and `~` are different trees.
 4. **PATH.** Run `where.exe python` and `where.exe py` in PowerShell, then `which python3` and `which code` in Ubuntu. *Check:* you can say which file runs for each name, and whether the App Execution Alias appears first.
-5. **Environment variables.** In PowerShell, run `$env:APP_GREETING = "Hi"`. Open a second tab and run `$env:APP_GREETING`. *Check:* the second tab is empty, and you can explain why, using Day 2's idea of separate processes.
+5. **Environment variables.** In PowerShell, run `$env:APP_GREETING = "Hi"`. Open a second tab and run `$env:APP_GREETING`. *Check:* the second tab is empty, and you can explain why, using Episode 2's idea of separate processes.
 6. **Packages.** In a venv, install `requests` and run `pip freeze`. *Check:* `requests` and its dependency `urllib3` are listed.
-7. **Bytecode.** Save the `dis` example from Day 2 as `bytecode.py` and run `py bytecode.py`. *Check:* you see `LOAD_FAST`-style instructions.
+7. **Bytecode.** Save the `dis` example from Episode 2 as `bytecode.py` and run `py bytecode.py`. *Check:* you see `LOAD_FAST`-style instructions.
 
 ---
 
@@ -308,12 +308,12 @@ Install commands are in the install section. Complete those first.
 
 The goal is a repo that shows a reviewer, in two minutes, that your machine is set up correctly and that you can find a bug with a debugger.
 
-Name the repo `100-days-software-day-03-developer-environment`.
+Name the repo `100-episodes-software-day-03-developer-environment`.
 
 ### Repository layout
 
 ```
-100-days-software-day-03-developer-environment/
+100-episodes-software-day-03-developer-environment/
 ├── README.md
 ├── SETUP.md                    # what you installed, versions, problems and fixes
 ├── check-env.ps1               # Windows environment check
@@ -432,7 +432,7 @@ __pycache__/
 
 ### Step 1: create the folder
 
-Create `C:\Users\<you>\dev\100-days-software-day-03-developer-environment` and open it in VS Code with **File > Open Folder**.
+Create `C:\Users\<you>\dev\100-episodes-software-day-03-developer-environment` and open it in VS Code with **File > Open Folder**.
 
 ### Step 2: check the Windows side
 
@@ -440,7 +440,7 @@ Add `check-env.ps1` and run it with `.\check-env.ps1`. If PowerShell refuses to 
 
 ### Step 3: check the WSL side
 
-In Ubuntu, create `check-env.sh` in `~/dev`, run `chmod +x check-env.sh` (Day 5 explains permissions), then run `./check-env.sh > check-env-wsl.txt` (Day 5 explains the `>`). Run `explorer.exe .`, copy `check-env.sh` into the repo folder, and copy `check-env-wsl.txt` into its `results\` folder.
+In Ubuntu, create `check-env.sh` in `~/dev`, run `chmod +x check-env.sh` (Episode 5 explains permissions), then run `./check-env.sh > check-env-wsl.txt` (Episode 5 explains the `>`). Run `explorer.exe .`, copy `check-env.sh` into the repo folder, and copy `check-env-wsl.txt` into its `results\` folder.
 
 ### Step 4: debug the bug
 
@@ -541,6 +541,6 @@ Create the GitHub repo and upload the files with **Add file > Upload files**. Do
 
 ## Tomorrow
 
-Day 4: Linux CLI I moves into the Ubuntu terminal you set up today. You will move around and manage files with `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv` and `rm`. You will read files with `cat` and `less`, look up any command with `man`, and tour the Linux filesystem from `/` down to your home folder. The filesystem tree, PATH and WSL's two worlds from today are the map. Tomorrow you learn to walk it quickly and safely.
+Episode 4: Linux CLI I moves into the Ubuntu terminal you set up today. You will move around and manage files with `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv` and `rm`. You will read files with `cat` and `less`, look up any command with `man`, and tour the Linux filesystem from `/` down to your home folder. The filesystem tree, PATH and WSL's two worlds from today are the map. Tomorrow you learn to walk it quickly and safely.
 
-**Next:** [Day 4: Linux CLI I](Software-Day-04-Linux-CLI-I.md)
+**Next:** [Episode 4: Linux CLI I](Software-Episode-04-Linux-CLI-I.md)

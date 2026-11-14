@@ -1,4 +1,4 @@
-# Day 1: Software Engineering and the SDLC
+# Episode 1: Software Engineering and the SDLC
 
 *100 days of Software Engineering, Module: Foundations*
 
@@ -259,7 +259,7 @@ Your project is `storycheck`, a small Python command-line tool. It reads a text 
 ### Repository layout
 
 ```
-100-days-software-day-01-software-engineering-and-the-sdlc/
+100-episodes-software-day-01-software-engineering-and-the-sdlc/
 ├── .github/
 │   └── workflows/
 │       └── tests.yml          # GitHub Actions: runs pytest on every push
@@ -276,12 +276,12 @@ Your project is `storycheck`, a small Python command-line tool. It reads a text 
 
 1. Run `python --version`. It must print `Python 3.12.x`. If not, install Python 3.12 from python.org.
 2. Run `git --version`. It must print 2.40 or newer.
-3. On github.com, click New repository. Name it `100-days-software-day-01-software-engineering-and-the-sdlc`, set it to public, and tick no "Add a file" options.
+3. On github.com, click New repository. Name it `100-episodes-software-day-01-software-engineering-and-the-sdlc`, set it to public, and tick no "Add a file" options.
 4. Clone it and enter the folder:
 
 ```bash
-git clone https://github.com/<your-username>/100-days-software-day-01-software-engineering-and-the-sdlc.git
-cd 100-days-software-day-01-software-engineering-and-the-sdlc
+git clone https://github.com/<your-username>/100-episodes-software-day-01-software-engineering-and-the-sdlc.git
+cd 100-episodes-software-day-01-software-engineering-and-the-sdlc
 ```
 
 5. Create and activate a virtual environment, which keeps this project's pytest separate from the rest of your computer:
@@ -612,6 +612,6 @@ Optional: run `git switch -c break-test`, add `assert False` to one test, push t
 
 ## Tomorrow
 
-Day 2, **How Computers Execute Programs**, explains what happens between the code you write and the result on screen: the CPU, memory, compilation and interpretation. Bring your `storycheck` repository. You will trace what Python does when `parse` reads one line of `stories.txt`, and compare that with the app idea you wrote about today.
+Episode 2, **How Computers Execute Programs**, explains what happens between the code you write and the result on screen: the CPU, memory, compilation and interpretation. Bring your `storycheck` repository. You will trace what Python does when `parse` reads one line of `stories.txt`, and compare that with the app idea you wrote about today.
 
-**Next:** [Day 2: How Computers Execute Programs](Software-Day-02-How-Computers-Execute-Programs.md)
+**Next:** [Episode 2: How Computers Execute Programs](Software-Episode-02-How-Computers-Execute-Programs.md)

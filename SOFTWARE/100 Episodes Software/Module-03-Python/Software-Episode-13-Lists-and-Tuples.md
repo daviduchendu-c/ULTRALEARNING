@@ -1,9 +1,9 @@
-# Day 13: Lists and Tuples
+# Episode 13: Lists and Tuples
 
-*100 Days of Software Engineering, Module 3: Python (Deep Foundation)*
+*100 Episodes of Software Engineering, Module 3: Python (Deep Foundation)*
 
 **Time:** about 3 hours
-**Level:** beginner to intermediate. You know objects, mutability and slicing from Day 10 and Day 12. This is for anyone who has copied a list and then watched both copies change, or who has written a loop to build a list that a single line could build.
+**Level:** beginner to intermediate. You know objects, mutability and slicing from Episode 10 and Episode 12. This is for anyone who has copied a list and then watched both copies change, or who has written a loop to build a list that a single line could build.
 
 **By the end of this day, you will have:**
 
@@ -17,15 +17,15 @@
 **What you need:**
 
 - Python 3.14 (any 3.12 or newer works). Check with `python --version`.
-- Git 2.40 or newer and a GitHub account from Day 8
+- Git 2.40 or newer and a GitHub account from Episode 8
 - A code editor with Python support, such as Visual Studio Code with the Microsoft Python extension (free)
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - `mypy` 1.x, installed with `python -m pip install mypy` (free, open source)
 
 **Prerequisites:**
 
-- Day 10: Objects, Variables and Types (references, mutability, `is`)
-- Day 12: Strings and Unicode (indexing and slicing, immutable sequences)
+- Episode 10: Objects, Variables and Types (references, mutability, `is`)
+- Episode 12: Strings and Unicode (indexing and slicing, immutable sequences)
 
 ---
 
@@ -51,7 +51,7 @@ In this guide you are going to cover the following:
 
 Most real data is a collection. A cart holds line items, a log holds events, a report holds rows, and an API returns a page of records. Lists and tuples are the two ordered collections that Python gives you for this, and almost every program that processes data uses them constantly. Three things cause most of the trouble: which operations change the collection, what exactly is copied when you pass a list to a function, and why changing one row changes a row in a different table.
 
-The answers come from the object model you learned on Day 10. A list is a mutable object that holds references to other objects. A tuple is an immutable object that also holds references. Copying a list copies the references, not the objects they point to, and that one fact explains most of the surprises. This day builds the full picture, from basic operations through copying, unpacking and comprehensions.
+The answers come from the object model you learned on Episode 10. A list is a mutable object that holds references to other objects. A tuple is an immutable object that also holds references. Copying a list copies the references, not the objects they point to, and that one fact explains most of the surprises. This day builds the full picture, from basic operations through copying, unpacking and comprehensions.
 
 The official reference is the section "Sequence Types (list, tuple, range)" in the Python standard library documentation at docs.python.org/3/library/stdtypes.html. The Python tutorial's section "Data Structures" at docs.python.org/3/tutorial/datastructures.html is short and covers most of this day's material with examples.
 
@@ -81,7 +81,7 @@ The five concepts follow the way you use collections in code. You read and chang
 
 Think of a train. Each carriage has a position counted from the front, and you can count carriages, ask whether a particular one is in the train, join two trains into a longer one, or repeat a short train several times. A list and a tuple support the same set of operations because both are sequences.
 
-From first principles, `len(seq)` returns the number of items. `x in seq` checks for membership by comparing each item with `==` until it finds a match, which takes time that grows with the length. `seq[i]` reads by position, and `seq[i:j]` returns a new sequence of the same type with the items in that range. `+` joins two sequences of the same type into a new one, and `*` repeats a sequence. Indexing and slicing rules are the same as for strings on Day 12.
+From first principles, `len(seq)` returns the number of items. `x in seq` checks for membership by comparing each item with `==` until it finds a match, which takes time that grows with the length. `seq[i]` reads by position, and `seq[i:j]` returns a new sequence of the same type with the items in that range. `+` joins two sequences of the same type into a new one, and `*` repeats a sequence. Indexing and slicing rules are the same as for strings on Episode 12.
 
 ```python
 tracks = ["Intro", "Main Theme", "Outro"]
@@ -95,7 +95,7 @@ print([0] * 4)                # [0, 0, 0, 0]
 
 The `*` operator has one trap. `[[0] * 3] * 3` creates three references to the same inner list, not three separate lists. Use a comprehension for that case, as shown below.
 
-The common mistake is using `in` on a large list inside a loop, which turns a simple loop into a quadratic one. A set or dictionary gives constant-time membership checks on average. Day 14 covers those, and Day 41 explains the cost model in depth.
+The common mistake is using `in` on a large list inside a loop, which turns a simple loop into a quadratic one. A set or dictionary gives constant-time membership checks on average. Episode 14 covers those, and Episode 41 explains the cost model in depth.
 
 ### Mutation
 
@@ -148,7 +148,7 @@ The common mistake is calling `copy` and believing that nothing is shared. For a
 
 Unpacking is a way of taking a sequence apart into named parts. Think of opening a parcel and laying out its contents on a table, each item in its own place. Python does this with a single assignment statement, and the number of names must match the number of items unless a starred name collects the rest.
 
-From first principles, `a, b = seq` iterates over `seq` and assigns each item in order. If the counts differ, Python raises `ValueError`. A starred target such as `*rest` takes all the items that the other names do not claim, and always produces a list, even if it is empty. You can put the starred name at the start, the middle or the end. Unpacking also works on function arguments with `*` and on dictionaries with `**`, which Day 17 covers. The swap idiom `a, b = b, a` is unpacking on a tuple built from the right side.
+From first principles, `a, b = seq` iterates over `seq` and assigns each item in order. If the counts differ, Python raises `ValueError`. A starred target such as `*rest` takes all the items that the other names do not claim, and always produces a list, even if it is empty. You can put the starred name at the start, the middle or the end. Unpacking also works on function arguments with `*` and on dictionaries with `**`, which Episode 17 covers. The swap idiom `a, b = b, a` is unpacking on a tuple built from the right side.
 
 ```python
 x, y = (3, 4)
@@ -242,12 +242,12 @@ Done when the final run is clean and the function raises a clear error on an emp
 
 The project is a small playlist library. Each track is a title and a duration. Functions add and remove tracks without changing the caller's list, compute totals, find the longest track, and show when a copy is shallow or deep. The code is short and the rules are precise. The evidence is a test suite that demonstrates each rule and a findings file that explains the shallow-copy result in your own words.
 
-Suggested repo name: `100-days-software-day-13-lists-and-tuples`.
+Suggested repo name: `100-episodes-software-day-13-lists-and-tuples`.
 
 Repo layout:
 
 ```
-100-days-software-day-13-lists-and-tuples/
+100-episodes-software-day-13-lists-and-tuples/
 ├── .gitignore
 ├── README.md
 ├── playlist.py
@@ -459,6 +459,6 @@ The project is light on features and heavy on rules about copying. A reviewer wh
 
 ## Tomorrow
 
-Day 14 covers the two collections that answer "is this key present" in constant time on average. Dictionaries map keys to values, and sets hold unique items. You will learn what hashing means, why only hashable objects can be keys, how mapping operations work, and how dictionary and set comprehensions fit into the patterns from today. The membership cost you measured at the end of this day is the problem those structures solve.
+Episode 14 covers the two collections that answer "is this key present" in constant time on average. Dictionaries map keys to values, and sets hold unique items. You will learn what hashing means, why only hashable objects can be keys, how mapping operations work, and how dictionary and set comprehensions fit into the patterns from today. The membership cost you measured at the end of this day is the problem those structures solve.
 
-**Next:** [Day 14: Dictionaries and Sets](Software-Day-14-Dictionaries-and-Sets.md)
+**Next:** [Episode 14: Dictionaries and Sets](Software-Episode-14-Dictionaries-and-Sets.md)

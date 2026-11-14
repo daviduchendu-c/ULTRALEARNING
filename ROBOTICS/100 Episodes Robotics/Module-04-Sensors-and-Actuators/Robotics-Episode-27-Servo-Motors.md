@@ -1,9 +1,9 @@
-# Day 27: Servo Motors
+# Episode 27: Servo Motors
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 3.5 hours
-**Level:** beginner to intermediate. You need Day 26 (the torque-speed curve and gearing) and basic Arduino from Module 3. Today you move from a motor that spins to a joint that holds an angle.
+**Level:** beginner to intermediate. You need Episode 26 (the torque-speed curve and gearing) and basic Arduino from Module 3. Today you move from a motor that spins to a joint that holds an angle.
 
 **By the end of this day, you will have:**
 
@@ -24,8 +24,8 @@
 
 **Prerequisites:**
 
-- Day 26: torque in newton-metres, gearbox ratio and the idea that stall torque is the limit of a joint
-- Day 13: the power budget, the bulk capacitor and the common ground
+- Episode 26: torque in newton-metres, gearbox ratio and the idea that stall torque is the limit of a joint
+- Episode 13: the power budget, the bulk capacitor and the common ground
 - Module 3: a sketch that reads serial input and drives a PWM pin
 - Basic trigonometry: converting a lever arm and a mass into a torque
 
@@ -132,7 +132,7 @@ The worked example is the step response. Suppose the target jumps from 0 to 90 d
 
 The common mistake is to treat the servo's dead band as a sign of a fault. The dead band is the range of errors that the controller ignores, which prevents the motor from buzzing when it is near the target. A servo with a 1 to 2 degree dead band will hold a position within that band, and it will not reach a target that is closer than the band to its current position. This matters for a robot joint that needs fine control. The fix is a closed loop with a sensor that has better resolution than the dead band, or a servo with a smaller dead band.
 
-Feedback also has limits. A potentiometer wears and gets noisy. A cheap potentiometer may give a reading that jitters by a degree or more, which the servo's control loop turns into a buzzing motor. A digital encoder inside a servo is more precise but has its own resolution, and the output angle is the encoder count divided by the counts per revolution after the gearbox. Day 29 covers encoders in detail.
+Feedback also has limits. A potentiometer wears and gets noisy. A cheap potentiometer may give a reading that jitters by a degree or more, which the servo's control loop turns into a buzzing motor. A digital encoder inside a servo is more precise but has its own resolution, and the output angle is the encoder count divided by the counts per revolution after the gearbox. Episode 29 covers encoders in detail.
 
 In the market, servo feedback decides the repeatability of a joint. A hobby servo may repeat within a few degrees, while an industrial servo repeats within a fraction of a degree, and the price follows.
 
@@ -148,7 +148,7 @@ The worked example is a 0.5 kg load at a 10 cm lever arm, which is the case from
 
 The common mistake is to use the servo's rated torque without a safety factor, and to forget the arm's own weight. A 3D-printed arm of 100 grams adds torque at the joint, and so does the bracket and the cable. Add every part's mass times its own lever distance to the total, and compute the torque at the worst position, which is usually horizontal.
 
-Torque is also limited by the servo's speed. A servo's rated torque is at stall. As the speed rises, the available torque falls along the servo's torque-speed curve, which Day 26 introduced. A servo that holds a 5 kg·cm load at rest may stall at a moderate speed if the arm is moving quickly against gravity. The check is the stall torque and the speed together.
+Torque is also limited by the servo's speed. A servo's rated torque is at stall. As the speed rises, the available torque falls along the servo's torque-speed curve, which Episode 26 introduced. A servo that holds a 5 kg·cm load at rest may stall at a moderate speed if the arm is moving quickly against gravity. The check is the stall torque and the speed together.
 
 In a robot, torque sizing is done for each joint separately, and the joint nearest the base carries the most load. The shoulder of a six-joint arm sees the weight of the whole arm and the payload, so it needs the largest servo.
 
@@ -158,7 +158,7 @@ In a robot, torque sizing is done for each joint separately, and the joint neare
 
 A servo's speed is given as the time to move 60 degrees with no load at a stated voltage, such as 0.1 seconds at 4.8 V. That number is a no-load figure, and it falls under load. The response time also includes the control loop's settling, which the overshoot and the damping affect.
 
-The first principle is that the speed is set by the motor's no-load speed and the gearbox ratio, as Day 26 described. A servo at 0.1 seconds per 60 degrees turns at 600 degrees per second, which is 10 rad/s at the output. The motor itself runs much faster, and the gearbox reduces the speed and raises the torque.
+The first principle is that the speed is set by the motor's no-load speed and the gearbox ratio, as Episode 26 described. A servo at 0.1 seconds per 60 degrees turns at 600 degrees per second, which is 10 rad/s at the output. The motor itself runs much faster, and the gearbox reduces the speed and raises the torque.
 
 The worked example is a move of 90 degrees at the servo's rated speed. At 600 degrees per second, the move takes 0.15 seconds without the settling time. With settling and a small overshoot, the total time to settle within 1 degree of the target might be 0.25 seconds. A robot that needs a 90-degree move in 0.1 seconds must choose a faster servo, or it must accept a motion that does not reach the target in time.
 
@@ -238,14 +238,14 @@ Keep the servo's supply separate from the Arduino's 5 V pin, and keep the common
 
 ## Project: a calibrated pan-tilt head
 
-This project builds a two-axis pan-tilt head with calibrated servos. It accepts angle commands over the serial port, moves to the commanded angle within the calibrated range, and logs the commanded and measured angles. The head is a useful test rig for later sensor work, because the camera and the IMU in Days 31 and 32 need a stable mount that can be moved to known angles.
+This project builds a two-axis pan-tilt head with calibrated servos. It accepts angle commands over the serial port, moves to the commanded angle within the calibrated range, and logs the commanded and measured angles. The head is a useful test rig for later sensor work, because the camera and the IMU in Episodes 31 and 32 need a stable mount that can be moved to known angles.
 
 **Goal:** build a two-axis pan-tilt head with calibration data for both servos, a serial command interface and a logged test run that shows the repeatability of each axis.
 
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-27-servo-motors/
+100-episodes-robotics-engineering-day-27-servo-motors/
 ├── README.md
 ├── firmware/
 │   └── pan_tilt/
@@ -417,6 +417,6 @@ This project has no moving parts beyond the servos, but the servos can pinch fin
 
 ## Tomorrow
 
-Tomorrow you will use the stepper motor, which holds position in a different way. A stepper moves in fixed steps with no feedback, so its position is known only while it does not miss a step. Day 28 covers steps, the step angle, the driver and microstepping, and it compares the stepper's torque at speed with the servo's torque-speed curve from today. The calibration habits from this day carry over: measure the real behavior of the motor before you trust its datasheet.
+Tomorrow you will use the stepper motor, which holds position in a different way. A stepper moves in fixed steps with no feedback, so its position is known only while it does not miss a step. Episode 28 covers steps, the step angle, the driver and microstepping, and it compares the stepper's torque at speed with the servo's torque-speed curve from today. The calibration habits from this day carry over: measure the real behavior of the motor before you trust its datasheet.
 
-**Next:** [Day 28: Stepper Motors](Robotics-Day-28-Stepper-Motors.md)
+**Next:** [Episode 28: Stepper Motors](Robotics-Episode-28-Stepper-Motors.md)

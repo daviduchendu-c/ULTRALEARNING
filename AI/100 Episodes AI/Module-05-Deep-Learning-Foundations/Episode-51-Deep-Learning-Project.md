@@ -1,6 +1,6 @@
-# Day 51: Deep Learning Project
+# Episode 51: Deep Learning Project
 
-*100 Days of AI Engineering, Module 5: Deep Learning Foundations*
+*100 Episodes of AI Engineering, Module 5: Deep Learning Foundations*
 
 **Time:** about 6 hours, spread over two sittings if you can. Training takes a few minutes per run on a CPU, and the write-up takes the rest.
 **Level:** intermediate. This is the module project. It draws on every earlier day, and it asks you to make the decisions a team makes: the split, the architecture, the stopping rule, the single test evaluation and the report.
@@ -15,7 +15,7 @@
 **What you need:**
 
 - A computer with Python 3.11 or 3.12. A GPU is optional. The project is sized for a CPU.
-- PyTorch 2.5.1 and NumPy 2.1.3, as installed on Day 46
+- PyTorch 2.5.1 and NumPy 2.1.3, as installed on Episode 46
 - torchvision 0.20.1, which is the release that pairs with PyTorch 2.5.1. Install it with `pip install torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu` for a CPU build, or the matching CUDA index if your PyTorch build uses CUDA.
 - pytest 8.3.3 and Matplotlib 3.9.2
 - About 40 MB of disk space for the dataset, downloaded on first run
@@ -23,10 +23,10 @@
 
 **Prerequisites:**
 
-- Day 39 to Day 42: the forward pass, activations, loss functions and the logits convention
-- Day 43 and Day 47: what the backward pass computes, and why autograd can do it for you
-- Day 44 and Day 45: optimizers, schedules, regularization and early stopping
-- Day 46 to Day 50: tensors, modules, datasets, loaders and the training loop
+- Episode 39 to Episode 42: the forward pass, activations, loss functions and the logits convention
+- Episode 43 and Episode 47: what the backward pass computes, and why autograd can do it for you
+- Episode 44 and Episode 45: optimizers, schedules, regularization and early stopping
+- Episode 46 to Episode 50: tensors, modules, datasets, loaders and the training loop
 
 ---
 
@@ -106,7 +106,7 @@ Do not pick the problem after you see the results. Write the problem statement f
 
 The split is the most important decision in the project. The training set is used to learn the weights, the validation set is used to make decisions, and the test set is used once to report a number. Each set has a different job, and mixing them makes the final number optimistic.
 
-From first principles, the 60,000 training images should be divided into a training part and a validation part, for example 54,000 and 6,000. The split should be random and seeded, so that the same examples always go to the same part, and it should be stratified, so that each class appears in roughly the same proportion in both. The official 10,000 test images are kept aside, and no decision of any kind is made using them. The normalization statistics must be computed from the training part only, as Day 49 required.
+From first principles, the 60,000 training images should be divided into a training part and a validation part, for example 54,000 and 6,000. The split should be random and seeded, so that the same examples always go to the same part, and it should be stratified, so that each class appears in roughly the same proportion in both. The official 10,000 test images are kept aside, and no decision of any kind is made using them. The normalization statistics must be computed from the training part only, as Episode 49 required.
 
 ```python
 import torch
@@ -131,7 +131,7 @@ Computing the normalization mean and standard deviation on the full training set
 
 The architecture should be the simplest one that solves the problem well enough, and the design should be justified by a measurement, not by habit. For Fashion-MNIST, a multi-layer perceptron with two hidden layers is a reasonable baseline, and a convolutional network would do better, but convolution is the subject of Module 6, so this project uses a dense network and says so.
 
-From first principles, the model flattens each 28 by 28 image into a vector of 784 numbers, passes it through a hidden layer of 256 ReLU units, a dropout layer, a hidden layer of 128 ReLU units, another dropout layer and a final layer of 10 logits. The loss is `nn.CrossEntropyLoss`, which takes the logits and the integer class labels. Dropout with a rate of 0.2 is a regularizer from Day 45, and the value is a starting point that you can tune on the validation set.
+From first principles, the model flattens each 28 by 28 image into a vector of 784 numbers, passes it through a hidden layer of 256 ReLU units, a dropout layer, a hidden layer of 128 ReLU units, another dropout layer and a final layer of 10 logits. The loss is `nn.CrossEntropyLoss`, which takes the logits and the integer class labels. Dropout with a rate of 0.2 is a regularizer from Episode 45, and the value is a starting point that you can tune on the validation set.
 
 ```python
 import torch.nn as nn
@@ -159,7 +159,7 @@ Do not tune the architecture until the test accuracy looks good. Change the desi
 
 ## Training and stopping
 
-Training uses the loop from Day 50, adapted for ten classes. The optimizer is Adam with a learning rate of 0.001, which is the default from the original paper. The batch size is 128, which is a common size that fits easily in memory. The loop runs for up to 60 epochs, with early stopping on the validation loss and a patience of 5 epochs. The best checkpoint is saved whenever the validation loss improves, and the latest state is saved every epoch for resuming.
+Training uses the loop from Episode 50, adapted for ten classes. The optimizer is Adam with a learning rate of 0.001, which is the default from the original paper. The batch size is 128, which is a common size that fits easily in memory. The loop runs for up to 60 epochs, with early stopping on the validation loss and a patience of 5 epochs. The best checkpoint is saved whenever the validation loss improves, and the latest state is saved every epoch for resuming.
 
 From first principles, the stopping rule chooses the number of epochs from the validation curve, not from a fixed number chosen in advance. The best checkpoint is the model at the epoch with the lowest validation loss, which is the model the project will evaluate. The validation accuracy is also logged, and it can be used as the stopping criterion if you prefer, as long as you state the choice in the model card.
 
@@ -232,12 +232,12 @@ Do not fix the errors you see in the test set by adding examples from the test s
 
 **Goal:** train a multi-layer perceptron on Fashion-MNIST with a validation split, early stopping and checkpoints, evaluate the best checkpoint once on the test set, and document the work in a model card that another engineer could use to decide whether to trust the result.
 
-**Repo name:** `100-days-ai-day-51-deep-learning-project`
+**Repo name:** `100-episodes-ai-day-51-deep-learning-project`
 
 **Repo layout:**
 
 ```
-100-days-ai-day-51-deep-learning-project/
+100-episodes-ai-day-51-deep-learning-project/
 ├── README.md
 ├── MODEL_CARD.md
 ├── requirements.txt
@@ -386,4 +386,4 @@ Create `src/fashion_lab/model.py` with `FashionMLP` from the lesson. Create `src
 
 ## Tomorrow
 
-Day 52 begins Module 6, Computer Vision, and it starts where this project stopped. An image is a grid of numbers, and you will learn what pixels, channels, resolution, color spaces and normalization mean in practice. The model you trained today treated each pixel as an unrelated input. Module 6 introduces the operations that use the image's structure, starting with the convolution you will implement by hand on Day 54.
+Episode 52 begins Module 6, Computer Vision, and it starts where this project stopped. An image is a grid of numbers, and you will learn what pixels, channels, resolution, color spaces and normalization mean in practice. The model you trained today treated each pixel as an unrelated input. Module 6 introduces the operations that use the image's structure, starting with the convolution you will implement by hand on Episode 54.

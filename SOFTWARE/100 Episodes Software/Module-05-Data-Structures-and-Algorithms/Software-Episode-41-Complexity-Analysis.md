@@ -1,6 +1,6 @@
-# Day 41: Complexity Analysis
+# Episode 41: Complexity Analysis
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
 **Level:** beginner to intermediate. You should be comfortable writing Python functions, loops and lists. This day is for anyone who has heard "that's O(n squared)" in a code review and nodded without being sure what it meant.
@@ -16,7 +16,7 @@
 **What you need:**
 
 - Python 3.12 or newer. The code in this day was checked with Python 3.14 (`python --version` should print at least 3.12)
-- Git 2.23 or newer (`git --version`), with the habits from Day 6 and Day 7
+- Git 2.23 or newer (`git --version`), with the habits from Episode 6 and Episode 7
 - A free GitHub account
 - A terminal: Git Bash, PowerShell, or Ubuntu on WSL 2
 - Optional: VS Code with the official Python extension
@@ -24,8 +24,8 @@
 **Prerequisites:**
 
 - Module 3: Python basics, including functions, lists, sets, `for` loops and `unittest`
-- Day 6: Git Mental Model (`git add`, `git commit`, `git status`)
-- Day 8: GitHub Workflow, at least to create a repository and push to it
+- Episode 6: Git Mental Model (`git add`, `git commit`, `git status`)
+- Episode 8: GitHub Workflow, at least to create a repository and push to it
 
 ---
 
@@ -120,7 +120,7 @@ Big-O shows up everywhere that code scales with data: database query planners ch
 
 Think about packing for a trip. Time is how long it takes you to pack. Space is how much luggage you carry at the peak. Some strategies are quick but bulky, such as taking one bag for each item, while others take longer but fit in one suitcase. Algorithms make the same trade. Time complexity counts operations as a function of input size. Space complexity counts the extra memory the algorithm needs as a function of input size, not counting the input itself.
 
-The first principles are simple. A function that stores one number regardless of input size uses O(1) extra space. A function that builds a new list the same length as the input uses O(n) extra space. A recursive function uses space for each active call on the call stack, so a recursion that goes n levels deep uses O(n) space even if it stores nothing else. Day 50 returns to that cost.
+The first principles are simple. A function that stores one number regardless of input size uses O(1) extra space. A function that builds a new list the same length as the input uses O(n) extra space. A recursive function uses space for each active call on the call stack, so a recursion that goes n levels deep uses O(n) space even if it stores nothing else. Episode 50 returns to that cost.
 
 ```python
 def running_totals(items: list[int]) -> list[int]:
@@ -165,7 +165,7 @@ def linear_search_comparisons(items: list[int], target: int) -> int:
 
 The best case happens when the target is first. The function makes one comparison, so the best case is O(1). The worst case is a target that is missing or last. The function makes n comparisons, so the worst case is O(n). The average depends on which targets you expect. If every position is equally likely, the average over the found targets is (n plus 1) divided by 2 comparisons, which is still O(n). You can verify that claim exactly: for a list of 10 distinct values, summing the comparisons over every possible target gives 1 plus 2 plus up to 10, which is 55. Dividing by 10 gives an average of 5.5, which equals (10 plus 1) divided by 2.
 
-The mistake to watch for is quoting only one case. When someone says "binary search is O(log n)", they usually mean the worst case. When someone says "hash tables are O(1)", they usually mean the average case with a good hash function, and the worst case can be O(n) when many keys collide. Day 45 shows how that happens. Name the case in every claim you write, or your reader will assume the most flattering one.
+The mistake to watch for is quoting only one case. When someone says "binary search is O(log n)", they usually mean the worst case. When someone says "hash tables are O(1)", they usually mean the average case with a good hash function, and the worst case can be O(n) when many keys collide. Episode 45 shows how that happens. Name the case in every claim you write, or your reader will assume the most flattering one.
 
 The best, average and worst cases matter in production because user traffic is rarely uniform. A cache, a search box and a login check all see skewed inputs, and an algorithm whose worst case is rare may be fine in practice while one whose average is bad may not be.
 
@@ -201,7 +201,7 @@ Amortized analysis shows up in the standard library of most languages. Java's `A
 
 ## Hands-on exercises
 
-Work in a new folder called `growth-lab` that you will turn into the project repository. Use `git init -b main` so the branch name matches Day 7.
+Work in a new folder called `growth-lab` that you will turn into the project repository. Use `git init -b main` so the branch name matches Episode 7.
 
 Exercise 1 reads complexity from code. Write five small functions in `docs/growth-notes.md`: one with a single loop, one with two sequential loops, one with nested loops, one that halves its input each step, and one that slices a list inside a loop. For each function, state the time complexity, the best and worst case, and the extra space. Check your answers by counting the operations for n equal to 10 and n equal to 20.
 
@@ -229,12 +229,12 @@ Done when the GitHub Actions run for your latest commit shows a green check.
 
 The project is a small library of complexity examples, a benchmark that measures them, and a GitHub Actions workflow that runs the tests. The code is short on purpose. The skill being tested is the analysis, and the workflow is what makes the analysis repeatable for the rest of the module.
 
-Suggested repo name: `100-days-software-day-41-complexity-analysis`.
+Suggested repo name: `100-episodes-software-day-41-complexity-analysis`.
 
 The repo layout:
 
 ```
-100-days-software-day-41-complexity-analysis/
+100-episodes-software-day-41-complexity-analysis/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -535,4 +535,4 @@ This project is light on new ideas and heavy on repetition. The repository and t
 
 ## Tomorrow
 
-Day 42 moves from counting operations to using arrays and strings directly. You will write prefix sums, two-pointer scans and a sliding window, and you will use this day's counting habit to show that each one does O(n) work where a naive version does O(n squared). The `dsa` package and the CI workflow you built today stay in place, and Day 42 adds `dsa/arrays.py` and its tests next to them.
+Episode 42 moves from counting operations to using arrays and strings directly. You will write prefix sums, two-pointer scans and a sliding window, and you will use this day's counting habit to show that each one does O(n) work where a naive version does O(n squared). The `dsa` package and the CI workflow you built today stay in place, and Episode 42 adds `dsa/arrays.py` and its tests next to them.

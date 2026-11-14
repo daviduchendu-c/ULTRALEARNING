@@ -1,9 +1,9 @@
-# Day 45: Hash Tables
+# Episode 45: Hash Tables
 
-*100 Days of Software Engineering, Module 5: Data Structures and Algorithms*
+*100 Episodes of Software Engineering, Module 5: Data Structures and Algorithms*
 
 **Time:** about 3 hours
-**Level:** intermediate. You should have finished Day 44 and be comfortable with classes, lists of tuples and `unittest`. This day is for anyone who uses `dict` and `set` every day and wants to know what happens underneath, and why a lookup is sometimes slow.
+**Level:** intermediate. You should have finished Episode 44 and be comfortable with classes, lists of tuples and `unittest`. This day is for anyone who uses `dict` and `set` every day and wants to know what happens underneath, and why a lookup is sometimes slow.
 
 **By the end of this day, you will have:**
 
@@ -16,13 +16,13 @@
 **What you need:**
 
 - Python 3.12 or newer (the code was checked with Python 3.14)
-- Git 2.23 or newer, and the repository from Day 44
+- Git 2.23 or newer, and the repository from Episode 44
 - A terminal (Git Bash, PowerShell or Ubuntu on WSL 2)
 
 **Prerequisites:**
 
-- Day 41: Complexity Analysis, especially average and worst case
-- Day 43: Linked Lists, because each bucket is a small list
+- Episode 41: Complexity Analysis, especially average and worst case
+- Episode 43: Linked Lists, because each bucket is a small list
 - Module 3: Python `dict`, `set` and tuples
 
 ---
@@ -150,7 +150,7 @@ for n in [3, 1, 3, 2]:
 print(sorted(seen))         # [1, 2, 3], duplicates removed
 ```
 
-The limitation of maps and sets is that they are unordered by key, in the sense that you cannot ask for the "next" key efficiently. Python's `dict` keeps insertion order, which is a different thing. If you need sorted keys, you need a tree, which Day 46 covers.
+The limitation of maps and sets is that they are unordered by key, in the sense that you cannot ask for the "next" key efficiently. Python's `dict` keeps insertion order, which is a different thing. If you need sorted keys, you need a tree, which Episode 46 covers.
 
 The common mistake is to use a list for membership tests in a loop, such as `if item in my_list` inside a loop over another list. That makes the whole program O(n squared). Convert the list to a set once before the loop. To spot it, look for `in` checks on a list inside a `for` loop.
 
@@ -160,7 +160,7 @@ Maps and sets appear in almost every program. Deduplication in data pipelines, j
 
 Think of a bookshelf. A small shelf is cheap and easy to search, but it fills up quickly. A large shelf takes more room and more time to build, but it leaves space for new books. A hash table makes the same trade between memory and speed. A low load factor means short bucket lists and fast lookups, but unused space. A high load factor saves memory and slows lookups.
 
-The first principle is the load factor. If the table has B buckets and N entries, the load factor alpha is N divided by B. Average lookup cost is roughly 1 plus alpha, assuming good hashing. To keep alpha bounded, the table resizes when alpha passes a threshold, such as 0.75. Each resize doubles the number of buckets and re-inserts every entry, which costs O(N) for that one operation. The resizes form a geometric series, so the amortized cost of an insert stays O(1), as Day 41 showed for dynamic arrays.
+The first principle is the load factor. If the table has B buckets and N entries, the load factor alpha is N divided by B. Average lookup cost is roughly 1 plus alpha, assuming good hashing. To keep alpha bounded, the table resizes when alpha passes a threshold, such as 0.75. Each resize doubles the number of buckets and re-inserts every entry, which costs O(N) for that one operation. The resizes form a geometric series, so the amortized cost of an insert stays O(1), as Episode 41 showed for dynamic arrays.
 
 ```python
 def put(self, key, value) -> None:
@@ -185,7 +185,7 @@ The tradeoffs matter in production systems where memory is the constraint, such 
 
 ## Hands-on exercises
 
-Work in the repository from Day 44. Keep the hash table in `dsa/hash_table.py` and the word counter in `dsa/word_count.py`.
+Work in the repository from Episode 44. Keep the hash table in `dsa/hash_table.py` and the word counter in `dsa/word_count.py`.
 
 Exercise 1 traces a bucket index. For a table with 8 buckets, write down the bucket index for the integer keys 3, 11, 19 and 27 on paper, using `hash(key) % 8`. Then run the same expressions in the shell and compare. Explain why all four land in the same bucket.
 
@@ -213,12 +213,12 @@ Done when your notes show both timings at both sizes and the ratio, with one sen
 
 The project is a word counter. It reads text, splits it into lowercase words, and counts each word in a `HashTable` you built. The tests compare the result with `collections.Counter`, which is the standard library's version, so you know your table is correct. The project also includes a deliberately bad hash function, used only in tests, to show what a poor distribution does to the bucket lengths.
 
-Suggested repo name: `100-days-software-day-45-hash-tables`. Copy the Day 44 repository into a new folder and rename it.
+Suggested repo name: `100-episodes-software-day-45-hash-tables`. Copy the Episode 44 repository into a new folder and rename it.
 
 The repo layout:
 
 ```
-100-days-software-day-45-hash-tables/
+100-episodes-software-day-45-hash-tables/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -367,7 +367,7 @@ if __name__ == "__main__":
         print(f"{n:>5}  {word}")
 ```
 
-Running `python count_words.py some-file.txt` prints the ten most common words. Sorting here is O(n log n) and is fine for a report. Day 47 shows a faster way to get only the top k.
+Running `python count_words.py some-file.txt` prints the ten most common words. Sorting here is O(n log n) and is fine for a report. Episode 47 shows a faster way to get only the top k.
 
 Starter code for `tests/test_hash_table.py`:
 
@@ -475,7 +475,7 @@ if __name__ == "__main__":
 
 Step-by-step tasks:
 
-1. Copy the Day 44 repository, add the files above, and run `python -m unittest`. All tests should pass.
+1. Copy the Episode 44 repository, add the files above, and run `python -m unittest`. All tests should pass.
 2. Run `python count_words.py` on a text file of your choice, such as a README or a public-domain book from Project Gutenberg. Record the top ten words in `docs/hash-notes.md`.
 3. Add a `set`-based function `unique_words(text: str) -> int` to `dsa/word_count.py` that counts distinct words. Add a test that compares it with `len(Counter(...))` on a sentence you write.
 4. In `docs/hash-notes.md`, record the load factor after inserting 1000 keys, and the longest bucket after inserting the keys 0 to 999 into a table with a hash function that returns the key modulo 4. Explain the second number.
@@ -499,7 +499,7 @@ This project is light on new code and heavy on measurement. A hash table you can
 
 1. Why does `HashTable.put` replace the value when the key already exists, instead of adding a second pair with the same key?
 2. A table has 16 buckets and 12 entries. What is its load factor, and what average bucket length should you expect with a good hash function?
-3. Explain why resizing a table is O(N) in one operation, but inserts are still O(1) amortized. Use the doubling argument from Day 41.
+3. Explain why resizing a table is O(N) in one operation, but inserts are still O(1) amortized. Use the doubling argument from Episode 41.
 4. A teammate writes `if word in word_list:` inside a loop over a long text. Describe the cost and the fix.
 5. Why does Python randomize string hashes between runs, and what breaks if you save string hash values to a file and read them back in the next run?
 6. A hash table with a bad hash function still returns correct results. So why does the bad function matter in production?
@@ -544,4 +544,4 @@ This project is light on new code and heavy on measurement. A hash table you can
 
 ## Tomorrow
 
-Day 46 covers trees and binary search trees. A hash table gives fast lookups but no order, so you cannot ask for the next key or a range of keys. A binary search tree keeps keys sorted, which makes search, insert and delete O(log n) when the tree is balanced, and it introduces recursion, which Day 50 examines in detail. You will build a BST, traverse it in three orders and see what happens to its height when the input is already sorted.
+Episode 46 covers trees and binary search trees. A hash table gives fast lookups but no order, so you cannot ask for the next key or a range of keys. A binary search tree keeps keys sorted, which makes search, insert and delete O(log n) when the tree is balanced, and it introduces recursion, which Episode 50 examines in detail. You will build a BST, traverse it in three orders and see what happens to its height when the input is already sorted.

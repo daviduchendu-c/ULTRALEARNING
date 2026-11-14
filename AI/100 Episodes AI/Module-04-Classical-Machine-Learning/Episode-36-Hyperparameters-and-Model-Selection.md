@@ -1,9 +1,9 @@
-# Day 36: Hyperparameters and Model Selection
+# Episode 36: Hyperparameters and Model Selection
 
-*100 Days of AI Engineering, Module 4: Classical Machine Learning*
+*100 Episodes of AI Engineering, Module 4: Classical Machine Learning*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 24 (validation and cross-validation), Day 34 (metrics) and Day 30 (ensembles, which have many settings to tune). Most of the risk today is methodological, so read the leakage section twice.
+**Level:** intermediate. You need Episode 24 (validation and cross-validation), Episode 34 (metrics) and Episode 30 (ensembles, which have many settings to tune). Most of the risk today is methodological, so read the leakage section twice.
 
 **By the end of this day, you will have:**
 
@@ -25,9 +25,9 @@
 
 **Prerequisites:**
 
-- Day 24: the three-way split and cross-validation
-- Day 29 and Day 30: decision trees and ensembles, and the settings they expose
-- Day 34: choosing a metric and a threshold on validation data
+- Episode 24: the three-way split and cross-validation
+- Episode 29 and Episode 30: decision trees and ensembles, and the settings they expose
+- Episode 34: choosing a metric and a threshold on validation data
 - Basic logarithms, since many hyperparameters are searched on a log scale
 
 ---
@@ -253,14 +253,14 @@ The mistake is building the pipeline and then calling `fit_transform` on the ful
 
 This is a medium-weight project. The code is short. The main deliverable is an honest report that shows how much the tuned score was inflated by selection, and what the test score says about the model.
 
-**Repo name:** `100-days-ai-engineering-day-36-hyperparameters-and-model-selection`
+**Repo name:** `100-episodes-ai-engineering-day-36-hyperparameters-and-model-selection`
 
 **Goal:** tune a pipeline with grid search and random search on the same budget, compare them, estimate the score with nested cross-validation, and show the size of the selection bias.
 
 **Repo layout:**
 
 ```
-100-days-ai-engineering-day-36-hyperparameters-and-model-selection/
+100-episodes-ai-engineering-day-36-hyperparameters-and-model-selection/
 ├── README.md
 ├── requirements.txt
 ├── pipeline.py
@@ -414,4 +414,4 @@ def test_pipeline_fits_on_random_data():
 
 Tomorrow you ask why a model made the decision it did. Feature importance, model coefficients, partial dependence and SHAP each give a different answer, and each can mislead if you read it too literally. You will also look at error slices and failure analysis, which tell you whether the errors fall on a group that matters, and you will learn to separate dataset problems from model problems. Those tools turn a good score into a model you can defend.
 
-**Next:** [Day 37: Interpretability and Error Analysis](Day-37-Interpretability-and-Error-Analysis.md)
+**Next:** [Episode 37: Interpretability and Error Analysis](Episode-37-Interpretability-and-Error-Analysis.md)

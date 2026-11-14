@@ -1,9 +1,9 @@
-# Day 41: Design for Manufacturing
+# Episode 41: Design for Manufacturing
 
-*100 Days of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
+*100 Episodes of Robotics Engineering, Module 5: Mechanical Engineering and CAD*
 
 **Time:** about 4 hours
-**Level:** intermediate. You need the parts from Days 37 to 40, the fits from Day 39, and the stress and deflection calculations from Day 34. Today you check whether those parts can be made, with the process you chose and the tolerance you wrote down. A design that is correct on the screen can still be impossible to print, cut or assemble.
+**Level:** intermediate. You need the parts from Episodes 37 to 40, the fits from Episode 39, and the stress and deflection calculations from Episode 34. Today you check whether those parts can be made, with the process you chose and the tolerance you wrote down. A design that is correct on the screen can still be impossible to print, cut or assemble.
 
 **By the end of this day, you will have:**
 
@@ -19,13 +19,13 @@
 - A digital caliper, reading to 0.01 mm
 - Optional: access to a laser cutter for a test coupon in 3 mm plywood or acrylic, and a CNC mill or a makerspace with one, to see a machined corner
 - Optional: a set of M3 bolts, nuts and washers, about $5, to test the fit of printed holes
-- The enclosure and bracket files from Day 37, Day 38 and Day 40
+- The enclosure and bracket files from Episode 37, Episode 38 and Episode 40
 
 **Prerequisites:**
 
-- Day 39: clearance and fits, the ISO 286 tolerance system, and interference checks
-- Day 40: the enclosure, the bracket and the material choices
-- Day 34: deflection and stress, for judging whether a thin wall is strong enough
+- Episode 39: clearance and fits, the ISO 286 tolerance system, and interference checks
+- Episode 40: the enclosure, the bracket and the material choices
+- Episode 34: deflection and stress, for judging whether a thin wall is strong enough
 
 ---
 
@@ -96,7 +96,7 @@ The history explains why the rules exist. Each process has its own limits, set b
 
 A tolerance is the permitted variation of a dimension. A hole written as 3.40 ± 0.05 mm may measure anywhere from 3.35 to 3.45 mm and still be accepted. The tolerance you write is a promise to the manufacturer, and it sets the cost. A tight tolerance on every dimension makes the part expensive, and a loose tolerance on a critical fit makes the assembly fail.
 
-The first principle is to tolerance only what matters. A fit between a bearing and its seat matters, and the ISO 286 fit from Day 39 is the right tool. The outside size of a bracket does not usually matter, and a general tolerance such as ISO 2768 medium is enough. Writing a tight tolerance on a dimension that does not affect the fit is wasted money.
+The first principle is to tolerance only what matters. A fit between a bearing and its seat matters, and the ISO 286 fit from Episode 39 is the right tool. The outside size of a bracket does not usually matter, and a general tolerance such as ISO 2768 medium is enough. Writing a tight tolerance on a dimension that does not affect the fit is wasted money.
 
 Here is a worked example. A hub bore must fit an 8 mm shaft with a light running clearance. The designer chooses a hole tolerance of +0.03 to 0 mm around 8.00 mm, which is a close clearance for a machined part, and a shaft tolerance of −0.01 to −0.03 mm. The clearance ranges from 0.01 to 0.06 mm. For a printed part, the designer knows the print will be undersized by about 0.1 to 0.2 mm, so the bore is designed larger and checked on the printer, as the rest of this lesson shows.
 
@@ -120,7 +120,7 @@ Here is a worked example for the hole compensation. The design calls for a 3.4 m
 
 The common mistake is to design a hole at exactly the bolt size, which prints too small, and then to force the bolt in and crack the plastic. The second mistake is to ignore the layer height and print orientation, which change the hole's roundness. A hole printed with its axis along Z is round, and a hole printed horizontally may be oval.
 
-FDM rules apply to every printed part in a robot, including the brackets, the mounts and the enclosure from Day 40.
+FDM rules apply to every printed part in a robot, including the brackets, the mounts and the enclosure from Episode 40.
 
 ---
 
@@ -136,7 +136,7 @@ Laser cutters also burn, so the material near the cut is darker and may be weake
 
 The common mistake is to draw a tab and slot at the same nominal width, which gives a slot that is too loose when the kerf is applied. The second mistake is to forget that the material thickness changes the kerf and the focus, so a test coupon must match the sheet you cut.
 
-Laser cutting is the usual process for chassis plates, panels and the flat brackets that Day 40 suggested.
+Laser cutting is the usual process for chassis plates, panels and the flat brackets that Episode 40 suggested.
 
 ---
 
@@ -164,7 +164,7 @@ The first principle is the clearance hole. For an M3 bolt, the ISO 273 table giv
 
 The second principle is the thread engagement. A bolt that screws into a tapped hole needs enough thread to carry the load. A common guideline for a steel bolt in aluminium is an engagement of about 1.5 times the bolt diameter, and for a bolt in plastic it is much longer, often 2 to 3 times the diameter, because the plastic thread strips more easily. The actual engagement depends on the material, and the designer should check a published table for the material in use.
 
-The third principle is the edge distance, which is the distance from the hole centre to the edge of the part. The rule from Day 38 applies: keep the edge distance at least equal to the hole diameter, and make it larger for a loaded joint.
+The third principle is the edge distance, which is the distance from the hole centre to the edge of the part. The rule from Episode 38 applies: keep the edge distance at least equal to the hole diameter, and make it larger for a loaded joint.
 
 Here is a worked example. An M3 bolt joins a 3 mm PETG bracket to a 3 mm aluminium chassis. The bolt uses a medium clearance hole of 3.4 mm in the bracket and a tapped hole of 2.5 mm in the aluminium. The aluminium takes a full thread, which is good, but the PETG bracket needs a hole of 3.4 mm with a nut on the other side, or a heat-set insert for a thread in plastic. The design decision is whether the bracket uses a nut, which adds a part, or an insert, which adds a step and a cost.
 
@@ -222,14 +222,14 @@ Stack-up is the check that tells you whether an assembly will fit when the parts
 
 This project is a Python checker that reads a design description and reports the DFM rules it breaks. The design description lists the features of a part and the process it will be made with. The checker applies the rules from this lesson, reports each violation and its rule, and has tests. It is a full mini-project, because it encodes the rules you will use in every part from now on.
 
-**Goal:** a checker that reads a JSON description of a part, applies the FDM, laser and CNC rules to its features, and prints a table of pass and fail results. It must flag the enclosure from Day 40 for any rule it breaks.
+**Goal:** a checker that reads a JSON description of a part, applies the FDM, laser and CNC rules to its features, and prints a table of pass and fail results. It must flag the enclosure from Episode 40 for any rule it breaks.
 
-**Repository name:** `100-days-robotics-day-41-design-for-manufacturing`
+**Repository name:** `100-episodes-robotics-day-41-design-for-manufacturing`
 
 **Repo layout:**
 
 ```
-100-days-robotics-day-41-design-for-manufacturing/
+100-episodes-robotics-day-41-design-for-manufacturing/
 ├── README.md
 ├── requirements.txt
 ├── dfm/
@@ -245,7 +245,7 @@ This project is a Python checker that reads a design description and reports the
     └── hole_coupon_results.csv
 ```
 
-**The design files.** Each design file lists the process and the features. Write `designs/enclosure_base.json` for the Day 40 base, with its wall thickness and its mounting holes.
+**The design files.** Each design file lists the process and the features. Write `designs/enclosure_base.json` for the Episode 40 base, with its wall thickness and its mounting holes.
 
 ```json
 {
@@ -394,4 +394,4 @@ Write `check_design.py` to load a design file, dispatch to the right rule functi
 
 ## Tomorrow
 
-Tomorrow, on Day 42, you bring everything from Module 5 together in a CAD project. You design a complete small robot chassis, with an assembly, drawings, an exploded view, a bill of materials and a manufacturing plan. The rules you checked today decide the process for each part, and the fits and the stack-up decide whether the chassis will go together on the first try.
+Tomorrow, on Episode 42, you bring everything from Module 5 together in a CAD project. You design a complete small robot chassis, with an assembly, drawings, an exploded view, a bill of materials and a manufacturing plan. The rules you checked today decide the process for each part, and the fits and the stack-up decide whether the chassis will go together on the first try.

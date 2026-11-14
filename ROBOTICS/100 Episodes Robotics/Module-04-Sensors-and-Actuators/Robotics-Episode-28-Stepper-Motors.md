@@ -1,9 +1,9 @@
-# Day 28: Stepper Motors
+# Episode 28: Stepper Motors
 
-*100 Days of Robotics Engineering, Module 4: Sensors and Actuators*
+*100 Episodes of Robotics Engineering, Module 4: Sensors and Actuators*
 
 **Time:** about 3.5 hours
-**Level:** intermediate. You need Day 26 (torque and speed), Day 27 (servo position control) and Day 13 (drivers, current limits and flyback protection). Today you learn how a motor can hold a position with no sensor at all, and where that trick fails.
+**Level:** intermediate. You need Episode 26 (torque and speed), Episode 27 (servo position control) and Episode 13 (drivers, current limits and flyback protection). Today you learn how a motor can hold a position with no sensor at all, and where that trick fails.
 
 **By the end of this day, you will have:**
 
@@ -25,10 +25,10 @@
 
 **Prerequisites:**
 
-- Day 26: torque, speed and the torque-speed curve
-- Day 27: why position control needs a reference and why calibration matters
-- Day 13: current limits, the driver's supply and the flyback diode inside a driver
-- Day 12: fuses and the power budget for a 12 V rail
+- Episode 26: torque, speed and the torque-speed curve
+- Episode 27: why position control needs a reference and why calibration matters
+- Episode 13: current limits, the driver's supply and the flyback diode inside a driver
+- Episode 12: fuses and the power budget for a 12 V rail
 
 ---
 
@@ -129,7 +129,7 @@ In the market, the step count is used in every CNC and 3D printer to command pos
 
 A stepper driver takes three logic signals from the microcontroller: a step pulse, a direction pin and an enable pin. It uses them to switch current through the stepper's two phases in a sequence, and it regulates the current in each phase to a set level. The driver is therefore a current controller, and the current setting is the most important one to get right.
 
-The first principle is that a coil's current is set by the voltage across it divided by its resistance and its inductance. A stepper's coil resistance is small, often a few ohms, so a fixed supply voltage would drive a large current and burn the coil. The driver chops the supply, switching it on and off, so the average current in the coil stays at the set level. This is the same switching principle as the PWM in Day 13, applied to the coil's current rather than its voltage.
+The first principle is that a coil's current is set by the voltage across it divided by its resistance and its inductance. A stepper's coil resistance is small, often a few ohms, so a fixed supply voltage would drive a large current and burn the coil. The driver chops the supply, switching it on and off, so the average current in the coil stays at the set level. This is the same switching principle as the PWM in Episode 13, applied to the coil's current rather than its voltage.
 
 The A4988 sets its current limit from the reference voltage Vref and the sense resistor on the board. The usual formula is I_max = Vref / (8 times R_sense), where R_sense is commonly 0.1 Ω on many carrier boards. Check the value printed on the board or in its documentation, because some boards use different sense resistors. With R_sense = 0.1 Ω, a motor rated at 1.0 A needs Vref = 1.0 times 8 times 0.1 = 0.8 V. The Vref is measured between the potentiometer's wiper and the GND pin, with the motor disconnected and the driver powered.
 
@@ -171,7 +171,7 @@ The common mistake is to assume the stepper's holding torque is its available to
 
 In a robot, the torque-speed curve sets the top speed for a stepper axis. Choose the motor from its curve at the speed you need, add a safety factor, and test the axis with the real load.
 
-In the market, steppers are used where the speed is moderate and the load is steady. Where high speed and variable load are needed, servos are the better choice, and that is the trade-off Day 27 introduced.
+In the market, steppers are used where the speed is moderate and the load is steady. Where high speed and variable load are needed, servos are the better choice, and that is the trade-off Episode 27 introduced.
 
 ---
 
@@ -250,7 +250,7 @@ This project builds a single-axis linear stage with a NEMA 17 stepper, an 8 mm l
 **Repo layout:**
 
 ```
-100-days-robotics-engineering-day-28-stepper-motors/
+100-episodes-robotics-engineering-day-28-stepper-motors/
 ├── README.md
 ├── firmware/
 │   └── linear_stage/
@@ -422,6 +422,6 @@ This project moves a carriage that can pinch fingers and that can drive into a s
 
 ## Tomorrow
 
-Tomorrow you will learn how to measure motion directly. Day 29 covers encoders: incremental and absolute types, the quadrature signal that gives direction, the counts per revolution, and how to convert counts into RPM, position and the wheel's odometry. The step-loss test from this day is the reason encoders matter. An encoder on the stage would have shown you the missed steps as they happened.
+Tomorrow you will learn how to measure motion directly. Episode 29 covers encoders: incremental and absolute types, the quadrature signal that gives direction, the counts per revolution, and how to convert counts into RPM, position and the wheel's odometry. The step-loss test from this day is the reason encoders matter. An encoder on the stage would have shown you the missed steps as they happened.
 
-**Next:** [Day 29: Encoders](Robotics-Day-29-Encoders.md)
+**Next:** [Episode 29: Encoders](Robotics-Episode-29-Encoders.md)
