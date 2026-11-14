@@ -4,7 +4,7 @@
 
 ## **Episode 1: Software Engineering and the SDLC**
 
-**Tutorial:** Episode 1: Software Engineering and the SDLC
+**Tutorial:** [Episode 1: Software Engineering and the SDLC](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-01-Software-Engineering-and-the-SDLC.md)
 
 **Study:**
 
@@ -20,7 +20,7 @@
 
 ## **Episode 2: How Computers Execute Programs**
 
-**Tutorial:** Episode 2: How Computers Execute Programs
+**Tutorial:** [Episode 2: How Computers Execute Programs](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-02-How-Computers-Execute-Programs.md)
 
 **Study:**
 
@@ -36,7 +36,7 @@
 
 ## **Episode 3: Developer Environment**
 
-**Tutorial:** Episode 3: Developer Environment
+**Tutorial:** [Episode 3: Developer Environment](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-03-Developer-Environment.md)
 
 **Study:**
 
@@ -50,7 +50,7 @@
 
 ## **Episode 4: Linux CLI I**
 
-**Tutorial:** Episode 4: Linux CLI I
+**Tutorial:** [Episode 4: Linux CLI I](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-04-Linux-CLI-I.md)
 
 **Study:**
 
@@ -69,7 +69,7 @@
 
 ## **Episode 5: Linux CLI II**
 
-**Tutorial:** Episode 5: Linux CLI II
+**Tutorial:** [Episode 5: Linux CLI II](100%20Episodes%20Software/Module-01-Foundations/Software-Episode-05-Linux-CLI-II.md)
 
 **Study:**
 
