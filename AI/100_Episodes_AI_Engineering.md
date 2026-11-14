@@ -1,4 +1,4 @@
-# 100 Episodes of AI Engineering
+# AI Engineering: 100 
 
 # Module 1: AI Foundations
 

@@ -1,5 +1,4 @@
-# 100 Episodes of Software Engineering: Learn, Build, Teach, Launch
-
+# Software Engineering: 100 
 ## Core resource stack
 
 - [Roadmap.sh](https://roadmap.sh/) for the curriculum map.

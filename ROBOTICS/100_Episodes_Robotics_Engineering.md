@@ -1,4 +1,4 @@
-# 100 Episodes of Robotics Engineering
+# Robotics Engineering 100
 
 # Module 1: Robotics Engineering Foundations (Episodes 1-5)
 
