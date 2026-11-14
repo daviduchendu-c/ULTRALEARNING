@@ -61,7 +61,7 @@ Episodes in the software and robotics tracks use the same structure, with tools 
 3. Do the exercises and the project yourself before moving on.
 4. Commit the project to GitHub. The index and the lesson each say what evidence to commit (code, tests, results, a README).
 
-The curriculum ends with a capstone in Episodes 99–100 and a career section (Episode 101) covering job direction, portfolio building, and first paid work.
+The curriculum ends with a capstone in Episodes 99–100.
 
 ## Writing a new day
 
