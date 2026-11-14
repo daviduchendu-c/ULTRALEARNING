@@ -6,7 +6,7 @@
 
 **Tutorial:** [Day 1: What Is Robotics?](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-01-What-Is-Robotics.md)
 
-Study:
+**Study:**
 
 -   Robotics vs automation vs mechatronics
 -   Sensing, computation, decision and actuation
@@ -23,9 +23,22 @@ algorithms, actuators, mechanics, power and feedback.
 
 **Tutorial:** [Day 2: Anatomy of a Robot](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-02-Anatomy-of-a-Robot.md)
 
-Study MCUs, SBCs, CPUs/GPUs, sensors, actuators, motor drivers,
-batteries, regulators, buses, frames, joints, transmissions, firmware
-and high-level software.
+**Study:**
+
+-   MCUs
+-   SBCs
+-   CPUs/GPUs
+-   Sensors
+-   Actuators
+-   Motor drivers
+-   Batteries
+-   Regulators
+-   Buses
+-   Frames
+-   Joints
+-   Transmissions
+-   Firmware
+-   High-level software
 
 **Output:** Hardware/software architecture for a mobile robot.
 
@@ -33,27 +46,63 @@ and high-level software.
 
 **Tutorial:** [Day 3: Robotics Engineering Workflow](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-03-Robotics-Engineering-Workflow.md)
 
-Problem → requirements → specifications → architecture → mechanical
-design → electronics → firmware → software → simulation → prototype →
-integration → testing → iteration → documentation.
+**Workflow:**
 
-Learn engineering notebooks, block diagrams, wiring diagrams,
-schematics, BOMs and version control.
+1.  Problem
+2.  Requirements
+3.  Specifications
+4.  Architecture
+5.  Mechanical design
+6.  Electronics
+7.  Firmware
+8.  Software
+9.  Simulation
+10. Prototype
+11. Integration
+12. Testing
+13. Iteration
+14. Documentation
+
+**Study:**
+
+-   Engineering notebooks
+-   Block diagrams
+-   Wiring diagrams
+-   Schematics
+-   BOMs
+-   Version control
 
 ## Day 4: Measurement and Engineering Tools
 
 **Tutorial:** [Day 4: Measurement and Engineering Tools](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-04-Measurement-and-Engineering-Tools.md)
 
-Study multimeters, bench supplies, oscilloscopes, logic analyzers,
-calipers, breadboards, soldering tools, datasheets and systematic
-debugging.
+**Study:**
+
+-   Multimeters
+-   Bench supplies
+-   Oscilloscopes
+-   Logic analyzers
+-   Calipers
+-   Breadboards
+-   Soldering tools
+-   Datasheets
+-   Systematic debugging
 
 ## Day 5: First Robot System Design
 
 **Tutorial:** [Day 5: First Robot System Design](100%20Days%20Robotics/Module-01-Robotics-Engineering-Foundations/Robotics-Day-05-First-Robot-System-Design.md)
 
-Design a robot on paper: requirements, compute, power, sensors,
-actuators, communications, mechanics, software architecture and BOM.
+**Design a robot on paper:**
+
+-   Requirements
+-   Compute
+-   Power
+-   Sensors
+-   Actuators
+-   Communications
+-   Mechanics
+-   Software architecture
+-   BOM
 
 ------------------------------------------------------------------------
 
@@ -61,55 +110,131 @@ actuators, communications, mechanics, software architecture and BOM.
 
 ## Day 6: Electricity Fundamentals
 
-Charge, voltage, current, resistance, power, energy, DC/AC concepts,
-conductors, ground/reference.
+**Study:**
 
-Core relationships: `V = IR`, `P = VI`.
+-   Charge
+-   Voltage
+-   Current
+-   Resistance
+-   Power
+-   Energy
+-   DC/AC concepts
+-   Conductors
+-   Ground/reference
+
+**Core relationships:** `V = IR`, `P = VI`.
 
 ## Day 7: Circuit Analysis
 
-Series/parallel circuits, equivalent resistance, voltage/current
-division, Kirchhoff's Voltage and Current Laws.
+**Study:**
+
+-   Series/parallel circuits
+-   Equivalent resistance
+-   Voltage/current division
+-   Kirchhoff's Voltage and Current Laws
 
 ## Day 8: Components
 
-Resistors, potentiometers, capacitors, inductors, diodes, LEDs,
-switches, relays, connectors, fuses and protection components.
+**Study:**
+
+-   Resistors
+-   Potentiometers
+-   Capacitors
+-   Inductors
+-   Diodes
+-   LEDs
+-   Switches
+-   Relays
+-   Connectors
+-   Fuses and protection components
 
 ## Day 9: Semiconductor Fundamentals
 
-PN junctions, diodes, BJTs, MOSFETs, transistor switching,
-pull-ups/pull-downs and logic-level switching.
+**Study:**
+
+-   PN junctions
+-   Diodes
+-   BJTs
+-   MOSFETs
+-   Transistor switching
+-   Pull-ups/pull-downs
+-   Logic-level switching
 
 ## Day 10: Digital Electronics
 
-Binary, bits/bytes, number systems, logic levels, logic gates, Boolean
-algebra, truth tables, combinational/sequential logic.
+**Study:**
+
+-   Binary
+-   Bits/bytes
+-   Number systems
+-   Logic levels
+-   Logic gates
+-   Boolean algebra
+-   Truth tables
+-   Combinational/sequential logic
 
 ## Day 11: Analog Electronics and Signals
 
-Analog/digital signals, dividers, ADC/DAC concepts, resolution,
-sampling, noise, filters and signal conditioning.
+**Study:**
+
+-   Analog/digital signals
+-   Dividers
+-   ADC/DAC concepts
+-   Resolution
+-   Sampling
+-   Noise
+-   Filters
+-   Signal conditioning
 
 ## Day 12: Robot Power Systems
 
-Batteries, capacity, current requirements, regulators, buck/boost
-conversion, rails, grounding, decoupling, power budgets, protection and
-brownouts.
+**Study:**
+
+-   Batteries
+-   Capacity
+-   Current requirements
+-   Regulators
+-   Buck/boost conversion
+-   Rails
+-   Grounding
+-   Decoupling
+-   Power budgets
+-   Protection
+-   Brownouts
 
 ## Day 13: Motor Electronics
 
-DC motor electrical behavior, back-EMF concept, H-bridges, drivers,
-MOSFET switching, PWM, current limits and electrical noise.
+**Study:**
+
+-   DC motor electrical behavior
+-   Back-EMF concept
+-   H-bridges
+-   Drivers
+-   MOSFET switching
+-   PWM
+-   Current limits
+-   Electrical noise
 
 ## Day 14: Schematics and Datasheets
 
-Symbols, nets, rails, IC pins, connectors, reference designators,
-ratings, operating conditions and timing diagrams.
+**Study:**
+
+-   Symbols
+-   Nets
+-   Rails
+-   IC pins
+-   Connectors
+-   Reference designators
+-   Ratings
+-   Operating conditions
+-   Timing diagrams
 
 ## Day 15: Electronics Project
 
-Create and document a small **sensor → controller → actuator** system.
+**Build:**
+
+-   A small **sensor → controller → actuator** system
+-   Documentation for the system
 
 ------------------------------------------------------------------------
 
@@ -117,50 +242,113 @@ Create and document a small **sensor → controller → actuator** system.
 
 ## Day 16: Microcontrollers
 
-CPU, clock, flash, SRAM, registers, GPIO, peripherals, firmware, boot
-process and MCU vs SBC.
+**Study:**
+
+-   CPU
+-   Clock
+-   Flash
+-   SRAM
+-   Registers
+-   GPIO
+-   Peripherals
+-   Firmware
+-   Boot process
+-   MCU vs SBC
 
 ## Day 17: GPIO
 
-Digital I/O, logic levels, pull-ups/down, buttons, LEDs and debouncing.
+**Study:**
+
+-   Digital I/O
+-   Logic levels
+-   Pull-ups/pull-downs
+-   Buttons
+-   LEDs
+-   Debouncing
 
 ## Day 18: ADC, PWM and Timers
 
-ADC resolution/sampling, PWM duty/frequency, timers and timing-sensitive
-control.
+**Study:**
+
+-   ADC resolution/sampling
+-   PWM duty/frequency
+-   Timers
+-   Timing-sensitive control
 
 ## Day 19: Interrupts
 
-Polling, interrupts, ISRs, hardware events, timer interrupts and
-blocking vs non-blocking code.
+**Study:**
+
+-   Polling
+-   Interrupts
+-   ISRs
+-   Hardware events
+-   Timer interrupts
+-   Blocking vs non-blocking code
 
 ## Day 20: UART
 
-TX/RX, baud rate, framing concepts, serial debugging and device
-communication.
+**Study:**
+
+-   TX/RX
+-   Baud rate
+-   Framing concepts
+-   Serial debugging
+-   Device communication
 
 ## Day 21: I²C
 
-SDA/SCL, addressing, bus topology, multiple devices and debugging.
+**Study:**
+
+-   SDA/SCL
+-   Addressing
+-   Bus topology
+-   Multiple devices
+-   Debugging
 
 ## Day 22: SPI
 
-MOSI/MISO/SCLK/CS, bus speed, multiple devices and SPI vs I²C vs UART.
+**Study:**
+
+-   MOSI/MISO/SCLK/CS
+-   Bus speed
+-   Multiple devices
+-   SPI vs I²C vs UART
 
 ## Day 23: Embedded Software Architecture
 
-State machines, drivers, modules, hardware abstraction, non-blocking
-architecture, telemetry and fault handling.
+**Study:**
+
+-   State machines
+-   Drivers
+-   Modules
+-   Hardware abstraction
+-   Non-blocking architecture
+-   Telemetry
+-   Fault handling
 
 ## Day 24: RTOS Fundamentals
 
-Tasks, scheduling, queues, semaphores, mutexes, timing, concurrency and
-race-condition concepts.
+**Study:**
+
+-   Tasks
+-   Scheduling
+-   Queues
+-   Semaphores
+-   Mutexes
+-   Timing
+-   Concurrency
+-   Race-condition concepts
 
 ## Day 25: Embedded Project
 
-Integrate multiple sensors/actuators, communications, a state machine,
-telemetry and structured firmware.
+**Build:**
+
+-   Multiple integrated sensors/actuators
+-   Communications
+-   A state machine
+-   Telemetry
+-   Structured firmware
 
 ------------------------------------------------------------------------
 
@@ -168,42 +356,96 @@ telemetry and structured firmware.
 
 ## Day 26: DC Motors
 
-Construction, torque, speed, current, stall current, gearing, encoders
-and drivers.
+**Study:**
+
+-   Construction
+-   Torque
+-   Speed
+-   Current
+-   Stall current
+-   Gearing
+-   Encoders
+-   Drivers
 
 ## Day 27: Servo Motors
 
-Position control, feedback concepts, command interface, torque, range
-and calibration.
+**Study:**
+
+-   Position control
+-   Feedback concepts
+-   Command interface
+-   Torque
+-   Range
+-   Calibration
 
 ## Day 28: Stepper Motors
 
-Steps, step angle, drivers, microstepping concepts, torque/speed and
-positioning.
+**Study:**
+
+-   Steps
+-   Step angle
+-   Drivers
+-   Microstepping concepts
+-   Torque/speed
+-   Positioning
 
 ## Day 29: Encoders
 
-Incremental/absolute concepts, quadrature, ticks, direction, RPM,
-position and odometry foundations.
+**Study:**
+
+-   Incremental/absolute concepts
+-   Quadrature
+-   Ticks
+-   Direction
+-   RPM
+-   Position
+-   Odometry foundations
 
 ## Day 30: Distance Sensors
 
-Ultrasonic, IR, ToF and LiDAR principles, range, FOV, resolution, noise
-and limitations.
+**Study:**
+
+-   Ultrasonic, IR, ToF and LiDAR principles
+-   Range
+-   FOV
+-   Resolution
+-   Noise
+-   Limitations
 
 ## Day 31: IMUs
 
-Accelerometers, gyroscopes, magnetometers, axes, drift, bias,
-calibration and orientation.
+**Study:**
+
+-   Accelerometers
+-   Gyroscopes
+-   Magnetometers
+-   Axes
+-   Drift
+-   Bias
+-   Calibration
+-   Orientation
 
 ## Day 32: Cameras
 
-RGB, stereo/depth concepts, resolution, FPS, exposure, FOV, calibration
-and camera frames.
+**Study:**
+
+-   RGB
+-   Stereo/depth concepts
+-   Resolution
+-   FPS
+-   Exposure
+-   FOV
+-   Calibration
+-   Camera frames
 
 ## Day 33: Sensor Integration Project
 
-Collect, timestamp, log and visualize multiple sensor streams.
+**Build:**
+
+-   Collect multiple sensor streams
+-   Timestamp them
+-   Log them
+-   Visualize them
 
 ------------------------------------------------------------------------
 
@@ -211,48 +453,111 @@ Collect, timestamp, log and visualize multiple sensor streams.
 
 ## Day 34: Mechanical Fundamentals
 
-Force, torque, mass, center of mass, friction, stress, strain, stiffness
-and equilibrium concepts.
+**Study:**
+
+-   Force
+-   Torque
+-   Mass
+-   Center of mass
+-   Friction
+-   Stress
+-   Strain
+-   Stiffness
+-   Equilibrium concepts
 
 ## Day 35: Mechanisms
 
-Gears, ratios, pulleys, belts, chains, lead screws, linkages, bearings,
-shafts and couplings.
+**Study:**
+
+-   Gears
+-   Ratios
+-   Pulleys
+-   Belts
+-   Chains
+-   Lead screws
+-   Linkages
+-   Bearings
+-   Shafts
+-   Couplings
 
 ## Day 36: Robot Drivetrains
 
-Differential, skid, Ackermann, omni, mecanum and tracked systems;
-compare maneuverability, complexity, odometry and terrain.
+**Study:**
+
+-   Differential
+-   Skid
+-   Ackermann
+-   Omni
+-   Mecanum
+-   Tracked
+
+**Compare:** maneuverability, complexity, odometry and terrain.
 
 ## Day 37: CAD Fundamentals
 
-Sketches, constraints, dimensions, reference geometry, parametric
-modeling and design intent.
+**Study:**
+
+-   Sketches
+-   Constraints
+-   Dimensions
+-   Reference geometry
+-   Parametric modeling
+-   Design intent
 
 ## Day 38: 3D Part Modeling
 
-Extrusions, revolutions, patterns, holes, fillets, chamfers and
-parametric dimensions.
+**Study:**
+
+-   Extrusions
+-   Revolutions
+-   Patterns
+-   Holes
+-   Fillets
+-   Chamfers
+-   Parametric dimensions
 
 ## Day 39: Assemblies
 
-Parts, joints/mates, DOF, interference, clearances and assembly
-hierarchy.
+**Study:**
+
+-   Parts
+-   Joints/mates
+-   DOF
+-   Interference
+-   Clearances
+-   Assembly hierarchy
 
 ## Day 40: Robot Component Design
 
-Motor brackets, sensor mounts, wheel hubs, chassis parts, servo
-mechanisms and enclosures.
+**Design:**
+
+-   Motor brackets
+-   Sensor mounts
+-   Wheel hubs
+-   Chassis parts
+-   Servo mechanisms
+-   Enclosures
 
 ## Day 41: Design for Manufacturing
 
-3D printing, machining/laser-cutting concepts, fasteners, tolerances,
-materials and assembly.
+**Study:**
+
+-   3D printing
+-   Machining/laser-cutting concepts
+-   Fasteners
+-   Tolerances
+-   Materials
+-   Assembly
 
 ## Day 42: CAD Project
 
-Design a complete small robot chassis with assembly, drawings, exploded
-view, BOM and manufacturing plan.
+**Design a complete small robot chassis with:**
+
+-   Assembly
+-   Drawings
+-   Exploded view
+-   BOM
+-   Manufacturing plan
 
 ------------------------------------------------------------------------
 
@@ -260,28 +565,64 @@ view, BOM and manufacturing plan.
 
 ## Day 43: PCB Fundamentals
 
-Layers, traces, pads, vias, footprints, solder mask, silkscreen, ground
-planes and power distribution.
+**Study:**
+
+-   Layers
+-   Traces
+-   Pads
+-   Vias
+-   Footprints
+-   Solder mask
+-   Silkscreen
+-   Ground planes
+-   Power distribution
 
 ## Day 44: Schematic Capture
 
-Symbols, labels, power, connectors, decoupling, ERC and component
-selection.
+**Study:**
+
+-   Symbols
+-   Labels
+-   Power
+-   Connectors
+-   Decoupling
+-   ERC
+-   Component selection
 
 ## Day 45: PCB Layout
 
-Placement, routing, trace width, ground/power planes, clearances, DRC
-and mechanical constraints.
+**Study:**
+
+-   Placement
+-   Routing
+-   Trace width
+-   Ground/power planes
+-   Clearances
+-   DRC
+-   Mechanical constraints
 
 ## Day 46: Manufacturing and Bring-Up
 
-Gerbers, drill files, BOM, fabrication/assembly concepts, inspection,
-continuity tests and board bring-up.
+**Study:**
+
+-   Gerbers
+-   Drill files
+-   BOM
+-   Fabrication/assembly concepts
+-   Inspection
+-   Continuity tests
+-   Board bring-up
 
 ## Day 47: Robotics Controller PCB
 
-Design a controller board with MCU, sensor/communication connectors,
-actuator interface, power, protection and debug/programming.
+**Design a controller board with:**
+
+-   MCU
+-   Sensor/communication connectors
+-   Actuator interface
+-   Power
+-   Protection
+-   Debug/programming
 
 ------------------------------------------------------------------------
 
@@ -289,43 +630,87 @@ actuator interface, power, protection and debug/programming.
 
 ## Day 48: Algebra and Trigonometry
 
-Functions, equations, radians, sine/cosine/tangent, identities and
-vectors.
+**Study:**
+
+-   Functions
+-   Equations
+-   Radians
+-   Sine/cosine/tangent
+-   Identities
+-   Vectors
 
 ## Day 49: Linear Algebra I
 
-Scalars, vectors, matrices, multiplication, transpose, inverse concepts
-and systems of equations.
+**Study:**
+
+-   Scalars
+-   Vectors
+-   Matrices
+-   Multiplication
+-   Transpose
+-   Inverse concepts
+-   Systems of equations
 
 ## Day 50: Linear Algebra II
 
-Dot/cross products, transformations, basis, determinants and
-eigenvalue/eigenvector concepts.
+**Study:**
+
+-   Dot/cross products
+-   Transformations
+-   Basis
+-   Determinants
+-   Eigenvalue/eigenvector concepts
 
 ## Day 51: Coordinate Systems
 
-World, base, sensor and end-effector frames; position vectors and frame
-changes.
+**Study:**
+
+-   World, base, sensor and end-effector frames
+-   Position vectors
+-   Frame changes
 
 ## Day 52: Rotations
 
-2D/3D rotations, rotation matrices, Euler angles, roll/pitch/yaw and
-quaternion concepts.
+**Study:**
+
+-   2D/3D rotations
+-   Rotation matrices
+-   Euler angles
+-   Roll/pitch/yaw
+-   Quaternion concepts
 
 ## Day 53: Homogeneous Transformations
 
-Translation + rotation, transform composition, inverses and frame
-chains. Implement in Python.
+**Study:**
+
+-   Translation + rotation
+-   Transform composition
+-   Inverses
+-   Frame chains
+
+**Exercise:** Implement in Python.
 
 ## Day 54: Calculus for Robotics
 
-Derivatives, rates, position/velocity/acceleration, integration and
-differential-equation concepts.
+**Study:**
+
+-   Derivatives
+-   Rates
+-   Position/velocity/acceleration
+-   Integration
+-   Differential-equation concepts
 
 ## Day 55: Probability
 
-Random variables, mean, variance, Gaussian distributions, conditional
-probability, Bayes and sensor uncertainty.
+**Study:**
+
+-   Random variables
+-   Mean
+-   Variance
+-   Gaussian distributions
+-   Conditional probability
+-   Bayes
+-   Sensor uncertainty
 
 ------------------------------------------------------------------------
 
@@ -333,37 +718,67 @@ probability, Bayes and sensor uncertainty.
 
 ## Day 56: DOF and Configuration Space
 
-Joints, degrees of freedom, configuration, C-space, workspace and
-constraints.
+**Study:**
+
+-   Joints
+-   Degrees of freedom
+-   Configuration
+-   C-space
+-   Workspace
+-   Constraints
 
 ## Day 57: Forward Kinematics
 
-Joint variables → end-effector pose. Start with planar arms and progress
-to matrix formulations.
+**Study:**
+
+-   Joint variables → end-effector pose
+-   Planar arms
+-   Matrix formulations
 
 ## Day 58: Denavit-Hartenberg Parameters
 
-Link frames, DH parameters and transformation chains.
+**Study:**
+
+-   Link frames
+-   DH parameters
+-   Transformation chains
 
 ## Day 59: Inverse Kinematics
 
-Desired end-effector pose → joint configuration; geometric,
-analytical/numerical concepts, multiple solutions and constraints.
+**Study:**
+
+-   Desired end-effector pose → joint configuration
+-   Geometric methods
+-   Analytical/numerical concepts
+-   Multiple solutions
+-   Constraints
 
 ## Day 60: Jacobians
 
-Differential motion, joint velocity, end-effector velocity and Jacobian
-mapping.
+**Study:**
+
+-   Differential motion
+-   Joint velocity
+-   End-effector velocity
+-   Jacobian mapping
 
 ## Day 61: Singularities
 
-Singular configurations, rank concepts, lost DOF and manipulability
-concepts.
+**Study:**
+
+-   Singular configurations
+-   Rank concepts
+-   Lost DOF
+-   Manipulability concepts
 
 ## Day 62: Kinematics Project
 
-Create a simulated arm with FK, IK, frame visualization and end-effector
-trajectories.
+**Build a simulated arm with:**
+
+-   FK
+-   IK
+-   Frame visualization
+-   End-effector trajectories
 
 ------------------------------------------------------------------------
 
@@ -371,47 +786,91 @@ trajectories.
 
 ## Day 63: Robot Dynamics
 
-Mass, inertia, forces, torque, gravity, friction and equations of
-motion.
+**Study:**
+
+-   Mass
+-   Inertia
+-   Forces
+-   Torque
+-   Gravity
+-   Friction
+-   Equations of motion
 
 ## Day 64: Dynamic System Modeling
 
-Differential equations, inputs/outputs, state variables and state-space
-concepts.
+**Study:**
+
+-   Differential equations
+-   Inputs/outputs
+-   State variables
+-   State-space concepts
 
 ## Day 65: Feedback Control
 
-Plant, controller, setpoint, sensor, feedback, error, disturbance and
-stability concepts.
+**Study:**
+
+-   Plant
+-   Controller
+-   Setpoint
+-   Sensor
+-   Feedback
+-   Error
+-   Disturbance
+-   Stability concepts
 
 ## Day 66: PID
 
-P/I/D terms, rise time, overshoot, settling, steady-state error, tuning,
-saturation and windup concepts.
+**Study:**
+
+-   P/I/D terms
+-   Rise time
+-   Overshoot
+-   Settling
+-   Steady-state error
+-   Tuning
+-   Saturation
+-   Windup concepts
 
 ## Day 67: Motor Control
 
-Position/velocity control, encoder feedback, setpoints and closed-loop
-control.
+**Study:**
+
+-   Position/velocity control
+-   Encoder feedback
+-   Setpoints
+-   Closed-loop control
 
 ## Day 68: State-Space Control
 
-State vectors/equations, controllability, observability and
-state-feedback concepts.
+**Study:**
+
+-   State vectors/equations
+-   Controllability
+-   Observability
+-   State-feedback concepts
 
 ## Day 69: Trajectory Generation
 
-Position, velocity and acceleration profiles, smooth motion and
-polynomial trajectory concepts.
+**Study:**
+
+-   Position, velocity and acceleration profiles
+-   Smooth motion
+-   Polynomial trajectory concepts
 
 ## Day 70: Motion Control
 
-Path vs trajectory, trajectory tracking and feedback tracking.
+**Study:**
+
+-   Path vs trajectory
+-   Trajectory tracking
+-   Feedback tracking
 
 ## Day 71: Control Project
 
-Create a closed-loop simulation or suitably safe physical experiment and
-analyze its response.
+**Build:**
+
+-   A closed-loop simulation or suitably safe physical experiment
+-   An analysis of its response
 
 ------------------------------------------------------------------------
 
@@ -419,51 +878,108 @@ analyze its response.
 
 ## Day 72: ROS 2 Foundations
 
-Middleware, distributed robotic systems, DDS concepts, ROS graph,
-workspaces, packages and distributions.
+**Study:**
+
+-   Middleware
+-   Distributed robotic systems
+-   DDS concepts
+-   ROS graph
+-   Workspaces
+-   Packages
+-   Distributions
 
 ## Day 73: ROS 2 CLI and Turtlesim
 
-Environment, CLI, run, node/topic/service/action inspection, `rqt` and
-graph exploration.
+**Study:**
+
+-   Environment
+-   CLI
+-   `ros2 run`
+-   Node/topic/service/action inspection
+-   `rqt`
+-   Graph exploration
 
 ## Day 74: Nodes and Topics
 
-Publishers, subscribers, messages, topic types, QoS introduction and
-communication graphs.
+**Study:**
+
+-   Publishers
+-   Subscribers
+-   Messages
+-   Topic types
+-   QoS introduction
+-   Communication graphs
 
 ## Day 75: Services and Actions
 
-Clients/servers, request-response, goals, feedback/results and when to
-choose each communication model.
+**Study:**
+
+-   Clients/servers
+-   Request-response
+-   Goals
+-   Feedback/results
+-   When to choose each communication model
 
 ## Day 76: Parameters, Launch and Logging
 
-Parameters, YAML, launch files, logging, namespaces and remapping.
+**Study:**
+
+-   Parameters
+-   YAML
+-   Launch files
+-   Logging
+-   Namespaces
+-   Remapping
 
 ## Day 77: ROS 2 Packages
 
-Create Python and C++ packages; understand dependencies, build systems,
-`colcon` and workspace sourcing.
+**Study:**
+
+-   Python packages
+-   C++ packages
+-   Dependencies
+-   Build systems
+-   `colcon`
+-   Workspace sourcing
 
 ## Day 78: TF2
 
-Transform trees, static/dynamic transforms, parent-child frames and
-transform lookup.
+**Study:**
+
+-   Transform trees
+-   Static/dynamic transforms
+-   Parent-child frames
+-   Transform lookup
 
 ## Day 79: URDF and Xacro
 
-Links, joints, visual/collision/inertial data, robot trees and macros.
+**Study:**
+
+-   Links
+-   Joints
+-   Visual/collision/inertial data
+-   Robot trees
+-   Macros
 
 ## Day 80: ros2_control
 
-Hardware interfaces, controllers, joint states/commands and controller
-management.
+**Study:**
+
+-   Hardware interfaces
+-   Controllers
+-   Joint states/commands
+-   Controller management
 
 ## Day 81: ROS 2 Project
 
-Build a multi-node system with robot model, TF, communication,
-configuration, launch and controller interfaces.
+**Build a multi-node system with:**
+
+-   Robot model
+-   TF
+-   Communication
+-   Configuration
+-   Launch
+-   Controller interfaces
 
 ------------------------------------------------------------------------
 
@@ -473,27 +989,53 @@ configuration, launch and controller interfaces.
 
 ## Day 82: Gazebo Fundamentals
 
-Worlds, models, physics, rendering, SDF concepts, simulation time and
-spawning.
+**Study:**
+
+-   Worlds
+-   Models
+-   Physics
+-   Rendering
+-   SDF concepts
+-   Simulation time
+-   Spawning
 
 ## Day 83: Simulated Sensors
 
-Cameras, IMUs, LiDAR/range sensors, update rates and sensor noise.
+**Study:**
+
+-   Cameras
+-   IMUs
+-   LiDAR/range sensors
+-   Update rates
+-   Sensor noise
 
 ## Day 84: ROS 2 + Gazebo
 
-Integrate robot descriptions, ROS topics, sensors, controllers and TF
-with simulation.
+**Integrate with simulation:**
+
+-   Robot descriptions
+-   ROS topics
+-   Sensors
+-   Controllers
+-   TF
 
 ## Day 85: Simulated Mobile Robot
 
-Create a differential-drive robot with sensors, controller and ROS
-interfaces.
+**Build a differential-drive robot with:**
+
+-   Sensors
+-   Controller
+-   ROS interfaces
 
 ## Day 86: Simulated Manipulator
 
-Create an arm with links, joints, controllers, sensors and ROS
-integration.
+**Build an arm with:**
+
+-   Links
+-   Joints
+-   Controllers
+-   Sensors
+-   ROS integration
 
 ------------------------------------------------------------------------
 
@@ -501,45 +1043,87 @@ integration.
 
 ## Day 87: Odometry
 
-Encoder measurements, differential-drive kinematics, pose estimation and
-accumulated error.
+**Study:**
+
+-   Encoder measurements
+-   Differential-drive kinematics
+-   Pose estimation
+-   Accumulated error
 
 ## Day 88: Sensor Fusion
 
-Noise, bias, drift, complementary filters, Kalman-filter intuition and
-multi-sensor estimates.
+**Study:**
+
+-   Noise
+-   Bias
+-   Drift
+-   Complementary filters
+-   Kalman-filter intuition
+-   Multi-sensor estimates
 
 ## Day 89: Localization
 
-Pose, uncertainty, probabilistic localization, particle-filter intuition
-and map/odom frames.
+**Study:**
+
+-   Pose
+-   Uncertainty
+-   Probabilistic localization
+-   Particle-filter intuition
+-   Map/odom frames
 
 ## Day 90: Mapping and SLAM
 
-Occupancy grids, SLAM, loop-closure concepts, LiDAR SLAM and visual-SLAM
-concepts.
+**Study:**
+
+-   Occupancy grids
+-   SLAM
+-   Loop-closure concepts
+-   LiDAR SLAM
+-   Visual-SLAM concepts
 
 ## Day 91: Path Planning
 
-Configuration spaces, graph search, Dijkstra, A\*, heuristics, collision
-checking and sampling-based concepts.
+**Study:**
+
+-   Configuration spaces
+-   Graph search
+-   Dijkstra
+-   A\*
+-   Heuristics
+-   Collision checking
+-   Sampling-based concepts
 
 ## Day 92: Navigation
 
-Global/local planning, costmaps, obstacle avoidance, goal navigation and
-Nav2 concepts.
+**Study:**
+
+-   Global/local planning
+-   Costmaps
+-   Obstacle avoidance
+-   Goal navigation
+-   Nav2 concepts
 
 ## Day 93: Manipulation and Motion Planning
 
-Grasping, collision checking, joint constraints, trajectory execution
-and MoveIt 2 concepts.
+**Study:**
+
+-   Grasping
+-   Collision checking
+-   Joint constraints
+-   Trajectory execution
+-   MoveIt 2 concepts
 
 ## Day 94: Autonomous Robot Project
 
-Build a simulated system that can:
+**Build a simulated system that can:**
 
-**Sense → Estimate → Localize → Plan → Move → Avoid obstacles → Reach a
-goal**
+1.  Sense
+2.  Estimate
+3.  Localize
+4.  Plan
+5.  Move
+6.  Avoid obstacles
+7.  Reach a goal
 
 ------------------------------------------------------------------------
 
@@ -547,24 +1131,52 @@ goal**
 
 ## Day 95: NVIDIA Isaac Sim
 
-USD concepts, assets, physics, articulations, sensors, URDF import,
-OmniGraph, Python and ROS 2 bridge.
+**Study:**
+
+-   USD concepts
+-   Assets
+-   Physics
+-   Articulations
+-   Sensors
+-   URDF import
+-   OmniGraph
+-   Python
+-   ROS 2 bridge
 
 ## Day 96: Robotics Perception
 
-Camera calibration, image processing, detection/segmentation concepts,
-depth, point clouds and pose estimation.
+**Study:**
+
+-   Camera calibration
+-   Image processing
+-   Detection/segmentation concepts
+-   Depth
+-   Point clouds
+-   Pose estimation
 
 ## Day 97: Robot Learning
 
-ML for robotics, reinforcement learning, imitation learning, policies,
-observations/actions/rewards, domain randomization and sim-to-real
-concepts.
+**Study:**
+
+-   ML for robotics
+-   Reinforcement learning
+-   Imitation learning
+-   Policies
+-   Observations/actions/rewards
+-   Domain randomization
+-   Sim-to-real concepts
 
 ## Day 98: Modern Robot Architectures
 
-Study humanoids, quadrupeds, autonomous vehicles, cobots, mobile
-manipulators, warehouse robots and physical AI as integrated systems.
+**Study as integrated systems:**
+
+-   Humanoids
+-   Quadrupeds
+-   Autonomous vehicles
+-   Cobots
+-   Mobile manipulators
+-   Warehouse robots
+-   Physical AI
 
 ------------------------------------------------------------------------
 
@@ -572,7 +1184,7 @@ manipulators, warehouse robots and physical AI as integrated systems.
 
 ## Day 99: Engineer the Robot
 
-Produce:
+**Produce:**
 
 1.  Problem statement
 2.  User requirements
@@ -583,24 +1195,40 @@ Produce:
 7.  Electronics architecture
 8.  PCB/schematic where appropriate
 9.  Power budget
-10.  Sensors
-11.  Actuators
-12.  Embedded architecture
-13.  ROS 2 architecture
-14.  Control architecture
-15.  Simulation model
-16.  Autonomy architecture
-17.  BOM
-18.  Test plan
-19.  Risk/failure analysis
-20.  Build schedule
+10. Sensors
+11. Actuators
+12. Embedded architecture
+13. ROS 2 architecture
+14. Control architecture
+15. Simulation model
+16. Autonomy architecture
+17. BOM
+18. Test plan
+19. Risk/failure analysis
+20. Build schedule
 
 ## Day 100: Integrate, Test and Teach
 
-Present the complete system: requirements, mechanics, electronics,
-power, firmware, sensors, actuators, mathematics, kinematics, control,
-ROS graph, simulation, autonomy, software architecture, testing,
-failures, tradeoffs and improvements.
+**Present the complete system:**
+
+-   Requirements
+-   Mechanics
+-   Electronics
+-   Power
+-   Firmware
+-   Sensors
+-   Actuators
+-   Mathematics
+-   Kinematics
+-   Control
+-   ROS graph
+-   Simulation
+-   Autonomy
+-   Software architecture
+-   Testing
+-   Failures
+-   Tradeoffs
+-   Improvements
 
 **Suggested episode:**\
 `Day 100/100: I Built an Autonomous Robot From Scratch | 100 Days of Robotics Engineering`

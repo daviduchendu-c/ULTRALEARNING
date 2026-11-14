@@ -10,7 +10,7 @@
 - [Git Docs](https://git-scm.com/docs) and [GitHub Docs](https://docs.github.com/en/get-started) for version control and collaboration.
 - Language and framework documentation for Python, C++, JavaScript, TypeScript, React, React Native, Node, Express, PostgreSQL, Docker, AWS, HTTP, and Web APIs.
 
-# Module: Foundations
+# Module 1: Foundations
 
 ## Day 1: Software Engineering and the SDLC
 
@@ -93,7 +93,7 @@
 -   Signals
 -   Shell scripting foundations
 
-# Module: Git and Collaboration
+# Module 2: Git and Collaboration
 
 ## Day 6: Git Mental Model
 
@@ -132,7 +132,7 @@
 -   README
 -   Releases
 
-# Module: Python (Deep Foundation)
+# Module 3: Python (Deep Foundation)
 
 ## Day 9: Python Runtime and Syntax
 
@@ -340,7 +340,7 @@
 -   Docs
 -   Git workflow
 
-# Module: C++ (Deep Foundation)
+# Module 4: C++ (Deep Foundation)
 
 ## Day 27: C++ Toolchain
 
@@ -482,7 +482,7 @@
 -   Structured application demonstrating memory safety, STL, tests and
     build tooling
 
-# Module: Data Structures and Algorithms
+# Module 5: Data Structures and Algorithms
 
 ## Day 41: Complexity Analysis
 
@@ -604,7 +604,7 @@
 -   Compare approaches
 -   Timed and untimed practice
 
-# Module: Web Foundations
+# Module 6: Web Foundations
 
 ## Day 54: How the Web Works
 
@@ -712,7 +712,7 @@
 -   Tooling
 -   JS interoperability
 
-# Module: React and Frontend Engineering
+# Module 7: React and Frontend Engineering
 
 ## Day 64: React Components
 
@@ -767,7 +767,7 @@
 -   Typed frontend consuming a real API
 -   Tests and profiling
 
-# Module: Backend, APIs and Databases
+# Module 8: Backend, APIs and Databases
 
 ## Day 70: Node.js
 
@@ -870,7 +870,7 @@
 -   Test databases
 -   Fixtures
 
-# Module: Full Stack and Mobile
+# Module 9: Full Stack and Mobile
 
 ## Day 80: Full-Stack Integration
 
@@ -907,7 +907,7 @@
 -   Mobile client backed by your API
 -   Tests on the target platforms
 
-# Module: Systems, Architecture and Cloud
+# Module 10: Systems, Architecture and Cloud
 
 ## Day 84: Networking for Developers
 
